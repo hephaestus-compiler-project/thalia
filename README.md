@@ -297,6 +297,25 @@ Arithmetic expressions, loops, exceptions,
 access modifiers (e.g., `public`, `private`)
 are not supported.
 
+
+# API-Based program generation
+
+
+## Collecting API signatures
+
+### Java
+
+Download Java docs from [here](https://www.oracle.com/java/technologies/javase-jdk11-doc-downloads.html).
+
+
+## Converting API docs from an HTML format into a JSON format
+
+```
+./scripts/doc2json.py -i <path-to-html-docs> -o output --language java
+```
+
+
+
 # Related publications
 
 * Stefanos Chaliasos, Thodoris Sotiropoulos, Diomidis Spinellis, Arthur Gervais, Benjamin Livshits, and Dimitris Mitropoulos. [Finding Typing Compiler Bugs](https://doi.org/10.1145/3519939.3523427). In Proceedings of the 43rd ACM SIGPLAN Conference on Programming Language Design and Implementation, PLDI '22. ACM, June 2022.

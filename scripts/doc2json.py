@@ -175,7 +175,7 @@ def process_methods(methods, is_con):
         access_mod = extract_method_access_mod(method_doc, is_con)
 
         if param_types is None:
-            # FIXME
+            # It's either a field, or a nested class
             continue
         method_obj = {
             "name": method_name,
