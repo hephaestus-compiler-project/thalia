@@ -308,6 +308,20 @@ are not supported.
 Download Java docs from [here](https://www.oracle.com/java/technologies/javase-jdk11-doc-downloads.html).
 
 
+### Kotlin
+
+Build Kotlin docs using [Dokka](https://github.com/Kotlin/dokka) and its
+Gradle plugin.
+
+```bash
+cd extras/kotlin-docs-dokka
+./gradlew dokkaHtml
+```
+
+The resulting documentation can be found in the generated `build/` directory,
+that is `extras/kotlin-docs-dokka/build/dokka/html/kotlin-docs/`.
+
+
 ## Converting API docs from an HTML format into a JSON format
 
 ```
