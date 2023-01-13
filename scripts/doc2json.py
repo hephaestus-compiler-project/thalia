@@ -124,12 +124,12 @@ def extract_method_parameter_types(method_doc, is_constructor):
 
 
 def extract_method_access_mod(method_doc, is_con):
-    if is_con:
-        # FIXME handle access mode of constructors
-        return None
+    column = method_doc.find(class_="colFirst")
+    if column is None and is_con:
+        # We have a public constructor
+        return "public"
 
-    text = method_doc.find(class_="colFirst").text.encode(
-        "ascii", "ignore").decode()
+    text = column.text.encode("ascii", "ignore").decode()
     return "protected" if "protected" in text else "public"
 
 
