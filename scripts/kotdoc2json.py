@@ -113,8 +113,6 @@ def extract_method_return_type(method_doc, is_constructor):
     if is_constructor:
         return None
     elem = method_doc.find("span", {"class": "top-right-position"})
-    if elem is None:
-        import pdb; pdb.set_trace()
     elem.decompose()
     segs = method_doc.text.split("): ")
     if len(segs) == 1:
@@ -129,6 +127,11 @@ def extract_method_parameter_types(method_doc, is_constructor):
         assert len(segs) == 2
         types.append(segs[1])
     return types
+
+
+def extract_method_access_mod(method_doc):
+    text = method_doc.text
+    return "protected" if "protected fun" in text else "public"
 
 
 def extract_method_name(method_doc, is_constructor):
@@ -185,6 +188,12 @@ def extract_field_receiver(field_doc):
     return match.group(2)
 
 
+def extract_field_access_mod(field_doc):
+    regex = re.compile("protected va[lr] .*")
+    match = re.match(regex, field_doc.text)
+    return "protected" if match else "public"
+
+
 def process_fields(fields):
     field_objs = []
     for field_doc in fields:
@@ -195,6 +204,7 @@ def process_fields(fields):
             "is_override": is_field_override(field_doc),
             "receiver": extract_field_receiver(field_doc),
             "type_parameters": extract_field_type_parameters(field_doc),
+            "access_mod": extract_field_access_mod(field_doc)
         }
         field_objs.append(field_obj)
     return field_objs
@@ -211,6 +221,7 @@ def process_methods(methods, is_constructor):
             method_doc, is_constructor)
         param_types = extract_method_parameter_types(
             method_doc, is_constructor)
+        access_mod = extract_method_access_mod(method_doc)
         if param_types is None:
             continue
         method_obj = {
@@ -221,7 +232,7 @@ def process_methods(methods, is_constructor):
             "receiver": extract_method_receiver(method_doc),
             "is_static": False,
             "is_constructor": is_constructor,
-            "access_mod": "public"
+            "access_mod": access_mod
         }
         method_objs.append(method_obj)
     return method_objs
