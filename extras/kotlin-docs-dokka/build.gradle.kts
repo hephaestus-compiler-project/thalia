@@ -14,3 +14,17 @@ dependencies {
     implementation(kotlin("stdlib"))
     testImplementation(kotlin("test-junit"))
 }
+
+tasks.dokkaHtml.configure {
+    dokkaSourceSets {
+        configureEach {
+            skipDeprecated.set(true)
+            documentedVisibilities.set(
+                setOf(
+                    org.jetbrains.dokka.DokkaConfiguration.Visibility.PUBLIC,
+                    org.jetbrains.dokka.DokkaConfiguration.Visibility.PROTECTED
+                )
+            )
+        }
+    }
+}
