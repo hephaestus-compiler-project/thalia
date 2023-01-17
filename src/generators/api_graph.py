@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import NamedTuple, Dict, List, Union
 
+import networkx as nx
+
 
 class TypeNode(NamedTuple):
     name: str
@@ -66,36 +68,13 @@ class APIEdge(NamedTuple):
     __repr__ = __str__
 
 
-class APIGraph(object):
-    def __init__(self):
-        self._graph: Dict[
-            Union[
-                TypeNode,
-                Field,
-                Method,
-                Constructor
-            ],
-            List[APIEdge]
-        ] = {}
-
-    def add_node(self, node):
-        if node not in self._graph:
-            self._graph[node] = []
-
-    def add_edge(self, source, target):
-        if source not in self._graph:
-            self._graph[source] = [APIEdge(target)]
-        else:
-            self._graph[source].append(APIEdge(target))
-
-
 class APIGraphBuilder(ABC):
     def __init__(self):
-        self.graph: APIGraph = None
+        self.graph: nx.DiGraph = None
 
     @abstractmethod
-    def build(self, docs: dict) -> APIGraph:
-        self.graph = APIGraph()
+    def build(self, docs: dict) -> nx.DiGraph:
+        self.graph = nx.DiGraph()
         return self.graph
 
 
@@ -104,8 +83,8 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         super().__init__()
         self._class_name = None
 
-    def build(self, docs: dict) -> APIGraph:
-        self.graph = APIGraph()
+    def build(self, docs: dict) -> nx.DiGraph:
+        self.graph = nx.DiGraph()
         for api_doc in docs.values():
             if api_doc["type_parameters"]:
                 # TODO: Handle parametric polymorphism.
@@ -163,3 +142,28 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         self.graph.add_node(class_node)
         self.process_fields(class_node, class_api["fields"])
         self.process_methods(class_node, class_api["methods"])
+
+
+def find_all_simple_paths(G, cutoff):
+    source_nodes = [
+        node
+        for node, indegree in G.in_degree(G.nodes())
+        if indegree == 0
+    ]
+
+    if cutoff == 0:
+        return [[node] for node in source_nodes]
+    else:
+        all_paths = []
+        current_paths = [[node] for node in source_nodes]
+        for _ in range(min(cutoff, len(G))):
+            next_paths = []
+            for path in current_paths:
+                for neighbor in G.neighbors(path[-1]):
+                    if neighbor not in path or isinstance(neighbor, TypeNode):
+                        new_path = path[:] + [neighbor]
+                        next_paths.append(new_path)
+                        all_paths.append(new_path)
+            current_paths = next_paths
+
+        return all_paths
