@@ -37,6 +37,8 @@ class JavaAPIDocConverter(APIDocConverter):
         'package-tree.html',
         'package-use.html'
     ]
+    PROTECTED = "protected"
+    PUBLIC = "public"
 
     def extract_package_name(self, html_doc):
         return html_doc.find_all(class_="subTitle")[1].find_all(text=True)[2]
@@ -205,10 +207,10 @@ class JavaAPIDocConverter(APIDocConverter):
         column = method_doc.find(class_="colFirst")
         if column is None and is_con:
             # We have a public constructor
-            return "public"
+            return self.PUBLIC
 
         text = column.text.encode("ascii", "ignore").decode()
-        return "protected" if "protected" in text else "public"
+        return self.PROTECTED if self.PROTECTED in text else self.PUBLIC
 
     def extract_method_name(self, method_doc, is_constructor):
         try:
@@ -293,6 +295,8 @@ class JavaAPIDocConverter(APIDocConverter):
 
 class KotlinAPIDocConverter(APIDocConverter):
     EXCLUDED_METHOD_NAME = "<no name provided>"
+    PROTECTED = "protected"
+    PUBLIC = "public"
 
     def process(self, args):
         toplevel_path = Path(args.input).joinpath("index.html")
@@ -449,7 +453,7 @@ class KotlinAPIDocConverter(APIDocConverter):
 
     def extract_method_access_mod(self, method_doc):
         text = method_doc.text
-        return "protected" if "protected fun" in text else "public"
+        return self.PROTECTED if "protected fun" in text else self.PUBLIC
 
     def extract_method_name(self, method_doc, is_constructor):
         try:
@@ -501,7 +505,7 @@ class KotlinAPIDocConverter(APIDocConverter):
     def extract_field_access_mod(self, field_doc):
         regex = re.compile("protected va[lr] .*")
         match = re.match(regex, field_doc.text)
-        return "protected" if match else "public"
+        return self.PROTECTED if match else self.PUBLIC
 
     def process_fields(self, fields):
         field_objs = []
