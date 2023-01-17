@@ -51,7 +51,9 @@ class JavaAPIDocConverter(APIDocConverter):
 
     def extract_class_type_parameters(self, html_doc):
         regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
-        text = html_doc.find(class_="typeNameLabel").text.split("<", 1)
+        class_def = html_doc.find(class_="typeNameLabel")
+        self._replace_anchors_with_package_prefix(class_def.select("a"))
+        text = class_def.text.split("<", 1)
         if len(text) == 1:
             return []
         text = text[1][:-1].encode(
@@ -59,8 +61,9 @@ class JavaAPIDocConverter(APIDocConverter):
         return [p[0] for p in re.findall(regex, text)]
 
     def extract_super_class(self, html_doc):
-        text = html_doc.select(".description .blockList pre")[0].text.encode(
-            "ascii", "ignore").decode()
+        supercls_defs = html_doc.select(".description .blockList pre")[0]
+        self._replace_anchors_with_package_prefix(supercls_defs.select("a"))
+        text = supercls_defs.text.encode("ascii", "ignore").decode()
         text = text.replace("\n", " ")
         segs = text.split(" extends ")
         if len(segs) == 1:
@@ -107,6 +110,9 @@ class JavaAPIDocConverter(APIDocConverter):
         super_class = self.extract_super_class(html_doc)
         super_interfaces = self.extract_super_interfaces(html_doc)
         class_type = self.extract_class_type(html_doc)
+        if class_type == self.ENUM:
+            # TODO handle enums
+            return None
         methods = html_doc.find_all(class_="rowColor") + html_doc.find_all(
             class_="altColor")
         methods_ = []
@@ -153,21 +159,39 @@ class JavaAPIDocConverter(APIDocConverter):
             return None
 
         regex = re.compile(
-            r"(static )?(default )?(protected )?(<.*>)?(.+)")
+            r"(static )?(default )?(abstract )?(protected )?(<.*>)?(.+)")
+        self._replace_anchors_with_package_prefix(
+            method_doc.select(".colFirst a"))
         text = method_doc.find(class_="colFirst").text.encode(
             "ascii", "ignore").decode()
         match = re.match(regex, text)
         if not match:
             raise Exception("Cannot match method's signature {!r}".format(
                 text))
-        return_type = match.group(5)
+        return_type = match.group(6)
         assert return_type is not None
         return return_type
+
+    def _replace_anchors_with_package_prefix(self, anchors):
+        # This method replaces the text of all anchors (note that the text
+        # corresponds to type names) with the fully quallified name of the
+        # type. The package prefix is found in a attribute of each anchor
+        # named "title".
+        for anchor in anchors:
+            title = anchor.get("title")
+            if not title or "type parameter" in title:
+                # It's either a primitive type of a type parameter. We ignore
+                # them.
+                continue
+            package_prefix = title.split(" in ")[1]
+            anchor.string.replace_with(package_prefix + "." + anchor.text)
 
     def extract_method_parameter_types(self, method_doc, is_constructor):
         key = (".colConstructorName code"
                if is_constructor else ".colSecond code")
         regex = re.compile("\\(?([^ ,<>]+(<.*>)?)[ ]+[a-z0-9_]+,? *\\)?")
+        self._replace_anchors_with_package_prefix(
+            method_doc.select(key + " a"))
         try:
             text = method_doc.select(key)[0].text.replace(
                 "\n", " ").replace("\xa0", " ").replace("\u200b", "").split(
@@ -541,6 +565,9 @@ def file2html(path):
 
 
 def dict2json(outdir, data):
+    if data is None:
+        # Nothing to store.
+        return
     path = os.path.join(outdir, data["name"]) + ".json"
     with open(path, 'w') as f:
         json.dump(data, f, indent=2)
