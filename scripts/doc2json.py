@@ -191,17 +191,21 @@ class JavaAPIDocConverter(APIDocConverter):
     def extract_method_parameter_types(self, method_doc, is_constructor):
         key = (".colConstructorName code"
                if is_constructor else ".colSecond code")
-        regex = re.compile("\\(?([^ ,<>]+(<.*>)?)[ ]+[a-z0-9_]+,? *\\)?")
+        regex = re.compile(r'(?:[^ <]|<[^>]*>)+')
         self._replace_anchors_with_package_prefix(
             method_doc.select(key + " a"))
         try:
             text = method_doc.select(key)[0].text.replace(
                 "\n", " ").replace("\xa0", " ").replace("\u200b", "").split(
-                    "(", 1)[1]
+                    "(", 1)[1].rsplit(")")[0]
         except IndexError:
             # We probably encounter a field
             return None
-        return [p[0] for p in re.findall(regex, text)]
+        if not text:
+            return []
+        elements = re.findall(regex, text)
+        param_types = [elements[i] for i in range(0, len(elements), 2)]
+        return param_types
 
     def extract_method_access_mod(self, method_doc, is_con):
         column = method_doc.find(class_="colFirst")
