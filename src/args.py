@@ -10,6 +10,17 @@ cwd = os.getcwd()
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
+    "-g", "--generator",
+    choices=["base", "api"],
+    default="base",
+    help="Type of generator"
+)
+parser.add_argument(
+    "--api-doc-path",
+    type=str,
+    help="Path to API docs"
+)
+parser.add_argument(
     "-s", "--seconds",
     type=int,
     help="Timeout in seconds"
@@ -235,6 +246,10 @@ def validate_args(args):
 
     if args.examine and not args.replay:
         sys.exit("You cannot use --examine option without the --replay option")
+
+    if args.generator == "api" and not args.api_doc_path:
+        sys.exit(("You need to provide the --api-doc-path option when using"
+                  " --generator 'api'"))
 
 
 def pre_process_args(args):
