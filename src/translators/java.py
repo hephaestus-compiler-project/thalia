@@ -1031,15 +1031,19 @@ class JavaTranslator(BaseTranslator):
         self.ident = 0
         children = node.children()
         for c in children:
-            c.accept(self)
+            if c is not None:
+                c.accept(self)
         children_res = self.pop_children_res(children)
         self.ident = old_ident
-        receiver = (
-            '({})'.format(children_res[0])
-            if isinstance(node.expr, ast.BottomConstant)
-            else children_res[0]
-        )
-        return "{ident}{expr}.{field}{semicolon}".format(
+        if children:
+            receiver = (
+                '({}).'.format(children_res[0])
+                if isinstance(node.expr, ast.BottomConstant)
+                else children_res[0]
+            )
+        else:
+            receiver = ""
+        return "{ident}{expr}{field}{semicolon}".format(
             ident=self.get_ident(),
             expr=receiver,
             field=node.field,

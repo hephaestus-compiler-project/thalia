@@ -547,15 +547,19 @@ class KotlinTranslator(BaseTranslator):
         self.ident = 0
         children = node.children()
         for c in children:
-            c.accept(self)
+            if c is not None:
+                c.accept(self)
         children_res = self.pop_children_res(children)
         self.ident = old_ident
-        receiver_expr = (
-            '({})'.format(children_res[0])
-            if isinstance(node.expr, ast.BottomConstant)
-            else children_res[0]
-        )
-        res = "{}{}.{}".format(" " * self.ident, receiver_expr, node.field)
+        if children:
+            receiver_expr = (
+                '({}).'.format(children_res[0])
+                if isinstance(node.expr, ast.BottomConstant)
+                else children_res[0]
+            )
+        else:
+            receiver_expr = ""
+        res = "{}{}{}".format(" " * self.ident, receiver_expr, node.field)
         self._children_res.append(res)
 
     @append_to
