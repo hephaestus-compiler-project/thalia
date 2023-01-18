@@ -1,7 +1,9 @@
 # pylint: disable=too-few-public-methods
+import json
+import os
 import sys
 
-from src.generators.generator import Generator
+from src.generators import Generator, APIGenerator
 from src.transformations.type_erasure import TypeErasure
 from src.transformations.type_overwriting import TypeOverwriting
 from src.utils import random, read_lines, load_program
@@ -20,6 +22,11 @@ class ProgramProcessor():
         'TypeOverwriting': TypeOverwriting,
     }
 
+    PROGRAM_GENERATORS = {
+        'base': Generator,
+        'api': APIGenerator
+    }
+
     def __init__(self, proc_id, args):
         self.proc_id = proc_id
         self.args = args
@@ -31,6 +38,19 @@ class ProgramProcessor():
             ProgramProcessor.NCP_TRANSFORMATIONS.values())
         self.transformation_schedule = self._get_transformation_schedule()
         self.current_transformation = 0
+
+    def _get_generator(self, logger):
+        kwargs = {
+            "language": self.args.language,
+            "logger": logger,
+        }
+        if self.args.generator == "api":
+            docs = {}
+            for api_path in os.listdir(self.args.api_doc_path):
+                with open(os.path.join(self.args.api_doc_path, api_path)) as f:
+                    docs[api_path] = json.load(f)
+            kwargs["api_docs"] = docs
+        return self.PROGRAM_GENERATORS.get(self.args.generator)(**kwargs)
 
     def _apply_transformation(self, transformation_cls,
                               transformation_number, program):
@@ -91,10 +111,7 @@ class ProgramProcessor():
                             self.proc_id)
         else:
             logger = None
-        generator = Generator(
-            language=self.args.language,
-            logger=logger,
-            options=self.args.options["Generator"])
+        generator = self._get_generator(logger)
         program = generator.generate()
         return program, True
 

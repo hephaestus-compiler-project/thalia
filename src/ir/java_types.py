@@ -23,32 +23,32 @@ class JavaBuiltinFactory(bt.BuiltinFactory):
     def get_number_type(self):
         return NumberType()
 
-    def get_integer_type(self):
-        return IntegerType(primitive=False)
+    def get_integer_type(self, primitive=False):
+        return IntegerType(primitive=primitive)
 
-    def get_byte_type(self):
-        return ByteType(primitive=False)
+    def get_byte_type(self, primitive=False):
+        return ByteType(primitive=primitive)
 
-    def get_short_type(self):
-        return ShortType(primitive=False)
+    def get_short_type(self, primitive=False):
+        return ShortType(primitive=primitive)
 
-    def get_long_type(self):
-        return LongType(primitive=False)
+    def get_long_type(self, primitive=False):
+        return LongType(primitive=primitive)
 
-    def get_float_type(self):
-        return FloatType(primitive=False)
+    def get_float_type(self, primitive=False):
+        return FloatType(primitive=primitive)
 
-    def get_double_type(self):
-        return DoubleType(primitive=False)
+    def get_double_type(self, primitive=False):
+        return DoubleType(primitive=primitive)
 
     def get_big_decimal_type(self):
         return DoubleType(primitive=False)
 
-    def get_boolean_type(self):
-        return BooleanType(primitive=False)
+    def get_boolean_type(self, primitive=False):
+        return BooleanType(primitive=primitive)
 
-    def get_char_type(self):
-        return CharType(primitive=False)
+    def get_char_type(self, primitive=False):
+        return CharType(primitive=primitive)
 
     def get_string_type(self):
         return StringType()
