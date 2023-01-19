@@ -547,8 +547,7 @@ class KotlinTranslator(BaseTranslator):
         self.ident = 0
         children = node.children()
         for c in children:
-            if c is not None:
-                c.accept(self)
+            c.accept(self)
         children_res = self.pop_children_res(children)
         self.ident = old_ident
         if children:

@@ -1236,7 +1236,10 @@ class FieldAccess(Expr):
         self.field = field
 
     def children(self):
-        return [self.expr]
+        if self.expr:
+            return [self.expr]
+        else:
+            return []
 
     def update_children(self, children):
         super().update_children(children)
