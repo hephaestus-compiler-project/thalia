@@ -45,12 +45,11 @@ class APIGenerator(Generator):
                                               subtype=False)
             ),
         }
-        t = expr_type.name
-        generator = constant_candidates.get(t.name.capitalize())
+        generator = constant_candidates.get(expr_type.name.capitalize())
         if generator is not None:
-            return generator(t)
+            return generator(expr_type)
         else:
-            return ast.BottomConstant(t)
+            return ast.BottomConstant(expr_type)
 
     def generate_expression_from_path(self, path: list) -> ast.Expr:
         elem = path[-1]
@@ -61,14 +60,14 @@ class APIGenerator(Generator):
             receiver = self.generate_expression_from_path(receiver_path)
 
         if isinstance(elem, ag.Method):
-            args = [ast.CallArgument(self.generate_expr(pt))
+            args = [ast.CallArgument(self.generate_expr(pt.t))
                     for pt in elem.parameters]
 
             return ast.FunctionCall(elem.name, args=args, receiver=receiver)
         elif isinstance(elem, ag.Field):
             return ast.FieldAccess(receiver, elem.name)
         elif isinstance(elem, ag.Constructor):
-            args = [self.generate_expr(pt) for pt in elem.parameters]
+            args = [self.generate_expr(pt.t) for pt in elem.parameters]
             return ast.New(tp.Classifier(elem.name), args)
 
         assert False, ("This is an unreachable code")
@@ -77,6 +76,7 @@ class APIGenerator(Generator):
         self.context = context or Context()
         paths = ag.find_all_simple_paths(self.api_graph, self.path_cutoff,
                                          self.max_paths)
+
         exprs = []
         for path in paths:
             path = [n for n in path if not isinstance(n, ag.TypeNode)]

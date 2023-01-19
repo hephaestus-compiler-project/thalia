@@ -8,18 +8,18 @@ from src.ir.builtins import BuiltinFactory
 
 
 class TypeNode(NamedTuple):
-    name: str
+    t: tp.Type
 
     def __str__(self):
-        return "(" + self.name.name + ")"
+        return "(" + str(self.t) + ")"
 
     __repr__ = __str__
 
     def __hash__(self):
-        return hash(str(self.name))
+        return hash(str(self.t))
 
     def __eq__(self, other):
-        return self.name == other.name
+        return self.__class__ == other.__class__ and self.t == other.t
 
 
 class Field(NamedTuple):
@@ -32,7 +32,7 @@ class Field(NamedTuple):
         return hash(str(self.name))
 
     def __eq__(self, other):
-        return self.name == other.name
+        return self.__class__ == other.__class__ and self.name == other.name
 
 
 class Method(NamedTuple):
@@ -42,7 +42,7 @@ class Method(NamedTuple):
 
     def __str__(self):
         return "{}({})".format(self.name, ",".join(
-            str(p.name) for p in self.parameters))
+            str(p) for p in self.parameters))
 
     __repr__ = __str__
 
@@ -51,6 +51,7 @@ class Method(NamedTuple):
 
     def __eq__(self, other):
         return (
+            self.__class__ == other.__class__ and
             self.name == other.name and
             self.cls == other.cls and
             self.parameters == other.parameters
@@ -63,7 +64,7 @@ class Constructor(NamedTuple):
 
     def __str__(self):
         return "{}({})".format(self.name, ",".join(
-            str(p.name) for p in self.parameters))
+            str(p) for p in self.parameters))
 
     __repr__ = __str__
 
@@ -72,6 +73,7 @@ class Constructor(NamedTuple):
 
     def __eq__(self, other):
         return (
+            self.__class__ == other.__class__ and
             self.name == other.name and
             self.parameters == other.parameters
         )
