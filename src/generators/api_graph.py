@@ -7,6 +7,11 @@ from src.ir import BUILTIN_FACTORIES, types as tp
 from src.ir.builtins import BuiltinFactory
 
 
+IN = 0
+OUT = 1
+WIDENING = 2
+
+
 class TypeNode(NamedTuple):
     t: tp.Type
 
@@ -151,10 +156,10 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             else:
                 field_node = Field(field_api["name"])
                 self.graph.add_node(field_node)
-                self.graph.add_edge(class_node, field_node)
+                self.graph.add_edge(class_node, field_node, label=IN)
             field_type = TypeNode(self.parse_type(field_api["type"]))
             self.graph.add_node(field_type)
-            self.graph.add_edge(field_node, field_type)
+            self.graph.add_edge(field_node, field_type, label=OUT)
 
     def process_methods(self, class_node, methods):
         for method_api in methods:
@@ -181,14 +186,14 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
                 method_node = Method(name, self._class_name, parameters)
             self.graph.add_node(method_node)
             if not (is_constructor or is_static):
-                self.graph.add_edge(class_node, method_node)
+                self.graph.add_edge(class_node, method_node, label=IN)
             ret_type = (
                 TypeNode(self.parse_type(self._class_name))
                 if is_constructor
                 else TypeNode(self.parse_type(method_api["return_type"]))
             )
             self.graph.add_node(ret_type)
-            self.graph.add_edge(method_node, ret_type)
+            self.graph.add_edge(method_node, ret_type, label=OUT)
 
     def process_class(self, class_api):
         self._class_name = class_api["name"]
@@ -196,6 +201,13 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         self.graph.add_node(class_node)
         self.process_fields(class_node, class_api["fields"])
         self.process_methods(class_node, class_api["methods"])
+        super_types = {
+            self.parse_type(st)
+            for st in class_api["implements"]
+        }
+        super_types.add(self.parse_type(class_api["inherits"]))
+        for st in super_types:
+            self.graph.add_edge(class_node, st, label=WIDENING)
 
 
 def find_all_simple_paths(G, cutoff, max_paths=None):
