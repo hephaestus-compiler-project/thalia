@@ -44,8 +44,11 @@ class JavaAPIDocConverter(APIDocConverter):
         return html_doc.find_all(class_="subTitle")[1].find_all(text=True)[2]
 
     def extract_class_name(self, html_doc):
-        regex = re.compile("([A-Za-z0-9\\.]+).*")
-        text = html_doc.find(class_="typeNameLabel").text
+        regex = re.compile("([@A-Za-z0-9\\.]+).*")
+        type_name = html_doc.find(class_="typeNameLabel")
+        if not type_name:
+            return None
+        text = type_name.text
         match = re.match(regex, text)
         if not match:
             raise Exception("Cannot extract class name: {!r}".format(text))
@@ -106,6 +109,10 @@ class JavaAPIDocConverter(APIDocConverter):
 
     def process_class(self, html_doc):
         class_name = self.extract_class_name(html_doc)
+        if not class_name:
+            # TODO handle annotations
+            return None
+
         package_name = self.extract_package_name(html_doc)
         full_class_name = "{pkg}.{cls}".format(pkg=package_name,
                                                cls=class_name)
