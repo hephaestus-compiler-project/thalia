@@ -121,7 +121,8 @@ class JavaAPIDocConverter(APIDocConverter):
         constructors = []
         for m in methods:
             if self.is_constructor(m):
-                constructors.append(m)
+                if class_type != self.ABSTRACT_CLASS:
+                    constructors.append(m)
             else:
                 methods_.append(m)
         fields = self._extract_fields(html_doc)
