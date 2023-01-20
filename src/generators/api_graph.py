@@ -202,12 +202,16 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         self.process_fields(class_node, class_api["fields"])
         self.process_methods(class_node, class_api["methods"])
         super_types = {
-            self.parse_type(st)
+            TypeNode(self.parse_type(st))
             for st in class_api["implements"]
         }
-        super_types.add(self.parse_type(class_api["inherits"]))
+        super_types.add(TypeNode(self.parse_type(
+            class_api["inherits"] or "java.lang.Object")))
         for st in super_types:
-            self.graph.add_edge(class_node, st, label=WIDENING)
+            self.graph.add_node(st)
+            # Do not connect a node with itself.
+            if class_node != st:
+                self.graph.add_edge(class_node, st, label=WIDENING)
 
 
 def find_all_simple_paths(G, cutoff, max_paths=None):
