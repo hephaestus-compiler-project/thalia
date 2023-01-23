@@ -5,6 +5,7 @@ import json
 import os
 import re
 import sys
+import urllib
 
 from bs4 import BeautifulSoup
 from pathlib import Path
@@ -39,6 +40,10 @@ class JavaAPIDocConverter(APIDocConverter):
     ]
     PROTECTED = "protected"
     PUBLIC = "public"
+
+    def __init__(self):
+        super().__init__()
+        self._current_api_cls = None
 
     def extract_package_name(self, html_doc):
         return html_doc.find_all(class_="subTitle")[1].find_all(text=True)[2]
@@ -122,6 +127,7 @@ class JavaAPIDocConverter(APIDocConverter):
         if class_type == self.ENUM:
             # TODO handle enums
             return None
+        self._current_api_cls = html_doc
         methods = html_doc.find_all(class_="rowColor") + html_doc.find_all(
             class_="altColor")
         methods_ = []
@@ -237,6 +243,29 @@ class JavaAPIDocConverter(APIDocConverter):
             return False
         return 'static' in method_doc.find(class_="colFirst").text
 
+    def extract_exceptions(self, method_doc):
+        href = method_doc.select(".memberNameLink a")[0]["href"]
+        href = urllib.parse.unquote(href)
+        # This is a ref to another class
+        if href.endswith(".html"):
+            return []
+        method_summary = self._current_api_cls.find(
+            id=href[1:]).nextSibling.nextSibling
+        throws_summary = method_summary.find(class_="throwsLabel")
+        if not throws_summary:
+            return []
+        exception_refs = []
+        elem = throws_summary.next.next.next
+        while elem and elem.name == "dd":
+            exceptions_refs = elem.select("a")
+            self._replace_anchors_with_package_prefix(exceptions_refs)
+            exception_refs.extend([
+                ref.text
+                for ref in exceptions_refs
+            ])
+            elem = elem.nextSibling.nextSibling
+        return exception_refs
+
     def is_constructor(self, method_doc):
         return method_doc.find(class_="colConstructorName") is not None
 
@@ -252,6 +281,7 @@ class JavaAPIDocConverter(APIDocConverter):
     def process_methods(self, methods, is_con):
         method_objs = []
         for method_doc in methods:
+            exceptions = self.extract_exceptions(method_doc)
             method_name = self.extract_method_name(method_doc, is_con)
             isstatic = self.extract_isstatic(method_doc, is_con)
             ret_type = self.extract_method_return_type(method_doc, is_con)
@@ -272,6 +302,7 @@ class JavaAPIDocConverter(APIDocConverter):
                 "is_static": isstatic,
                 "is_constructor": is_con,
                 "access_mod": access_mod,
+                "throws": exceptions,
             }
             method_objs.append(method_obj)
         return method_objs
