@@ -589,8 +589,11 @@ class GroovyTranslator(BaseTranslator):
             )
         integer_types = {
             gt.Long: "(Long) ",
+            gt.LongPrimitive: "(long)",
             gt.Short: "(Short) ",
+            gt.ShortPrimitive: "(short)",
             gt.Byte: "(Byte) ",
+            gt.BytePrimitive: "(byte)",
             gt.Number: "(Number) ",
             gt.BigInteger: "(BigInteger) ",
         }
@@ -614,6 +617,8 @@ class GroovyTranslator(BaseTranslator):
             gt.Double: "(Double) ",
             gt.Float: "(Float) ",
             gt.Number: "(Number) ",
+            gt.DoublePrimitive: "(double)",
+            gt.FloatPrimitive: "(float)",
         }
         cast = real_types.get(node.real_type, "")
         return "{ident}{cast}{literal}".format(

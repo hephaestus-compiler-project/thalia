@@ -169,10 +169,10 @@ class JavaTranslator(BaseTranslator):
             if get_boxed_void and isinstance(t, jt.VoidType):
                 return "Void"
             if box:
-                return PRIMITIVES_TO_BOXED.get(t.get_name(), t.get_name())
+                return PRIMITIVES_TO_BOXED.get(t.get_name())
             return t.get_name()
         if isinstance(t_constructor, jt.ArrayType):
-            return "{}[]".format(self.get_type_name(t.type_args[0], False, True))
+            return "{}[]".format(self.get_type_name(t.type_args[0], False, box))
         return "{}<{}>".format(t.name, ", ".join([self.type_arg2str(ta)
                                                   for ta in t.type_args]))
 
@@ -765,11 +765,11 @@ class JavaTranslator(BaseTranslator):
     @append_to
     def visit_integer_constant(self, node):
         def get_cast_literal(integer_type, literal):
-            if integer_type == jt.Long:
+            if integer_type in [jt.Long, jt.LongPrimitive]:
                 return "(long)" + str(literal)
-            if integer_type == jt.Short:
+            if integer_type in [jt.Short, jt.ShortPrimitive]:
                 return "(short)" + str(literal)
-            if integer_type == jt.Byte:
+            if integer_type in [jt.Byte, jt.BytePrimitive]:
                 return "(byte)" + str(literal)
             if integer_type == jt.Number:
                 return "(Number) new Long(" + str(literal) + ")"
@@ -790,7 +790,7 @@ class JavaTranslator(BaseTranslator):
     @append_to
     def visit_real_constant(self, node):
         def get_cast_literal(real_type, literal):
-            if real_type == jt.Float:
+            if real_type in [jt.Float, jt.FloatPrimitive]:
                 return "(float)" + str(literal)
             if real_type == jt.Number:
                 return "(Number) new Double(" + str(literal) + ")"

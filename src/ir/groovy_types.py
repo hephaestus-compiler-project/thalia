@@ -404,21 +404,28 @@ class FunctionType(tp.TypeConstructor, ObjectType):
         self.supertypes.append(ObjectType())
 
 
-### WARNING: use them only for testing ###
 Object = ObjectType()
 Void = VoidType()
 Number = NumberType()
 Integer = IntegerType()
+IntPrimitive = IntegerType(primitive=True)
 Short = ShortType()
+ShortPrimitive = ShortType(primitive=True)
 Long = LongType()
+LongPrimitive = LongType(primitive=True)
 Byte = ByteType()
+BytePrimitive = ByteType(primitive=True)
 Float = FloatType()
+FloatPrimitive = FloatType(primitive=True)
 Double = DoubleType()
+DoublePrimitive = DoubleType(primitive=True)
 BigDecimal = BigDecimalType()
 BigInteger = BigIntegerType()
 Char = CharType()
+CharPrimitive = CharType(primitive=True)
 String = StringType()
 Boolean = BooleanType()
+BooleanPrimitive = BooleanType(primitive=True)
 Array = ArrayType()
 NonNothingTypes = [Object, Number, Integer, Short, Long, Byte, Float,
                    Double, BigDecimal, BigInteger, Char, String, Boolean,
