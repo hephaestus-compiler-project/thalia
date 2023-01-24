@@ -200,7 +200,8 @@ class JavaAPIDocConverter(APIDocConverter):
                 # them.
                 continue
             package_prefix = title.split(" in ")[1]
-            anchor.string.replace_with(package_prefix + "." + anchor.text)
+            if not anchor.string.startswith(package_prefix):
+                anchor.string.replace_with(package_prefix + "." + anchor.text)
 
     def extract_method_parameter_types(self, method_doc, is_constructor):
         key = (".colConstructorName code"
