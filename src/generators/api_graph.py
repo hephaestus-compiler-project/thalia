@@ -212,37 +212,3 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             # Do not connect a node with itself.
             if class_node != st:
                 self.graph.add_edge(class_node, st, label=WIDENING)
-
-
-def find_all_simple_paths(G, cutoff, max_paths=None):
-    source_nodes = [
-        node
-        for node, indegree in G.in_degree(G.nodes())
-        if indegree == 0
-    ]
-
-    if cutoff == 0:
-        return [[node] for node in source_nodes]
-    else:
-        stop = False
-        all_paths = []
-        current_paths = [[node] for node in source_nodes]
-        for j in range(min(cutoff, len(G))):
-            next_paths = []
-            for i, path in enumerate(current_paths):
-                for neighbor in G.neighbors(path[-1]):
-                    if neighbor not in path or isinstance(neighbor, TypeNode):
-                        new_path = path[:] + [neighbor]
-                        next_paths.append(new_path)
-                        if len(new_path) == cutoff:
-                            all_paths.append(new_path)
-                        if max_paths and len(all_paths) == max_paths:
-                            stop = True
-                            break
-                if stop:
-                    break
-            current_paths = next_paths
-            if stop:
-                break
-
-        return all_paths
