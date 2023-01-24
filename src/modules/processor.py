@@ -36,10 +36,17 @@ class ProgramProcessor():
         ]
         self.ncp_transformations = list(
             ProgramProcessor.NCP_TRANSFORMATIONS.values())
+        self.program_generator = self._get_generator()
         self.transformation_schedule = self._get_transformation_schedule()
         self.current_transformation = 0
 
-    def _get_generator(self, logger):
+    def _get_generator(self):
+        if self.args.log:
+            logger = Logger(self.args.name, self.args.test_directory,
+                            self.proc_id, "Generator",
+                            self.proc_id)
+        else:
+            logger = None
         kwargs = {
             "language": self.args.language,
             "logger": logger,
@@ -105,14 +112,8 @@ class ProgramProcessor():
     def generate_program(self):
         if self.args.debug:
             print("\nGenerating program: " + str(self.proc_id))
-        if self.args.log:
-            logger = Logger(self.args.name, self.args.test_directory,
-                            self.proc_id, "Generator",
-                            self.proc_id)
-        else:
-            logger = None
-        generator = self._get_generator(logger)
-        program = generator.generate()
+        program = self.program_generator.generate()
+        self.program_generator.reset_state()
         return program, True
 
     def can_transform(self):

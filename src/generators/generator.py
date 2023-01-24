@@ -81,6 +81,18 @@ class Generator():
         # complete informations about them.
         self._blacklisted_classes: set = set()
 
+    def reset_state(self):
+        self.context = None
+        self.depth = 1
+        self._vars_in_context = defaultdict(lambda: 0)
+        self._new_from_class = None
+        self.namespace = ast.GLOBAL_NAMESPACE
+        self._inside_java_lambda = False
+        self.declaration_namespace = None
+        self.int_stream = iter(range(1, 10000))
+        self._in_super_call = False
+        self._blacklisted_classes: set = set()
+
     ### Entry Point Generators ###
 
     def generate(self, context=None) -> ast.Program:
