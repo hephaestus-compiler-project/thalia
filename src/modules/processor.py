@@ -113,7 +113,7 @@ class ProgramProcessor():
         if self.args.debug:
             print("\nGenerating program: " + str(self.proc_id))
         program = self.program_generator.generate()
-        self.program_generator.reset_state()
+        self.program_generator.prepare_next_program()
         return program, True
 
     def can_transform(self):

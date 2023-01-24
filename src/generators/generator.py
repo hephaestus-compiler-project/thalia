@@ -81,7 +81,7 @@ class Generator():
         # complete informations about them.
         self._blacklisted_classes: set = set()
 
-    def reset_state(self):
+    def prepare_next_program(self):
         self.context = None
         self.depth = 1
         self._vars_in_context = defaultdict(lambda: 0)
