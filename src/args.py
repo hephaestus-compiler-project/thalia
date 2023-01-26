@@ -261,6 +261,8 @@ def validate_args(args):
     if args.generator == "api" and not args.api_doc_path:
         sys.exit(("You need to provide the --api-doc-path option when using"
                   " --generator 'api'"))
+    if args.generator == "api" and args.workers is not None:
+        sys.exit("The 'api' generator cannot be used in parallel mode")
 
 
 def pre_process_args(args):
