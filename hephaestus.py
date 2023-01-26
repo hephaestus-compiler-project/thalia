@@ -499,7 +499,7 @@ def _run(process_program, process_res):
                 args = (pid, dirname, packages)
                 if program_processor:
                     # Set pid to program processor
-                    program_processor.pid = pid
+                    program_processor.proc_id = pid
                     args += (program_processor,)
                 r = process_program(*args)
                 if r:
