@@ -69,7 +69,7 @@ class APIGenerator(Generator):
         "groovy": ag.JavaAPIGraphBuilder,
     }
 
-    def __init__(self, api_docs, language=None, logger=None):
+    def __init__(self, api_docs, options={}, language=None, logger=None):
         super().__init__(language=language, logger=logger)
         self.api_docs = api_docs
         self.api_graph: nx.DiGraph = self.API_GRAPH_BUILDERS[language](
@@ -79,6 +79,8 @@ class APIGenerator(Generator):
         self.visited_exprs = {}
         self.programs_gen = self.compute_programs()
         self.max_level = 2
+        self._has_next = True
+        self.start_index = options.get("start-index", 0)
 
     def encode_api_components(self, api_graph: nx.DiGraph) -> List[APIEncoding]:
         api_components = (ag.Field, ag.Constructor, ag.Method)
@@ -119,12 +121,16 @@ class APIGenerator(Generator):
     def compute_programs(self):
         func_name = "test"
         test_namespace = ast.GLOBAL_NAMESPACE + (func_name,)
+        program_index = 0
         for api, receivers, parameters, returns in self.encodings:
             types = (receivers, parameters, returns)
             if types in self.visited:
                 continue
             self.visited.add(types)
             for combination in itertools.product(*types):
+                if program_index < self.start_index:
+                    program_index += 1
+                    continue
                 receiver, parameter, return_type = combination
                 self.context = Context()
                 self.namespace = test_namespace
@@ -143,6 +149,7 @@ class APIGenerator(Generator):
                     body=ast.Block(body),
                     func_type=ast.FunctionDeclaration.FUNCTION)
                 self._add_node_to_parent(self.namespace[:-1], main_func)
+                program_index += 1
                 yield ast.Program(deepcopy(self.context), self.language)
 
     def generate_from_type_combination(self, api, receiver, parameter,
@@ -204,7 +211,15 @@ class APIGenerator(Generator):
             return ast.BottomConstant(expr_type)
 
     def generate(self, context=None) -> ast.Program:
-        return next(self.programs_gen)
+        program = next(self.programs_gen, None)
+        if not program:
+            self._has_next = False
+            program = None
+
+        return program
+
+    def has_next(self):
+        return self._has_next
 
     def reset_state(self):
         pass
