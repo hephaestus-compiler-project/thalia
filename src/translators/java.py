@@ -683,7 +683,7 @@ class JavaTranslator(BaseTranslator):
             )
         else:
             res = ("{ident}{public}{final}{abstract}{type_params}{ret_type} "
-                   "{name}({params}) {body}{semicolon}").format(
+                   "{name}({params}) throws Exception {body}{semicolon}").format(
                 ident=self.get_ident(old_ident=old_ident),
                 public="public ",
                 final="final " if node.is_final else "",
@@ -1038,7 +1038,7 @@ class JavaTranslator(BaseTranslator):
             receiver = (
                 '({}).'.format(children_res[0])
                 if isinstance(node.expr, ast.BottomConstant)
-                else children_res[0]
+                else "{}.".format(children_res[0])
             )
         else:
             receiver = ""

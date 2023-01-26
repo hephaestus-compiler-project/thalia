@@ -554,7 +554,7 @@ class KotlinTranslator(BaseTranslator):
             receiver_expr = (
                 '({}).'.format(children_res[0])
                 if isinstance(node.expr, ast.BottomConstant)
-                else children_res[0]
+                else "{}.".format(children_res[0])
             )
         else:
             receiver_expr = ""
