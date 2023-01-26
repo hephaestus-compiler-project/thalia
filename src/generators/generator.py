@@ -93,6 +93,13 @@ class Generator():
         self._in_super_call = False
         self._blacklisted_classes: set = set()
 
+    def has_next(self):
+        """
+        Checks if the generator can generate another program for the
+        next iteration.
+        """
+        return True
+
     ### Entry Point Generators ###
 
     def generate(self, context=None) -> ast.Program:

@@ -50,6 +50,7 @@ class ProgramProcessor():
         kwargs = {
             "language": self.args.language,
             "logger": logger,
+            "options": self.args.options["Generator"][self.args.generator],
         }
         if self.args.generator == "api":
             docs = {}
@@ -112,6 +113,8 @@ class ProgramProcessor():
     def generate_program(self):
         if self.args.debug:
             print("\nGenerating program: " + str(self.proc_id))
+        if not self.program_generator.has_next():
+            return None, None
         program = self.program_generator.generate()
         self.program_generator.prepare_next_program()
         return program, True

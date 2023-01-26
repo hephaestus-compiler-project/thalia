@@ -277,6 +277,13 @@ def gen_program(pid, dirname, packages, program_processor=None):
     proc = program_processor or ProgramProcessor(pid, cli_args)
     try:
         program, oracle = proc.get_program()
+        if program is None:
+            # There is nothing else to generate. Possibly, we have enumerated
+            # all possible programs.
+            global STOP_COND
+            STOP_COND = True
+            return None
+
         if cli_args.examine:
             print("pp program.context._context (to print the context)")
             __import__('ipdb').set_trace()
@@ -495,7 +502,8 @@ def _run(process_program, process_res):
                     program_processor.pid = pid
                     args += (program_processor,)
                 r = process_program(*args)
-                res.append(r)
+                if r:
+                    res.append(r)
 
             process_res(iteration, res, tmpdir, batches)
 
@@ -512,6 +520,7 @@ def run():
 
     def process_res(start_index, res, testdir, batch):
         oracles = OrderedDict()
+        batch = min(len(res), batch)
         for i, r in enumerate(res):
             oracles[start_index + i] = r
         res = {} if cli_args.dry_run else check_oracle(testdir, oracles)
