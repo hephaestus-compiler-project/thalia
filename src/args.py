@@ -31,6 +31,13 @@ parser.add_argument(
     help="Iterations to run (default: 3)"
 )
 parser.add_argument(
+    "--start-index",
+    type=int,
+    default=0,
+    help=("Enumerate programs starting from the given index (used only with "
+          "API-based program generation")
+)
+parser.add_argument(
     "-t", "--transformations",
     type=int,
     default=0,
@@ -189,6 +196,10 @@ args.stop_cond = "timeout" if args.seconds else "iterations"
 args.temp_directory = os.path.join(cwd, "temp")
 args.options = {
     "Generator": {
+        "base": {},
+        "api": {
+            "start-index": args.start_index
+        }
     },
     'Translator': {
         'cast_numbers': args.cast_numbers,
