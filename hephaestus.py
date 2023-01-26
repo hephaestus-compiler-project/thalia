@@ -261,7 +261,7 @@ def process_ncp_transformations(pid, dirname, translator, proc,
     return dst_file, injected_err
 
 
-def gen_program(pid, dirname, packages):
+def gen_program(pid, dirname, packages, program_processor=None):
     """
     This function is responsible processing an iteration.
 
@@ -274,7 +274,7 @@ def gen_program(pid, dirname, packages):
     utils.random.reset_word_pool()
     translator = TRANSLATORS[cli_args.language]('src.' + packages[0],
                                                 cli_args.options['Translator'])
-    proc = ProgramProcessor(pid, cli_args)
+    proc = program_processor or ProgramProcessor(pid, cli_args)
     try:
         program, oracle = proc.get_program()
         if cli_args.examine:
@@ -475,6 +475,10 @@ def _run(process_program, process_res):
     iteration = 1
     time_passed = 0
     start_time = time.time()
+    program_processor = None
+    if cli_args.workers is None or cli_args.debug:
+        # We do not know pid yet.
+        program_processor = ProgramProcessor(None, cli_args)
     while stop_condition(iteration, time_passed):
         try:
             utils.random.reset_word_pool()
@@ -485,7 +489,12 @@ def _run(process_program, process_res):
                 packages = (utils.random.word(), utils.random.word())
                 dirname = os.path.join(tmpdir, 'src')
                 pid = iteration + i
-                r = process_program(pid, dirname, packages)
+                args = (pid, dirname, packages)
+                if program_processor:
+                    # Set pid to program processor
+                    program_processor.pid = pid
+                    args += (program_processor,)
+                r = process_program(*args)
                 res.append(r)
 
             process_res(iteration, res, tmpdir, batches)
@@ -498,8 +507,8 @@ def _run(process_program, process_res):
 
 def run():
 
-    def process_program(pid, dirname, packages):
-        return gen_program(pid, dirname, packages)
+    def process_program(pid, dirname, packages, program_processor):
+        return gen_program(pid, dirname, packages, program_processor)
 
     def process_res(start_index, res, testdir, batch):
         oracles = OrderedDict()
