@@ -7,8 +7,8 @@ import networkx as nx
 from src import utils
 from src.ir import ast, types as tp
 from src.ir.context import Context
-from src.generators import utils as gu
-from src.generators import api_graph as ag, generators as gens
+from src.generators import api_graph as ag, generators as gens, utils as gu
+from src.generators.config import cfg
 from src.generators.generator import Generator
 
 
@@ -78,7 +78,6 @@ class APIGenerator(Generator):
         self.visited = set()
         self.visited_exprs = {}
         self.programs_gen = self.compute_programs()
-        self.max_level = 2
         self._has_next = True
         self.start_index = options.get("start-index", 0)
 
@@ -156,7 +155,7 @@ class APIGenerator(Generator):
                                        return_type) -> ast.Expr:
         receiver = self._generate_expr_from_node(receiver)
         args = self._generate_args(getattr(api, "parameters", []), parameter,
-                                   level=1)
+                                   depth=1)
         var_type = return_type
         if isinstance(api, ag.Method):
             args = [ast.CallArgument(arg) for arg in args]
@@ -224,22 +223,22 @@ class APIGenerator(Generator):
     def reset_state(self):
         pass
 
-    def _generate_expr_from_node(self, node, level=1):
+    def _generate_expr_from_node(self, node, depth=1):
         expr = self.visited_exprs.get(node)
         if expr:
             return expr
         if node == EMPTY:
             return None
-        if level == self.max_level:
+        if depth == cfg.limits.max_depth:
             return self.generate_expr(node.t)
         path = _find_path_of_target(self.api_graph, node)
         if not path:
             return self.generate_expr(node.t)
-        expr = self._generate_expression_from_path(path, level=level)
+        expr = self._generate_expression_from_path(path, depth=depth)
         self.visited_exprs[node] = expr
         return expr
 
-    def _generate_args(self, parameters, param_type, level):
+    def _generate_args(self, parameters, param_type, depth):
         if not parameters:
             return []
         args = []
@@ -249,27 +248,27 @@ class APIGenerator(Generator):
                 t = param_type
             else:
                 t = param
-            args.append(self._generate_expr_from_node(t, level))
+            args.append(self._generate_expr_from_node(t, depth))
         return args
 
     def _generate_expression_from_path(self, path: list,
-                                       level: int) -> ast.Expr:
+                                       depth: int) -> ast.Expr:
         elem = path[-1]
         receiver_path = path[:-1]
         if not receiver_path:
             receiver = None
         else:
             receiver = self._generate_expression_from_path(receiver_path,
-                                                           level)
+                                                           depth)
         if isinstance(elem, ag.Method):
             args = [ast.CallArgument(pe)
                     for pe in self._generate_args(elem.parameters, None,
-                                                  level + 1)]
+                                                  depth + 1)]
             expr = ast.FunctionCall(elem.name, args=args, receiver=receiver)
         elif isinstance(elem, ag.Field):
             expr = ast.FieldAccess(receiver, elem.name)
         elif isinstance(elem, ag.Constructor):
-            args = self._generate_args(elem.parameters, None, level + 1)
+            args = self._generate_args(elem.parameters, None, depth + 1)
             expr = ast.New(tp.Classifier(elem.name), args)
         else:
             expr = self.generate_expr(elem.t)
