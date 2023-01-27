@@ -28,7 +28,7 @@ class ProgramProcessor():
     }
 
     def __init__(self, proc_id, args):
-        self._proc_id = proc_id
+        self.proc_id = proc_id
         self.args = args
         self.transformations = [
             ProgramProcessor.CP_TRANSFORMATIONS[t]
@@ -39,17 +39,6 @@ class ProgramProcessor():
         self.program_generator = self._get_generator()
         self.transformation_schedule = self._get_transformation_schedule()
         self.current_transformation = 0
-
-    @property
-    def proc_id(self):
-        return self._proc_id
-
-    @proc_id.setter
-    def proc_id(self, value):
-        self._proc_id = value
-        if self.program_generator and self.program_generator.logger is not None:
-            self.program_generator.logger.iteration = value
-            self.program_generator.logger.number = value
 
     def _get_generator(self):
         if self.args.log:
@@ -126,8 +115,8 @@ class ProgramProcessor():
             print("\nGenerating program: " + str(self.proc_id))
         if not self.program_generator.has_next():
             return None, None
+        self.program_generator.prepare_next_program(self.proc_id)
         program = self.program_generator.generate()
-        self.program_generator.prepare_next_program()
         return program, True
 
     def can_transform(self):

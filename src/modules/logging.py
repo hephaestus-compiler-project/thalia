@@ -17,6 +17,12 @@ class Logger():
             mkdir(self.directory)
             self.filename = os.path.join(self.directory, str(self.iteration))
 
+    def update_filename(self, iteration):
+        self.iteration = iteration
+        if not self.stdout:
+            self.directory = os.path.join(self.test_directory, "logs")
+            self.filename = os.path.join(self.directory, str(self.iteration))
+
     def log_info(self):
         msg = "\n{}\nTransformation name:{}\nTransformation No: {}\n\n".format(
             10*"=",

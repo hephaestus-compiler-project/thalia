@@ -81,7 +81,7 @@ class Generator():
         # complete informations about them.
         self._blacklisted_classes: set = set()
 
-    def prepare_next_program(self):
+    def prepare_next_program(self, program_id):
         self.context = None
         self.depth = 1
         self._vars_in_context = defaultdict(lambda: 0)
@@ -92,6 +92,7 @@ class Generator():
         self.int_stream = iter(range(1, 10000))
         self._in_super_call = False
         self._blacklisted_classes: set = set()
+        self.logger.update_filename(program_id)
 
     def has_next(self):
         """
