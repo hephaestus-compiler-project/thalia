@@ -10,6 +10,7 @@ from src.ir.context import Context
 from src.generators import api_graph as ag, generators as gens, utils as gu
 from src.generators.config import cfg
 from src.generators.generator import Generator
+from src.modules.logging import log
 
 
 def _reachable_with_inheritance(graph: nx.DiGraph,
@@ -80,6 +81,7 @@ class APIGenerator(Generator):
         self.programs_gen = self.compute_programs()
         self._has_next = True
         self.start_index = options.get("start-index", 0)
+        self.logger.update_filename("api-generator")
 
     def encode_api_components(self, api_graph: nx.DiGraph) -> List[APIEncoding]:
         api_components = (ag.Field, ag.Constructor, ag.Method)
@@ -101,19 +103,21 @@ class APIGenerator(Generator):
                 if receiver.t != self.bt_factory.get_any_type():
                     receivers.update(_reachable_with_inheritance(
                         reversed_graph, receiver))
-            parameters = set(getattr(node, "parameters", []))
-            for param in set(parameters):
+            parameters = [{p} for p in getattr(node, "parameters", [])]
+            for param_set in parameters:
+                param = list(param_set)[0]
                 if param.t != self.bt_factory.get_any_type():
-                    parameters.update(_reachable_with_inheritance(
+                    param_set.update(_reachable_with_inheritance(
                         reversed_graph, param))
             if not parameters:
-                parameters.add(EMPTY)
+                parameters = ({EMPTY},)
+            parameters = tuple([frozenset(s) for s in parameters])
             view = api_graph.out_edges(node)
             assert len(view) == 1
             ret_type = list(view)[0][1]
             ret_types = _reachable_with_inheritance(api_graph, ret_type)
             encodings.append(APIEncoding(node, frozenset(receivers),
-                                         frozenset(parameters),
+                                         parameters,
                                          frozenset(ret_types)))
         return encodings
 
@@ -122,7 +126,7 @@ class APIGenerator(Generator):
         test_namespace = ast.GLOBAL_NAMESPACE + (func_name,)
         program_index = 0
         for api, receivers, parameters, returns in self.encodings:
-            types = (receivers, parameters, returns)
+            types = (receivers, *parameters, returns)
             if types in self.visited:
                 continue
             self.visited.add(types)
@@ -130,11 +134,12 @@ class APIGenerator(Generator):
                 if program_index < self.start_index:
                     program_index += 1
                     continue
-                receiver, parameter, return_type = combination
+                receiver, parameters, return_type = (
+                    combination[0], combination[1:-1], combination[-1])
                 self.context = Context()
                 self.namespace = test_namespace
                 expr = self.generate_from_type_combination(api, receiver,
-                                                           parameter,
+                                                           parameters,
                                                            return_type)
                 decls = list(self.context.get_declarations(
                     self.namespace, True).values())
@@ -149,12 +154,18 @@ class APIGenerator(Generator):
                     func_type=ast.FunctionDeclaration.FUNCTION)
                 self._add_node_to_parent(self.namespace[:-1], main_func)
                 program_index += 1
+                msg = ("Generating program of combination: (receiver: {}, "
+                       "parameters: {}, return: {}")
+                msg = msg.format(str(receiver),
+                                 ",".join([str(p) for p in parameters]),
+                                 str(return_type))
+                log(self.logger, msg)
                 yield ast.Program(deepcopy(self.context), self.language)
 
-    def generate_from_type_combination(self, api, receiver, parameter,
+    def generate_from_type_combination(self, api, receiver, parameters,
                                        return_type) -> ast.Expr:
         receiver = self._generate_expr_from_node(receiver)
-        args = self._generate_args(getattr(api, "parameters", []), parameter,
+        args = self._generate_args(getattr(api, "parameters", []), parameters,
                                    depth=1)
         var_type = return_type
         if isinstance(api, ag.Method):
@@ -220,7 +231,7 @@ class APIGenerator(Generator):
     def has_next(self):
         return self._has_next
 
-    def reset_state(self):
+    def prepare_next_program(self, program_id):
         pass
 
     def _generate_expr_from_node(self, node, depth=1):
@@ -238,11 +249,12 @@ class APIGenerator(Generator):
         self.visited_exprs[node] = expr
         return expr
 
-    def _generate_args(self, parameters, param_type, depth):
+    def _generate_args(self, parameters, actual_types, depth):
         if not parameters:
             return []
         args = []
-        for param in parameters:
+        for i, param in enumerate(parameters):
+            param_type = actual_types[i]
             if param_type and param in _reachable_with_inheritance(
                     self.api_graph, param_type):
                 t = param_type
@@ -262,13 +274,15 @@ class APIGenerator(Generator):
                                                            depth)
         if isinstance(elem, ag.Method):
             args = [ast.CallArgument(pe)
-                    for pe in self._generate_args(elem.parameters, None,
+                    for pe in self._generate_args(elem.parameters,
+                                                  elem.parameters,
                                                   depth + 1)]
             expr = ast.FunctionCall(elem.name, args=args, receiver=receiver)
         elif isinstance(elem, ag.Field):
             expr = ast.FieldAccess(receiver, elem.name)
         elif isinstance(elem, ag.Constructor):
-            args = self._generate_args(elem.parameters, None, depth + 1)
+            args = self._generate_args(elem.parameters, elem.parameters,
+                                       depth + 1)
             expr = ast.New(tp.Classifier(elem.name), args)
         else:
             expr = self.generate_expr(elem.t)
