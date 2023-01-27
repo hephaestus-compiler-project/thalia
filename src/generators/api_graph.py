@@ -10,6 +10,7 @@ from src.ir.builtins import BuiltinFactory
 IN = 0
 OUT = 1
 WIDENING = 2
+PROTECTED = "protected"
 
 
 class TypeNode(NamedTuple):
@@ -29,15 +30,18 @@ class TypeNode(NamedTuple):
 
 class Field(NamedTuple):
     name: str
+    cls: str
 
     def __str__(self):
         return self.name
 
     def __hash__(self):
-        return hash(str(self.name))
+        return hash(str(self.name) + str(self.cls))
 
     def __eq__(self, other):
-        return self.__class__ == other.__class__ and self.name == other.name
+        return (self.__class__ == other.__class__ and
+                self.name == other.name and
+                self.cls == other.cls)
 
 
 class Method(NamedTuple):
@@ -150,11 +154,14 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
 
     def process_fields(self, class_node, fields):
         for field_api in fields:
+            if field_api["access_mod"] == PROTECTED:
+                continue
             if field_api["is_static"]:
-                field_node = Field(self._class_name + "." + field_api["name"])
+                field_node = Field(self._class_name + "." + field_api["name"],
+                                   self._class_name)
                 self.graph.add_node(field_node)
             else:
-                field_node = Field(field_api["name"])
+                field_node = Field(field_api["name"], self._class_name)
                 self.graph.add_node(field_node)
                 self.graph.add_edge(class_node, field_node, label=IN)
             field_type = TypeNode(self.parse_type(field_api["type"]))
@@ -163,7 +170,7 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
 
     def process_methods(self, class_node, methods):
         for method_api in methods:
-            if method_api["access_mod"] == "protected":
+            if method_api["access_mod"] == PROTECTED:
                 continue
             if method_api["type_parameters"]:
                 # TODO: Handle parametric polymorphism.
