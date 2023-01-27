@@ -71,15 +71,17 @@ class JavaAPIDocConverter(APIDocConverter):
         return [p[0] for p in re.findall(regex, text)]
 
     def extract_super_class(self, html_doc):
+        regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
         supercls_defs = html_doc.select(".description .blockList pre")[0]
         self._replace_anchors_with_package_prefix(supercls_defs.select("a"))
         text = supercls_defs.text.encode("ascii", "ignore").decode()
         text = text.replace("\n", " ")
         segs = text.split(" extends ")
         if len(segs) == 1:
-            return None
-        super_class = segs[1].split(" implements ")[0]
-        return super_class
+            return []
+        text = segs[1].split(" implements ")[0]
+        text = text.replace(", ", ",")
+        return [p for p in re.findall(regex, text)]
 
     def extract_class_type(self, html_doc):
         text = html_doc.select(".description pre")[0].text

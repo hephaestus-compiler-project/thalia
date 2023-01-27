@@ -210,10 +210,10 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         self.process_methods(class_node, class_api["methods"])
         super_types = {
             TypeNode(self.parse_type(st))
-            for st in class_api["implements"]
+            for st in class_api["implements"] + class_api["inherits"]
         }
-        super_types.add(TypeNode(self.parse_type(
-            class_api["inherits"] or "java.lang.Object")))
+        if not super_types:
+            super_types.add(TypeNode(self.parse_type("java.lang.Object")))
         for st in super_types:
             self.graph.add_node(st)
             # Do not connect a node with itself.
