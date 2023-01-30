@@ -143,7 +143,7 @@ class GroovyTranslator(BaseTranslator):
     def _get_main_prefix(self, decl_type, name):
         ns_decls = list(self.context.get_namespaces_decls(
             self._namespace, name, decl_type))
-        if len(ns_decls) == 1 and ns_decls[0][0][:-1] == ast.GLOBAL_NAMESPACE:
+        if len(ns_decls) == 1 and ns_decls[0][0] == ast.GLOBAL_NAMESPACE:
             return "Main."
         return ""
 
