@@ -3,7 +3,7 @@ from typing import NamedTuple, List
 
 import networkx as nx
 
-from src.ir import BUILTIN_FACTORIES, types as tp
+from src.ir import BUILTIN_FACTORIES, types as tp, kotlin_types as kt
 from src.ir.builtins import BuiltinFactory
 
 
@@ -92,10 +92,30 @@ class APIGraphBuilder(ABC):
     def __init__(self):
         self.graph: nx.DiGraph = None
 
-    @abstractmethod
     def build(self, docs: dict) -> nx.DiGraph:
         self.graph = nx.DiGraph()
+        for api_doc in docs.values():
+            if api_doc["type_parameters"]:
+                # TODO: Handle parametric polymorphism.
+                continue
+            self.process_class(api_doc)
         return self.graph
+
+    @abstractmethod
+    def process_class(self, class_api: dict):
+        pass
+
+    @abstractmethod
+    def process_methods(self, methods: List[dict]):
+        pass
+
+    @abstractmethod
+    def process_fields(self, fields: List[dict]):
+        pass
+
+    @abstractmethod
+    def parse_type(self, str_t: str) -> tp.Type:
+        pass
 
 
 class JavaAPIGraphBuilder(APIGraphBuilder):
@@ -110,6 +130,7 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             str_t = str_t.split("[]")[0]
             return tf.get_array_type().new([self.parse_type(str_t)])
         elif str_t.endswith("..."):
+            # TODO consider this as a vararg rather than a single type.
             return self.parse_type(str_t.split("...")[0])
         elif str_t in ["char", "java.lang.Character"]:
             primitive = str_t == "char"
@@ -142,15 +163,6 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             return tf.get_void_type()
         else:
             return tp.SimpleClassifier(str_t)
-
-    def build(self, docs: dict) -> nx.DiGraph:
-        self.graph = nx.DiGraph()
-        for api_doc in docs.values():
-            if api_doc["type_parameters"]:
-                # TODO: Handle parametric polymorphism.
-                continue
-            self.process_class(api_doc)
-        return self.graph
 
     def process_fields(self, class_node, fields):
         for field_api in fields:
@@ -219,3 +231,141 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             # Do not connect a node with itself.
             if class_node != st:
                 self.graph.add_edge(class_node, st, label=WIDENING)
+
+
+class KotlinAPIGraphBuilder(APIGraphBuilder):
+    def __init__(self, target_language="kotlin"):
+        super().__init__()
+        self.bt_factory: BuiltinFactory = BUILTIN_FACTORIES[target_language]
+        self._class_name = None
+
+    def parse_type(self, str_t: str) -> tp.Type:
+        tf = self.bt_factory
+        if str_t.endswith("Array<"):
+            str_t = str_t.split("Array<")[1][:-1]
+            return tf.get_array_type().new([self.parse_type(str_t)])
+        elif str_t == "CharArray":
+            return kt.CharArray
+        elif str_t == "ByteArray":
+            return kt.ByteArray
+        elif str_t == "ShortArray":
+            return kt.ShortArray
+        elif str_t == "IntArray":
+            return kt.IntegerArray
+        elif str_t == "LongArray":
+            return kt.LongArray
+        elif str_t == "FloatArray":
+            return kt.FloatArray
+        elif str_t == "DoubleArray":
+            return kt.DoubleArray
+        elif str_t.startswith("vararg "):
+            return self.parse_type(str_t.split("vararg ")[1])
+        elif str_t == "Char":
+            return tf.get_char_type()
+        elif str_t == "Byte":
+            return tf.get_byte_type()
+        elif str_t == "Short":
+            return tf.get_short_type()
+        elif str_t == "Int":
+            return tf.get_integer_type()
+        elif str_t == "Long":
+            return tf.get_long_type()
+        elif str_t == "Float":
+            return tf.get_float_type()
+        elif str_t == "Double":
+            return tf.get_double_type()
+        elif str_t == "String":
+            return tf.get_string_type()
+        elif str_t == "Any":
+            return tf.get_any_type()
+        elif str_t == "java.lang.BigDecimal":
+            return tf.get_double_type()
+        elif str_t == "Unit":
+            return tf.get_void_type()
+        else:
+            return tp.SimpleClassifier(str_t)
+
+    def process_fields(self, class_node, fields):
+        for field_api in fields:
+            if field_api["access_mod"] == PROTECTED:
+                continue
+            if class_node:
+                receiver = class_node
+            receiver = (
+                TypeNode(self.parse_type(field_api["receiver"]))
+                if field_api["receiver"]
+                else class_node)
+            if receiver:
+                self._class_name = str(receiver.t)
+                self.graph.add_node(receiver)
+            field_node = Field(field_api["name"], self._class_name)
+            self.graph.add_node(field_node)
+            if receiver:
+                self.graph.add_edge(receiver, field_node, label=IN)
+            field_type = TypeNode(self.parse_type(field_api["type"]))
+            self.graph.add_node(field_type)
+            self.graph.add_edge(field_node, field_type, label=OUT)
+
+    def process_methods(self, class_node, methods):
+        for method_api in methods:
+            if method_api["access_mod"] == PROTECTED:
+                continue
+            if method_api["type_parameters"]:
+                # TODO: Handle parametric polymorphism.
+                continue
+            name = method_api["name"]
+            is_constructor = method_api["is_constructor"]
+            parameters = [
+                TypeNode(self.parse_type(p))
+                for p in method_api["parameters"]
+            ]
+            if class_node:
+                receiver = class_node
+            receiver = (
+                TypeNode(self.parse_type(method_api["receiver"]))
+                if method_api["receiver"]
+                else class_node)
+            if receiver:
+                self._class_name = str(receiver.t)
+                self.graph.add_node(receiver)
+            if is_constructor:
+                method_node = Constructor(self._class_name,
+                                          parameters)
+            else:
+                method_node = Method(name, self._class_name, parameters)
+            self.graph.add_node(method_node)
+            if not (is_constructor or receiver is None):
+                self.graph.add_edge(receiver, method_node, label=IN)
+            ret_type = (
+                TypeNode(self.parse_type(self._class_name))
+                if is_constructor
+                else TypeNode(self.parse_type(method_api["return_type"]))
+            )
+            self.graph.add_node(ret_type)
+            self.graph.add_edge(method_node, ret_type, label=OUT)
+
+    def _process_class(self, class_api: dict):
+        self._class_name = class_api["name"].rsplit(".", 1)[-1]
+        class_node = TypeNode(self.parse_type(self._class_name))
+        self.graph.add_node(class_node)
+        self.process_fields(class_node, class_api["fields"])
+        self.process_methods(class_node, class_api["methods"])
+        super_types = {
+            TypeNode(self.parse_type(st))
+            for st in class_api["implements"] + class_api["inherits"]
+        }
+        if not super_types:
+            super_types.add(TypeNode(self.parse_type("Any")))
+        for st in super_types:
+            self.graph.add_node(st)
+            # Do not connect a node with itself.
+            if class_node != st:
+                self.graph.add_edge(class_node, st, label=WIDENING)
+
+    def process_class(self, class_api):
+        if class_api["is_class"]:
+            self._process_class(class_api)
+        else:
+            self._class_name = None
+            self.process_methods(None, class_api["methods"])
+            self.process_fields(None, class_api["fields"])

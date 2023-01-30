@@ -66,7 +66,7 @@ class APIEncoding(NamedTuple):
 class APIGenerator(Generator):
     API_GRAPH_BUILDERS = {
         "java": ag.JavaAPIGraphBuilder,
-        "kotlin": ag.JavaAPIGraphBuilder,
+        "kotlin": ag.KotlinAPIGraphBuilder,
         "groovy": ag.JavaAPIGraphBuilder,
     }
 
