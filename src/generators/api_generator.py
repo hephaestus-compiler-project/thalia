@@ -72,6 +72,7 @@ class APIGenerator(Generator):
 
     def __init__(self, api_docs, options={}, language=None, logger=None):
         super().__init__(language=language, logger=logger)
+        self.logger.update_filename("api-generator")
         self.api_docs = api_docs
         self.api_graph: nx.DiGraph = self.API_GRAPH_BUILDERS[language](
             language).build(api_docs)
@@ -81,9 +82,10 @@ class APIGenerator(Generator):
         self.programs_gen = self.compute_programs()
         self._has_next = True
         self.start_index = options.get("start-index", 0)
-        self.logger.update_filename("api-generator")
 
     def encode_api_components(self, api_graph: nx.DiGraph) -> List[APIEncoding]:
+        msg = "Building API encodings..."
+        log(self.logger, msg)
         api_components = (ag.Field, ag.Constructor, ag.Method)
         api_nodes = [
             n
@@ -119,6 +121,8 @@ class APIGenerator(Generator):
             encodings.append(APIEncoding(node, frozenset(receivers),
                                          parameters,
                                          frozenset(ret_types)))
+        msg = "Constructed {} API encodings...".format(len(encodings))
+        log(self.logger, msg)
         return encodings
 
     def compute_programs(self):
