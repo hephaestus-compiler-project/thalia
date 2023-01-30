@@ -364,9 +364,27 @@ class KotlinAPIDocConverter(APIDocConverter):
             "name": package_name,
             "methods": method_objs,
             "fields": self.process_fields(fields),
+            "type_parameters": [],
             "is_class": False,
         }
         return api
+
+    def _replace_anchors_with_package_prefix(self, anchors):
+        # This method replaces the text of all anchors (note that the text
+        # corresponds to type names) with the fully quallified name of the
+        # type. The package prefix is found in a attribute of each anchor
+        # named "title".
+        package_regex = re.compile(
+            "https://docs.oracle.com/.*/api/(.*)/[^/]+.html")
+        for anchor in anchors:
+            href = anchor.get("href")
+            if not href.startswith("https://docs.oracle.com"):
+                continue
+
+            match = re.match(package_regex, href)
+            package_prefix = match.group(1).replace("/", ".")
+            if not anchor.string.startswith(package_prefix):
+                anchor.string.replace_with(package_prefix + "." + anchor.text)
 
     def _get_super_classes_interfaces(self, html_doc):
         regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
@@ -410,19 +428,17 @@ class KotlinAPIDocConverter(APIDocConverter):
         return re.findall(regex, text)
 
     def extract_super_class(self, html_doc):
-        classes = self._get_super_classes_interfaces(html_doc)
-        if not classes:
-            return None
         # In general, we cannot distinguish between interfaces and classes.
-        return classes[0]
+        classes = self._get_super_classes_interfaces(html_doc)
+        return classes
 
     def extract_class_type(self, html_doc):
-        cl_type = html_doc.select(".cover span")[3].text
-        if 'interface' in cl_type:
+        text = html_doc.select(".cover .platform-hinted .symbol")[0].text
+        if 'interface' in text:
             return self.INTERFACE
-        if 'abstract class' in cl_type:
+        if 'abstract class' in text:
             return self.ABSTRACT_CLASS
-        if 'enum' in cl_type:
+        if 'enum' in text:
             return self.ENUM
         return self.REGULAR_CLASS
 
@@ -444,7 +460,10 @@ class KotlinAPIDocConverter(APIDocConverter):
         fields = html_doc.select(
             "div[data-togglable=\"Properties\"] .title .symbol")
         method_objs = self.process_methods(methods, False)
-        constructor_objs = self.process_methods(constructors, True)
+        if class_type != self.ABSTRACT_CLASS:
+            constructor_objs = self.process_methods(constructors, True)
+        else:
+            constructor_objs = []
         class_obj = {
             'name': full_class_name,
             'type_parameters': self.extract_class_type_parameters(html_doc),
@@ -572,6 +591,7 @@ class KotlinAPIDocConverter(APIDocConverter):
     def process_methods(self, methods, is_constructor):
         method_objs = []
         for method_doc in methods:
+            self._replace_anchors_with_package_prefix(method_doc.select("a"))
             method_name = self.extract_method_name(method_doc, is_constructor)
             if method_name == self.EXCLUDED_METHOD_NAME:
                 continue
