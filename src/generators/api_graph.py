@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
+from collections import OrderedDict
 from typing import NamedTuple, List, Tuple
+import re
 
 import networkx as nx
 
@@ -97,9 +99,6 @@ class APIGraphBuilder(ABC):
         self.graph = nx.DiGraph()
         self.subtyping_graph = nx.DiGraph()
         for api_doc in docs.values():
-            if api_doc["type_parameters"]:
-                # TODO: Handle parametric polymorphism.
-                continue
             self.process_class(api_doc)
         return self.graph, self.subtyping_graph
 
@@ -116,7 +115,8 @@ class APIGraphBuilder(ABC):
         pass
 
     @abstractmethod
-    def parse_type(self, str_t: str) -> tp.Type:
+    def parse_type(self, str_t: str,
+                   type_variables: List[str] = None) -> tp.Type:
         pass
 
 
@@ -125,8 +125,60 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         super().__init__()
         self.bt_factory: BuiltinFactory = BUILTIN_FACTORIES[target_language]
         self._class_name = None
+        self._class_type_var_map: dict = {}
+        self._type_var_map: dict = {}
 
-    def parse_type(self, str_t: str) -> tp.Type:
+    def parse_wildcard(self, str_t) -> tp.WildCardType:
+        if str_t == "?":
+            return tp.WildCardType()
+        if "extends" in str_t:
+            return tp.WildCardType(
+                self.parse_type(str_t.split(" extends ", 1)[1]),
+                variance=tp.Covariant)
+        else:
+            return tp.WildCardType(
+                self.parse_type(str_t.split(" super ", 1)[1]),
+                variance=tp.Contravariant)
+
+    def parse_type_parameter(self, str_t: str) -> tp.TypeParameter:
+        segs = str_t.split(" extends ")
+        if len(segs) == 1:
+            return tp.TypeParameter(self._type_var_map.get(str_t, str_t))
+        bound = self.parse_type(segs[1])
+        return tp.TypeParameter(
+            self._type_var_map.get(segs[0], segs[0]), bound=bound)
+
+    def parse_reg_type(self, str_t: str) -> tp.Type:
+        if str_t.startswith("?"):
+            return self.parse_wildcard(str_t)
+        segs = str_t.split(".")
+        is_type_var = (
+            len(segs) == 1 or
+            (
+                " extends " in str_t and
+                "." not in str_t.split(" extends ")[0]
+             )
+        )
+        if is_type_var:
+            return self.parse_type_parameter(str_t)
+        regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
+        segs = str_t.split("<", 1)
+        if len(segs) == 1:
+            return tp.SimpleClassifier(str_t)
+        base, type_args_str = segs[0], segs[1][:-1]
+        type_args = re.findall(regex, type_args_str)
+        new_type_args = []
+        for type_arg in type_args:
+            new_type_args.append(self.parse_type(type_arg))
+        type_vars = [
+            tp.TypeParameter(base + ".T" + str(i + 1))
+            for i in range(len(new_type_args))
+        ]
+        type_vars = self._class_type_var_map.get(base, type_vars)
+        return tp.TypeConstructor(base, type_vars).new(new_type_args)
+
+    def parse_type(self, str_t: str,
+                   type_variables: List[str] = None) -> tp.Type:
         tf = self.bt_factory
         if str_t.endswith("[]"):
             str_t = str_t.split("[]")[0]
@@ -155,6 +207,9 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         elif str_t in ["double", "java.lang.Double"]:
             primitive = str_t == "double"
             return tf.get_double_type(primitive=primitive)
+        elif str_t in ["boolean", "java.lang.Boolean"]:
+            primitive = str_t == "boolean"
+            return tf.get_boolean_type(primitive=primitive)
         elif str_t == "java.lang.String":
             return tf.get_string_type()
         elif str_t == "java.lang.Object":
@@ -164,7 +219,7 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         elif str_t == "void":
             return tf.get_void_type()
         else:
-            return tp.SimpleClassifier(str_t)
+            return self.parse_reg_type(str_t)
 
     def process_fields(self, class_node, fields):
         for field_api in fields:
@@ -247,7 +302,8 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         self.bt_factory: BuiltinFactory = BUILTIN_FACTORIES[target_language]
         self._class_name = None
 
-    def parse_type(self, str_t: str) -> tp.Type:
+    def parse_type(self, str_t: str,
+                   type_variables: List[str] = None) -> tp.Type:
         tf = self.bt_factory
         if str_t.endswith("Array<"):
             str_t = str_t.split("Array<")[1][:-1]

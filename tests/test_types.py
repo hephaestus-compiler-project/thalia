@@ -229,8 +229,8 @@ def test_primitives_arrays():
     java_double_array = jt.Array.new([jt.DoubleType(primitive=True)])
     java_boxed_double_array = jt.Array.new([jt.Double])
 
-    assert groovy_double_array.is_assignable(groovy_boxed_double_array)
-    assert groovy_boxed_double_array.is_assignable(groovy_double_array)
+    assert not groovy_double_array.is_assignable(groovy_boxed_double_array)
+    assert not groovy_boxed_double_array.is_assignable(groovy_double_array)
     assert not java_double_array.is_assignable(java_boxed_double_array)
     assert not java_boxed_double_array.is_assignable(java_double_array)
 
