@@ -5,7 +5,9 @@ import re
 
 import networkx as nx
 
-from src.ir import BUILTIN_FACTORIES, types as tp, kotlin_types as kt
+from src.ir import (
+    BUILTIN_FACTORIES, types as tp, kotlin_types as kt,
+    type_utils as tu)
 from src.ir.builtins import BuiltinFactory
 
 
@@ -120,13 +122,93 @@ class APIGraphBuilder(ABC):
         pass
 
 
+class APIGraph():
+    # TODO
+    def __init__(self, api_graph, subtyping_graph):
+        self.api_graph = api_graph
+        self.subtyping_graph = subtyping_graph
+        self._types = [node.t for node in self.subtyping_graph.nodes()
+                       if not node.t.is_type_constructor()]
+
+    def solve_constraint(self, constraint, type_var_map):
+        for type_k, type_v in constraint.items():
+            if not type_k.is_type_var():
+                continue
+            inst = type_var_map.get(type_k)
+            if inst:
+                if not type_v.is_type_var() and type_v != inst:
+                    return None
+                type_var_map[type_v] = inst
+        return type_var_map
+
+    def subtypes(self, node: TypeNode):
+        subtypes = {node}
+        if node.t.is_type_var():
+            return subtypes
+        if not node.t.is_parameterized():
+            return nx.descendants(self.subtyping_graph, node)
+        type_var_map = node.t.get_type_variable_assignments()
+        for k, v in nx.dfs_edges(self.subtyping_graph,
+                                 TypeNode(node.t.t_constructor)):
+            constraint = self.subtyping_graph[k][v].get("constraint") or {}
+            if not constraint:
+                subtypes.add(v)
+            solution = self.solve_constraint(constraint,
+                                             dict(type_var_map))
+            if not solution:
+                continue
+            type_var_map = solution
+            if v.t.is_type_constructor():
+                subtypes.add(TypeNode(tu.instantiate_type_constructor(
+                    v.t, self._types, type_var_map=type_var_map)[0]))
+            else:
+                subtypes.add(v)
+        return subtypes
+
+    def supertypes(self, node: TypeNode):
+        reverse_graph = self.subtyping_graph.reverse()
+        supertypes = set()
+        constraints = {}
+        for k, v in nx.dfs_edges(reverse_graph, node):
+            constraint = reverse_graph[k][v].get("constraint") or {}
+            if not constraint:
+                supertypes.add(v)
+                continue
+            for type_k, type_v in constraint.items():
+                if type_v.is_type_var():
+                    t = constraints.get(type_v)
+                else:
+                    t = type_v
+                constraints[type_k] = t
+            else:
+                supertypes.add(TypeNode(tu.instantiate_type_constructor(
+                    v.t, {}, type_var_map=constraints)[0]))
+        return supertypes
+
+
 class JavaAPIGraphBuilder(APIGraphBuilder):
     def __init__(self, target_language):
         super().__init__()
         self.bt_factory: BuiltinFactory = BUILTIN_FACTORIES[target_language]
         self._class_name = None
         self._class_type_var_map: dict = {}
-        self._type_var_map: dict = {}
+
+    def build(self, docs: dict) -> Tuple[nx.DiGraph, nx.DiGraph]:
+        for api_doc in docs.values():
+            if not api_doc["type_parameters"]:
+                continue
+            cls_name = api_doc["name"]
+            type_param_map = OrderedDict()
+            for i, type_param_str in enumerate(api_doc["type_parameters"]):
+                type_param = self.parse_type_parameter(type_param_str)
+                bound = None
+                if type_param.bound:
+                    bound = type_param.get(type_param.bound.name,
+                                           type_param.bound)
+                type_param_map[type_param.name] = tp.TypeParameter(
+                    cls_name + ".T" + str(i), bound=bound)
+            self._class_type_var_map[cls_name] = type_param_map
+        return super().build(docs)
 
     def parse_wildcard(self, str_t) -> tp.WildCardType:
         if str_t == "?":
@@ -142,11 +224,12 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
 
     def parse_type_parameter(self, str_t: str) -> tp.TypeParameter:
         segs = str_t.split(" extends ")
+        type_var_map = self._class_type_var_map.get(self._class_name, {})
         if len(segs) == 1:
-            return tp.TypeParameter(self._type_var_map.get(str_t, str_t))
+            return type_var_map.get(str_t, tp.TypeParameter(str_t))
         bound = self.parse_type(segs[1])
-        return tp.TypeParameter(
-            self._type_var_map.get(segs[0], segs[0]), bound=bound)
+        return type_var_map.get(segs[0],
+                                tp.TypeParameter(segs[0], bound=bound))
 
     def parse_reg_type(self, str_t: str) -> tp.Type:
         if str_t.startswith("?"):
@@ -174,7 +257,9 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             tp.TypeParameter(base + ".T" + str(i + 1))
             for i in range(len(new_type_args))
         ]
-        type_vars = self._class_type_var_map.get(base, type_vars)
+        type_var_map = self._class_type_var_map.get(base)
+        if type_var_map:
+            type_vars = list(type_var_map.values())
         return tp.TypeConstructor(base, type_vars).new(new_type_args)
 
     def parse_type(self, str_t: str,
@@ -278,22 +363,33 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
 
     def process_class(self, class_api):
         self._class_name = class_api["name"]
-        class_node = TypeNode(self.parse_type(self._class_name))
+        if class_api["type_parameters"]:
+            class_node = TypeNode(tp.TypeConstructor(
+                self._class_name,
+                list(self._class_type_var_map[self._class_name].values())))
+        else:
+            class_node = TypeNode(self.parse_type(self._class_name))
         self.graph.add_node(class_node)
         self.subtyping_graph.add_node(class_node)
         self.process_fields(class_node, class_api["fields"])
         self.process_methods(class_node, class_api["methods"])
         super_types = {
-            TypeNode(self.parse_type(st))
+            self.parse_type(st)
             for st in class_api["implements"] + class_api["inherits"]
         }
         if not super_types:
-            super_types.add(TypeNode(self.parse_type("java.lang.Object")))
+            super_types.add(self.parse_type("java.lang.Object"))
         for st in super_types:
-            self.subtyping_graph.add_node(st)
+            kwargs = {}
+            source = TypeNode(st)
+            if st.is_parameterized():
+                source = TypeNode(st.t_constructor)
+                kwargs["constraint"] = st.get_type_variable_assignments()
+            self.subtyping_graph.add_node(source)
             # Do not connect a node with itself.
-            if class_node != st:
-                self.subtyping_graph.add_edge(st, class_node, label=WIDENING)
+            if class_node != source:
+                self.subtyping_graph.add_edge(source, class_node,
+                                              **kwargs)
 
 
 class KotlinAPIGraphBuilder(APIGraphBuilder):
