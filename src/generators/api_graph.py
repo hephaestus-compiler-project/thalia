@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import NamedTuple, List
+from typing import NamedTuple, List, Tuple
 
 import networkx as nx
 
@@ -91,15 +91,17 @@ class Constructor(NamedTuple):
 class APIGraphBuilder(ABC):
     def __init__(self):
         self.graph: nx.DiGraph = None
+        self.subtyping_graph: nx.DiGraph = None
 
-    def build(self, docs: dict) -> nx.DiGraph:
+    def build(self, docs: dict) -> Tuple[nx.DiGraph, nx.DiGraph]:
         self.graph = nx.DiGraph()
+        self.subtyping_graph = nx.DiGraph()
         for api_doc in docs.values():
             if api_doc["type_parameters"]:
                 # TODO: Handle parametric polymorphism.
                 continue
             self.process_class(api_doc)
-        return self.graph
+        return self.graph, self.subtyping_graph
 
     @abstractmethod
     def process_class(self, class_api: dict):
@@ -178,6 +180,7 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
                 self.graph.add_edge(class_node, field_node, label=IN)
             field_type = TypeNode(self.parse_type(field_api["type"]))
             self.graph.add_node(field_type)
+            self.subtyping_graph.add_node(field_type)
             self.graph.add_edge(field_node, field_type, label=OUT)
 
     def process_methods(self, class_node, methods):
@@ -194,6 +197,9 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
                 TypeNode(self.parse_type(p))
                 for p in method_api["parameters"]
             ]
+            for param in parameters:
+                self.graph.add_node(param)
+                self.subtyping_graph.add_node(param)
             if is_constructor:
                 method_node = Constructor(self._class_name,
                                           parameters)
@@ -212,12 +218,14 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
                 else TypeNode(self.parse_type(method_api["return_type"]))
             )
             self.graph.add_node(ret_type)
+            self.subtyping_graph.add_node(ret_type)
             self.graph.add_edge(method_node, ret_type, label=OUT)
 
     def process_class(self, class_api):
         self._class_name = class_api["name"]
         class_node = TypeNode(self.parse_type(self._class_name))
         self.graph.add_node(class_node)
+        self.subtyping_graph.add_node(class_node)
         self.process_fields(class_node, class_api["fields"])
         self.process_methods(class_node, class_api["methods"])
         super_types = {
@@ -227,10 +235,10 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         if not super_types:
             super_types.add(TypeNode(self.parse_type("java.lang.Object")))
         for st in super_types:
-            self.graph.add_node(st)
+            self.subtyping_graph.add_node(st)
             # Do not connect a node with itself.
             if class_node != st:
-                self.graph.add_edge(class_node, st, label=WIDENING)
+                self.subtyping_graph.add_edge(st, class_node, label=WIDENING)
 
 
 class KotlinAPIGraphBuilder(APIGraphBuilder):
@@ -298,12 +306,14 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             if receiver:
                 self._class_name = str(receiver.t)
                 self.graph.add_node(receiver)
+                self.subtyping_graph.add_node(receiver)
             field_node = Field(field_api["name"], self._class_name)
             self.graph.add_node(field_node)
             if receiver:
                 self.graph.add_edge(receiver, field_node, label=IN)
             field_type = TypeNode(self.parse_type(field_api["type"]))
             self.graph.add_node(field_type)
+            self.subtyping_graph.add_node(field_type)
             self.graph.add_edge(field_node, field_type, label=OUT)
 
     def process_methods(self, class_node, methods):
@@ -319,6 +329,9 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
                 TypeNode(self.parse_type(p))
                 for p in method_api["parameters"]
             ]
+            for param in parameters:
+                self.graph.add_node(param)
+                self.subtyping_graph.add_node(param)
             if class_node:
                 receiver = class_node
             receiver = (
@@ -328,6 +341,7 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             if receiver:
                 self._class_name = str(receiver.t)
                 self.graph.add_node(receiver)
+                self.subtyping_graph.add_node(receiver)
             if is_constructor:
                 method_node = Constructor(self._class_name,
                                           parameters)
@@ -342,12 +356,14 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
                 else TypeNode(self.parse_type(method_api["return_type"]))
             )
             self.graph.add_node(ret_type)
+            self.subtyping_graph.add_node(ret_type)
             self.graph.add_edge(method_node, ret_type, label=OUT)
 
     def _process_class(self, class_api: dict):
         self._class_name = class_api["name"].rsplit(".", 1)[-1]
         class_node = TypeNode(self.parse_type(self._class_name))
         self.graph.add_node(class_node)
+        self.subtyping_graph.add_node(class_node)
         self.process_fields(class_node, class_api["fields"])
         self.process_methods(class_node, class_api["methods"])
         super_types = {
@@ -357,10 +373,10 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         if not super_types:
             super_types.add(TypeNode(self.parse_type("Any")))
         for st in super_types:
-            self.graph.add_node(st)
+            self.subtyping_graph.add_node(st)
             # Do not connect a node with itself.
             if class_node != st:
-                self.graph.add_edge(class_node, st, label=WIDENING)
+                self.subtyping_graph.add_edge(st, class_node, label=WIDENING)
 
     def process_class(self, class_api):
         if class_api["is_class"]:

@@ -13,27 +13,6 @@ from src.generators.generator import Generator
 from src.modules.logging import log
 
 
-def _reachable_with_inheritance(graph: nx.DiGraph,
-                                source: ag.TypeNode) -> list:
-    visited = {k: False for k in graph.nodes()}
-
-    def _dfs(n):
-        visited[n] = True
-        if n not in graph:
-            return
-        for target, attrs in graph[n].items():
-            if attrs["label"] != ag.WIDENING:
-                continue
-            if not visited.get(target, False):
-                _dfs(target)
-    _dfs(source)
-    return {
-        n
-        for n, is_visited in visited.items()
-        if is_visited
-    }
-
-
 def _find_path_of_target(graph: nx.DiGraph, target: ag.TypeNode) -> list:
     if target not in graph:
         return None
@@ -74,28 +53,28 @@ class APIGenerator(Generator):
         super().__init__(language=language, logger=logger)
         self.logger.update_filename("api-generator")
         self.api_docs = api_docs
-        self.api_graph: nx.DiGraph = self.API_GRAPH_BUILDERS[language](
-            language).build(api_docs)
-        self.encodings = self.encode_api_components(self.api_graph)
+        self.api_graph, self.subtyping_graph = \
+            self.API_GRAPH_BUILDERS[language](language).build(api_docs)
+        self.encodings = self.encode_api_components()
         self.visited = set()
         self.visited_exprs = {}
         self.programs_gen = self.compute_programs()
         self._has_next = True
         self.start_index = options.get("start-index", 0)
 
-    def encode_api_components(self, api_graph: nx.DiGraph) -> List[APIEncoding]:
+    def encode_api_components(self) -> List[APIEncoding]:
         msg = "Building API encodings..."
         log(self.logger, msg)
         api_components = (ag.Field, ag.Constructor, ag.Method)
         api_nodes = [
             n
-            for n in api_graph.nodes()
+            for n in self.api_graph.nodes()
             if isinstance(n, api_components)
         ]
         encodings = []
-        reversed_graph = api_graph.reverse()
+        reversed_graph = self.subtyping_graph.reverse()
         for node in api_nodes:
-            view = api_graph.in_edges(node)
+            view = self.api_graph.in_edges(node)
             if not view:
                 receivers = {EMPTY}
             else:
@@ -103,21 +82,22 @@ class APIGenerator(Generator):
                 receiver = list(view)[0][0]
                 receivers = {receiver}
                 if receiver.t != self.bt_factory.get_any_type():
-                    receivers.update(_reachable_with_inheritance(
-                        reversed_graph, receiver))
+                    receivers.update(nx.descendants(self.subtyping_graph,
+                                                    receiver))
             parameters = [{p} for p in getattr(node, "parameters", [])]
             for param_set in parameters:
                 param = list(param_set)[0]
                 if param.t != self.bt_factory.get_any_type():
-                    param_set.update(_reachable_with_inheritance(
-                        reversed_graph, param))
+                    param_set.update(nx.descendants(self.subtyping_graph,
+                                                    param))
             if not parameters:
                 parameters = ({EMPTY},)
             parameters = tuple([frozenset(s) for s in parameters])
-            view = api_graph.out_edges(node)
+            view = self.api_graph.out_edges(node)
             assert len(view) == 1
             ret_type = list(view)[0][1]
-            ret_types = _reachable_with_inheritance(api_graph, ret_type)
+            ret_types = nx.descendants(reversed_graph, ret_type)
+            ret_types.add(ret_type)
             encodings.append(APIEncoding(node, frozenset(receivers),
                                          parameters,
                                          frozenset(ret_types)))
@@ -259,8 +239,8 @@ class APIGenerator(Generator):
         args = []
         for i, param in enumerate(parameters):
             param_type = actual_types[i]
-            if param_type and param in _reachable_with_inheritance(
-                    self.api_graph, param_type):
+            if param_type and param_type in nx.descendants(
+                    self.subtyping_graph, param):
                 t = param_type
             else:
                 t = param
