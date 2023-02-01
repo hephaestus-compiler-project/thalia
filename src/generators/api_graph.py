@@ -134,11 +134,16 @@ class APIGraph():
         for type_k, type_v in constraint.items():
             if not type_k.is_type_var():
                 continue
-            inst = type_var_map.get(type_k)
-            if inst:
-                if not type_v.is_type_var() and type_v != inst:
-                    return None
-                type_var_map[type_v] = inst
+            assignment = tp.substitute_type(type_k, type_var_map)
+            sub = tu.unify_types(assignment, type_v, None, same_type=False)
+            is_invalid = (
+                assignment != type_v and
+                (not sub or any(type_var_map.get(k, v) != v
+                                for k, v in sub.items()))
+            )
+            if is_invalid:
+                return None
+            type_var_map[type_v] = assignment
         return type_var_map
 
     def subtypes(self, node: TypeNode):
@@ -146,16 +151,21 @@ class APIGraph():
         if node.t.is_type_var():
             return subtypes
         if not node.t.is_parameterized():
-            return nx.descendants(self.subtyping_graph, node)
+            subtypes.update(nx.descendants(self.subtyping_graph, node))
+            return subtypes
         type_var_map = node.t.get_type_variable_assignments()
+        excluded_nodes = set()
         for k, v in nx.dfs_edges(self.subtyping_graph,
                                  TypeNode(node.t.t_constructor)):
+            if k in excluded_nodes:
+                continue
             constraint = self.subtyping_graph[k][v].get("constraint") or {}
             if not constraint:
                 subtypes.add(v)
             solution = self.solve_constraint(constraint,
                                              dict(type_var_map))
             if not solution:
+                excluded_nodes.add(v)
                 continue
             type_var_map = solution
             if v.t.is_type_constructor():
