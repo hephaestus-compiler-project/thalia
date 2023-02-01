@@ -157,14 +157,12 @@ class APIGraph():
         excluded_nodes = set()
         for k, v in nx.dfs_edges(self.subtyping_graph,
                                  TypeNode(node.t.t_constructor)):
-            if k in excluded_nodes:
-                continue
             constraint = self.subtyping_graph[k][v].get("constraint") or {}
             if not constraint:
                 subtypes.add(v)
             solution = self.solve_constraint(constraint,
                                              dict(type_var_map))
-            if not solution:
+            if not solution or k in excluded_nodes:
                 excluded_nodes.add(v)
                 continue
             type_var_map = solution
