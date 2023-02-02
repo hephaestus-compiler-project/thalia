@@ -32,16 +32,6 @@ def _find_path_of_target(graph: nx.DiGraph, target: ag.TypeNode) -> list:
     return pruned_path
 
 
-EMPTY = 0
-
-
-class APIEncoding(NamedTuple):
-    api: Union[ag.Field, ag.Method, ag.Constructor]
-    receivers: Set[ag.TypeNode]
-    parameters: Set[ag.TypeNode]
-    returns: Set[ag.TypeNode]
-
-
 class APIGenerator(Generator):
     API_GRAPH_BUILDERS = {
         "java": ag.JavaAPIGraphBuilder,
@@ -53,57 +43,14 @@ class APIGenerator(Generator):
         super().__init__(language=language, logger=logger)
         self.logger.update_filename("api-generator")
         self.api_docs = api_docs
-        self.api_graph, self.subtyping_graph = \
-            self.API_GRAPH_BUILDERS[language](language).build(api_docs)
-        self.encodings = self.encode_api_components()
+        self.api_graph = self.API_GRAPH_BUILDERS[language](language).build(
+            api_docs)
+        self.encodings = self.api_graph.encode_api_components()
         self.visited = set()
         self.visited_exprs = {}
         self.programs_gen = self.compute_programs()
         self._has_next = True
         self.start_index = options.get("start-index", 0)
-
-    def encode_api_components(self) -> List[APIEncoding]:
-        msg = "Building API encodings..."
-        log(self.logger, msg)
-        api_components = (ag.Field, ag.Constructor, ag.Method)
-        api_nodes = [
-            n
-            for n in self.api_graph.nodes()
-            if isinstance(n, api_components)
-        ]
-        encodings = []
-        reversed_graph = self.subtyping_graph.reverse()
-        for node in api_nodes:
-            view = self.api_graph.in_edges(node)
-            if not view:
-                receivers = {EMPTY}
-            else:
-                assert len(view) == 1
-                receiver = list(view)[0][0]
-                receivers = {receiver}
-                if receiver.t != self.bt_factory.get_any_type():
-                    receivers.update(nx.descendants(self.subtyping_graph,
-                                                    receiver))
-            parameters = [{p} for p in getattr(node, "parameters", [])]
-            for param_set in parameters:
-                param = list(param_set)[0]
-                if param.t != self.bt_factory.get_any_type():
-                    param_set.update(nx.descendants(self.subtyping_graph,
-                                                    param))
-            if not parameters:
-                parameters = ({EMPTY},)
-            parameters = tuple([frozenset(s) for s in parameters])
-            view = self.api_graph.out_edges(node)
-            assert len(view) == 1
-            ret_type = list(view)[0][1]
-            ret_types = nx.descendants(reversed_graph, ret_type)
-            ret_types.add(ret_type)
-            encodings.append(APIEncoding(node, frozenset(receivers),
-                                         parameters,
-                                         frozenset(ret_types)))
-        msg = "Constructed {} API encodings...".format(len(encodings))
-        log(self.logger, msg)
-        return encodings
 
     def compute_programs(self):
         func_name = "test"
@@ -222,11 +169,11 @@ class APIGenerator(Generator):
         expr = self.visited_exprs.get(node)
         if expr:
             return expr
-        if node == EMPTY:
+        if node == self.api_graph.EMPTY:
             return None
         if depth == cfg.limits.max_depth:
             return self.generate_expr(node.t)
-        path = _find_path_of_target(self.api_graph, node)
+        path = self.api_graph.find_API_path(node)
         if not path:
             return self.generate_expr(node.t)
         expr = self._generate_expression_from_path(path, depth=depth)
@@ -239,8 +186,7 @@ class APIGenerator(Generator):
         args = []
         for i, param in enumerate(parameters):
             param_type = actual_types[i]
-            if param_type and param_type in nx.descendants(
-                    self.subtyping_graph, param):
+            if param_type and param_type in self.api_graph.subtypes(param):
                 t = param_type
             else:
                 t = param

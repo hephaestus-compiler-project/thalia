@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
-from collections import OrderedDict
-from typing import NamedTuple, List, Tuple
+from collections import OrderedDict, defaultdict
+from typing import NamedTuple, List, Union, Set
 import re
 
 import networkx as nx
 
+from src import utils
 from src.ir import (
     BUILTIN_FACTORIES, types as tp, kotlin_types as kt,
     type_utils as tu)
@@ -71,6 +72,17 @@ class Method(NamedTuple):
         )
 
 
+class UpperBoundConstraint(NamedTuple):
+    bound: tp.Type
+
+
+class EqualityConstraint(NamedTuple):
+    t: tp.Type
+
+
+UNSATISFIABLE = object()
+
+
 class Constructor(NamedTuple):
     name: str
     parameters: List[TypeNode]
@@ -92,38 +104,18 @@ class Constructor(NamedTuple):
         )
 
 
-class APIGraphBuilder(ABC):
-    def __init__(self):
-        self.graph: nx.DiGraph = None
-        self.subtyping_graph: nx.DiGraph = None
-
-    def build(self, docs: dict) -> Tuple[nx.DiGraph, nx.DiGraph]:
-        self.graph = nx.DiGraph()
-        self.subtyping_graph = nx.DiGraph()
-        for api_doc in docs.values():
-            self.process_class(api_doc)
-        return self.graph, self.subtyping_graph
-
-    @abstractmethod
-    def process_class(self, class_api: dict):
-        pass
-
-    @abstractmethod
-    def process_methods(self, methods: List[dict]):
-        pass
-
-    @abstractmethod
-    def process_fields(self, fields: List[dict]):
-        pass
-
-    @abstractmethod
-    def parse_type(self, str_t: str,
-                   type_variables: List[str] = None) -> tp.Type:
-        pass
+class APIEncoding(NamedTuple):
+    api: Union[Field, Method, Constructor]
+    receivers: Set[TypeNode]
+    parameters: Set[TypeNode]
+    returns: Set[TypeNode]
 
 
 class APIGraph():
     # TODO
+
+    EMPTY = 0
+
     def __init__(self, api_graph, subtyping_graph):
         self.api_graph = api_graph
         self.subtyping_graph = subtyping_graph
@@ -148,7 +140,7 @@ class APIGraph():
 
     def subtypes(self, node: TypeNode):
         subtypes = {node}
-        if node.t.is_type_var() or node not in self.subtyping_graph:
+        if node.t.is_type_var():
             return subtypes
         if node.t.is_parameterized() and node.t.has_wildcards():
             # TODO Handle wildcards
@@ -201,6 +193,207 @@ class APIGraph():
                     v.t, {}, type_var_map=constraints)[0]))
         return supertypes
 
+    def find_API_path(self, target: TypeNode) -> list:
+        origin = target
+        if target.t.is_parameterized():
+            target = TypeNode(target.t.t_constructor)
+        source_nodes = [
+            node
+            for node, indegree in self.api_graph.in_degree(
+                self.api_graph.nodes())
+            if indegree == 0 and nx.has_path(self.api_graph, node, target)
+        ]
+        if not source_nodes:
+            return None
+
+        source = utils.random.choice(source_nodes)
+        if source == target:
+            return None
+        for path in nx.all_simple_edge_paths(self.api_graph, source=source,
+                                             target=target):
+            type_var_map = self._compute_type_var_map(path)
+            constraints = self._collect_constraints(path, origin, type_var_map)
+            assignments = self.instantiate_type_variables(constraints,
+                                                          type_var_map)
+            if assignments is None:
+                continue
+            node_path = OrderedDict()
+            for source, target in path:
+                node_path[source] = True
+                node_path[target] = True
+            return list(node_path.keys()), assignments
+        return None
+
+    def _collect_constraints(self, path: list, target: TypeNode,
+                             type_var_map: dict):
+        constraints = defaultdict(set)
+        if target.t.is_parameterized():
+            for k, v in target.t.get_type_variable_assignments().items():
+                t = tp.substitute_type(k, type_var_map)
+                if t.has_type_variables():
+                    sub = tu.unify_types(v, t, None, same_type=False)
+                    assert sub is not None
+                    for k, v in sub.items():
+                        constraints[k].add(EqualityConstraint(v))
+                else:
+                    constraints[k].add(EqualityConstraint(v))
+                    constraints[k].add(EqualityConstraint(t))
+        nodes = OrderedDict()
+        for source, target in path:
+            if isinstance(source, TypeNode):
+                if source.t.is_type_constructor():
+                    nodes.update({k: True for k in source.t.type_parameters})
+            if isinstance(target, TypeNode):
+                if target.t.is_type_constructor():
+                    nodes.update({k: True for k in target.t.type_parameters})
+
+        for node in nodes:
+            constraints[node]
+            if node.is_type_var() and node.bound:
+                t = tp.substitute_type(node, type_var_map)
+                if t.has_type_variables():
+                    sub = tu.unify_types(v, t, None, same_type=False)
+                    for k, v in sub.items():
+                        constraint = (
+                            UpperBoundConstraint(node.bound)
+                            if t.is_type_var()
+                            else EqualityConstraint(v)
+                        )
+                        constraints[k].add(constraint)
+                else:
+                    constraints[node].add(EqualityConstraint(t))
+                    constraints[node].add(UpperBoundConstraint(
+                        tp.substitute_type(node.bound, type_var_map)))
+        ordered_constraints = OrderedDict()
+        for node in nodes:
+            ordered_constraints[node] = constraints[node]
+        return ordered_constraints
+
+    def instantiate_type_variables(self, constraints, type_var_map):
+        type_var_assignments = {}
+        free_variables = {
+            k
+            for k in constraints.keys()
+            if k not in type_var_map
+        }
+        for type_var in list(free_variables) + list(type_var_map.keys()):
+            type_var_constraints = constraints[type_var]
+            if not type_var_constraints:
+                t = type_var_map.get(type_var)
+                if t is None:
+                    t = utils.random.choice(self._types)
+                type_var_assignments[type_var] = tp.substitute_type(
+                    t, type_var_assignments)
+                continue
+
+            upper_bounds = [c.bound for c in type_var_constraints
+                            if isinstance(c, UpperBoundConstraint)]
+            eqs = [c.t for c in type_var_constraints
+                   if isinstance(c, EqualityConstraint)]
+            if len(eqs) > 1:
+                return None
+            if len(eqs) == 1:
+                type_var_assignments[type_var] = eqs[0]
+                continue
+
+            if len(upper_bounds) > 1:
+                type_var_assignments[type_var] = upper_bounds[0]
+                continue
+
+            new_bounds = set()
+            for bound in set(upper_bounds):
+                supers = self.supertypes()
+                if any(s.t in upper_bounds
+                       for s in supers):
+                    new_bounds.append(bound)
+            if len(new_bounds) > 1:
+                return None
+            if len(new_bounds) == 1:
+                type_var_assignments[type_var] = new_bounds[0]
+            return None
+
+        return type_var_assignments
+
+    def _compute_type_var_map(self, path: list):
+        type_var_map = OrderedDict()
+        for source, target in path:
+            constraint = self.api_graph[source][target].get("constraint")
+            if not constraint:
+                continue
+            for type_k, type_v in constraint.items():
+                sub_t = tp.substitute_type(type_v, type_var_map)
+                if sub_t.has_type_variables():
+                    type_var_map[type_k] = sub_t
+                else:
+                    type_var_map[type_k] = type_v
+        return type_var_map
+
+    def encode_api_components(self) -> List[APIEncoding]:
+        api_components = (Field, Constructor, Method)
+        api_nodes = [
+            n
+            for n in self.api_graph.nodes()
+            if isinstance(n, api_components)
+        ]
+        encodings = []
+        for node in api_nodes:
+            view = self.api_graph.in_edges(node)
+            if not view:
+                receivers = {self.EMPTY}
+            else:
+                assert len(view) == 1
+                receiver = list(view)[0][0]
+                receivers = {receiver}
+                if receiver.t != self.bt_factory.get_any_type():
+                    receivers.update(self.subtypes(receiver))
+            parameters = [{p} for p in getattr(node, "parameters", [])]
+            for param_set in parameters:
+                param = list(param_set)[0]
+                if param.t != self.bt_factory.get_any_type():
+                    param_set.update(self.subtypes(param))
+            if not parameters:
+                parameters = ({self.EMPTY},)
+            parameters = tuple([frozenset(s) for s in parameters])
+            view = self.api_graph.out_edges(node)
+            assert len(view) == 1
+            ret_type = list(view)[0][1]
+            ret_types = self.supertypes(ret_type)
+            ret_types.add(ret_type)
+            encodings.append(APIEncoding(node, frozenset(receivers),
+                                         parameters,
+                                         frozenset(ret_types)))
+        return encodings
+
+
+class APIGraphBuilder(ABC):
+    def __init__(self):
+        self.graph: nx.DiGraph = None
+        self.subtyping_graph: nx.DiGraph = None
+
+    def build(self, docs: dict) -> APIGraph:
+        self.graph = nx.DiGraph()
+        self.subtyping_graph = nx.DiGraph()
+        for api_doc in docs.values():
+            self.process_class(api_doc)
+        return APIGraph(self.graph, self.subtyping_graph)
+
+    @abstractmethod
+    def process_class(self, class_api: dict):
+        pass
+
+    @abstractmethod
+    def process_methods(self, methods: List[dict]):
+        pass
+
+    @abstractmethod
+    def process_fields(self, fields: List[dict]):
+        pass
+
+    @abstractmethod
+    def parse_type(self, str_t: str,
+                   type_variables: List[str] = None) -> tp.Type:
+        pass
+
 
 class JavaAPIGraphBuilder(APIGraphBuilder):
     def __init__(self, target_language):
@@ -209,7 +402,7 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         self._class_name = None
         self._class_type_var_map: dict = {}
 
-    def build(self, docs: dict) -> Tuple[nx.DiGraph, nx.DiGraph]:
+    def build(self, docs: dict) -> APIGraph:
         for api_doc in docs.values():
             if not api_doc["type_parameters"]:
                 continue
@@ -219,8 +412,8 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
                 type_param = self.parse_type_parameter(type_param_str)
                 bound = None
                 if type_param.bound:
-                    bound = type_param.get(type_param.bound.name,
-                                           type_param.bound)
+                    bound = type_param_map.get(type_param.bound.name,
+                                               type_param.bound)
                 type_param_map[type_param.name] = tp.TypeParameter(
                     cls_name + ".T" + str(i), bound=bound)
             self._class_type_var_map[cls_name] = type_param_map
@@ -339,6 +532,30 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             self.subtyping_graph.add_node(field_type)
             self.graph.add_edge(field_node, field_type, label=OUT)
 
+    def _build_api_output_type(self, source_node, output_type,
+                               is_constructor=False):
+        if is_constructor:
+            if self._class_node.t.is_type_constructor():
+                output_type = self._class_name.t.new(
+                    self._class_node.t.type_parameters)
+            else:
+                output_type = self._class_node
+
+        if output_type.is_parameterized():
+            target_node = TypeNode(output_type.t_constructor)
+            self.graph.add_node(target_node)
+            self.subtyping_graph.add_node(target_node)
+            kwargs = {
+                "constraint": output_type.get_type_variable_assignments()
+            }
+            self.graph.add_edge(source_node, target_node, label=OUT,
+                                **kwargs)
+        else:
+            target_node = TypeNode(output_type)
+            self.graph.add_node(target_node)
+            self.subtyping_graph.add_node(target_node)
+            self.graph.add_edge(source_node, target_node, label=OUT)
+
     def process_methods(self, class_node, methods):
         for method_api in methods:
             if method_api["access_mod"] == PROTECTED:
@@ -368,16 +585,13 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             self.graph.add_node(method_node)
             if not (is_constructor or is_static):
                 self.graph.add_edge(class_node, method_node, label=IN)
-            ret_type = (
-                TypeNode(self.parse_type(self._class_name))
-                if is_constructor
-                else TypeNode(self.parse_type(method_api["return_type"]))
-            )
-            self.graph.add_node(ret_type)
-            self.subtyping_graph.add_node(ret_type)
-            self.graph.add_edge(method_node, ret_type, label=OUT)
+            output_type = None
+            if not is_constructor:
+                output_type = self.parse_type(method_api["return_type"])
+            self._build_api_output_type(method_node, output_type,
+                                        is_constructor)
 
-    def process_class(self, class_api):
+    def construct_class_type(self, class_api):
         self._class_name = class_api["name"]
         if class_api["type_parameters"]:
             class_node = TypeNode(tp.TypeConstructor(
@@ -385,6 +599,10 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
                 list(self._class_type_var_map[self._class_name].values())))
         else:
             class_node = TypeNode(self.parse_type(self._class_name))
+        return class_node
+
+    def process_class(self, class_api):
+        class_node = self.construct_class_type(class_api)
         self.graph.add_node(class_node)
         self.subtyping_graph.add_node(class_node)
         self.process_fields(class_node, class_api["fields"])

@@ -1,343 +1,154 @@
+import copy
+
+from src.ir import types as tp
 from src.generators import api_graph as ag
 
 
 DOCS1 = {
-    "java.StringList": {
-        "name": "java.StringList",
-        "inherits": ["java.util.LinkedList<java.lang.String>"],
+    "java.Foo": {
+        "name": "java.Foo",
+        "inherits": [],
         "implements": [],
         "fields": [],
-        "methods": [],
+        "methods": [{
+            "name": "makeList",
+            "is_static": False,
+            "is_constructor": False,
+            "parameters": [],
+            "access_mod": "public",
+            "type_parameters": [],
+            "return_type": "java.List"
+
+
+        }],
         "type_parameters": []
     },
-    "java.IntegerList": {
-        "name": "java.IntegerList",
-        "inherits": ["java.util.LinkedList<java.lang.Integer>"],
+    "java.List": {
+        "name": "java.List",
+        "inherits": [],
         "implements": [],
         "fields": [],
-        "methods": [],
+        "methods": [{
+            "name": "toSet",
+            "is_static": False,
+            "is_constructor": False,
+            "parameters": [],
+            "access_mod": "public",
+            "type_parameters": [],
+            "return_type": "java.Set"
+
+
+        }],
         "type_parameters": []
     },
-    "java.util.List": {
-        "name": "java.util.List",
-        "inherits": ["java.lang.Object"],
+    "java.Set": {
+        "name": "java.Set",
+        "inherits": [],
         "implements": [],
         "fields": [],
-        "methods": [],
-        "type_parameters": ["T"]
+        "methods": [{
+            "name": "add",
+            "is_static": False,
+            "is_constructor": False,
+            "parameters": [],
+            "access_mod": "public",
+            "type_parameters": [],
+            "return_type": "void"
+
+
+        }],
+        "type_parameters": []
     },
-    "java.util.LinkedList": {
-        "name": "java.util.LinkedList",
-        "inherits": ["java.util.List<T>"],
-        "implements": [],
-        "fields": [],
-        "methods": [],
-        "type_parameters": ["T"]
-    }
 }
 
 
 DOCS2 = {
-   "java.Number": {
-        "name": "java.Number",
-        "inherits": ["java.lang.Object"],
-        "implements": [],
-        "fields": [],
-        "methods": [],
-        "type_parameters": []
-    },
-    "java.Integer": {
-        "name": "java.Integer",
-        "inherits": ["java.Number"],
-        "implements": [],
-        "fields": [],
-        "methods": [],
-        "type_parameters": []
-    },
-    "java.Long": {
-        "name": "java.Long",
-        "inherits": ["java.Number"],
-        "implements": [],
-        "fields": [],
-        "methods": [],
-        "type_parameters": []
-    },
-    "java.String": {
-        "name": "java.String",
-        "inherits": ["java.lang.Object"],
-        "implements": [],
-        "fields": [],
-        "methods": [],
-        "type_parameters": []
-    },
-}
-
-
-DOCS3 = {
-    "java.Map": {
-        "name": "java.Map",
-        "inherits": ["java.lang.Object"],
-        "implements": [],
-        "fields": [],
-        "methods": [],
-        "type_parameters": ["K", "V"]
-    },
-    "java.HashMap": {
-        "name": "java.HashMap",
-        "inherits": ["java.Map<K,V>"],
-        "implements": [],
-        "fields": [],
-        "methods": [],
-        "type_parameters": ["K", "V"]
-    },
     "java.Foo": {
         "name": "java.Foo",
-        "inherits": ["java.HashMap<java.lang.String,T>"],
+        "inherits": [],
         "implements": [],
         "fields": [],
-        "methods": [],
+        "methods": [{
+            "name": "makeList",
+            "is_static": False,
+            "is_constructor": False,
+            "parameters": [],
+            "access_mod": "public",
+            "type_parameters": [],
+            "return_type": "java.List"
+
+
+        }],
         "type_parameters": ["T"]
     },
-    "java.Bar": {
-        "name": "java.Bar",
-        "inherits": ["java.Foo<java.Map<java.lang.String,java.lang.Integer>>"],
+    "java.List": {
+        "name": "java.List",
+        "inherits": [],
         "implements": [],
         "fields": [],
-        "methods": [],
-        "type_parameters": []
-    }
+        "methods": [{
+            "name": "toSet",
+            "is_static": False,
+            "is_constructor": False,
+            "parameters": [],
+            "access_mod": "public",
+            "type_parameters": [],
+            "return_type": "java.Set<T>"
+
+
+        }],
+        "type_parameters": ["T extends Number"]
+    },
+    "java.Set": {
+        "name": "java.Set",
+        "inherits": [],
+        "implements": [],
+        "fields": [],
+        "methods": [{
+            "name": "add",
+            "is_static": False,
+            "is_constructor": False,
+            "parameters": ["T"],
+            "access_mod": "public",
+            "type_parameters": [],
+            "return_type": "void"
+
+
+        }],
+        "type_parameters": ["T"]
+    },
 }
 
 
-DOCS4 = {
-    "java.Map": {
-        "name": "java.Map",
-        "inherits": ["java.lang.Object"],
-        "implements": [],
-        "fields": [],
-        "methods": [],
-        "type_parameters": ["K", "V"]
-    },
-    "java.Stream": {
-        "name": "java.Stream",
-        "inherits": ["java.Map<T,java.Map<T,java.lang.String>>"],
-        "implements": [],
-        "fields": [],
-        "methods": [],
-        "type_parameters": ["T"]
-    },
-    "java.Foo": {
-        "name": "java.Foo",
-        "inherits": ["java.Stream<java.lang.Object>"],
-        "implements": [],
-        "fields": [],
-        "methods": [],
-        "type_parameters": []
-    },
-}
-
-
-def test_subtypes1():
+def test1():
     b = ag.JavaAPIGraphBuilder("java")
-    api_graph = ag.APIGraph(*b.build(DOCS1))
+    api_graph = b.build(DOCS1)
+    path, assignments = api_graph.find_API_path(
+        ag.TypeNode(b.parse_type("java.Set")))
+    assert assignments == {}
 
-    # Case 1
-    subtypes = api_graph.subtypes(ag.TypeNode(b.parse_type(
-        "java.util.List<java.lang.Object>")))
-    assert subtypes == {
-        ag.TypeNode(b.parse_type("java.util.List<java.lang.Object>")),
-        ag.TypeNode(b.parse_type("java.util.LinkedList<java.lang.Object>")),
-    }
-
-    # Case 2
-    subtypes = api_graph.subtypes(ag.TypeNode(b.parse_type(
-        "java.util.List<java.lang.String>")))
-    assert subtypes == {
-        ag.TypeNode(b.parse_type("java.util.List<java.lang.String>")),
-        ag.TypeNode(b.parse_type("java.util.LinkedList<java.lang.String>")),
-        ag.TypeNode(b.parse_type("java.StringList"))
-    }
-
-    # Case 3
-    subtypes = api_graph.subtypes(ag.TypeNode(b.parse_type(
-        "java.util.List<java.lang.Integer>")))
-    assert subtypes == {
-        ag.TypeNode(b.parse_type("java.util.List<java.lang.Integer>")),
-        ag.TypeNode(b.parse_type("java.util.LinkedList<java.lang.Integer>")),
-        ag.TypeNode(b.parse_type("java.IntegerList"))
-    }
-
-    # Case 4
-    subtypes = api_graph.subtypes(ag.TypeNode(b.parse_type(
-        "java.util.List<T>")))
-    assert subtypes == {
-        ag.TypeNode(b.parse_type("java.util.List<T>")),
-        ag.TypeNode(b.parse_type("java.util.LinkedList<T>")),
-    }
+    assert path == [
+        ag.TypeNode(b.parse_type("java.Foo")),
+        ag.Method("makeList", "java.Foo", []),
+        ag.TypeNode(b.parse_type("java.List")),
+        ag.Method("toSet", "java.List", []),
+        ag.TypeNode(b.parse_type("java.Set"))
+    ]
 
 
-def test_subtypes2():
+def test2():
+    docs = copy.deepcopy(DOCS1)
+    docs["java.Foo"]["type_parameters"] = ["T"]
     b = ag.JavaAPIGraphBuilder("java")
-    api_graph = ag.APIGraph(*b.build(DOCS2))
+    api_graph = b.build(docs)
+    path, assignments = api_graph.find_API_path(
+        ag.TypeNode(b.parse_type("java.Set")))
+    assert tp.TypeParameter("java.Foo.T0") in assignments
 
-    # Case 1
-    subtypes = api_graph.subtypes(ag.TypeNode(b.parse_type("java.lang.Object")))
-    assert subtypes == {
-        ag.TypeNode(b.parse_type("java.lang.Object")),
-        ag.TypeNode(b.parse_type("java.Number")),
-        ag.TypeNode(b.parse_type("java.Integer")),
-        ag.TypeNode(b.parse_type("java.Long")),
-        ag.TypeNode(b.parse_type("java.String")),
-    }
-
-    # Case 2
-    subtypes = api_graph.subtypes(ag.TypeNode(b.parse_type("java.Number")))
-    assert subtypes == {
-        ag.TypeNode(b.parse_type("java.Number")),
-        ag.TypeNode(b.parse_type("java.Integer")),
-        ag.TypeNode(b.parse_type("java.Long")),
-    }
-
-    # Case 3
-    subtypes = api_graph.subtypes(ag.TypeNode(b.parse_type("java.String")))
-    assert subtypes == { ag.TypeNode(b.parse_type("java.String")) }
-
-
-def test_subtypes3():
-    b = ag.JavaAPIGraphBuilder("java")
-    api_graph = ag.APIGraph(*b.build(DOCS3))
-    subtypes = api_graph.subtypes(ag.TypeNode(b.parse_type(
-        "java.Map<T1,java.lang.String>")))
-    assert subtypes == {
-        ag.TypeNode(b.parse_type("java.Map<T1,java.lang.String>")),
-        ag.TypeNode(b.parse_type("java.HashMap<T1,java.lang.String>")),
-    }
-
-    subtypes = api_graph.subtypes(ag.TypeNode(b.parse_type(
-        "java.HashMap<java.lang.String,java.lang.Integer>")))
-    assert subtypes == {
-        ag.TypeNode(b.parse_type("java.HashMap<java.lang.String,java.lang.Integer>")),
-        ag.TypeNode(b.parse_type("java.Foo<java.lang.Integer>")),
-    }
-
-    subtypes = api_graph.subtypes(ag.TypeNode(b.parse_type(
-        "java.Map<java.lang.String,java.Map<java.lang.String,java.lang.Integer>>")))
-    assert subtypes == {
-        ag.TypeNode(b.parse_type("java.Map<java.lang.String,java.Map<java.lang.String,java.lang.Integer>>")),
-        ag.TypeNode(b.parse_type("java.HashMap<java.lang.String,java.Map<java.lang.String,java.lang.Integer>>")),
-        ag.TypeNode(b.parse_type("java.Foo<java.Map<java.lang.String,java.lang.Integer>>")),
-        ag.TypeNode(b.parse_type("java.Bar")),
-    }
-
-
-def test_subtypes4():
-    b = ag.JavaAPIGraphBuilder("java")
-    api_graph = ag.APIGraph(*b.build(DOCS4))
-    subtypes = api_graph.subtypes(ag.TypeNode(b.parse_type(
-        "java.Map<T1,java.lang.String>")))
-    assert subtypes == {
-        ag.TypeNode(b.parse_type("java.Map<T1,java.lang.String>")),
-    }
-
-    subtypes = api_graph.subtypes(ag.TypeNode(b.parse_type(
-        "java.Map<F,java.Map<F,java.lang.Integer>>")))
-    assert subtypes == {
-        ag.TypeNode(b.parse_type("java.Map<F,java.Map<F,java.lang.Integer>>")),
-    }
-
-    subtypes = api_graph.subtypes(ag.TypeNode(b.parse_type(
-        "java.Map<F,java.Map<F,java.lang.String>>")))
-    assert subtypes == {
-        ag.TypeNode(b.parse_type("java.Map<F,java.Map<F,java.lang.String>>")),
-        ag.TypeNode(b.parse_type("java.Stream<F>")),
-    }
-
-
-def test_supertypes1():
-    b = ag.JavaAPIGraphBuilder("java")
-    api_graph = ag.APIGraph(*b.build(DOCS1))
-
-    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
-        "java.lang.Object")))
-    assert supertypes == set()
-
-    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
-        "java.StringList")))
-    assert supertypes == {
-        ag.TypeNode(b.parse_type("java.lang.Object")),
-        ag.TypeNode(b.parse_type("java.util.List<java.lang.String>")),
-        ag.TypeNode(b.parse_type("java.util.LinkedList<java.lang.String>")),
-    }
-
-    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
-        "java.util.LinkedList<java.lang.Object>")))
-    assert supertypes == {
-        ag.TypeNode(b.parse_type("java.lang.Object")),
-        ag.TypeNode(b.parse_type("java.util.List<java.lang.Object>")),
-    }
-
-    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
-        "java.util.List<java.lang.Object>")))
-    assert supertypes == {
-        ag.TypeNode(b.parse_type("java.lang.Object")),
-    }
-
-
-def test_supertypes2():
-    b = ag.JavaAPIGraphBuilder("java")
-    api_graph = ag.APIGraph(*b.build(DOCS2))
-
-    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
-        "java.String")))
-    assert supertypes == {
-        ag.TypeNode(b.parse_type("java.lang.Object")),
-    }
-
-    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
-        "java.Long")))
-    assert supertypes == {
-        ag.TypeNode(b.parse_type("java.lang.Object")),
-        ag.TypeNode(b.parse_type("java.Number")),
-    }
-
-
-def test_supertypes3():
-    b = ag.JavaAPIGraphBuilder("java")
-    api_graph = ag.APIGraph(*b.build(DOCS3))
-
-    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
-        "java.Foo<java.lang.Integer>")))
-    assert supertypes == {
-        ag.TypeNode(b.parse_type("java.HashMap<java.lang.String,java.lang.Integer>")),
-        ag.TypeNode(b.parse_type("java.Map<java.lang.String,java.lang.Integer>")),
-        ag.TypeNode(b.parse_type("java.lang.Object")),
-    }
-
-    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
-        "java.Bar")))
-    assert supertypes == {
-        ag.TypeNode(b.parse_type("java.Foo<java.Map<java.lang.String,java.lang.Integer>>")),
-        ag.TypeNode(b.parse_type("java.HashMap<java.lang.String,java.Map<java.lang.String,java.lang.Integer>>")),
-        ag.TypeNode(b.parse_type("java.Map<java.lang.String,java.Map<java.lang.String,java.lang.Integer>>")),
-        ag.TypeNode(b.parse_type("java.lang.Object")),
-    }
-
-
-def test_supertypes4():
-    b = ag.JavaAPIGraphBuilder("java")
-    api_graph = ag.APIGraph(*b.build(DOCS4))
-
-    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
-        "java.Stream<K>")))
-    assert supertypes == {
-        ag.TypeNode(b.parse_type("java.Map<K,java.Map<K,java.lang.String>>")),
-        ag.TypeNode(b.parse_type("java.lang.Object")),
-    }
-
-    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
-        "java.Foo")))
-    assert supertypes == {
-        ag.TypeNode(b.parse_type("java.Stream<java.lang.Object>")),
-        ag.TypeNode(b.parse_type("java.Map<java.lang.Object,java.Map<java.lang.Object,java.lang.String>>")),
-        ag.TypeNode(b.parse_type("java.lang.Object")),
-    }
+    assert path == [
+        b.construct_class_type(docs["java.Foo"]),
+        ag.Method("makeList", "java.Foo", []),
+        ag.TypeNode(b.parse_type("java.List")),
+        ag.Method("toSet", "java.List", []),
+        ag.TypeNode(b.parse_type("java.Set"))
+    ]
