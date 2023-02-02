@@ -251,3 +251,93 @@ def test_subtypes4():
         ag.TypeNode(b.parse_type("java.Map<F,java.Map<F,java.lang.String>>")),
         ag.TypeNode(b.parse_type("java.Stream<F>")),
     }
+
+
+def test_supertypes1():
+    b = ag.JavaAPIGraphBuilder("java")
+    api_graph = ag.APIGraph(*b.build(DOCS1))
+
+    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
+        "java.lang.Object")))
+    assert supertypes == set()
+
+    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
+        "java.StringList")))
+    assert supertypes == {
+        ag.TypeNode(b.parse_type("java.lang.Object")),
+        ag.TypeNode(b.parse_type("java.util.List<java.lang.String>")),
+        ag.TypeNode(b.parse_type("java.util.LinkedList<java.lang.String>")),
+    }
+
+    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
+        "java.util.LinkedList<java.lang.Object>")))
+    assert supertypes == {
+        ag.TypeNode(b.parse_type("java.lang.Object")),
+        ag.TypeNode(b.parse_type("java.util.List<java.lang.Object>")),
+    }
+
+    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
+        "java.util.List<java.lang.Object>")))
+    assert supertypes == {
+        ag.TypeNode(b.parse_type("java.lang.Object")),
+    }
+
+
+def test_supertypes2():
+    b = ag.JavaAPIGraphBuilder("java")
+    api_graph = ag.APIGraph(*b.build(DOCS2))
+
+    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
+        "java.String")))
+    assert supertypes == {
+        ag.TypeNode(b.parse_type("java.lang.Object")),
+    }
+
+    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
+        "java.Long")))
+    assert supertypes == {
+        ag.TypeNode(b.parse_type("java.lang.Object")),
+        ag.TypeNode(b.parse_type("java.Number")),
+    }
+
+
+def test_supertypes3():
+    b = ag.JavaAPIGraphBuilder("java")
+    api_graph = ag.APIGraph(*b.build(DOCS3))
+
+    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
+        "java.Foo<java.lang.Integer>")))
+    assert supertypes == {
+        ag.TypeNode(b.parse_type("java.HashMap<java.lang.String,java.lang.Integer>")),
+        ag.TypeNode(b.parse_type("java.Map<java.lang.String,java.lang.Integer>")),
+        ag.TypeNode(b.parse_type("java.lang.Object")),
+    }
+
+    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
+        "java.Bar")))
+    assert supertypes == {
+        ag.TypeNode(b.parse_type("java.Foo<java.Map<java.lang.String,java.lang.Integer>>")),
+        ag.TypeNode(b.parse_type("java.HashMap<java.lang.String,java.Map<java.lang.String,java.lang.Integer>>")),
+        ag.TypeNode(b.parse_type("java.Map<java.lang.String,java.Map<java.lang.String,java.lang.Integer>>")),
+        ag.TypeNode(b.parse_type("java.lang.Object")),
+    }
+
+
+def test_supertypes4():
+    b = ag.JavaAPIGraphBuilder("java")
+    api_graph = ag.APIGraph(*b.build(DOCS4))
+
+    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
+        "java.Stream<K>")))
+    assert supertypes == {
+        ag.TypeNode(b.parse_type("java.Map<K,java.Map<K,java.lang.String>>")),
+        ag.TypeNode(b.parse_type("java.lang.Object")),
+    }
+
+    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
+        "java.Foo")))
+    assert supertypes == {
+        ag.TypeNode(b.parse_type("java.Stream<java.lang.Object>")),
+        ag.TypeNode(b.parse_type("java.Map<java.lang.Object,java.Map<java.lang.Object,java.lang.String>>")),
+        ag.TypeNode(b.parse_type("java.lang.Object")),
+    }

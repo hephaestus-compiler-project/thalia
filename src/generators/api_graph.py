@@ -150,6 +150,9 @@ class APIGraph():
         subtypes = {node}
         if node.t.is_type_var():
             return subtypes
+        if node.t.is_parameterized() and node.t.has_wildcards():
+            # TODO Handle wildcards
+            return subtypes
         if not node.t.is_parameterized():
             subtypes.update(nx.descendants(self.subtyping_graph, node))
             return subtypes
@@ -177,14 +180,17 @@ class APIGraph():
         reverse_graph = self.subtyping_graph.reverse()
         supertypes = set()
         constraints = {}
+        if node.t.is_parameterized():
+            constraints.update(node.t.get_type_variable_assignments())
+            node = TypeNode(node.t.t_constructor)
         for k, v in nx.dfs_edges(reverse_graph, node):
             constraint = reverse_graph[k][v].get("constraint") or {}
             if not constraint:
                 supertypes.add(v)
                 continue
             for type_k, type_v in constraint.items():
-                if type_v.is_type_var():
-                    t = constraints.get(type_v)
+                if type_v.has_type_variables():
+                    t = tp.substitute_type(type_v, constraints)
                 else:
                     t = type_v
                 constraints[type_k] = t
