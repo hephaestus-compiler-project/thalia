@@ -249,21 +249,24 @@ class APIGraph():
 
         for node in nodes:
             constraints[node]
-            if node.is_type_var() and node.bound:
-                t = tp.substitute_type(node, type_var_map)
-                if t.has_type_variables():
-                    sub = tu.unify_types(v, t, None, same_type=False)
-                    for k, v in sub.items():
-                        constraint = (
-                            UpperBoundConstraint(node.bound)
-                            if t.is_type_var()
-                            else EqualityConstraint(v)
-                        )
-                        constraints[k].add(constraint)
-                else:
-                    constraints[node].add(EqualityConstraint(t))
+            t = tp.substitute_type(node, type_var_map)
+            if t.has_type_variables():
+                if node.bound is None:
+                    continue
+                sub = tu.unify_types(v, t, None, same_type=False)
+                for k, v in sub.items():
+                    constraint = (
+                        UpperBoundConstraint(node.bound)
+                        if t.is_type_var()
+                        else EqualityConstraint(v)
+                    )
+                    constraints[k].add(constraint)
+            else:
+                constraints[node].add(EqualityConstraint(t))
+                if node.bound:
                     constraints[node].add(UpperBoundConstraint(
                         tp.substitute_type(node.bound, type_var_map)))
+
         ordered_constraints = OrderedDict()
         for node in nodes:
             ordered_constraints[node] = constraints[node]

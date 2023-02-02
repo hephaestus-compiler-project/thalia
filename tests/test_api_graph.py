@@ -75,9 +75,7 @@ DOCS2 = {
             "parameters": [],
             "access_mod": "public",
             "type_parameters": [],
-            "return_type": "java.List"
-
-
+            "return_type": "java.List<T>"
         }],
         "type_parameters": ["T"]
     },
@@ -94,10 +92,8 @@ DOCS2 = {
             "access_mod": "public",
             "type_parameters": [],
             "return_type": "java.Set<T>"
-
-
         }],
-        "type_parameters": ["T extends Number"]
+        "type_parameters": ["T"]
     },
     "java.Set": {
         "name": "java.Set",
@@ -151,4 +147,45 @@ def test2():
         ag.TypeNode(b.parse_type("java.List")),
         ag.Method("toSet", "java.List", []),
         ag.TypeNode(b.parse_type("java.Set"))
+    ]
+
+def test3():
+    b = ag.JavaAPIGraphBuilder("java")
+    api_graph = b.build(DOCS2)
+    path, assignments = api_graph.find_API_path(
+        b.construct_class_type(DOCS2["java.Set"]))
+    assert tp.TypeParameter("java.Foo.T0") in assignments
+    assert tp.TypeParameter("java.List.T0") in assignments
+    assert tp.TypeParameter("java.Set.T0") in assignments
+    assert len(set(assignments.values())) == 1
+
+    assert path == [
+        b.construct_class_type(DOCS2["java.Foo"]),
+        ag.Method("makeList", "java.Foo", []),
+        b.construct_class_type(DOCS2["java.List"]),
+        ag.Method("toSet", "java.List", []),
+        b.construct_class_type(DOCS2["java.Set"])
+    ]
+
+    docs = copy.deepcopy(DOCS2)
+    docs["java.Foo"]["methods"][0]["return_type"] = "java.List<java.lang.String>"
+    b = ag.JavaAPIGraphBuilder("java")
+    api_graph = b.build(docs)
+    path, assignments = api_graph.find_API_path(
+        b.construct_class_type(DOCS2["java.Set"]))
+    assert tp.TypeParameter("java.Foo.T0") in assignments
+    assert tp.TypeParameter("java.List.T0") in assignments
+    assert tp.TypeParameter("java.List.T0") in assignments
+    assert assignments[tp.TypeParameter("java.List.T0")] == b.parse_type(
+        "java.lang.String")
+    assert assignments[tp.TypeParameter("java.Set.T0")] == b.parse_type(
+        "java.lang.String")
+
+
+    assert path == [
+        b.construct_class_type(DOCS2["java.Foo"]),
+        ag.Method("makeList", "java.Foo", []),
+        b.construct_class_type(DOCS2["java.List"]),
+        ag.Method("toSet", "java.List", []),
+        b.construct_class_type(DOCS2["java.Set"])
     ]
