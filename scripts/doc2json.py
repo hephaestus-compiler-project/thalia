@@ -68,7 +68,7 @@ class JavaAPIDocConverter(APIDocConverter):
             return []
         text = text[1][:-1].encode(
             "ascii", "ignore").decode().replace(" , ", ",")
-        return [p[0] for p in re.findall(regex, text)]
+        return re.findall(regex, text)
 
     def extract_super_class(self, html_doc):
         regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
