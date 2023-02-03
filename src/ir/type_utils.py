@@ -1020,7 +1020,8 @@ def _update_type_var_map(type_var_map, key, value):
 
 
 def unify_types(t1: tp.Type, t2: tp.Type, factory,
-                same_type=True) -> dict:
+                same_type=True,
+                strict_mode=True) -> dict:
     """
     This function performs unification on two types. The second type is
     the type we try to match with the first one, by substituting any
@@ -1062,11 +1063,13 @@ def unify_types(t1: tp.Type, t2: tp.Type, factory,
             return {t2: t1}
 
         if not bound2 or (bound1 and bound1.is_subtype(bound2)):
-            return {t2: t1}
+            if strict_mode:
+                return {t2: t1}
     if is_type_var2:
         bound = t2.get_bound_rec(factory)
         if bound and not t1.is_subtype(bound):
-            return {}
+            if strict_mode:
+                return {}
         return {t2: t1}
 
     if not isinstance(t1, tp.ParameterizedType):
@@ -1098,7 +1101,7 @@ def unify_types(t1: tp.Type, t2: tp.Type, factory,
                 else None
             )
             if t_var and t_var.bound is not None:
-                if t_arg1.is_subtype(t_var.bound):
+                if t_arg1.is_subtype(t_var.bound) or not strict_mode:
                     # This means that we found another mapping for the
                     # same type variable and this mapping does not
                     # correspond to t_arg1.
