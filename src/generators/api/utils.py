@@ -23,9 +23,11 @@ def compute_assignment_graph(api_graph: nx.DiGraph, path: list) -> OrderedDict:
         for type_k, type_v in constraint.items():
             sub_t = tp.substitute_type(type_v, assignment_graph)
             if sub_t.has_type_variables():
-                assignment_graph[type_k] = sub_t
+                assigned_t = sub_t
             else:
-                assignment_graph[type_k] = type_v
+                assigned_t = type_v
+            if type_k != assigned_t:
+                assignment_graph[type_k] = assigned_t
     return assignment_graph
 
 

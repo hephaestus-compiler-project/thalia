@@ -200,6 +200,26 @@ def test_collect_constraints():
             t5: set(),
         }
 
+    # Case 7
+    # T1:
+    # T1 <- T1
+    t1 = tp.TypeParameter("T1", bound=kt.Number)
+    t2 = tp.TypeParameter("T2")
+    t3 = tp.TypeParameter("T3")
+    t4 = tp.TypeParameter("T4")
+    t5 = tp.TypeParameter("T5")
+    assignment_graph = {t2: t1, t3: kt.String, t4: t1, t5: t1}
+    target = tp.TypeConstructor("F", [t5]).new([kt.Integer])
+    assert au.collect_constraints(
+        target, [t1, t2, t3, t4, t5], assignment_graph) == {
+            t1: {au.EqualityConstraint(kt.Integer), au.UpperBoundConstraint(kt.Number)},
+            t2: set(),
+            t3: {au.EqualityConstraint(kt.String)},
+            t4: set(),
+            t5: set(),
+        }
+
+
 
 def test_collect_constraints_parameterized():
     # Case 1

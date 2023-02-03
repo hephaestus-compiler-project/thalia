@@ -123,16 +123,26 @@ class APIGraph():
         self.api_graph = api_graph
         self.subtyping_graph = subtyping_graph
         self.bt_factory = bt_factory
-        self._types = [node.t for node in self.subtyping_graph.nodes()
-                       if not node.t.is_type_constructor()]
+        self._types = {node.t.name: node.t
+                       for node in self.subtyping_graph.nodes()
+                       if not node.t.is_type_constructor()}
+        self._all_types = {node.t.name: node.t
+                           for node in self.subtyping_graph.nodes()}
 
     def get_random_type(self):
         types = [
             t
-            for t in self._types
-            if not t.is_type_var() and t == self.bt_factory.get_void_type()
+            for t in self._types.values()
+            if (
+                not t.has_type_variables() and
+                t != self.bt_factory.get_void_type() and
+                not getattr(t, "primitive", False)
+            )
         ]
         return utils.random.choice(types)
+
+    def get_type_by_name(self, typename):
+        return self._all_types.get(typename)
 
     def solve_constraint(self, constraint, type_var_map):
         for type_k, type_v in constraint.items():
@@ -158,12 +168,17 @@ class APIGraph():
             # TODO Handle wildcards
             return subtypes
         if not node.t.is_parameterized():
+            if node not in self.subtyping_graph:
+                return subtypes
             subtypes.update(nx.descendants(self.subtyping_graph, node))
             return subtypes
+
         type_var_map = node.t.get_type_variable_assignments()
+        node = TypeNode(node.t.t_constructor)
+        if node not in self.subtyping_graph:
+            return subtypes
         excluded_nodes = set()
-        for k, v in nx.dfs_edges(self.subtyping_graph,
-                                 TypeNode(node.t.t_constructor)):
+        for k, v in nx.dfs_edges(self.subtyping_graph, node):
             constraint = self.subtyping_graph[k][v].get("constraint") or {}
             if not constraint:
                 subtypes.add(v)
@@ -187,6 +202,8 @@ class APIGraph():
         if node.t.is_parameterized():
             constraints.update(node.t.get_type_variable_assignments())
             node = TypeNode(node.t.t_constructor)
+        if node not in self.subtyping_graph:
+            return supertypes
         if node not in reverse_graph:
             return supertypes
         for k, v in nx.dfs_edges(reverse_graph, node):
@@ -209,6 +226,8 @@ class APIGraph():
         origin = target
         if target.t.is_parameterized():
             target = TypeNode(target.t.t_constructor)
+        if target not in self.api_graph:
+            return None
         source_nodes = [
             node
             for node, indegree in self.api_graph.in_degree(
@@ -236,7 +255,9 @@ class APIGraph():
             for source, target in path:
                 node_path[source] = True
                 node_path[target] = True
-            return list(node_path.keys()), assignments
+            pruned_path = [n for i, n in enumerate(node_path.keys())
+                           if i == 0 or not isinstance(n, TypeNode)]
+            return pruned_path, assignments
         return None
 
     def encode_api_components(self) -> List[APIEncoding]:
@@ -447,13 +468,10 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
     def _build_api_output_type(self, source_node, output_type,
                                is_constructor=False):
         if is_constructor:
-            if self._class_node.t.is_type_constructor():
-                output_type = self._class_name.t.new(
-                    self._class_node.t.type_parameters)
-            else:
-                output_type = self._class_node
+            output_type = self._class_node.t
 
-        if output_type.is_parameterized():
+        is_array = output_type.name == self.bt_factory.get_array_type().name
+        if output_type.is_parameterized() and not is_array:
             target_node = TypeNode(output_type.t_constructor)
             self.graph.add_node(target_node)
             self.subtyping_graph.add_node(target_node)
@@ -515,6 +533,7 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
 
     def process_class(self, class_api):
         class_node = self.construct_class_type(class_api)
+        self._class_node = class_node
         self.graph.add_node(class_node)
         self.subtyping_graph.add_node(class_node)
         self.process_fields(class_node, class_api["fields"])
