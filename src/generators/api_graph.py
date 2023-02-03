@@ -118,11 +118,21 @@ class APIGraph():
 
     EMPTY = 0
 
-    def __init__(self, api_graph, subtyping_graph):
+    def __init__(self, api_graph, subtyping_graph,
+                 bt_factory):
         self.api_graph = api_graph
         self.subtyping_graph = subtyping_graph
+        self.bt_factory = bt_factory
         self._types = [node.t for node in self.subtyping_graph.nodes()
                        if not node.t.is_type_constructor()]
+
+    def get_random_type(self):
+        types = [
+            t
+            for t in self._types
+            if not t.is_type_var() and t == self.bt_factory.get_void_type()
+        ]
+        return utils.random.choice(types)
 
     def solve_constraint(self, constraint, type_var_map):
         for type_k, type_v in constraint.items():
@@ -213,12 +223,13 @@ class APIGraph():
             return None
         for path in nx.all_simple_edge_paths(self.api_graph, source=source,
                                              target=target):
-            type_var_map = au.compute_assignment_graph(self.api_graph, path)
+            assignment_graph = au.compute_assignment_graph(self.api_graph,
+                                                           path)
             type_variables = _get_type_variables(path)
             constraints = au.collect_constraints(origin.t, type_variables,
-                                                 type_var_map)
-            assignments = self.instantiate_type_variables(constraints,
-                                                          type_var_map)
+                                                 assignment_graph)
+            assignments = au.instantiate_type_variables(self, constraints,
+                                                        assignment_graph)
             if assignments is None:
                 continue
             node_path = OrderedDict()
@@ -227,53 +238,6 @@ class APIGraph():
                 node_path[target] = True
             return list(node_path.keys()), assignments
         return None
-
-    def instantiate_type_variables(self, constraints, type_var_map):
-        if constraints is None:
-            return None
-        type_var_assignments = {}
-        free_variables = {
-            k
-            for k in constraints.keys()
-            if k not in type_var_map
-        }
-        for type_var in list(free_variables) + list(type_var_map.keys()):
-            type_var_constraints = constraints[type_var]
-            if not type_var_constraints:
-                t = type_var_map.get(type_var)
-                if t is None:
-                    t = utils.random.choice(self._types)
-                type_var_assignments[type_var] = tp.substitute_type(
-                    t, type_var_assignments)
-                continue
-
-            upper_bounds = [c.bound for c in type_var_constraints
-                            if isinstance(c, au.UpperBoundConstraint)]
-            eqs = [c.t for c in type_var_constraints
-                   if isinstance(c, au.EqualityConstraint)]
-            if len(eqs) > 1:
-                return None
-            if len(eqs) == 1:
-                type_var_assignments[type_var] = eqs[0]
-                continue
-
-            if len(upper_bounds) > 1:
-                type_var_assignments[type_var] = upper_bounds[0]
-                continue
-
-            new_bounds = set()
-            for bound in set(upper_bounds):
-                supers = self.supertypes()
-                if any(s.t in upper_bounds
-                       for s in supers):
-                    new_bounds.append(bound)
-            if len(new_bounds) > 1:
-                return None
-            if len(new_bounds) == 1:
-                type_var_assignments[type_var] = new_bounds[0]
-            return None
-
-        return type_var_assignments
 
     def encode_api_components(self) -> List[APIEncoding]:
         api_components = (Field, Constructor, Method)
@@ -316,13 +280,14 @@ class APIGraphBuilder(ABC):
     def __init__(self):
         self.graph: nx.DiGraph = None
         self.subtyping_graph: nx.DiGraph = None
+        self.bt_factory = None
 
     def build(self, docs: dict) -> APIGraph:
         self.graph = nx.DiGraph()
         self.subtyping_graph = nx.DiGraph()
         for api_doc in docs.values():
             self.process_class(api_doc)
-        return APIGraph(self.graph, self.subtyping_graph)
+        return APIGraph(self.graph, self.subtyping_graph, self.bt_factory)
 
     @abstractmethod
     def process_class(self, class_api: dict):
