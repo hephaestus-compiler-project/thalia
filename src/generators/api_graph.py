@@ -10,6 +10,7 @@ from src.ir import (
     BUILTIN_FACTORIES, types as tp, kotlin_types as kt,
     type_utils as tu)
 from src.ir.builtins import BuiltinFactory
+from src.generators.api import utils as au
 
 
 IN = 0
@@ -72,17 +73,6 @@ class Method(NamedTuple):
         )
 
 
-class UpperBoundConstraint(NamedTuple):
-    bound: tp.Type
-
-
-class EqualityConstraint(NamedTuple):
-    t: tp.Type
-
-
-UNSATISFIABLE = object()
-
-
 class Constructor(NamedTuple):
     name: str
     parameters: List[TypeNode]
@@ -109,6 +99,18 @@ class APIEncoding(NamedTuple):
     receivers: Set[TypeNode]
     parameters: Set[TypeNode]
     returns: Set[TypeNode]
+
+
+def _get_type_variables(path: list) -> List[tp.TypeParameter]:
+    nodes = OrderedDict()
+    for source, target in path:
+        if isinstance(source, TypeNode):
+            if source.t.is_type_constructor():
+                nodes.update({k: True for k in source.t.type_parameters})
+        if isinstance(target, TypeNode):
+            if target.t.is_type_constructor():
+                nodes.update({k: True for k in target.t.type_parameters})
+    return list(nodes.keys())
 
 
 class APIGraph():
@@ -211,8 +213,10 @@ class APIGraph():
             return None
         for path in nx.all_simple_edge_paths(self.api_graph, source=source,
                                              target=target):
-            type_var_map = self._compute_type_var_map(path)
-            constraints = self._collect_constraints(path, origin, type_var_map)
+            type_var_map = au.compute_assignment_graph(self.api_graph, path)
+            type_variables = _get_type_variables(path)
+            constraints = au.collect_constraints(origin.t, type_variables,
+                                                 type_var_map)
             assignments = self.instantiate_type_variables(constraints,
                                                           type_var_map)
             if assignments is None:
@@ -223,54 +227,6 @@ class APIGraph():
                 node_path[target] = True
             return list(node_path.keys()), assignments
         return None
-
-    def _collect_constraints(self, path: list, target: TypeNode,
-                             type_var_map: dict):
-        constraints = defaultdict(set)
-        if target.t.is_parameterized():
-            for k, v in target.t.get_type_variable_assignments().items():
-                t = tp.substitute_type(k, type_var_map)
-                if t.has_type_variables():
-                    sub = tu.unify_types(v, t, None, same_type=False)
-                    assert sub is not None
-                    for k, v in sub.items():
-                        constraints[k].add(EqualityConstraint(v))
-                else:
-                    constraints[k].add(EqualityConstraint(v))
-                    constraints[k].add(EqualityConstraint(t))
-        nodes = OrderedDict()
-        for source, target in path:
-            if isinstance(source, TypeNode):
-                if source.t.is_type_constructor():
-                    nodes.update({k: True for k in source.t.type_parameters})
-            if isinstance(target, TypeNode):
-                if target.t.is_type_constructor():
-                    nodes.update({k: True for k in target.t.type_parameters})
-
-        for node in nodes:
-            constraints[node]
-            t = tp.substitute_type(node, type_var_map)
-            if t.has_type_variables():
-                if node.bound is None:
-                    continue
-                sub = tu.unify_types(v, t, None, same_type=False)
-                for k, v in sub.items():
-                    constraint = (
-                        UpperBoundConstraint(node.bound)
-                        if t.is_type_var()
-                        else EqualityConstraint(v)
-                    )
-                    constraints[k].add(constraint)
-            else:
-                constraints[node].add(EqualityConstraint(t))
-                if node.bound:
-                    constraints[node].add(UpperBoundConstraint(
-                        tp.substitute_type(node.bound, type_var_map)))
-
-        ordered_constraints = OrderedDict()
-        for node in nodes:
-            ordered_constraints[node] = constraints[node]
-        return ordered_constraints
 
     def instantiate_type_variables(self, constraints, type_var_map):
         type_var_assignments = {}
@@ -290,9 +246,9 @@ class APIGraph():
                 continue
 
             upper_bounds = [c.bound for c in type_var_constraints
-                            if isinstance(c, UpperBoundConstraint)]
+                            if isinstance(c, au.UpperBoundConstraint)]
             eqs = [c.t for c in type_var_constraints
-                   if isinstance(c, EqualityConstraint)]
+                   if isinstance(c, au.EqualityConstraint)]
             if len(eqs) > 1:
                 return None
             if len(eqs) == 1:
@@ -316,20 +272,6 @@ class APIGraph():
             return None
 
         return type_var_assignments
-
-    def _compute_type_var_map(self, path: list):
-        type_var_map = OrderedDict()
-        for source, target in path:
-            constraint = self.api_graph[source][target].get("constraint")
-            if not constraint:
-                continue
-            for type_k, type_v in constraint.items():
-                sub_t = tp.substitute_type(type_v, type_var_map)
-                if sub_t.has_type_variables():
-                    type_var_map[type_k] = sub_t
-                else:
-                    type_var_map[type_k] = type_v
-        return type_var_map
 
     def encode_api_components(self) -> List[APIEncoding]:
         api_components = (Field, Constructor, Method)
