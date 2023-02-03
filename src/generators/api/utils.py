@@ -40,7 +40,8 @@ def _collect_constraints_from_target_type(target: tp.Type,
             if t.has_type_variables():
                 sub = tu.unify_types(v, t, None, same_type=False,
                                      strict_mode=False)
-                assert sub is not None
+                if not sub:
+                    return None
                 for k, v in sub.items():
                     constraints[k].add(EqualityConstraint(v))
             else:
@@ -54,6 +55,8 @@ def collect_constraints(target: tp.Type,
                         assignment_graph: dict):
     constraints = _collect_constraints_from_target_type(target,
                                                         assignment_graph)
+    if constraints is None:
+        return constraints
     for node in type_variables:
         constraints[node]
         t = tp.substitute_type(node, assignment_graph)
@@ -62,6 +65,8 @@ def collect_constraints(target: tp.Type,
                 continue
             sub = tu.unify_types(node.bound, t, None, same_type=False,
                                  strict_mode=False)
+            if not sub:
+                return None
             for k, v in sub.items():
                 constraint = (
                     UpperBoundConstraint(node.bound)

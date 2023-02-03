@@ -229,6 +229,8 @@ class APIGraph():
         return None
 
     def instantiate_type_variables(self, constraints, type_var_map):
+        if constraints is None:
+            return None
         type_var_assignments = {}
         free_variables = {
             k

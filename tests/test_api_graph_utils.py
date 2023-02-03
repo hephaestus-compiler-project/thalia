@@ -199,3 +199,32 @@ def test_collect_constraints():
             t4: set(),
             t5: set(),
         }
+
+
+def test_collect_constraints_parameterized():
+    # Case 1
+    # T1:
+    # T2 <- F<T1>
+    # T3: kt.String
+    t1 = tp.TypeParameter("T1")
+    t2 = tp.TypeParameter("T2")
+    t3 = tp.TypeParameter("T3")
+    t4 = tp.TypeParameter("T4")
+    t = tp.TypeConstructor("F", [t4]).new([t1])
+    assignment_graph = {t2: t, t3: t}
+    target = tp.TypeConstructor("T", [t3]).new([kt.String])
+    assert au.collect_constraints(
+        target, [t1, t2, t3], assignment_graph) is None
+
+    # Case 1
+    # T1:
+    # T2 <- F<T1>
+    # T3: F<Integer>
+    target = tp.TypeConstructor("T", [t3]).new([
+        t.t_constructor.new([kt.Integer])])
+    assert au.collect_constraints(
+        target, [t1, t2, t3], assignment_graph) == {
+            t1: {au.EqualityConstraint(kt.Integer)},
+            t2: set(),
+            t3: set()
+        }
