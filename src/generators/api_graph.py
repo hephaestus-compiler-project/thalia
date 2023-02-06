@@ -123,22 +123,26 @@ class APIGraph():
         self.api_graph = api_graph
         self.subtyping_graph = subtyping_graph
         self.bt_factory = bt_factory
-        self._types = {node.t.name: node.t
+        self._types = {node.t
                        for node in self.subtyping_graph.nodes()
                        if not node.t.is_type_constructor()}
         self._all_types = {node.t.name: node.t
                            for node in self.subtyping_graph.nodes()}
 
-    def get_random_type(self):
+    def get_reg_types(self):
         types = [
             t
-            for t in self._types.values()
+            for t in self._types
             if (
                 not t.has_type_variables() and
                 t != self.bt_factory.get_void_type() and
                 not getattr(t, "primitive", False)
             )
         ]
+        return types
+
+    def get_random_type(self):
+        types = self.get_reg_types()
         return utils.random.choice(types)
 
     def get_type_by_name(self, typename):
@@ -149,7 +153,8 @@ class APIGraph():
             if not type_k.is_type_var():
                 continue
             assignment = tp.substitute_type(type_k, type_var_map)
-            sub = tu.unify_types(assignment, type_v, None, same_type=False)
+            sub = tu.unify_types(assignment, type_v, self.bt_factory,
+                                 same_type=False)
             is_invalid = (
                 assignment != type_v and
                 (not sub or any(type_var_map.get(k, v) != v
@@ -167,14 +172,19 @@ class APIGraph():
         if node.t.is_parameterized() and node.t.has_wildcards():
             # TODO Handle wildcards
             return subtypes
-        if not node.t.is_parameterized():
+        if not node.t.is_parameterized() and not node.t.is_type_constructor():
             if node not in self.subtyping_graph:
                 return subtypes
             subtypes.update(nx.descendants(self.subtyping_graph, node))
             return subtypes
 
-        type_var_map = node.t.get_type_variable_assignments()
-        node = TypeNode(node.t.t_constructor)
+        node_t = node.t
+        if node_t.is_type_constructor():
+            # FIXME type constructor subtypes
+            return subtypes
+
+        type_var_map = node_t.get_type_variable_assignments()
+        node = TypeNode(node_t.t_constructor)
         if node not in self.subtyping_graph:
             return subtypes
         excluded_nodes = set()
@@ -190,7 +200,7 @@ class APIGraph():
             type_var_map = solution
             if v.t.is_type_constructor():
                 subtypes.add(TypeNode(tu.instantiate_type_constructor(
-                    v.t, self._types, type_var_map=type_var_map)[0]))
+                    v.t, self.get_reg_types(), type_var_map=type_var_map)[0]))
             else:
                 subtypes.add(v)
         return subtypes
@@ -246,7 +256,8 @@ class APIGraph():
                                                            path)
             type_variables = _get_type_variables(path)
             constraints = au.collect_constraints(origin.t, type_variables,
-                                                 assignment_graph)
+                                                 assignment_graph,
+                                                 self.bt_factory)
             assignments = au.instantiate_type_variables(self, constraints,
                                                         assignment_graph)
             if assignments is None:

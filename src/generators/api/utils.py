@@ -32,7 +32,8 @@ def compute_assignment_graph(api_graph: nx.DiGraph, path: list) -> OrderedDict:
 
 
 def _collect_constraints_from_target_type(target: tp.Type,
-                                          assignment_graph: dict) -> dict:
+                                          assignment_graph: dict,
+                                          bt_factory) -> dict:
     constraints = defaultdict(set)
     if not target.is_parameterized():
         return constraints
@@ -54,9 +55,11 @@ def _collect_constraints_from_target_type(target: tp.Type,
 
 def collect_constraints(target: tp.Type,
                         type_variables: List[tp.TypeParameter],
-                        assignment_graph: dict):
+                        assignment_graph: dict,
+                        bt_factory=None):
     constraints = _collect_constraints_from_target_type(target,
-                                                        assignment_graph)
+                                                        assignment_graph,
+                                                        bt_factory)
     if constraints is None:
         return constraints
     for node in type_variables:
@@ -65,7 +68,8 @@ def collect_constraints(target: tp.Type,
         if t.has_type_variables():
             if node.bound is None:
                 continue
-            sub = tu.unify_types(node.bound, t, None, same_type=False,
+            sub = tu.unify_types(node.bound, t, bt_factory,
+                                 same_type=False,
                                  strict_mode=False)
             if not sub:
                 return None
