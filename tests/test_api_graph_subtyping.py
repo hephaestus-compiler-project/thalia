@@ -137,6 +137,35 @@ DOCS4 = {
 }
 
 
+DOCS5 = {
+    "java.util.Spliterator.OfInt": {
+        "name": "java.util.Spliterator.OfInt",
+        "type_parameters": [],
+        "implements": [],
+        "inherits": [
+          "java.util.Spliterator.OfPrimitive<java.lang.Integer,java.lang.Integer,java.util.Spliterator.OfInt>"
+        ],
+        "methods": [],
+        "fields": []
+
+    },
+    "java.util.Spliterator.OfPrimitive": {
+        "name": "java.util.Spliterator.OfPrimitive",
+        "type_parameters": [
+          "T",
+          "T_CONS",
+          "T_SPLITR extends Spliterator.OfPrimitive<T,T_CONS,T_SPLITR>"
+        ],
+        "implements": [],
+        "inherits": [
+            "java.lang.Object"
+        ],
+        "methods": [],
+        "fields": []
+    }
+}
+
+
 def test_subtypes1():
     b = ag.JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS1)
@@ -340,4 +369,17 @@ def test_supertypes4():
         ag.TypeNode(b.parse_type("java.Stream<java.lang.Object>")),
         ag.TypeNode(b.parse_type("java.Map<java.lang.Object,java.Map<java.lang.Object,java.lang.String>>")),
         ag.TypeNode(b.parse_type("java.lang.Object")),
+    }
+
+
+def test_supertypes5():
+    b = ag.JavaAPIGraphBuilder("java")
+    api_graph = b.build(DOCS5)
+
+    supertypes = api_graph.supertypes(ag.TypeNode(b.parse_type(
+        "java.util.Spliterator.OfInt")))
+    assert supertypes == {
+        ag.TypeNode(b.parse_type("java.lang.Object")),
+        ag.TypeNode(b.parse_type(
+            "java.util.Spliterator.OfPrimitive<java.lang.Integer,java.lang.Integer,java.util.Spliterator.OfInt>"))
     }
