@@ -76,11 +76,12 @@ class JavaAPIDocConverter(APIDocConverter):
         self._replace_anchors_with_package_prefix(supercls_defs.select("a"))
         text = supercls_defs.text.encode("ascii", "ignore").decode()
         text = text.replace("\n", " ")
-        segs = text.split(" extends ")
-        if len(segs) == 1:
+        regex2 = re.compile(".* extends (.*)( implements .*)?")
+        match = re.match(regex2, text)
+        if not match:
             return []
-        text = segs[1].split(" implements ")[0]
-        text = text.replace(", ", ",")
+
+        text = match.group(1).split(" implements ")[0].replace(", ", ",")
         return [p for p in re.findall(regex, text)]
 
     def extract_class_type(self, html_doc):
