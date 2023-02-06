@@ -41,12 +41,16 @@ def _collect_constraints_from_target_type(target: tp.Type,
         for k, v in target.get_type_variable_assignments().items():
             t = tp.substitute_type(k, assignment_graph)
             if t.has_type_variables():
-                sub = tu.unify_types(v, t, None, same_type=False,
+                sub = tu.unify_types(v, t, bt_factory, same_type=False,
                                      strict_mode=False)
                 if not sub:
                     return None
                 for k, v in sub.items():
-                    constraints[k].add(EqualityConstraint(v))
+                    if not v.is_wildcard():
+                        constraints[k].add(EqualityConstraint(v))
+                        continue
+                    if v.bound:
+                        constraints[k].add(EqualityConstraint(v.bound))
             else:
                 constraints[k].add(EqualityConstraint(v))
                 constraints[k].add(EqualityConstraint(t))
@@ -77,9 +81,14 @@ def collect_constraints(target: tp.Type,
                 constraint = (
                     UpperBoundConstraint(node.bound)
                     if t.is_type_var()
-                    else EqualityConstraint(v)
+                    else (
+                        EqualityConstraint(v)
+                        if not v.is_wildcard()
+                        else EqualityConstraint(v.bound) if v.bound else None
+                    )
                 )
-                constraints[k].add(constraint)
+                if constraint:
+                    constraints[k].add(constraint)
         else:
             constraints[node].add(EqualityConstraint(t))
             if node.bound:
@@ -137,8 +146,11 @@ def instantiate_type_variables(api_graph, constraints,
             continue
 
         new_bounds = set()
+
+        from src.generators import api_graph as ag
+
         for bound in set(upper_bounds):
-            supers = api_graph.supertypes()
+            supers = api_graph.supertypes(ag.TypeNode(bound))
             if any(s.t in upper_bounds
                    for s in supers):
                 new_bounds.append(bound)

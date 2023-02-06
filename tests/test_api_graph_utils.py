@@ -236,7 +236,7 @@ def test_collect_constraints_parameterized():
     assert au.collect_constraints(
         target, [t1, t2, t3], assignment_graph) is None
 
-    # Case 1
+    # Case 2
     # T1:
     # T2 <- F<T1>
     # T3: F<Integer>
@@ -247,4 +247,33 @@ def test_collect_constraints_parameterized():
             t1: {au.EqualityConstraint(kt.Integer)},
             t2: set(),
             t3: set()
+        }
+
+
+def test_collect_constraints_wildcard():
+    # Case 1
+    # T1
+    # T2 <- T1
+    # T2: ?
+    t1 = tp.TypeParameter("T1")
+    t2 = tp.TypeParameter("T2")
+    target = tp.TypeConstructor("T", [t2]).new([tp.WildCardType()])
+    assignment_graph = {t2: t1}
+    assert au.collect_constraints(
+        target, [t1, t2], assignment_graph) == {
+            t1: set(),
+            t2: set(),
+        }
+
+    # Case 2
+    # T1
+    # T2 <- T1
+    # T2: ? extends Number
+    target = tp.TypeConstructor("T", [t2]).new([tp.WildCardType(
+        bound=kt.Number, variance=tp.Covariant)])
+    assignment_graph = {t2: t1}
+    assert au.collect_constraints(
+        target, [t1, t2], assignment_graph) == {
+            t1: {au.EqualityConstraint(kt.Number)},
+            t2: set(),
         }
