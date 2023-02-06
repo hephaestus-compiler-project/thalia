@@ -99,6 +99,7 @@ class APIEncoding(NamedTuple):
     receivers: Set[TypeNode]
     parameters: Set[TypeNode]
     returns: Set[TypeNode]
+    type_var_map: dict
 
 
 def _get_type_variables(path: list) -> List[tp.TypeParameter]:
@@ -307,13 +308,20 @@ class APIGraph():
             parameters = tuple([frozenset(s) for s in parameters])
             view = self.api_graph.out_edges(node)
             assert len(view) == 1
-            ret_type = TypeNode(tp.substitute_type(
-                list(view)[0][1].t, type_var_map))
+            ret_type = list(view)[0][1]
+            constraint = self.api_graph[node][ret_type].get("constraint", {})
+            if constraint:
+                ret_type = TypeNode(
+                    ret_type.t.new([constraint[tpa]
+                                   for tpa in ret_type.t.type_parameters])
+                )
+            ret_type = TypeNode(tp.substitute_type(ret_type.t, type_var_map))
             ret_types = self.supertypes(ret_type)
             ret_types.add(ret_type)
             encodings.append(APIEncoding(node, frozenset(receivers),
                                          parameters,
-                                         frozenset(ret_types)))
+                                         frozenset(ret_types),
+                                         type_var_map))
         return encodings
 
 
