@@ -281,15 +281,23 @@ class APIGraph():
         encodings = []
         for node in api_nodes:
             view = self.api_graph.in_edges(node)
+            type_var_map = {}
             if not view:
                 receivers = {self.EMPTY}
             else:
                 assert len(view) == 1
                 receiver = list(view)[0][0]
+                if receiver.t.is_type_constructor():
+                    # TODO Revisit
+                    receiver_t, type_var_map = tu.instantiate_type_constructor(
+                        receiver.t, self.get_reg_types()
+                    )
+                    receiver = TypeNode(receiver_t)
                 receivers = {receiver}
                 if receiver.t != self.bt_factory.get_any_type():
                     receivers.update(self.subtypes(receiver))
-            parameters = [{p} for p in getattr(node, "parameters", [])]
+            parameters = [{TypeNode(tp.substitute_type(p.t, type_var_map))}
+                          for p in getattr(node, "parameters", [])]
             for param_set in parameters:
                 param = list(param_set)[0]
                 if param.t != self.bt_factory.get_any_type():
@@ -299,7 +307,8 @@ class APIGraph():
             parameters = tuple([frozenset(s) for s in parameters])
             view = self.api_graph.out_edges(node)
             assert len(view) == 1
-            ret_type = list(view)[0][1]
+            ret_type = TypeNode(tp.substitute_type(
+                list(view)[0][1].t, type_var_map))
             ret_types = self.supertypes(ret_type)
             ret_types.add(ret_type)
             encodings.append(APIEncoding(node, frozenset(receivers),
