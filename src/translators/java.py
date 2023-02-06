@@ -169,10 +169,11 @@ class JavaTranslator(BaseTranslator):
             if get_boxed_void and isinstance(t, jt.VoidType):
                 return "Void"
             if box:
-                return PRIMITIVES_TO_BOXED.get(t.get_name())
+                return PRIMITIVES_TO_BOXED.get(t.get_name(), t.get_name())
             return t.get_name()
         if isinstance(t_constructor, jt.ArrayType):
-            return "{}[]".format(self.get_type_name(t.type_args[0], False, box))
+            return "{}[]".format(self.get_type_name(t.type_args[0], False,
+                                                    box))
         return "{}<{}>".format(t.name, ", ".join([self.type_arg2str(ta)
                                                   for ta in t.type_args]))
 
