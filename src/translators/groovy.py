@@ -857,6 +857,7 @@ class GroovyTranslator(BaseTranslator):
         func = main_prefix + node.func
         receiver = children_res[0] if node.receiver else None
         args = children_res[1:] if node.receiver else children_res
+        segs = node.func.rsplit(".", 1)
         if receiver:
             receiver_expr = (
                 '({}).'.format(children_res[0])
@@ -864,10 +865,19 @@ class GroovyTranslator(BaseTranslator):
                 else children_res[0] + '.'
             )
         else:
-            receiver_expr = ''
-        res = "{ident}{receiver}{name}{apply}({args})".format(
+            receiver_expr, func = (
+                ("this.", func)
+                if len(segs) == 1
+                else (segs[0] + ".", segs[1])
+            )
+        type_args_str = ""
+        if node.type_args and not node.can_infer_type_args:
+            type_args_str = "<{}>".format(", ".join(
+                self.get_type_name(t) for t in node.type_args))
+        res = "{ident}{receiver}{type_args}{name}{apply}({args})".format(
             ident=self.get_ident(),
             receiver=receiver_expr,
+            type_args=type_args_str,
             name=func,
             apply=".apply" if node.is_ref_call else "",
             args=", ".join(args)

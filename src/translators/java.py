@@ -1142,6 +1142,7 @@ class JavaTranslator(BaseTranslator):
                 args=", ".join(varargs)
             )
             args = args[:len(fdecl[1].params)-1] + [varargs]
+        segs = func.split(".")
         if receiver:
             receiver_expr = (
                 '({}).'.format(children_res[0])
@@ -1149,12 +1150,24 @@ class JavaTranslator(BaseTranslator):
                 else children_res[0] + '.'
             )
         else:
-            receiver_expr = ''
-        res = "{ident}{main}{receiver}{name}{apply}({args}){semicolon}".format(
+            receiver_expr, func = (
+                ("this.", func)
+                if len(segs) == 1
+                else (segs[0] + ".", segs[1])
+            )
+        type_args_str = ""
+        if node.type_args and not node.can_infer_type_args:
+            type_args_str = "<{}>".format(", ".join(
+                self.get_type_name(t) for t in node.type_args))
+        res = "{ident}{main}{receiver}{type_args}{name}{apply}({args}){semicolon}".format(
             ident=self.get_ident(),
-            main=self._get_main_prefix('vars', node.func) if node.is_ref_call \
-                else "",
+            main=(
+                self._get_main_prefix('vars', node.func)
+                if node.is_ref_call
+                else ""
+            ),
             receiver=receiver_expr,
+            type_args=type_args_str,
             name=func,
             apply=".apply" if is_nested_func() or node.is_ref_call else "",
             args=", ".join(args),
