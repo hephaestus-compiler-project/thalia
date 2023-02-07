@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from collections import OrderedDict, defaultdict
+from collections import OrderedDict
+from copy import deepcopy
 from typing import NamedTuple, List, Union, Set
 import re
 
@@ -54,22 +55,30 @@ class Method(NamedTuple):
     name: str
     cls: str
     parameters: List[TypeNode]
+    type_parameters: List[tp.TypeParameter]
 
     def __str__(self):
-        return "{}({})".format(self.name, ",".join(
-            str(p) for p in self.parameters))
+        type_parameters_str = ""
+        if self.type_parameters:
+            type_parameters_str = "<{}>".format(",".join(
+                [str(tpa) for tpa in self.type_parameters]))
+        return "{}{}({})".format(type_parameters_str,
+                                 self.name,
+                                 ",".join(str(p) for p in self.parameters))
 
     __repr__ = __str__
 
     def __hash__(self):
-        return hash(str(self.name) + str(self.cls) + str(self.parameters))
+        return hash(str(self.name) + str(self.cls) + str(
+            self.parameters) + str(self.type_parameters))
 
     def __eq__(self, other):
         return (
             self.__class__ == other.__class__ and
             self.name == other.name and
             self.cls == other.cls and
-            self.parameters == other.parameters
+            self.parameters == other.parameters and
+            self.type_parameters == other.type_parameters
         )
 
 
@@ -103,15 +112,19 @@ class APIEncoding(NamedTuple):
 
 
 def _get_type_variables(path: list) -> List[tp.TypeParameter]:
-    nodes = OrderedDict()
+    node_path = OrderedDict()
     for source, target in path:
-        if isinstance(source, TypeNode):
-            if source.t.is_type_constructor():
-                nodes.update({k: True for k in source.t.type_parameters})
-        if isinstance(target, TypeNode):
-            if target.t.is_type_constructor():
-                nodes.update({k: True for k in target.t.type_parameters})
-    return list(nodes.keys())
+        node_path[source] = True
+        node_path[target] = True
+
+    nodes = []
+    for node in node_path.keys():
+        if isinstance(node, TypeNode):
+            if node.t.is_type_constructor():
+                nodes.extend(node.t.type_parameters)
+        if isinstance(node, Method):
+            nodes.extend(node.type_parameters)
+    return nodes
 
 
 class APIGraph():
@@ -297,6 +310,11 @@ class APIGraph():
                 receivers = {receiver}
                 if receiver.t != self.bt_factory.get_any_type():
                     receivers.update(self.subtypes(receiver))
+            type_parameters = getattr(node, "type_parameters", [])
+            if type_parameters:
+                type_var_map.update(
+                    tu.instantiate_parameterized_function(
+                        type_parameters, self.get_reg_types()))
             parameters = [{TypeNode(tp.substitute_type(p.t, type_var_map))}
                           for p in getattr(node, "parameters", [])]
             for param_set in parameters:
@@ -362,22 +380,16 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         self.bt_factory: BuiltinFactory = BUILTIN_FACTORIES[target_language]
         self._class_name = None
         self._class_type_var_map: dict = {}
+        self._current_func_type_var_map: dict = {}
 
     def build(self, docs: dict) -> APIGraph:
         for api_doc in docs.values():
             if not api_doc["type_parameters"]:
                 continue
             cls_name = api_doc["name"]
-            type_param_map = OrderedDict()
-            for i, type_param_str in enumerate(api_doc["type_parameters"]):
-                type_param = self.parse_type_parameter(type_param_str)
-                bound = None
-                if type_param.bound:
-                    bound = type_param_map.get(type_param.bound.name,
-                                               type_param.bound)
-                type_param_map[type_param.name] = tp.TypeParameter(
-                    cls_name + ".T" + str(i), bound=bound)
-            self._class_type_var_map[cls_name] = type_param_map
+            self._class_type_var_map[cls_name] = self._rename_type_parameters(
+                cls_name, api_doc["type_parameters"]
+            )
         return super().build(docs)
 
     def parse_wildcard(self, str_t) -> tp.WildCardType:
@@ -392,9 +404,15 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
                 self.parse_type(str_t.split(" super ", 1)[1]),
                 variance=tp.Contravariant)
 
-    def parse_type_parameter(self, str_t: str) -> tp.TypeParameter:
+    def parse_type_parameter(self, str_t: str,
+                             keep: bool = False) -> tp.TypeParameter:
         segs = str_t.split(" extends ")
-        type_var_map = self._class_type_var_map.get(self._class_name, {})
+        type_var_map = deepcopy(
+            self._class_type_var_map.get(self._class_name, {}))
+        type_var_map.update(self._current_func_type_var_map)
+        if keep:
+            type_var_map = {}
+
         if len(segs) == 1:
             return type_var_map.get(str_t, tp.TypeParameter(str_t))
         bound = self.parse_type(segs[1])
@@ -490,8 +508,24 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
                 self.graph.add_edge(class_node, field_node, label=IN)
             field_type = TypeNode(self.parse_type(field_api["type"]))
             self.graph.add_node(field_type)
-            self.subtyping_graph.add_node(field_type)
+            # self.subtyping_graph.add_node(field_type)
             self.graph.add_edge(field_node, field_type, label=OUT)
+
+    def _rename_type_parameters(self, prefix: str,
+                                type_parameters: List[str]) -> OrderedDict:
+        # We use an OrderedDict because we need to store type parameters
+        # in the order they appear in the corresponding definitions.
+        type_param_map = OrderedDict()
+        for i, type_param_str in enumerate(type_parameters):
+            type_param = self.parse_type_parameter(type_param_str,
+                                                   keep=True)
+            bound = None
+            if type_param.bound:
+                bound = type_param_map.get(type_param.bound.name,
+                                           type_param.bound)
+            type_param_map[type_param.name] = tp.TypeParameter(
+                prefix + ".T" + str(i), bound=bound)
+        return type_param_map
 
     def _build_api_output_type(self, source_node, output_type,
                                is_constructor=False):
@@ -502,7 +536,7 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         if output_type.is_parameterized() and not is_array:
             target_node = TypeNode(output_type.t_constructor)
             self.graph.add_node(target_node)
-            self.subtyping_graph.add_node(target_node)
+            # self.subtyping_graph.add_node(target_node)
             kwargs = {
                 "constraint": output_type.get_type_variable_assignments()
             }
@@ -511,17 +545,17 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         else:
             target_node = TypeNode(output_type)
             self.graph.add_node(target_node)
-            self.subtyping_graph.add_node(target_node)
+            # self.subtyping_graph.add_node(target_node)
             self.graph.add_edge(source_node, target_node, label=OUT)
 
     def process_methods(self, class_node, methods):
         for method_api in methods:
             if method_api["access_mod"] == PROTECTED:
                 continue
-            if method_api["type_parameters"]:
-                # TODO: Handle parametric polymorphism.
-                continue
             name = method_api["name"]
+            self._current_func_type_var_map = self._rename_type_parameters(
+                self._class_name + "." + name, method_api["type_parameters"])
+            type_parameters = list(self._current_func_type_var_map.values())
             is_constructor = method_api["is_constructor"]
             is_static = method_api["is_static"]
             parameters = [
@@ -530,16 +564,18 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             ]
             for param in parameters:
                 self.graph.add_node(param)
-                self.subtyping_graph.add_node(param)
+                # self.subtyping_graph.add_node(param)
             if is_constructor:
                 method_node = Constructor(self._class_name,
                                           parameters)
             elif is_static:
                 method_node = Method(self._class_name + "." + name,
                                      self._class_name,
-                                     parameters)
+                                     parameters,
+                                     type_parameters)
             else:
-                method_node = Method(name, self._class_name, parameters)
+                method_node = Method(name, self._class_name, parameters,
+                                     type_parameters)
             self.graph.add_node(method_node)
             if not (is_constructor or is_static):
                 self.graph.add_edge(class_node, method_node, label=IN)
@@ -548,6 +584,7 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
                 output_type = self.parse_type(method_api["return_type"])
             self._build_api_output_type(method_node, output_type,
                                         is_constructor)
+            self._current_func_type_var_map = {}
 
     def construct_class_type(self, class_api):
         self._class_name = class_api["name"]
@@ -691,7 +728,8 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
                 method_node = Constructor(self._class_name,
                                           parameters)
             else:
-                method_node = Method(name, self._class_name, parameters)
+                method_node = Method(name, self._class_name, parameters,
+                                     method_api["type_parameters"])
             self.graph.add_node(method_node)
             if not (is_constructor or receiver is None):
                 self.graph.add_edge(receiver, method_node, label=IN)

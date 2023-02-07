@@ -125,8 +125,8 @@ def test1():
 
     assert path == [
         ag.TypeNode(b.parse_type("java.Foo")),
-        ag.Method("makeList", "java.Foo", []),
-        ag.Method("toSet", "java.List", []),
+        ag.Method("makeList", "java.Foo", [], []),
+        ag.Method("toSet", "java.List", [], []),
     ]
 
 
@@ -141,8 +141,8 @@ def test2():
 
     assert path == [
         b.construct_class_type(docs["java.Foo"]),
-        ag.Method("makeList", "java.Foo", []),
-        ag.Method("toSet", "java.List", []),
+        ag.Method("makeList", "java.Foo", [], []),
+        ag.Method("toSet", "java.List", [], []),
     ]
 
 def test3():
@@ -157,8 +157,8 @@ def test3():
 
     assert path == [
         b.construct_class_type(DOCS2["java.Foo"]),
-        ag.Method("makeList", "java.Foo", []),
-        ag.Method("toSet", "java.List", []),
+        ag.Method("makeList", "java.Foo", [], []),
+        ag.Method("toSet", "java.List", [], []),
     ]
 
     docs = copy.deepcopy(DOCS2)
@@ -178,6 +178,6 @@ def test3():
 
     assert path == [
         b.construct_class_type(DOCS2["java.Foo"]),
-        ag.Method("makeList", "java.Foo", []),
-        ag.Method("toSet", "java.List", []),
+        ag.Method("makeList", "java.Foo", [], []),
+        ag.Method("toSet", "java.List", [], []),
     ]

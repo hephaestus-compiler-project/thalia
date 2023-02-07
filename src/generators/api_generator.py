@@ -106,7 +106,9 @@ class APIGenerator(Generator):
         var_type = tp.substitute_type(return_type.t, type_var_map)
         if isinstance(api, ag.Method):
             args = [ast.CallArgument(arg) for arg in args]
-            expr = ast.FunctionCall(api.name, args=args, receiver=receiver)
+            type_args = [type_var_map[tpa] for tpa in api.type_parameters]
+            expr = ast.FunctionCall(api.name, args=args, receiver=receiver,
+                                    type_args=type_args)
         elif isinstance(api, ag.Constructor):
             expr = ast.New(tp.Classifier(api.name), args=args)
         else:
@@ -238,7 +240,9 @@ class APIGenerator(Generator):
                     for pe in self._generate_args(elem.parameters,
                                                   elem.parameters,
                                                   depth + 1, type_var_map)]
-            expr = ast.FunctionCall(elem.name, args=args, receiver=receiver)
+            type_args = [type_var_map[tpa] for tpa in elem.type_parameters]
+            expr = ast.FunctionCall(elem.name, args=args, receiver=receiver,
+                                    type_args=type_args)
         elif isinstance(elem, ag.Field):
             expr = ast.FieldAccess(receiver, elem.name)
         elif isinstance(elem, ag.Constructor):
