@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from collections import OrderedDict
 from copy import deepcopy
+import itertools
 from typing import NamedTuple, List, Union, Set
 import re
 
@@ -164,7 +165,7 @@ class APIGraph():
 
     def solve_constraint(self, constraint, type_var_map):
         for type_k, type_v in constraint.items():
-            if not type_k.is_type_var():
+            if not type_k.has_type_variables():
                 continue
             assignment = tp.substitute_type(type_k, type_var_map)
             sub = tu.unify_types(assignment, type_v, self.bt_factory,
@@ -183,8 +184,26 @@ class APIGraph():
         subtypes = {node}
         if node.t.is_type_var():
             return subtypes
-        if node.t.is_parameterized() and node.t.has_wildcards():
-            # TODO Handle wildcards
+        if node.t.is_parameterized() and any(t_arg.is_wildcard()
+                                             for t_arg in node.t.type_args):
+            possible_type_args = []
+            for t_arg in node.t.type_args:
+                if not t_arg.is_wildcard():
+                    possible_type_args.append([t_arg])
+                    continue
+                if t_arg.is_invariant():
+                    possible_type_args.append(self.get_reg_types())
+                elif t_arg.is_covariant():
+                    possible_type_args.append({
+                        n.t for n in self.subtypes(TypeNode(t_arg.bound))
+                        if not n.t.is_type_constructor()})
+                else:
+                    possible_type_args.append({n.t for n in self.supertypes(
+                        TypeNode(t_arg.bound))})
+            for combination in itertools.product(*possible_type_args):
+                new_sub = node.t.t_constructor.new(list(combination))
+                subtypes.add(TypeNode(new_sub))
+                subtypes.update(self.subtypes(TypeNode(new_sub)))
             return subtypes
         if not node.t.is_parameterized() and not node.t.is_type_constructor():
             if node not in self.subtyping_graph:

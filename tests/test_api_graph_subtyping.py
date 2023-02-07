@@ -204,6 +204,15 @@ def test_subtypes1():
         ag.TypeNode(b.parse_type("java.util.LinkedList<T>")),
     }
 
+    subtypes = api_graph.subtypes(ag.TypeNode(b.parse_type(
+        "java.util.List<? extends java.lang.String>")))
+    assert subtypes == {
+        ag.TypeNode(b.parse_type("java.util.List<? extends java.lang.String>")),
+        ag.TypeNode(b.parse_type("java.util.List<java.lang.String>")),
+        ag.TypeNode(b.parse_type("java.util.LinkedList<java.lang.String>")),
+        ag.TypeNode(b.parse_type("java.StringList"))
+    }
+
 
 def test_subtypes2():
     b = ag.JavaAPIGraphBuilder("java")

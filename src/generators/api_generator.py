@@ -1,6 +1,5 @@
 from copy import deepcopy
 import itertools
-from typing import List, Set, NamedTuple, Union
 
 import networkx as nx
 
@@ -89,9 +88,9 @@ class APIGenerator(Generator):
                     func_type=ast.FunctionDeclaration.FUNCTION)
                 self._add_node_to_parent(self.namespace[:-1], main_func)
                 program_index += 1
-                msg = ("Generating program of combination: (receiver: {}, "
-                       "parameters: {}, return: {}")
-                msg = msg.format(str(receiver),
+                msg = ("API: {}; Generating program of combination: "
+                       "(receiver: {}, parameters: {}, return: {}")
+                msg = msg.format(str(api), str(receiver),
                                  ",".join([str(p) for p in parameters]),
                                  str(return_type))
                 log(self.logger, msg)
@@ -212,6 +211,7 @@ class APIGenerator(Generator):
         for i, param in enumerate(parameters):
             param_type = ag.TypeNode(
                 tp.substitute_type(actual_types[i].t, type_var_map))
+            param = ag.TypeNode(tp.substitute_type(param.t, type_var_map))
             if param_type and param_type in self.api_graph.subtypes(param):
                 t = param_type
             else:
