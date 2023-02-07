@@ -56,7 +56,7 @@ class APIGenerator(Generator):
         func_name = "test"
         test_namespace = ast.GLOBAL_NAMESPACE + (func_name,)
         program_index = 0
-        for api, receivers, parameters, returns in self.encodings:
+        for api, receivers, parameters, returns, type_map in self.encodings:
             if isinstance(api, ag.Constructor):
                 # TODO
                 continue
@@ -74,7 +74,8 @@ class APIGenerator(Generator):
                 self.namespace = test_namespace
                 expr = self.generate_from_type_combination(api, receiver,
                                                            parameters,
-                                                           return_type)
+                                                           return_type,
+                                                           type_map)
                 decls = list(self.context.get_declarations(
                     self.namespace, True).values())
                 decls = [d for d in decls
@@ -97,8 +98,9 @@ class APIGenerator(Generator):
                 yield ast.Program(deepcopy(self.context), self.language)
 
     def generate_from_type_combination(self, api, receiver, parameters,
-                                       return_type) -> ast.Expr:
+                                       return_type, type_map) -> ast.Expr:
         receiver, type_var_map = self._generate_expr_from_node(receiver)
+        type_var_map.update(type_map)
         args = self._generate_args(getattr(api, "parameters", []), parameters,
                                    depth=1, type_var_map=type_var_map)
         var_type = tp.substitute_type(return_type.t, type_var_map)
@@ -171,26 +173,30 @@ class APIGenerator(Generator):
     def _generate_expr_from_node(self, node, depth=1):
         stored_expr = self.visited_exprs.get(node)
         if stored_expr:
-            stored_expr
+            return stored_expr
         if node == self.api_graph.EMPTY:
             return None, {}
         if depth == cfg.limits.max_depth:
             if node.t.is_type_constructor():
                 t, type_var_map = tu.instantiate_type_constructor(
-                    node.t, self.api_graph._types)
+                    node.t, self.api_graph.get_reg_types())
             else:
                 t, type_var_map = node.t, {}
             return self.generate_expr(t), type_var_map
         path = self.api_graph.find_API_path(node)
         if not path:
-            type_var_map = (
-                node.t.get_type_variable_assignments()
-                if node.t.is_parameterized()
-                else {}
-            )
-            return self.generate_expr(node.t), type_var_map
+            if node.t.is_type_constructor():
+                t, type_var_map = tu.instantiate_type_constructor(
+                    node.t, self.api_graph.get_reg_types())
+            else:
+                t = node.t
+                type_var_map = (
+                    node.t.get_type_variable_assignments()
+                    if node.t.is_parameterized()
+                    else {}
+                )
+            return self.generate_expr(t), type_var_map
         path, type_var_map = path
-        print(path, type_var_map)
         expr = self._generate_expression_from_path(path, depth=depth,
                                                    type_var_map=type_var_map)
         self.visited_exprs[node] = (expr, type_var_map)
@@ -202,7 +208,8 @@ class APIGenerator(Generator):
             return []
         args = []
         for i, param in enumerate(parameters):
-            param_type = actual_types[i]
+            param_type = ag.TypeNode(
+                tp.substitute_type(actual_types[i].t, type_var_map))
             if param_type and param_type in self.api_graph.subtypes(param):
                 t = param_type
             else:
@@ -213,6 +220,12 @@ class APIGenerator(Generator):
 
     def _generate_expression_from_path(self, path: list,
                                        depth: int, type_var_map) -> ast.Expr:
+        def _instantiate_type_con(t: tp.Type):
+            if t.is_type_constructor():
+                return t.new([type_var_map[tpa]
+                              for tpa in t.type_parameters])
+            return t
+
         elem = path[-1]
         receiver_path = path[:-1]
         if not receiver_path:
@@ -232,10 +245,9 @@ class APIGenerator(Generator):
             args = self._generate_args(elem.parameters, elem.parameters,
                                        depth + 1, type_var_map)
             con_type = self.api_graph.get_type_by_name(elem.name)
-            if con_type.is_type_constructor():
-                con_type = con_type.new([type_var_map[t]
-                                         for t in con_type.type_parameters])
+            con_type = _instantiate_type_con(con_type)
             expr = ast.New(con_type, args)
         else:
-            expr = self.generate_expr(tp.substitute_type(elem.t, type_var_map))
+            t = _instantiate_type_con(elem.t)
+            expr = self.generate_expr(tp.substitute_type(t, type_var_map))
         return expr
