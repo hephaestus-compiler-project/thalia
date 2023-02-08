@@ -167,7 +167,7 @@ class JavaAPIDocConverter(APIDocConverter):
         if is_constructor:
             return []
         regex = re.compile(
-            r"(static )?(default )?(<(.*)>)?.+")
+            r"(static )?(default )?(<(.*)>)?[^<>\?](.*)?")
         text = method_doc.find(class_="colFirst").text.encode(
             "ascii", "ignore").decode()
         match = re.match(regex, text)
@@ -185,7 +185,7 @@ class JavaAPIDocConverter(APIDocConverter):
             return None
 
         regex = re.compile(
-            r"(static )?(default )?(abstract )?(protected )?(<.*>)?(.+)")
+            r"(static )?(default )?(abstract )?(protected )?(<.*>)?([^<>\?](.*)?)")
         self._replace_anchors_with_package_prefix(
             method_doc.select(".colFirst a"))
         text = method_doc.find(class_="colFirst").text.encode(
