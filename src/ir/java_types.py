@@ -15,7 +15,7 @@ class JavaBuiltinFactory(bt.BuiltinFactory):
         return JavaBuiltin
 
     def get_void_type(self):
-        return VoidType()
+        return VoidType(primitive=True)
 
     def get_any_type(self):
         return ObjectType()
@@ -122,7 +122,7 @@ class ObjectType(JavaBuiltin):
 
 
 class VoidType(JavaBuiltin):
-    def __init__(self, name="void", primitive=False):
+    def __init__(self, name="Void", primitive=False):
         super().__init__(name, primitive)
         if not self.primitive:
             self.supertypes.append(ObjectType())
@@ -134,6 +134,11 @@ class VoidType(JavaBuiltin):
 
     def box_type(self):
         return VoidType(self.name, primitive=False)
+
+    def get_name(self):
+        if self.is_primitive():
+            return "void"
+        return super().get_name()
 
 
 class NumberType(ObjectType):
