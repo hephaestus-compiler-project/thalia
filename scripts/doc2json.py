@@ -105,6 +105,11 @@ class JavaAPIDocConverter(APIDocConverter):
         text = segs[1].replace(", ", ",")
         return [p for p in re.findall(regex, text)]
 
+    def extract_functional_interface(self, html_doc):
+        text = html_doc.select(".description .blockList pre")[0].text.encode(
+            "ascii", "ignore").decode()
+        return "@FunctionalInterface" in text
+
     def process(self, args):
         for base in os.listdir(args.input):
             if base in self.EXCLUDED_FILES:
@@ -127,6 +132,7 @@ class JavaAPIDocConverter(APIDocConverter):
         super_class = self.extract_super_class(html_doc)
         super_interfaces = self.extract_super_interfaces(html_doc)
         class_type = self.extract_class_type(html_doc)
+        is_func_interface = self.extract_functional_interface(html_doc)
         if class_type == self.ENUM:
             # TODO handle enums
             return None
@@ -247,6 +253,11 @@ class JavaAPIDocConverter(APIDocConverter):
             return False
         return 'static' in method_doc.find(class_="colFirst").text
 
+    def extract_isdefault(self, method_doc, is_constructor):
+        if is_constructor:
+            return False
+        return "default" in method_doc.find(class_="colFirst").text
+
     def extract_exceptions(self, method_doc):
         href = method_doc.select(".memberNameLink a")[0]["href"]
         href = urllib.parse.unquote(href)
@@ -294,6 +305,7 @@ class JavaAPIDocConverter(APIDocConverter):
             param_types = self.extract_method_parameter_types(method_doc,
                                                               is_con)
             access_mod = self.extract_method_access_mod(method_doc, is_con)
+            is_default = self.extract_isdefault(method_doc, is_con)
 
             if param_types is None:
                 # It's either a field, or a nested class
@@ -307,6 +319,7 @@ class JavaAPIDocConverter(APIDocConverter):
                 "is_constructor": is_con,
                 "access_mod": access_mod,
                 "throws": exceptions,
+                "is_default": is_default
             }
             method_objs.append(method_obj)
         return method_objs
