@@ -830,12 +830,23 @@ class GroovyTranslator(BaseTranslator):
             signature = self.get_type_name(node.get_signature())
             cast = " as " + signature
 
-        receiver = children_res[0] if children_res else "Main"
-        receiver += "::" # We can also use .&
+        segs = node.func.rsplit(".", 1)
+        func_name = segs[-1]
+        receiver = (
+            children_res[0]
+            if children_res
+            else (
+                "Main"
+                if len(segs) == 1
+                else segs[0]
+            )
+        )
+
+        receiver += "::"  # We can also use .&
         res = "{ident}{receiver}{name}{cast}".format(
             ident=self.get_ident(),
             receiver=receiver,
-            name=node.func,
+            name=func_name,
             cast=cast
         )
         return res

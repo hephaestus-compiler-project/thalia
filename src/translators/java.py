@@ -1084,6 +1084,9 @@ class JavaTranslator(BaseTranslator):
                 if namespace == ast.GLOBAL_NAMESPACE and isinstance(
                         decl, ast.FunctionDeclaration):
                     receiver = "Main"
+        segs = node.func.rsplit(".", 1)
+        if len(segs) > 1:
+            receiver = segs[0]
 
         receiver += "::" if receiver != "" else ""
 
