@@ -180,30 +180,35 @@ class APIGraph():
             type_var_map[type_v] = assignment
         return type_var_map
 
+    def _subtypes_of_wildcards(self, node):
+        possible_type_args = []
+        subtypes = set()
+        for t_arg in node.t.type_args:
+            if not t_arg.is_wildcard():
+                possible_type_args.append([t_arg])
+                continue
+            if t_arg.is_invariant():
+                possible_type_args.append(self.get_reg_types())
+            elif t_arg.is_covariant():
+                possible_type_args.append({
+                    n.t for n in self.subtypes(TypeNode(t_arg.bound))
+                    if not n.t.is_type_constructor()})
+            else:
+                possible_type_args.append({n.t for n in self.supertypes(
+                    TypeNode(t_arg.bound))})
+        for combination in itertools.product(*possible_type_args):
+            new_sub = node.t.t_constructor.new(list(combination))
+            subtypes.add(TypeNode(new_sub))
+            subtypes.update(self.subtypes(TypeNode(new_sub)))
+        return subtypes
+
     def subtypes(self, node: TypeNode):
         subtypes = {node}
         if node.t.is_type_var():
             return subtypes
         if node.t.is_parameterized() and any(t_arg.is_wildcard()
                                              for t_arg in node.t.type_args):
-            possible_type_args = []
-            for t_arg in node.t.type_args:
-                if not t_arg.is_wildcard():
-                    possible_type_args.append([t_arg])
-                    continue
-                if t_arg.is_invariant():
-                    possible_type_args.append(self.get_reg_types())
-                elif t_arg.is_covariant():
-                    possible_type_args.append({
-                        n.t for n in self.subtypes(TypeNode(t_arg.bound))
-                        if not n.t.is_type_constructor()})
-                else:
-                    possible_type_args.append({n.t for n in self.supertypes(
-                        TypeNode(t_arg.bound))})
-            for combination in itertools.product(*possible_type_args):
-                new_sub = node.t.t_constructor.new(list(combination))
-                subtypes.add(TypeNode(new_sub))
-                subtypes.update(self.subtypes(TypeNode(new_sub)))
+            subtypes.update(self._subtypes_of_wildcards(node))
             return subtypes
         if not node.t.is_parameterized() and not node.t.is_type_constructor():
             if node not in self.subtyping_graph:
