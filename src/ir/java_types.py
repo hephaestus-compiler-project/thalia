@@ -377,7 +377,7 @@ class FunctionType(tp.TypeConstructor):
 
 
 Object = ObjectType()
-Void = VoidType()
+Void = VoidType(primitive=True)
 Number = NumberType()
 Integer = IntegerType()
 IntPrimitive = IntegerType(primitive=True)

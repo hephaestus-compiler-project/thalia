@@ -188,7 +188,7 @@ class JavaTranslator(BaseTranslator):
     def _get_main_prefix(self, decl_type, name):
         ns_decls = list(self.context.get_namespaces_decls(
             self._namespace, name, decl_type))
-        if len(ns_decls) == 1 and ns_decls[0][0][:-1] == ast.GLOBAL_NAMESPACE:
+        if len(ns_decls) == 1 and ns_decls[0][0] == ast.GLOBAL_NAMESPACE:
             if not self._visit_is_stack.count(name):
                 return "Main."
         return ""
@@ -1089,11 +1089,12 @@ class JavaTranslator(BaseTranslator):
             receiver = segs[0]
 
         receiver += "::" if receiver != "" else ""
+        func_name = segs[-1]
 
         res = "{ident}{receiver}{name}{semicolon}".format(
             ident=self.get_ident(),
             receiver=receiver,
-            name=node.func,
+            name=func_name,
             semicolon=";" if self._parent_is_block() else ""
         )
         return res
@@ -1145,7 +1146,7 @@ class JavaTranslator(BaseTranslator):
                 args=", ".join(varargs)
             )
             args = args[:len(fdecl[1].params)-1] + [varargs]
-        segs = func.split(".")
+        segs = func.rsplit(".", 1)
         if receiver:
             receiver_expr = (
                 '({}).'.format(children_res[0])
