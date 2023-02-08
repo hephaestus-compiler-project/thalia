@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from collections import OrderedDict
 from copy import deepcopy
 import itertools
-from typing import NamedTuple, List, Union, Set
+from typing import NamedTuple, List, Union, Set, Dict, Tuple
 import re
 
 import networkx as nx
@@ -133,10 +133,12 @@ class APIGraph():
 
     EMPTY = 0
 
-    def __init__(self, api_graph, subtyping_graph,
+    def __init__(self, api_graph, subtyping_graph, functional_types,
                  bt_factory):
-        self.api_graph = api_graph
-        self.subtyping_graph = subtyping_graph
+        self.api_graph: nx.DiGraph = api_graph
+        self.subtyping_graph: nx.DiGraph = subtyping_graph
+        self.functional_types: Dict[tp.Type, tp.ParameterizedType] = \
+            functional_types
         self.bt_factory = bt_factory
         self._types = {node.t
                        for node in self.subtyping_graph.nodes()
@@ -309,6 +311,41 @@ class APIGraph():
             return pruned_path, assignments
         return None
 
+    def get_functional_type(self, etype: tp.Type):
+        class_type = etype
+        if etype.is_parameterized():
+            class_type = etype.t_constructor
+        return self.functional_types.get(class_type)
+
+    def get_function_refs_of(self, etype: tp.Type) -> List[Tuple[Method, dict]]:
+        type_var_map = {}
+        if etype.is_parameterized():
+            etype = etype.to_variance_free()
+            type_var_map = etype.get_type_variable_assignments()
+        func_type = self.get_functional_type(etype)
+        assert func_type is not None
+        func_type = tp.substitute_type(func_type, type_var_map)
+        candidate_functions = []
+        for api in self.api_graph.nodes():
+            if not isinstance(api, Method):
+                continue
+            param_types = [p.t.box_type() for p in api.parameters]
+            view = self.api_graph.out_edges(api)
+            assert len(view) == 1
+            out_type = list(view)[0][1].t
+            if out_type.is_type_constructor():
+                constraint = self.api_graph[api][
+                    TypeNode(out_type)].get("constraint")
+                out_type = out_type.new(
+                    [constraint[tpa] for tpa in out_type.type_parameters])
+            api_type = self.bt_factory.get_function_type(
+                len(param_types)).new(param_types + [out_type.box_type()])
+            sub = tu.unify_types(func_type, api_type, self.bt_factory,
+                                 same_type=True)
+            if sub:
+                candidate_functions.append((api, sub))
+        return candidate_functions
+
     def encode_api_components(self) -> List[APIEncoding]:
         api_components = (Field, Constructor, Method)
         api_nodes = [
@@ -371,6 +408,7 @@ class APIGraphBuilder(ABC):
     def __init__(self):
         self.graph: nx.DiGraph = None
         self.subtyping_graph: nx.DiGraph = None
+        self.functional_types: Dict[tp.Type, tp.ParameterizedType] = {}
         self.bt_factory = None
 
     def build(self, docs: dict) -> APIGraph:
@@ -378,7 +416,8 @@ class APIGraphBuilder(ABC):
         self.subtyping_graph = nx.DiGraph()
         for api_doc in docs.values():
             self.process_class(api_doc)
-        return APIGraph(self.graph, self.subtyping_graph, self.bt_factory)
+        return APIGraph(self.graph, self.subtyping_graph,
+                        self.functional_types, self.bt_factory)
 
     @abstractmethod
     def process_class(self, class_api: dict):
@@ -405,6 +444,7 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         self._class_name = None
         self._class_type_var_map: dict = {}
         self._current_func_type_var_map: dict = {}
+        self._is_func_interface: bool = False
 
     def build(self, docs: dict) -> APIGraph:
         for api_doc in docs.values():
@@ -604,11 +644,20 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             if not (is_constructor or is_static):
                 self.graph.add_edge(class_node, method_node, label=IN)
             output_type = None
+            ret_type = method_api["return_type"]
             if not is_constructor:
-                output_type = self.parse_type(method_api["return_type"])
+                output_type = self.parse_type(ret_type)
             self._build_api_output_type(method_node, output_type,
                                         is_constructor)
             self._current_func_type_var_map = {}
+            is_abstract = not method_api.get("is_default", False) and not \
+                method_api["is_static"]
+            if self._is_func_interface and is_abstract:
+                func_params = [param.t.box_type() for param in parameters]
+                ret_type = self.parse_type(ret_type)
+                func_type = self.bt_factory.get_function_type(
+                    len(func_params)).new(func_params + [ret_type.box_type()])
+                self.functional_types[class_node.t] = func_type
 
     def construct_class_type(self, class_api):
         self._class_name = class_api["name"]
@@ -625,6 +674,7 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         self._class_node = class_node
         self.graph.add_node(class_node)
         self.subtyping_graph.add_node(class_node)
+        self._is_func_interface = class_api.get("functional_interface", False)
         self.process_fields(class_node, class_api["fields"])
         self.process_methods(class_node, class_api["methods"])
         super_types = {

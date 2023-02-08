@@ -125,6 +125,28 @@ class APIGenerator(Generator):
         self._add_node_to_parent(self.namespace, var_decl)
         return None
 
+    def generate_func_ref(self, expr_type: tp.Type, type_var_map: dict,
+                          depth: int):
+        candidates = self.api_graph.get_function_refs_of(expr_type)
+        if not candidates:
+            return ast.BottomConstant(expr_type)
+        api, sub = utils.random.choice(candidates)
+        type_var_map.update(sub)
+        segs = api.name.rsplit(".", 1)
+        if len(segs) > 1:
+            rec = None
+        else:
+            rec_type = self.api_graph.get_type_by_name(api.cls)
+            if rec_type.is_type_constructor():
+                rec_type, sub = tu.instantiate_type_constructor(
+                    rec_type, self.api_graph.get_reg_types(),
+                    type_var_map=type_var_map)
+                type_var_map.update(sub)
+            rec = self._generate_expr_from_node(ag.TypeNode(rec_type),
+                                                depth + 1)[0]
+        return ast.FunctionReference(api.name, receiver=rec,
+                                     signature=expr_type)
+
     def generate_expr(self,
                       expr_type: tp.Type = None,
                       only_leaves=False,
@@ -217,7 +239,13 @@ class APIGenerator(Generator):
             else:
                 t = param
             t = ag.TypeNode(tp.substitute_type(t.t, type_var_map))
-            args.append(self._generate_expr_from_node(t, depth)[0])
+            is_func = self.api_graph.get_functional_type(t.t) is not None
+            expr = (
+                self.generate_func_ref(t.t, type_var_map, depth)
+                if is_func
+                else self._generate_expr_from_node(t, depth)[0]
+            )
+            args.append(expr)
         return args
 
     def _generate_expression_from_path(self, path: list,
