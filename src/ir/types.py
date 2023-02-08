@@ -110,6 +110,9 @@ class Type(Node):
     def not_related(self, other: Type):
         return not(self.is_subtype(other) or other.is_subtype(self))
 
+    def box_type(self):
+        return self
+
     def get_name(self):
         return str(self.name)
 
