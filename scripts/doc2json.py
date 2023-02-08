@@ -159,6 +159,7 @@ class JavaAPIDocConverter(APIDocConverter):
           "class_type": class_type,
           'methods': method_objs + constructor_objs,
           'fields': field_objs,
+          "functional_interface": is_func_interface,
         }
         return class_obj
 
