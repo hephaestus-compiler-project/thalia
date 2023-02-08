@@ -451,8 +451,10 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             if not api_doc["type_parameters"]:
                 continue
             cls_name = api_doc["name"]
-            self._class_type_var_map[cls_name] = self._rename_type_parameters(
-                cls_name, api_doc["type_parameters"]
+            self._class_type_var_map[cls_name] = OrderedDict()
+            self._rename_type_parameters(
+                cls_name, api_doc["type_parameters"],
+                self._class_type_var_map[cls_name]
             )
         return super().build(docs)
 
@@ -475,6 +477,10 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             self._class_type_var_map.get(self._class_name, {}))
         type_var_map.update(self._current_func_type_var_map)
         if keep:
+            # It might be the case where the names of function's and class's
+            # type parameters conflict. In this case, we should not replace
+            # the name of a function's type parameter with the name
+            # of the corresponding class type parameter.
             type_var_map = {}
 
         if len(segs) == 1:
@@ -514,8 +520,7 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             type_vars = list(type_var_map.values())
         return tp.TypeConstructor(base, type_vars).new(new_type_args)
 
-    def parse_type(self, str_t: str,
-                   type_variables: List[str] = None) -> tp.Type:
+    def parse_type(self, str_t: str) -> tp.Type:
         tf = self.bt_factory
         if str_t.endswith("[]"):
             str_t = str_t.split("[]")[0]
@@ -576,20 +581,19 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             self.graph.add_edge(field_node, field_type, label=OUT)
 
     def _rename_type_parameters(self, prefix: str,
-                                type_parameters: List[str]) -> OrderedDict:
+                                type_parameters: List[str],
+                                type_name_map: OrderedDict):
         # We use an OrderedDict because we need to store type parameters
         # in the order they appear in the corresponding definitions.
-        type_param_map = OrderedDict()
         for i, type_param_str in enumerate(type_parameters):
             type_param = self.parse_type_parameter(type_param_str,
                                                    keep=True)
             bound = None
             if type_param.bound:
-                bound = type_param_map.get(type_param.bound.name,
-                                           type_param.bound)
-            type_param_map[type_param.name] = tp.TypeParameter(
+                bound = tp.substitute_type(type_param.bound, type_name_map)
+
+            type_name_map[type_param.name] = tp.TypeParameter(
                 prefix + ".T" + str(i), bound=bound)
-        return type_param_map
 
     def _build_api_output_type(self, source_node, output_type,
                                is_constructor=False):
@@ -617,8 +621,11 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             if method_api["access_mod"] == PROTECTED:
                 continue
             name = method_api["name"]
-            self._current_func_type_var_map = self._rename_type_parameters(
-                self._class_name + "." + name, method_api["type_parameters"])
+            self._current_func_type_var_map = OrderedDict()
+            self._rename_type_parameters(
+                self._class_name + "." + name, method_api["type_parameters"],
+                self._current_func_type_var_map
+            )
             type_parameters = list(self._current_func_type_var_map.values())
             is_constructor = method_api["is_constructor"]
             is_static = method_api["is_static"]
@@ -702,8 +709,7 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         self.bt_factory: BuiltinFactory = BUILTIN_FACTORIES[target_language]
         self._class_name = None
 
-    def parse_type(self, str_t: str,
-                   type_variables: List[str] = None) -> tp.Type:
+    def parse_type(self, str_t: str) -> tp.Type:
         tf = self.bt_factory
         if str_t.endswith("Array<"):
             str_t = str_t.split("Array<")[1][:-1]
