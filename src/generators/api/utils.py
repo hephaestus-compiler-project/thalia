@@ -147,12 +147,9 @@ def instantiate_type_variables(api_graph, constraints,
 
         new_bounds = set()
 
-        from src.generators import api_graph as ag
-
         for bound in set(upper_bounds):
-            supers = api_graph.supertypes(ag.TypeNode(bound))
-            if any(s.t in upper_bounds
-                   for s in supers):
+            supers = api_graph.supertypes(bound)
+            if any(s.t in upper_bounds for s in supers):
                 new_bounds.append(bound)
         if len(new_bounds) > 1:
             return None

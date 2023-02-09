@@ -21,21 +21,6 @@ WIDENING = 2
 PROTECTED = "protected"
 
 
-class TypeNode(NamedTuple):
-    t: tp.Type
-
-    def __str__(self):
-        return "(" + str(self.t) + ")"
-
-    __repr__ = __str__
-
-    def __hash__(self):
-        return hash(str(self.t))
-
-    def __eq__(self, other):
-        return self.__class__ == other.__class__ and self.t == other.t
-
-
 class Field(NamedTuple):
     name: str
     cls: str
@@ -55,7 +40,7 @@ class Field(NamedTuple):
 class Method(NamedTuple):
     name: str
     cls: str
-    parameters: List[TypeNode]
+    parameters: List[tp.Type]
     type_parameters: List[tp.TypeParameter]
 
     def __str__(self):
@@ -85,7 +70,7 @@ class Method(NamedTuple):
 
 class Constructor(NamedTuple):
     name: str
-    parameters: List[TypeNode]
+    parameters: List[tp.Type]
 
     def __str__(self):
         return "{}({})".format(self.name, ",".join(
@@ -106,9 +91,9 @@ class Constructor(NamedTuple):
 
 class APIEncoding(NamedTuple):
     api: Union[Field, Method, Constructor]
-    receivers: Set[TypeNode]
-    parameters: Set[TypeNode]
-    returns: Set[TypeNode]
+    receivers: Set[tp.Type]
+    parameters: Set[tp.Type]
+    returns: Set[tp.Type]
     type_var_map: dict
 
 
@@ -120,9 +105,9 @@ def _get_type_variables(path: list) -> List[tp.TypeParameter]:
 
     nodes = []
     for node in node_path.keys():
-        if isinstance(node, TypeNode):
-            if node.t.is_type_constructor():
-                nodes.extend(node.t.type_parameters)
+        if isinstance(node, tp.Type):
+            if node.is_type_constructor():
+                nodes.extend(node.type_parameters)
         if isinstance(node, Method):
             nodes.extend(node.type_parameters)
     return nodes
@@ -140,10 +125,10 @@ class APIGraph():
         self.functional_types: Dict[tp.Type, tp.ParameterizedType] = \
             functional_types
         self.bt_factory = bt_factory
-        self._types = {node.t
+        self._types = {node
                        for node in self.subtyping_graph.nodes()
-                       if not node.t.is_type_constructor()}
-        self._all_types = {node.t.name: node.t
+                       if not node.is_type_constructor()}
+        self._all_types = {node.name: node
                            for node in self.subtyping_graph.nodes()}
 
     def get_reg_types(self):
@@ -185,7 +170,7 @@ class APIGraph():
     def _subtypes_of_wildcards(self, node):
         possible_type_args = []
         subtypes = set()
-        for t_arg in node.t.type_args:
+        for t_arg in node.type_args:
             if not t_arg.is_wildcard():
                 possible_type_args.append([t_arg])
                 continue
@@ -193,38 +178,37 @@ class APIGraph():
                 possible_type_args.append(self.get_reg_types())
             elif t_arg.is_covariant():
                 possible_type_args.append({
-                    n.t for n in self.subtypes(TypeNode(t_arg.bound))
-                    if not n.t.is_type_constructor()})
+                    n for n in self.subtypes(t_arg.bound)
+                    if not n.is_type_constructor()})
             else:
-                possible_type_args.append({n.t for n in self.supertypes(
-                    TypeNode(t_arg.bound))})
+                possible_type_args.append({n for n in self.supertypes(
+                    t_arg.bound)})
         for combination in itertools.product(*possible_type_args):
-            new_sub = node.t.t_constructor.new(list(combination))
-            subtypes.add(TypeNode(new_sub))
-            subtypes.update(self.subtypes(TypeNode(new_sub)))
+            new_sub = node.t_constructor.new(list(combination))
+            subtypes.add(new_sub)
+            subtypes.update(self.subtypes(new_sub))
         return subtypes
 
-    def subtypes(self, node: TypeNode):
+    def subtypes(self, node: tp.Type):
         subtypes = {node}
-        if node.t.is_type_var():
+        if node.is_type_var():
             return subtypes
-        if node.t.is_parameterized() and any(t_arg.is_wildcard()
-                                             for t_arg in node.t.type_args):
+        if node.is_parameterized() and any(t_arg.is_wildcard()
+                                           for t_arg in node.type_args):
             subtypes.update(self._subtypes_of_wildcards(node))
             return subtypes
-        if not node.t.is_parameterized() and not node.t.is_type_constructor():
+        if not node.is_parameterized() and not node.is_type_constructor():
             if node not in self.subtyping_graph:
                 return subtypes
             subtypes.update(nx.descendants(self.subtyping_graph, node))
             return subtypes
 
-        node_t = node.t
-        if node_t.is_type_constructor():
+        if node.is_type_constructor():
             # FIXME type constructor subtypes
             return subtypes
 
-        type_var_map = node_t.get_type_variable_assignments()
-        node = TypeNode(node_t.t_constructor)
+        type_var_map = node.get_type_variable_assignments()
+        node = node.t_constructor
         if node not in self.subtyping_graph:
             return subtypes
         excluded_nodes = set()
@@ -238,20 +222,20 @@ class APIGraph():
                 excluded_nodes.add(v)
                 continue
             type_var_map = solution
-            if v.t.is_type_constructor():
-                subtypes.add(TypeNode(tu.instantiate_type_constructor(
-                    v.t, self.get_reg_types(), type_var_map=type_var_map)[0]))
+            if v.is_type_constructor():
+                subtypes.add(tu.instantiate_type_constructor(
+                    v, self.get_reg_types(), type_var_map=type_var_map)[0])
             else:
                 subtypes.add(v)
         return subtypes
 
-    def supertypes(self, node: TypeNode):
+    def supertypes(self, node: tp.Type):
         reverse_graph = self.subtyping_graph.reverse()
         supertypes = set()
         constraints = {}
-        if node.t.is_parameterized():
-            constraints.update(node.t.get_type_variable_assignments())
-            node = TypeNode(node.t.t_constructor)
+        if node.is_parameterized():
+            constraints.update(node.get_type_variable_assignments())
+            node = node.t_constructor
         if node not in self.subtyping_graph:
             return supertypes
         if node not in reverse_graph:
@@ -268,14 +252,14 @@ class APIGraph():
                     t = type_v
                 constraints[type_k] = t
             else:
-                supertypes.add(TypeNode(tu.instantiate_type_constructor(
-                    v.t, {}, type_var_map=constraints)[0]))
+                supertypes.add(tu.instantiate_type_constructor(
+                    v, {}, type_var_map=constraints)[0])
         return supertypes
 
-    def find_API_path(self, target: TypeNode) -> list:
+    def find_API_path(self, target: tp.Type) -> list:
         origin = target
-        if target.t.is_parameterized():
-            target = TypeNode(target.t.t_constructor)
+        if target.is_parameterized():
+            target = target.t_constructor
         if target not in self.api_graph:
             return None
         source_nodes = [
@@ -295,7 +279,7 @@ class APIGraph():
             assignment_graph = au.compute_assignment_graph(self.api_graph,
                                                            path)
             type_variables = _get_type_variables(path)
-            constraints = au.collect_constraints(origin.t, type_variables,
+            constraints = au.collect_constraints(origin, type_variables,
                                                  assignment_graph,
                                                  self.bt_factory)
             assignments = au.instantiate_type_variables(self, constraints,
@@ -307,7 +291,7 @@ class APIGraph():
                 node_path[source] = True
                 node_path[target] = True
             pruned_path = [n for i, n in enumerate(node_path.keys())
-                           if i == 0 or not isinstance(n, TypeNode)]
+                           if i == 0 or not isinstance(n, tp.Type)]
             return pruned_path, assignments
         return None
 
@@ -329,13 +313,12 @@ class APIGraph():
         for api in self.api_graph.nodes():
             if not isinstance(api, Method):
                 continue
-            param_types = [p.t.box_type() for p in api.parameters]
+            param_types = [p.box_type() for p in api.parameters]
             view = self.api_graph.out_edges(api)
             assert len(view) == 1
-            out_type = list(view)[0][1].t
+            out_type = list(view)[0][1]
             if out_type.is_type_constructor():
-                constraint = self.api_graph[api][
-                    TypeNode(out_type)].get("constraint")
+                constraint = self.api_graph[api][out_type].get("constraint")
                 out_type = out_type.new(
                     [constraint[tpa] for tpa in out_type.type_parameters])
             api_type = self.bt_factory.get_function_type(
@@ -362,25 +345,25 @@ class APIGraph():
             else:
                 assert len(view) == 1
                 receiver = list(view)[0][0]
-                if receiver.t.is_type_constructor():
+                if receiver.is_type_constructor():
                     # TODO Revisit
                     receiver_t, type_var_map = tu.instantiate_type_constructor(
-                        receiver.t, self.get_reg_types()
+                        receiver, self.get_reg_types()
                     )
-                    receiver = TypeNode(receiver_t)
+                    receiver = receiver_t
                 receivers = {receiver}
-                if receiver.t != self.bt_factory.get_any_type():
+                if receiver != self.bt_factory.get_any_type():
                     receivers.update(self.subtypes(receiver))
             type_parameters = getattr(node, "type_parameters", [])
             if type_parameters:
                 type_var_map.update(
                     tu.instantiate_parameterized_function(
                         type_parameters, self.get_reg_types()))
-            parameters = [{TypeNode(tp.substitute_type(p.t, type_var_map))}
+            parameters = [{tp.substitute_type(p, type_var_map)}
                           for p in getattr(node, "parameters", [])]
             for param_set in parameters:
                 param = list(param_set)[0]
-                if param.t != self.bt_factory.get_any_type():
+                if param != self.bt_factory.get_any_type():
                     param_set.update(self.subtypes(param))
             if not parameters:
                 parameters = ({self.EMPTY},)
@@ -390,11 +373,10 @@ class APIGraph():
             ret_type = list(view)[0][1]
             constraint = self.api_graph[node][ret_type].get("constraint", {})
             if constraint:
-                ret_type = TypeNode(
-                    ret_type.t.new([constraint[tpa]
-                                   for tpa in ret_type.t.type_parameters])
+                ret_type = ret_type.new(
+                    [constraint[tpa] for tpa in ret_type.type_parameters]
                 )
-            ret_type = TypeNode(tp.substitute_type(ret_type.t, type_var_map))
+            ret_type = tp.substitute_type(ret_type, type_var_map)
             ret_types = self.supertypes(ret_type)
             ret_types.add(ret_type)
             encodings.append(APIEncoding(node, frozenset(receivers),
@@ -575,7 +557,7 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
                 field_node = Field(field_api["name"], self._class_name)
                 self.graph.add_node(field_node)
                 self.graph.add_edge(class_node, field_node, label=IN)
-            field_type = TypeNode(self.parse_type(field_api["type"]))
+            field_type = self.parse_type(field_api["type"])
             self.graph.add_node(field_type)
             # self.subtyping_graph.add_node(field_type)
             self.graph.add_edge(field_node, field_type, label=OUT)
@@ -598,11 +580,11 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
     def _build_api_output_type(self, source_node, output_type,
                                is_constructor=False):
         if is_constructor:
-            output_type = self._class_node.t
+            output_type = self._class_node
 
         is_array = output_type.name == self.bt_factory.get_array_type().name
         if output_type.is_parameterized() and not is_array:
-            target_node = TypeNode(output_type.t_constructor)
+            target_node = output_type.t_constructor
             self.graph.add_node(target_node)
             # self.subtyping_graph.add_node(target_node)
             kwargs = {
@@ -611,7 +593,7 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             self.graph.add_edge(source_node, target_node, label=OUT,
                                 **kwargs)
         else:
-            target_node = TypeNode(output_type)
+            target_node = output_type
             self.graph.add_node(target_node)
             # self.subtyping_graph.add_node(target_node)
             self.graph.add_edge(source_node, target_node, label=OUT)
@@ -629,10 +611,7 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             type_parameters = list(self._current_func_type_var_map.values())
             is_constructor = method_api["is_constructor"]
             is_static = method_api["is_static"]
-            parameters = [
-                TypeNode(self.parse_type(p))
-                for p in method_api["parameters"]
-            ]
+            parameters = [self.parse_type(p) for p in method_api["parameters"]]
             for param in parameters:
                 self.graph.add_node(param)
                 # self.subtyping_graph.add_node(param)
@@ -660,20 +639,20 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             is_abstract = not method_api.get("is_default", False) and not \
                 method_api["is_static"]
             if self._is_func_interface and is_abstract:
-                func_params = [param.t.box_type() for param in parameters]
+                func_params = [param.box_type() for param in parameters]
                 ret_type = self.parse_type(ret_type)
                 func_type = self.bt_factory.get_function_type(
                     len(func_params)).new(func_params + [ret_type.box_type()])
-                self.functional_types[class_node.t] = func_type
+                self.functional_types[class_node] = func_type
 
     def construct_class_type(self, class_api):
         self._class_name = class_api["name"]
         if class_api["type_parameters"]:
-            class_node = TypeNode(tp.TypeConstructor(
+            class_node = tp.TypeConstructor(
                 self._class_name,
-                list(self._class_type_var_map[self._class_name].values())))
+                list(self._class_type_var_map[self._class_name].values()))
         else:
-            class_node = TypeNode(self.parse_type(self._class_name))
+            class_node = self.parse_type(self._class_name)
         return class_node
 
     def process_class(self, class_api):
@@ -692,9 +671,9 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             super_types.add(self.parse_type("java.lang.Object"))
         for st in super_types:
             kwargs = {}
-            source = TypeNode(st)
+            source = st
             if st.is_parameterized():
-                source = TypeNode(st.t_constructor)
+                source = st.t_constructor
                 kwargs["constraint"] = st.get_type_variable_assignments()
             self.subtyping_graph.add_node(source)
             # Do not connect a node with itself.
@@ -762,18 +741,18 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             if class_node:
                 receiver = class_node
             receiver = (
-                TypeNode(self.parse_type(field_api["receiver"]))
+                self.parse_type(field_api["receiver"])
                 if field_api["receiver"]
                 else class_node)
             if receiver:
-                self._class_name = str(receiver.t)
+                self._class_name = str(receiver)
                 self.graph.add_node(receiver)
                 self.subtyping_graph.add_node(receiver)
             field_node = Field(field_api["name"], self._class_name)
             self.graph.add_node(field_node)
             if receiver:
                 self.graph.add_edge(receiver, field_node, label=IN)
-            field_type = TypeNode(self.parse_type(field_api["type"]))
+            field_type = self.parse_type(field_api["type"])
             self.graph.add_node(field_type)
             self.subtyping_graph.add_node(field_type)
             self.graph.add_edge(field_node, field_type, label=OUT)
@@ -787,21 +766,17 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
                 continue
             name = method_api["name"]
             is_constructor = method_api["is_constructor"]
-            parameters = [
-                TypeNode(self.parse_type(p))
-                for p in method_api["parameters"]
-            ]
+            parameters = [self.parse_type(p) for p in method_api["parameters"]]
             for param in parameters:
                 self.graph.add_node(param)
                 self.subtyping_graph.add_node(param)
             if class_node:
                 receiver = class_node
-            receiver = (
-                TypeNode(self.parse_type(method_api["receiver"]))
-                if method_api["receiver"]
-                else class_node)
+            receiver = (self.parse_type(method_api["receiver"])
+                        if method_api["receiver"]
+                        else class_node)
             if receiver:
-                self._class_name = str(receiver.t)
+                self._class_name = str(receiver)
                 self.graph.add_node(receiver)
                 self.subtyping_graph.add_node(receiver)
             if is_constructor:
@@ -814,9 +789,9 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             if not (is_constructor or receiver is None):
                 self.graph.add_edge(receiver, method_node, label=IN)
             ret_type = (
-                TypeNode(self.parse_type(self._class_name))
+                self.parse_type(self._class_name)
                 if is_constructor
-                else TypeNode(self.parse_type(method_api["return_type"]))
+                else self.parse_type(method_api["return_type"])
             )
             self.graph.add_node(ret_type)
             self.subtyping_graph.add_node(ret_type)
@@ -824,17 +799,17 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
 
     def _process_class(self, class_api: dict):
         self._class_name = class_api["name"].rsplit(".", 1)[-1]
-        class_node = TypeNode(self.parse_type(self._class_name))
+        class_node = self.parse_type(self._class_name)
         self.graph.add_node(class_node)
         self.subtyping_graph.add_node(class_node)
         self.process_fields(class_node, class_api["fields"])
         self.process_methods(class_node, class_api["methods"])
         super_types = {
-            TypeNode(self.parse_type(st))
+            self.parse_type(st)
             for st in class_api["implements"] + class_api["inherits"]
         }
         if not super_types:
-            super_types.add(TypeNode(self.parse_type("Any")))
+            super_types.add(self.parse_type("Any"))
         for st in super_types:
             self.subtyping_graph.add_node(st)
             # Do not connect a node with itself.

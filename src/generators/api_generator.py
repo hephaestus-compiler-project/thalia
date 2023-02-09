@@ -12,7 +12,7 @@ from src.generators.generator import Generator
 from src.modules.logging import log
 
 
-def _find_path_of_target(graph: nx.DiGraph, target: ag.TypeNode) -> list:
+def _find_path_of_target(graph: nx.DiGraph, target: tp.Type) -> list:
     if target not in graph:
         return None
     source_nodes = [
@@ -27,7 +27,7 @@ def _find_path_of_target(graph: nx.DiGraph, target: ag.TypeNode) -> list:
         return None
     path = next(nx.all_simple_paths(graph, source=source, target=target))
     pruned_path = [n for i, n in enumerate(path)
-                   if i == 0 or not isinstance(n, ag.TypeNode)]
+                   if i == 0 or not isinstance(n, tp.Type)]
     return pruned_path
 
 
@@ -102,7 +102,7 @@ class APIGenerator(Generator):
         type_var_map.update(type_map)
         args = self._generate_args(getattr(api, "parameters", []), parameters,
                                    depth=1, type_var_map=type_var_map)
-        var_type = tp.substitute_type(return_type.t, type_var_map)
+        var_type = tp.substitute_type(return_type, type_var_map)
         if isinstance(api, ag.Method):
             args = [ast.CallArgument(arg) for arg in args]
             type_args = [type_var_map[tpa] for tpa in api.type_parameters]
@@ -142,8 +142,7 @@ class APIGenerator(Generator):
                     rec_type, self.api_graph.get_reg_types(),
                     type_var_map=type_var_map)
                 type_var_map.update(sub)
-            rec = self._generate_expr_from_node(ag.TypeNode(rec_type),
-                                                depth + 1)[0]
+            rec = self._generate_expr_from_node(rec_type, depth + 1)[0]
         return ast.FunctionReference(api.name, receiver=rec,
                                      signature=expr_type)
 
@@ -200,22 +199,22 @@ class APIGenerator(Generator):
         if node == self.api_graph.EMPTY:
             return None, {}
         if depth == cfg.limits.max_depth:
-            if node.t.is_type_constructor():
+            if node.is_type_constructor():
                 t, type_var_map = tu.instantiate_type_constructor(
-                    node.t, self.api_graph.get_reg_types())
+                    node, self.api_graph.get_reg_types())
             else:
-                t, type_var_map = node.t, {}
+                t, type_var_map = node, {}
             return self.generate_expr(t), type_var_map
         path = self.api_graph.find_API_path(node)
         if not path:
-            if node.t.is_type_constructor():
+            if node.is_type_constructor():
                 t, type_var_map = tu.instantiate_type_constructor(
-                    node.t, self.api_graph.get_reg_types())
+                    node, self.api_graph.get_reg_types())
             else:
-                t = node.t
+                t = node
                 type_var_map = (
-                    node.t.get_type_variable_assignments()
-                    if node.t.is_parameterized()
+                    node.get_type_variable_assignments()
+                    if node.is_parameterized()
                     else {}
                 )
             return self.generate_expr(t), type_var_map
@@ -231,17 +230,16 @@ class APIGenerator(Generator):
             return []
         args = []
         for i, param in enumerate(parameters):
-            param_type = ag.TypeNode(
-                tp.substitute_type(actual_types[i].t, type_var_map))
-            param = ag.TypeNode(tp.substitute_type(param.t, type_var_map))
+            param_type = tp.substitute_type(actual_types[i], type_var_map)
+            param = tp.substitute_type(param, type_var_map)
             if param_type and param_type in self.api_graph.subtypes(param):
                 t = param_type
             else:
                 t = param
-            t = ag.TypeNode(tp.substitute_type(t.t, type_var_map))
-            is_func = self.api_graph.get_functional_type(t.t) is not None
+            t = tp.substitute_type(t, type_var_map)
+            is_func = self.api_graph.get_functional_type(t) is not None
             expr = (
-                self.generate_func_ref(t.t, type_var_map, depth)
+                self.generate_func_ref(t, type_var_map, depth)
                 if is_func
                 else self._generate_expr_from_node(t, depth)[0]
             )
@@ -280,6 +278,6 @@ class APIGenerator(Generator):
             con_type = _instantiate_type_con(con_type)
             expr = ast.New(con_type, args)
         else:
-            t = _instantiate_type_con(elem.t)
+            t = _instantiate_type_con(elem)
             expr = self.generate_expr(tp.substitute_type(t, type_var_map))
         return expr

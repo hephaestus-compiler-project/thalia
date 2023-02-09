@@ -119,12 +119,11 @@ DOCS2 = {
 def test1():
     b = ag.JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS1)
-    path, assignments = api_graph.find_API_path(
-        ag.TypeNode(b.parse_type("java.Set")))
+    path, assignments = api_graph.find_API_path(b.parse_type("java.Set"))
     assert assignments == {}
 
     assert path == [
-        ag.TypeNode(b.parse_type("java.Foo")),
+        b.parse_type("java.Foo"),
         ag.Method("makeList", "java.Foo", [], []),
         ag.Method("toSet", "java.List", [], []),
     ]
@@ -135,8 +134,7 @@ def test2():
     docs["java.Foo"]["type_parameters"] = ["T"]
     b = ag.JavaAPIGraphBuilder("java")
     api_graph = b.build(docs)
-    path, assignments = api_graph.find_API_path(
-        ag.TypeNode(b.parse_type("java.Set")))
+    path, assignments = api_graph.find_API_path(b.parse_type("java.Set"))
     assert tp.TypeParameter("java.Foo.T0") in assignments
 
     assert path == [
@@ -174,7 +172,6 @@ def test3():
         "java.lang.String")
     assert assignments[tp.TypeParameter("java.Set.T0")] == b.parse_type(
         "java.lang.String")
-
 
     assert path == [
         b.construct_class_type(DOCS2["java.Foo"]),
