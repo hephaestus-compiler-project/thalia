@@ -30,6 +30,9 @@ class Field(NamedTuple):
                 self.name == other.name and
                 self.cls == other.cls)
 
+    def get_class_name(self):
+        return self.cls
+
 
 class Method(NamedTuple):
     name: str
@@ -61,6 +64,9 @@ class Method(NamedTuple):
             self.type_parameters == other.type_parameters
         )
 
+    def get_class_name(self):
+        return self.cls
+
 
 class Constructor(NamedTuple):
     name: str
@@ -81,6 +87,9 @@ class Constructor(NamedTuple):
             self.name == other.name and
             self.parameters == other.parameters
         )
+
+    def get_class_name(self):
+        return self.name
 
 
 class APIEncoding(NamedTuple):
@@ -301,25 +310,28 @@ class APIGraph():
             etype = etype.to_variance_free()
             type_var_map = etype.get_type_variable_assignments()
         func_type = self.get_functional_type(etype)
-        assert func_type is not None
+        if func_type is None:
+            return []
         func_type = tp.substitute_type(func_type, type_var_map)
         candidate_functions = []
         for api in self.api_graph.nodes():
-            if not isinstance(api, Method):
+            if not isinstance(api, (Method, Constructor)):
                 continue
             param_types = [p.box_type() for p in api.parameters]
             view = self.api_graph.out_edges(api)
             assert len(view) == 1
             out_type = list(view)[0][1]
             if out_type.is_type_constructor():
-                constraint = self.api_graph[api][out_type].get("constraint")
+                constraint = self.api_graph[api][out_type].get("constraint",
+                                                               {})
                 out_type = out_type.new(
-                    [constraint[tpa] for tpa in out_type.type_parameters])
+                    [constraint.get(tpa, tpa)
+                     for tpa in out_type.type_parameters])
             api_type = self.bt_factory.get_function_type(
                 len(param_types)).new(param_types + [out_type.box_type()])
             sub = tu.unify_types(func_type, api_type, self.bt_factory,
                                  same_type=True)
-            if sub:
+            if sub or func_type == api_type:
                 candidate_functions.append((api, sub))
         return candidate_functions
 

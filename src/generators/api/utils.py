@@ -149,7 +149,7 @@ def instantiate_type_variables(api_graph, constraints,
 
         for bound in set(upper_bounds):
             supers = api_graph.supertypes(bound)
-            if any(s.t in upper_bounds for s in supers):
+            if any(s in upper_bounds for s in supers):
                 new_bounds.append(bound)
         if len(new_bounds) > 1:
             return None

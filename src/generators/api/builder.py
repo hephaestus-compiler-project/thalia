@@ -62,6 +62,7 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             if not api_doc["type_parameters"]:
                 continue
             cls_name = api_doc["name"]
+            self._class_name = cls_name
             self._class_type_var_map[cls_name] = OrderedDict()
             self._rename_type_parameters(
                 cls_name, api_doc["type_parameters"],
@@ -275,16 +276,17 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
                 self.functional_types[class_node] = func_type
 
     def construct_class_type(self, class_api):
-        self._class_name = class_api["name"]
+        class_name = class_api["name"]
         if class_api["type_parameters"]:
             class_node = tp.TypeConstructor(
-                self._class_name,
-                list(self._class_type_var_map[self._class_name].values()))
+                class_name,
+                list(self._class_type_var_map[class_name].values()))
         else:
-            class_node = self.parse_type(self._class_name)
+            class_node = self.parse_type(class_name)
         return class_node
 
     def process_class(self, class_api):
+        self._class_name = class_api["name"]
         class_node = self.construct_class_type(class_api)
         self._class_node = class_node
         self.graph.add_node(class_node)

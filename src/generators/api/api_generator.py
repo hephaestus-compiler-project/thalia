@@ -136,14 +136,21 @@ class APIGenerator(Generator):
         if len(segs) > 1:
             rec = None
         else:
-            rec_type = self.api_graph.get_type_by_name(api.cls)
+            rec_type = self.api_graph.get_type_by_name(api.get_class_name())
             if rec_type.is_type_constructor():
                 rec_type, sub = tu.instantiate_type_constructor(
                     rec_type, self.api_graph.get_reg_types(),
                     type_var_map=type_var_map)
                 type_var_map.update(sub)
-            rec = self._generate_expr_from_node(rec_type, depth + 1)[0]
-        return ast.FunctionReference(api.name, receiver=rec,
+            rec = (
+                ast.New(rec_type, args=[])  # This is a constructor reference
+                if isinstance(api, ag.Constructor)
+                else self._generate_expr_from_node(rec_type, depth + 1)[0]
+            )
+        api_name = (
+            ast.FunctionReference.NEW_REF
+            if isinstance(api, ag.Constructor) else api.name)
+        return ast.FunctionReference(api_name, receiver=rec,
                                      signature=expr_type)
 
     def generate_expr(self,
@@ -198,7 +205,7 @@ class APIGenerator(Generator):
             return stored_expr
         if node == self.api_graph.EMPTY:
             return None, {}
-        if depth == cfg.limits.max_depth:
+        if depth >= cfg.limits.max_depth:
             if node.is_type_constructor():
                 t, type_var_map = tu.instantiate_type_constructor(
                     node, self.api_graph.get_reg_types())

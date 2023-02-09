@@ -116,6 +116,119 @@ DOCS2 = {
     },
 }
 
+DOCS3 = {
+    "java.Foo": {
+        "name": "java.Foo",
+        "inherits": [],
+        "implements": [],
+        "fields": [],
+        "methods": [
+            {
+                "name": "m1",
+                "is_static": False,
+                "is_constructor": False,
+                "parameters": [],
+                "access_mod": "public",
+                "type_parameters": [],
+                "return_type": "java.lang.Object"
+            },
+            {
+                "name": "m2",
+                "is_static": False,
+                "is_constructor": False,
+                "parameters": ["java.lang.String"],
+                "access_mod": "public",
+                "type_parameters": [],
+                "return_type": "java.lang.Object"
+            },
+            {
+                "name": "m3",
+                "is_static": False,
+                "is_constructor": False,
+                "parameters": [],
+                "access_mod": "public",
+                "type_parameters": ["T"],
+                "return_type": "java.List<T>"
+            },
+            {
+                "name": "Foo",
+                "is_static": False,
+                "is_constructor": True,
+                "parameters": [],
+                "access_mod": "public",
+                "type_parameters": [],
+                "return_type": None
+            },
+        ],
+        "type_parameters": ["T"]
+    },
+    "java.List": {
+        "name": "java.List",
+        "inherits": [],
+        "implements": [],
+        "fields": [],
+        "methods": [{
+            "name": "m4",
+            "is_static": False,
+            "is_constructor": False,
+            "parameters": ["java.lang.String"],
+            "access_mod": "public",
+            "type_parameters": [],
+            "return_type": "java.lang.Object"
+        }],
+        "type_parameters": ["T"]
+    },
+    "java.Function": {
+        "name": "java.Function",
+        "type_parameters": [
+          "T",
+          "R"
+        ],
+        "functional_interface": True,
+        "implements": [],
+        "inherits": [],
+        "class_type": 1,
+        "fields": [],
+        "methods": [
+          {
+            "name": "apply",
+            "parameters": [
+              "T"
+            ],
+            "type_parameters": [],
+            "return_type": "R",
+            "is_static": False,
+            "is_constructor": False,
+            "access_mod": "public",
+            "throws": [],
+            "is_default": False
+          },
+        ]
+    },
+    "java.Producer": {
+        "name": "java.Producer",
+        "type_parameters": ["T"],
+        "functional_interface": True,
+        "implements": [],
+        "inherits": [],
+        "class_type": 1,
+        "fields": [],
+        "methods": [
+          {
+            "name": "apply",
+            "parameters": [],
+            "type_parameters": [],
+            "return_type": "T",
+            "is_static": False,
+            "is_constructor": False,
+            "access_mod": "public",
+            "throws": [],
+            "is_default": False
+          },
+        ]
+    },
+}
+
 
 def test1():
     b = JavaAPIGraphBuilder("java")
@@ -179,3 +292,89 @@ def test3():
         ag.Method("makeList", "java.Foo", [], []),
         ag.Method("toSet", "java.List", [], []),
     ]
+
+
+def test_get_function_refs_of():
+    b = JavaAPIGraphBuilder("java")
+    api_graph = b.build(DOCS3)
+
+    refs = api_graph.get_function_refs_of(
+        b.parse_type("java.Producer<java.lang.Object>"))
+    assert refs == [
+        (
+            ag.Method("m1", "java.Foo", [], []),
+            {}
+        ),
+        (
+            ag.Method("apply", "java.Producer", [], []),
+            {
+                tp.TypeParameter("java.Producer.T0"): b.parse_type(
+                    "java.lang.Object")
+            }
+        )
+    ]
+
+    refs = api_graph.get_function_refs_of(
+        b.parse_type("java.Function<java.lang.String,java.lang.Object>"),
+    )
+    assert refs == [
+        (
+            ag.Method("m2", "java.Foo", [b.parse_type("java.lang.String")], []),
+            {}
+        ),
+        (
+            ag.Method("m4", "java.List", [b.parse_type("java.lang.String")], []),
+            {}
+        ),
+        (
+            ag.Method("apply", "java.Function",
+                      [tp.TypeParameter("java.Function.T0")], []),
+            {
+                tp.TypeParameter("java.Function.T0"): b.parse_type("java.lang.String"),
+                tp.TypeParameter("java.Function.T1"): b.parse_type("java.lang.Object"),
+            }
+        )
+
+    ]
+
+    refs = api_graph.get_function_refs_of(
+        b.parse_type("java.Producer<java.List<java.lang.Integer>>")
+    )
+    assert refs == [
+        (
+            ag.Method("m3", "java.Foo", [], [tp.TypeParameter("java.Foo.m3.T0")]),
+            {
+                tp.TypeParameter("java.Foo.m3.T0"): b.parse_type("java.lang.Integer")
+            }
+        ),
+        (
+            ag.Method("apply", "java.Producer", [], []),
+            {
+                tp.TypeParameter("java.Producer.T0"): b.parse_type(
+                    "java.List<java.lang.Integer>")
+            }
+        )
+    ]
+
+
+    refs = api_graph.get_function_refs_of(
+        b.parse_type("java.Producer<java.Foo<java.lang.Integer>>")
+    )
+    assert refs == [
+        (
+            ag.Constructor("java.Foo", []),
+            {
+                tp.TypeParameter("java.Foo.T0"): b.parse_type("java.lang.Integer")
+            }
+        ),
+        (
+            ag.Method("apply", "java.Producer", [], []),
+            {
+                tp.TypeParameter("java.Producer.T0"): b.parse_type(
+                    "java.Foo<java.lang.Integer>")
+            }
+        )
+    ]
+
+    refs = api_graph.get_function_refs_of(b.parse_type("java.lang.Object"))
+    assert refs == []
