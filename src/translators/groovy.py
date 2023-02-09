@@ -833,7 +833,11 @@ class GroovyTranslator(BaseTranslator):
         segs = node.func.rsplit(".", 1)
         func_name = segs[-1]
         receiver = (
-            children_res[0]
+            (
+                self.get_type_name(node.receiver.class_type)
+                if node.func == ast.FunctionReference.NEW_REF
+                else children_res[0]
+            )
             if children_res
             else (
                 "Main"
@@ -846,7 +850,7 @@ class GroovyTranslator(BaseTranslator):
         res = "{ident}{receiver}{name}{cast}".format(
             ident=self.get_ident(),
             receiver=receiver,
-            name=func_name,
+            name=func_name.replace(ast.FunctionReference.NEW_REF, "new"),
             cast=cast
         )
         return res

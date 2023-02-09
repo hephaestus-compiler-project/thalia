@@ -1326,6 +1326,8 @@ class FunctionCall(Expr):
 
 
 class FunctionReference(Expr):
+    NEW_REF = "__init__"
+
     def __init__(self, func: str, receiver: Expr, signature: types.Type):
         self.func = func
         self.receiver = receiver

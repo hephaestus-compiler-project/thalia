@@ -1065,7 +1065,11 @@ class JavaTranslator(BaseTranslator):
 
         # Set receiver
         if children_res:
-            receiver = children_res[0]
+            receiver = (
+                children_res[0]
+                if node.func != ast.FunctionReference.NEW_REF
+                else self.get_type_name(node.receiver.class_type)
+            )
         else:
             # Global function
             receiver = ""
@@ -1094,7 +1098,7 @@ class JavaTranslator(BaseTranslator):
         res = "{ident}{receiver}{name}{semicolon}".format(
             ident=self.get_ident(),
             receiver=receiver,
-            name=func_name,
+            name=func_name.replace(ast.FunctionReference.NEW_REF, "new"),
             semicolon=";" if self._parent_is_block() else ""
         )
         return res
