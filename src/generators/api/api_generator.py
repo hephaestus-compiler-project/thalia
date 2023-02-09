@@ -7,7 +7,7 @@ from src import utils
 from src.ir import ast, types as tp, type_utils as tu
 from src.ir.context import Context
 from src.generators import generators as gens, utils as gu, Generator
-from src.generators.api import api_graph as ag
+from src.generators.api import api_graph as ag, builder
 from src.generators.config import cfg
 from src.modules.logging import log
 
@@ -33,9 +33,9 @@ def _find_path_of_target(graph: nx.DiGraph, target: tp.Type) -> list:
 
 class APIGenerator(Generator):
     API_GRAPH_BUILDERS = {
-        "java": ag.JavaAPIGraphBuilder,
-        "kotlin": ag.KotlinAPIGraphBuilder,
-        "groovy": ag.JavaAPIGraphBuilder,
+        "java": builder.JavaAPIGraphBuilder,
+        "kotlin": builder.KotlinAPIGraphBuilder,
+        "groovy": builder.JavaAPIGraphBuilder,
     }
 
     def __init__(self, api_docs, options={}, language=None, logger=None):

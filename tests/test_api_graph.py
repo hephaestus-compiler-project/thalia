@@ -2,6 +2,7 @@ import copy
 
 from src.ir import types as tp
 from src.generators.api import api_graph as ag
+from src.generators.api.builder import JavaAPIGraphBuilder
 
 
 DOCS1 = {
@@ -117,7 +118,7 @@ DOCS2 = {
 
 
 def test1():
-    b = ag.JavaAPIGraphBuilder("java")
+    b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS1)
     path, assignments = api_graph.find_API_path(b.parse_type("java.Set"))
     assert assignments == {}
@@ -132,7 +133,7 @@ def test1():
 def test2():
     docs = copy.deepcopy(DOCS1)
     docs["java.Foo"]["type_parameters"] = ["T"]
-    b = ag.JavaAPIGraphBuilder("java")
+    b = JavaAPIGraphBuilder("java")
     api_graph = b.build(docs)
     path, assignments = api_graph.find_API_path(b.parse_type("java.Set"))
     assert tp.TypeParameter("java.Foo.T0") in assignments
@@ -144,7 +145,7 @@ def test2():
     ]
 
 def test3():
-    b = ag.JavaAPIGraphBuilder("java")
+    b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS2)
     path, assignments = api_graph.find_API_path(
         b.construct_class_type(DOCS2["java.Set"]))
@@ -161,7 +162,7 @@ def test3():
 
     docs = copy.deepcopy(DOCS2)
     docs["java.Foo"]["methods"][0]["return_type"] = "java.List<java.lang.String>"
-    b = ag.JavaAPIGraphBuilder("java")
+    b = JavaAPIGraphBuilder("java")
     api_graph = b.build(docs)
     path, assignments = api_graph.find_API_path(
         b.construct_class_type(DOCS2["java.Set"]))

@@ -1,4 +1,5 @@
 from src.generators.api import api_graph as ag
+from src.generators.api.builder import JavaAPIGraphBuilder
 
 
 DOCS1 = {
@@ -167,7 +168,7 @@ DOCS5 = {
 
 
 def test_subtypes1():
-    b = ag.JavaAPIGraphBuilder("java")
+    b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS1)
 
     # Case 1
@@ -214,7 +215,7 @@ def test_subtypes1():
 
 
 def test_subtypes2():
-    b = ag.JavaAPIGraphBuilder("java")
+    b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS2)
 
     # Case 1
@@ -241,7 +242,7 @@ def test_subtypes2():
 
 
 def test_subtypes3():
-    b = ag.JavaAPIGraphBuilder("java")
+    b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS3)
     subtypes = api_graph.subtypes(b.parse_type(
         "java.Map<T1,java.lang.String>"))
@@ -268,7 +269,7 @@ def test_subtypes3():
 
 
 def test_subtypes4():
-    b = ag.JavaAPIGraphBuilder("java")
+    b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS4)
     subtypes = api_graph.subtypes(b.parse_type(
         "java.Map<T1,java.lang.String>"))
@@ -291,7 +292,7 @@ def test_subtypes4():
 
 
 def test_supertypes1():
-    b = ag.JavaAPIGraphBuilder("java")
+    b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS1)
 
     supertypes = api_graph.supertypes(b.parse_type("java.lang.Object"))
@@ -319,7 +320,7 @@ def test_supertypes1():
 
 
 def test_supertypes2():
-    b = ag.JavaAPIGraphBuilder("java")
+    b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS2)
 
     supertypes = api_graph.supertypes(b.parse_type("java.String"))
@@ -335,7 +336,7 @@ def test_supertypes2():
 
 
 def test_supertypes3():
-    b = ag.JavaAPIGraphBuilder("java")
+    b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS3)
 
     supertypes = api_graph.supertypes(b.parse_type(
@@ -357,7 +358,7 @@ def test_supertypes3():
 
 
 def test_supertypes4():
-    b = ag.JavaAPIGraphBuilder("java")
+    b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS4)
 
     supertypes = api_graph.supertypes(b.parse_type("java.Stream<K>"))
@@ -376,7 +377,7 @@ def test_supertypes4():
 
 
 def test_supertypes5():
-    b = ag.JavaAPIGraphBuilder("java")
+    b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS5)
 
     supertypes = api_graph.supertypes(b.parse_type(

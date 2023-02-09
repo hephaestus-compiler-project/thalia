@@ -1,5 +1,5 @@
 from src.ir import types as tp, java_types as jt
-from src.generators.api.api_graph import JavaAPIGraphBuilder
+from src.generators.api.builder import JavaAPIGraphBuilder
 
 
 def test_primitives():
