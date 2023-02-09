@@ -3,7 +3,8 @@ import json
 import os
 import sys
 
-from src.generators import Generator, APIGenerator
+from src.generators import Generator
+from src.generators.api import APIGenerator
 from src.transformations.type_erasure import TypeErasure
 from src.transformations.type_overwriting import TypeOverwriting
 from src.utils import random, read_lines, load_program

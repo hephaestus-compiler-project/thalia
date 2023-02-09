@@ -8,9 +8,8 @@ import re
 import networkx as nx
 
 from src import utils
-from src.ir import (
-    BUILTIN_FACTORIES, types as tp, kotlin_types as kt,
-    type_utils as tu)
+from src.ir import (BUILTIN_FACTORIES, types as tp, kotlin_types as kt,
+                    type_utils as tu)
 from src.ir.builtins import BuiltinFactory
 from src.generators.api import utils as au
 

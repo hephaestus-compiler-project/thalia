@@ -1,7 +1,7 @@
 import copy
 
 from src.ir import types as tp
-from src.generators import api_graph as ag
+from src.generators.api import api_graph as ag
 
 
 DOCS1 = {

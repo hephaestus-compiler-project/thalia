@@ -6,9 +6,9 @@ import networkx as nx
 from src import utils
 from src.ir import ast, types as tp, type_utils as tu
 from src.ir.context import Context
-from src.generators import api_graph as ag, generators as gens, utils as gu
+from src.generators import generators as gens, utils as gu, Generator
+from src.generators.api import api_graph as ag
 from src.generators.config import cfg
-from src.generators.generator import Generator
 from src.modules.logging import log
 
 
