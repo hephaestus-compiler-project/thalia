@@ -38,6 +38,13 @@ parser.add_argument(
           "API-based program generation")
 )
 parser.add_argument(
+    "--api-rules",
+    type=str,
+    default=None,
+    help=("File that contains the rules specifying the APIs used for"
+          " program enumeration (used only with API-based program generation)")
+)
+parser.add_argument(
     "-t", "--transformations",
     type=int,
     default=0,
@@ -198,7 +205,8 @@ args.options = {
     "Generator": {
         "base": {},
         "api": {
-            "start-index": args.start_index
+            "start-index": args.start_index,
+            "api-rules": args.api_rules
         }
     },
     'Translator': {
@@ -263,6 +271,13 @@ def validate_args(args):
                   " --generator 'api'"))
     if args.generator == "api" and args.workers is not None:
         sys.exit("The 'api' generator cannot be used in parallel mode")
+
+    if args.api_rules and not os.path.isfile(args.api_rules):
+        sys.exit("You have to provide a valid file in --api-rules")
+
+    if args.generator != "api" and args.api_rules is not None:
+        sys.exit(("The --api-rules option is only combined with "
+                 "--generator 'api'"))
 
 
 def pre_process_args(args):

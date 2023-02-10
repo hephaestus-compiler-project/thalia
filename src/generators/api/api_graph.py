@@ -33,6 +33,17 @@ class Field(NamedTuple):
     def get_class_name(self):
         return self.cls
 
+    def get_name(self):
+        return self.name.rsplit(".", 1)[-1]
+
+    @property
+    def class_(self):
+        return self.get_class_name()
+
+    @property
+    def api_name(self):
+        return self.get_name()
+
 
 class Method(NamedTuple):
     name: str
@@ -67,6 +78,17 @@ class Method(NamedTuple):
     def get_class_name(self):
         return self.cls
 
+    def get_name(self):
+        return self.name.rsplit(".", 1)[-1]
+
+    @property
+    def class_(self):
+        return self.get_class_name()
+
+    @property
+    def api_name(self):
+        return self.get_name()
+
 
 class Constructor(NamedTuple):
     name: str
@@ -90,6 +112,17 @@ class Constructor(NamedTuple):
 
     def get_class_name(self):
         return self.name
+
+    def get_name(self):
+        return self.name.rsplit(".", 1)[-1]
+
+    @property
+    def class_(self):
+        return self.get_class_name()
+
+    @property
+    def api_name(self):
+        return self.get_name()
 
 
 class APIEncoding(NamedTuple):

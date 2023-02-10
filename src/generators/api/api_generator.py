@@ -7,7 +7,7 @@ from src import utils
 from src.ir import ast, types as tp, type_utils as tu
 from src.ir.context import Context
 from src.generators import generators as gens, utils as gu, Generator
-from src.generators.api import api_graph as ag, builder
+from src.generators.api import api_graph as ag, builder, matcher as match
 from src.generators.config import cfg
 from src.modules.logging import log
 
@@ -50,6 +50,10 @@ class APIGenerator(Generator):
         self.programs_gen = self.compute_programs()
         self._has_next = True
         self.start_index = options.get("start-index", 0)
+        self.api_matcher = None
+        api_rules_file = options.get("api-rules")
+        if api_rules_file:
+            self.api_matcher = match.parse_rule_file(api_rules_file)
 
     def compute_programs(self):
         func_name = "test"
@@ -58,6 +62,8 @@ class APIGenerator(Generator):
         for api, receivers, parameters, returns, type_map in self.encodings:
             if isinstance(api, ag.Constructor):
                 # TODO
+                continue
+            if self.api_matcher and not self.api_matcher.match(api):
                 continue
             types = (receivers, *parameters, returns)
             if types in self.visited:

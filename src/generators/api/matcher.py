@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from collections import namedtuple
-from typing import List
+from typing import List, NamedTuple, Tuple, Set, Any
 import json
 import os
 import re
@@ -11,12 +11,12 @@ class Pattern(ABC):
         self.args = args
 
     @abstractmethod
-    def match(self, segment):
+    def match(self, segment: str) -> bool:
         pass
 
 
 class AnyPattern(Pattern):
-    def match(self, segment):
+    def match(self, segment: str) -> bool:
         return True
 
     def __repr__(self):
@@ -24,9 +24,15 @@ class AnyPattern(Pattern):
 
     __str__ = __repr__
 
+    def __hash__(self):
+        return hash(str(self.__class__))
+
+    def __eq__(self, other):
+        return self.__class__ == other.__class__
+
 
 class Prefix(Pattern):
-    def __init__(self, prefix):
+    def __init__(self, prefix: str):
         self.prefix = prefix
 
     def __repr__(self):
@@ -34,7 +40,16 @@ class Prefix(Pattern):
 
     __str__ = __repr__
 
-    def match(self, segment):
+    def __hash__(self):
+        return hash(str(self.__class__) + self.prefix)
+
+    def __eq__(self, other):
+        return (
+            self.__class__ == other.__class__ and
+            self.prefix == other.prefix
+        )
+
+    def match(self, segment: str) -> bool:
         startswith = getattr(segment, 'startswith', None)
         if startswith is not None:
             return startswith(self.prefix)
@@ -60,17 +75,24 @@ class Regex(Pattern):
 
     __str__ = __repr__
 
+    def __hash__(self):
+        return hash(str(self.__class__) + self.pattern)
+
+    def __eq__(self, other):
+        return (
+            self.__class__ == other.__class__ and
+            self.pattern == other.pattern
+        )
+
     def match(self, segment):
-        segment_type = type(segment)
-        if isinstance(segment_type, str):
+        if isinstance(segment, str):
             return self.matcher.match(segment) is not None
         elif isinstance(segment, AnyPattern):
             return True
         else:
-            m = "Comparison between Regex and {segment!r} not supported"
-            m = m.format(segment=segment)
-            raise NotImplementedError(m)
-            return False
+            msg = "Comparison between Regex and {segment!r} not supported"
+            msg = msg.format(segment=segment)
+            raise NotImplementedError(msg)
 
 
 class Literal(Pattern):
@@ -82,13 +104,38 @@ class Literal(Pattern):
 
     __str__ = __repr__
 
+    def __hash__(self):
+        return hash(str(self.__class__) + self.segment)
+
+    def __eq__(self, other):
+        return (
+            self.__class__ == other.__class__ and
+            self.segment == other.segment
+        )
+
     def match(self, segment):
         return self.segment == segment
 
 
 class And(Pattern):
     def __init__(self, pattern):
-        self.patterns = parse_pattern(x for x in pattern.split('&'))
+        self.patterns = [parse_pattern(x) for x in pattern.split('&')]
+
+    def __repr__(self):
+        return "And({patterns!r})".format(patterns=",".join(
+            str(p) for p in self.patterns))
+
+    __str__ = __repr__
+
+    def __hash__(self):
+        return hash(str(self.__class__) + ",".join(
+            str(p) for p in self.patterns))
+
+    def __eq__(self, other):
+        return (
+            self.__class__ == other.__class__ and
+            self.patterns == other.patterns
+        )
 
     def match(self, segment):
         return all(x.match(segment) for x in self.patterns)
@@ -96,7 +143,23 @@ class And(Pattern):
 
 class Or(Pattern):
     def __init__(self, pattern):
-        self.patterns = parse_pattern(x for x in pattern.split('|'))
+        self.patterns = [parse_pattern(x) for x in pattern.split('|')]
+
+    def __repr__(self):
+        return "Or({patterns!r})".format(patterns=",".join(
+            str(p) for p in self.patterns))
+
+    __str__ = __repr__
+
+    def __hash__(self):
+        return hash(str(self.__class__) + ",".join(
+            str(p) for p in self.patterns))
+
+    def __eq__(self, other):
+        return (
+            self.__class__ == other.__class__ and
+            self.patterns == other.patterns
+        )
 
     def match(self, segment):
         return any(x.match(segment) for x in self.patterns)
@@ -105,6 +168,20 @@ class Or(Pattern):
 class Inverse(Pattern):
     def __init__(self, pattern):
         self.pattern = parse_pattern(pattern)
+
+    def __repr__(self):
+        return "Inverse({pattern!r})".format(pattern=self.pattern)
+
+    __str__ = __repr__
+
+    def __hash__(self):
+        return hash(str(self.__class__) + str(self.pattern))
+
+    def __eq__(self, other):
+        return (
+            self.__class__ == other.__class__ and
+            self.pattern == other.pattern
+        )
 
     def match(self, segment):
         return not self.pattern.match(segment)
@@ -141,13 +218,11 @@ class Matcher(object):
 
     def _check_row_type(self, row):
         if not isinstance(row, self.Row):
-            m = "rows must be of type Matcher.Row, not {row!r}"
-            m = m.format(row=row)
-            raise TypeError(m)
+            msg = "rows must be of type Matcher.Row, not {row!r}"
+            msg = msg.format(row=row)
+            raise TypeError(msg)
 
-    def match(self, row):
-        row = self.Row(*row)
-        self._check_row_type(row)
+    def match(self, row: Any) -> bool:
         results = set()
         for tab_row in self.rules_set:
             item = {}
@@ -165,7 +240,24 @@ class Matcher(object):
                 val = self.Row(**item)
                 results.add(val)
 
-        return results
+        return bool(results)
+
+
+def parse_rule_spec(spec: dict) -> List[List[Pattern]]:
+    column_names = spec.get("column_names")
+    if column_names is None:
+        msg = "Rules must specify column names"
+        raise ValueError(msg)
+
+    rules = spec.get("rules")
+    rule_set = [
+        [
+            parse_pattern(pattern)
+            for pattern in rule
+        ]
+        for rule in rules
+    ]
+    return Matcher(column_names, rule_set)
 
 
 def parse_rule_file(filepath: str) -> List[List[Pattern]]:
@@ -176,18 +268,4 @@ def parse_rule_file(filepath: str) -> List[List[Pattern]]:
 
     with open(filepath, 'r') as f:
         data = json.load(f)
-
-    column_names = data.get("column_names")
-    if column_names is None:
-        msg = "Rules must specify column names"
-        raise ValueError(msg)
-
-    rules = data.get("rules")
-    rule_set = [
-        [
-            parse_pattern(pattern)
-            for pattern in rule
-        ]
-        for rule in rules
-    ]
-    return Matcher(column_names, rule_set)
+    return parse_rule_spec(data)
