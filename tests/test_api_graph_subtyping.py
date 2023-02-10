@@ -167,6 +167,51 @@ DOCS5 = {
 }
 
 
+DOCS6 = {
+    "java.Comparable": {
+        "name": "java.Comparable",
+        "inherits": ["java.lang.Object"],
+        "implements": [],
+        "fields": [],
+        "methods": [],
+        "type_parameters": ["T"]
+    },
+    "java.String": {
+        "name": "java.String",
+        "inherits": ["java.Comparable<java.String>"],
+        "implements": [],
+        "fields": [],
+        "methods": [],
+        "type_parameters": []
+    },
+    "java.Foo": {
+        "name": "java.Foo",
+        "inherits": ["java.Comparable<java.Foo<T>>"],
+        "implements": [],
+        "fields": [],
+        "methods": [],
+        "type_parameters": ["T"]
+    },
+    "java.BaseStream": {
+        "name": "java.BaseStream",
+        "inherits": ["java.lang.Object"],
+        "implements": [],
+        "fields": [],
+        "methods": [],
+        "type_parameters": ["T", "S"]
+    },
+    "java.Stream": {
+        "name": "java.Stream",
+        "inherits": ["java.BaseStream<T,java.Stream<T>>"],
+        "implements": [],
+        "fields": [],
+        "methods": [],
+        "type_parameters": ["T"]
+    }
+
+}
+
+
 def test_subtypes1():
     b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS1)
@@ -387,3 +432,35 @@ def test_supertypes5():
         b.parse_type(
             "java.util.Spliterator.OfPrimitive<java.lang.Integer,java.lang.Integer,java.util.Spliterator.OfInt>")
     }
+
+
+def test_get_instantiations_of_recursive_bound():
+    b = JavaAPIGraphBuilder("java")
+    api_graph = b.build(DOCS6)
+
+    # Case 1
+    types = api_graph.get_instantiations_of_recursive_bound(b.parse_type(
+        "java.Comparable<T>"))
+    assert types == {b.parse_type("java.String"),
+                     b.construct_class_type(DOCS6["java.Foo"])}
+
+    # Case 2
+    types = api_graph.get_instantiations_of_recursive_bound(b.parse_type(
+        "java.Comparable<java.lang.Integer>"))
+    assert types == set()
+
+    # Case 3
+    types = api_graph.get_instantiations_of_recursive_bound(b.parse_type(
+        "java.Comparable<java.String>"))
+    assert types == set()
+
+    # Case 4
+    types = api_graph.get_instantiations_of_recursive_bound(b.parse_type(
+        "java.Comparable<java.String>"))
+    assert types == set()
+
+    # Case 5 / BaseStream
+    b._class_name = "java.BaseStream"
+    types = api_graph.get_instantiations_of_recursive_bound(b.parse_type(
+        "java.BaseStream<T,S>"))
+    assert types == set()

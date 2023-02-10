@@ -331,6 +331,32 @@ class APIGraph():
             return pruned_path, assignments
         return None
 
+    def get_instantiations_of_recursive_bound(
+            self, bound: tp.ParameterizedType) -> Set[tp.Type]:
+        possibles_types = set()
+        if not bound.is_parameterized():
+            return possibles_types
+
+        subtypes = nx.descendants(self.subtyping_graph, bound.t_constructor)
+        for st in subtypes:
+            # This is a quick and dirty solution. For every subtype of the
+            # given bound, we compute its supertypes, and then we try to
+            # find the supertype S that has the same type constructor with
+            # the given bound. After performing type unification and compa-
+            # ring S with the computed substitution, we decide whether S
+            # is a valid instantiation.
+            supertype = [t for t in self.supertypes(st)
+                         if bound.name == t.name][0]
+            sub = tu.unify_types(supertype, bound, self.bt_factory)
+            if not sub or len(sub) > 1:
+                continue
+            t = st
+            if st.is_type_constructor():
+                t = st.new(st.type_parameters)
+            if t == list(sub.values())[0]:
+                possibles_types.add(st)
+        return possibles_types
+
     def get_functional_type(self, etype: tp.Type):
         class_type = etype
         if etype.is_parameterized():
