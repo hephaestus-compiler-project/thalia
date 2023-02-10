@@ -44,3 +44,4 @@ def test_matcher():
     assert matcher.match(matcher.Row("foo", "b"))
     assert matcher.match(matcher.Row("fdb", "rem"))
     assert not matcher.match(matcher.Row("ffd", "add"))
+    assert not matcher.match("random")

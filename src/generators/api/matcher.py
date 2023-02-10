@@ -90,9 +90,7 @@ class Regex(Pattern):
         elif isinstance(segment, AnyPattern):
             return True
         else:
-            msg = "Comparison between Regex and {segment!r} not supported"
-            msg = msg.format(segment=segment)
-            raise NotImplementedError(msg)
+            return False
 
 
 class Literal(Pattern):
@@ -228,7 +226,7 @@ class Matcher(object):
             item = {}
             for name in self.column_names:
                 tab_val = getattr(tab_row, name)
-                row_val = getattr(row, name)
+                row_val = getattr(row, name, None)
 
                 if tab_val.match(row_val):
                     item[name] = row_val
