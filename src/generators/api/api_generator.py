@@ -1,8 +1,6 @@
 from copy import deepcopy
 import itertools
 
-import networkx as nx
-
 from src import utils
 from src.ir import ast, types as tp, type_utils as tu
 from src.ir.context import Context
@@ -10,25 +8,6 @@ from src.generators import generators as gens, utils as gu, Generator
 from src.generators.api import api_graph as ag, builder, matcher as match
 from src.generators.config import cfg
 from src.modules.logging import log
-
-
-def _find_path_of_target(graph: nx.DiGraph, target: tp.Type) -> list:
-    if target not in graph:
-        return None
-    source_nodes = [
-        node
-        for node, indegree in graph.in_degree(graph.nodes())
-        if indegree == 0 and nx.has_path(graph, node, target)
-    ]
-    if not source_nodes:
-        return None
-    source = utils.random.choice(source_nodes)
-    if source == target:
-        return None
-    path = next(nx.all_simple_paths(graph, source=source, target=target))
-    pruned_path = [n for i, n in enumerate(path)
-                   if i == 0 or not isinstance(n, tp.Type)]
-    return pruned_path
 
 
 class APIGenerator(Generator):
