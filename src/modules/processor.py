@@ -117,6 +117,7 @@ class ProgramProcessor():
         if not self.program_generator.has_next():
             return None, None
         self.program_generator.prepare_next_program(self.proc_id)
+        self.current_transformation = 0
         program = self.program_generator.generate()
         return program, True
 
