@@ -268,6 +268,16 @@ class TypeParameter(AbstractType):
             return other in bound.get_type_variables(None)
         return False
 
+    def has_recursive_bound(self, factory=None) -> bool:
+        if not self.bound or not self.bound.is_parameterized():
+            return False
+
+        type_variable_names = {
+            type_var.name
+            for type_var in self.bound.get_type_variables(factory)
+        }
+        return self.name in type_variable_names
+
     def get_bound_rec(self, factory):
         """
         This function recursively gets the bound of the type parameter.

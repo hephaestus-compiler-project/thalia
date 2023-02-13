@@ -430,3 +430,22 @@ def test_get_bound_rec_wildcards():
     type_param = tp.TypeParameter("T")
     wildcard = tp.WildCardType(type_param, tp.Covariant)
     assert wildcard.get_bound_rec() == type_param
+
+
+def test_type_parameter_has_recursive_bounds():
+    type_param = tp.TypeParameter("T")
+    assert not type_param.has_recursive_bound()
+
+    type_param = tp.TypeParameter("T", bound=kt.String)
+    assert not type_param.has_recursive_bound()
+
+    type_param = tp.TypeParameter("T", bound=tp.TypeConstructor(
+        "F", [tp.TypeParameter("T")]).new([kt.String]))
+    assert not type_param.has_recursive_bound()
+
+    type_param = tp.TypeParameter("T", bound=tp.TypeParameter("K"))
+    assert not type_param.has_recursive_bound()
+
+    type_param = tp.TypeParameter("T", bound=tp.TypeConstructor(
+        "F", [tp.TypeParameter("T")]).new([tp.TypeParameter("T")]))
+    assert type_param.has_recursive_bound()
