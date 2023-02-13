@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from typing import TypeVar, List, Tuple, Dict
+from typing import TypeVar, List, Tuple, Dict, Callable, Set, Iterable
 
 import src.ir.types as tp
 import src.ir.context as ctx
@@ -538,11 +538,47 @@ def update_type_var_bound_rec(t_param: tp.TypeParameter,
     update_type_var_bound_rec(bound, t, t_args, indexes, type_var_map)
 
 
+def _find_candidate_types_for_bound(
+        type_param: tp.TypeParameter,
+        type_var_map: dict,
+        types: Set[tp.Type],
+        rec_bound_handler: Callable[
+            [tp.TypeParameter, dict, Set[tp.Type]],
+            Iterable[tp.Type]
+        ]
+) -> List[tp.Type]:
+    if type_param.has_recursive_bound() and rec_bound_handler:
+        return list(rec_bound_handler(type_param, type_var_map, types))
+
+    if type_param.bound.has_type_variables():
+        bound = tp.substitute_type(type_param.bound, type_var_map)
+    else:
+        bound = type_param.bound
+    # If the type parameter has a bound, then find types
+    # that are subtypes to this bound.
+    # Note that at this point we ignore use variance
+    # to prevent creating invalid types, e.g.,
+    #  * bound: Foo<X, X>
+    #  * X is assigned to out Number
+    #  * class Bar<X, T extends Foo<X, X>>
+    #  * Prevent creating Bar<out Number, Foo<Long, Number>>
+    a_types = find_subtypes(bound, types, True,
+                            ignore_variance=True)
+    for i, t in enumerate(a_types):
+        if isinstance(t, tp.ParameterizedType):
+            a_types[i] = t.to_variance_free()
+    return a_types
+
+
 def _compute_type_variable_assignments(
         type_parameters: List[tp.TypeParameter],
         types: List[tp.Type],
         type_var_map=None,
         variance_choices: Dict[tp.TypeParameter, Tuple[bool, bool]] = None,
+        rec_bound_handler: Callable[
+            [tp.TypeParameter, dict, Set[tp.Type]],
+            Set[tp.Type]
+        ] = None,
         for_type_constructor=True):
     t_args = []
     type_var_map = dict(type_var_map or {})
@@ -584,24 +620,8 @@ def _compute_type_variable_assignments(
             if not a_types:
                 if t_param.bound:
                     if not t_param.bound.is_type_var():
-                        if t_param.bound.has_type_variables():
-                            bound = tp.substitute_type(
-                                t_param.bound, type_var_map)
-                        else:
-                            bound = t_param.bound
-                        # If the type parameter has a bound, then find types
-                        # that are subtypes to this bound.
-                        # Note that at this point we ignore use variance
-                        # to prevent creating invalid types, e.g.,
-                        #  * bound: Foo<X, X>
-                        #  * X is assigned to out Number
-                        #  * class Bar<X, T extends Foo<X, X>>
-                        #  * Prevent creating Bar<out Number, Foo<Long, Number>>
-                        a_types = find_subtypes(bound, types, True,
-                                                ignore_variance=True)
-                        for i, t in enumerate(a_types):
-                            if isinstance(t, tp.ParameterizedType):
-                                a_types[i] = t.to_variance_free()
+                        a_types = _find_candidate_types_for_bound(
+                            t_param, type_var_map, types, rec_bound_handler)
                     else:
                         try:
                             t_bound = type_var_map[t_param.bound]
@@ -647,6 +667,10 @@ def _compute_type_variable_assignments(
                         a_types = [t_bound]
                 else:
                     a_types = types
+        if not a_types:
+            # Unfortunately, we are unable to instantiate type variables with
+            # the given constructors.
+            return None
         c = utils.random.choice(a_types)
         if isinstance(c, ast.ClassDeclaration):
             cls_type = c.get_type()
@@ -679,7 +703,11 @@ def instantiate_type_constructor(
         variance_choices: Dict[tp.TypeParameter, Tuple[bool, bool]] = None,
         enable_pecs=True,
         disable_variance_functions=False,
-        disable_variance=False):
+        disable_variance=False,
+        rec_bound_handler: Callable[
+            [tp.TypeParameter, dict, Set[tp.Type]],
+            Set[tp.Type]
+        ] = None):
     """Given a type constructor create a parameterized type.
 
     Note that this function is used for instantiating type parameters of
@@ -714,20 +742,24 @@ def instantiate_type_constructor(
         # Set return
         variance_choices[type_constructor.type_parameters[-1]] = (True, False)
 
-    if disable_variance or (disable_variance_functions and
-            type_constructor.name.startswith('Function')):
+    if disable_variance or (disable_variance_functions
+                            and type_constructor.name.startswith('Function')):
         variance_choices = {
-                tparam: (False, False)
-                for tparam in type_constructor.type_parameters
+            tparam: (False, False)
+            for tparam in type_constructor.type_parameters
         }
 
     types = _get_available_types(type_constructor,
                                  types, only_regular, primitives=False)
-    t_args, type_var_map = _compute_type_variable_assignments(
+    ret = _compute_type_variable_assignments(
         type_constructor.type_parameters,
         types, type_var_map=type_var_map, variance_choices=variance_choices,
-        for_type_constructor=True
+        for_type_constructor=True,
+        rec_bound_handler=rec_bound_handler
     )
+    if not ret:
+        return ret
+    t_args, type_var_map = ret
     return type_constructor.new(t_args), type_var_map
 
 
@@ -735,12 +767,20 @@ def instantiate_parameterized_function(
         type_parameters: List[tp.TypeParameter],
         types: List[tp.Type],
         only_regular=True,
-        type_var_map=None):
+        type_var_map=None,
+        rec_bound_handler: Callable[
+            [tp.TypeParameter, dict, Set[tp.Type]],
+            Set[tp.Type]
+        ] = None):
     types = _get_available_types(None, types, only_regular, primitives=False)
-    _, type_var_map = _compute_type_variable_assignments(
+    ret = _compute_type_variable_assignments(
         type_parameters, types, type_var_map=type_var_map,
         variance_choices=None, for_type_constructor=False,
+        rec_bound_handler=rec_bound_handler
     )
+    if not ret:
+        return ret
+    _, type_var_map = ret
     return type_var_map
 
 
