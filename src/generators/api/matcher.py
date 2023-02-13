@@ -209,36 +209,66 @@ def parse_pattern(string):
 
 
 class Matcher(object):
-    def __init__(self, column_names, rules=()):
+    def __init__(self, column_names: List[str], rule: Tuple[Pattern]):
         self.column_names = tuple(column_names)
         self.Row = namedtuple("MatcherRow", self.column_names)
-        self.rules_set = {self.Row(*r) for r in rules}
-
-    def _check_row_type(self, row):
-        if not isinstance(row, self.Row):
-            msg = "rows must be of type Matcher.Row, not {row!r}"
-            msg = msg.format(row=row)
-            raise TypeError(msg)
+        self.rule = self.Row(*rule)
 
     def match(self, row: Any) -> bool:
-        results = set()
-        for tab_row in self.rules_set:
-            item = {}
-            for name in self.column_names:
-                tab_val = getattr(tab_row, name)
-                row_val = getattr(row, name, None)
+        for name in self.column_names:
+            tab_val = getattr(self.rule, name)
+            row_val = getattr(row, name, None)
 
-                if tab_val.match(row_val):
-                    item[name] = row_val
-                else:
-                    item = None
-                    break
+            if not tab_val.match(row_val):
+                return False
 
-            if item is not None:
-                val = self.Row(**item)
-                results.add(val)
+        return True
 
-        return bool(results)
+
+class AllMatcher(Matcher):
+    def __init__(self, matchers: Set[Matcher]):
+        self.column_names = list(matchers)[0].column_names
+        self.Row = namedtuple("MatcherRow", self.column_names)
+        self.matchers = matchers
+
+    def match(self, row: Any) -> bool:
+        return all(matcher.match(row) for matcher in self.matchers)
+
+
+class AnyMatcher(Matcher):
+    def __init__(self, matchers: Set[Matcher]):
+        self.column_names = list(matchers)[0].column_names
+        self.Row = namedtuple("MatcherRow", self.column_names)
+        self.matchers = matchers
+
+    def match(self, row: Any) -> bool:
+        return any(matcher.match(row) for matcher in self.matchers)
+
+
+class NotMatcher(Matcher):
+    def __init__(self, matcher: Matcher):
+        self.column_names = matcher.column_names
+        self.Row = namedtuple("MatcherRow", self.column_names)
+        self.matcher = matcher
+
+    def match(self, row: Any) -> bool:
+        return not self.matcher.match(row)
+
+
+_aggr_funcs = {
+    "any": AnyMatcher,
+    "all": AllMatcher,
+}
+
+
+def get_aggr_func(string: str, matchers: Set[Matcher]) -> Matcher:
+    if string.startswith("!"):
+        return NotMatcher(get_aggr_func(string[1:]))
+    if string not in _aggr_funcs.keys():
+        msg = "Aggregate function {func!r} is not supported"
+        msg = msg.format(func=string)
+        raise ValueError(msg)
+    return _aggr_funcs[string](matchers)
 
 
 def parse_rule_spec(spec: dict) -> List[List[Pattern]]:
@@ -248,14 +278,14 @@ def parse_rule_spec(spec: dict) -> List[List[Pattern]]:
         raise ValueError(msg)
 
     rules = spec.get("rules")
-    rule_set = [
-        [
+    matchers = [
+        Matcher(column_names, [
             parse_pattern(pattern)
             for pattern in rule
-        ]
+        ])
         for rule in rules
     ]
-    return Matcher(column_names, rule_set)
+    return get_aggr_func(spec.get("func", "any"), matchers)
 
 
 def parse_rule_file(filepath: str) -> List[List[Pattern]]:

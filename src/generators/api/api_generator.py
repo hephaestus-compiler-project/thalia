@@ -124,11 +124,14 @@ class APIGenerator(Generator):
             rec_type = self.api_graph.get_type_by_name(api.get_class_name())
             if rec_type.is_type_constructor():
                 handler = self.api_graph.get_instantiations_of_recursive_bound
-                rec_type, sub = tu.instantiate_type_constructor(
-                    rec_type, self.api_graph.get_reg_types(),
-                    type_var_map=type_var_map,
-                    rec_bound_handler=handler
-                )
+                try:
+                    rec_type, sub = tu.instantiate_type_constructor(
+                        rec_type, self.api_graph.get_reg_types(),
+                        type_var_map=type_var_map,
+                        rec_bound_handler=handler
+                    )
+                except:
+                    import pdb; pdb.set_trace()
                 type_var_map.update(sub)
             rec = (
                 ast.New(rec_type, args=[])  # This is a constructor reference
