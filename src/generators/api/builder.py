@@ -123,13 +123,16 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         new_type_args = []
         for type_arg in type_args:
             new_type_args.append(self.parse_type(type_arg))
+        type_var_map = self._class_type_var_map.get(base) or {}
+        values = list(type_var_map.values())
         type_vars = [
-            tp.TypeParameter(base + ".T" + str(i + 1))
+            (
+                values[i]
+                if i < len(values)
+                else tp.TypeParameter(base + ".T" + str(i + 1))
+            )
             for i in range(len(new_type_args))
         ]
-        type_var_map = self._class_type_var_map.get(base)
-        if type_var_map:
-            type_vars = list(type_var_map.values())
         return tp.TypeConstructor(base, type_vars).new(new_type_args)
 
     def parse_type(self, str_t: str) -> tp.Type:
@@ -200,12 +203,32 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         for i, type_param_str in enumerate(type_parameters):
             type_param = self.parse_type_parameter(type_param_str,
                                                    keep=True)
+
+            # We use this auxiliarry type parameter to handle the renaming
+            # of recursive bounds.
+            type_param_no_bound = tp.TypeParameter(
+                type_param.name, variance=type_param.variance)
+            new_name = prefix + ".T" + str(i + 1)
+            type_var_map = {type_param_no_bound: tp.TypeParameter(new_name)}
+
             bound = None
             if type_param.bound:
-                bound = tp.substitute_type(type_param.bound, type_name_map)
+                bound = tp.substitute_type(type_param.bound, type_var_map)
 
-            type_name_map[type_param.name] = tp.TypeParameter(
-                prefix + ".T" + str(i), bound=bound)
+            renamed = tp.TypeParameter(new_name, bound=bound)
+            type_name_map[type_param.name] = renamed
+            if bound and bound.is_parameterized():
+
+                # This loop iterates over the type parameters of the type
+                # constructor associated with the bound. It then replaces
+                # the "incomplete" type parameter with "renamed", as the
+                # latter is now complete.
+                for i, tpa in enumerate(
+                        list(bound.t_constructor.type_parameters)):
+                    # TODO revisit
+                    if tpa.name == renamed.name:
+                        bound.t_constructor.type_parameters[i] = deepcopy(
+                            renamed)
 
     def _build_api_output_type(self, source_node, output_type,
                                is_constructor=False):

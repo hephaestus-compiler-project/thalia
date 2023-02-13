@@ -259,8 +259,12 @@ class APIGraph():
                 continue
             type_var_map = solution
             if v.is_type_constructor():
-                subtypes.add(tu.instantiate_type_constructor(
-                    v, self.get_reg_types(), type_var_map=type_var_map)[0])
+                handler = self.get_instantiations_of_recursive_bound
+                inst_t = tu.instantiate_type_constructor(
+                    v, self.get_reg_types(), type_var_map=type_var_map,
+                    rec_bound_handler=handler)
+                if inst_t:
+                    subtypes.add(inst_t[0])
             else:
                 subtypes.add(v)
         return subtypes
@@ -288,8 +292,10 @@ class APIGraph():
                     t = type_v
                 constraints[type_k] = t
             else:
+                handler = self.get_instantiations_of_recursive_bound
                 supertypes.add(tu.instantiate_type_constructor(
-                    v, {}, type_var_map=constraints)[0])
+                    v, {}, type_var_map=constraints,
+                    rec_bound_handler=handler)[0])
         return supertypes
 
     def find_API_path(self, target: tp.Type) -> list:
@@ -332,9 +338,13 @@ class APIGraph():
         return None
 
     def get_instantiations_of_recursive_bound(
-            self, bound: tp.ParameterizedType) -> Set[tp.Type]:
+            self, type_param: tp.TypeParameter,
+            type_var_map: dict,
+            types: Set[tp.Type] = None
+    ) -> Set[tp.Type]:
         possibles_types = set()
-        if not bound.is_parameterized():
+        bound = type_param.bound
+        if not bound or not bound.is_parameterized():
             return possibles_types
 
         subtypes = nx.descendants(self.subtyping_graph, bound.t_constructor)
@@ -348,13 +358,30 @@ class APIGraph():
             supertype = [t for t in self.supertypes(st)
                          if bound.name == t.name][0]
             sub = tu.unify_types(supertype, bound, self.bt_factory)
-            if not sub or len(sub) > 1:
+            if not sub:
                 continue
+            sub_names = {k.name: v for k, v in sub.items()}
+            bound_found = sub_names[type_param.name]
+            reverse = {v: tp.substitute_type(k, type_var_map)
+                       for k, v in sub.items()
+                       if v.is_type_var()}
             t = st
+            if any(v != tp.substitute_type(sub.get(k, k), reverse)
+                   for k, v in type_var_map.items()):
+                continue
             if st.is_type_constructor():
                 t = st.new(st.type_parameters)
-            if t == list(sub.values())[0]:
-                possibles_types.add(st)
+            if t == bound_found:
+                if st.is_type_constructor():
+                    handler = self.get_instantiations_of_recursive_bound
+                    sub_t, _ = tu.instantiate_type_constructor(
+                        st, types or self.get_reg_types(),
+                        type_var_map=reverse,
+                        rec_bound_handler=handler
+                    )
+                else:
+                    sub_t = st
+                possibles_types.add(sub_t)
         return possibles_types
 
     def get_functional_type(self, etype: tp.Type):
@@ -412,9 +439,16 @@ class APIGraph():
                 receiver = list(view)[0][0]
                 if receiver.is_type_constructor():
                     # TODO Revisit
-                    receiver_t, type_var_map = tu.instantiate_type_constructor(
-                        receiver, self.get_reg_types()
+                    handler = self.get_instantiations_of_recursive_bound
+                    inst = tu.instantiate_type_constructor(
+                        receiver, self.get_reg_types(),
+                        rec_bound_handler=handler
                     )
+                    if not inst:
+                        # We were unable to instantiate the given type
+                        # constructor.
+                        continue
+                    receiver_t, type_var_map = inst
                     receiver = receiver_t
                 receivers = {receiver}
                 if receiver != self.bt_factory.get_any_type():

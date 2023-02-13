@@ -249,7 +249,7 @@ def test2():
     b = JavaAPIGraphBuilder("java")
     api_graph = b.build(docs)
     path, assignments = api_graph.find_API_path(b.parse_type("java.Set"))
-    assert tp.TypeParameter("java.Foo.T0") in assignments
+    assert tp.TypeParameter("java.Foo.T1") in assignments
 
     assert path == [
         b.construct_class_type(docs["java.Foo"]),
@@ -262,9 +262,9 @@ def test3():
     api_graph = b.build(DOCS2)
     path, assignments = api_graph.find_API_path(
         b.construct_class_type(DOCS2["java.Set"]))
-    assert tp.TypeParameter("java.Foo.T0") in assignments
-    assert tp.TypeParameter("java.List.T0") in assignments
-    assert tp.TypeParameter("java.Set.T0") in assignments
+    assert tp.TypeParameter("java.Foo.T1") in assignments
+    assert tp.TypeParameter("java.List.T1") in assignments
+    assert tp.TypeParameter("java.Set.T1") in assignments
     assert len(set(assignments.values())) == 1
 
     assert path == [
@@ -279,12 +279,12 @@ def test3():
     api_graph = b.build(docs)
     path, assignments = api_graph.find_API_path(
         b.construct_class_type(DOCS2["java.Set"]))
-    assert tp.TypeParameter("java.Foo.T0") in assignments
-    assert tp.TypeParameter("java.List.T0") in assignments
-    assert tp.TypeParameter("java.List.T0") in assignments
-    assert assignments[tp.TypeParameter("java.List.T0")] == b.parse_type(
+    assert tp.TypeParameter("java.Foo.T1") in assignments
+    assert tp.TypeParameter("java.List.T1") in assignments
+    assert tp.TypeParameter("java.List.T1") in assignments
+    assert assignments[tp.TypeParameter("java.List.T1")] == b.parse_type(
         "java.lang.String")
-    assert assignments[tp.TypeParameter("java.Set.T0")] == b.parse_type(
+    assert assignments[tp.TypeParameter("java.Set.T1")] == b.parse_type(
         "java.lang.String")
 
     assert path == [
@@ -308,7 +308,7 @@ def test_get_function_refs_of():
         (
             ag.Method("apply", "java.Producer", [], []),
             {
-                tp.TypeParameter("java.Producer.T0"): b.parse_type(
+                tp.TypeParameter("java.Producer.T1"): b.parse_type(
                     "java.lang.Object")
             }
         )
@@ -328,10 +328,10 @@ def test_get_function_refs_of():
         ),
         (
             ag.Method("apply", "java.Function",
-                      [tp.TypeParameter("java.Function.T0")], []),
+                      [tp.TypeParameter("java.Function.T1")], []),
             {
-                tp.TypeParameter("java.Function.T0"): b.parse_type("java.lang.String"),
-                tp.TypeParameter("java.Function.T1"): b.parse_type("java.lang.Object"),
+                tp.TypeParameter("java.Function.T1"): b.parse_type("java.lang.String"),
+                tp.TypeParameter("java.Function.T2"): b.parse_type("java.lang.Object"),
             }
         )
 
@@ -342,15 +342,15 @@ def test_get_function_refs_of():
     )
     assert refs == [
         (
-            ag.Method("m3", "java.Foo", [], [tp.TypeParameter("java.Foo.m3.T0")]),
+            ag.Method("m3", "java.Foo", [], [tp.TypeParameter("java.Foo.m3.T1")]),
             {
-                tp.TypeParameter("java.Foo.m3.T0"): b.parse_type("java.lang.Integer")
+                tp.TypeParameter("java.Foo.m3.T1"): b.parse_type("java.lang.Integer")
             }
         ),
         (
             ag.Method("apply", "java.Producer", [], []),
             {
-                tp.TypeParameter("java.Producer.T0"): b.parse_type(
+                tp.TypeParameter("java.Producer.T1"): b.parse_type(
                     "java.List<java.lang.Integer>")
             }
         )
@@ -364,13 +364,13 @@ def test_get_function_refs_of():
         (
             ag.Constructor("java.Foo", []),
             {
-                tp.TypeParameter("java.Foo.T0"): b.parse_type("java.lang.Integer")
+                tp.TypeParameter("java.Foo.T1"): b.parse_type("java.lang.Integer")
             }
         ),
         (
             ag.Method("apply", "java.Producer", [], []),
             {
-                tp.TypeParameter("java.Producer.T0"): b.parse_type(
+                tp.TypeParameter("java.Producer.T1"): b.parse_type(
                     "java.Foo<java.lang.Integer>")
             }
         )

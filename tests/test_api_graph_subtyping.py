@@ -158,9 +158,7 @@ DOCS5 = {
           "T_SPLITR extends Spliterator.OfPrimitive<T,T_CONS,T_SPLITR>"
         ],
         "implements": [],
-        "inherits": [
-            "java.lang.Object"
-        ],
+        "inherits": ["java.lang.Object"],
         "methods": [],
         "fields": []
     }
@@ -439,28 +437,26 @@ def test_get_instantiations_of_recursive_bound():
     api_graph = b.build(DOCS6)
 
     # Case 1
-    types = api_graph.get_instantiations_of_recursive_bound(b.parse_type(
-        "java.Comparable<T>"))
+    type_param = b.parse_type("R extends java.Comparable<R>")
+    types = api_graph.get_instantiations_of_recursive_bound(
+        type_param, {}, {b.parse_type("java.lang.String")})
     assert types == {b.parse_type("java.String"),
-                     b.construct_class_type(DOCS6["java.Foo"])}
+                     b.parse_type("java.Foo<java.lang.String>")}
 
     # Case 2
-    types = api_graph.get_instantiations_of_recursive_bound(b.parse_type(
-        "java.Comparable<java.lang.Integer>"))
+    type_param = b.parse_type("R extends java.Comparable<java.lang.Integer>")
+    types = api_graph.get_instantiations_of_recursive_bound(type_param, {})
     assert types == set()
 
     # Case 3
-    types = api_graph.get_instantiations_of_recursive_bound(b.parse_type(
-        "java.Comparable<java.String>"))
+    type_param = b.parse_type("R extends java.Comparable<java.String>")
+    types = api_graph.get_instantiations_of_recursive_bound(type_param, {})
     assert types == set()
 
-    # Case 4
-    types = api_graph.get_instantiations_of_recursive_bound(b.parse_type(
-        "java.Comparable<java.String>"))
-    assert types == set()
-
-    # Case 5 / BaseStream
+    # Case 4 / BaseStream
     b._class_name = "java.BaseStream"
-    types = api_graph.get_instantiations_of_recursive_bound(b.parse_type(
-        "java.BaseStream<T,S>"))
-    assert types == set()
+    type_param = b.parse_type("L extends java.BaseStream<K,L>")
+    type_var_map = {b.parse_type("K"): b.parse_type("java.lang.Object")}
+    types = api_graph.get_instantiations_of_recursive_bound(
+        type_param, type_var_map)
+    assert types == { b.parse_type("java.Stream<java.lang.Object>") }

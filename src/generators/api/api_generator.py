@@ -123,9 +123,12 @@ class APIGenerator(Generator):
         else:
             rec_type = self.api_graph.get_type_by_name(api.get_class_name())
             if rec_type.is_type_constructor():
+                handler = self.api_graph.get_instantiations_of_recursive_bound
                 rec_type, sub = tu.instantiate_type_constructor(
                     rec_type, self.api_graph.get_reg_types(),
-                    type_var_map=type_var_map)
+                    type_var_map=type_var_map,
+                    rec_bound_handler=handler
+                )
                 type_var_map.update(sub)
             rec = (
                 ast.New(rec_type, args=[])  # This is a constructor reference
@@ -192,16 +195,22 @@ class APIGenerator(Generator):
             return None, {}
         if depth >= cfg.limits.max_depth:
             if node.is_type_constructor():
+                handler = self.api_graph.get_instantiations_of_recursive_bound
                 t, type_var_map = tu.instantiate_type_constructor(
-                    node, self.api_graph.get_reg_types())
+                    node, self.api_graph.get_reg_types(),
+                    rec_bound_handler=handler
+                )
             else:
                 t, type_var_map = node, {}
             return self.generate_expr(t), type_var_map
         path = self.api_graph.find_API_path(node)
         if not path:
             if node.is_type_constructor():
+                handler = self.api_graph.get_instantiations_of_recursive_bound
                 t, type_var_map = tu.instantiate_type_constructor(
-                    node, self.api_graph.get_reg_types())
+                    node, self.api_graph.get_reg_types(),
+                    rec_bound_handler=handler
+                )
             else:
                 t = node
                 type_var_map = (
