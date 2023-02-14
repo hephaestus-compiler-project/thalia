@@ -535,7 +535,7 @@ class KotlinAPIDocConverter(APIDocConverter):
 
     def extract_method_access_mod(self, method_doc):
         text = method_doc.text
-        return self.PROTECTED if "protected fun" in text else self.PUBLIC
+        return self.PROTECTED if "protected " in text else self.PUBLIC
 
     def extract_method_name(self, method_doc, is_constructor):
         try:
