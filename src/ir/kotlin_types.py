@@ -218,6 +218,12 @@ class SpecializedArrayType(tp.TypeConstructor, AnyType):
         self.supertypes.append(AnyType())
 
 
+class NullableType(tp.TypeConstructor, AnyType):
+    def __init__(self, name="Nullable"):
+        super().__init__(name, [tp.TypeParameter("T")])
+        self.supertypes.append(AnyType())
+
+
 class FunctionType(tp.TypeConstructor, AnyType):
     def __init__(self, nr_type_parameters: int):
         name = "Function" + str(nr_type_parameters)

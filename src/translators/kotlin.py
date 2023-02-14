@@ -68,6 +68,8 @@ class KotlinTranslator(BaseTranslator):
         if isinstance(t_constructor, kt.SpecializedArrayType):
             return "{}Array".format(self.get_type_name(
                 t.type_args[0]))
+        if isinstance(t_constructor, kt.NullableType):
+            return "{}?".format(self.get_type_name(t.type_args[0]))
         return "{}<{}>".format(t.name, ", ".join([self.type_arg2str(ta)
                                                   for ta in t.type_args]))
 

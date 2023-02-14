@@ -198,4 +198,5 @@ def test_kotlin_wildcards():
         "java.List", [tp.TypeParameter("java.List.T1")]).new([tp.WildCardType(
             bound=kt.Integer, variance=tp.Covariant
         )])
-    assert b.parse_type("Array<*>?") == tp.SimpleClassifier("Array<*>?")
+    assert b.parse_type("Array<*>?") == kt.NullableType().new(
+        [kt.ArrayType().new([tp.WildCardType()])])

@@ -432,7 +432,7 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         tf = self.bt_factory
         if str_t.endswith("?"):
             # This is a nullable type.
-            return tp.SimpleClassifier(str_t)
+            return kt.NullableType().new([self.parse_type(str_t[:-1])])
         elif str_t.startswith("Array<"):
             str_t = str_t.split("Array<")[1][:-1]
             return tf.get_array_type().new([self.parse_type(str_t)])
