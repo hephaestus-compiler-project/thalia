@@ -192,7 +192,6 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
                 self.graph.add_edge(class_node, field_node, label=IN)
             field_type = self.parse_type(field_api["type"])
             self.graph.add_node(field_type)
-            # self.subtyping_graph.add_node(field_type)
             self.graph.add_edge(field_node, field_type, label=OUT)
 
     def _rename_type_parameters(self, prefix: str,
@@ -341,10 +340,98 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         super().__init__()
         self.bt_factory: BuiltinFactory = BUILTIN_FACTORIES[target_language]
         self._class_name = None
+        self._class_type_var_map: dict = {}
+        self._current_func_type_var_map: dict = {}
+        self._is_func_interface: bool = False
+        self._type_parameters = []
+
+    def build(self, docs: dict) -> APIGraph:
+        for api_doc in docs.values():
+            if not api_doc["type_parameters"]:
+                continue
+            cls_name = api_doc["name"]
+            self._class_name = cls_name
+            self._class_type_var_map[cls_name] = OrderedDict()
+            self._rename_type_parameters(
+                cls_name, api_doc["type_parameters"],
+                self._class_type_var_map[cls_name]
+            )
+        return super().build(docs)
+
+    def parse_wildcard(self, str_t) -> tp.WildCardType:
+        if str_t == "*":
+            return tp.WildCardType()
+        if "out " in str_t:
+            return tp.WildCardType(
+                self.parse_type(str_t.split("out ", 1)[1].lstrip()),
+                variance=tp.Covariant)
+        else:
+            return tp.WildCardType(
+                self.parse_type(str_t.split("in ", 1)[1].lstrip()),
+                variance=tp.Contravariant)
+
+    def parse_type_parameter(self, str_t: str,
+                             keep: bool = False) -> tp.TypeParameter:
+        if str_t.startswith("out "):
+            variance = tp.Covariant
+            type_param = str_t.split("out ", 1)[1]
+        elif str_t.startswith("in "):
+            variance = tp.Contravariant
+            type_param = str_t.split("in ", 1)[1]
+        else:
+            variance = tp.Invariant
+            type_param = str_t
+        segs = type_param.split(":")
+        type_var_map = deepcopy(
+            self._class_type_var_map.get(self._class_name, {}))
+        type_var_map.update(self._current_func_type_var_map)
+        if keep:
+            # It might be the case where the names of function's and class's
+            # type parameters conflict. In this case, we should not replace
+            # the name of a function's type parameter with the name
+            # of the corresponding class type parameter.
+            type_var_map = {}
+
+        if len(segs) == 1:
+            return type_var_map.get(type_param,
+                                    tp.TypeParameter(type_param,
+                                                     variance=variance))
+        bound = self.parse_type(segs[1].lstrip())
+        return type_var_map.get(
+            segs[0].rstrip(),
+            tp.TypeParameter(segs[0].rstrip(), variance=variance, bound=bound))
+
+    def parse_reg_type(self, str_t: str) -> tp.Type:
+        if str_t.startswith("*") or str_t.startswith("out ") or \
+                str_t.startswith("in "):
+            return self.parse_wildcard(str_t)
+        segs = str_t.split(".")
+        if any(str_t.startswith(t) for t in self._type_parameters):
+            return self.parse_type_parameter(str_t)
+        regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
+        segs = str_t.split("<", 1)
+        if len(segs) == 1:
+            return tp.SimpleClassifier(str_t)
+        base, type_args_str = segs[0], segs[1][:segs[1].rfind(">")]
+        type_args = re.findall(regex, type_args_str)
+        new_type_args = []
+        for type_arg in type_args:
+            new_type_args.append(self.parse_type(type_arg))
+        type_var_map = self._class_type_var_map.get(base) or {}
+        values = list(type_var_map.values())
+        type_vars = [
+            (
+                values[i]
+                if i < len(values)
+                else tp.TypeParameter(base + ".T" + str(i + 1))
+            )
+            for i in range(len(new_type_args))
+        ]
+        return tp.TypeConstructor(base, type_vars).new(new_type_args)
 
     def parse_type(self, str_t: str) -> tp.Type:
         tf = self.bt_factory
-        if str_t.endswith("Array<"):
+        if str_t.startswith("Array<"):
             str_t = str_t.split("Array<")[1][:-1]
             return tf.get_array_type().new([self.parse_type(str_t)])
         elif str_t == "CharArray":
@@ -361,32 +448,111 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             return kt.FloatArray
         elif str_t == "DoubleArray":
             return kt.DoubleArray
+        elif str_t == "int[]":
+            return kt.IntegerArray
+        elif str_t.endswith("[]"):
+            str_t = str_t.split("[]")[0]
+            return tf.get_array_type().new([self.parse_type(str_t)])
         elif str_t.startswith("vararg "):
             return self.parse_type(str_t.split("vararg ")[1])
-        elif str_t == "Char":
+        elif str_t == "java.lang.Byte":
+            return tp.SimpleClassifier("Byte?")
+        elif str_t == "java.lang.Short":
+            return tp.SimpleClassifier("Short?")
+        elif str_t == "java.lang.Integer":
+            return tp.SimpleClassifier("Int?")
+        elif str_t == "java.lang.Long":
+            return tp.SimpleClassifier("Long?")
+        elif str_t == "java.lang.Float":
+            return tp.SimpleClassifier("Float?")
+        elif str_t == "java.lang.Double":
+            return tp.SimpleClassifier("Double?")
+        elif str_t == "java.lang.Character":
+            return tp.SimpleClassifier("Char?")
+        elif str_t == "java.lang.Boolean":
+            return tp.SimpleClassifier("Boolean?")
+        elif str_t in ["Char", "char"]:
             return tf.get_char_type()
-        elif str_t == "Byte":
+        elif str_t in ["Byte", "byte"]:
             return tf.get_byte_type()
-        elif str_t == "Short":
+        elif str_t in ["Short", "short"]:
             return tf.get_short_type()
-        elif str_t == "Int":
+        elif str_t in ["Int", "int"]:
             return tf.get_integer_type()
-        elif str_t == "Long":
+        elif str_t in ["Long", "long"]:
             return tf.get_long_type()
-        elif str_t == "Float":
+        elif str_t in ["Float", "float"]:
             return tf.get_float_type()
-        elif str_t == "Double":
+        elif str_t in ["Double", "double"]:
             return tf.get_double_type()
-        elif str_t == "String":
+        elif str_t in ["Boolean", "boolean"]:
+            return tf.get_boolean_type()
+        elif str_t in ["String", "java.lang.String"]:
             return tf.get_string_type()
-        elif str_t == "Any":
+        elif str_t in ["Number", "java.lang.Number"]:
+            return tf.get_number_type()
+        elif str_t in ["Any", "java.lang.Object"]:
             return tf.get_any_type()
         elif str_t == "java.lang.BigDecimal":
             return tf.get_double_type()
-        elif str_t == "Unit":
+        elif str_t in ["Unit", "void", "Void"]:
             return tf.get_void_type()
         else:
-            return tp.SimpleClassifier(str_t)
+            return self.parse_reg_type(str_t)
+
+    def _rename_type_parameters(self, prefix: str,
+                                type_parameters: List[str],
+                                type_name_map: OrderedDict):
+        # We use an OrderedDict because we need to store type parameters
+        # in the order they appear in the corresponding definitions.
+        for i, type_param_str in enumerate(type_parameters):
+            type_param = self.parse_type_parameter(type_param_str,
+                                                   keep=True)
+
+            # We use this auxiliarry type parameter to handle the renaming
+            # of recursive bounds.
+            type_param_no_bound = tp.TypeParameter(
+                type_param.name, variance=type_param.variance)
+            new_name = prefix + ".T" + str(i + 1)
+            type_var_map = {type_param_no_bound: tp.TypeParameter(new_name)}
+
+            bound = None
+            if type_param.bound:
+                bound = tp.substitute_type(type_param.bound, type_var_map)
+
+            renamed = tp.TypeParameter(new_name, bound=bound)
+            type_name_map[type_param.name] = renamed
+            if bound and bound.is_parameterized():
+
+                # This loop iterates over the type parameters of the type
+                # constructor associated with the bound. It then replaces
+                # the "incomplete" type parameter with "renamed", as the
+                # latter is now complete.
+                for i, tpa in enumerate(
+                        list(bound.t_constructor.type_parameters)):
+                    # TODO revisit
+                    if tpa.name == renamed.name:
+                        bound.t_constructor.type_parameters[i] = deepcopy(
+                            renamed)
+
+    def _build_api_output_type(self, source_node, output_type,
+                               is_constructor=False):
+        if is_constructor:
+            output_type = self._class_node
+
+        is_array = output_type.name == self.bt_factory.get_array_type().name
+        if output_type.is_parameterized() and not is_array:
+            target_node = output_type.t_constructor
+            self.graph.add_node(target_node)
+            kwargs = {
+                "constraint": output_type.get_type_variable_assignments()
+            }
+            self.graph.add_edge(source_node, target_node, label=OUT,
+                                **kwargs)
+        else:
+            target_node = output_type
+            self.graph.add_node(target_node)
+            self.graph.add_edge(source_node, target_node, label=OUT)
 
     def process_fields(self, class_node, fields):
         for field_api in fields:
@@ -407,9 +573,7 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             if receiver:
                 self.graph.add_edge(receiver, field_node, label=IN)
             field_type = self.parse_type(field_api["type"])
-            self.graph.add_node(field_type)
-            self.subtyping_graph.add_node(field_type)
-            self.graph.add_edge(field_node, field_type, label=OUT)
+            self._build_api_output_type(field_node, field_type)
 
     def process_methods(self, class_node, methods):
         for method_api in methods:
@@ -418,6 +582,7 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             if method_api["type_parameters"]:
                 # TODO: Handle parametric polymorphism.
                 continue
+
             name = method_api["name"]
             is_constructor = method_api["is_constructor"]
             parameters = [self.parse_type(p) for p in method_api["parameters"]]
@@ -442,18 +607,26 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             self.graph.add_node(method_node)
             if not (is_constructor or receiver is None):
                 self.graph.add_edge(receiver, method_node, label=IN)
-            ret_type = (
-                self.parse_type(self._class_name)
-                if is_constructor
-                else self.parse_type(method_api["return_type"])
-            )
-            self.graph.add_node(ret_type)
-            self.subtyping_graph.add_node(ret_type)
-            self.graph.add_edge(method_node, ret_type, label=OUT)
+            output_type = None
+            ret_type = method_api["return_type"]
+            if not is_constructor:
+                output_type = self.parse_type(ret_type)
+            self._build_api_output_type(method_node, output_type,
+                                        is_constructor)
+            self._current_func_type_var_map = {}
+            is_abstract = not method_api.get("is_default", False) and not \
+                method_api["is_static"]
+            if self._is_func_interface and is_abstract:
+                func_params = [param.box_type() for param in parameters]
+                ret_type = self.parse_type(ret_type)
+                func_type = self.bt_factory.get_function_type(
+                    len(func_params)).new(func_params + [ret_type.box_type()])
+                self.functional_types[class_node] = func_type
 
     def _process_class(self, class_api: dict):
         self._class_name = class_api["name"].rsplit(".", 1)[-1]
         class_node = self.parse_type(self._class_name)
+        self._class_node = class_node
         self.graph.add_node(class_node)
         self.subtyping_graph.add_node(class_node)
         self.process_fields(class_node, class_api["fields"])
@@ -465,10 +638,16 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         if not super_types:
             super_types.add(self.parse_type("Any"))
         for st in super_types:
-            self.subtyping_graph.add_node(st)
+            kwargs = {}
+            source = st
+            if st.is_parameterized():
+                source = st.t_constructor
+                kwargs["constraint"] = st.get_type_variable_assignments()
+            self.subtyping_graph.add_node(source)
             # Do not connect a node with itself.
-            if class_node != st:
-                self.subtyping_graph.add_edge(st, class_node, label=WIDENING)
+            if class_node != source:
+                self.subtyping_graph.add_edge(source, class_node,
+                                              **kwargs)
 
     def process_class(self, class_api):
         if class_api["is_class"]:
