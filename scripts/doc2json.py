@@ -433,13 +433,13 @@ class KotlinAPIDocConverter(APIDocConverter):
             element.find_all("div", {"class": "copy-popup-wrapper"})
         for e in rem_elems:
             e.decompose()
-        segs = element.text.split(": ")
-        cls_text = segs[0]
+        segs = element.text.split(":")
+        cls_text = segs[0].rstrip()
         segs = cls_text.split("<")
         if len(segs) == 1:
             return []
         regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
-        text = segs[1][:-2].replace(", ", ",")
+        text = segs[1][:-1].replace(", ", ",")
         return re.findall(regex, text)
 
     def extract_super_class(self, html_doc):
@@ -465,6 +465,7 @@ class KotlinAPIDocConverter(APIDocConverter):
         package_name = self.extract_package_name(html_doc)
         full_class_name = "{pkg}.{cls}".format(pkg=package_name,
                                                cls=class_name)
+        type_parameters = self.extract_class_type_parameters(html_doc)
         super_class = self.extract_super_class(html_doc)
         super_interfaces = self.extract_super_interfaces(html_doc)
         class_type = self.extract_class_type(html_doc)
@@ -479,14 +480,15 @@ class KotlinAPIDocConverter(APIDocConverter):
             constructor_objs = self.process_methods(constructors, True)
         else:
             constructor_objs = []
+        field_objs = self.process_fields(fields)
         class_obj = {
             'name': full_class_name,
-            'type_parameters': self.extract_class_type_parameters(html_doc),
+            'type_parameters': type_parameters,
             'implements': super_interfaces,
             'inherits': super_class,
             "class_type": class_type,
             "methods": method_objs + constructor_objs,
-            'fields': self.process_fields(fields),
+            'fields': field_objs,
             "is_class": True,
         }
         return class_obj
