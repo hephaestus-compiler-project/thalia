@@ -9,7 +9,8 @@ import networkx as nx
 
 from src.ir import BUILTIN_FACTORIES, types as tp, kotlin_types as kt
 from src.ir.builtins import BuiltinFactory
-from src.generators.api.api_graph import (APIGraph, IN, OUT, WIDENING, Method,
+from src.translators.kotlin import KotlinTranslator
+from src.generators.api.api_graph import (APIGraph, IN, OUT, Method,
                                           Constructor, Field)
 
 PROTECTED = "protected"
@@ -238,7 +239,6 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         if output_type.is_parameterized() and not is_array:
             target_node = output_type.t_constructor
             self.graph.add_node(target_node)
-            # self.subtyping_graph.add_node(target_node)
             kwargs = {
                 "constraint": output_type.get_type_variable_assignments()
             }
@@ -247,7 +247,6 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         else:
             target_node = output_type
             self.graph.add_node(target_node)
-            # self.subtyping_graph.add_node(target_node)
             self.graph.add_edge(source_node, target_node, label=OUT)
 
     def process_methods(self, class_node, methods):
@@ -266,7 +265,6 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             parameters = [self.parse_type(p) for p in method_api["parameters"]]
             for param in parameters:
                 self.graph.add_node(param)
-                # self.subtyping_graph.add_node(param)
             if is_constructor:
                 method_node = Constructor(self._class_name,
                                           parameters)
@@ -344,6 +342,7 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         self._current_func_type_var_map: dict = {}
         self._is_func_interface: bool = False
         self._type_parameters = []
+        self.kt_translator = KotlinTranslator()
 
     def build(self, docs: dict) -> APIGraph:
         for api_doc in docs.values():
@@ -409,10 +408,10 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         if any(str_t.startswith(t) for t in self._type_parameters):
             return self.parse_type_parameter(str_t)
         regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
-        segs = str_t.split("<", 1)
+        segs = str_t.replace(", ", ",").split("<", 1)
         if len(segs) == 1:
             return tp.SimpleClassifier(str_t)
-        base, type_args_str = segs[0], segs[1][:segs[1].rfind(">")]
+        base, type_args_str = segs[0], segs[1][:-1]
         type_args = re.findall(regex, type_args_str)
         new_type_args = []
         for type_arg in type_args:
@@ -431,7 +430,10 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
 
     def parse_type(self, str_t: str) -> tp.Type:
         tf = self.bt_factory
-        if str_t.startswith("Array<"):
+        if str_t.endswith("?"):
+            # This is a nullable type.
+            return tp.SimpleClassifier(str_t)
+        elif str_t.startswith("Array<"):
             str_t = str_t.split("Array<")[1][:-1]
             return tf.get_array_type().new([self.parse_type(str_t)])
         elif str_t == "CharArray":
@@ -565,9 +567,12 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
                 if field_api["receiver"]
                 else class_node)
             if receiver:
-                self._class_name = str(receiver)
+                self._class_name = (
+                    receiver.name
+                    if not receiver.is_parameterized()
+                    else self.kt_translator.get_type_name(receiver)
+                )
                 self.graph.add_node(receiver)
-                self.subtyping_graph.add_node(receiver)
             field_node = Field(field_api["name"], self._class_name)
             self.graph.add_node(field_node)
             if receiver:
@@ -588,16 +593,18 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             parameters = [self.parse_type(p) for p in method_api["parameters"]]
             for param in parameters:
                 self.graph.add_node(param)
-                self.subtyping_graph.add_node(param)
             if class_node:
                 receiver = class_node
             receiver = (self.parse_type(method_api["receiver"])
                         if method_api["receiver"]
                         else class_node)
             if receiver:
-                self._class_name = str(receiver)
+                self._class_name = (
+                    receiver.name
+                    if not receiver.is_parameterized()
+                    else self.kt_translator.get_type_name(receiver)
+                )
                 self.graph.add_node(receiver)
-                self.subtyping_graph.add_node(receiver)
             if is_constructor:
                 method_node = Constructor(self._class_name,
                                           parameters)
@@ -623,12 +630,25 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
                     len(func_params)).new(func_params + [ret_type.box_type()])
                 self.functional_types[class_node] = func_type
 
+    def construct_class_type(self, class_api):
+        class_name = class_api["name"]
+        if class_api["type_parameters"]:
+            self._type_parameters = list(
+                self._class_type_var_map[class_name].keys())
+            class_node = tp.TypeConstructor(
+                class_name,
+                list(self._class_type_var_map[class_name].values()))
+        else:
+            class_node = self.parse_type(class_name)
+        return class_node
+
     def _process_class(self, class_api: dict):
-        self._class_name = class_api["name"].rsplit(".", 1)[-1]
-        class_node = self.parse_type(self._class_name)
+        self._class_name = class_api["name"]
+        class_node = self.construct_class_type(class_api)
         self._class_node = class_node
         self.graph.add_node(class_node)
         self.subtyping_graph.add_node(class_node)
+        self._is_func_interface = class_api.get("functional_interface", False)
         self.process_fields(class_node, class_api["fields"])
         self.process_methods(class_node, class_api["methods"])
         super_types = {
@@ -648,6 +668,7 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             if class_node != source:
                 self.subtyping_graph.add_edge(source, class_node,
                                               **kwargs)
+        self._type_parameters = []
 
     def process_class(self, class_api):
         if class_api["is_class"]:
