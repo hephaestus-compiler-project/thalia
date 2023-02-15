@@ -225,7 +225,6 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
                 # latter is now complete.
                 for i, tpa in enumerate(
                         list(bound.t_constructor.type_parameters)):
-                    # TODO revisit
                     if tpa.name == renamed.name:
                         bound.t_constructor.type_parameters[i] = deepcopy(
                             renamed)
@@ -341,7 +340,7 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         self._class_type_var_map: dict = {}
         self._current_func_type_var_map: dict = {}
         self._is_func_interface: bool = False
-        self._type_parameters = []
+        self._type_parameters = set()
         self.kt_translator = KotlinTranslator()
 
     def build(self, docs: dict) -> APIGraph:
@@ -405,7 +404,9 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
                 str_t.startswith("in "):
             return self.parse_wildcard(str_t)
         segs = str_t.split(".")
-        if any(str_t.startswith(t) for t in self._type_parameters):
+        regex = "^{letter!s}([ ]?:.*)?$"
+        if any(re.match(regex.format(letter=t), str_t)
+               for t in self._type_parameters):
             return self.parse_type_parameter(str_t)
         regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
         segs = str_t.replace(", ", ",").split("<", 1)
@@ -532,7 +533,6 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
                 # latter is now complete.
                 for i, tpa in enumerate(
                         list(bound.t_constructor.type_parameters)):
-                    # TODO revisit
                     if tpa.name == renamed.name:
                         bound.t_constructor.type_parameters[i] = deepcopy(
                             renamed)
@@ -581,18 +581,21 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             self._build_api_output_type(field_node, field_type)
 
     def process_methods(self, class_node, methods):
+        current_type_parameters = self._type_parameters
         for method_api in methods:
             if method_api["access_mod"] == PROTECTED:
                 continue
-            if method_api["type_parameters"]:
-                # TODO: Handle parametric polymorphism.
-                continue
-
             name = method_api["name"]
-            is_constructor = method_api["is_constructor"]
-            parameters = [self.parse_type(p) for p in method_api["parameters"]]
-            for param in parameters:
-                self.graph.add_node(param)
+
+            self._current_func_type_var_map = OrderedDict()
+            self._rename_type_parameters(
+                self._class_name or method_api["receiver"] + "." + name,
+                method_api["type_parameters"],
+                self._current_func_type_var_map
+            )
+            type_parameters = list(self._current_func_type_var_map.values())
+            self._type_parameters = self._type_parameters.union(
+                self._current_func_type_var_map.keys())
             if class_node:
                 receiver = class_node
             receiver = (self.parse_type(method_api["receiver"])
@@ -605,12 +608,18 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
                     else self.kt_translator.get_type_name(receiver)
                 )
                 self.graph.add_node(receiver)
+
+            parameters = [self.parse_type(p) for p in method_api["parameters"]]
+            for param in parameters:
+                self.graph.add_node(param)
+
+            is_constructor = method_api["is_constructor"]
             if is_constructor:
                 method_node = Constructor(self._class_name,
                                           parameters)
             else:
                 method_node = Method(name, self._class_name, parameters,
-                                     method_api["type_parameters"])
+                                     type_parameters)
             self.graph.add_node(method_node)
             if not (is_constructor or receiver is None):
                 self.graph.add_edge(receiver, method_node, label=IN)
@@ -629,11 +638,12 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
                 func_type = self.bt_factory.get_function_type(
                     len(func_params)).new(func_params + [ret_type.box_type()])
                 self.functional_types[class_node] = func_type
+            self._type_parameters = current_type_parameters
 
     def construct_class_type(self, class_api):
         class_name = class_api["name"]
         if class_api["type_parameters"]:
-            self._type_parameters = list(
+            self._type_parameters = set(
                 self._class_type_var_map[class_name].keys())
             class_node = tp.TypeConstructor(
                 class_name,
@@ -668,7 +678,7 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             if class_node != source:
                 self.subtyping_graph.add_edge(source, class_node,
                                               **kwargs)
-        self._type_parameters = []
+        self._type_parameters = set()
 
     def process_class(self, class_api):
         if class_api["is_class"]:
