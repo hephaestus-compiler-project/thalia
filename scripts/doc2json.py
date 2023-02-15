@@ -405,8 +405,6 @@ class KotlinAPIDocConverter(APIDocConverter):
 
             match = re.match(regex, href)
             package_prefix = match.group(1).replace("/", ".")
-            if package_prefix == "kotlin":
-                continue
             segs = package_prefix.rsplit(".", 1)
             if segs[-1].startswith("-"):
                 # Handle nested class
