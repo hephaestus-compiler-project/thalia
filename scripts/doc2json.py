@@ -518,7 +518,7 @@ class KotlinAPIDocConverter(APIDocConverter):
         if is_constructor:
             return []
         regex = re.compile(
-            r".*fun <([^\.]*)> .+\(.*\).*")
+            r".*fun <(.*)> (.*\.)?[a-zA-Z0-9_]+\(.*\).*")
         match = re.match(regex, method_doc.text)
         if not match:
             return []
