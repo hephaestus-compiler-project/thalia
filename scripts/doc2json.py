@@ -508,7 +508,7 @@ class KotlinAPIDocConverter(APIDocConverter):
 
     def extract_method_receiver(self, method_doc):
         regex = re.compile(
-            r".*fun (<.*> )?(.*)\..+\(.*\).*")
+            r".*fun (<.*> )?(.*)\.[a-zA-Z0-9_]+\(.*\).*")
         match = re.match(regex, method_doc.text)
         if not match:
             return None
