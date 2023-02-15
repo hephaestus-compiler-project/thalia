@@ -389,15 +389,28 @@ class KotlinAPIDocConverter(APIDocConverter):
         # corresponds to type names) with the fully quallified name of the
         # type. The package prefix is found in a attribute of each anchor
         # named "title".
-        package_regex = re.compile(
+        java_regex = re.compile(
             "https://docs.oracle.com/.*/api/(.*)/[^/]+.html")
+        kotlin_regex = re.compile(
+            "https://kotlinlang.org/api/latest/.*/stdlib/(.*)/-[^/]+/index.html"
+        )
         for anchor in anchors:
             href = anchor.get("href")
-            if not href.startswith("https://docs.oracle.com"):
+            if href.startswith("https://docs.oracle.com"):
+                regex = java_regex
+            elif href.startswith("https://kotlinlang.org"):
+                regex = kotlin_regex
+            else:
                 continue
 
-            match = re.match(package_regex, href)
+            match = re.match(regex, href)
             package_prefix = match.group(1).replace("/", ".")
+            if package_prefix == "kotlin":
+                continue
+            segs = package_prefix.rsplit(".", 1)
+            if segs[-1].startswith("-"):
+                # Handle nested class
+                package_prefix = segs[0]
             if not anchor.string.startswith(package_prefix):
                 anchor.string.replace_with(package_prefix + "." + anchor.text)
 
@@ -409,6 +422,7 @@ class KotlinAPIDocConverter(APIDocConverter):
             element.find_all("div", {"class": "copy-popup-wrapper"})
         for e in rem_elems:
             e.decompose()
+        self._replace_anchors_with_package_prefix(element.select("a"))
         segs = element.text.split(": ")
         if len(segs) == 1:
             # No super classes / interfaces.
@@ -433,6 +447,7 @@ class KotlinAPIDocConverter(APIDocConverter):
             element.find_all("div", {"class": "copy-popup-wrapper"})
         for e in rem_elems:
             e.decompose()
+        self._replace_anchors_with_package_prefix(element.select("a"))
         segs = element.text.split(":")
         cls_text = segs[0].rstrip()
         segs = cls_text.split("<")
@@ -462,7 +477,7 @@ class KotlinAPIDocConverter(APIDocConverter):
 
     def process_class(self, html_doc):
         class_name = self.extract_class_name(html_doc)
-        package_name = self.extract_package_name(html_doc)
+        package_name = "kotlin." + self.extract_package_name(html_doc)
         full_class_name = "{pkg}.{cls}".format(pkg=package_name,
                                                cls=class_name)
         type_parameters = self.extract_class_type_parameters(html_doc)
@@ -528,6 +543,7 @@ class KotlinAPIDocConverter(APIDocConverter):
     def extract_method_parameter_types(self, method_doc, is_constructor):
         types = []
         for param in method_doc.select(".parameter"):
+            self._replace_anchors_with_package_prefix(param.select("a"))
             segs = param.text.strip(", ").split(": ", 1)
             assert len(segs) == 2
             types.append(segs[1])
