@@ -164,12 +164,9 @@ class KotlinTypeParser(TypeParser):
     def __init__(self,
                  class_type_name_map: Dict[str, tp.TypeParameter] = None,
                  func_type_name_map: Dict[str, tp.TypeParameter] = None,
-                 classes_type_parameters: dict = None,
-                 type_parameters=None):
+                 classes_type_parameters: dict = None):
         super().__init__("kotlin", class_type_name_map,
                          func_type_name_map, classes_type_parameters)
-        # FIXME remove me
-        self.type_parameters = type_parameters or []
 
     def is_func_type(self, str_t: str) -> bool:
         return bool(re.match(self.FUNC_REGEX, str_t))
@@ -234,9 +231,14 @@ class KotlinTypeParser(TypeParser):
                 str_t.startswith("in "):
             return self.parse_wildcard(str_t)
         segs = str_t.split(".")
-        regex = "^{letter!s}([ ]?:.*)?$"
-        if any(re.match(regex.format(letter=t), str_t)
-               for t in self.type_parameters):
+        is_type_var = (
+            len(segs) == 1 or
+            (
+                ": " in str_t and
+                "." not in str_t.split(":")[0]
+             )
+        )
+        if is_type_var:
             return self.parse_type_parameter(str_t)
         regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
         segs = str_t.replace(", ", ",").split("<", 1)
@@ -270,22 +272,22 @@ class KotlinTypeParser(TypeParser):
         if str_t.endswith("?"):
             # This is a nullable type.
             return kt.NullableType().new([self.parse_type(str_t[:-1])])
-        elif str_t.startswith("Array<"):
-            str_t = str_t.split("Array<")[1][:-1]
+        elif str_t.startswith("kotlin.Array<"):
+            str_t = str_t.split("kotlin.Array<")[1][:-1]
             return tf.get_array_type().new([self.parse_type(str_t)])
-        elif str_t == "CharArray":
+        elif str_t == "kotlin.CharArray":
             return kt.CharArray
-        elif str_t == "ByteArray":
+        elif str_t == "kotlin.ByteArray":
             return kt.ByteArray
-        elif str_t == "ShortArray":
+        elif str_t == "kotlin.ShortArray":
             return kt.ShortArray
-        elif str_t == "IntArray":
+        elif str_t == "kotlin.IntArray":
             return kt.IntegerArray
-        elif str_t == "LongArray":
+        elif str_t == "kotlin.LongArray":
             return kt.LongArray
-        elif str_t == "FloatArray":
+        elif str_t == "kotlin.FloatArray":
             return kt.FloatArray
-        elif str_t == "DoubleArray":
+        elif str_t == "kotlin.DoubleArray":
             return kt.DoubleArray
         elif str_t == "int[]":
             return kt.IntegerArray
@@ -310,31 +312,31 @@ class KotlinTypeParser(TypeParser):
             return tp.SimpleClassifier("Char?")
         elif str_t == "java.lang.Boolean":
             return tp.SimpleClassifier("Boolean?")
-        elif str_t in ["Char", "char"]:
+        elif str_t in ["kotlin.Char", "char", "Char"]:
             return tf.get_char_type()
-        elif str_t in ["Byte", "byte"]:
+        elif str_t in ["kotlin.Byte", "byte", "Byte"]:
             return tf.get_byte_type()
-        elif str_t in ["Short", "short"]:
+        elif str_t in ["kotlin.Short", "short", "Short"]:
             return tf.get_short_type()
-        elif str_t in ["Int", "int"]:
+        elif str_t in ["kotlin.Int", "int", "Int"]:
             return tf.get_integer_type()
-        elif str_t in ["Long", "long"]:
+        elif str_t in ["kotlin.Long", "long", "Long"]:
             return tf.get_long_type()
-        elif str_t in ["Float", "float"]:
+        elif str_t in ["kotlin.Float", "float", "Float"]:
             return tf.get_float_type()
-        elif str_t in ["Double", "double"]:
+        elif str_t in ["kotlin.Double", "double", "Double"]:
             return tf.get_double_type()
-        elif str_t in ["Boolean", "boolean"]:
+        elif str_t in ["kotlin.Boolean", "boolean", "Boolean"]:
             return tf.get_boolean_type()
-        elif str_t in ["String", "java.lang.String"]:
+        elif str_t in ["kotlin.String", "java.lang.String", "String"]:
             return tf.get_string_type()
-        elif str_t in ["Number", "java.lang.Number"]:
+        elif str_t in ["kotlin.Number", "java.lang.Number", "Number"]:
             return tf.get_number_type()
-        elif str_t in ["Any", "java.lang.Object"]:
+        elif str_t in ["kotlin.Any", "java.lang.Object", "Any"]:
             return tf.get_any_type()
         elif str_t == "java.lang.BigDecimal":
             return tf.get_double_type()
-        elif str_t in ["Unit", "void", "Void"]:
+        elif str_t in ["kotlin.Unit", "void", "Void", "Unit"]:
             return tf.get_void_type()
         else:
             return self.parse_reg_type(str_t)

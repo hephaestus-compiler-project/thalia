@@ -91,14 +91,14 @@ def test_wildcards():
 
 def test_kotlin_primitives():
     b = KotlinTypeParser()
-    assert b.parse_type("Char") == kt.CharType()
-    assert b.parse_type("Byte") == kt.ByteType()
-    assert b.parse_type("Short") == kt.ShortType()
-    assert b.parse_type("Int") == kt.IntegerType()
-    assert b.parse_type("Long") == kt.LongType()
-    assert b.parse_type("Float") == kt.FloatType()
-    assert b.parse_type("Double") == kt.DoubleType()
-    assert b.parse_type("Boolean") == kt.BooleanType()
+    assert b.parse_type("kotlin.Char") == kt.CharType()
+    assert b.parse_type("kotlin.Byte") == kt.ByteType()
+    assert b.parse_type("kotlin.Short") == kt.ShortType()
+    assert b.parse_type("kotlin.Int") == kt.IntegerType()
+    assert b.parse_type("kotlin.Long") == kt.LongType()
+    assert b.parse_type("kotlin.Float") == kt.FloatType()
+    assert b.parse_type("kotlin.Double") == kt.DoubleType()
+    assert b.parse_type("kotlin.Boolean") == kt.BooleanType()
 
 
 def test_kotlin_builtin_types():
@@ -114,45 +114,45 @@ def test_kotlin_builtin_types():
     assert b.parse_type("java.lang.Object") == kt.Any
     assert b.parse_type("void") == kt.Unit
     assert b.parse_type("java.lang.String[]") == kt.Array.new([kt.String])
-    assert b.parse_type("Array<String>") == kt.Array.new([kt.String])
+    assert b.parse_type("kotlin.Array<kotlin.String>") == kt.Array.new([kt.String])
     assert b.parse_type("int[]") == kt.IntegerArray
-    assert b.parse_type("CharArray") == kt.CharArray
-    assert b.parse_type("ByteArray") == kt.ByteArray
-    assert b.parse_type("ShortArray") == kt.ShortArray
-    assert b.parse_type("IntArray") == kt.IntegerArray
-    assert b.parse_type("LongArray") == kt.LongArray
-    assert b.parse_type("FloatArray") == kt.FloatArray
-    assert b.parse_type("DoubleArray") == kt.DoubleArray
-    assert b.parse_type("Any") == kt.Any
+    assert b.parse_type("kotlin.CharArray") == kt.CharArray
+    assert b.parse_type("kotlin.ByteArray") == kt.ByteArray
+    assert b.parse_type("kotlin.ShortArray") == kt.ShortArray
+    assert b.parse_type("kotlin.IntArray") == kt.IntegerArray
+    assert b.parse_type("kotlin.LongArray") == kt.LongArray
+    assert b.parse_type("kotlin.FloatArray") == kt.FloatArray
+    assert b.parse_type("kotlin.DoubleArray") == kt.DoubleArray
+    assert b.parse_type("kotlin.Any") == kt.Any
     assert b.parse_type("java.lang.Object") == kt.Any
 
 
 def test_kotlin_regular_types():
     b = KotlinTypeParser()
-    assert b.parse_type("Calendar") == tp.SimpleClassifier("Calendar")
-    assert b.parse_type("List<String>") == tp.TypeConstructor(
-        "List", [tp.TypeParameter("List.T1")]).new([kt.String])
-    assert b.parse_type("Map<String,Calendar>") == \
-        tp.TypeConstructor("Map",
+    assert b.parse_type("k.Calendar") == tp.SimpleClassifier("k.Calendar")
+    assert b.parse_type("k.List<kotlin.String>") == tp.TypeConstructor(
+        "k.List", [tp.TypeParameter("k.List.T1")]).new([kt.String])
+    assert b.parse_type("k.Map<kotlin.String,k.Calendar>") == \
+        tp.TypeConstructor("k.Map",
                            [
-                               tp.TypeParameter("Map.T1"),
-                               tp.TypeParameter("Map.T2")
+                               tp.TypeParameter("k.Map.T1"),
+                               tp.TypeParameter("k.Map.T2")
                            ]
-        ).new([kt.String, tp.SimpleClassifier("Calendar")])
-    t = b.parse_type("List<Map<String,Calendar>>")
-    t1 = tp.TypeConstructor("Map",
+        ).new([kt.String, tp.SimpleClassifier("k.Calendar")])
+    t = b.parse_type("k.List<k.Map<kotlin.String,k.Calendar>>")
+    t1 = tp.TypeConstructor("k.Map",
                            [
-                               tp.TypeParameter("Map.T1"),
-                               tp.TypeParameter("Map.T2")
+                               tp.TypeParameter("k.Map.T1"),
+                               tp.TypeParameter("k.Map.T2")
                            ]
-        ).new([kt.String, tp.SimpleClassifier("Calendar")])
-    t2 = tp.TypeConstructor("List",
-                            [tp.TypeParameter("List.T1")]).new([t1])
+        ).new([kt.String, tp.SimpleClassifier("k.Calendar")])
+    t2 = tp.TypeConstructor("k.List",
+                            [tp.TypeParameter("k.List.T1")]).new([t1])
     assert t == t2
 
 
 def test_kotlin_type_variables():
-    b = KotlinTypeParser(type_parameters=["T", "Foo", "X"])
+    b = KotlinTypeParser()
     assert b.parse_type("T") == tp.TypeParameter("T")
     assert b.parse_type("T : java.lang.String") == tp.TypeParameter(
         "T", bound=kt.String)
@@ -171,9 +171,9 @@ def test_kotlin_type_variables():
          tp.TypeParameter("java.BaseStream.T2")]).new([tp.TypeParameter("T"), stream])
     assert t == base_stream
 
-    assert b.parse_type_parameter("out T: String") == tp.TypeParameter(
+    assert b.parse_type_parameter("out T: kotlin.String") == tp.TypeParameter(
         "T", variance=tp.Covariant, bound=kt.String)
-    assert b.parse_type_parameter("in T : String") == tp.TypeParameter(
+    assert b.parse_type_parameter("in T : kotlin.String") == tp.TypeParameter(
         "T", variance=tp.Contravariant, bound=kt.String)
     assert b.parse_type_parameter("out T") == tp.TypeParameter(
         "T", variance=tp.Covariant)
@@ -196,7 +196,7 @@ def test_kotlin_wildcards():
         "java.List", [tp.TypeParameter("java.List.T1")]).new([tp.WildCardType(
             bound=kt.Integer, variance=tp.Covariant
         )])
-    assert b.parse_type("Array<*>?") == kt.NullableType().new(
+    assert b.parse_type("kotlin.Array<*>?") == kt.NullableType().new(
         [kt.ArrayType().new([tp.WildCardType()])])
 
 
@@ -208,12 +208,12 @@ def test_kotlin_function_types():
         [kt.Boolean, kt.String]
     )
     assert b.parse_type("() -> Unit") == kt.FunctionType(0).new([kt.Unit])
-    t = b.parse_type("(Boolean, (Int) -> Boolean, List<String>) -> Set<String>")
+    t = b.parse_type("(Boolean, (Int) -> Boolean, k.List<String>) -> k.Set<String>")
     exp_t = kt.FunctionType(3).new([
         kt.Boolean,
         kt.FunctionType(1).new([kt.Integer, kt.Boolean]),
-        tp.TypeConstructor("List", [tp.TypeParameter("List.T1")]).new([kt.String]),
-        tp.TypeConstructor("Set", [tp.TypeParameter("Set.T1")]).new([kt.String]),
+        tp.TypeConstructor("k.List", [tp.TypeParameter("k.List.T1")]).new([kt.String]),
+        tp.TypeConstructor("k.Set", [tp.TypeParameter("k.Set.T1")]).new([kt.String]),
     ])
 
     assert t == exp_t
@@ -225,11 +225,11 @@ def test_kotlin_function_types():
     ])
     assert t == exp_t
 
-    t = b.parse_type("(Map<String, Int>) -> Unit")
+    t = b.parse_type("(k.Map<String, Int>) -> Unit")
     exp_t = kt.FunctionType(1).new([
-        tp.TypeConstructor("Map", [
-            tp.TypeParameter("Map.T1"),
-            tp.TypeParameter("Map.T2")
+        tp.TypeConstructor("k.Map", [
+            tp.TypeParameter("k.Map.T1"),
+            tp.TypeParameter("k.Map.T2")
         ]).new([kt.String, kt.Integer]),
         kt.Unit
     ])

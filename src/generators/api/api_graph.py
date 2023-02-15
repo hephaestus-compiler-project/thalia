@@ -432,8 +432,13 @@ class APIGraph():
         for node in api_nodes:
             view = self.api_graph.in_edges(node)
             type_var_map = {}
+            func_type_parameters = getattr(node, "type_parameters", [])
             if not view:
                 receivers = {self.EMPTY}
+                if func_type_parameters:
+                    type_var_map.update(
+                        tu.instantiate_parameterized_function(
+                            func_type_parameters, self.get_reg_types()))
             else:
                 assert len(view) == 1
                 receiver = list(view)[0][0]
@@ -450,14 +455,23 @@ class APIGraph():
                         continue
                     receiver_t, type_var_map = inst
                     receiver = receiver_t
+                    func_type_parameters = [
+                        tp.substitute_type(t, type_var_map)
+                        for t in func_type_parameters
+                    ]
+                    if func_type_parameters:
+                        type_var_map.update(
+                            tu.instantiate_parameterized_function(
+                                func_type_parameters, self.get_reg_types()))
+                else:
+                    if func_type_parameters:
+                        type_var_map.update(
+                            tu.instantiate_parameterized_function(
+                                func_type_parameters, self.get_reg_types()))
+                    receiver = tp.substitute_type(receiver, type_var_map)
                 receivers = {receiver}
                 if receiver != self.bt_factory.get_any_type():
                     receivers.update(self.subtypes(receiver))
-            type_parameters = getattr(node, "type_parameters", [])
-            if type_parameters:
-                type_var_map.update(
-                    tu.instantiate_parameterized_function(
-                        type_parameters, self.get_reg_types()))
             parameters = [{tp.substitute_type(p, type_var_map)}
                           for p in getattr(node, "parameters", [])]
             for param_set in parameters:
