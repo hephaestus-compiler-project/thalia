@@ -12,6 +12,8 @@ from src.ir.builtins import BuiltinFactory
 from src.translators.kotlin import KotlinTranslator
 from src.generators.api.api_graph import (APIGraph, IN, OUT, Method,
                                           Constructor, Field)
+from src.generators.api.type_parsers import (TypeParser, KotlinTypeParser,
+                                             JavaTypeParser)
 
 PROTECTED = "protected"
 
@@ -32,6 +34,10 @@ class APIGraphBuilder(ABC):
                         self.functional_types, self.bt_factory)
 
     @abstractmethod
+    def get_type_parser(self) -> TypeParser:
+        pass
+
+    @abstractmethod
     def process_class(self, class_api: dict):
         pass
 
@@ -43,15 +49,11 @@ class APIGraphBuilder(ABC):
     def process_fields(self, fields: List[dict]):
         pass
 
-    @abstractmethod
-    def parse_type(self, str_t: str,
-                   type_variables: List[str] = None) -> tp.Type:
-        pass
-
 
 class JavaAPIGraphBuilder(APIGraphBuilder):
     def __init__(self, target_language):
         super().__init__()
+        self.target_language = target_language
         self.bt_factory: BuiltinFactory = BUILTIN_FACTORIES[target_language]
         self._class_name = None
         self._class_type_var_map: dict = {}
@@ -71,113 +73,16 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             )
         return super().build(docs)
 
-    def parse_wildcard(self, str_t) -> tp.WildCardType:
-        if str_t == "?":
-            return tp.WildCardType()
-        if "extends" in str_t:
-            return tp.WildCardType(
-                self.parse_type(str_t.split(" extends ", 1)[1]),
-                variance=tp.Covariant)
-        else:
-            return tp.WildCardType(
-                self.parse_type(str_t.split(" super ", 1)[1]),
-                variance=tp.Contravariant)
-
-    def parse_type_parameter(self, str_t: str,
-                             keep: bool = False) -> tp.TypeParameter:
-        segs = str_t.split(" extends ")
-        type_var_map = deepcopy(
-            self._class_type_var_map.get(self._class_name, {}))
-        type_var_map.update(self._current_func_type_var_map)
-        if keep:
-            # It might be the case where the names of function's and class's
-            # type parameters conflict. In this case, we should not replace
-            # the name of a function's type parameter with the name
-            # of the corresponding class type parameter.
-            type_var_map = {}
-
-        if len(segs) == 1:
-            return type_var_map.get(str_t, tp.TypeParameter(str_t))
-        bound = self.parse_type(segs[1])
-        return type_var_map.get(segs[0],
-                                tp.TypeParameter(segs[0], bound=bound))
-
-    def parse_reg_type(self, str_t: str) -> tp.Type:
-        if str_t.startswith("?"):
-            return self.parse_wildcard(str_t)
-        segs = str_t.split(".")
-        is_type_var = (
-            len(segs) == 1 or
-            (
-                " extends " in str_t and
-                "." not in str_t.split(" extends ")[0]
-             )
+    def get_type_parser(self):
+        return JavaTypeParser(
+            self.target_language,
+            self._class_type_var_map.get(self._class_name, {}),
+            self._current_func_type_var_map,
+            self._class_type_var_map
         )
-        if is_type_var:
-            return self.parse_type_parameter(str_t)
-        regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
-        segs = str_t.split("<", 1)
-        if len(segs) == 1:
-            return tp.SimpleClassifier(str_t)
-        base, type_args_str = segs[0], segs[1][:-1]
-        type_args = re.findall(regex, type_args_str)
-        new_type_args = []
-        for type_arg in type_args:
-            new_type_args.append(self.parse_type(type_arg))
-        type_var_map = self._class_type_var_map.get(base) or {}
-        values = list(type_var_map.values())
-        type_vars = [
-            (
-                values[i]
-                if i < len(values)
-                else tp.TypeParameter(base + ".T" + str(i + 1))
-            )
-            for i in range(len(new_type_args))
-        ]
-        return tp.TypeConstructor(base, type_vars).new(new_type_args)
 
-    def parse_type(self, str_t: str) -> tp.Type:
-        tf = self.bt_factory
-        if str_t.endswith("[]"):
-            str_t = str_t.split("[]")[0]
-            return tf.get_array_type().new([self.parse_type(str_t)])
-        elif str_t.endswith("..."):
-            # TODO consider this as a vararg rather than a single type.
-            return self.parse_type(str_t.split("...")[0])
-        elif str_t in ["char", "java.lang.Character"]:
-            primitive = str_t == "char"
-            return tf.get_char_type(primitive)
-        elif str_t in ["byte", "java.lang.Byte"]:
-            primitive = str_t == "byte"
-            return tf.get_byte_type(primitive)
-        elif str_t in ["short", "java.lang.Short"]:
-            primitive = str_t == "short"
-            return tf.get_short_type(primitive=primitive)
-        elif str_t in ["int", "java.lang.Integer"]:
-            primitive = str_t == "int"
-            return tf.get_integer_type(primitive=primitive)
-        elif str_t in ["long", "java.lang.Long"]:
-            primitive = str_t == "long"
-            return tf.get_long_type(primitive=primitive)
-        elif str_t in ["float", "java.lang.Float"]:
-            primitive = str_t == "float"
-            return tf.get_float_type(primitive=primitive)
-        elif str_t in ["double", "java.lang.Double"]:
-            primitive = str_t == "double"
-            return tf.get_double_type(primitive=primitive)
-        elif str_t in ["boolean", "java.lang.Boolean"]:
-            primitive = str_t == "boolean"
-            return tf.get_boolean_type(primitive=primitive)
-        elif str_t == "java.lang.String":
-            return tf.get_string_type()
-        elif str_t == "java.lang.Object":
-            return tf.get_any_type()
-        elif str_t == "java.lang.BigDecimal":
-            return tf.get_double_type()
-        elif str_t == "void":
-            return tf.get_void_type()
-        else:
-            return self.parse_reg_type(str_t)
+    def parse_type(self, str_t: str):
+        return self.get_type_parser().parse_type(str_t)
 
     def process_fields(self, class_node, fields):
         for field_api in fields:
@@ -201,8 +106,8 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
         # We use an OrderedDict because we need to store type parameters
         # in the order they appear in the corresponding definitions.
         for i, type_param_str in enumerate(type_parameters):
-            type_param = self.parse_type_parameter(type_param_str,
-                                                   keep=True)
+            type_param = self.get_type_parser().parse_type_parameter(
+                type_param_str, keep=True)
 
             # We use this auxiliarry type parameter to handle the renaming
             # of recursive bounds.
@@ -356,152 +261,17 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             )
         return super().build(docs)
 
-    def parse_wildcard(self, str_t) -> tp.WildCardType:
-        if str_t == "*":
-            return tp.WildCardType()
-        if "out " in str_t:
-            return tp.WildCardType(
-                self.parse_type(str_t.split("out ", 1)[1].lstrip()),
-                variance=tp.Covariant)
-        else:
-            return tp.WildCardType(
-                self.parse_type(str_t.split("in ", 1)[1].lstrip()),
-                variance=tp.Contravariant)
+    def get_type_parser(self):
+        return KotlinTypeParser(
+            self.target_language,
+            self._class_type_var_map.get(self._class_name, {}),
+            self._current_func_type_var_map,
+            self._class_type_var_map,
+            self._type_parameters
+        )
 
-    def parse_type_parameter(self, str_t: str,
-                             keep: bool = False) -> tp.TypeParameter:
-        if str_t.startswith("out "):
-            variance = tp.Covariant
-            type_param = str_t.split("out ", 1)[1]
-        elif str_t.startswith("in "):
-            variance = tp.Contravariant
-            type_param = str_t.split("in ", 1)[1]
-        else:
-            variance = tp.Invariant
-            type_param = str_t
-        segs = type_param.split(":")
-        type_var_map = deepcopy(
-            self._class_type_var_map.get(self._class_name, {}))
-        type_var_map.update(self._current_func_type_var_map)
-        if keep:
-            # It might be the case where the names of function's and class's
-            # type parameters conflict. In this case, we should not replace
-            # the name of a function's type parameter with the name
-            # of the corresponding class type parameter.
-            type_var_map = {}
-
-        if len(segs) == 1:
-            return type_var_map.get(type_param,
-                                    tp.TypeParameter(type_param,
-                                                     variance=variance))
-        bound = self.parse_type(segs[1].lstrip())
-        return type_var_map.get(
-            segs[0].rstrip(),
-            tp.TypeParameter(segs[0].rstrip(), variance=variance, bound=bound))
-
-    def parse_reg_type(self, str_t: str) -> tp.Type:
-        if str_t.startswith("*") or str_t.startswith("out ") or \
-                str_t.startswith("in "):
-            return self.parse_wildcard(str_t)
-        segs = str_t.split(".")
-        regex = "^{letter!s}([ ]?:.*)?$"
-        if any(re.match(regex.format(letter=t), str_t)
-               for t in self._type_parameters):
-            return self.parse_type_parameter(str_t)
-        regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
-        segs = str_t.replace(", ", ",").split("<", 1)
-        if len(segs) == 1:
-            return tp.SimpleClassifier(str_t)
-        base, type_args_str = segs[0], segs[1][:-1]
-        type_args = re.findall(regex, type_args_str)
-        new_type_args = []
-        for type_arg in type_args:
-            new_type_args.append(self.parse_type(type_arg))
-        type_var_map = self._class_type_var_map.get(base) or {}
-        values = list(type_var_map.values())
-        type_vars = [
-            (
-                values[i]
-                if i < len(values)
-                else tp.TypeParameter(base + ".T" + str(i + 1))
-            )
-            for i in range(len(new_type_args))
-        ]
-        return tp.TypeConstructor(base, type_vars).new(new_type_args)
-
-    def parse_type(self, str_t: str) -> tp.Type:
-        tf = self.bt_factory
-        if str_t.endswith("?"):
-            # This is a nullable type.
-            return kt.NullableType().new([self.parse_type(str_t[:-1])])
-        elif str_t.startswith("Array<"):
-            str_t = str_t.split("Array<")[1][:-1]
-            return tf.get_array_type().new([self.parse_type(str_t)])
-        elif str_t == "CharArray":
-            return kt.CharArray
-        elif str_t == "ByteArray":
-            return kt.ByteArray
-        elif str_t == "ShortArray":
-            return kt.ShortArray
-        elif str_t == "IntArray":
-            return kt.IntegerArray
-        elif str_t == "LongArray":
-            return kt.LongArray
-        elif str_t == "FloatArray":
-            return kt.FloatArray
-        elif str_t == "DoubleArray":
-            return kt.DoubleArray
-        elif str_t == "int[]":
-            return kt.IntegerArray
-        elif str_t.endswith("[]"):
-            str_t = str_t.split("[]")[0]
-            return tf.get_array_type().new([self.parse_type(str_t)])
-        elif str_t.startswith("vararg "):
-            return self.parse_type(str_t.split("vararg ")[1])
-        elif str_t == "java.lang.Byte":
-            return tp.SimpleClassifier("Byte?")
-        elif str_t == "java.lang.Short":
-            return tp.SimpleClassifier("Short?")
-        elif str_t == "java.lang.Integer":
-            return tp.SimpleClassifier("Int?")
-        elif str_t == "java.lang.Long":
-            return tp.SimpleClassifier("Long?")
-        elif str_t == "java.lang.Float":
-            return tp.SimpleClassifier("Float?")
-        elif str_t == "java.lang.Double":
-            return tp.SimpleClassifier("Double?")
-        elif str_t == "java.lang.Character":
-            return tp.SimpleClassifier("Char?")
-        elif str_t == "java.lang.Boolean":
-            return tp.SimpleClassifier("Boolean?")
-        elif str_t in ["Char", "char"]:
-            return tf.get_char_type()
-        elif str_t in ["Byte", "byte"]:
-            return tf.get_byte_type()
-        elif str_t in ["Short", "short"]:
-            return tf.get_short_type()
-        elif str_t in ["Int", "int"]:
-            return tf.get_integer_type()
-        elif str_t in ["Long", "long"]:
-            return tf.get_long_type()
-        elif str_t in ["Float", "float"]:
-            return tf.get_float_type()
-        elif str_t in ["Double", "double"]:
-            return tf.get_double_type()
-        elif str_t in ["Boolean", "boolean"]:
-            return tf.get_boolean_type()
-        elif str_t in ["String", "java.lang.String"]:
-            return tf.get_string_type()
-        elif str_t in ["Number", "java.lang.Number"]:
-            return tf.get_number_type()
-        elif str_t in ["Any", "java.lang.Object"]:
-            return tf.get_any_type()
-        elif str_t == "java.lang.BigDecimal":
-            return tf.get_double_type()
-        elif str_t in ["Unit", "void", "Void"]:
-            return tf.get_void_type()
-        else:
-            return self.parse_reg_type(str_t)
+    def parse_type(self, str_t: str):
+        return self.get_type_parser().parse_type(str_t)
 
     def _rename_type_parameters(self, prefix: str,
                                 type_parameters: List[str],

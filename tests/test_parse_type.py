@@ -1,10 +1,9 @@
 from src.ir import types as tp, java_types as jt, kotlin_types as kt
-from src.generators.api.builder import (JavaAPIGraphBuilder,
-                                        KotlinAPIGraphBuilder)
+from src.generators.api.type_parsers import JavaTypeParser, KotlinTypeParser
 
 
 def test_primitives():
-    b = JavaAPIGraphBuilder("java")
+    b = JavaTypeParser("java")
     assert b.parse_type("char") == jt.CharType(primitive=True)
     assert b.parse_type("byte") == jt.ByteType(primitive=True)
     assert b.parse_type("short") == jt.ShortType(primitive=True)
@@ -16,7 +15,7 @@ def test_primitives():
 
 
 def test_builtin_types():
-    b = JavaAPIGraphBuilder("java")
+    b = JavaTypeParser("java")
     assert b.parse_type("java.lang.Character") == jt.CharType(primitive=False)
     assert b.parse_type("java.lang.Byte") == jt.ByteType(primitive=False)
     assert b.parse_type("java.lang.Short") == jt.ShortType(primitive=False)
@@ -32,7 +31,7 @@ def test_builtin_types():
 
 
 def test_regular_types():
-    b = JavaAPIGraphBuilder("java")
+    b = JavaTypeParser("java")
     assert b.parse_type("java.util.Calendar") == tp.SimpleClassifier(
         "java.util.Calendar")
     assert b.parse_type("java.util.List<java.lang.String>") == tp.TypeConstructor(
@@ -57,7 +56,7 @@ def test_regular_types():
 
 
 def test_type_variables():
-    b = JavaAPIGraphBuilder("java")
+    b = JavaTypeParser("java")
     assert b.parse_type("T") == tp.TypeParameter("T")
     assert b.parse_type("T extends java.lang.String") == tp.TypeParameter(
         "T", bound=jt.String)
@@ -78,7 +77,7 @@ def test_type_variables():
 
 
 def test_wildcards():
-    b = JavaAPIGraphBuilder("java")
+    b = JavaTypeParser("java")
     assert b.parse_type("?") == tp.WildCardType()
     assert b.parse_type("java.List<?>") == tp.TypeConstructor(
         "java.List", [tp.TypeParameter("java.List.T1")]).new([tp.WildCardType()])
@@ -91,7 +90,7 @@ def test_wildcards():
 
 
 def test_kotlin_primitives():
-    b = KotlinAPIGraphBuilder()
+    b = KotlinTypeParser()
     assert b.parse_type("Char") == kt.CharType()
     assert b.parse_type("Byte") == kt.ByteType()
     assert b.parse_type("Short") == kt.ShortType()
@@ -103,7 +102,7 @@ def test_kotlin_primitives():
 
 
 def test_kotlin_builtin_types():
-    b = KotlinAPIGraphBuilder()
+    b = KotlinTypeParser()
     assert b.parse_type("java.lang.Character") == tp.SimpleClassifier("Char?")
     assert b.parse_type("java.lang.Byte") == tp.SimpleClassifier("Byte?")
     assert b.parse_type("java.lang.Short") == tp.SimpleClassifier("Short?")
@@ -129,7 +128,7 @@ def test_kotlin_builtin_types():
 
 
 def test_kotlin_regular_types():
-    b = KotlinAPIGraphBuilder()
+    b = KotlinTypeParser()
     assert b.parse_type("Calendar") == tp.SimpleClassifier("Calendar")
     assert b.parse_type("List<String>") == tp.TypeConstructor(
         "List", [tp.TypeParameter("List.T1")]).new([kt.String])
@@ -153,8 +152,7 @@ def test_kotlin_regular_types():
 
 
 def test_kotlin_type_variables():
-    b = KotlinAPIGraphBuilder()
-    b._type_parameters = ["T", "Foo", "X"]
+    b = KotlinTypeParser(type_parameters=["T", "Foo", "X"])
     assert b.parse_type("T") == tp.TypeParameter("T")
     assert b.parse_type("T : java.lang.String") == tp.TypeParameter(
         "T", bound=kt.String)
@@ -184,7 +182,7 @@ def test_kotlin_type_variables():
 
 
 def test_kotlin_wildcards():
-    b = KotlinAPIGraphBuilder()
+    b = KotlinTypeParser()
     assert b.parse_type("*") == tp.WildCardType()
     assert b.parse_type("java.List<*>") == tp.TypeConstructor(
         "java.List", [tp.TypeParameter("java.List.T1")]).new([tp.WildCardType()])
@@ -200,3 +198,28 @@ def test_kotlin_wildcards():
         )])
     assert b.parse_type("Array<*>?") == kt.NullableType().new(
         [kt.ArrayType().new([tp.WildCardType()])])
+
+
+def test_kotlin_function_types():
+    b = KotlinTypeParser()
+    assert b.parse_type("(Boolean) -> String") == kt.FunctionType(1).new(
+        [kt.Boolean, kt.String])
+    assert b.parse_type("(Boolean) -> (String)") == kt.FunctionType(1).new(
+        [kt.Boolean, kt.String]
+    )
+    assert b.parse_type("() -> Unit") == kt.FunctionType(0).new([kt.Unit])
+    t = b.parse_type("(Boolean, (Int) -> Boolean, List<String>) -> Set<String>")
+    exp_t = kt.FunctionType(3).new([
+        kt.Boolean,
+        kt.FunctionType(1).new([kt.Integer, kt.Boolean]),
+        tp.TypeConstructor("List", [tp.TypeParameter("List.T1")]).new([kt.String]),
+        tp.TypeConstructor("Set", [tp.TypeParameter("Set.T1")]).new([kt.String]),
+    ])
+
+    assert t == exp_t
+
+    t = b.parse_type("((Boolean) -> String) -> (Int) -> Int")
+    exp_t = kt.FunctionType(1).new([
+        kt.FunctionType(1).new([kt.Boolean, kt.String]),
+        kt.FunctionType(1).new([kt.Integer, kt.Integer])
+    ])
