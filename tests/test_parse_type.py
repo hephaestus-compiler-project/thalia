@@ -223,3 +223,17 @@ def test_kotlin_function_types():
         kt.FunctionType(1).new([kt.Boolean, kt.String]),
         kt.FunctionType(1).new([kt.Integer, kt.Integer])
     ])
+    assert t == exp_t
+
+    t = b.parse_type("(Map<String, Int>) -> Unit")
+    exp_t = kt.FunctionType(1).new([
+        tp.TypeConstructor("Map", [
+            tp.TypeParameter("Map.T1"),
+            tp.TypeParameter("Map.T2")
+        ]).new([kt.String, kt.Integer]),
+        kt.Unit
+    ])
+    assert t == exp_t
+
+    assert b.parse_type("(a: String, b: Int) -> Int") == kt.FunctionType(2).new(
+        [kt.String, kt.Integer, kt.Integer])

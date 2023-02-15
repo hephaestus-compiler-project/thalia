@@ -157,7 +157,7 @@ class JavaTypeParser(TypeParser):
 class KotlinTypeParser(TypeParser):
     FUNC_SEP_REGEX = re.compile(r"->(?![^()]*\))")
 
-    COMMA_SEP_REGEX = re.compile(r"(?:[^,(]|\([^)]*\))+")
+    COMMA_SEP_REGEX = re.compile(r"(?:[^,<(]|\([^)]*\)|<[^>]*>)+")
 
     FUNC_REGEX = re.compile(r"^\(.*\) -> .*")
 
@@ -179,7 +179,7 @@ class KotlinTypeParser(TypeParser):
         assert len(segs) == 2
         param_strs = re.findall(self.COMMA_SEP_REGEX, segs[0].rstrip()[1:-1])
         param_types = [
-            self.parse_type(param_str.strip())
+            self.parse_type(param_str.strip().split(": ", 1)[-1])
             for param_str in param_strs
         ]
         ret_type = self.parse_type(segs[1].lstrip())
