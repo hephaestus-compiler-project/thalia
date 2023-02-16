@@ -118,6 +118,8 @@ class JavaAPIDocConverter(APIDocConverter):
             if not apidoc_path.endswith(".html"):
                 continue
             data = self.process_class(file2html(apidoc_path))
+            if data:
+                data["language"] = args.language
             dict2json(args.output, data)
 
     def process_class(self, html_doc):
@@ -362,10 +364,12 @@ class KotlinAPIDocConverter(APIDocConverter):
     def process(self, args):
         toplevel_path = Path(args.input).joinpath("index.html")
         data = self.process_toplevel(file2html(toplevel_path))
+        data["language"] = args.language
         dict2json(args.output, data)
         for path in Path(args.input).rglob('*/index.html'):
             apidoc_path = str(path)
             data = self.process_class(file2html(apidoc_path))
+            data["language"] = args.language
             dict2json(args.output, data)
 
     def process_toplevel(self, html_doc):
