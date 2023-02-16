@@ -385,6 +385,13 @@ class APIGraph():
         return possibles_types
 
     def get_functional_type(self, etype: tp.Type):
+        if etype.is_parameterized():
+            # Check if this the given type is a native function type, e.g.,
+            # (Boolean) -> String.
+            t_constructor = etype.t_constructor
+            if t_constructor == self.bt_factory.get_function_type(
+                    len(t_constructor.type_parameters) - 1):
+                return etype
         class_type = etype
         if etype.is_parameterized():
             class_type = etype.t_constructor
