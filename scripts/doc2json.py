@@ -560,7 +560,7 @@ class KotlinAPIDocConverter(APIDocConverter):
 
     def extract_field_name(self, field_doc):
         field_doc.find("span", {"class": "top-right-position"}).decompose()
-        regex = re.compile(".*va[lr] ([^\\.]+\\.)?([^ <>\\.]+): .*")
+        regex = re.compile(".*va[lr] (.+\\.)?([^ <>\\.]+): .*")
         match = re.match(regex, field_doc.text)
         assert match is not None
         return match.group(2)
@@ -606,6 +606,7 @@ class KotlinAPIDocConverter(APIDocConverter):
     def process_fields(self, fields):
         field_objs = []
         for field_doc in fields:
+            self._replace_anchors_with_package_prefix(field_doc.select("a"))
             field_obj = {
                 "name": self.extract_field_name(field_doc),
                 "type": self.extract_field_type(field_doc),
