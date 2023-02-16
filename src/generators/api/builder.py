@@ -1,13 +1,12 @@
 from abc import ABC, abstractmethod
 from collections import OrderedDict
 from copy import deepcopy
-import re
 from typing import List, Dict
 
 
 import networkx as nx
 
-from src.ir import BUILTIN_FACTORIES, types as tp, kotlin_types as kt
+from src.ir import BUILTIN_FACTORIES, types as tp
 from src.ir.builtins import BuiltinFactory
 from src.translators.kotlin import KotlinTranslator
 from src.generators.api.api_graph import (APIGraph, IN, OUT, Method,
@@ -252,6 +251,7 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             if not api_doc["type_parameters"]:
                 continue
             cls_name = api_doc["name"]
+            self.target_language = api_doc["language"]
             self._class_name = cls_name
             self._class_type_var_map[cls_name] = OrderedDict()
             self._rename_type_parameters(
@@ -261,13 +261,20 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         return super().build(docs)
 
     def get_type_parser(self):
-        return KotlinTypeParser(
-            self._class_type_var_map.get(self._class_name, {}),
-            self._current_func_type_var_map,
-            self._class_type_var_map,
-        )
+        parsers = {
+            "java": JavaTypeParser,
+            "kotlin": KotlinTypeParser
+        }
+        args = (self._class_type_var_map.get(self._class_name, {}),
+                self._current_func_type_var_map, self._class_type_var_map)
+        if self.target_language == "java":
+            args = ("kotlin",) + args
+
+        return parsers[self.target_language](*args)
 
     def parse_type(self, str_t: str):
+        if str_t == "Any" and type(self.get_type_parser()) is JavaTypeParser:
+            import pdb; pdb.set_trace()
         return self.get_type_parser().parse_type(str_t)
 
     def _rename_type_parameters(self, prefix: str,
@@ -331,7 +338,7 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
                 receiver = class_node
             receiver = (
                 self.parse_type(field_api["receiver"])
-                if field_api["receiver"]
+                if field_api.get("receiver")
                 else class_node)
             if receiver:
                 self._class_name = (
@@ -350,7 +357,7 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
     def get_prefix(self, method_api):
         if self._class_name:
             return self._class_name
-        receiver = method_api["receiver"]
+        receiver = method_api.get("receiver")
         if receiver is None:
             return ""
         return receiver
@@ -372,7 +379,7 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             if class_node:
                 receiver = class_node
             receiver = (self.parse_type(method_api["receiver"])
-                        if method_api["receiver"]
+                        if method_api.get("receiver")
                         else class_node)
             if receiver:
                 self.graph.add_node(receiver)
@@ -382,13 +389,19 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
                 self.graph.add_node(param)
 
             is_constructor = method_api["is_constructor"]
+            is_static = method_api["is_static"]
             if is_constructor:
                 method_node = Constructor(prefix, parameters)
+            elif is_static:
+                method_node = Method(self._class_name + "." + name,
+                                     self._class_name,
+                                     parameters,
+                                     type_parameters)
             else:
                 method_node = Method(name, prefix, parameters,
                                      type_parameters)
             self.graph.add_node(method_node)
-            if not (is_constructor or receiver is None):
+            if not (is_constructor or receiver is None or is_static):
                 self.graph.add_edge(receiver, method_node, label=IN)
             output_type = None
             ret_type = method_api["return_type"]
@@ -430,7 +443,7 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             for st in class_api["implements"] + class_api["inherits"]
         }
         if not super_types:
-            super_types.add(self.parse_type("Any"))
+            super_types.add(self.bt_factory.get_any_type())
         for st in super_types:
             kwargs = {}
             source = st
@@ -444,7 +457,8 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
                                               **kwargs)
 
     def process_class(self, class_api):
-        if class_api["is_class"]:
+        self.target_language = class_api["language"]
+        if class_api.get("is_class", True):
             self._process_class(class_api)
         else:
             self._class_name = None
