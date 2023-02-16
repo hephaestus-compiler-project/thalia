@@ -7,6 +7,7 @@ import networkx as nx
 from src import utils
 from src.ir import types as tp, type_utils as tu
 from src.generators.api import utils as au
+from src.generators.api.matcher import Matcher
 
 
 IN = 0
@@ -433,7 +434,8 @@ class APIGraph():
                 candidate_functions.append((api, sub))
         return candidate_functions
 
-    def encode_api_components(self) -> List[APIEncoding]:
+    def encode_api_components(self,
+                              matcher: Matcher = None) -> List[APIEncoding]:
         api_components = (Field, Constructor, Method)
         api_nodes = [
             n
@@ -442,6 +444,8 @@ class APIGraph():
         ]
         encodings = []
         for node in api_nodes:
+            if matcher and not matcher.match(node):
+                continue
             view = self.api_graph.in_edges(node)
             type_var_map = {}
             func_type_parameters = getattr(node, "type_parameters", [])

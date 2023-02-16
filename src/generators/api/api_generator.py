@@ -23,16 +23,16 @@ class APIGenerator(Generator):
         self.api_docs = api_docs
         self.api_graph = self.API_GRAPH_BUILDERS[language](language).build(
             api_docs)
-        self.encodings = self.api_graph.encode_api_components()
+        api_rules_file = options.get("api-rules")
+        kwargs = {}
+        if api_rules_file:
+            kwargs["matcher"] = match.parse_rule_file(api_rules_file)
+        self.encodings = self.api_graph.encode_api_components(**kwargs)
         self.visited = set()
         self.visited_exprs = {}
         self.programs_gen = self.compute_programs()
         self._has_next = True
         self.start_index = options.get("start-index", 0)
-        self.api_matcher = None
-        api_rules_file = options.get("api-rules")
-        if api_rules_file:
-            self.api_matcher = match.parse_rule_file(api_rules_file)
 
     def compute_programs(self):
         func_name = "test"
@@ -41,8 +41,6 @@ class APIGenerator(Generator):
         for api, receivers, parameters, returns, type_map in self.encodings:
             if isinstance(api, ag.Constructor):
                 # TODO
-                continue
-            if self.api_matcher and not self.api_matcher.match(api):
                 continue
             types = (receivers, *parameters, returns)
             if types in self.visited:
