@@ -237,3 +237,20 @@ def test_kotlin_function_types():
 
     assert b.parse_type("(a: String, b: Int) -> Int") == kt.FunctionType(2).new(
         [kt.String, kt.Integer, kt.Integer])
+
+    t = b.parse_type("(kotlin.collections.Map.Entry<K, V>) -> R?")
+    print("here")
+    exp_t = kt.FunctionType(1).new([
+        tp.TypeConstructor(
+            "kotlin.collections.Map.Entry",
+            [
+                tp.TypeParameter("kotlin.collections.Map.Entry.T1"),
+                tp.TypeParameter("kotlin.collections.Map.Entry.T2"),
+            ]
+        ).new([
+            tp.TypeParameter("K"),
+            tp.TypeParameter("V")
+        ]),
+        kt.NullableType().new([tp.TypeParameter("R")])
+    ])
+    assert t == exp_t
