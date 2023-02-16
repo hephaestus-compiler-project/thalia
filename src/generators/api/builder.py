@@ -273,8 +273,6 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         return parsers[self.target_language](*args)
 
     def parse_type(self, str_t: str):
-        if str_t == "Any" and type(self.get_type_parser()) is JavaTypeParser:
-            import pdb; pdb.set_trace()
         return self.get_type_parser().parse_type(str_t)
 
     def _rename_type_parameters(self, prefix: str,
