@@ -203,6 +203,11 @@ class APIGraph():
             type_var_map[type_v] = assignment
         return type_var_map
 
+    def get_incoming_node(self, node):
+        view = self.api_graph.in_edges(node)
+        assert len(view) == 1
+        return list(view)[0][0]
+
     def _subtypes_of_wildcards(self, node):
         possible_type_args = []
         subtypes = set()

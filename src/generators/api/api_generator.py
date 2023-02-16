@@ -121,18 +121,16 @@ class APIGenerator(Generator):
         if len(segs) > 1:
             rec = None
         else:
-            rec_type = self.api_graph.get_type_by_name(api.get_class_name())
+            rec_type = self.api_graph.get_incoming_node(api)
             if rec_type.is_type_constructor():
                 handler = self.api_graph.get_instantiations_of_recursive_bound
-                try:
-                    rec_type, sub = tu.instantiate_type_constructor(
-                        rec_type, self.api_graph.get_reg_types(),
-                        type_var_map=type_var_map,
-                        rec_bound_handler=handler
-                    )
-                except:
-                    import pdb; pdb.set_trace()
+                rec_type, sub = tu.instantiate_type_constructor(
+                    rec_type, self.api_graph.get_reg_types(),
+                    type_var_map=type_var_map,
+                    rec_bound_handler=handler
+                )
                 type_var_map.update(sub)
+            rec_type = tp.substitute_type(rec_type, type_var_map)
             rec = (
                 ast.New(rec_type, args=[])  # This is a constructor reference
                 if isinstance(api, ag.Constructor)
