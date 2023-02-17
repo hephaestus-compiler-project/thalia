@@ -159,9 +159,8 @@ class APIGraphBuilder(ABC):
         return self.get_type_parser().parse_type(str_t)
 
     def get_api_outgoing_node(self, output_type: tp.Type):
-        is_array = output_type.name == self.bt_factory.get_array_type().name
         kwargs = {}
-        if output_type.is_parameterized() and not is_array:
+        if output_type.is_parameterized():
             target_node = output_type.t_constructor
             kwargs = {
                 "constraint": output_type.get_type_variable_assignments()
@@ -267,6 +266,7 @@ class APIGraphBuilder(ABC):
 
 
 class JavaAPIGraphBuilder(APIGraphBuilder):
+
     def __init__(self, target_language):
         super().__init__(target_language)
         self.api_language = "java"
@@ -281,6 +281,7 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
 
 
 class KotlinAPIGraphBuilder(APIGraphBuilder):
+
     def __init__(self, target_language="kotlin"):
         super().__init__(target_language)
 
@@ -306,3 +307,10 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             self.class_name = None
             self.process_methods(class_api["methods"])
             self.process_fields(class_api["fields"])
+
+    def build_functional_interface(self, method_api: dict,
+                                   parameters: List[tp.Type],
+                                   ret_type: tp.Type):
+        # We disable functional interfaces until this gets fixed:
+        # https://youtrack.jetbrains.com/issue/KT-48838/Support-SAM-conversions-on-value-parameters-inferred-into-Kotlin-functional-interface
+        pass
