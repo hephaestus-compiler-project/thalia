@@ -619,7 +619,8 @@ class KotlinAPIDocConverter(APIDocConverter):
                 "receiver": self.extract_field_receiver(field_doc),
                 "type_parameters": self.extract_field_type_parameters(
                     field_doc),
-                "access_mod": self.extract_field_access_mod(field_doc)
+                "access_mod": self.extract_field_access_mod(field_doc),
+                "is_static": False
             }
             field_objs.append(field_obj)
         return field_objs
