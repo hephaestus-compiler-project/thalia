@@ -209,50 +209,47 @@ class APIGraph():
         assert len(view) == 1
         return list(view)[0][0]
 
-    def _subtypes_of_wildcards(self, node):
+    def subtypes_of_parameterized(self, node):
         possible_type_args = []
         subtypes = set()
-        for t_arg in node.type_args:
-            if not t_arg.is_wildcard():
+        for i, t_arg in enumerate(node.type_args):
+            type_param = node.t_constructor.type_parameters[i]
+            # Type argument not wildcard, type parameter invariant
+            if not t_arg.is_wildcard() and type_param.is_invariant():
                 possible_type_args.append([t_arg])
                 continue
-            if t_arg.is_invariant():
+
+            # Type argument invariant
+            if t_arg.is_wildcard() and t_arg.is_invariant():
                 possible_type_args.append(self.get_reg_types())
-            elif t_arg.is_covariant():
+
+            # Type argument covariant or type param covariant
+            elif (t_arg.is_wildcard() and t_arg.is_covariant() or
+                  type_param.is_covariant()):
                 possible_type_args.append({
-                    n for n in self.subtypes(t_arg.bound)
+                    n for n in self.subtypes(getattr(t_arg, "bound", t_arg))
                     if not n.is_type_constructor()})
+            # Type argument contravariant or type param contravariant
             else:
                 possible_type_args.append({n for n in self.supertypes(
-                    t_arg.bound)})
+                    getattr(t_arg, "bound", t_arg))})
         for combination in itertools.product(*possible_type_args):
             new_sub = node.t_constructor.new(list(combination))
             subtypes.add(new_sub)
-            subtypes.update(self.subtypes(new_sub))
+            subtypes.update(self.subtypes_of_parameterized_inheritance(
+                new_sub))
         return subtypes
 
-    def subtypes(self, node: tp.Type):
-        subtypes = {node}
-        if node.is_type_var():
-            return subtypes
-        if node.is_parameterized() and any(t_arg.is_wildcard()
-                                           for t_arg in node.type_args):
-            subtypes.update(self._subtypes_of_wildcards(node))
-            return subtypes
-        if not node.is_parameterized() and not node.is_type_constructor():
-            if node not in self.subtyping_graph:
-                return subtypes
-            subtypes.update(nx.descendants(self.subtyping_graph, node))
-            return subtypes
+    def subtypes_of_parameterized_inheritance(
+            self, node: tp.ParameterizedType) -> Set[tp.Type]:
+        assert node.is_parameterized()
 
-        if node.is_type_constructor():
-            # FIXME type constructor subtypes
-            return subtypes
-
+        subtypes = set()
         type_var_map = node.get_type_variable_assignments()
         node = node.t_constructor
         if node not in self.subtyping_graph:
             return subtypes
+
         excluded_nodes = set()
         for k, v in nx.dfs_edges(self.subtyping_graph, node):
             constraint = self.subtyping_graph[k][v].get("constraint") or {}
@@ -273,6 +270,34 @@ class APIGraph():
                     subtypes.add(inst_t[0])
             else:
                 subtypes.add(v)
+        return subtypes
+
+    def subtypes(self, node: tp.Type, include_self=True):
+        subtypes = {node} if include_self else set()
+        if node.is_type_var():
+            return subtypes
+        if node.is_parameterized() and any(
+                t_arg.is_wildcard() or
+                not node.t_constructor.type_parameters[i].is_invariant()
+                for i, t_arg in enumerate(node.type_args)
+        ):
+            # Here the parameterized type either contains wildcards or the
+            # type is derived from non-invariant type parameters.
+            subtypes.update(self.subtypes_of_parameterized(node))
+            return subtypes
+
+        # Subtypes of simple classifiers.
+        if not node.is_parameterized() and not node.is_type_constructor():
+            if node not in self.subtyping_graph:
+                return subtypes
+            subtypes.update(nx.descendants(self.subtyping_graph, node))
+            return subtypes
+
+        if node.is_type_constructor():
+            # FIXME type constructor subtypes
+            return subtypes
+
+        subtypes.update(self.subtypes_of_parameterized_inheritance(node))
         return subtypes
 
     def supertypes(self, node: tp.Type):
@@ -351,6 +376,9 @@ class APIGraph():
         possibles_types = set()
         bound = type_param.bound
         if not bound or not bound.is_parameterized():
+            return possibles_types
+
+        if bound.t_constructor not in self.subtyping_graph:
             return possibles_types
 
         subtypes = nx.descendants(self.subtyping_graph, bound.t_constructor)
@@ -452,9 +480,14 @@ class APIGraph():
             if not view:
                 receivers = {self.EMPTY}
                 if func_type_parameters:
-                    type_var_map.update(
-                        tu.instantiate_parameterized_function(
-                            func_type_parameters, self.get_reg_types()))
+                    handler = self.get_instantiations_of_recursive_bound
+                    func_type_var_map = tu.instantiate_parameterized_function(
+                            func_type_parameters, self.get_reg_types(),
+                            rec_bound_handler=handler)
+                    if not func_type_var_map:
+                        continue
+
+                    type_var_map.update(func_type_var_map)
             else:
                 assert len(view) == 1
                 receiver = list(view)[0][0]
@@ -476,18 +509,30 @@ class APIGraph():
                         for t in func_type_parameters
                     ]
                     if func_type_parameters:
-                        type_var_map.update(
-                            tu.instantiate_parameterized_function(
-                                func_type_parameters, self.get_reg_types()))
+                        handler = self.get_instantiations_of_recursive_bound
+                        func_type_var_map = tu.instantiate_parameterized_function(
+                                func_type_parameters, self.get_reg_types(),
+                                rec_bound_handler=handler)
+                        if not func_type_var_map:
+                            continue
+
+                        type_var_map.update(func_type_var_map)
                 else:
                     if func_type_parameters:
-                        type_var_map.update(
-                            tu.instantiate_parameterized_function(
-                                func_type_parameters, self.get_reg_types()))
+                        handler = self.get_instantiations_of_recursive_bound
+                        func_type_var_map = tu.instantiate_parameterized_function(
+                                func_type_parameters, self.get_reg_types(),
+                                rec_bound_handler=handler)
+                        if not func_type_var_map:
+                            continue
+
+                        type_var_map.update(func_type_var_map)
                     receiver = tp.substitute_type(receiver, type_var_map)
                 receivers = {receiver}
                 if receiver != self.bt_factory.get_any_type():
-                    receivers.update(self.subtypes(receiver))
+                    include_self = not (receiver.is_parameterized() and
+                                        receiver.has_wildcards())
+                    receivers.update(self.subtypes(receiver, include_self))
             parameters = [{tp.substitute_type(p, type_var_map)}
                           for p in getattr(node, "parameters", [])]
             for param_set in parameters:

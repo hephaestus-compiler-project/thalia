@@ -334,6 +334,33 @@ def test_subtypes4():
     }
 
 
+def test_subtypes6():
+    b = JavaAPIGraphBuilder("java")
+    api_graph = b.build(DOCS2)
+
+    # Case 1
+    subtypes = api_graph.subtypes(b.parse_type("java.lang.Object[]"))
+    assert subtypes == {
+        b.parse_type("java.lang.Object[]"),
+        b.parse_type("java.Number[]"),
+        b.parse_type("java.Integer[]"),
+        b.parse_type("java.Long[]"),
+        b.parse_type("java.String[]"),
+    }
+
+    # Case 2
+    subtypes = api_graph.subtypes(b.parse_type("java.Number[]"))
+    assert subtypes == {
+        b.parse_type("java.Number[]"),
+        b.parse_type("java.Integer[]"),
+        b.parse_type("java.Long[]"),
+    }
+
+    # Case 3
+    subtypes = api_graph.subtypes(b.parse_type("java.String[]"))
+    assert subtypes == { b.parse_type("java.String[]") }
+
+
 def test_supertypes1():
     b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS1)
