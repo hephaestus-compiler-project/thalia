@@ -113,7 +113,6 @@ def test_kotlin_builtin_types():
     assert b.parse_type("java.lang.String") == kt.String
     assert b.parse_type("java.lang.Object") == kt.Any
     assert b.parse_type("void") == kt.Unit
-    assert b.parse_type("java.lang.String[]") == kt.Array.new([kt.String])
     assert b.parse_type("kotlin.Array<kotlin.String>") == kt.Array.new([kt.String])
     assert b.parse_type("int[]") == kt.IntegerArray
     assert b.parse_type("kotlin.CharArray") == kt.CharArray

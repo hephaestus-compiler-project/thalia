@@ -8,17 +8,32 @@ from src.ir import BUILTIN_FACTORIES, types as tp, kotlin_types as kt
 from src.ir.builtins import BuiltinFactory
 
 
+def map_type(f):
+    def inner(parser: TypeParser, str_t: str):
+        segs = str_t.split("<", 1)
+        type_name = segs[0]
+        if type_name in parser.mapped_types:
+            mapped_type, mapped_parser = parser.mapped_types[type_name]
+            str_t = mapped_type + (segs[1] if len(segs) == 2 else "")
+            return mapped_parser.parse_type(mapped_type)
+        else:
+            return f(parser, str_t)
+    return inner
+
+
 class TypeParser(ABC):
     def __init__(self, target_language: str,
                  class_type_name_map: Dict[str, tp.TypeParameter] = None,
                  func_type_name_map: Dict[str, tp.TypeParameter] = None,
                  classes_type_parameters: dict = None,
-                 type_spec: Dict[str, tp.Type] = None):
+                 type_spec: Dict[str, tp.Type] = None,
+                 mapped_types: Dict[str, tuple] = None):
         self.bt_factory: BuiltinFactory = BUILTIN_FACTORIES[target_language]
         self.class_type_name_map = class_type_name_map or {}
         self.func_type_name_map = func_type_name_map or {}
         self.classes_type_parameters = classes_type_parameters or {}
         self.type_spec = type_spec or {}
+        self.mapped_types = mapped_types or {}
 
     @abstractmethod
     def parse_function_type(self, str_t: str) -> tp.ParameterizedType:
@@ -29,11 +44,11 @@ class TypeParser(ABC):
         pass
 
     @abstractmethod
-    def parse_type_parameter(self, str_t: str) -> tp.TypeParameter:
+    def parse_type_parameter(self, str_t: str, keep: bool) -> tp.TypeParameter:
         pass
 
     @abstractmethod
-    def parse_type(self, str_t: str, keep: bool) -> tp.Type:
+    def parse_type(self, str_t) -> tp.Type:
         pass
 
 
@@ -42,10 +57,11 @@ class JavaTypeParser(TypeParser):
                  class_type_name_map: Dict[str, tp.TypeParameter] = None,
                  func_type_name_map: Dict[str, tp.TypeParameter] = None,
                  classes_type_parameters: dict = None,
-                 type_spec: Dict[str, tp.Type] = None):
+                 type_spec: Dict[str, tp.Type] = None,
+                 mapped_types: Dict[str, tuple] = None):
         super().__init__(target_language, class_type_name_map,
                          func_type_name_map, classes_type_parameters,
-                         type_spec)
+                         type_spec, mapped_types)
 
     def parse_function_type(self, str_t: str) -> tp.ParameterizedType:
         pass
@@ -125,7 +141,13 @@ class JavaTypeParser(TypeParser):
         elif str_t.endswith("..."):
             # TODO consider this as a vararg rather than a single type.
             return self.parse_type(str_t.split("...")[0])
-        elif str_t in ["char", "java.lang.Character"]:
+        else:
+            return self._parse_type(str_t)
+
+    @map_type
+    def _parse_type(self, str_t: str) -> tp.Type:
+        tf = self.bt_factory
+        if str_t in ["char", "java.lang.Character"]:
             primitive = str_t == "char"
             return tf.get_char_type(primitive)
         elif str_t in ["byte", "java.lang.Byte"]:
@@ -172,10 +194,11 @@ class KotlinTypeParser(TypeParser):
                  class_type_name_map: Dict[str, tp.TypeParameter] = None,
                  func_type_name_map: Dict[str, tp.TypeParameter] = None,
                  classes_type_parameters: dict = None,
-                 type_spec: Dict[str, tp.Type] = None):
+                 type_spec: Dict[str, tp.Type] = None,
+                 mapped_types: Dict[str, tuple] = None):
         super().__init__("kotlin", class_type_name_map,
                          func_type_name_map, classes_type_parameters,
-                         type_spec)
+                         type_spec, mapped_types)
 
     def is_func_type(self, str_t: str) -> bool:
         return bool(re.match(self.FUNC_REGEX, str_t))
@@ -287,7 +310,13 @@ class KotlinTypeParser(TypeParser):
         elif str_t.startswith("kotlin.Array<"):
             str_t = str_t.split("kotlin.Array<")[1][:-1]
             return tf.get_array_type().new([self.parse_type(str_t)])
-        elif str_t == "kotlin.CharArray":
+        else:
+            return self._parse_type(str_t)
+
+    @map_type
+    def _parse_type(self, str_t: str) -> tp.Type:
+        tf = self.bt_factory
+        if str_t == "kotlin.CharArray":
             return kt.CharArray
         elif str_t == "kotlin.ByteArray":
             return kt.ByteArray
@@ -303,9 +332,6 @@ class KotlinTypeParser(TypeParser):
             return kt.DoubleArray
         elif str_t == "int[]":
             return kt.IntegerArray
-        elif str_t.endswith("[]"):
-            str_t = str_t.split("[]")[0]
-            return tf.get_array_type().new([self.parse_type(str_t)])
         elif str_t.startswith("vararg "):
             return self.parse_type(str_t.split("vararg ")[1])
         elif str_t == "java.lang.Byte":

@@ -327,6 +327,35 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
 
 class KotlinAPIGraphBuilder(APIGraphBuilder):
 
+    # From https://kotlinlang.org/docs/java-interop.html#mapped-types
+    MAPPED_TYPES = {
+        "java.lang.Object": "kotlin.Any",
+        "java.lang.Cloneable": "kotlin.Cloneable",
+        "java.lang.Comparable": "kotlin.Comparable",
+        "java.lang.Enum": "kotlin.Enum",
+        "java.lang.annotation.Annotation": "kotlin.Annotation",
+        "java.lang.CharSequence": "kotlin.CharSequence",
+        "java.lang.String": "kotlin.String",
+        "java.lang.Number": "kotlin.Number",
+        "java.lang.Throwable": "kotlin.Throwable",
+        "java.lang.Byte": "kotlin.Byte?",
+        "java.lang.Short": "kotlin.Short?",
+        "java.lang.Integer": "kotlin.Int?",
+        "java.lang.Long": "kotlin.Long?",
+        "java.lang.Character": "kotlin.Char?",
+        "java.lang.Float": "kotlin.Float?",
+        "java.lang.Double": "kotlin.Double?",
+        "java.lang.Boolean": "kotlin.Boolean?",
+        "java.util.Iterator": "kotlin.collections.Iterator",
+        "java.lang.Iterable": "kotlin.collections.Iterable",
+        "java.util.Collection": "kotlin.collections.MutableCollection",
+        "java.util.Set": "kotlin.collections.MutableSet",
+        "java.util.List": "kotlin.collections.MutableList",
+        "java.util.ListIterator": "kotlin.collections.MutableListIterator",
+        "java.util.Map": "kotlin.collections.MutableMap",
+        "java.util.Map.Entry": "kotlin.collections.MutableMap.MutableEntry"
+    }
+
     def __init__(self, target_language="kotlin"):
         super().__init__(target_language)
 
@@ -335,9 +364,13 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             "java": JavaTypeParser,
             "kotlin": KotlinTypeParser
         }
+        mapped_types = {
+            k: (v, self)
+            for k, v in self.MAPPED_TYPES.items()
+        }
         args = (self._class_type_var_map.get(self.class_name, {}),
                 self._current_func_type_var_map, self._class_type_var_map,
-                self.parsed_types)
+                self.parsed_types, mapped_types)
         if self.api_language == "java":
             args = ("kotlin",) + args
 
