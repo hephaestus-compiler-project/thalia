@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from collections import namedtuple
-from typing import List, NamedTuple, Tuple, Set, Any
+from typing import List, Tuple, Set, Any
 import json
 import os
 import re

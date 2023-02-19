@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from collections import OrderedDict
 from copy import deepcopy
-from typing import List, Dict, Tuple
+from typing import List, Dict
 
 
 import networkx as nx
@@ -33,17 +33,38 @@ class APIGraphBuilder(ABC):
         self._current_func_type_var_map: dict = {}
         self._is_func_interface: bool = False
 
+        self.parsed_types: Dict[str, tp.Type] = {}
+
     @abstractmethod
     def get_type_parser(self) -> TypeParser:
         pass
 
-    def build(self, docs: dict) -> APIGraph:
-        # First we make a pass to assign class type parameters a unique name.
+    def build_topological_sort(self, docs: dict) -> List[str]:
+        dep_graph = nx.DiGraph()
         for api_doc in docs.values():
-            if not api_doc["type_parameters"]:
+            name = api_doc["name"]
+            self.api_language = api_doc.get("language", self.api_language)
+            super_types = {
+                self.parse_type(st)
+                for st in api_doc["implements"] + api_doc["inherits"]
+            }
+            dep_graph.add_node(name)
+            for st in super_types:
+                if st == self.bt_factory.get_any_type():
+                    continue
+                dep_graph.add_node(st.name)
+                dep_graph.add_edge(st.name, name)
+        return list(nx.topological_sort(dep_graph))
+
+    def build(self, docs: dict) -> APIGraph:
+        top_sort = self.build_topological_sort(docs)
+        # First we make a pass to assign class type parameters a unique name.
+        for cls_name in top_sort:
+            api_doc = docs.get(cls_name)
+            if not api_doc or not api_doc["type_parameters"]:
                 continue
             self.api_language = api_doc.get("language", self.api_language)
-            cls_name = api_doc["name"]
+            # cls_name = api_doc["name"]
             self.class_name = cls_name
             self._class_type_var_map[cls_name] = OrderedDict()
             self.rename_type_parameters(
@@ -53,10 +74,18 @@ class APIGraphBuilder(ABC):
 
         self.graph = nx.DiGraph()
         self.subtyping_graph = nx.DiGraph()
-        for api_doc in docs.values():
-            # Now we are actually processing the docs of each API and build
-            # the corresponding API graph.
-            self.process_class(api_doc)
+        for cls_name in top_sort:
+            api_doc = docs.get(cls_name)
+            if api_doc:
+                self.api_language = api_doc.get("language", self.api_language)
+                self.class_name = api_doc["name"]
+                self.build_class_node(api_doc)
+        for cls_name in top_sort:
+            api_doc = docs.get(cls_name)
+            if api_doc:
+                # Now we are actually processing the docs of each API and build
+                # the corresponding API graph.
+                self.process_class(api_doc)
         return APIGraph(self.graph, self.subtyping_graph,
                         self.functional_types, self.bt_factory)
 
@@ -87,7 +116,9 @@ class APIGraphBuilder(ABC):
                 field_node = Field(field_api["name"], receiver_name)
 
             self.graph.add_node(field_node)
-            if receiver:
+            if receiver and not field_api["is_static"]:
+                # XXX: Maybe we also need to consider static fields called
+                # by a receiver.
                 self.graph.add_node(receiver)
                 self.graph.add_edge(receiver, field_node, label=IN)
             field_type = self.parse_type(field_api["type"])
@@ -236,13 +267,26 @@ class APIGraphBuilder(ABC):
             self.functional_types[self.class_node] = func_type
 
     def build_class_node(self, class_api: dict) -> tp.Type:
+        super_types = {
+            self.parse_type(st)
+            for st in class_api["implements"] + class_api["inherits"]
+        }
+        if not super_types:
+            super_types.add(self.bt_factory.get_any_type())
         class_name = class_api["name"]
+        super_types = list(super_types)
         if class_api["type_parameters"]:
             class_node = tp.TypeConstructor(
                 class_name,
-                list(self._class_type_var_map[class_name].values()))
+                list(self._class_type_var_map[class_name].values()),
+                super_types
+            )
         else:
             class_node = self.parse_type(class_name)
+        if type(class_node) is tp.SimpleClassifier:
+            class_node = tp.SimpleClassifier(class_node.name, super_types)
+
+        self.parsed_types[class_node.name] = class_node
         return class_node
 
     def build_subtyping_relations(self, class_api: dict):
@@ -276,7 +320,8 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
             self.target_language,
             self._class_type_var_map.get(self.class_name, {}),
             self._current_func_type_var_map,
-            self._class_type_var_map
+            self._class_type_var_map,
+            self.parsed_types
         )
 
 
@@ -291,7 +336,8 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             "kotlin": KotlinTypeParser
         }
         args = (self._class_type_var_map.get(self.class_name, {}),
-                self._current_func_type_var_map, self._class_type_var_map)
+                self._current_func_type_var_map, self._class_type_var_map,
+                self.parsed_types)
         if self.api_language == "java":
             args = ("kotlin",) + args
 
@@ -314,3 +360,8 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         # We disable functional interfaces until this gets fixed:
         # https://youtrack.jetbrains.com/issue/KT-48838/Support-SAM-conversions-on-value-parameters-inferred-into-Kotlin-functional-interface
         pass
+
+    def build_topological_sort(self, docs: dict) -> List[str]:
+        docs = {k: v for k, v in docs.items()
+                if v.get("is_class", True)}
+        return super().build_topological_sort(docs)

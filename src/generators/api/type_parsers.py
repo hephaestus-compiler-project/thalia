@@ -12,11 +12,13 @@ class TypeParser(ABC):
     def __init__(self, target_language: str,
                  class_type_name_map: Dict[str, tp.TypeParameter] = None,
                  func_type_name_map: Dict[str, tp.TypeParameter] = None,
-                 classes_type_parameters: dict = None):
+                 classes_type_parameters: dict = None,
+                 type_spec: Dict[str, tp.Type] = None):
         self.bt_factory: BuiltinFactory = BUILTIN_FACTORIES[target_language]
         self.class_type_name_map = class_type_name_map or {}
         self.func_type_name_map = func_type_name_map or {}
         self.classes_type_parameters = classes_type_parameters or {}
+        self.type_spec = type_spec or {}
 
     @abstractmethod
     def parse_function_type(self, str_t: str) -> tp.ParameterizedType:
@@ -39,9 +41,11 @@ class JavaTypeParser(TypeParser):
     def __init__(self, target_language: str,
                  class_type_name_map: Dict[str, tp.TypeParameter] = None,
                  func_type_name_map: Dict[str, tp.TypeParameter] = None,
-                 classes_type_parameters: dict = None):
+                 classes_type_parameters: dict = None,
+                 type_spec: Dict[str, tp.Type] = None):
         super().__init__(target_language, class_type_name_map,
-                         func_type_name_map, classes_type_parameters)
+                         func_type_name_map, classes_type_parameters,
+                         type_spec)
 
     def parse_function_type(self, str_t: str) -> tp.ParameterizedType:
         pass
@@ -92,7 +96,8 @@ class JavaTypeParser(TypeParser):
         regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
         segs = str_t.split("<", 1)
         if len(segs) == 1:
-            return tp.SimpleClassifier(str_t)
+            parsed_t = tp.SimpleClassifier(str_t)
+            return self.type_spec.get(str_t, parsed_t)
         base, type_args_str = segs[0], segs[1][:-1]
         type_args = re.findall(regex, type_args_str)
         new_type_args = []
@@ -108,7 +113,9 @@ class JavaTypeParser(TypeParser):
             )
             for i in range(len(new_type_args))
         ]
-        return tp.TypeConstructor(base, type_vars).new(new_type_args)
+        parsed_t = self.type_spec.get(base, tp.TypeConstructor(base,
+                                                               type_vars))
+        return parsed_t.new(new_type_args)
 
     def parse_type(self, str_t: str) -> tp.Type:
         tf = self.bt_factory
@@ -164,9 +171,11 @@ class KotlinTypeParser(TypeParser):
     def __init__(self,
                  class_type_name_map: Dict[str, tp.TypeParameter] = None,
                  func_type_name_map: Dict[str, tp.TypeParameter] = None,
-                 classes_type_parameters: dict = None):
+                 classes_type_parameters: dict = None,
+                 type_spec: Dict[str, tp.Type] = None):
         super().__init__("kotlin", class_type_name_map,
-                         func_type_name_map, classes_type_parameters)
+                         func_type_name_map, classes_type_parameters,
+                         type_spec)
 
     def is_func_type(self, str_t: str) -> bool:
         return bool(re.match(self.FUNC_REGEX, str_t))
@@ -243,7 +252,8 @@ class KotlinTypeParser(TypeParser):
         regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
         segs = str_t.replace(", ", ",").split("<", 1)
         if len(segs) == 1:
-            return tp.SimpleClassifier(str_t)
+            parsed_t = tp.SimpleClassifier(str_t)
+            return self.type_spec.get(str_t, parsed_t)
         base, type_args_str = segs[0], segs[1][:-1]
         type_args = re.findall(regex, type_args_str)
         new_type_args = []
@@ -259,7 +269,9 @@ class KotlinTypeParser(TypeParser):
             )
             for i in range(len(new_type_args))
         ]
-        return tp.TypeConstructor(base, type_vars).new(new_type_args)
+        parsed_t = self.type_spec.get(base, tp.TypeConstructor(base,
+                                                               type_vars))
+        return parsed_t.new(new_type_args)
 
     def parse_type(self, str_t: str) -> tp.Type:
         tf = self.bt_factory

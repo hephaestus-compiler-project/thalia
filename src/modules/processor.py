@@ -57,7 +57,7 @@ class ProgramProcessor():
             docs = {}
             for api_path in os.listdir(self.args.api_doc_path):
                 with open(os.path.join(self.args.api_doc_path, api_path)) as f:
-                    docs[api_path] = json.load(f)
+                    docs[api_path.replace(".json", "")] = json.load(f)
             kwargs["api_docs"] = docs
         return self.PROGRAM_GENERATORS.get(self.args.generator)(**kwargs)
 

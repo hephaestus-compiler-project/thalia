@@ -551,7 +551,8 @@ class APIGraph():
                     [constraint[tpa] for tpa in ret_type.type_parameters]
                 )
             ret_type = tp.substitute_type(ret_type, type_var_map)
-            ret_types = self.supertypes(ret_type)
+            ret_types = set(tu.find_supertypes(ret_type, self.get_reg_types(),
+                                               include_self=False))
             ret_types.add(ret_type)
             encodings.append(APIEncoding(node, frozenset(receivers),
                                          parameters,

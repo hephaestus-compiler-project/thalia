@@ -38,6 +38,7 @@ class APIGenerator(Generator):
         func_name = "test"
         test_namespace = ast.GLOBAL_NAMESPACE + (func_name,)
         program_index = 0
+        i = 1
         for api, receivers, parameters, returns, type_map in self.encodings:
             if isinstance(api, ag.Constructor):
                 # TODO
@@ -71,12 +72,14 @@ class APIGenerator(Generator):
                     func_type=ast.FunctionDeclaration.FUNCTION)
                 self._add_node_to_parent(self.namespace[:-1], main_func)
                 program_index += 1
-                msg = ("API: {}; Generating program of combination: "
-                       "(receiver: {}, parameters: {}, return: {}")
-                msg = msg.format(str(api), str(receiver),
-                                 ",".join([str(p) for p in parameters]),
-                                 str(return_type))
+                msg = "Generated program {id!r}\n".format(id=i)
+                msg += "\tAPI: {api!r}\n".format(api=api)
+                msg += "\treceiver: {receiver!r}\n".format(receiver=receiver)
+                msg += "\tparameters {params!r}\n".format(params=", ".join(
+                    str(p) for p in parameters))
+                msg += "\treturn: {ret!r}\n".format(ret=return_type)
                 log(self.logger, msg)
+                i += 1
                 yield ast.Program(deepcopy(self.context), self.language)
 
     def generate_from_type_combination(self, api, receiver, parameters,
@@ -232,7 +235,7 @@ class APIGenerator(Generator):
         for i, param in enumerate(parameters):
             param_type = tp.substitute_type(actual_types[i], type_var_map)
             param = tp.substitute_type(param, type_var_map)
-            if param_type and param_type in self.api_graph.subtypes(param):
+            if param_type and not param_type.is_subtype(param):
                 t = param_type
             else:
                 t = param
