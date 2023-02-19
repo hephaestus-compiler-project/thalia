@@ -220,7 +220,7 @@ class SpecializedArrayType(tp.TypeConstructor, AnyType):
 
 class NullableType(tp.TypeConstructor, AnyType):
     def __init__(self, name="Nullable"):
-        super().__init__(name, [tp.TypeParameter("T")])
+        super().__init__(name, [tp.TypeParameter("T", variance=tp.Covariant)])
         self.supertypes.append(AnyType())
 
 
