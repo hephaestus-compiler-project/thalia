@@ -5,6 +5,7 @@ import sys
 
 from docparser.java import JavaAPIDocConverter
 from docparser.kotlin import KotlinAPIDocConverter
+from docparser.scala import ScalaAPIDocConverter
 
 
 def preprocess_args(args):
@@ -23,7 +24,7 @@ def get_args():
     parser.add_argument(
         "--language",
         default="java",
-        choices=["java", "kotlin"],
+        choices=["java", "kotlin", "scala"],
         help="Language associated with the given API docs"
     )
     parser.add_argument(
@@ -43,7 +44,8 @@ def get_args():
 
 CONVERTERS = {
     "java": JavaAPIDocConverter(),
-    "kotlin": KotlinAPIDocConverter()
+    "kotlin": KotlinAPIDocConverter(),
+    "scala": ScalaAPIDocConverter(),
 }
 
 
