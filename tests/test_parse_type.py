@@ -1,5 +1,7 @@
-from src.ir import types as tp, java_types as jt, kotlin_types as kt
-from src.generators.api.type_parsers import JavaTypeParser, KotlinTypeParser
+from src.ir import (types as tp, java_types as jt, kotlin_types as kt,
+                    scala_types as sc)
+from src.generators.api.type_parsers import (JavaTypeParser, KotlinTypeParser,
+                                             ScalaTypeParser)
 
 
 def test_primitives():
@@ -238,7 +240,6 @@ def test_kotlin_function_types():
         [kt.String, kt.Integer, kt.Integer])
 
     t = b.parse_type("(kotlin.collections.Map.Entry<K, V>) -> R?")
-    print("here")
     exp_t = kt.FunctionType(1).new([
         tp.TypeConstructor(
             "kotlin.collections.Map.Entry",
@@ -253,3 +254,172 @@ def test_kotlin_function_types():
         kt.NullableType().new([tp.TypeParameter("R")])
     ])
     assert t == exp_t
+
+
+def test_scala_primitives():
+    b = ScalaTypeParser()
+    assert b.parse_type("scala.Char") == sc.CharType()
+    assert b.parse_type("scala.Byte") == sc.ByteType()
+    assert b.parse_type("scala.Short") == sc.ShortType()
+    assert b.parse_type("scala.Int") == sc.IntegerType()
+    assert b.parse_type("scala.Long") == sc.LongType()
+    assert b.parse_type("scala.Float") == sc.FloatType()
+    assert b.parse_type("scala.Double") == sc.DoubleType()
+    assert b.parse_type("scala.Boolean") == sc.BooleanType()
+
+
+def test_scala_builtin_types():
+    b = ScalaTypeParser()
+    assert b.parse_type("java.lang.Character") == sc.CharType()
+    assert b.parse_type("java.lang.Byte") == sc.ByteType()
+    assert b.parse_type("java.lang.Short") == sc.ShortType()
+    assert b.parse_type("java.lang.Integer") == sc.IntegerType()
+    assert b.parse_type("java.lang.Long") == sc.LongType()
+    assert b.parse_type("java.lang.Float") == sc.FloatType()
+    assert b.parse_type("java.lang.Double") == sc.DoubleType()
+    assert b.parse_type("java.lang.String") == sc.String
+    assert b.parse_type("void") == sc.Unit
+    assert b.parse_type("Void") == sc.Unit
+    assert b.parse_type("scala.Unit") == sc.Unit
+    assert b.parse_type("Unit") == sc.Unit
+    assert b.parse_type("scala.Any") == sc.Any
+    assert b.parse_type("scala.String") == sc.String
+    assert b.parse_type("scala.Array[scala.String]") == sc.Array.new(
+        [sc.String])
+    assert b.parse_type("scala.Seq[scala.String]") == sc.Seq.new(
+        [sc.String])
+
+
+def test_scala_regular_types():
+    b = ScalaTypeParser()
+    assert b.parse_type("k.Calendar") == tp.SimpleClassifier("k.Calendar")
+    assert b.parse_type("k.List[scala.String]") == tp.TypeConstructor(
+        "k.List", [tp.TypeParameter("k.List.T1")]).new([sc.String])
+    assert b.parse_type("k.Map[scala.String,k.Calendar]") == \
+        tp.TypeConstructor("k.Map",
+                           [
+                               tp.TypeParameter("k.Map.T1"),
+                               tp.TypeParameter("k.Map.T2")
+                           ]
+        ).new([sc.String, tp.SimpleClassifier("k.Calendar")])
+    t = b.parse_type("k.List[k.Map[scala.String,k.Calendar]]")
+    t1 = tp.TypeConstructor("k.Map",
+                           [
+                               tp.TypeParameter("k.Map.T1"),
+                               tp.TypeParameter("k.Map.T2")
+                           ]
+        ).new([sc.String, tp.SimpleClassifier("k.Calendar")])
+    t2 = tp.TypeConstructor("k.List",
+                            [tp.TypeParameter("k.List.T1")]).new([t1])
+    assert t == t2
+
+
+def test_scala_type_variables():
+    b = ScalaTypeParser()
+    assert b.parse_type("T") == tp.TypeParameter("T")
+    assert b.parse_type("T <: java.lang.String") == tp.TypeParameter(
+        "T", bound=sc.String)
+    assert b.parse_type("Foo <: java.util.List[java.lang.String]") == \
+        tp.TypeParameter("Foo", bound=tp.TypeConstructor(
+            "java.util.List", [tp.TypeParameter("java.util.List.T1")]).new([sc.String]))
+    assert b.parse_type("T <: X") == tp.TypeParameter(
+        "T", bound=tp.TypeParameter("X"))
+    t = b.parse_type("java.BaseStream[T,java.Stream[T]]")
+    stream = tp.TypeConstructor(
+        "java.Stream", [tp.TypeParameter("java.Stream.T1")]).new(
+            [tp.TypeParameter("T")])
+    base_stream = tp.TypeConstructor(
+        "java.BaseStream",
+        [tp.TypeParameter("java.BaseStream.T1"),
+         tp.TypeParameter("java.BaseStream.T2")]).new([tp.TypeParameter("T"), stream])
+    assert t == base_stream
+
+    assert b.parse_type("+T <: scala.String") == tp.TypeParameter(
+        "T", variance=tp.Covariant, bound=sc.String)
+    assert b.parse_type("-T <: scala.String") == tp.TypeParameter(
+        "T", variance=tp.Contravariant, bound=sc.String)
+    assert b.parse_type("+T") == tp.TypeParameter(
+        "T", variance=tp.Covariant)
+    assert b.parse_type("-T") == tp.TypeParameter("T", variance=tp.Contravariant)
+    assert b.parse_type(
+        "+CC[X] <: scala.SortedSet[X] with scala.SortedSetOps[X, CC, CC[X]]") is None
+    assert b.parse_type("+CC[X] <: scala.SortedSet[X]") is None
+    assert b.parse_type("+CC[_] <: scala.SortedSet") is None
+    assert b.parse_type("X >: Y") is None
+
+
+def test_scala_wildcards():
+    b = ScalaTypeParser()
+    assert b.parse_type("?") == tp.WildCardType()
+    assert b.parse_type("_") == tp.WildCardType()
+    assert b.parse_type("java.List[?]") == tp.TypeConstructor(
+        "java.List", [tp.TypeParameter("java.List.T1")]).new([tp.WildCardType()])
+    assert b.parse_type("? <: java.lang.String") == tp.WildCardType(
+        bound=sc.String, variance=tp.Covariant
+    )
+    assert b.parse_type("? >: java.lang.String") == tp.WildCardType(
+        bound=sc.String, variance=tp.Contravariant
+    )
+    assert b.parse_type("java.List[? <: Int]") == tp.TypeConstructor(
+        "java.List", [tp.TypeParameter("java.List.T1")]).new([tp.WildCardType(
+            bound=sc.Integer, variance=tp.Covariant
+        )])
+    assert b.parse_type("scala.Array[_]") == sc.ArrayType().new([tp.WildCardType()])
+
+
+def test_scala_function_types():
+     b = ScalaTypeParser()
+     assert b.parse_type("(Boolean) => String") == sc.FunctionType(1).new(
+         [sc.Boolean, sc.String])
+     assert b.parse_type("(Boolean) => (String)") == sc.FunctionType(1).new(
+         [sc.Boolean, sc.String]
+     )
+     assert b.parse_type("() => Unit") == sc.FunctionType(0).new([sc.Unit])
+     t = b.parse_type("(Boolean, (Int) => Boolean, k.List[String]) => k.Set[String]")
+     exp_t = sc.FunctionType(3).new([
+         sc.Boolean,
+         sc.FunctionType(1).new([sc.Integer, sc.Boolean]),
+         tp.TypeConstructor("k.List", [tp.TypeParameter("k.List.T1")]).new([sc.String]),
+         tp.TypeConstructor("k.Set", [tp.TypeParameter("k.Set.T1")]).new([sc.String]),
+     ])
+
+     assert t == exp_t
+
+     t = b.parse_type("((Boolean) => String) => (Int) => Int")
+     exp_t = sc.FunctionType(1).new([
+         sc.FunctionType(1).new([sc.Boolean, sc.String]),
+         sc.FunctionType(1).new([sc.Integer, sc.Integer])
+     ])
+     assert t == exp_t
+
+     t = b.parse_type("(Boolean) => (String) => (Int)")
+     exp_t = sc.FunctionType(1).new([
+         sc.Boolean,
+         sc.FunctionType(1).new([sc.String, sc.Integer])
+     ])
+
+     t = b.parse_type("(Boolean) => (String) => (Int) => Char")
+     exp_t = sc.FunctionType(1).new([
+         sc.Boolean,
+         sc.FunctionType(1).new([
+             sc.String,
+             sc.FunctionType(1).new([sc.Integer, sc.Char])
+         ])
+     ])
+
+     t = b.parse_type("(k.Map[String, Int]) => Unit")
+     exp_t = sc.FunctionType(1).new([
+         tp.TypeConstructor("k.Map", [
+             tp.TypeParameter("k.Map.T1"),
+             tp.TypeParameter("k.Map.T2")
+         ]).new([sc.String, sc.Integer]),
+         sc.Unit
+     ])
+     assert t == exp_t
+
+     t = b.parse_type("(((String, Int))) => Boolean")
+     exp_t = sc.FunctionType(2).new([
+         sc.String,
+         sc.Integer,
+         sc.Boolean
+     ])
