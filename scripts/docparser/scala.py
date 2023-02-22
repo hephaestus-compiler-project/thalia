@@ -1,10 +1,8 @@
 import re
 import os
 
-from bs4 import BeautifulSoup
-from selenium import webdriver
-
 from docparser.base import APIDocConverter
+from docparser.utils import file2html, dict2json
 
 
 class ScalaAPIDocConverter(APIDocConverter):
@@ -16,23 +14,24 @@ class ScalaAPIDocConverter(APIDocConverter):
     PUBLIC = "public"
     OBJECT = 5
 
+    def __init__(self):
+        super().__init__()
+        self.class_name = None
+
     def process(self, args):
-        with webdriver.Firefox() as driver:
-            for base in os.listdir(args.input):
-                if base in self.EXCLUDED_FILES:
-                    continue
-                apidoc_path = os.path.join(args.input, base)
-                if not apidoc_path.endswith(".html"):
-                    continue
-                driver.get("file://" + os.path.abspath(apidoc_path))
-                data = self.process_class(BeautifulSoup(
-                    driver.page_source, "html.parser"))
-                if data:
-                    data["language"] = args.language
-                name = None
-                if data["class_type"] == self.OBJECT:
-                    name = data["name"] + "_Object"
-                dict2json(args.output, data, name=name)
+        for base in os.listdir(args.input):
+            if base in self.EXCLUDED_FILES:
+                continue
+            apidoc_path = os.path.join(args.input, base)
+            if not apidoc_path.endswith(".html"):
+                continue
+            data = self.process_class(file2html(apidoc_path))
+            if data:
+                data["language"] = args.language
+            name = None
+            if data["class_type"] == self.OBJECT:
+                name = data["name"] + "_Object"
+            dict2json(args.output, data, name=name)
 
     def _replace_anchors_with_package_prefix(self, anchors):
         # This method replaces the text of all anchors (note that the text
@@ -41,10 +40,7 @@ class ScalaAPIDocConverter(APIDocConverter):
         # named "title".
         for anchor in anchors:
             fname = anchor.get("id")
-            try:
-                cls_name = fname.rsplit(".", 1)[1]
-            except:
-                import pdb; pdb.set_trace()
+            cls_name = fname.rsplit(".", 1)[1]
             if fname != anchor.string:
                 anchor.string.replace_with(anchor.string.replace(cls_name,
                                                                  fname))
@@ -90,6 +86,7 @@ class ScalaAPIDocConverter(APIDocConverter):
 
     def process_class(self, html_doc):
         class_name = self.extract_class_name(html_doc)
+        self.class_name = class_name
         package_name = self.extract_package_name(html_doc)
         full_class_name = "{pkg}.{cls}".format(pkg=package_name,
                                                cls=class_name)
@@ -206,17 +203,38 @@ class ScalaAPIDocConverter(APIDocConverter):
             field_objs.append(field_obj)
         return field_objs
 
+    def _should_add_method(self, method_doc):
+        element = method_doc.select(".fullcomment .attributes.block")
+        if not element:
+            return True
+        is_deprecated = bool(element[0].find("dt", string="Deprecated"))
+        if is_deprecated:
+            return False
+        is_implicit = bool(element[0].find("dt", string="Implicit"))
+        is_shadowed = bool(element[0].find("dt", string="Shadowing"))
+        if is_shadowed:
+            return False
+        if is_implicit:
+            return True
+        dt = element[0].find("dt", string="Definition Classes")
+        if not dt:
+            return True
+        text = dt.nextSibling.text
+        return any(seg == self.class_name for seg in text.split(" \u2192 "))
+
     def process_methods(self, methods, is_constructor):
         method_objs = []
         for method_doc in methods:
-            if method_doc.get("style") == "display: none;":
-                continue
-
             if not method_doc.select(".symbol .result"):
+                # Problably this an nested class / object.
                 continue
 
             if method_doc.find(class_="params") is None or method_doc.select(
                     ".symbol .implicit"):
+                # Probably this is a field.
+                continue
+
+            if not self._should_add_method(method_doc):
                 continue
 
             self._replace_anchors_with_package_prefix(method_doc.select(
