@@ -222,6 +222,19 @@ class FunctionType(tp.TypeConstructor, AnyType):
         self.supertypes.append(AnyType())
 
 
+class TupleType(tp.TypeConstructor, AnyType):
+    def __init__(self, n_type_parameters: int):
+        name = "Tuple" + str(n_type_parameters)
+        # We can have decl-variance in Scala
+        type_parameters = [
+            tp.TypeParameter("A" + str(i + 1), tp.Contravariant)
+            for i in range(n_type_parameters)
+        ]
+        self.nr_type_parameters = n_type_parameters
+        super().__init__(name, type_parameters)
+        self.supertypes.append(AnyType())
+
+
 Any = AnyType()
 Nothing = NothingType()
 Unit = UnitType()
