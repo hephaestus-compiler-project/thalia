@@ -192,8 +192,6 @@ class KotlinTypeParser(TypeParser):
 
     FUNC_REGEX = re.compile(r"^\(.*\) -> .*")
 
-    TYPE_ARG_REGEX = re.compile(r'(?:[^,<]|<[^>]*>)+')
-
     def __init__(self,
                  class_type_name_map: Dict[str, tp.TypeParameter] = None,
                  func_type_name_map: Dict[str, tp.TypeParameter] = None,
@@ -226,7 +224,7 @@ class KotlinTypeParser(TypeParser):
     def parse_native_function_type(self, str_t: str) -> tp.ParameterizedType:
         segs = str_t.replace(", ", ",").split("[", 1)
         type_args_str = segs[1][:-1]
-        type_args = re.findall(self.TYPE_ARG_REGEX, type_args_str)
+        type_args = re.findall(self.COMMA_SEP_REGEX, type_args_str)
         new_type_args = []
         for type_arg in type_args:
             new_type_args.append(self.parse_type(type_arg))
@@ -293,7 +291,7 @@ class KotlinTypeParser(TypeParser):
             parsed_t = tp.SimpleClassifier(str_t)
             return self.type_spec.get(str_t, parsed_t)
         base, type_args_str = segs[0], segs[1][:-1]
-        type_args = re.findall(self.TYPE_ARG_REGEX, type_args_str)
+        type_args = re.findall(self.COMMA_SEP_REGEX, type_args_str)
         new_type_args = []
         for type_arg in type_args:
             new_type_args.append(self.parse_type(type_arg))
@@ -404,8 +402,6 @@ class ScalaTypeParser(TypeParser):
 
     FUNC_REGEX = re.compile(r"^\(.*\) => .*")
 
-    TYPE_ARG_REGEX = re.compile(r'(?:[^,\[]|\[[^\]]*\])+')
-
     def __init__(self,
                  class_type_name_map: Dict[str, tp.TypeParameter] = None,
                  func_type_name_map: Dict[str, tp.TypeParameter] = None,
@@ -438,7 +434,7 @@ class ScalaTypeParser(TypeParser):
     def parse_native_function_type(self, str_t: str) -> tp.ParameterizedType:
         segs = str_t.replace(", ", ",").split("[", 1)
         type_args_str = segs[1][:-1]
-        type_args = re.findall(self.TYPE_ARG_REGEX, type_args_str)
+        type_args = re.findall(self.COMMA_SEP_REGEX, type_args_str)
         new_type_args = []
         for type_arg in type_args:
             new_type_args.append(self.parse_type(type_arg))
@@ -510,7 +506,7 @@ class ScalaTypeParser(TypeParser):
             parsed_t = tp.SimpleClassifier(str_t)
             return self.type_spec.get(str_t, parsed_t)
         base, type_args_str = segs[0], segs[1][:-1]
-        type_args = re.findall(self.TYPE_ARG_REGEX, type_args_str)
+        type_args = re.findall(self.COMMA_SEP_REGEX, type_args_str)
         new_type_args = []
         for type_arg in type_args:
             new_type_args.append(self.parse_type(type_arg))
