@@ -9,10 +9,10 @@ def file2html(path):
         return BeautifulSoup(f, "html.parser")
 
 
-def dict2json(outdir, data):
+def dict2json(outdir, data, name=None):
     if data is None:
         # Nothing to store.
         return
-    path = os.path.join(outdir, data["name"]) + ".json"
+    path = os.path.join(outdir, name or data["name"]) + ".json"
     with open(path, 'w') as f:
         json.dump(data, f, indent=2)

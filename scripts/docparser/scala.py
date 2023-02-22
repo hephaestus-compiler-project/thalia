@@ -1,4 +1,3 @@
-import re
 import os
 
 from docparser.base import APIDocConverter
@@ -97,24 +96,22 @@ class ScalaAPIDocConverter(APIDocConverter):
         type_parameters = self.extract_class_type_parameters(html_doc)
         class_type = self.extract_class_type(html_doc)
         methods = html_doc.select("#allMembers .values.members li")
-        # constructors = html_doc.select(
-        #     "div[data-togglable=\"Constructors\"] .title .symbol")
-        # fields = html_doc.select(
-        #     "div[data-togglable=\"Properties\"] .title .symbol")
+        constructors = html_doc.select("#constructors li")
+        fields = methods
         method_objs = self.process_methods(methods, False)
-        # if class_type != self.ABSTRACT_CLASS:
-        #     constructor_objs = self.process_methods(constructors, True)
-        # else:
-        #     constructor_objs = []
-        # field_objs = self.process_fields(fields)
+        if class_type != self.ABSTRACT_CLASS:
+            constructor_objs = self.process_methods(constructors, True)
+        else:
+            constructor_objs = []
+        field_objs = self.process_fields(fields)
         class_obj = {
             'name': full_class_name,
             'type_parameters': type_parameters,
             'implements': super_interfaces,
             'inherits': super_class,
             "class_type": class_type,
-            "methods": method_objs,
-            'fields': [],
+            "methods": method_objs + constructor_objs,
+            'fields': field_objs,
             "is_class": True,
         }
         return class_obj
@@ -140,6 +137,7 @@ class ScalaAPIDocConverter(APIDocConverter):
             types.extend([
                 param_spec.text.split(": ")[1]
                 for param_spec in param_specs
+                if "implicit" not in param_spec.get("class", [])
             ])
         return types
 
@@ -149,38 +147,20 @@ class ScalaAPIDocConverter(APIDocConverter):
     def extract_method_name(self, method_doc):
         return method_doc.select(".symbol .name")[0].text
 
-    def extract_field_name(self, field_doc):
-        field_doc.find("span", {"class": "top-right-position"}).decompose()
-        regex = re.compile(".*va[lr] (.+\\.)?([^ <>\\.]+): .*")
-        match = re.match(regex, field_doc.text)
-        assert match is not None
-        return match.group(2)
+    extract_field_name = extract_method_name
 
     def extract_field_type(self, field_doc):
-        return field_doc.text.split(": ")[1]
-
-    def is_field_final(self, field_doc):
-        keywords = [
-            e.text.strip(" ")
-            for e in field_doc.find_all("span", {"class": "token keyword"})
-        ]
-        return "val" in keywords
-
-    def is_field_override(self, field_doc):
-        keywords = [
-            e.text.strip(" ")
-            for e in field_doc.find_all("span", {"class": "token keyword"})
-        ]
-        return "override" in keywords
+        return self.extract_method_return_type(field_doc, False)
 
     def extract_field_type_parameters(self, field_doc):
-        regex = re.compile(".*va[lr] <(.+)> .+: .*")
-        match = re.match(regex, field_doc.text)
-        if not match:
-            return []
-        type_parameters = match.group(1).replace(", ", ",")
-        regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
-        return re.findall(regex, type_parameters)
+        return self.extract_method_type_parameters(field_doc, False)
+
+    def is_field_final(self, field_doc):
+        return "final" in field_doc.find(class_="modifier") or \
+            "val" in field_doc.find(class_="kind")
+
+    def is_field_override(self, field_doc):
+        return "override" in field_doc.find(class_="modifier")
 
     def extract_field_access_mod(self, field_doc):
         return self.PUBLIC
@@ -188,13 +168,25 @@ class ScalaAPIDocConverter(APIDocConverter):
     def process_fields(self, fields):
         field_objs = []
         for field_doc in fields:
-            self._replace_anchors_with_package_prefix(field_doc.select("a"))
+            if not field_doc.select(".symbol .result"):
+                # Probably a nested class.
+                continue
+            if field_doc.find("span", {"class": "kind"}).text not in [
+                    "def", "val", "var"]:
+                continue
+            if field_doc.find(class_="params") is not None:
+                # This is a method
+                continue
+            if not self._should_add_member(field_doc):
+                continue
+            self._replace_anchors_with_package_prefix(field_doc.select(
+                ".symbol a"))
             field_obj = {
                 "name": self.extract_field_name(field_doc),
                 "type": self.extract_field_type(field_doc),
                 "is_final": self.is_field_final(field_doc),
                 "is_override": self.is_field_override(field_doc),
-                "receiver": self.extract_field_receiver(field_doc),
+                "receiver": None,
                 "type_parameters": self.extract_field_type_parameters(
                     field_doc),
                 "access_mod": self.extract_field_access_mod(field_doc),
@@ -203,7 +195,9 @@ class ScalaAPIDocConverter(APIDocConverter):
             field_objs.append(field_obj)
         return field_objs
 
-    def _should_add_method(self, method_doc):
+    def _should_add_member(self, method_doc):
+        if not method_doc.select(".symbol .name"):
+            return False
         element = method_doc.select(".fullcomment .attributes.block")
         if not element:
             return True
@@ -225,16 +219,15 @@ class ScalaAPIDocConverter(APIDocConverter):
     def process_methods(self, methods, is_constructor):
         method_objs = []
         for method_doc in methods:
-            if not method_doc.select(".symbol .result"):
+            if not is_constructor and not method_doc.select(".symbol .result"):
                 # Problably this an nested class / object.
                 continue
 
-            if method_doc.find(class_="params") is None or method_doc.select(
-                    ".symbol .implicit"):
+            if method_doc.find(class_="params") is None:
                 # Probably this is a field.
                 continue
 
-            if not self._should_add_method(method_doc):
+            if not self._should_add_member(method_doc):
                 continue
 
             self._replace_anchors_with_package_prefix(method_doc.select(
