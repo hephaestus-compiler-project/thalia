@@ -431,7 +431,17 @@ def test_scala_function_types():
          sc.Boolean
      ])
 
-     b.parse_type("scala.Function1[String, Int]") == sc.FunctionType(1).new([
+     assert b.parse_type("scala.Function1[String, Int]") == sc.FunctionType(1).new([
          sc.String, sc.Integer
      ])
-     b.parse_type("scala.Function0[Int]") == sc.FunctionType(0).new([sc.Integer])
+     assert b.parse_type("scala.Function0[Int]") == sc.FunctionType(0).new([sc.Integer])
+
+
+def test_scala_tuple_types():
+     b = ScalaTypeParser()
+     assert b.parse_type("(String, Int)") == sc.TupleType(2).new([sc.String, sc.Integer])
+     assert b.parse_type("k.Map[String,(String,Int)]") == tp.TypeConstructor(
+         "k.Map", [tp.TypeParameter("k.Map.T1"), tp.TypeParameter("k.Map.T2")]).new([
+             sc.String,
+             sc.TupleType(2).new([sc.String, sc.Integer])
+     ])

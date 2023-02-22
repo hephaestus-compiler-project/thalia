@@ -431,6 +431,16 @@ class ScalaTypeParser(TypeParser):
             param_types + [ret_type]
         )
 
+    def parse_tuple_type(self, str_t: str) -> tp.ParameterizedType:
+        tuple_strs = re.findall(self.COMMA_SEP_REGEX, str_t.replace(", ", ","))
+        tuple_types = [
+            self.parse_type(tuple_str)
+            for tuple_str in tuple_strs
+        ]
+        if len(tuple_types) == 1:
+            return tuple_types[0]
+        return sc.TupleType(len(tuple_types)).new(tuple_types)
+
     def parse_native_function_type(self, str_t: str) -> tp.ParameterizedType:
         segs = str_t.replace(", ", ",").split("[", 1)
         type_args_str = segs[1][:-1]
@@ -526,20 +536,18 @@ class ScalaTypeParser(TypeParser):
 
     def parse_type(self, str_t: str) -> tp.Type:
         tf = self.bt_factory
-        if str_t.startswith("=> "):
-            # Call by name parameter
-            return self.parse_type(str_t.split("=> ", 1)[1])
+        if str_t.endswith("*"):
+            # Vararg
+            return self.parse_type(str_t[:-1])
         if self.is_func_type(str_t):
             return self.parse_function_type(str_t)
         if self.is_native_func_type(str_t):
             return self.parse_native_function_type(str_t)
-        if str_t.endswith("*"):
-            # Vararg
-            return self.parse_type(str_t[:-1])
-        if str_t.startswith("("):
-            str_t = str_t[1:]
-        if str_t.endswith(")"):
-            str_t = str_t[:-1]
+        if str_t.startswith("(") and str_t.endswith(")"):
+            return self.parse_tuple_type(str_t[1:-1])
+        if str_t.startswith("=> "):
+            # Call by name parameter
+            return self.parse_type(str_t.split("=> ", 1)[1])
         if str_t.startswith("scala.Array["):
             str_t = str_t.split("scala.Array[")[1][:-1]
             return tf.get_array_type().new([self.parse_type(str_t)])
