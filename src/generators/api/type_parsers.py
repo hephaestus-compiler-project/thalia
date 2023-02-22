@@ -530,6 +530,9 @@ class ScalaTypeParser(TypeParser):
 
     def parse_type(self, str_t: str) -> tp.Type:
         tf = self.bt_factory
+        if str_t.startswith("=> "):
+            # Call by name parameter
+            return self.parse_type(str_t.split("=> ", 1)[1])
         if self.is_func_type(str_t):
             return self.parse_function_type(str_t)
         if self.is_native_func_type(str_t):

@@ -318,6 +318,8 @@ def test_scala_regular_types():
                             [tp.TypeParameter("k.List.T1")]).new([t1])
     assert t == t2
 
+    b.parse_type("=> String") == sc.String
+
 
 def test_scala_type_variables():
     b = ScalaTypeParser()
