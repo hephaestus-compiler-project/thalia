@@ -204,6 +204,9 @@ class KotlinTypeParser(TypeParser):
     def is_func_type(self, str_t: str) -> bool:
         return bool(re.match(self.FUNC_REGEX, str_t))
 
+    def is_native_func_type(self, str_t: str) -> bool:
+        return str_t.startswith("kotlin.Function")
+
     def parse_function_type(self, str_t: str) -> tp.ParameterizedType:
         segs = self.FUNC_SEP_REGEX.split(str_t, 1)
         assert len(segs) == 2
@@ -216,6 +219,16 @@ class KotlinTypeParser(TypeParser):
         return self.bt_factory.get_function_type(len(param_types)).new(
             param_types + [ret_type]
         )
+
+    def parse_native_function_type(self, str_t: str) -> tp.ParameterizedType:
+        regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
+        segs = str_t.replace(", ", ",").split("[", 1)
+        type_args_str = segs[1][:-1]
+        type_args = re.findall(regex, type_args_str)
+        new_type_args = []
+        for type_arg in type_args:
+            new_type_args.append(self.parse_type(type_arg))
+        return sc.FunctionType(len(new_type_args) - 1).new(new_type_args)
 
     def parse_wildcard(self, str_t) -> tp.WildCardType:
         if str_t == "*":
@@ -301,6 +314,8 @@ class KotlinTypeParser(TypeParser):
         tf = self.bt_factory
         if self.is_func_type(str_t):
             return self.parse_function_type(str_t)
+        if self.is_native_func_type(str_t):
+            return self.parse_native_function_type(str_t)
         if str_t.startswith("("):
             str_t = str_t[1:]
         if str_t.endswith(")"):
@@ -401,6 +416,9 @@ class ScalaTypeParser(TypeParser):
     def is_func_type(self, str_t: str) -> bool:
         return bool(re.match(self.FUNC_REGEX, str_t))
 
+    def is_native_func_type(self, str_t: str) -> bool:
+        return str_t.startswith("scala.Function")
+
     def parse_function_type(self, str_t: str) -> tp.ParameterizedType:
         segs = self.FUNC_SEP_REGEX.split(str_t, 1)
         assert len(segs) == 2
@@ -413,6 +431,16 @@ class ScalaTypeParser(TypeParser):
         return self.bt_factory.get_function_type(len(param_types)).new(
             param_types + [ret_type]
         )
+
+    def parse_native_function_type(self, str_t: str) -> tp.ParameterizedType:
+        regex = re.compile(r'(?:[^,\[]|\[[^\]]*\])+')
+        segs = str_t.replace(", ", ",").split("[", 1)
+        type_args_str = segs[1][:-1]
+        type_args = re.findall(regex, type_args_str)
+        new_type_args = []
+        for type_arg in type_args:
+            new_type_args.append(self.parse_type(type_arg))
+        return sc.FunctionType(len(new_type_args) - 1).new(new_type_args)
 
     def parse_wildcard(self, str_t) -> tp.WildCardType:
         if str_t == "?" or str_t == "_":
@@ -503,6 +531,8 @@ class ScalaTypeParser(TypeParser):
         tf = self.bt_factory
         if self.is_func_type(str_t):
             return self.parse_function_type(str_t)
+        if self.is_native_func_type(str_t):
+            return self.parse_native_function_type(str_t)
         if str_t.endswith("*"):
             # Vararg
             return self.parse_type(str_t[:-1])
