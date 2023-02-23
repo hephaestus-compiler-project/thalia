@@ -11,7 +11,7 @@ from src.ir.builtins import BuiltinFactory
 from src.generators.api.api_graph import (APIGraph, IN, OUT, Method,
                                           Constructor, Field)
 from src.generators.api.type_parsers import (TypeParser, KotlinTypeParser,
-                                             JavaTypeParser)
+                                             JavaTypeParser, ScalaTypeParser)
 
 PROTECTED = "protected"
 
@@ -59,6 +59,7 @@ class APIGraphBuilder(ABC):
     def build(self, docs: dict) -> APIGraph:
         top_sort = self.build_topological_sort(docs)
         # First we make a pass to assign class type parameters a unique name.
+        excluded_cls = set()
         for cls_name in top_sort:
             api_doc = docs.get(cls_name)
             if not api_doc or not api_doc["type_parameters"]:
@@ -67,11 +68,16 @@ class APIGraphBuilder(ABC):
             # cls_name = api_doc["name"]
             self.class_name = cls_name
             self._class_type_var_map[cls_name] = OrderedDict()
-            self.rename_type_parameters(
-                cls_name, api_doc["type_parameters"],
-                self._class_type_var_map[cls_name]
-            )
+            try:
+                self.rename_type_parameters(
+                    cls_name, api_doc["type_parameters"],
+                    self._class_type_var_map[cls_name]
+                )
+            except NotImplementedError:
+                excluded_cls.add(cls_name)
+                del self._class_type_var_map[cls_name]
 
+        top_sort = [c for c in top_sort if c not in excluded_cls]
         self.graph = nx.DiGraph()
         self.subtyping_graph = nx.DiGraph()
         for cls_name in top_sort:
@@ -131,7 +137,11 @@ class APIGraphBuilder(ABC):
                 continue
 
             receiver_name = self.get_receiver_name(method_api)
-            method_node = self.build_method_node(method_api, receiver_name)
+            try:
+                method_node = self.build_method_node(method_api, receiver_name)
+            except NotImplementedError:
+                self._current_func_type_var_map = {}
+                continue
             receiver = self.get_api_incoming_node(method_api)
 
             is_constructor = method_api["is_constructor"]
@@ -160,6 +170,10 @@ class APIGraphBuilder(ABC):
         for i, type_param_str in enumerate(type_parameters):
             type_param = self.get_type_parser().parse_type_parameter(
                 type_param_str, keep=True)
+            if not type_param:
+                msg = "{str!r} is a type, not currently supported"
+                msg = msg.format(str=type_param_str)
+                raise NotImplementedError(msg)
 
             # We use this auxiliarry type parameter to handle the renaming
             # of recursive bounds.
@@ -398,3 +412,26 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         docs = {k: v for k, v in docs.items()
                 if v.get("is_class", True)}
         return super().build_topological_sort(docs)
+
+
+class ScalaAPIGraphBuilder(APIGraphBuilder):
+    def __init__(self, target_language="scala"):
+        super().__init__(target_language)
+
+    def get_type_parser(self):
+        return ScalaTypeParser(
+            self._class_type_var_map.get(self.class_name, {}),
+            self._current_func_type_var_map,
+            self._class_type_var_map,
+            self.parsed_types
+        )
+
+    def build(self, docs: dict) -> APIGraph:
+        # XXX Filter nested classes / objects.
+        filtered_docs = {}
+        for k, v in docs.items():
+            segs = v["name"].split(".")
+            if len(segs) == 3 and segs[-2][0].isupper():
+                continue
+            filtered_docs[k] = v
+        return super().build(filtered_docs)

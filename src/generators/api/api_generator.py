@@ -15,6 +15,7 @@ class APIGenerator(Generator):
         "java": builder.JavaAPIGraphBuilder,
         "kotlin": builder.KotlinAPIGraphBuilder,
         "groovy": builder.JavaAPIGraphBuilder,
+        "scala": builder.ScalaAPIGraphBuilder,
     }
 
     def __init__(self, api_docs, options={}, language=None, logger=None):
