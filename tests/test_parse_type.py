@@ -275,14 +275,6 @@ def test_scala_primitives():
 
 def test_scala_builtin_types():
     b = ScalaTypeParser()
-    assert b.parse_type("java.lang.Character") == sc.CharType()
-    assert b.parse_type("java.lang.Byte") == sc.ByteType()
-    assert b.parse_type("java.lang.Short") == sc.ShortType()
-    assert b.parse_type("java.lang.Integer") == sc.IntegerType()
-    assert b.parse_type("java.lang.Long") == sc.LongType()
-    assert b.parse_type("java.lang.Float") == sc.FloatType()
-    assert b.parse_type("java.lang.Double") == sc.DoubleType()
-    assert b.parse_type("java.lang.String") == sc.String
     assert b.parse_type("void") == sc.Unit
     assert b.parse_type("Void") == sc.Unit
     assert b.parse_type("scala.Unit") == sc.Unit
@@ -324,9 +316,9 @@ def test_scala_regular_types():
 def test_scala_type_variables():
     b = ScalaTypeParser()
     assert b.parse_type("T") == tp.TypeParameter("T")
-    assert b.parse_type("T <: java.lang.String") == tp.TypeParameter(
+    assert b.parse_type("T <: scala.String") == tp.TypeParameter(
         "T", bound=sc.String)
-    assert b.parse_type("Foo <: java.util.List[java.lang.String]") == \
+    assert b.parse_type("Foo <: java.util.List[scala.String]") == \
         tp.TypeParameter("Foo", bound=tp.TypeConstructor(
             "java.util.List", [tp.TypeParameter("java.util.List.T1")]).new([sc.String]))
     assert b.parse_type("T <: X") == tp.TypeParameter(
@@ -361,10 +353,10 @@ def test_scala_wildcards():
     assert b.parse_type("_") == tp.WildCardType()
     assert b.parse_type("java.List[?]") == tp.TypeConstructor(
         "java.List", [tp.TypeParameter("java.List.T1")]).new([tp.WildCardType()])
-    assert b.parse_type("? <: java.lang.String") == tp.WildCardType(
+    assert b.parse_type("? <: scala.String") == tp.WildCardType(
         bound=sc.String, variance=tp.Covariant
     )
-    assert b.parse_type("? >: java.lang.String") == tp.WildCardType(
+    assert b.parse_type("? >: scala.String") == tp.WildCardType(
         bound=sc.String, variance=tp.Contravariant
     )
     assert b.parse_type("java.List[? <: Int]") == tp.TypeConstructor(

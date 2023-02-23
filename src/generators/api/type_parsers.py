@@ -398,7 +398,7 @@ class KotlinTypeParser(TypeParser):
 class ScalaTypeParser(TypeParser):
     FUNC_SEP_REGEX = re.compile(r"=>(?![^()]*\))")
 
-    COMMA_SEP_REGEX = re.compile(r"(?:[^,\[(]|\([^)]*\)|\[[^>]*\])+")
+    COMMA_SEP_REGEX = re.compile(r"(?:[^,\[(]|\([^)]*\)|\[[^\]]*\])+")
 
     FUNC_REGEX = re.compile(r"^\(.*\) => .*")
 
@@ -560,25 +560,25 @@ class ScalaTypeParser(TypeParser):
     @map_type
     def _parse_type(self, str_t: str) -> tp.Type:
         tf = self.bt_factory
-        if str_t in ["java.lang.Byte", "scala.Byte", "Byte"]:
+        if str_t in ["scala.Byte", "Byte"]:
             return self.bt_factory.get_byte_type()
-        elif str_t in ["java.lang.Short", "scala.Short", "Short"]:
+        elif str_t in ["scala.Short", "Short"]:
             return self.bt_factory.get_short_type()
-        elif str_t in ["java.lang.Integer", "scala.Int", "Int"]:
+        elif str_t in ["scala.Int", "Int"]:
             return self.bt_factory.get_integer_type()
-        elif str_t in ["java.lang.Long", "scala.Long", "Long"]:
+        elif str_t in ["scala.Long", "Long"]:
             return self.bt_factory.get_long_type()
-        elif str_t in ["java.lang.Float", "scala.Float", "Float"]:
+        elif str_t in ["scala.Float", "Float"]:
             return self.bt_factory.get_float_type()
-        elif str_t in ["java.lang.Double", "scala.Double", "Double"]:
+        elif str_t in ["scala.Double", "Double"]:
             return self.bt_factory.get_double_type()
-        elif str_t in ["java.lang.Character", "scala.Char", "Char"]:
+        elif str_t in ["scala.Char", "Char"]:
             return self.bt_factory.get_char_type()
-        elif str_t in ["java.lang.Boolean", "scala.Boolean", "Boolean"]:
+        elif str_t in ["scala.Boolean", "Boolean"]:
             return self.bt_factory.get_boolean_type()
-        elif str_t in ["java.lang.String", "scala.String", "String"]:
+        elif str_t in ["scala.String", "String"]:
             return tf.get_string_type()
-        elif str_t in ["java.lang.Number", "scala.Number", "Number"]:
+        elif str_t in ["scala.Number", "Number"]:
             return tf.get_number_type()
         elif str_t in ["scala.Any"]:
             return tf.get_any_type()
