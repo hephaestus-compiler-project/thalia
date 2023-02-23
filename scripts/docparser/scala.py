@@ -169,7 +169,12 @@ class ScalaAPIDocConverter(APIDocConverter):
         return types
 
     def extract_method_access_mod(self, method_doc):
-        return self.PUBLIC
+        visibilities = {
+            "pub": self.PUBLIC,
+            "prt": self.PROTECTED,
+        }
+        visibility = method_doc["visbl"]
+        return visibilities[visibility]
 
     def extract_method_name(self, method_doc):
         elem = method_doc.select(".symbol")[0]
@@ -193,8 +198,7 @@ class ScalaAPIDocConverter(APIDocConverter):
     def is_field_override(self, field_doc):
         return "override" in field_doc.find(class_="modifier")
 
-    def extract_field_access_mod(self, field_doc):
-        return self.PUBLIC
+    extract_field_access_mod = extract_method_access_mod
 
     def process_fields(self, fields):
         field_objs = []
