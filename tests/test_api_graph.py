@@ -1,6 +1,6 @@
 import copy
 
-from src.ir import types as tp
+from src.ir import types as tp, java_types as jt
 from src.generators.api import api_graph as ag
 from src.generators.api.builder import JavaAPIGraphBuilder
 
@@ -230,6 +230,42 @@ DOCS3 = {
 }
 
 
+DOCS4 = {
+    "java.Producer": {
+        "name": "java.Producer",
+        "type_parameters": ["T"],
+        "functional_interface": True,
+        "implements": [],
+        "inherits": [],
+        "class_type": 1,
+        "fields": [],
+        "methods": [
+          {
+            "name": "apply",
+            "parameters": [],
+            "type_parameters": [],
+            "return_type": "T",
+            "is_static": False,
+            "is_constructor": False,
+            "access_mod": "public",
+            "throws": [],
+            "is_default": False
+          },
+        ]
+    },
+    "java.Foo": {
+        "name": "java.Foo",
+        "type_parameters": [],
+        "functional_interface": False,
+        "implements": ["java.Producer<java.lang.String>"],
+        "inherits": [],
+        "class_type": 9,
+        "fields": [],
+        "methods": []
+    }
+}
+
+
 def test1():
     b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS1)
@@ -378,3 +414,14 @@ def test_get_function_refs_of():
 
     refs = api_graph.get_function_refs_of(b.parse_type("java.lang.Object"))
     assert refs == []
+
+
+def test_get_functional_type():
+    b = JavaAPIGraphBuilder("java")
+    api_graph = b.build(DOCS4)
+
+    assert api_graph.get_functional_type(b.parse_type("java.lang.String")) is None
+    assert api_graph.get_functional_type(b.parse_type(
+        "java.Producer<java.lang.Integer>")) == jt.FunctionType(0).new([tp.TypeParameter("java.Producer.T1")])
+    assert api_graph.get_functional_type(
+        b.parse_type("java.Foo")) == jt.FunctionType(0).new([jt.String])

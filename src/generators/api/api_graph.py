@@ -348,7 +348,7 @@ class APIGraph():
         if source == target:
             return None
         for path in nx.all_simple_edge_paths(self.api_graph, source=source,
-                                             target=target):
+                                             target=target, cutoff=10):
             assignment_graph = au.compute_assignment_graph(self.api_graph,
                                                            path)
             type_variables = _get_type_variables(path)
@@ -418,7 +418,7 @@ class APIGraph():
                 possibles_types.add(sub_t)
         return possibles_types
 
-    def get_functional_type(self, etype: tp.Type):
+    def _get_functional_type(self, etype: tp.Type) -> tp.ParameterizedType:
         if etype.is_parameterized():
             # Check if this the given type is a native function type, e.g.,
             # (Boolean) -> String.
@@ -430,6 +430,20 @@ class APIGraph():
         if etype.is_parameterized():
             class_type = etype.t_constructor
         return self.functional_types.get(class_type)
+
+    def get_functional_type(self, etype: tp.Type) -> tp.ParameterizedType:
+        func_type = self._get_functional_type(etype)
+        if func_type:
+            return func_type
+        supertypes = self.supertypes(etype)
+        for supertype in supertypes:
+            type_var_map = {}
+            if supertype.is_parameterized():
+                type_var_map = supertype.get_type_variable_assignments()
+            func_type = self._get_functional_type(supertype)
+            if func_type:
+                return tp.substitute_type(func_type, type_var_map)
+        return None
 
     def get_function_refs_of(self, etype: tp.Type) -> List[Tuple[Method, dict]]:
         type_var_map = {}
