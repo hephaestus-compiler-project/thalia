@@ -59,6 +59,8 @@ class KotlinTranslator(BaseTranslator):
             return "in " + self.get_type_name(t_arg.bound)
 
     def get_type_name(self, t):
+        if t is None:
+            import pdb; pdb.set_trace()
         if t.is_wildcard():
             t = t.get_bound_rec()
             return self.get_type_name(t)
@@ -600,20 +602,29 @@ class KotlinTranslator(BaseTranslator):
             if not node.can_infer_type_args and node.type_args
             else ""
         )
+        segs = node.func.rsplit(".", 1)
         if node.receiver:
             receiver_expr = (
                 '({})'.format(children_res[0])
                 if isinstance(node.receiver, ast.BottomConstant)
                 else children_res[0]
             )
-            res = "{}{}.{}{}({})".format(
-                " " * self.ident, receiver_expr, node.func,
-                type_args,
-                ", ".join(children_res[1:]))
+            func = node.func
+            args = children_res[1:]
         else:
-            res = "{}{}{}({})".format(
-                " " * self.ident, node.func, type_args,
-                ", ".join(children_res))
+            receiver_expr, func = (
+                ("this", func)
+                if len(segs) == 1
+                else (segs[0], segs[1])
+            )
+            args = children_res
+        res = "{ident}{rec}.{func}{type_args}({args})".format(
+            ident=" " * self.ident,
+            rec=receiver_expr,
+            func=func,
+            type_args=type_args,
+            args=", ".join(args)
+        )
         self._children_res.append(res)
 
     @append_to

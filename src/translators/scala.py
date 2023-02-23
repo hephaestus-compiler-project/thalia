@@ -1,4 +1,4 @@
-from src.ir import ast, scala_types as sc, types as tp, type_utils as tu
+from src.ir import ast, scala_types as sc, types as tp
 from src.translators.base import BaseTranslator
 
 
@@ -522,12 +522,15 @@ class ScalaTranslator(BaseTranslator):
             c.accept(self)
         children_res = self.pop_children_res(children)
         self.ident = old_ident
-        receiver_expr = (
-            '({})'.format(children_res[0])
-            if isinstance(node.expr, ast.BottomConstant)
-            else children_res[0]
-        )
-        res = "{}{}.{}".format(" " * self.ident, receiver_expr, node.field)
+        if children:
+            receiver_expr = (
+                '({}).'.format(children_res[0])
+                if isinstance(node.expr, ast.BottomConstant)
+                else children_res[0] + "."
+            )
+        else:
+            receiver_expr = ""
+        res = "{}{}{}".format(" " * self.ident, receiver_expr, node.field)
         self._children_res.append(res)
 
     @append_to
@@ -574,26 +577,29 @@ class ScalaTranslator(BaseTranslator):
             if not node.can_infer_type_args and node.type_args
             else ""
         )
+        segs = node.func.rsplit(".", 1)
         if node.receiver:
             receiver_expr = (
                 '({})'.format(children_res[0])
                 if isinstance(node.receiver, ast.BottomConstant)
                 else children_res[0]
             )
-            res = "{ident}{rec}.{name}{type_args}({args})".format(
-                ident=" " * self.ident,
-                rec=receiver_expr,
-                name=node.func,
-                type_args=type_args,
-                args=", ".join(children_res[1:])
-            )
+            func = node.func
+            args = children_res[1:]
         else:
-            res = "{ident}{name}{type_args}({args})".format(
-                ident=" " * self.ident,
-                name=node.func,
-                type_args=type_args,
-                args=", ".join(children_res)
+            receiver_expr, func = (
+                ("this.", func)
+                if len(segs) == 1
+                else (segs[0], segs[1])
             )
+            args = children_res
+        res = "{ident}{rec}.{name}{type_args}({args})".format(
+            ident=" " * self.ident,
+            rec=receiver_expr,
+            name=func,
+            type_args=type_args,
+            args=", ".join(args)
+        )
         self._children_res.append(res)
 
     @append_to
