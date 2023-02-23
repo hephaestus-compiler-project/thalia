@@ -1,4 +1,5 @@
 import os
+import re
 
 from docparser.base import APIDocConverter
 from docparser.utils import file2html, dict2json
@@ -16,8 +17,12 @@ class ScalaAPIDocConverter(APIDocConverter):
     def __init__(self):
         super().__init__()
         self.class_name = None
+        self.is_object = False
 
     def process(self, args):
+        docs = {}
+        objects_methods = {}
+        objects_fields = {}
         for base in os.listdir(args.input):
             if base in self.EXCLUDED_FILES:
                 continue
@@ -27,10 +32,22 @@ class ScalaAPIDocConverter(APIDocConverter):
             data = self.process_class(file2html(apidoc_path))
             if data:
                 data["language"] = args.language
-            name = None
-            if data["class_type"] == self.OBJECT:
-                name = data["name"] + "_Object"
-            dict2json(args.output, data, name=name)
+            value = docs.get(data["name"])
+            if value:
+                value["methods"].extend(data["methods"])
+                value["fields"].extend(data["fields"])
+            else:
+                if data["class_type"] != self.OBJECT:
+                    data["methods"].extend(objects_methods.get(data["name"],
+                                                               []))
+                    data["fields"].extend(objects_fields.get(data["name"],
+                                                             []))
+                    docs[data["name"]] = data
+                else:
+                    objects_methods[data["name"]] = data["methods"]
+                    objects_fields[data["name"]] = data["fields"]
+        for data in docs.values():
+            dict2json(args.output, data)
 
     def _replace_anchors_with_package_prefix(self, anchors):
         # This method replaces the text of all anchors (note that the text
@@ -60,9 +77,12 @@ class ScalaAPIDocConverter(APIDocConverter):
             "ascii", "ignore").decode()
 
     def extract_class_type_parameters(self, html_doc):
+        tparams = html_doc.select("#signature .tparams")
+        if not tparams:
+            return []
         return [
             elem.text
-            for elem in html_doc.select("#signature .tparams span")
+            for elem in tparams[0].find_all("span", recursive=False)
         ]
 
     def extract_super_class(self, html_doc):
@@ -70,6 +90,7 @@ class ScalaAPIDocConverter(APIDocConverter):
 
     def extract_class_type(self, html_doc):
         text = html_doc.select("#signature .modifier_kind")[0].text
+        text = re.sub(" +", " ", text)
         if 'trait' in text:
             return self.INTERFACE
         if 'abstract class' in text:
@@ -91,10 +112,13 @@ class ScalaAPIDocConverter(APIDocConverter):
                                                cls=class_name)
         self._replace_anchors_with_package_prefix(
             html_doc.select("#signature .result a"))
+        self._replace_anchors_with_package_prefix(
+            html_doc.select("#signature .tparams a"))
         super_class = self.extract_super_class(html_doc)
         super_interfaces = self.extract_super_interfaces(html_doc)
         type_parameters = self.extract_class_type_parameters(html_doc)
         class_type = self.extract_class_type(html_doc)
+        self.is_object = class_type == self.OBJECT
         methods = html_doc.select("#allMembers .values.members li")
         constructors = html_doc.select("#constructors li")
         fields = methods
@@ -119,9 +143,12 @@ class ScalaAPIDocConverter(APIDocConverter):
     def extract_method_type_parameters(self, method_doc, is_constructor):
         if is_constructor:
             return []
+        tparams = method_doc.select(".symbol .tparams")
+        if not tparams:
+            return []
         return [
             elem.text
-            for elem in method_doc.select(".symbol .tparams")
+            for elem in tparams[0].find_all("span", recursive=False)
         ]
 
     def extract_method_return_type(self, method_doc, is_constructor):
@@ -135,7 +162,7 @@ class ScalaAPIDocConverter(APIDocConverter):
         for param in method_doc.select(".symbol .params"):
             param_specs = param.find_all("span", recursive=False)
             types.extend([
-                param_spec.text.split(": ")[1]
+                param_spec.text.split(": ", 1)[1]
                 for param_spec in param_specs
                 if "implicit" not in param_spec.get("class", [])
             ])
@@ -145,7 +172,11 @@ class ScalaAPIDocConverter(APIDocConverter):
         return self.PUBLIC
 
     def extract_method_name(self, method_doc):
-        return method_doc.select(".symbol .name")[0].text
+        elem = method_doc.select(".symbol")[0]
+        name = elem.find(class_="name")
+        if name:
+            return name.text
+        return elem.find(class_="implicit").text
 
     extract_field_name = extract_method_name
 
@@ -177,6 +208,9 @@ class ScalaAPIDocConverter(APIDocConverter):
             if field_doc.find(class_="params") is not None:
                 # This is a method
                 continue
+            if field_doc.select(".symbol .tparams"):
+                # TODO handle field parameters
+                continue
             if not self._should_add_member(field_doc):
                 continue
             self._replace_anchors_with_package_prefix(field_doc.select(
@@ -190,14 +224,12 @@ class ScalaAPIDocConverter(APIDocConverter):
                 "type_parameters": self.extract_field_type_parameters(
                     field_doc),
                 "access_mod": self.extract_field_access_mod(field_doc),
-                "is_static": False
+                "is_static": self.is_object,
             }
             field_objs.append(field_obj)
         return field_objs
 
     def _should_add_member(self, method_doc):
-        if not method_doc.select(".symbol .name"):
-            return False
         element = method_doc.select(".fullcomment .attributes.block")
         if not element:
             return True
@@ -206,10 +238,8 @@ class ScalaAPIDocConverter(APIDocConverter):
             return False
         is_implicit = bool(element[0].find("dt", string="Implicit"))
         is_shadowed = bool(element[0].find("dt", string="Shadowing"))
-        if is_shadowed:
+        if is_shadowed or is_implicit:
             return False
-        if is_implicit:
-            return True
         dt = element[0].find("dt", string="Definition Classes")
         if not dt:
             return True
@@ -246,7 +276,7 @@ class ScalaAPIDocConverter(APIDocConverter):
                 "type_parameters": type_params,
                 "return_type": ret_type,
                 "receiver": None,
-                "is_static": False,
+                "is_static": self.is_object,
                 "is_constructor": is_constructor,
                 "access_mod": access_mod
             }
