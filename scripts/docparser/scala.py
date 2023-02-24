@@ -56,10 +56,21 @@ class ScalaAPIDocConverter(APIDocConverter):
         # named "title".
         for anchor in anchors:
             fname = anchor.get("id")
-            cls_name = fname.rsplit(".", 1)[1]
+            if not fname:
+                continue
             if fname != anchor.string:
-                anchor.string.replace_with(anchor.string.replace(cls_name,
-                                                                 fname))
+                anchor.string.replace_with(fname)
+
+    def _replace_span_with_package_prefix(self, spans):
+        for span in spans:
+            if "extype" not in span.get("class", []):
+                continue
+            fname = span.get("name")
+            if fname != span.string:
+                package, _ = tuple(fname.rsplit(span.string, 1))
+                if not any(s == self.class_name.rsplit(".", 1)[-1]
+                           for s in package.split(".")):
+                    span.string.replace_with(fname)
 
     def _get_super_classes_interfaces(self, html_doc):
         res = html_doc.select("#signature .result")
@@ -219,6 +230,8 @@ class ScalaAPIDocConverter(APIDocConverter):
                 continue
             self._replace_anchors_with_package_prefix(field_doc.select(
                 ".symbol a"))
+            self._replace_span_with_package_prefix(field_doc.select(
+                ".symbol span"))
             field_obj = {
                 "name": self.extract_field_name(field_doc),
                 "type": self.extract_field_type(field_doc),
@@ -266,6 +279,8 @@ class ScalaAPIDocConverter(APIDocConverter):
 
             self._replace_anchors_with_package_prefix(method_doc.select(
                 ".symbol a"))
+            self._replace_span_with_package_prefix(method_doc.select(
+                ".symbol span"))
             method_name = self.extract_method_name(method_doc)
             ret_type = self.extract_method_return_type(method_doc,
                                                        is_constructor)
