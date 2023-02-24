@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from copy import deepcopy
+from copy import copy
 from typing import Dict
 import re
 
@@ -84,7 +84,7 @@ class JavaTypeParser(TypeParser):
     def parse_type_parameter(self, str_t: str,
                              keep: bool = False) -> tp.TypeParameter:
         segs = str_t.split(" extends ")
-        type_var_map = deepcopy(self.class_type_name_map)
+        type_var_map = copy(self.class_type_name_map)
         type_var_map.update(self.func_type_name_map)
         if keep:
             # It might be the case where the names of function's and class's
@@ -254,7 +254,7 @@ class KotlinTypeParser(TypeParser):
             variance = tp.Invariant
             type_param = str_t
         segs = type_param.split(":")
-        type_var_map = deepcopy(self.class_type_name_map)
+        type_var_map = copy(self.class_type_name_map)
         type_var_map.update(self.func_type_name_map)
         if keep:
             # It might be the case where the names of function's and class's
@@ -480,7 +480,7 @@ class ScalaTypeParser(TypeParser):
         if "[" in segs[0]:
             # XXX Probably a higher-kinded type: not supported at the moment.
             return None
-        type_var_map = deepcopy(self.class_type_name_map)
+        type_var_map = copy(self.class_type_name_map)
         type_var_map.update(self.func_type_name_map)
         if keep:
             # It might be the case where the names of function's and class's
