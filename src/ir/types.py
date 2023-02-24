@@ -1,6 +1,6 @@
 # pylint: disable=abstract-method
 from __future__ import annotations
-from copy import deepcopy, copy
+from copy import copy
 from collections import defaultdict
 from typing import List, Dict, Set
 
@@ -461,7 +461,7 @@ def perform_type_substitution(etype, type_map,
         t_param = TypeParameter(t_param.name, t_param.variance, new_bound)
         type_params.append(t_param)
 
-    etype = deepcopy(etype)
+    etype = copy(etype)
     etype.type_parameters = type_params
     etype.supertypes = supertypes
     return etype
@@ -594,7 +594,7 @@ class ParameterizedType(SimpleClassifier):
     def __init__(self, t_constructor: TypeConstructor,
                  type_args: List[Type],
                  can_infer_type_args=False):
-        self.t_constructor = deepcopy(t_constructor)
+        self.t_constructor = copy(t_constructor)
         self.type_args = list(type_args)
         assert len(self.t_constructor.type_parameters) == len(type_args), \
             "You should provide {} types for {}".format(

@@ -449,3 +449,63 @@ def test_type_parameter_has_recursive_bounds():
     type_param = tp.TypeParameter("T", bound=tp.TypeConstructor(
         "F", [tp.TypeParameter("T")]).new([tp.TypeParameter("T")]))
     assert type_param.has_recursive_bound()
+
+
+def test_type_constructor_multiple_instantiations():
+    type_con = tp.TypeConstructor("Foo", [
+        tp.TypeParameter("T1", variance=tp.Covariant),
+        tp.TypeParameter("T2", variance=None)
+    ])
+
+    t1 = type_con.new([kt.String, kt.Integer])
+    t2 = type_con.new([kt.String, kt.String])
+
+    assert not t1.is_subtype(t2)
+
+    t3 = type_con.new([kt.Any, kt.Integer])
+    assert t1.is_subtype(t3)
+    assert not t2.is_subtype(t3)
+
+
+    type_con2 = tp.TypeConstructor("Bar", [
+        tp.TypeParameter("T2", variance=tp.Covariant)
+    ], supertypes=[
+        type_con.new([tp.TypeParameter("T2", variance=tp.Covariant), kt.Integer])
+    ])
+
+    t4 = type_con2.new([kt.Number])
+    t5 = type_con2.new([kt.Integer])
+    t6 = type_con2.new([kt.Integer])
+
+    assert t5.is_subtype(t4)
+    assert t5.is_subtype(t3)
+
+
+def test_type_constructor_multiple_instantiations_with_bounds():
+    # Class Foo<T1, T2>
+    # Class Bar<+T1, T2 : Foo<T1, Int>>
+    # Class Baz<T1> : Foo<T1, Int>
+
+    type_con = tp.TypeConstructor("Foo", [
+        tp.TypeParameter("T1", variance=None),
+        tp.TypeParameter("T2", variance=None)
+    ])
+
+    type_param1 = tp.TypeParameter("T1", variance=tp.Covariant)
+    type_param2 = tp.TypeParameter("T2", bound=type_con.new([type_param1, kt.Integer]))
+    type_con2 = tp.TypeConstructor("Bar", [type_param1, type_param2])
+
+    type_param3 = tp.TypeParameter("T1", variance=tp.Covariant)
+    type_con3 = tp.TypeConstructor("Baz", [type_param3], supertypes=[
+        type_con2.new([type_param3,
+                       type_con.new([type_param3, kt.Integer])])
+    ])
+
+    t1 = type_con3.new([kt.Number])
+    t2 = type_con3.new([kt.Integer])
+    t3 = type_con2.new([kt.Number, type_con.new([kt.Number, kt.Integer])])
+    t4 = type_con2.new([kt.Integer, type_con.new([kt.Integer, kt.Integer])])
+    assert t1.is_subtype(t3)
+    assert not t1.is_subtype(t4)
+    assert not t2.is_subtype(t3)
+    assert t2.is_subtype(t4)
