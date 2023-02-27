@@ -33,6 +33,7 @@ proxy
 readable
 return
 sealed
+scala
 some
 super
 then
