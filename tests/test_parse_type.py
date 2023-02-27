@@ -427,6 +427,10 @@ def test_scala_function_types():
          sc.String, sc.Integer
      ])
      assert b.parse_type("scala.Function0[Int]") == sc.FunctionType(0).new([sc.Integer])
+     assert b.parse_type("(=> scala.String) => scala.Int") == sc.FunctionType(1).new([
+         sc.String,
+         sc.Integer
+     ])
 
 
 def test_scala_tuple_types():

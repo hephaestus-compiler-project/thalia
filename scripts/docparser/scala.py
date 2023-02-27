@@ -172,7 +172,7 @@ class ScalaAPIDocConverter(APIDocConverter):
         types = []
         for param in method_doc.select(".symbol .params"):
             param_specs = param.find_all("span", recursive=False)
-            types.extend([
+            types.append([
                 param_spec.text.split(": ", 1)[1]
                 for param_spec in param_specs
                 if "implicit" not in param_spec.get("class", [])
@@ -263,6 +263,21 @@ class ScalaAPIDocConverter(APIDocConverter):
         text = dt.nextSibling.text
         return any(seg == self.class_name for seg in text.split(" \u2192 "))
 
+    def _get_param_ret_types(self, param_types, ret_type):
+        # This constructs method signatures in the presence of curried
+        # functions.
+        if not param_types:
+            return [], ret_type
+        if len(param_types) == 1:
+            return param_types[0], ret_type
+
+        curried_sig = " => ".join([
+            "(" + ", ".join(p) + ")"
+            for p in param_types[1:]
+        ])
+        ret_type = curried_sig + (" => " + ret_type if ret_type else "")
+        return param_types[0], ret_type
+
     def process_methods(self, methods, is_constructor):
         method_objs = []
         for method_doc in methods:
@@ -288,6 +303,8 @@ class ScalaAPIDocConverter(APIDocConverter):
                 method_doc, is_constructor)
             param_types = self.extract_method_parameter_types(
                 method_doc, is_constructor)
+            param_types, ret_type = self._get_param_ret_types(param_types,
+                                                              ret_type)
             access_mod = self.extract_method_access_mod(method_doc)
             method_obj = {
                 "name": method_name,
