@@ -46,10 +46,23 @@ class Field(NamedTuple):
         return self.get_name()
 
 
+class Parameter(NamedTuple):
+    t: tp.Type
+    variable: bool
+
+    def __str__(self):
+        return "{t!s}{suffix!s}".format(
+            t=str(self.t),
+            suffix="*" if self.variable else ""
+        )
+
+    __repr__ = __str__
+
+
 class Method(NamedTuple):
     name: str
     cls: str
-    parameters: List[tp.Type]
+    parameters: List[Parameter]
     type_parameters: List[tp.TypeParameter]
 
     def __str__(self):
@@ -201,7 +214,8 @@ class APIGraph():
             )
             if is_invalid:
                 return None
-            type_var_map[type_v] = assignment
+            if type_v.is_type_var():
+                type_var_map[type_v] = assignment
         return type_var_map
 
     def get_incoming_node(self, node):
@@ -227,12 +241,12 @@ class APIGraph():
             elif (t_arg.is_wildcard() and t_arg.is_covariant() or
                   type_param.is_covariant()):
                 possible_type_args.append({
-                    n for n in self.subtypes(getattr(t_arg, "bound", t_arg))
+                    n for n in self.subtypes(getattr(t_arg, "bound", t_arg) or t_arg)
                     if not n.is_type_constructor()})
             # Type argument contravariant or type param contravariant
             else:
                 possible_type_args.append({n for n in self.supertypes(
-                    getattr(t_arg, "bound", t_arg))})
+                    getattr(t_arg, "bound", t_arg) or t_arg)})
         for combination in itertools.product(*possible_type_args):
             new_sub = node.t_constructor.new(list(combination))
             subtypes.add(new_sub)
@@ -458,7 +472,14 @@ class APIGraph():
         for api in self.api_graph.nodes():
             if not isinstance(api, (Method, Constructor)):
                 continue
-            param_types = [p.box_type() for p in api.parameters]
+            param_types = [
+                (
+                    self.bt_factory.get_array_type().new([param.t.box_type()])
+                    if param.variable
+                    else param.t.box_type()
+                )
+                for param in api.parameters
+            ]
             view = self.api_graph.out_edges(api)
             assert len(view) == 1
             out_type = list(view)[0][1]
@@ -547,7 +568,7 @@ class APIGraph():
                     include_self = not (receiver.is_parameterized() and
                                         receiver.has_wildcards())
                     receivers.update(self.subtypes(receiver, include_self))
-            parameters = [{tp.substitute_type(p, type_var_map)}
+            parameters = [{tp.substitute_type(p.t, type_var_map)}
                           for p in getattr(node, "parameters", [])]
             for param_set in parameters:
                 param = list(param_set)[0]

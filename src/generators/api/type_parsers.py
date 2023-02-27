@@ -49,7 +49,11 @@ class TypeParser(ABC):
         pass
 
     @abstractmethod
-    def parse_type(self, str_t) -> tp.Type:
+    def parse_type(self, str_t: str) -> tp.Type:
+        pass
+
+    @abstractmethod
+    def is_variable_argument(self, str_t: str) -> bool:
         pass
 
 
@@ -183,6 +187,9 @@ class JavaTypeParser(TypeParser):
             return tf.get_void_type()
         else:
             return self.parse_reg_type(str_t)
+
+    def is_variable_argument(self, str_t: str) -> bool:
+        return str_t.endswith("...")
 
 
 class KotlinTypeParser(TypeParser):
@@ -394,6 +401,9 @@ class KotlinTypeParser(TypeParser):
         else:
             return self.parse_reg_type(str_t)
 
+    def is_variable_argument(self, str_t: str) -> bool:
+        return str_t.startswith("vararg ")
+
 
 class ScalaTypeParser(TypeParser):
     FUNC_SEP_REGEX = re.compile(r"=>(?![^()]*\))")
@@ -586,3 +596,6 @@ class ScalaTypeParser(TypeParser):
             return tf.get_void_type()
         else:
             return self.parse_reg_type(str_t)
+
+    def is_variable_argument(self, str_t: str) -> bool:
+        return str_t.endswith("*")

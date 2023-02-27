@@ -9,7 +9,7 @@ import networkx as nx
 from src.ir import BUILTIN_FACTORIES, types as tp
 from src.ir.builtins import BuiltinFactory
 from src.generators.api.api_graph import (APIGraph, IN, OUT, Method,
-                                          Constructor, Field)
+                                          Constructor, Field, Parameter)
 from src.generators.api.type_parsers import (TypeParser, KotlinTypeParser,
                                              JavaTypeParser, ScalaTypeParser)
 
@@ -253,9 +253,13 @@ class APIGraphBuilder(ABC):
         type_parameters = self.build_method_type_parameters(method_api,
                                                             method_fqn)
 
-        parameters = [self.parse_type(p) for p in method_api["parameters"]]
+        parameters = [
+            Parameter(self.parse_type(p),
+                      self.get_type_parser().is_variable_argument(p))
+            for p in method_api["parameters"]
+        ]
         for param in parameters:
-            self.graph.add_node(param)
+            self.graph.add_node(param.t)
         if is_constructor:
             method_node = Constructor(receiver_name, parameters)
         elif is_static:
@@ -268,12 +272,19 @@ class APIGraphBuilder(ABC):
         return method_node
 
     def build_functional_interface(self, method_api: dict,
-                                   parameters: List[tp.Type],
+                                   parameters: List[Parameter],
                                    ret_type: tp.Type):
         is_abstract = not method_api.get("is_default", False) and not \
             method_api["is_static"]
         if self._is_func_interface and is_abstract:
-            func_params = [param.box_type() for param in parameters]
+            func_params = [
+                (
+                    self.bt_factory.get_array_type().new([param.t.box_type()])
+                    if param.variable
+                    else param.t.box_type()
+                )
+                for param in parameters
+            ]
             func_type = self.bt_factory.get_function_type(
                 len(func_params)).new(func_params + [ret_type.box_type()])
             assert self.class_node, ("A functional interface detected."
@@ -431,7 +442,7 @@ class ScalaAPIGraphBuilder(APIGraphBuilder):
         filtered_docs = {}
         for k, v in docs.items():
             segs = v["name"].split(".")
-            if len(segs) == 3 and segs[-2][0].isupper():
+            if len(segs) >= 3 and segs[-2][0].isupper():
                 continue
             filtered_docs[k] = v
         return super().build(filtered_docs)

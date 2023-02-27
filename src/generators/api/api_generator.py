@@ -87,7 +87,8 @@ class APIGenerator(Generator):
                                        return_type, type_map) -> ast.Expr:
         receiver, type_var_map = self._generate_expr_from_node(receiver)
         type_var_map.update(type_map)
-        args = self._generate_args(getattr(api, "parameters", []), parameters,
+        exp_parameters = [p.t for p in getattr(api, "parameters", [])]
+        args = self._generate_args(exp_parameters, parameters,
                                    depth=1, type_var_map=type_var_map)
         var_type = tp.substitute_type(return_type, type_var_map)
         if isinstance(api, ag.Method):
@@ -266,9 +267,10 @@ class APIGenerator(Generator):
             receiver = self._generate_expression_from_path(receiver_path,
                                                            depth, type_var_map)
         if isinstance(elem, ag.Method):
+            parameters = [param.t for param in elem.parameters]
             args = [ast.CallArgument(pe)
-                    for pe in self._generate_args(elem.parameters,
-                                                  elem.parameters,
+                    for pe in self._generate_args(parameters,
+                                                  parameters,
                                                   depth + 1, type_var_map)]
             type_args = [type_var_map[tpa] for tpa in elem.type_parameters]
             expr = ast.FunctionCall(elem.name, args=args, receiver=receiver,
@@ -276,7 +278,8 @@ class APIGenerator(Generator):
         elif isinstance(elem, ag.Field):
             expr = ast.FieldAccess(receiver, elem.name)
         elif isinstance(elem, ag.Constructor):
-            args = self._generate_args(elem.parameters, elem.parameters,
+            parameters = [param.t for param in elem.parameters]
+            args = self._generate_args(parameters, parameters,
                                        depth + 1, type_var_map)
             con_type = self.api_graph.get_type_by_name(elem.name)
             con_type = _instantiate_type_con(con_type)

@@ -355,16 +355,18 @@ def test_get_function_refs_of():
     )
     assert refs == [
         (
-            ag.Method("m2", "java.Foo", [b.parse_type("java.lang.String")], []),
+            ag.Method("m2", "java.Foo", [
+                ag.Parameter(b.parse_type("java.lang.String"), False)], []),
             {}
         ),
         (
-            ag.Method("m4", "java.List", [b.parse_type("java.lang.String")], []),
+            ag.Method("m4", "java.List", [
+                ag.Parameter(b.parse_type("java.lang.String"), False)], []),
             {}
         ),
         (
             ag.Method("apply", "java.Function",
-                      [tp.TypeParameter("java.Function.T1")], []),
+                      [ag.Parameter(tp.TypeParameter("java.Function.T1"), False)], []),
             {
                 tp.TypeParameter("java.Function.T1"): b.parse_type("java.lang.String"),
                 tp.TypeParameter("java.Function.T2"): b.parse_type("java.lang.Object"),
@@ -378,7 +380,8 @@ def test_get_function_refs_of():
     )
     assert refs == [
         (
-            ag.Method("m3", "java.Foo", [], [tp.TypeParameter("java.Foo.m3.T1")]),
+            ag.Method("m3", "java.Foo", [],
+                      [tp.TypeParameter("java.Foo.m3.T1")]),
             {
                 tp.TypeParameter("java.Foo.m3.T1"): b.parse_type("java.lang.Integer")
             }
