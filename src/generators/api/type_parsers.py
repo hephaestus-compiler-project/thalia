@@ -15,8 +15,8 @@ def map_type(f):
         type_name = segs[0]
         if type_name in parser.mapped_types:
             mapped_type, mapped_parser = parser.mapped_types[type_name]
-            str_t = mapped_type + (segs[1] if len(segs) == 2 else "")
-            return mapped_parser.parse_type(mapped_type)
+            str_t = mapped_type + ("<" + segs[1] if len(segs) == 2 else "")
+            return mapped_parser.parse_type(str_t)
         else:
             return f(parser, str_t)
     return inner
