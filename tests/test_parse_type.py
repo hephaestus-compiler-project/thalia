@@ -432,6 +432,16 @@ def test_scala_function_types():
          sc.Integer
      ])
 
+     t = b.parse_type("((scala.String) => scala.Int) => scala.Boolean")
+     exp_t = sc.FunctionType(1).new([
+         sc.FunctionType(1).new([
+             sc.String,
+             sc.Integer
+         ]),
+         sc.Boolean
+     ])
+     assert t == exp_t
+
 
 def test_scala_tuple_types():
      b = ScalaTypeParser()

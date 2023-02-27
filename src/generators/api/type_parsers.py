@@ -193,7 +193,7 @@ class JavaTypeParser(TypeParser):
 
 
 class KotlinTypeParser(TypeParser):
-    FUNC_SEP_REGEX = re.compile(r"->(?![^()]*\))")
+    FUNC_SEP_REGEX = re.compile(r"->(?!(?:[^(]*\([^)]*\))*[^()]*\))")
 
     COMMA_SEP_REGEX = re.compile(r"(?:[^,<(]|\([^)]*\)|<[^>]*>)+")
 
@@ -406,7 +406,7 @@ class KotlinTypeParser(TypeParser):
 
 
 class ScalaTypeParser(TypeParser):
-    FUNC_SEP_REGEX = re.compile(r"=>(?![^()]*\))")
+    FUNC_SEP_REGEX = re.compile(r"=>(?!(?:[^(]*\([^)]*\))*[^()]*\))")
 
     COMMA_SEP_REGEX = re.compile(r"(?:[^,\[(]|\([^)]*\)|\[[^\]]*\])+")
 
@@ -542,7 +542,10 @@ class ScalaTypeParser(TypeParser):
         ]
         parsed_t = self.type_spec.get(base, tp.TypeConstructor(base,
                                                                type_vars))
-        return parsed_t.new(new_type_args)
+        try:
+            return parsed_t.new(new_type_args)
+        except:
+            import pdb; pdb.set_trace()
 
     def parse_type(self, str_t: str) -> tp.Type:
         tf = self.bt_factory
