@@ -542,10 +542,7 @@ class ScalaTypeParser(TypeParser):
         ]
         parsed_t = self.type_spec.get(base, tp.TypeConstructor(base,
                                                                type_vars))
-        try:
-            return parsed_t.new(new_type_args)
-        except:
-            import pdb; pdb.set_trace()
+        return parsed_t.new(new_type_args)
 
     def parse_type(self, str_t: str) -> tp.Type:
         tf = self.bt_factory

@@ -59,8 +59,6 @@ class KotlinTranslator(BaseTranslator):
             return "in " + self.get_type_name(t_arg.bound)
 
     def get_type_name(self, t):
-        if t is None:
-            import pdb; pdb.set_trace()
         if t.is_wildcard():
             t = t.get_bound_rec()
             return self.get_type_name(t)

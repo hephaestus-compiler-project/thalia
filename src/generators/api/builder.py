@@ -26,7 +26,7 @@ class APIGraphBuilder(ABC):
         self.subtyping_graph: nx.DiGraph = None
 
         self.functional_types: Dict[tp.Type, tp.ParameterizedType] = {}
-        self.class_node: tp.Type = None
+        self.class_nodes: dict[str, tp.Type] = {}
         self.class_name: str = None
 
         self._class_type_var_map: dict = {}
@@ -49,6 +49,10 @@ class APIGraphBuilder(ABC):
                 for st in api_doc["implements"] + api_doc["inherits"]
             }
             dep_graph.add_node(name)
+            parent = api_doc.get("parent")
+            if parent:
+                dep_graph.add_node(parent)
+                dep_graph.add_edge(parent, name)
             for st in super_types:
                 if st == self.bt_factory.get_any_type():
                     continue
@@ -88,6 +92,22 @@ class APIGraphBuilder(ABC):
                 self.build_class_node(api_doc)
         for cls_name in top_sort:
             api_doc = docs.get(cls_name)
+            if not api_doc or not api_doc["type_parameters"]:
+                continue
+            self.api_language = api_doc.get("language", self.api_language)
+            # cls_name = api_doc["name"]
+            self.class_name = cls_name
+            self._class_type_var_map[cls_name] = OrderedDict()
+            try:
+                self.rename_type_parameters(
+                    cls_name, api_doc["type_parameters"],
+                    self._class_type_var_map[cls_name]
+                )
+            except NotImplementedError:
+                excluded_cls.add(cls_name)
+                del self._class_type_var_map[cls_name]
+        for cls_name in top_sort:
+            api_doc = docs.get(cls_name)
             if api_doc:
                 # Now we are actually processing the docs of each API and build
                 # the corresponding API graph.
@@ -99,15 +119,15 @@ class APIGraphBuilder(ABC):
         self.api_language = class_api.get("language", self.api_language)
         self.class_name = class_api["name"]
         class_node = self.build_class_node(class_api)
-        self.class_node = class_node
-        self.graph.add_node(class_node)
+        self.graph.add_node(class_node, outer_class=self.parent_cls)
+        self.class_nodes[self.class_name] = class_node
         self.subtyping_graph.add_node(class_node)
         self._is_func_interface = class_api.get("functional_interface", False)
         self.process_fields(class_api["fields"])
         self.process_methods(class_api["methods"])
         self.build_subtyping_relations(class_api)
-        self.class_node = None
         self.class_name = None
+        self.parent_cls: tp.Type = None
 
     def process_fields(self, fields: List[dict]):
         for field_api in fields:
@@ -127,6 +147,9 @@ class APIGraphBuilder(ABC):
                 # by a receiver.
                 self.graph.add_node(receiver)
                 self.graph.add_edge(receiver, field_node, label=IN)
+            if field_api["is_static"] and self.parent_cls:
+                # Handle fields of non-static inner classes.
+                self.graph.add_edge(self.parent_cls, field_node, label=IN)
             field_type = self.parse_type(field_api["type"])
             out_node, kwargs = self.get_api_outgoing_node(field_type)
             self.graph.add_edge(field_node, out_node, label=OUT, **kwargs)
@@ -149,12 +172,16 @@ class APIGraphBuilder(ABC):
             if not (is_constructor or is_static or receiver is None):
                 self.graph.add_edge(receiver, method_node, label=IN)
 
+            if (is_static or is_constructor) and self.parent_cls:
+                # Handle the members of non-static inner classes
+                self.graph.add_edge(self.parent_cls, method_node, label=IN)
+
             output_type = None
             ret_type = method_api["return_type"]
             if not is_constructor:
                 output_type = self.parse_type(ret_type)
             else:
-                output_type = self.class_node
+                output_type = self.class_nodes[self.class_name]
             out_node, kwargs = self.get_api_outgoing_node(output_type)
             self.graph.add_edge(method_node, out_node, label=OUT, **kwargs)
             self._current_func_type_var_map = {}
@@ -222,8 +249,8 @@ class APIGraphBuilder(ABC):
         return method_api.get("receiver")
 
     def get_api_incoming_node(self, api_doc: dict) -> tp.Type:
-        if self.class_node:
-            return self.class_node
+        if self.class_name:
+            return self.class_nodes[self.class_name]
         receiver = api_doc.get("receiver")
         if receiver is not None:
             receiver = self.parse_type(receiver)
@@ -287,9 +314,10 @@ class APIGraphBuilder(ABC):
             ]
             func_type = self.bt_factory.get_function_type(
                 len(func_params)).new(func_params + [ret_type.box_type()])
-            assert self.class_node, ("A functional interface detected."
-                                     " This can be None")
-            self.functional_types[self.class_node] = func_type
+            class_node = self.class_nodes.get(self.class_name)
+            assert class_node, ("A functional interface detected. "
+                                "This can be None")
+            self.functional_types[class_node] = func_type
 
     def build_class_node(self, class_api: dict) -> tp.Type:
         super_types = {
@@ -311,6 +339,7 @@ class APIGraphBuilder(ABC):
         if type(class_node) is tp.SimpleClassifier:
             class_node = tp.SimpleClassifier(class_node.name, super_types)
 
+        self.parent_cls = self.class_nodes.get(class_api.get("parent"))
         self.parsed_types[class_node.name] = class_node
         return class_node
 
@@ -329,9 +358,9 @@ class APIGraphBuilder(ABC):
                 kwargs["constraint"] = st.get_type_variable_assignments()
             self.subtyping_graph.add_node(source)
             # Do not connect a node with itself.
-            if self.class_node != source:
-                self.subtyping_graph.add_edge(source, self.class_node,
-                                              **kwargs)
+            class_node = self.class_nodes[self.class_name]
+            if class_node != source:
+                self.subtyping_graph.add_edge(source, class_node, **kwargs)
 
 
 class JavaAPIGraphBuilder(APIGraphBuilder):
@@ -407,7 +436,6 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             super().process_class(class_api)
         else:
             self._is_func_interface = False
-            self.class_node = None
             self.class_name = None
             self.process_methods(class_api["methods"])
             self.process_fields(class_api["fields"])

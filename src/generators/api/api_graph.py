@@ -343,7 +343,8 @@ class APIGraph():
                     rec_bound_handler=handler)[0])
         return supertypes
 
-    def find_API_path(self, target: tp.Type) -> list:
+    def find_API_path(self, target: tp.Type,
+                      with_constraints: dict = None) -> list:
         origin = target
         if target.is_parameterized():
             target = target.t_constructor
@@ -358,28 +359,29 @@ class APIGraph():
         if not source_nodes:
             return None
 
-        source = utils.random.choice(source_nodes)
-        if source == target:
-            return None
-        for path in nx.all_simple_edge_paths(self.api_graph, source=source,
-                                             target=target, cutoff=10):
-            assignment_graph = au.compute_assignment_graph(self.api_graph,
-                                                           path)
-            type_variables = _get_type_variables(path)
-            constraints = au.collect_constraints(origin, type_variables,
-                                                 assignment_graph,
-                                                 self.bt_factory)
-            assignments = au.instantiate_type_variables(self, constraints,
-                                                        assignment_graph)
-            if assignments is None:
+        for source in source_nodes:
+            if source == target:
                 continue
-            node_path = OrderedDict()
-            for source, target in path:
-                node_path[source] = True
-                node_path[target] = True
-            pruned_path = [n for i, n in enumerate(node_path.keys())
-                           if i == 0 or not isinstance(n, tp.Type)]
-            return pruned_path, assignments
+            for path in nx.all_simple_edge_paths(self.api_graph, source=source,
+                                                 target=target, cutoff=10):
+                assignment_graph = au.compute_assignment_graph(self.api_graph,
+                                                               path)
+                type_variables = _get_type_variables(path)
+                constraints = au.collect_constraints(origin, type_variables,
+                                                     assignment_graph,
+                                                     with_constraints or {},
+                                                     self.bt_factory)
+                assignments = au.instantiate_type_variables(self, constraints,
+                                                            assignment_graph)
+                if assignments is None:
+                    continue
+                node_path = OrderedDict()
+                for source, target in path:
+                    node_path[source] = True
+                    node_path[target] = True
+                pruned_path = [n for i, n in enumerate(node_path.keys())
+                               if i == 0 or not isinstance(n, tp.Type)]
+                return pruned_path, assignments
         return None
 
     def get_instantiations_of_recursive_bound(
@@ -507,11 +509,35 @@ class APIGraph():
                 return None
         return {}
 
+    def instantiate_receiver_type(self, receiver: tp.Type):
+        type_var_map = {}
+        outer_type = self.api_graph.nodes[receiver]["outer_class"]
+        if outer_type:
+            ret = self.instantiate_receiver_type(outer_type)
+            if ret is None:
+                return None
+            _, type_var_map = ret
+        if receiver.is_type_constructor():
+            handler = self.get_instantiations_of_recursive_bound
+            inst = tu.instantiate_type_constructor(
+                receiver, self.get_reg_types(),
+                rec_bound_handler=handler
+            )
+            if not inst:
+                # We were unable to instantiate the given type
+                # constructor.
+                return None
+            type_var_map.update(inst[1])
+            return inst[0], type_var_map
+        else:
+            return receiver, type_var_map
+
     def encode_receiver(self, api_node):
         view = self.api_graph.in_edges(api_node)
         type_var_map = {}
         func_type_parameters = getattr(api_node, "type_parameters", [])
         if not view:
+            # API is not associated with a receiver
             receivers = {self.EMPTY}
             func_type_var_map = self.instantiate_func_type_variables(
                 api_node, func_type_parameters)
@@ -521,35 +547,20 @@ class APIGraph():
         else:
             assert len(view) == 1
             receiver = list(view)[0][0]
-            if receiver.is_type_constructor():
-                # XXX Revisit
-                handler = self.get_instantiations_of_recursive_bound
-                inst = tu.instantiate_type_constructor(
-                    receiver, self.get_reg_types(),
-                    rec_bound_handler=handler
-                )
-                if not inst:
-                    # We were unable to instantiate the given type
-                    # constructor.
-                    return None
-                receiver_t, type_var_map = inst
-                receiver = receiver_t
-                func_type_parameters = [
-                    tp.substitute_type(t, type_var_map)
-                    for t in func_type_parameters
-                ]
-                func_type_var_map = self.instantiate_func_type_variables(
-                    api_node, func_type_parameters)
-                if func_type_var_map is None:
-                    return None
-                type_var_map.update(func_type_var_map)
-            else:
-                func_type_var_map = self.instantiate_func_type_variables(
-                    api_node, func_type_parameters)
-                if func_type_var_map is None:
-                    return None
-                type_var_map.update(func_type_var_map)
-                receiver = tp.substitute_type(receiver, type_var_map)
+            ret = self.instantiate_receiver_type(receiver)
+            if ret is None:
+                return None
+            receiver, rec_var_map = ret
+            type_var_map.update(rec_var_map)
+            func_type_parameters = [
+                tp.substitute_type(t, type_var_map)
+                for t in func_type_parameters
+            ]
+            func_type_var_map = self.instantiate_func_type_variables(
+                api_node, func_type_parameters)
+            if func_type_var_map is None:
+                return None
+            type_var_map.update(func_type_var_map)
             receivers = {receiver}
             if receiver != self.bt_factory.get_any_type():
                 include_self = not (receiver.is_parameterized() and

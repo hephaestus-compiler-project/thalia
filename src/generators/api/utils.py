@@ -1,5 +1,5 @@
 from collections import OrderedDict, defaultdict
-from typing import NamedTuple, List
+from typing import NamedTuple, List, Set, Dict
 
 import networkx as nx
 
@@ -31,41 +31,51 @@ def compute_assignment_graph(api_graph: nx.DiGraph, path: list) -> OrderedDict:
     return assignment_graph
 
 
-def _collect_constraints_from_target_type(target: tp.Type,
-                                          assignment_graph: dict,
-                                          bt_factory) -> dict:
+def build_equality_constraints(
+    assignments: dict,
+    assignment_graph: dict,
+    bt_factory
+) -> Dict[tp.TypeParameter, Set[EqualityConstraint]]:
     constraints = defaultdict(set)
-    if not target.is_parameterized():
-        return constraints
-    if target.is_parameterized():
-        for k, v in target.get_type_variable_assignments().items():
-            t = tp.substitute_type(k, assignment_graph)
-            if t.has_type_variables():
-                sub = tu.unify_types(v, t, bt_factory, same_type=False,
-                                     strict_mode=False)
-                if not sub:
-                    return None
-                for k, v in sub.items():
-                    if not v.is_wildcard():
-                        constraints[k].add(EqualityConstraint(v))
-                        continue
-                    if v.bound:
-                        constraints[k].add(EqualityConstraint(v.bound))
-            else:
-                constraints[k].add(EqualityConstraint(v))
-                constraints[k].add(EqualityConstraint(t))
+    for k, v in assignments.items():
+        t = tp.substitute_type(k, assignment_graph)
+        if t.has_type_variables():
+            sub = tu.unify_types(v, t, bt_factory, same_type=False,
+                                 strict_mode=False)
+            if not sub:
+                return None
+            for k, v in sub.items():
+                if not v.is_wildcard():
+                    constraints[k].add(EqualityConstraint(v))
+                    continue
+                if v.bound:
+                    constraints[k].add(EqualityConstraint(v.bound))
+        else:
+            constraints[k].add(EqualityConstraint(v))
+            constraints[k].add(EqualityConstraint(t))
     return constraints
 
 
 def collect_constraints(target: tp.Type,
                         type_variables: List[tp.TypeParameter],
                         assignment_graph: dict,
+                        with_constraints: dict = None,
                         bt_factory=None):
-    constraints = _collect_constraints_from_target_type(target,
-                                                        assignment_graph,
-                                                        bt_factory)
-    if constraints is None:
-        return constraints
+    constraints = defaultdict(set)
+    if target.is_parameterized():
+        # Gather equality constraints that stem from target type (i.e.,
+        # type variable assignments of the target paremeterized type).
+        eq_constraints = build_equality_constraints(
+            target.get_type_variable_assignments(),
+            assignment_graph, bt_factory)
+        if eq_constraints is None:
+            return eq_constraints
+        constraints.update(eq_constraints)
+    if with_constraints:
+        # Gather equality constraints from any other given constraint.
+        constraints.update(build_equality_constraints(with_constraints,
+                                                      assignment_graph,
+                                                      bt_factory))
     for node in type_variables:
         constraints[node]
         t = tp.substitute_type(node, assignment_graph)
