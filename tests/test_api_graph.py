@@ -266,6 +266,47 @@ DOCS4 = {
 }
 
 
+DOCS5 = {
+    "java.Foo": {
+        "name": "java.Foo",
+        "inherits": [],
+        "implements": [],
+        "fields": [],
+        "methods": [{
+            "name": "makeList",
+            "is_static": True,
+            "is_constructor": False,
+            "parameters": [],
+            "access_mod": "public",
+            "type_parameters": [],
+            "return_type": "java.Foo<java.lang.String>"
+
+
+        }],
+        "type_parameters": ["T"]
+    },
+    "java.Foo.List": {
+        "name": "java.Foo.List",
+        "inherits": [],
+        "implements": [],
+        "fields": [],
+        "methods": [{
+            "name": "List",
+            "is_static": False,
+            "is_constructor": True,
+            "parameters": [],
+            "access_mod": "public",
+            "type_parameters": [],
+            "return_type": None
+
+
+        }],
+        "parent": "java.Foo",
+        "type_parameters": []
+    },
+}
+
+
 def test1():
     b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS1)
@@ -328,6 +369,47 @@ def test3():
         ag.Method("makeList", "java.Foo", [], []),
         ag.Method("toSet", "java.List", [], []),
     ]
+
+
+def test4():
+    b = JavaAPIGraphBuilder("java")
+    api_graph = b.build(DOCS5)
+    assert api_graph.find_API_path(
+        b.build_class_node(DOCS5["java.Foo.List"]),
+        with_constraints={tp.TypeParameter("java.Foo.T1"): jt.Integer}) is None
+
+    path, assignments = api_graph.find_API_path(
+        b.build_class_node(DOCS5["java.Foo.List"]),
+        with_constraints={tp.TypeParameter("java.Foo.T1"): jt.String})
+    assert path == [
+        ag.Method("java.Foo.makeList", "java.Foo", [], []),
+        ag.Constructor("java.Foo.List", [])
+    ]
+    assert assignments == {
+        tp.TypeParameter("java.Foo.T1"): jt.String
+    }
+
+    docs = copy.deepcopy(DOCS5)
+    docs["java.Foo"]["methods"].append({
+        "name": "java.Foo",
+        "is_static": False,
+        "is_constructor": True,
+        "parameters": [],
+        "access_mod": "public",
+        "type_parameters": [],
+        "return_type": None
+    })
+    api_graph = b.build(docs)
+    path, assignments = api_graph.find_API_path(
+        b.build_class_node(docs["java.Foo.List"]),
+        with_constraints={tp.TypeParameter("java.Foo.T1"): jt.Integer})
+    assert path == [
+        ag.Constructor("java.Foo", []),
+        ag.Constructor("java.Foo.List", [])
+    ]
+    assert assignments == {
+        tp.TypeParameter("java.Foo.T1"): jt.Integer
+    }
 
 
 def test_get_function_refs_of():

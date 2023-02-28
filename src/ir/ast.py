@@ -264,29 +264,38 @@ class ObjectDecleration(Declaration):
 
 
 class SuperClassInstantiation(Node):
-    def __init__(self, class_type: types.Type, args: List[Expr] = []):
+    def __init__(self, class_type: types.Type, args: List[Expr] = [],
+                 receiver: Expr = None):
         assert not isinstance(class_type, types.AbstractType)
         self.class_type = class_type
         self.args = args
+        self.receiver = receiver
 
     def children(self):
-        return self.args or []
+        return (self.args or []) + ([self.receiver] if self.receiver else [])
 
     def update_children(self, children):
         super().update_children(children)
-        if self.args is not None:
-            self.args = children
+        if self.args:
+            self.args = children[:len(self.args)]
+        if self.receiver:
+            self.receiver = children[-1]
 
     def __str__(self):
         if self.args is None:
             return self.class_type.name
-        return "{}({})".format(
-            self.class_type.name, ", ".join(map(str, self.args)))
+        return "{rec}{name}({args})".format(
+            rec=str(self.receiver) + "." if self.receiver else "",
+            name=self.class_type.name,
+            args=", ".join(map(str, self.args))
+        )
 
     def is_equal(self, other):
         if isinstance(other, SuperClassInstantiation):
             return (self.class_type == other.class_type and
-                    check_list_eq(self.args, other.args))
+                    check_list_eq(self.args, other.args) and
+                    not self.receiver or self.receiver.is_equal(other.receiver)
+                    )
         return False
 
 

@@ -759,7 +759,7 @@ def instantiate_type_constructor(
         rec_bound_handler=rec_bound_handler
     )
     if not ret:
-        return ret
+        return None
     t_args, type_var_map = ret
     return type_constructor.new(t_args), type_var_map
 
@@ -780,7 +780,7 @@ def instantiate_parameterized_function(
         rec_bound_handler=rec_bound_handler
     )
     if not ret:
-        return ret
+        return None
     _, type_var_map = ret
     return type_var_map
 
