@@ -237,7 +237,7 @@ class APIGenerator(Generator):
         for i, param in enumerate(parameters):
             param_type = tp.substitute_type(actual_types[i], type_var_map)
             param = tp.substitute_type(param, type_var_map)
-            if param_type and not param_type.is_subtype(param):
+            if param_type and param_type.is_subtype(param):
                 t = param_type
             else:
                 t = param
