@@ -497,6 +497,66 @@ class APIGraph():
                 candidate_functions.append((api, sub))
         return candidate_functions
 
+    def instantiate_func_type_variables(self, api_node, func_type_parameters):
+        if func_type_parameters:
+            handler = self.get_instantiations_of_recursive_bound
+            func_type_var_map = tu.instantiate_parameterized_function(
+                    func_type_parameters, self.get_reg_types(),
+                    rec_bound_handler=handler)
+            if not func_type_var_map:
+                return None
+        return {}
+
+    def encode_receiver(self, api_node):
+        view = self.api_graph.in_edges(api_node)
+        type_var_map = {}
+        func_type_parameters = getattr(api_node, "type_parameters", [])
+        if not view:
+            receivers = {self.EMPTY}
+            func_type_var_map = self.instantiate_func_type_variables(
+                api_node, func_type_parameters)
+            if func_type_var_map is None:
+                return None
+            type_var_map.update(func_type_var_map)
+        else:
+            assert len(view) == 1
+            receiver = list(view)[0][0]
+            if receiver.is_type_constructor():
+                # XXX Revisit
+                handler = self.get_instantiations_of_recursive_bound
+                inst = tu.instantiate_type_constructor(
+                    receiver, self.get_reg_types(),
+                    rec_bound_handler=handler
+                )
+                if not inst:
+                    # We were unable to instantiate the given type
+                    # constructor.
+                    return None
+                receiver_t, type_var_map = inst
+                receiver = receiver_t
+                func_type_parameters = [
+                    tp.substitute_type(t, type_var_map)
+                    for t in func_type_parameters
+                ]
+                func_type_var_map = self.instantiate_func_type_variables(
+                    api_node, func_type_parameters)
+                if func_type_var_map is None:
+                    return None
+                type_var_map.update(func_type_var_map)
+            else:
+                func_type_var_map = self.instantiate_func_type_variables(
+                    api_node, func_type_parameters)
+                if func_type_var_map is None:
+                    return None
+                type_var_map.update(func_type_var_map)
+                receiver = tp.substitute_type(receiver, type_var_map)
+            receivers = {receiver}
+            if receiver != self.bt_factory.get_any_type():
+                include_self = not (receiver.is_parameterized() and
+                                    receiver.has_wildcards())
+                receivers.update(self.subtypes(receiver, include_self))
+        return receivers, type_var_map
+
     def encode_api_components(self,
                               matcher: Matcher = None) -> List[APIEncoding]:
         api_components = (Field, Constructor, Method)
@@ -509,65 +569,10 @@ class APIGraph():
         for node in api_nodes:
             if matcher and not matcher.match(node):
                 continue
-            view = self.api_graph.in_edges(node)
-            type_var_map = {}
-            func_type_parameters = getattr(node, "type_parameters", [])
-            if not view:
-                receivers = {self.EMPTY}
-                if func_type_parameters:
-                    handler = self.get_instantiations_of_recursive_bound
-                    func_type_var_map = tu.instantiate_parameterized_function(
-                            func_type_parameters, self.get_reg_types(),
-                            rec_bound_handler=handler)
-                    if not func_type_var_map:
-                        continue
-
-                    type_var_map.update(func_type_var_map)
-            else:
-                assert len(view) == 1
-                receiver = list(view)[0][0]
-                if receiver.is_type_constructor():
-                    # TODO Revisit
-                    handler = self.get_instantiations_of_recursive_bound
-                    inst = tu.instantiate_type_constructor(
-                        receiver, self.get_reg_types(),
-                        rec_bound_handler=handler
-                    )
-                    if not inst:
-                        # We were unable to instantiate the given type
-                        # constructor.
-                        continue
-                    receiver_t, type_var_map = inst
-                    receiver = receiver_t
-                    func_type_parameters = [
-                        tp.substitute_type(t, type_var_map)
-                        for t in func_type_parameters
-                    ]
-                    if func_type_parameters:
-                        handler = self.get_instantiations_of_recursive_bound
-                        func_type_var_map = tu.instantiate_parameterized_function(
-                                func_type_parameters, self.get_reg_types(),
-                                rec_bound_handler=handler)
-                        if not func_type_var_map:
-                            continue
-
-                        type_var_map.update(func_type_var_map)
-                else:
-                    if func_type_parameters:
-                        handler = self.get_instantiations_of_recursive_bound
-                        func_type_var_map = tu.instantiate_parameterized_function(
-                                func_type_parameters, self.get_reg_types(),
-                                rec_bound_handler=handler)
-                        if not func_type_var_map:
-                            continue
-
-                        type_var_map.update(func_type_var_map)
-                    receiver = tp.substitute_type(receiver, type_var_map)
-                receivers = {receiver}
-                if receiver != self.bt_factory.get_any_type():
-                    include_self = not (receiver.is_parameterized() and
-                                        receiver.has_wildcards())
-                    receivers.update(self.subtypes(receiver, include_self))
+            ret = self.encode_receiver(node)
+            if ret is None:
+                continue
+            receivers, type_var_map = ret
             parameters = [{tp.substitute_type(p.t, type_var_map)}
                           for p in getattr(node, "parameters", [])]
             for param_set in parameters:
