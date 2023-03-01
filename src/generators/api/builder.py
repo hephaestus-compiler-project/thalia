@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from collections import OrderedDict
 from copy import deepcopy
-from typing import List, Dict
+from typing import List, Dict, Set
 
 
 import networkx as nx
@@ -60,16 +60,14 @@ class APIGraphBuilder(ABC):
                 dep_graph.add_edge(st.name, name)
         return list(nx.topological_sort(dep_graph))
 
-    def build(self, docs: dict) -> APIGraph:
-        top_sort = self.build_topological_sort(docs)
-        # First we make a pass to assign class type parameters a unique name.
+    def rename_class_type_parameters(self, docs: dict,
+                                     classes: List[str]) -> Set[str]:
         excluded_cls = set()
-        for cls_name in top_sort:
+        for cls_name in classes:
             api_doc = docs.get(cls_name)
             if not api_doc or not api_doc["type_parameters"]:
                 continue
             self.api_language = api_doc.get("language", self.api_language)
-            # cls_name = api_doc["name"]
             self.class_name = cls_name
             self._class_type_var_map[cls_name] = OrderedDict()
             try:
@@ -80,7 +78,12 @@ class APIGraphBuilder(ABC):
             except NotImplementedError:
                 excluded_cls.add(cls_name)
                 del self._class_type_var_map[cls_name]
+        return excluded_cls
 
+    def build(self, docs: dict) -> APIGraph:
+        top_sort = self.build_topological_sort(docs)
+        # First we make a pass to assign class type parameters a unique name.
+        excluded_cls = self.rename_class_type_parameters(docs, top_sort)
         top_sort = [c for c in top_sort if c not in excluded_cls]
         self.graph = nx.DiGraph()
         self.subtyping_graph = nx.DiGraph()
@@ -90,22 +93,8 @@ class APIGraphBuilder(ABC):
                 self.api_language = api_doc.get("language", self.api_language)
                 self.class_name = api_doc["name"]
                 self.build_class_node(api_doc)
-        for cls_name in top_sort:
-            api_doc = docs.get(cls_name)
-            if not api_doc or not api_doc["type_parameters"]:
-                continue
-            self.api_language = api_doc.get("language", self.api_language)
-            # cls_name = api_doc["name"]
-            self.class_name = cls_name
-            self._class_type_var_map[cls_name] = OrderedDict()
-            try:
-                self.rename_type_parameters(
-                    cls_name, api_doc["type_parameters"],
-                    self._class_type_var_map[cls_name]
-                )
-            except NotImplementedError:
-                excluded_cls.add(cls_name)
-                del self._class_type_var_map[cls_name]
+        # One more pass to handle recursive upper bounds.
+        self.rename_class_type_parameters(docs, top_sort)
         for cls_name in top_sort:
             api_doc = docs.get(cls_name)
             if api_doc:
