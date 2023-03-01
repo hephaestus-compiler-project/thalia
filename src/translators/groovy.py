@@ -759,13 +759,26 @@ class GroovyTranslator(BaseTranslator):
         self.ident = old_ident
         # Remove type arguments from Parameterized Type
         if getattr(node.class_type, 'can_infer_type_args', None) is True:
-            cls = node.class_type.name + "<>"
+            prefix = (
+                node.class_type.name.rsplit(".", 1)[1]
+                if node.receiver
+                else node.class_type.name
+            )
+            cls = prefix + "<>"
         else:
             cls = self.get_type_name(node.class_type)
-        res = "{ident}new {cls}({args})".format(
+            segs = cls.split("<", 1)
+            prefix = (
+                segs[0].rsplit(".", 1)[1]
+                if node.receiver
+                else segs[0]
+            )
+            cls = prefix if len(segs) == 1 else prefix + "<" + segs[1]
+        res = "{ident}{rec}new {cls}({args})".format(
             ident=self.get_ident(),
+            rec=children_res[-1] + "." if node.receiver else "",
             cls=cls,
-            args=", ".join(children_res)
+            args=", ".join(children_res[:len(node.args)])
         )
         self._cast_number = prev_cast_number
         return res

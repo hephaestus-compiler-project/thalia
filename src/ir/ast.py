@@ -264,28 +264,23 @@ class ObjectDecleration(Declaration):
 
 
 class SuperClassInstantiation(Node):
-    def __init__(self, class_type: types.Type, args: List[Expr] = [],
-                 receiver: Expr = None):
+    def __init__(self, class_type: types.Type, args: List[Expr] = []):
         assert not isinstance(class_type, types.AbstractType)
         self.class_type = class_type
         self.args = args
-        self.receiver = receiver
 
     def children(self):
-        return (self.args or []) + ([self.receiver] if self.receiver else [])
+        return self.args or []
 
     def update_children(self, children):
         super().update_children(children)
         if self.args:
             self.args = children[:len(self.args)]
-        if self.receiver:
-            self.receiver = children[-1]
 
     def __str__(self):
         if self.args is None:
             return self.class_type.name
-        return "{rec}{name}({args})".format(
-            rec=str(self.receiver) + "." if self.receiver else "",
+        return "{name}({args})".format(
             name=self.class_type.name,
             args=", ".join(map(str, self.args))
         )
@@ -293,9 +288,7 @@ class SuperClassInstantiation(Node):
     def is_equal(self, other):
         if isinstance(other, SuperClassInstantiation):
             return (self.class_type == other.class_type and
-                    check_list_eq(self.args, other.args) and
-                    not self.receiver or self.receiver.is_equal(other.receiver)
-                    )
+                    check_list_eq(self.args, other.args))
         return False
 
 
@@ -1210,32 +1203,41 @@ class Is(BinaryOp):
 
 
 class New(Expr):
-    def __init__(self, class_type: types.Type, args: List[Expr]):
+    def __init__(self, class_type: types.Type, args: List[Expr],
+                 receiver: Expr = None):
         self.class_type = class_type
         self.args = args
+        self.receiver = receiver
 
     def children(self):
-        return self.args
+        return self.args + ([self.receiver] if self.receiver else [])
 
     def update_children(self, children):
         super().update_children(children)
-        self.args = children
+        self.args = children[:len(self.args)]
+        if self.receiver:
+            self.receiver = children[-1]
 
     def __str__(self):
         if getattr(self.class_type, 'type_args', None) is not None:
-            return " new {}<{}> ({})".format(
-                str(self.class_type.name),
-                ", ".join(map(str, self.class_type.type_args)) + ")",
-                ", ".join(map(str, self.args)) + ")"
+            return " new {rec}{name}<{type_args}> ({args})".format(
+                rec=str(self.receiver) + "." if self.receiver else "",
+                name=self.class_type.name,
+                type_args=", ".join(map(str, self.class_type.type_args)) + ")",
+                args=", ".join(map(str, self.args)) + ")"
             )
 
-        return "new " + self.class_type.name + "(" + \
-            ", ".join(map(str, self.args)) + ")"
+        return "new {rec}{name} ({args})".format(
+            rec=str(self.receiver) + "." if self.receiver else "",
+            name=self.class_type.name,
+            args=", ".join(map(str, self.args))
+        )
 
     def is_equal(self, other):
         if isinstance(other, New):
             return (self.class_type == other.class_type and
-                    check_list_eq(self.args, other.args))
+                    check_list_eq(self.args, other.args) and
+                    not self.receiver or self.receiver.is_equal(other.receiver))
         return False
 
 
