@@ -512,6 +512,7 @@ class APIGraph():
                     rec_bound_handler=handler)
             if not func_type_var_map:
                 return None
+            return func_type_var_map
         return {}
 
     def instantiate_receiver_type(self, receiver: tp.Type):
