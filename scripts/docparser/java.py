@@ -20,7 +20,7 @@ class JavaAPIDocConverter(APIDocConverter):
         self._current_api_cls = None
 
     def extract_package_name(self, html_doc):
-        return html_doc.find_all(class_="subTitle")[1].find_all(text=True)[2]
+        return html_doc.find_all(class_="subTitle")[0].find_all(text=True)[2]
 
     def extract_class_name(self, html_doc):
         regex = re.compile("([@A-Za-z0-9\\.]+).*")
@@ -84,6 +84,19 @@ class JavaAPIDocConverter(APIDocConverter):
             "ascii", "ignore").decode()
         return "@FunctionalInterface" in text
 
+    def is_class_static(self, html_doc):
+        text = html_doc.select(".description .blockList pre")[0].text
+        return " static " in text
+
+    def extract_parent_class(self, html_doc, class_name, package_name):
+        parent = None
+        segs = class_name.split(".")
+        if len(segs) > 1:
+            is_static = self.is_class_static(html_doc)
+            if not is_static:
+                parent = package_name + "." + segs[0]
+        return parent
+
     def process(self, args):
         for base in os.listdir(args.input):
             if base in self.EXCLUDED_FILES:
@@ -127,6 +140,7 @@ class JavaAPIDocConverter(APIDocConverter):
         method_objs = self.process_methods(methods_, False)
         constructor_objs = self.process_methods(constructors, True)
         field_objs = self.process_fields(fields)
+        parent = self.extract_parent_class(html_doc, class_name, package_name)
         class_obj = {
           'name': full_class_name,
           'type_parameters': self.extract_class_type_parameters(html_doc),
@@ -136,6 +150,7 @@ class JavaAPIDocConverter(APIDocConverter):
           'methods': method_objs + constructor_objs,
           'fields': field_objs,
           "functional_interface": is_func_interface,
+          "parent": parent,
         }
         return class_obj
 

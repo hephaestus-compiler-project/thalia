@@ -127,6 +127,17 @@ class KotlinAPIDocConverter(APIDocConverter):
     def extract_super_interfaces(self, html_doc):
         return self._get_super_classes_interfaces(html_doc)
 
+    def is_class_inner(self, html_doc):
+        return "inner " in html_doc.select(
+            ".cover .platform-hinted .symbol")[0].text
+
+    def extract_parent_class(self, html_doc, class_name, package_name):
+        parent = None
+        is_inner = self.is_class_inner(html_doc)
+        if is_inner:
+            parent = package_name
+        return parent
+
     def process_class(self, html_doc):
         class_name = self.extract_class_name(html_doc)
         package_name = "kotlin." + self.extract_package_name(html_doc)
@@ -148,6 +159,7 @@ class KotlinAPIDocConverter(APIDocConverter):
         else:
             constructor_objs = []
         field_objs = self.process_fields(fields)
+        parent = self.extract_parent_class(html_doc, class_name, package_name)
         class_obj = {
             'name': full_class_name,
             'type_parameters': type_parameters,
@@ -157,6 +169,7 @@ class KotlinAPIDocConverter(APIDocConverter):
             "methods": method_objs + constructor_objs,
             'fields': field_objs,
             "is_class": True,
+            "parent": parent,
         }
         return class_obj
 
