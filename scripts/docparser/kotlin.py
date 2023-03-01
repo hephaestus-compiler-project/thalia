@@ -140,7 +140,7 @@ class KotlinAPIDocConverter(APIDocConverter):
 
     def process_class(self, html_doc):
         class_name = self.extract_class_name(html_doc)
-        package_name = "kotlin." + self.extract_package_name(html_doc)
+        package_name = self.extract_package_name(html_doc)
         full_class_name = "{pkg}.{cls}".format(pkg=package_name,
                                                cls=class_name)
         type_parameters = self.extract_class_type_parameters(html_doc)

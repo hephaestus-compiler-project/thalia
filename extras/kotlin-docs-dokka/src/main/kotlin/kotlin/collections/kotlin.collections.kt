@@ -1,4 +1,4 @@
-package collections
+package kotlin.collections
 
 public val <T> kotlin.Array<out T>.indices: kotlin.ranges.IntRange { get; }
 
