@@ -11,16 +11,19 @@ class KotlinCompiler(BaseCompiler):
         re.MULTILINE
     )
 
-    def __init__(self, input_name, filter_patterns=None):
-        super().__init__(input_name, filter_patterns)
+    def __init__(self, input_name, filter_patterns=None, library_path=None):
+        super().__init__(input_name, filter_patterns, library_path)
 
     @classmethod
     def get_compiler_version(cls):
         return ['kotlinc', '-version']
 
     def get_compiler_cmd(self):
+        extra_options = []
+        if self.library_path:
+            extra_options = ["-cp", self.library_path]
         return ['kotlinc', self.input_name, '-include-runtime', '-d',
-                'program.jar']
+                'program.jar'] + extra_options
 
     def get_filename(self, match):
         return match[0]

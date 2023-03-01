@@ -383,7 +383,8 @@ def check_oracle(dirname, oracles):
     """
     filename = os.path.join(dirname, 'src')
     filter_patterns = utils.path2set(cli_args.error_filter_patterns)
-    compiler = COMPILERS[cli_args.language](filename, filter_patterns)
+    compiler = COMPILERS[cli_args.language](filename, filter_patterns,
+                                            cli_args.library_path)
     command_args = compiler.get_compiler_cmd()
     # At this point, we run the compiler
     _, err = run_command(command_args)

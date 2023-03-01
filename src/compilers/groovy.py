@@ -12,16 +12,21 @@ class GroovyCompiler(BaseCompiler):
 
     STACKOVERFLOW_REGEX = re.compile(r'(.*java.lang.StackOverflowError)(.*)')
 
-    def __init__(self, input_name, filter_patterns=None):
+    def __init__(self, input_name, filter_patterns=None,
+                 library_path=None):
         input_name = os.path.join(input_name, '*', '*.groovy')
-        super().__init__(input_name, filter_patterns)
+        super().__init__(input_name, filter_patterns, library_path)
 
     @classmethod
     def get_compiler_version(cls):
-        return ['groovyc', '-version']
+        return ['groovyc-l', '-version']
 
     def get_compiler_cmd(self):
-        return ['groovyc', '--compile-static', self.input_name]
+        extra_options = []
+        if self.library_path:
+            extra_options = ["-cp", self.library_path]
+        return ['groovyc-l', '--compile-static'] + extra_options + \
+            [self.input_name]
 
     def get_filename(self, match):
         return match[0]

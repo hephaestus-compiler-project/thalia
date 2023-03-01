@@ -45,6 +45,13 @@ parser.add_argument(
           " program enumeration (used only with API-based program generation)")
 )
 parser.add_argument(
+    "--library-path",
+    type=str,
+    default=None,
+    help=("Path where the compiled library resides. "
+          "(Used only with API-based program generation)")
+)
+parser.add_argument(
     "-t", "--transformations",
     type=int,
     default=0,
@@ -278,6 +285,9 @@ def validate_args(args):
     if args.generator != "api" and args.api_rules is not None:
         sys.exit(("The --api-rules option is only combined with "
                  "--generator 'api'"))
+    if args.generator != "api" and args.library_path is not None:
+        sys.exit("The --library_path option is only combined with "
+                 "--generator 'api'")
 
 
 def pre_process_args(args):

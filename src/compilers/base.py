@@ -6,9 +6,10 @@ class BaseCompiler():
     ERROR_REGEX = None
     CRASH_REGEX = None
 
-    def __init__(self, input_name, filter_patterns=None):
+    def __init__(self, input_name, filter_patterns=None, library_path=None):
         self.input_name = input_name
         self.filter_patterns = filter_patterns or []
+        self.library_path = library_path
         self.crash_msg = None
 
     @classmethod
