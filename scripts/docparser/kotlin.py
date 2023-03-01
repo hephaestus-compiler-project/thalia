@@ -1,3 +1,4 @@
+import os
 import re
 
 from pathlib import Path
@@ -13,16 +14,19 @@ class KotlinAPIDocConverter(APIDocConverter):
 
     def process(self, args):
         toplevel_path = Path(args.input).joinpath("index.html")
+        self.api_path = os.path.dirname(toplevel_path)
         data = self.process_toplevel(file2html(toplevel_path))
         data["language"] = args.language
         dict2json(args.output, data)
         for path in Path(args.input).rglob('*/index.html'):
             apidoc_path = str(path)
+            self.api_path = os.path.dirname(path)
             data = self.process_class(file2html(apidoc_path))
             data["language"] = args.language
             dict2json(args.output, data)
 
     def process_toplevel(self, html_doc):
+        self.class_name = None
         package_name = self.extract_package_name(html_doc, True)
         methods = html_doc.select(
             "div[data-togglable=\"Functions\"] .title .symbol")
@@ -46,19 +50,27 @@ class KotlinAPIDocConverter(APIDocConverter):
         java_regex = re.compile(
             "https://docs.oracle.com/.*/api/(.*)/[^/]+.html")
         kotlin_regex = re.compile(
-            "https://kotlinlang.org/api/latest/.*/stdlib/(.*)/-[^/]+/index.html"
+            ".*/(docs/kotlin|stdlib)/(.+)/-[^/]+/index.html"
         )
         for anchor in anchors:
             href = anchor.get("href")
+            if not href.startswith("https") and (href.startswith("-")
+                                                 or href.startswith(".")
+                                                 or anchor.string.startswith(
+                                                     self.class_name or "")):
+                href = os.path.realpath(os.path.join(self.api_path, href))
             if href.startswith("https://docs.oracle.com"):
                 regex = java_regex
-            elif href.startswith("https://kotlinlang.org"):
+            elif href.startswith("https://kotlinlang.org") or href.startswith(
+                    "/"):
                 regex = kotlin_regex
             else:
                 continue
 
             match = re.match(regex, href)
-            package_prefix = match.group(1).replace("/", ".")
+            if not match:
+                continue
+            package_prefix = match.group(2).replace("/", ".")
             segs = package_prefix.rsplit(".", 1)
             if segs[-1].startswith("-"):
                 # Handle nested class
@@ -140,6 +152,7 @@ class KotlinAPIDocConverter(APIDocConverter):
 
     def process_class(self, html_doc):
         class_name = self.extract_class_name(html_doc)
+        self.class_name = class_name
         package_name = self.extract_package_name(html_doc)
         full_class_name = "{pkg}.{cls}".format(pkg=package_name,
                                                cls=class_name)
