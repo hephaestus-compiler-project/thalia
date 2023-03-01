@@ -85,7 +85,8 @@ class APIGenerator(Generator):
 
     def generate_from_type_combination(self, api, receiver, parameters,
                                        return_type, type_map) -> ast.Expr:
-        receiver, type_var_map = self._generate_expr_from_node(receiver)
+        receiver, type_var_map = self._generate_expr_from_node(
+            receiver, constraints=type_map)
         type_var_map.update(type_map)
         exp_parameters = [p.t for p in getattr(api, "parameters", [])]
         args = self._generate_args(exp_parameters, parameters,
@@ -137,7 +138,8 @@ class APIGenerator(Generator):
             rec = (
                 ast.New(rec_type, args=[])  # This is a constructor reference
                 if isinstance(api, ag.Constructor)
-                else self._generate_expr_from_node(rec_type, depth + 1)[0]
+                else self._generate_expr_from_node(rec_type, depth + 1,
+                                                   type_var_map)[0]
             )
         api_name = (
             ast.FunctionReference.NEW_REF
@@ -191,7 +193,7 @@ class APIGenerator(Generator):
     def prepare_next_program(self, program_id):
         pass
 
-    def _generate_expr_from_node(self, node, depth=1):
+    def _generate_expr_from_node(self, node, depth=1, constraints=None):
         stored_expr = self.visited_exprs.get(node)
         if stored_expr:
             return stored_expr
@@ -202,18 +204,20 @@ class APIGenerator(Generator):
                 handler = self.api_graph.get_instantiations_of_recursive_bound
                 t, type_var_map = tu.instantiate_type_constructor(
                     node, self.api_graph.get_reg_types(),
-                    rec_bound_handler=handler
+                    rec_bound_handler=handler, type_var_map=constraints
                 )
             else:
                 t, type_var_map = node, {}
             return self.generate_expr(t), type_var_map
-        path = self.api_graph.find_API_path(node)
+        path = self.api_graph.find_API_path(node,
+                                            with_constraints=constraints)
         if not path:
             if node.is_type_constructor():
                 handler = self.api_graph.get_instantiations_of_recursive_bound
                 t, type_var_map = tu.instantiate_type_constructor(
                     node, self.api_graph.get_reg_types(),
-                    rec_bound_handler=handler
+                    rec_bound_handler=handler,
+                    type_var_map=constraints
                 )
             else:
                 t = node
@@ -246,7 +250,8 @@ class APIGenerator(Generator):
             expr = (
                 self.generate_func_ref(t, type_var_map, depth)
                 if is_func
-                else self._generate_expr_from_node(t, depth)[0]
+                else self._generate_expr_from_node(t, depth,
+                                                   type_var_map)[0]
             )
             args.append(expr)
         return args
@@ -281,9 +286,9 @@ class APIGenerator(Generator):
             parameters = [param.t for param in elem.parameters]
             args = self._generate_args(parameters, parameters,
                                        depth + 1, type_var_map)
-            con_type = self.api_graph.get_type_by_name(elem.name)
+            con_type = self.api_graph.get_type_by_name(elem.get_class_name())
             con_type = _instantiate_type_con(con_type)
-            expr = ast.New(con_type, args)
+            expr = ast.New(con_type, args, receiver=receiver)
         else:
             t = _instantiate_type_con(elem)
             expr = self.generate_expr(tp.substitute_type(t, type_var_map))

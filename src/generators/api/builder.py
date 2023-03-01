@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from collections import OrderedDict
-from copy import deepcopy
+from copy import deepcopy, copy
 from typing import List, Dict, Set
 
 
@@ -34,10 +34,19 @@ class APIGraphBuilder(ABC):
         self._is_func_interface: bool = False
 
         self.parsed_types: Dict[str, tp.Type] = {}
+        self.parent_cls: tp.Type = None
 
     @abstractmethod
     def get_type_parser(self) -> TypeParser:
         pass
+
+    @property
+    def type_var_mappings(self):
+        type_var_mappings = copy(self._class_type_var_map.get(
+            getattr(self.parent_cls, "name", None), {}))
+        type_var_mappings.update(self._class_type_var_map.get(
+            self.class_name, {}))
+        return type_var_mappings
 
     def build_topological_sort(self, docs: dict) -> List[str]:
         dep_graph = nx.DiGraph()
@@ -361,7 +370,7 @@ class JavaAPIGraphBuilder(APIGraphBuilder):
     def get_type_parser(self):
         return JavaTypeParser(
             self.target_language,
-            self._class_type_var_map.get(self.class_name, {}),
+            self.type_var_mappings,
             self._current_func_type_var_map,
             self._class_type_var_map,
             self.parsed_types
@@ -411,7 +420,7 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             k: (v, self)
             for k, v in self.MAPPED_TYPES.items()
         }
-        args = (self._class_type_var_map.get(self.class_name, {}),
+        args = (self.type_var_mappings,
                 self._current_func_type_var_map, self._class_type_var_map,
                 self.parsed_types, mapped_types)
         if self.api_language == "java":
@@ -448,7 +457,7 @@ class ScalaAPIGraphBuilder(APIGraphBuilder):
 
     def get_type_parser(self):
         return ScalaTypeParser(
-            self._class_type_var_map.get(self.class_name, {}),
+            self.type_var_mappings,
             self._current_func_type_var_map,
             self._class_type_var_map,
             self.parsed_types
