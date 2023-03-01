@@ -535,13 +535,31 @@ class KotlinTranslator(BaseTranslator):
         self.ident = old_ident
         # Remove type arguments from Parameterized Type
         if getattr(node.class_type, 'can_infer_type_args', None) is True:
-            self._children_res.append("{}({})".format(
-                " " * self.ident + node.class_type.name,
-                ", ".join(children_res)))
+            prefix = (
+                node.class_type.name.rsplit(".", 1)[1]
+                if node.receiver
+                else node.class_type.name
+            )
+            cls = prefix + "<>"
+            self._children_res.append("{ident}{rec}{name}({args})".format(
+                ident=" " * self.ident,
+                rec=children_res[-1] + "." if node.receiver else "",
+                name=cls,
+                args=", ".join(children_res[:len(node.args)])))
         else:
-            self._children_res.append("{}({})".format(
-                " " * self.ident + self.get_type_name(node.class_type),
-                ", ".join(children_res)))
+            cls = self.get_type_name(node.class_type)
+            segs = cls.split("<", 1)
+            prefix = (
+                segs[0].rsplit(".", 1)[1]
+                if node.receiver
+                else segs[0]
+            )
+            cls = prefix if len(segs) == 1 else prefix + "<" + segs[1]
+            self._children_res.append("{ident}{rec}{name}({args})".format(
+                ident=" " * self.ident,
+                rec=children_res[-1] + "." if node.receiver else "",
+                name=cls,
+                args=", ".join(children_res[:len(node.args)])))
 
     @append_to
     def visit_field_access(self, node):
