@@ -138,8 +138,7 @@ class APIGenerator(Generator):
             rec = (
                 ast.New(rec_type, args=[])  # This is a constructor reference
                 if isinstance(api, ag.Constructor)
-                else self._generate_expr_from_node(rec_type, depth + 1,
-                                                   type_var_map)[0]
+                else self._generate_expr_from_node(rec_type, depth + 1)[0]
             )
         api_name = (
             ast.FunctionReference.NEW_REF
@@ -250,8 +249,7 @@ class APIGenerator(Generator):
             expr = (
                 self.generate_func_ref(t, type_var_map, depth)
                 if is_func
-                else self._generate_expr_from_node(t, depth,
-                                                   type_var_map)[0]
+                else self._generate_expr_from_node(t, depth)[0]
             )
             args.append(expr)
         return args
