@@ -421,7 +421,7 @@ class APIGraph():
                        for k, v in sub.items()
                        if v.is_type_var()}
             t = st
-            if any(v != tp.substitute_type(sub.get(k, k), reverse)
+            if any(v != tp.substitute_type(sub.get(k, v), reverse)
                    for k, v in type_var_map.items()):
                 continue
             if st.is_type_constructor():
