@@ -1,5 +1,7 @@
 from copy import deepcopy
+import functools
 import itertools
+from typing import List
 
 from src import utils
 from src.ir import ast, types as tp, type_utils as tu
@@ -34,12 +36,45 @@ class APIGenerator(Generator):
         self.programs_gen = self.compute_programs()
         self._has_next = True
         self.start_index = options.get("start-index", 0)
+        self.max_conditional_depth = options.get("max-conditional-depth", 4)
+
+    def produce_test_case(self, expr: ast.Expr) -> ast.Program:
+        func_name = "test"
+        decls = list(self.context.get_declarations(
+            self.namespace, True).values())
+        decls = [d for d in decls
+                 if not isinstance(d, ast.ParameterDeclaration)]
+        body = decls + ([expr] if expr else [])
+        main_func = ast.FunctionDeclaration(
+            func_name,
+            params=[],
+            ret_type=self.bt_factory.get_void_type(),
+            body=ast.Block(body),
+            func_type=ast.FunctionDeclaration.FUNCTION)
+        self._add_node_to_parent(self.namespace[:-1], main_func)
+        return ast.Program(deepcopy(self.context), self.language)
+
+    def log_program_info(self, program_id, api, receivers, parameters,
+                         return_type):
+        def log_types(types):
+            if len(types) == 1:
+                return str(types[0])
+            return "Union[{}]".format(", ".join(str(t) for t in types))
+
+        msg = "Generated program {id!r}\n".format(id=program_id)
+        msg += "\tAPI: {api!r}\n".format(api=api)
+        msg += "\treceiver: {receiver!r}\n".format(receiver=log_types(
+            receivers))
+        msg += "\tparameters {params!r}\n".format(params=", ".join(
+            log_types(p) for p in parameters))
+        msg += "\treturn: {ret!r}\n".format(ret=log_types([return_type]))
+        log(self.logger, msg)
 
     def compute_programs(self):
-        func_name = "test"
-        test_namespace = ast.GLOBAL_NAMESPACE + (func_name,)
         program_index = 0
         i = 1
+        func_name = "test"
+        test_namespace = ast.GLOBAL_NAMESPACE + (func_name,)
         for api, receivers, parameters, returns, type_map in self.encodings:
             if isinstance(api, ag.Constructor):
                 # TODO
@@ -56,37 +91,85 @@ class APIGenerator(Generator):
                     combination[0], combination[1:-1], combination[-1])
                 self.context = Context()
                 self.namespace = test_namespace
-                expr = self.generate_from_type_combination(api, receiver,
-                                                           parameters,
-                                                           return_type,
-                                                           type_map)
-                decls = list(self.context.get_declarations(
-                    self.namespace, True).values())
-                decls = [d for d in decls
-                         if not isinstance(d, ast.ParameterDeclaration)]
-                body = decls + ([expr] if expr else [])
-                main_func = ast.FunctionDeclaration(
-                    func_name,
-                    params=[],
-                    ret_type=self.bt_factory.get_void_type(),
-                    body=ast.Block(body),
-                    func_type=ast.FunctionDeclaration.FUNCTION)
-                self._add_node_to_parent(self.namespace[:-1], main_func)
+                params = [[p] for p in parameters]
+                expr = self.generate_from_type_combination(
+                    api, [receiver], params, return_type, type_map)
+                yield self.produce_test_case(expr)
+                self.log_program_info(i, api, [receiver], params, return_type)
                 program_index += 1
-                msg = "Generated program {id!r}\n".format(id=i)
-                msg += "\tAPI: {api!r}\n".format(api=api)
-                msg += "\treceiver: {receiver!r}\n".format(receiver=receiver)
-                msg += "\tparameters {params!r}\n".format(params=", ".join(
-                    str(p) for p in parameters))
-                msg += "\treturn: {ret!r}\n".format(ret=return_type)
-                log(self.logger, msg)
                 i += 1
-                yield ast.Program(deepcopy(self.context), self.language)
+            self.context = Context()
+            self.namespace = test_namespace
+            parameters = [
+                utils.random.sample(t, min(self.max_conditional_depth, len(t)))
+                for t in types[1:-1]
+            ]
+            receivers = utils.random.sample(types[0], min(
+                self.max_conditional_depth, len(types[0])))
+            if all(len(p) == 1 for p in parameters) and len(receivers) == 1:
+                # No conditinal can be created.
+                continue
+            for ret in types[-1]:
+                if program_index < self.start_index:
+                    program_index += 1
+                    continue
+                expr = self.generate_from_type_combination(api, receivers,
+                                                           parameters, ret,
+                                                           type_map)
+                yield self.produce_test_case(expr)
+                self.log_program_info(i, api, receivers, parameters,
+                                      return_type)
+                program_index += 1
+                i += 1
+
+    def generate_expr_from_node(self, node: tp.Type,
+                                func_ref: bool,
+                                constraints: dict = None,
+                                depth: int = 1) -> ast.Expr:
+        is_func = func_ref and self.api_graph.get_functional_type(
+            node) is not None
+        return (
+            (self.generate_func_ref(node, constraints or {}, depth), {})
+            if is_func
+            else self._generate_expr_from_node(
+                node, depth, {} if func_ref else (constraints or {}))
+        )
+
+    def generate_expr_from_nodes(self, nodes: List[tp.Type],
+                                 constraints: dict,
+                                 func_ref: bool = False,
+                                 depth: int = 1) -> ast.Expr:
+        if len(nodes) == 1:
+            return self.generate_expr_from_node(
+                nodes[0], func_ref=func_ref, constraints=constraints,
+                depth=depth)
+        cond = self.generate_expr(self.bt_factory.get_boolean_type())
+        cond_type = functools.reduce(
+            lambda acc, x: acc if x.is_subtype(acc) else x,
+            nodes,
+            nodes[0]
+        )
+        expr1, type_var_map1 = self.generate_expr_from_node(
+            nodes[0], func_ref=func_ref, constraints=constraints, depth=depth)
+        expr2, type_var_map2 = self.generate_expr_from_node(
+            nodes[1], func_ref=func_ref, constraints=constraints, depth=depth)
+        ret_type_var_map = {}
+        ret_type_var_map.update(type_var_map1)
+        ret_type_var_map.update(type_var_map2)
+        cond = ast.Conditional(cond, expr1, expr2, cond_type)
+        for node in nodes[2:]:
+            expr1, type_var_map1 = self.generate_expr_from_node(
+                node, func_ref=func_ref, constraints=constraints, depth=depth)
+            cond = ast.Conditional(
+                self.generate_expr(self.bt_factory.get_boolean_type()),
+                expr1, cond, cond_type)
+            ret_type_var_map.update(type_var_map1)
+        return cond, ret_type_var_map
 
     def generate_from_type_combination(self, api, receiver, parameters,
                                        return_type, type_map) -> ast.Expr:
-        receiver, type_var_map = self._generate_expr_from_node(
-            receiver, constraints=type_map)
+        receiver, type_var_map = self.generate_expr_from_nodes(
+            receiver, type_map, func_ref=False)
         type_var_map.update(type_map)
         exp_parameters = [p.t for p in getattr(api, "parameters", [])]
         args = self._generate_args(exp_parameters, parameters,
@@ -115,7 +198,7 @@ class APIGenerator(Generator):
         return None
 
     def generate_func_ref(self, expr_type: tp.Type, type_var_map: dict,
-                          depth: int):
+                          depth: int) -> ast.FunctionReference:
         candidates = self.api_graph.get_function_refs_of(expr_type)
         if not candidates:
             return ast.BottomConstant(expr_type)
@@ -238,19 +321,14 @@ class APIGenerator(Generator):
             return []
         args = []
         for i, param in enumerate(parameters):
-            param_type = tp.substitute_type(actual_types[i], type_var_map)
+            param_types = [
+                tp.substitute_type(param_type, type_var_map)
+                for param_type in actual_types[i]
+            ]
             param = tp.substitute_type(param, type_var_map)
-            if param_type and param_type.is_subtype(param):
-                t = param_type
-            else:
-                t = param
-            t = tp.substitute_type(t, type_var_map)
-            is_func = self.api_graph.get_functional_type(t) is not None
-            expr = (
-                self.generate_func_ref(t, type_var_map, depth)
-                if is_func
-                else self._generate_expr_from_node(t, depth)[0]
-            )
+            expr = self.generate_expr_from_nodes(param_types, {},
+                                                 func_ref=True,
+                                                 depth=depth)[0]
             args.append(expr)
         return args
 
@@ -273,7 +351,7 @@ class APIGenerator(Generator):
             parameters = [param.t for param in elem.parameters]
             args = [ast.CallArgument(pe)
                     for pe in self._generate_args(parameters,
-                                                  parameters,
+                                                  [[p] for p in parameters],
                                                   depth + 1, type_var_map)]
             type_args = [type_var_map[tpa] for tpa in elem.type_parameters]
             expr = ast.FunctionCall(elem.name, args=args, receiver=receiver,
@@ -282,7 +360,7 @@ class APIGenerator(Generator):
             expr = ast.FieldAccess(receiver, elem.name)
         elif isinstance(elem, ag.Constructor):
             parameters = [param.t for param in elem.parameters]
-            args = self._generate_args(parameters, parameters,
+            args = self._generate_args(parameters, [[p] for p in parameters],
                                        depth + 1, type_var_map)
             con_type = self.api_graph.get_type_by_name(elem.get_class_name())
             con_type = _instantiate_type_con(con_type)
