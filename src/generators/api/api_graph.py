@@ -21,7 +21,7 @@ class Field(NamedTuple):
     cls: str
 
     def __str__(self):
-        return self.name
+        return self.get_class_name() + "." + self.get_name()
 
     def __hash__(self):
         return hash(str(self.name) + str(self.cls))
@@ -70,9 +70,12 @@ class Method(NamedTuple):
         if self.type_parameters:
             type_parameters_str = "<{}>".format(",".join(
                 [str(tpa) for tpa in self.type_parameters]))
-        return "{}{}({})".format(type_parameters_str,
-                                 self.name,
-                                 ",".join(str(p) for p in self.parameters))
+        return "{cls!s}.{type_params!s}{name!s}({args!s})".format(
+            cls=self.get_class_name(),
+            type_params=type_parameters_str,
+            name=self.get_name(),
+            args=", ".join(str(p) for p in self.parameters)
+        )
 
     __repr__ = __str__
 
@@ -109,8 +112,11 @@ class Constructor(NamedTuple):
     parameters: List[tp.Type]
 
     def __str__(self):
-        return "{}({})".format(self.name, ",".join(
-            str(p) for p in self.parameters))
+        return "{cls!s}.{name!s}({args!s})".format(
+            cls=self.get_class_name(),
+            name=self.get_name(),
+            args=", ".join(str(p) for p in self.parameters)
+        )
 
     __repr__ = __str__
 

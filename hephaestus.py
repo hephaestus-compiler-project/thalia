@@ -14,30 +14,12 @@ from collections import namedtuple, OrderedDict
 
 from src.args import args as cli_args, validate_args, pre_process_args
 from src import utils
-from src.compilers.kotlin import KotlinCompiler
-from src.compilers.groovy import GroovyCompiler
-from src.compilers.java import JavaCompiler
-from src.compilers.scala import ScalaCompiler
-from src.translators.kotlin import KotlinTranslator
-from src.translators.groovy import GroovyTranslator
-from src.translators.scala import ScalaTranslator
-from src.translators.java import JavaTranslator
+from src.compilers import COMPILERS
+from src.translators import TRANSLATORS
 from src.modules.processor import ProgramProcessor
 
 
 STOP_COND = False
-TRANSLATORS = {
-    'kotlin': KotlinTranslator,
-    'groovy': GroovyTranslator,
-    'java': JavaTranslator,
-    'scala': ScalaTranslator
-}
-COMPILERS = {
-    'kotlin': KotlinCompiler,
-    'groovy': GroovyCompiler,
-    'java': JavaCompiler,
-    'scala': ScalaCompiler
-}
 STATS = {
     "Info": {
         "stop_cond": cli_args.stop_cond,

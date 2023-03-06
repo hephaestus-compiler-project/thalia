@@ -10,6 +10,7 @@ from src.generators import generators as gens, utils as gu, Generator
 from src.generators.api import api_graph as ag, builder, matcher as match
 from src.generators.config import cfg
 from src.modules.logging import log
+from src.translators import TRANSLATORS
 
 
 class APIGenerator(Generator):
@@ -37,6 +38,7 @@ class APIGenerator(Generator):
         self._has_next = True
         self.start_index = options.get("start-index", 0)
         self.max_conditional_depth = options.get("max-conditional-depth", 4)
+        self.translator = TRANSLATORS[language]()
 
     def produce_test_case(self, expr: ast.Expr) -> ast.Program:
         func_name = "test"
@@ -56,18 +58,23 @@ class APIGenerator(Generator):
 
     def log_program_info(self, program_id, api, receivers, parameters,
                          return_type):
+        def to_str(t):
+            if isinstance(t, int):
+                return str(t)
+            return self.translator.get_type_name(t)
+
         def log_types(types):
             if len(types) == 1:
-                return str(types[0])
-            return "Union[{}]".format(", ".join(str(t) for t in types))
+                return to_str(types[0])
+            return "Union[{}]".format(", ".join(to_str(t) for t in types))
 
-        msg = "Generated program {id!r}\n".format(id=program_id)
+        msg = "Generated program {id!s}\n".format(id=program_id)
         msg += "\tAPI: {api!r}\n".format(api=api)
-        msg += "\treceiver: {receiver!r}\n".format(receiver=log_types(
+        msg += "\treceiver: {receiver!s}\n".format(receiver=log_types(
             receivers))
-        msg += "\tparameters {params!r}\n".format(params=", ".join(
+        msg += "\tparameters {params!s}\n".format(params=", ".join(
             log_types(p) for p in parameters))
-        msg += "\treturn: {ret!r}\n".format(ret=log_types([return_type]))
+        msg += "\treturn: {ret!s}\n".format(ret=log_types([return_type]))
         log(self.logger, msg)
 
     def compute_programs(self):
