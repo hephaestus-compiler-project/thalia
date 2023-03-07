@@ -386,13 +386,13 @@ class APIGraph():
                                                             assignment_graph)
                 if assignments is None:
                     continue
+                type_deps = au.compute_type_var_dependencies(self.api_graph,
+                                                             path)
                 node_path = OrderedDict()
                 for source, target in path:
                     node_path[source] = True
                     node_path[target] = True
-                pruned_path = [n for i, n in enumerate(node_path.keys())
-                               if i == 0 or not isinstance(n, tp.Type)]
-                return pruned_path, assignments
+                return list(node_path.keys()), assignments, type_deps
         return None
 
     def get_instantiations_of_recursive_bound(

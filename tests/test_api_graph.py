@@ -307,11 +307,21 @@ DOCS5 = {
 }
 
 
+def filter_types(path):
+    return [
+        p
+        for i, p in enumerate(path)
+        if i == 0 or not isinstance(p, tp.Type)
+    ]
+
+
 def test1():
     b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS1)
-    path, assignments = api_graph.find_API_path(b.parse_type("java.Set"))
+    path, assignments, _ = api_graph.find_API_path(b.parse_type("java.Set"))
     assert assignments == {}
+
+    path = filter_types(path)
 
     assert path == [
         b.parse_type("java.Foo"),
@@ -325,8 +335,10 @@ def test2():
     docs["java.Foo"]["type_parameters"] = ["T"]
     b = JavaAPIGraphBuilder("java")
     api_graph = b.build(docs)
-    path, assignments = api_graph.find_API_path(b.parse_type("java.Set"))
+    path, assignments, _ = api_graph.find_API_path(b.parse_type("java.Set"))
     assert tp.TypeParameter("java.Foo.T1") in assignments
+
+    path = filter_types(path)
 
     assert path == [
         b.build_class_node(docs["java.Foo"]),
@@ -337,12 +349,14 @@ def test2():
 def test3():
     b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS2)
-    path, assignments = api_graph.find_API_path(
+    path, assignments, _ = api_graph.find_API_path(
         b.build_class_node(DOCS2["java.Set"]))
     assert tp.TypeParameter("java.Foo.T1") in assignments
     assert tp.TypeParameter("java.List.T1") in assignments
     assert tp.TypeParameter("java.Set.T1") in assignments
     assert len(set(assignments.values())) == 1
+
+    path = filter_types(path)
 
     assert path == [
         b.build_class_node(DOCS2["java.Foo"]),
@@ -354,7 +368,7 @@ def test3():
     docs["java.Foo"]["methods"][0]["return_type"] = "java.List<java.lang.String>"
     b = JavaAPIGraphBuilder("java")
     api_graph = b.build(docs)
-    path, assignments = api_graph.find_API_path(
+    path, assignments, _ = api_graph.find_API_path(
         b.build_class_node(DOCS2["java.Set"]))
     assert tp.TypeParameter("java.Foo.T1") in assignments
     assert tp.TypeParameter("java.List.T1") in assignments
@@ -363,6 +377,8 @@ def test3():
         "java.lang.String")
     assert assignments[tp.TypeParameter("java.Set.T1")] == b.parse_type(
         "java.lang.String")
+
+    path = filter_types(path)
 
     assert path == [
         b.build_class_node(DOCS2["java.Foo"]),
@@ -378,9 +394,10 @@ def test4():
         b.build_class_node(DOCS5["java.Foo.List"]),
         with_constraints={tp.TypeParameter("java.Foo.T1"): jt.Integer}) is None
 
-    path, assignments = api_graph.find_API_path(
+    path, assignments, _ = api_graph.find_API_path(
         b.build_class_node(DOCS5["java.Foo.List"]),
         with_constraints={tp.TypeParameter("java.Foo.T1"): jt.String})
+    path = filter_types(path)
     assert path == [
         ag.Method("java.Foo.makeList", "java.Foo", [], []),
         ag.Constructor("java.Foo.List", [])
@@ -400,9 +417,10 @@ def test4():
         "return_type": None
     })
     api_graph = b.build(docs)
-    path, assignments = api_graph.find_API_path(
+    path, assignments, _ = api_graph.find_API_path(
         b.build_class_node(docs["java.Foo.List"]),
         with_constraints={tp.TypeParameter("java.Foo.T1"): jt.Integer})
+    path = filter_types(path)
     assert path == [
         ag.Constructor("java.Foo", []),
         ag.Constructor("java.Foo.List", [])

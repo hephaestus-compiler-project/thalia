@@ -316,7 +316,7 @@ class APIGenerator(Generator):
                     else {}
                 )
             return self.generate_expr(t), type_var_map
-        path, type_var_map = path
+        path, type_var_map, type_deps = path
         expr = self._generate_expression_from_path(path, depth=depth,
                                                    type_var_map=type_var_map)
         self.visited_exprs[node] = (expr, type_var_map)
