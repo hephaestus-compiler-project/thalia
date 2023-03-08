@@ -81,7 +81,7 @@ class Method(NamedTuple):
 
     def __hash__(self):
         return hash(str(self.name) + str(self.cls) + str(
-            self.parameters) + str(self.type_parameters))
+            self.parameters) + str([t.name for t in self.type_parameters]))
 
     def __eq__(self, other):
         return (
@@ -186,6 +186,7 @@ class APIGraph():
                        if not node.is_type_constructor()}
         self._all_types = {node.name: node
                            for node in self.subtyping_graph.nodes()}
+        self.source_nodes_of = {}
 
     def get_reg_types(self):
         types = [
@@ -223,11 +224,6 @@ class APIGraph():
             if type_v.is_type_var():
                 type_var_map[type_v] = assignment
         return type_var_map
-
-    def get_incoming_node(self, node):
-        view = self.api_graph.in_edges(node)
-        assert len(view) == 1
-        return list(view)[0][0]
 
     def subtypes_of_parameterized(self, node):
         possible_type_args = []
@@ -361,12 +357,15 @@ class APIGraph():
             target = target.t_constructor
         if target not in self.api_graph:
             return None
-        source_nodes = [
-            node
-            for node, indegree in self.api_graph.in_degree(
-                self.api_graph.nodes())
-            if indegree == 0 and nx.has_path(self.api_graph, node, target)
-        ]
+        source_nodes = self.source_nodes_of.get(target)
+        if source_nodes is None:
+            source_nodes = [
+                node
+                for node, indegree in self.api_graph.in_degree(
+                    self.api_graph.nodes())
+                if indegree == 0 and nx.has_path(self.api_graph, node, target)
+            ]
+            self.source_nodes_of[target] = source_nodes
         if not source_nodes:
             return None
 
@@ -386,13 +385,11 @@ class APIGraph():
                                                             assignment_graph)
                 if assignments is None:
                     continue
-                type_deps = au.compute_type_var_dependencies(self.api_graph,
-                                                             path)
                 node_path = OrderedDict()
                 for source, target in path:
                     node_path[source] = True
                     node_path[target] = True
-                return list(node_path.keys()), assignments, type_deps
+                return list(node_path.keys()), assignments
         return None
 
     def get_instantiations_of_recursive_bound(
@@ -545,10 +542,10 @@ class APIGraph():
             return receiver, type_var_map
 
     def encode_receiver(self, api_node):
-        view = self.api_graph.in_edges(api_node)
         type_var_map = {}
         func_type_parameters = getattr(api_node, "type_parameters", [])
-        if not view:
+        receiver = self.get_input_type(api_node)
+        if not receiver:
             # API is not associated with a receiver
             receivers = {self.EMPTY}
             func_type_var_map = self.instantiate_func_type_variables(
@@ -557,8 +554,6 @@ class APIGraph():
                 return None
             type_var_map.update(func_type_var_map)
         else:
-            assert len(view) == 1
-            receiver = list(view)[0][0]
             ret = self.instantiate_receiver_type(receiver)
             if ret is None:
                 return None
@@ -579,6 +574,31 @@ class APIGraph():
                                     receiver.has_wildcards())
                 receivers.update(self.subtypes(receiver, include_self))
         return receivers, type_var_map
+
+    def get_input_type(self, api) -> tp.Type:
+        view = self.api_graph.in_edges(api)
+        if not view:
+            return None
+        assert len(view) == 1
+        return list(view)[0][0]
+
+    def get_output_type(self, api) -> tp.Type:
+        view = self.api_graph.out_edges(api)
+        if not view:
+            return None
+        assert len(view) == 1
+        return list(view)[0][1]
+
+    def get_concrete_output_type(self, api):
+        out_type = self.get_output_type(api)
+        if isinstance(api, Constructor):
+            return out_type.new(out_type.type_parameters)
+
+        constraint = self.api_graph[api][out_type].get("constraint")
+        if constraint:
+            out_type = out_type.new([constraint[tpa]
+                                     for tpa in out_type.type_parameters])
+        return out_type
 
     def encode_api_components(self,
                               matcher: Matcher = None) -> List[APIEncoding]:
@@ -605,9 +625,7 @@ class APIGraph():
             if not parameters:
                 parameters = ({self.EMPTY},)
             parameters = tuple([frozenset(s) for s in parameters])
-            view = self.api_graph.out_edges(node)
-            assert len(view) == 1
-            ret_type = list(view)[0][1]
+            ret_type = self.get_output_type(node)
             constraint = self.api_graph[node][ret_type].get("constraint", {})
             if constraint:
                 ret_type = ret_type.new(
