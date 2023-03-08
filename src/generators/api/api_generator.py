@@ -201,8 +201,8 @@ class APIGenerator(Generator):
             expr = ast.FunctionCall(api.name, args=call_args,
                                     receiver=receiver, type_args=type_args)
             if api.type_parameters:
-                self.type_erasure.erase_types(expr, api, [arg.path
-                                                          for arg in args])
+                self.type_eraser.erase_types(expr, api, [arg.path
+                                                         for arg in args])
         elif isinstance(api, ag.Constructor):
             expr = ast.New(tp.Classifier(api.name), args=args)
         else:
@@ -358,7 +358,7 @@ class APIGenerator(Generator):
             expr = self.generate_expr_from_nodes(param_types, {},
                                                  func_ref=True,
                                                  depth=depth)
-            self.reset_erasure()
+            self.reset_type_erasure()
             args.append(expr)
         return args
 
@@ -378,7 +378,7 @@ class APIGenerator(Generator):
             self.on_erasure(exp_type=None)
             receiver = self._generate_expression_from_path(receiver_path,
                                                            depth, type_var_map)
-            self.reset_erasure()
+            self.reset_type_erasure()
         if isinstance(elem, ag.Method):
             parameters = [param.t for param in elem.parameters]
             args = self._generate_args(parameters,
@@ -390,8 +390,8 @@ class APIGenerator(Generator):
             expr = ast.FunctionCall(elem.name, args=call_args,
                                     receiver=receiver, type_args=type_args)
             if elem.type_parameters:
-                self.type_erasure.erase_types(expr, elem, [arg.path
-                                                           for arg in args])
+                self.type_eraser.erase_types(expr, elem, [arg.path
+                                                          for arg in args])
         elif isinstance(elem, ag.Field):
             expr = ast.FieldAccess(receiver, elem.name)
         elif isinstance(elem, ag.Constructor):
@@ -403,8 +403,8 @@ class APIGenerator(Generator):
             con_type = _instantiate_type_con(con_type)
             expr = ast.New(con_type, call_args, receiver=receiver)
             if con_type.is_parameterized():
-                self.type_erasure.erase_types(expr, elem, [arg.path
-                                                           for arg in args])
+                self.type_eraser.erase_types(expr, elem, [arg.path
+                                                          for arg in args])
         elif len(path) == 1:
             t = _instantiate_type_con(elem)
             expr = self.generate_expr(tp.substitute_type(t, type_var_map))
@@ -413,12 +413,12 @@ class APIGenerator(Generator):
         return expr
 
     def on_erasure(self, exp_type):
-        self._prev_type_erasure = self.type_erasure
-        self.type_erasure = te.TypeEraser(self.api_graph, exp_type,
-                                          self.bt_factory)
+        self._prev_type_erasure = self.type_eraser
+        self.type_eraser = te.TypeEraser(self.api_graph, exp_type,
+                                         self.bt_factory)
 
-    def reset_erasure(self):
-        self.type_erasure = self._prev_type_erasure
+    def reset_type_erasure(self):
+        self.type_eraser = self._prev_type_erasure
 
     def enable_out_pos(self):
         self.out_pos = True
