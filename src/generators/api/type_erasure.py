@@ -24,11 +24,17 @@ class TypeEraser():
         self.out_type = out_type
         self.bt_factory = bt_factory
 
+    def get_type_parameters(self, api: ag.APINode) -> List[tp.TypeParameter]:
+        if isinstance(api, ag.Constructor):
+            return self.api_graph.get_type_by_name(
+                api.get_class_name()).type_parameters
+        return api.type_parameters
+
     def compute_markings(self,
                          api: ag.APINode) -> Dict[tp.TypeParameter, Set[int]]:
         markings = defaultdict(set)
         ret_type = self.api_graph.get_concrete_output_type(api)
-        for type_param in api.type_parameters:
+        for type_param in self.get_type_parameters(api):
             if isinstance(api, ag.Constructor):
                 # All type parameters of a constructor are in out position.
                 markings[type_param].add(self.OUT)
@@ -71,17 +77,15 @@ class TypeEraser():
 
             arg_type = self.api_graph.get_concrete_output_type(arg_api)
             type_variables = get_type_variables(arg_type, self.bt_factory)
-            type_parameters = (
-                arg_type.t_constructor.type_parameters
-                if is_constructor
-                else arg_api.type_parameters
-            )
+            type_parameters = self.get_type_parameters(arg_api)
             method_type_params = {
                 tpa for tpa in type_parameters
                 if tpa in type_variables
             }
             can_infer = True
             sub = tu.unify_types(api_out_type, arg_type, self.bt_factory)
+            if not sub:
+                return False
             for mtpa in method_type_params:
                 if any(mtpa in get_type_variables(p.t, self.bt_factory)
                        for p in arg_api.parameters):
@@ -102,5 +106,5 @@ class TypeEraser():
                 continue
             if self.can_infer_in_position(type_param, marks, ret_type, args):
                 omittable_type_params.add(type_param)
-        if len(omittable_type_params) == len(api.type_parameters):
+        if len(omittable_type_params) == len(self.get_type_parameters(api)):
             expr.omit_types()
