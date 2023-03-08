@@ -14,20 +14,6 @@ class EqualityConstraint(NamedTuple):
     t: tp.Type
 
 
-def compute_type_var_dependencies(api_graph: nx.DiGraph,
-                                  path: list) -> nx.DiGraph:
-    graph = nx.DiGraph()
-    for source, target in path:
-        constraint = api_graph[source][target].get("constraint")
-        if not constraint:
-            continue
-        for type_k, type_v in constraint.items():
-            graph.add_node(type_k)
-            graph.add_node(type_v)
-            graph.add_edge(type_k, type_v)
-    return graph
-
-
 def compute_assignment_graph(api_graph: nx.DiGraph, path: list) -> OrderedDict:
     assignment_graph = OrderedDict()
     for source, target in path:
