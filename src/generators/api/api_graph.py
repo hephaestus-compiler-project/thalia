@@ -145,8 +145,12 @@ class Constructor(NamedTuple):
         return self.get_name()
 
 
+APINode = Union[Field, Method, Constructor, tp.Type]
+APIPath = List[APINode]
+
+
 class APIEncoding(NamedTuple):
-    api: Union[Field, Method, Constructor]
+    api: APINode
     receivers: Set[tp.Type]
     parameters: Set[tp.Type]
     returns: Set[tp.Type]
@@ -351,7 +355,7 @@ class APIGraph():
         return supertypes
 
     def find_API_path(self, target: tp.Type,
-                      with_constraints: dict = None) -> list:
+                      with_constraints: dict = None) -> (APIPath, dict):
         origin = target
         if target.is_parameterized():
             target = target.t_constructor
