@@ -1218,6 +1218,10 @@ class New(Expr):
         if self.receiver:
             self.receiver = children[-1]
 
+    def omit_types(self):
+        if self.class_type.is_parameterized():
+            self.class_type.can_infer_type_args = True
+
     def __str__(self):
         if getattr(self.class_type, 'type_args', None) is not None:
             return " new {rec}{name}<{type_args}> ({args})".format(
@@ -1297,6 +1301,9 @@ class FunctionCall(Expr):
             t_param: self.type_args[i]
             for i, t_param in enumerate(self.type_parameters)
         }
+
+    def omit_types(self):
+        self.can_infer_type_args = True
 
     @property
     def can_infer_type_args(self):
