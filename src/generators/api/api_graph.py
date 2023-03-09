@@ -395,7 +395,8 @@ class APIGraph():
                 for source, target in path:
                     node_path[source] = True
                     node_path[target] = True
-                return list(node_path.keys()), assignments
+                node_path = list(node_path.keys())
+                return node_path, assignments
         return None
 
     def get_instantiations_of_recursive_bound(
@@ -602,7 +603,10 @@ class APIGraph():
     def get_concrete_output_type(self, api):
         out_type = self.get_output_type(api)
         if isinstance(api, Constructor):
-            return out_type.new(out_type.type_parameters)
+            if out_type.is_type_constructor():
+                return out_type.new(out_type.type_parameters)
+            else:
+                return out_type
 
         constraint = self.api_graph[api][out_type].get("constraint")
         if constraint:
