@@ -26,8 +26,11 @@ class TypeEraser():
 
     def get_type_parameters(self, api: ag.APINode) -> List[tp.TypeParameter]:
         if isinstance(api, ag.Constructor):
-            return self.api_graph.get_type_by_name(
-                api.get_class_name()).type_parameters
+            t = self.api_graph.get_type_by_name(api.get_class_name())
+            if t.is_type_constructor():
+                return t.type_parameters
+            else:
+                return []
         return api.type_parameters
 
     def compute_markings(self,
@@ -58,7 +61,7 @@ class TypeEraser():
         return bool(sub)
 
     def can_infer_in_position(self, type_param: tp.TypeParameter,
-                              marks: Set[int], api_out_type: tp.Type,
+                              marks: Set[int], api_params: List[tp.Type],
                               api_args: List[ag.APIPath]) -> bool:
         for mark in marks.difference({self.OUT}):
             path = api_args[mark]
@@ -67,28 +70,29 @@ class TypeEraser():
                 return True
 
             arg_api = path[-2]
-            is_constructor = isinstance(arg_api, ag.Constructor)
-            is_parameterized_method = isinstance(
-                arg_api, ag.Method) and arg_api.type_parameters
-            if not is_parameterized_method and not is_constructor:
+            type_parameters = self.get_type_parameters(arg_api)
+            if not type_parameters:
                 # The argument is not a polymorphic call. We can infer
-                # the argument time without a problem.
+                # the argument type without a problem.
                 return True
 
             arg_type = self.api_graph.get_concrete_output_type(arg_api)
             type_variables = get_type_variables(arg_type, self.bt_factory)
-            type_parameters = self.get_type_parameters(arg_api)
             method_type_params = {
                 tpa for tpa in type_parameters
                 if tpa in type_variables
             }
             can_infer = True
-            sub = tu.unify_types(api_out_type, arg_type, self.bt_factory)
+            sub = tu.unify_types(api_params[mark].t, arg_type, self.bt_factory,
+                                 same_type=False, subtype_on_left=False)
+            if api_params[mark].t.name != arg_type.name:
+                import pdb; pdb.set_trace()
             if not sub:
                 return False
             for mtpa in method_type_params:
                 if any(mtpa in get_type_variables(p.t, self.bt_factory)
                        for p in arg_api.parameters):
+                    # Type variable of API is in "in" position.
                     continue
                 if sub[mtpa].is_type_var():
                     can_infer = False
@@ -104,7 +108,8 @@ class TypeEraser():
             if self.can_infer_out_position(type_param, marks, ret_type):
                 omittable_type_params.add(type_param)
                 continue
-            if self.can_infer_in_position(type_param, marks, ret_type, args):
+            if self.can_infer_in_position(type_param, marks, api.parameters,
+                                          args):
                 omittable_type_params.add(type_param)
         if len(omittable_type_params) == len(self.get_type_parameters(api)):
             expr.omit_types()
