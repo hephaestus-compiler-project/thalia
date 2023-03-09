@@ -84,7 +84,7 @@ def collect_constraints(target: tp.Type,
                 continue
             sub = tu.unify_types(node.bound, t, bt_factory,
                                  same_type=False,
-                                 strict_mode=False)
+                                 strict_mode=False, subtype_on_left=False)
             if not sub:
                 return None
             for k, v in sub.items():
