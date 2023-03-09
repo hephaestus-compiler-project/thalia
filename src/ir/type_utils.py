@@ -1056,13 +1056,50 @@ def _update_type_var_map(type_var_map, key, value):
     v = type_var_map.get(key)
     if v and v != value:
         return False
+    if value.is_wildcard():
+        value = getattr(value, "bound", value)
     type_var_map[key] = value
     return True
 
 
+def _unify_types_with_subtyping(t1: tp.Type, t2: tp.Type, factory,
+                                subtype_on_left: bool):
+    supertypes = t1.supertypes if subtype_on_left else t2.supertypes
+    for supertype in supertypes:
+        if subtype_on_left:
+            sub = unify_types(supertype, t2, factory, same_type=False,
+                              subtype_on_left=subtype_on_left)
+        else:
+            sub = unify_types(t1, supertype, factory, same_type=False,
+                              subtype_on_left=subtype_on_left)
+        if sub:
+            return sub
+    return {}
+
+
+def _unify_type_with_type_var(t1: tp.Type, t2: tp.Type, factory,
+                              strict_mode):
+    if t1.is_type_var():
+        bound1 = t1.get_bound_rec(factory)
+        bound2 = t2.get_bound_rec(factory)
+        if not bound1 and not bound2:
+            return {t2: t1}
+
+        if not bound2 or (bound1 and bound1.is_subtype(bound2)):
+            if strict_mode:
+                return {t2: t1}
+
+    bound = t2.get_bound_rec(factory)
+    if bound and not t1.is_subtype(bound):
+        if strict_mode:
+            return {}
+    return {t2: t1}
+
+
 def unify_types(t1: tp.Type, t2: tp.Type, factory,
-                same_type=True,
-                strict_mode=True) -> dict:
+                same_type: bool = True,
+                strict_mode: bool = True,
+                subtype_on_left: bool = True) -> dict:
     """
     This function performs unification on two types. The second type is
     the type we try to match with the first one, by substituting any
@@ -1089,31 +1126,18 @@ def unify_types(t1: tp.Type, t2: tp.Type, factory,
     if same_type and type(t1) != type(t2):
         return {}
 
-    if not same_type and t1.name != t2.name and not t2.is_type_var():
-        if not t1.supertypes:
-            return {}
-        supertype = t1.supertypes[-1]
-        return unify_types(supertype, t2, factory, same_type=same_type)
+    non_wildcard_type_var = not t2.is_type_var() and not t2.is_wildcard()
+    if not same_type and t1.name != t2.name and non_wildcard_type_var:
+        return _unify_types_with_subtyping(t1, t2, factory,
+                                           subtype_on_left)
 
-    is_type_var = isinstance(t1, tp.TypeParameter)
-    is_type_var2 = isinstance(t2, tp.TypeParameter)
-    if is_type_var and is_type_var2:
-        bound1 = t1.get_bound_rec(factory)
-        bound2 = t2.get_bound_rec(factory)
-        if not bound1 and not bound2:
-            return {t2: t1}
+    if t2.is_wildcard():
+        t2 = getattr(t2, "bound", t2)
 
-        if not bound2 or (bound1 and bound1.is_subtype(bound2)):
-            if strict_mode:
-                return {t2: t1}
-    if is_type_var2:
-        bound = t2.get_bound_rec(factory)
-        if bound and not t1.is_subtype(bound):
-            if strict_mode:
-                return {}
-        return {t2: t1}
+    if t2.is_type_var():
+        return _unify_type_with_type_var(t1, t2, factory, strict_mode)
 
-    if not isinstance(t1, tp.ParameterizedType):
+    if not t1.is_parameterized():
         return {}
 
     if t1.t_constructor != t2.t_constructor:
@@ -1138,7 +1162,7 @@ def unify_types(t1: tp.Type, t2: tp.Type, factory,
                 return {}
         else:
             t_var = (
-                t_arg2 if isinstance(t_arg2, tp.TypeParameter)
+                t_arg2 if t_arg2.is_type_var()
                 else None
             )
             if t_var and t_var.bound is not None:
@@ -1149,10 +1173,8 @@ def unify_types(t1: tp.Type, t2: tp.Type, factory,
                     if not _update_type_var_map(type_var_map, t_var, t_arg1):
                         return {}
                     continue
-                is_parameterized = isinstance(t_var.bound,
-                                              tp.ParameterizedType)
-                is_parameterized2 = isinstance(t_arg1,
-                                               tp.ParameterizedType)
+                is_parameterized = t_var.bound.is_parameterized()
+                is_parameterized2 = t_arg1.is_parameterized()
                 if is_parameterized and is_parameterized2:
                     res = unify_types(t_arg1, t_var.bound, factory)
                     if not res or any(
@@ -1165,8 +1187,7 @@ def unify_types(t1: tp.Type, t2: tp.Type, factory,
                 # The same as the above comment.
                 if not _update_type_var_map(type_var_map, t_var, t_arg1):
                     return {}
-            elif isinstance(t_arg2, tp.ParameterizedType) and (
-                  isinstance(t_arg1, tp.ParameterizedType)):
+            elif t_arg2.is_parameterized() and t_arg1.is_parameterized():
                 res = unify_types(t_arg1, t_arg2, factory)
                 if not res or any(
                         not _update_type_var_map(type_var_map, k, v)

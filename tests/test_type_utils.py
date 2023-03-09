@@ -1237,6 +1237,28 @@ def test_unify_types_same_parameterized_type():
     }
 
 
+def test_unify_types_with_wildcards():
+    factory = kt.KotlinBuiltinFactory()
+    type_param1 = tp.TypeParameter("T1")
+    type_param2 = tp.TypeParameter("T2")
+    foo = tp.TypeConstructor("A", [type_param1])
+    t1 = foo.new([tp.WildCardType(bound=type_param1, variance=tp.Covariant)])
+    t2 = foo.new([type_param2])
+
+    params = tutils.unify_types(t1, t2, factory)
+    assert params == {type_param2: type_param1}
+
+    t1 = foo.new([tp.WildCardType(bound=kt.String, variance=tp.Contravariant)])
+    params = tutils.unify_types(t1, t2, factory)
+    assert params == {type_param2: kt.String}
+
+    t1 = kt.String
+    t2 = tp.WildCardType(bound=type_param1, variance=tp.Covariant)
+    params = tutils.unify_types(t1, t2, factory, same_type=False)
+    assert params == {type_param1: kt.String}
+    assert tutils.unify_types(t2, t1, factory, same_type=False) == {}
+
+
 def test_unify_types_with_simple_and_parameterized_types():
     factory = kt.KotlinBuiltinFactory()
     type_param1 = tp.TypeParameter("T1")
@@ -1260,6 +1282,21 @@ def test_unify_types_with_simple_and_parameterized_types():
     bar_d = bar.new([kt.Long])
     params = tutils.unify_types(bar_d, foo_d, factory, same_type=False)
     assert params == {type_param1: kt.Long}
+
+
+def test_unify_types_with_simple_and_parameterized_types_subtype_on_right():
+    factory = kt.KotlinBuiltinFactory()
+    type_param1 = tp.TypeParameter("T1")
+    type_param2 = tp.TypeParameter("T2")
+    foo = tp.TypeConstructor("A", [type_param1])
+    bar = tp.TypeConstructor("B", [type_param2], [foo.new([type_param2])])
+
+    t1 = foo.new([type_param1])
+    t2 = bar.new([type_param2])
+
+    params = tutils.unify_types(t1, t2, factory, same_type=False,
+                                subtype_on_left=False)
+    assert params == {type_param2: type_param1}
 
 
 def test_build_type_variable_dependencies():
