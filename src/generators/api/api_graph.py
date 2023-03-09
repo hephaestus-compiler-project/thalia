@@ -254,7 +254,9 @@ class APIGraph():
                 possible_type_args.append({n for n in self.supertypes(
                     getattr(t_arg, "bound", t_arg) or t_arg)})
         for combination in itertools.product(*possible_type_args):
-            new_sub = node.t_constructor.new(list(combination))
+            t_constructor = self.get_type_by_name(
+                node.name) or node.t_constructor
+            new_sub = t_constructor.new(list(combination))
             subtypes.add(new_sub)
             subtypes.update(self.subtypes_of_parameterized_inheritance(
                 new_sub))
@@ -266,7 +268,7 @@ class APIGraph():
 
         subtypes = set()
         type_var_map = node.get_type_variable_assignments()
-        node = node.t_constructor
+        node = self.get_type_by_name(node.name) or node.t_constructor
         if node not in self.subtyping_graph:
             return subtypes
 
@@ -331,7 +333,7 @@ class APIGraph():
         constraints = {}
         if node.is_parameterized():
             constraints.update(node.get_type_variable_assignments())
-            node = node.t_constructor
+            node = self.get_type_by_name(node.name) or node.t_constructor
         if node not in self.subtyping_graph:
             return supertypes
         if node not in reverse_graph:
@@ -358,7 +360,7 @@ class APIGraph():
                       with_constraints: dict = None) -> (APIPath, dict):
         origin = target
         if target.is_parameterized():
-            target = target.t_constructor
+            target = self.get_type_by_name(target.name)
         if target not in self.api_graph:
             return None
         source_nodes = self.source_nodes_of.get(target)
@@ -406,10 +408,12 @@ class APIGraph():
         if not bound or not bound.is_parameterized():
             return possibles_types
 
-        if bound.t_constructor not in self.subtyping_graph:
+        t_constructor = self.get_type_by_name(
+            bound.name) or bound.t_constructor
+        if t_constructor not in self.subtyping_graph:
             return possibles_types
 
-        subtypes = nx.descendants(self.subtyping_graph, bound.t_constructor)
+        subtypes = nx.descendants(self.subtyping_graph, t_constructor)
         for st in subtypes:
             # This is a quick and dirty solution. For every subtype of the
             # given bound, we compute its supertypes, and then we try to
@@ -450,13 +454,15 @@ class APIGraph():
         if etype.is_parameterized():
             # Check if this the given type is a native function type, e.g.,
             # (Boolean) -> String.
-            t_constructor = etype.t_constructor
+            t_constructor = self.get_type_by_name(
+                etype.name) or etype.t_constructor
             if t_constructor == self.bt_factory.get_function_type(
                     len(t_constructor.type_parameters) - 1):
                 return etype
         class_type = etype
         if etype.is_parameterized():
-            class_type = etype.t_constructor
+            class_type = self.get_type_by_name(
+                etype.name) or etype.t_constructor
         return self.functional_types.get(class_type)
 
     def get_functional_type(self, etype: tp.Type) -> tp.ParameterizedType:
