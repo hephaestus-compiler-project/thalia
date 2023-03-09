@@ -117,7 +117,8 @@ class APIGenerator(Generator):
                 program_index += 1
                 i += 1
             parameters = [
-                utils.random.sample(t, min(self.max_conditional_depth, len(t)))
+                utils.random.sample(t, min(self.max_conditional_depth + 1,
+                                           len(t)))
                 for t in types[1:-1]
             ]
             receivers = utils.random.sample(types[0], min(

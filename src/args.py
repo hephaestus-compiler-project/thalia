@@ -52,6 +52,12 @@ parser.add_argument(
           "(Used only with API-based program generation)")
 )
 parser.add_argument(
+    "--max-conditional-depth",
+    type=int,
+    default=1,
+    help="Maximum depth of conditionals"
+)
+parser.add_argument(
     "-t", "--transformations",
     type=int,
     default=0,
@@ -213,7 +219,8 @@ args.options = {
         "base": {},
         "api": {
             "start-index": args.start_index,
-            "api-rules": args.api_rules
+            "api-rules": args.api_rules,
+            "max-conditional-depth": args.max_conditional_depth,
         }
     },
     'Translator': {
@@ -288,6 +295,8 @@ def validate_args(args):
     if args.generator != "api" and args.library_path is not None:
         sys.exit("The --library_path option is only combined with "
                  "--generator 'api'")
+    if args.max_conditional_depth <= 0:
+        sys.exit("The --max-conditional-depth option should be >= 1")
 
 
 def pre_process_args(args):
