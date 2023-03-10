@@ -85,8 +85,6 @@ class TypeEraser():
             can_infer = True
             sub = tu.unify_types(api_params[mark].t, arg_type, self.bt_factory,
                                  same_type=False, subtype_on_left=False)
-            if api_params[mark].t.name != arg_type.name:
-                import pdb; pdb.set_trace()
             if not sub:
                 return False
             for mtpa in method_type_params:

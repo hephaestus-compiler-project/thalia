@@ -1,7 +1,7 @@
 from copy import deepcopy
 import functools
 import itertools
-from typing import List, NamedTuple
+from typing import List, NamedTuple, Union
 
 from src import utils
 from src.ir import ast, types as tp, type_utils as tu
@@ -148,8 +148,9 @@ class APIGenerator(Generator):
         is_func = func_ref and self.api_graph.get_functional_type(
             node) is not None
         return (
-            ExprRes(self.generate_func_ref(node, constraints or {}, depth), {},
-                    [node])
+            ExprRes(self.generate_function_expr(node, constraints or {},
+                                                depth),
+                    {}, [node])
             if is_func
             else self._generate_expr_from_node(
                 node, depth, {} if func_ref else (constraints or {}))
@@ -221,11 +222,47 @@ class APIGenerator(Generator):
         self._add_node_to_parent(self.namespace, var_decl)
         return None
 
+    def generate_function_expr(self, expr_type: tp.Type, type_var_map: dict,
+                               depth: int) -> Union[ast.Lambda,
+                                                    ast.FunctionReference]:
+        return (
+            self.generate_lambda(expr_type, type_var_map, depth)
+            if utils.random.bool()
+            else self.generate_func_ref(expr_type, type_var_map, depth)
+        )
+
+    def generate_lambda(self, expr_type: tp.Type, type_var_map: dict,
+                        depth: int) -> ast.Lambda:
+        sub = {}
+        if expr_type.is_parameterized():
+            expr_type = expr_type.to_variance_free()
+            sub = expr_type.get_type_variable_assignments()
+            sub.update(type_var_map)
+        func_type = self.api_graph.get_functional_type(expr_type)
+        func_type = tp.substitute_type(func_type, sub)
+        shadow_name = "lambda_" + str(next(self.int_stream))
+        prev_namespace = self.namespace
+        self.namespace += (shadow_name,)
+
+        params = [
+            ast.ParameterDeclaration(name=gu.gen_identifier("lower"),
+                                     param_type=param_type)
+            for param_type in func_type.type_args[:-1]
+        ]
+        ret_type = func_type.type_args[-1]
+        for p in params:
+            self.context.add_var(self.namespace, p.name, p)
+        expr = self._generate_expr_from_node(ret_type, depth + 1)[0]
+        lambda_expr = ast.Lambda(shadow_name, params, ret_type, expr,
+                                 func_type)
+        self.namespace = prev_namespace
+        return lambda_expr
+
     def generate_func_ref(self, expr_type: tp.Type, type_var_map: dict,
                           depth: int) -> ast.FunctionReference:
         candidates = self.api_graph.get_function_refs_of(expr_type)
         if not candidates:
-            return ast.BottomConstant(expr_type)
+            return self.generate_lambda(expr_type, depth, type_var_map)
         api, sub = utils.random.choice(candidates)
         type_var_map.update(sub)
         segs = api.name.rsplit(".", 1)
