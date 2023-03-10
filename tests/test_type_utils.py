@@ -1254,8 +1254,7 @@ def test_unify_types_with_wildcards():
 
     t1 = kt.String
     t2 = tp.WildCardType(bound=type_param1, variance=tp.Covariant)
-    params = tutils.unify_types(t1, t2, factory, same_type=False)
-    assert params == {type_param1: kt.String}
+    assert tutils.unify_types(t1, t2, factory, same_type=False) == {}
     assert tutils.unify_types(t2, t1, factory, same_type=False) == {}
 
 

@@ -1126,8 +1126,8 @@ def unify_types(t1: tp.Type, t2: tp.Type, factory,
     if same_type and type(t1) != type(t2):
         return {}
 
-    non_wildcard_type_var = not t2.is_type_var() and not t2.is_wildcard()
-    if not same_type and t1.name != t2.name and non_wildcard_type_var:
+    non_type_var = not t2.is_type_var()
+    if not same_type and t1.name != t2.name and non_type_var:
         return _unify_types_with_subtyping(t1, t2, factory,
                                            subtype_on_left)
 
