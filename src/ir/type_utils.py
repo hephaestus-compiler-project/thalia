@@ -1151,7 +1151,7 @@ def unify_types(t1: tp.Type, t2: tp.Type, factory,
         if t_arg2.is_wildcard() and not t_arg1.is_wildcard():
             return {}
 
-        if t_arg2.is_wildcard():
+        if t_arg2.is_wildcard() and not t_arg2.is_invariant():
             t_arg2 = t_arg2.bound
             t_arg1 = t_arg1.bound
 
