@@ -475,6 +475,7 @@ def _instantiate_type_param_rec(t_param: types.TypeParameter,
                                                         type_var_map)
     return new_t_param
 
+
 class Lambda(Expr):
     # body can be Block or Expr
     def __init__(self,
@@ -488,6 +489,7 @@ class Lambda(Expr):
         self.ret_type = ret_type
         self.body = body
         self.signature = signature
+        self._can_infer_signature = False
 
     def children(self):
         if self.body is None:
@@ -528,6 +530,19 @@ class Lambda(Expr):
                     ) and
                     check_list_eq(self.params, other.params))
         return False
+
+    @property
+    def can_infer_signature(self):
+        return self._can_infer_signature
+
+    @can_infer_signature.setter
+    def can_infer_signature(self, value):
+        if not isinstance(value, bool):
+            raise TypeError("Must be bool")
+        self._can_infer_signature = value
+
+    def omit_types(self):
+        self.can_infer_signature = True
 
 
 class ClassDeclaration(Declaration):
