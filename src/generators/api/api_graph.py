@@ -24,7 +24,7 @@ class Field(NamedTuple):
         return self.get_class_name() + "." + self.get_name()
 
     def __hash__(self):
-        return hash(str(self.name) + str(self.cls))
+        return hash((self.name, self.cls))
 
     def __eq__(self, other):
         return (self.__class__ == other.__class__ and
@@ -58,6 +58,9 @@ class Parameter(NamedTuple):
 
     __repr__ = __str__
 
+    def __hash__(self):
+        return hash((self.t, self.variable))
+
 
 class Method(NamedTuple):
     name: str
@@ -80,8 +83,8 @@ class Method(NamedTuple):
     __repr__ = __str__
 
     def __hash__(self):
-        return hash(str(self.name) + str(self.cls) + str(
-            self.parameters) + str([t.name for t in self.type_parameters]))
+        return hash((self.name, self.cls, tuple(self.parameters),
+                     tuple(self.type_parameters)))
 
     def __eq__(self, other):
         return (
@@ -109,7 +112,7 @@ class Method(NamedTuple):
 
 class Constructor(NamedTuple):
     name: str
-    parameters: List[tp.Type]
+    parameters: List[Parameter]
 
     def __str__(self):
         return "{cls!s}.{name!s}({args!s})".format(
@@ -121,7 +124,7 @@ class Constructor(NamedTuple):
     __repr__ = __str__
 
     def __hash__(self):
-        return hash(str(self.name) + str(self.parameters))
+        return hash((self.name, tuple(self.parameters)))
 
     def __eq__(self, other):
         return (

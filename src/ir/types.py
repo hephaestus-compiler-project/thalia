@@ -32,7 +32,7 @@ class Variance(object):
         return self.value == 0
 
     def __hash__(self):
-        return hash(str(self.value))
+        return hash(self.value)
 
     def __str__(self):
         return str(self.value)
@@ -154,7 +154,7 @@ class Builtin(Type):
 
     def __hash__(self):
         """Hash based on the Type"""
-        return hash(str(self.__class__))
+        return hash((self.__class__, self.name))
 
     def is_subtype(self, other: Type) -> bool:
         return other == self or other in self.get_supertypes()
@@ -202,8 +202,7 @@ class SimpleClassifier(Classifier):
 
     def __hash__(self):
         """Hash based on the Type"""
-        return hash("{}{}{}".format(
-            str(self.__class__), str(self.name), str(self.supertypes)))
+        return hash((self.__class__, self.name, tuple(self.supertypes)))
 
     def _check_supertypes(self):
         """The transitive closure of supertypes must be consistent, i.e., does
@@ -308,7 +307,7 @@ class TypeParameter(AbstractType):
                 self.bound == other.bound)
 
     def __hash__(self):
-        return hash(str(self.name) + str(self.variance))
+        return hash((self.name, self.variance))
 
     def __str__(self):
         return "{}{}{}".format(
@@ -374,7 +373,7 @@ class WildCardType(Type):
                 self.bound == other.bound)
 
     def __hash__(self):
-        return hash(str(self.name) + str(self.variance))
+        return hash((self.name, self.variance))
 
     def __str__(self):
         if not self.bound:
@@ -488,8 +487,8 @@ class TypeConstructor(AbstractType):
                 str(self.type_parameters) == str(other.type_parameters))
 
     def __hash__(self):
-        return hash(str(self.__class__) + str(self.name) + str(self.supertypes)
-                    + str(self.type_parameters))
+        return hash((self.name, tuple(self.supertypes),
+                     tuple(self.type_parameters)))
 
     def is_type_constructor(self):
         return True
@@ -707,8 +706,8 @@ class ParameterizedType(SimpleClassifier):
                 self.type_args == other.type_args)
 
     def __hash__(self):
-        return hash(str(self.name) + str(self.supertypes) + str(self.type_args)
-                    + str(self.t_constructor.type_parameters))
+        return hash((self.name, tuple(self.supertypes), tuple(self.type_args),
+                     tuple(self.t_constructor.type_parameters)))
 
     def __str__(self):
         return "{}<{}>".format(self.name,

@@ -90,8 +90,7 @@ class GroovyBuiltin(Builtin):
         return str(self.name).lower() + "(groovy-primitive)"
 
     def __hash__(self):
-        return hash(str(self.name) + str(self.primitive) + str(
-            self.supertypes))
+        return hash((self.__class__, self.name, self.primitive))
 
     def __eq__(self, other):
         return (
