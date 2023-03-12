@@ -245,6 +245,8 @@ class APIGenerator(Generator):
                                      param_type=param_type)
             for param_type in func_type.type_args[:-1]
         ]
+        for param in params:
+            self.api_graph.add_variable_node(param.name, param.get_type())
         ret_type = func_type.type_args[-1]
         for p in params:
             self.context.add_var(self.namespace, p.name, p)
@@ -258,6 +260,8 @@ class APIGenerator(Generator):
         self.namespace = prev_namespace
         self.reset_type_erasure()
         self.type_eraser.erase_types(lambda_expr, func_type, [])
+        for param in params:
+            self.api_graph.remove_variable_node(param.name)
         return lambda_expr
 
     def generate_func_ref(self, expr_type: tp.Type, type_var_map: dict,
@@ -380,7 +384,8 @@ class APIGenerator(Generator):
         path, type_var_map = path
         expr = self._generate_expression_from_path(path, depth=depth,
                                                    type_var_map=type_var_map)
-        self.visited_exprs[node] = ExprRes(expr, type_var_map, path)
+        if not any(isinstance(n, ag.Variable) for n in path):
+            self.visited_exprs[node] = ExprRes(expr, type_var_map, path)
         return ExprRes(expr, type_var_map, path)
 
     def _generate_args(self, parameters, actual_types, depth,
@@ -443,6 +448,8 @@ class APIGenerator(Generator):
             expr = ast.New(con_type, call_args, receiver=receiver)
             if con_type.is_parameterized():
                 self.type_eraser.erase_types(expr, elem, args)
+        elif isinstance(elem, ag.Variable):
+            return ast.Variable(elem.name)
         elif len(path) == 1:
             t = _instantiate_type_con(elem)
             expr = self.generate_expr(tp.substitute_type(t, type_var_map))

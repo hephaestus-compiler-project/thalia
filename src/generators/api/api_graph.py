@@ -46,6 +46,27 @@ class Field(NamedTuple):
         return self.get_name()
 
 
+class Variable(NamedTuple):
+    name: str
+
+    def __str__(self):
+        return self.get_name()
+
+    def __hash__(self):
+        return hash(self.name)
+
+    def __eq__(self, other):
+        return (self.__class__ == other.__class__ and
+                self.name == other.name)
+
+    def get_name(self):
+        return self.name.rsplit(".", 1)[-1]
+
+    @property
+    def api_name(self):
+        return self.get_name()
+
+
 class Parameter(NamedTuple):
     t: tp.Type
     variable: bool
@@ -148,7 +169,7 @@ class Constructor(NamedTuple):
         return self.get_name()
 
 
-APINode = Union[Field, Method, Constructor, tp.Type]
+APINode = Union[Field, Method, Constructor, tp.Type, Variable]
 APIPath = List[APINode]
 
 
@@ -359,6 +380,20 @@ class APIGraph():
                     rec_bound_handler=handler)[0])
         return supertypes
 
+    def add_variable_node(self, name: str, var_type: tp.Type):
+        source = Variable(name)
+        kwargs = {}
+        if var_type.is_parameterized():
+            kwargs["constraint"] = var_type \
+                .get_type_variable_assignments()
+        target = self.get_type_by_name(var_type.name)
+        self.api_graph.add_node(source)
+        self.api_graph.add_node(target)
+        self.api_graph.add_edge(source, target, **kwargs)
+
+    def remove_variable_node(self, name: str):
+        self.api_graph.remove_node(Variable(name))
+
     def find_API_path(self, target: tp.Type,
                       with_constraints: dict = None) -> (APIPath, dict):
         origin = target
@@ -374,7 +409,8 @@ class APIGraph():
                     self.api_graph.nodes())
                 if indegree == 0 and nx.has_path(self.api_graph, node, target)
             ]
-            self.source_nodes_of[target] = source_nodes
+            self.source_nodes_of[target] = [s for s in source_nodes
+                                            if not isinstance(s, Variable)]
         if not source_nodes:
             return None
 

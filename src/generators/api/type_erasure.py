@@ -50,7 +50,9 @@ class TypeEraser():
             # In case of lambda we exclude the last type parameter which can
             # be inferred by its body.
             return api.t_constructor.type_parameters[:-1]
-        return api.type_parameters
+        if isinstance(api, ag.Method):
+            return api.type_parameters
+        return []
 
     def compute_markings(self,
                          api: ag.APINode) -> Dict[tp.TypeParameter, Set[int]]:
