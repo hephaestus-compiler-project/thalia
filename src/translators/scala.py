@@ -325,7 +325,7 @@ class ScalaTranslator(BaseTranslator):
         param_res = [children_res[i] for i, _ in enumerate(node.params)]
         body_res = children_res[-1] if node.body else ''
         ret_type_str = (
-            ":" + self.get_type_name(node.ret_type)
+            ": " + self.get_type_name(node.ret_type)
             if node.ret_type
             else ""
         )
@@ -334,7 +334,7 @@ class ScalaTranslator(BaseTranslator):
             ret_type_str = ""
 
         # use the lambda syntax: { params -> stmt }
-        res = "({params}) => {body}:{ret}".format(
+        res = "({params}) => {body}{ret}".format(
             params=", ".join(param_res),
             body=body_res,
             ret=ret_type_str
