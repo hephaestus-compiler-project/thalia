@@ -381,8 +381,10 @@ class APIGraph():
         for source in source_nodes:
             if source == target:
                 continue
-            for path in nx.all_simple_edge_paths(self.api_graph, source=source,
-                                                 target=target, cutoff=10):
+            paths = nx.shortest_simple_paths(self.api_graph, source=source,
+                                             target=target)
+            for path in sorted(paths, key=len, reverse=True):
+                path = list(zip(path, path[1:]))
                 assignment_graph = au.compute_assignment_graph(self.api_graph,
                                                                path)
                 type_variables = _get_type_variables(path)
@@ -473,25 +475,33 @@ class APIGraph():
         func_type = self._get_functional_type(etype)
         if func_type:
             return func_type
-        supertypes = self.supertypes(etype)
-        for supertype in supertypes:
-            type_var_map = {}
-            if supertype.is_parameterized():
-                type_var_map = supertype.get_type_variable_assignments()
-            func_type = self._get_functional_type(supertype)
-            if func_type:
-                return tp.substitute_type(func_type, type_var_map)
+        # We should not inspect the inheritance chain to retrieve function
+        # type.
+        # supertypes = self.supertypes(etype)
+        # for supertype in supertypes:
+        #     type_var_map = {}
+        #     if supertype.is_parameterized():
+        #         type_var_map = supertype.get_type_variable_assignments()
+        #     func_type = self._get_functional_type(supertype)
+        #     if func_type:
+        #         return tp.substitute_type(func_type, type_var_map)
         return None
 
-    def get_function_refs_of(self, etype: tp.Type) -> List[Tuple[Method, dict]]:
+    def get_functional_type_instantiated(
+            self, etype: tp.Type) -> tp.ParameterizedType:
         type_var_map = {}
         if etype.is_parameterized():
             etype = etype.to_variance_free()
             type_var_map = etype.get_type_variable_assignments()
         func_type = self.get_functional_type(etype)
         if func_type is None:
+            return None
+        return tp.substitute_type(func_type, type_var_map)
+
+    def get_function_refs_of(self, etype: tp.Type) -> List[Tuple[Method, dict]]:
+        func_type = self.get_functional_type_instantiated(etype)
+        if func_type is None:
             return []
-        func_type = tp.substitute_type(func_type, type_var_map)
         candidate_functions = []
         for api in self.api_graph.nodes():
             if not isinstance(api, (Method, Constructor)):

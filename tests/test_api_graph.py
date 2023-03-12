@@ -526,5 +526,4 @@ def test_get_functional_type():
     assert api_graph.get_functional_type(b.parse_type("java.lang.String")) is None
     assert api_graph.get_functional_type(b.parse_type(
         "java.Producer<java.lang.Integer>")) == jt.FunctionType(0).new([tp.TypeParameter("java.Producer.T1")])
-    assert api_graph.get_functional_type(
-        b.parse_type("java.Foo")) == jt.FunctionType(0).new([jt.String])
+    assert api_graph.get_functional_type(b.parse_type("java.Foo")) is None
