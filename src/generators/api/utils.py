@@ -41,7 +41,7 @@ def build_equality_constraints(
         t = tp.substitute_type(k, assignment_graph)
         if t.has_type_variables():
             sub = tu.unify_types(v, t, bt_factory, same_type=False,
-                                 strict_mode=False)
+                                 strict_mode=False, subtype_on_left=False)
             if not sub:
                 return None
             for k, v in sub.items():

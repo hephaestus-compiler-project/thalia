@@ -34,7 +34,6 @@ class APIGenerator(Generator):
     def __init__(self, api_docs, options={}, language=None, logger=None):
         super().__init__(language=language, logger=logger)
         self.logger.update_filename("api-generator")
-        self.api_docs = api_docs
         self.api_graph = self.API_GRAPH_BUILDERS[language](language).build(
             api_docs)
         api_rules_file = options.get("api-rules")
@@ -50,6 +49,10 @@ class APIGenerator(Generator):
         self.max_conditional_depth = options.get("max-conditional-depth", 4)
         self.translator = TRANSLATORS[language]()
         self.type_eraser: te.TypeEraser = None
+        # This is used for maintaining a stack of expected types used for
+        # determining the expected types of the generated expressions.
+        # This is used for type erasure.
+        self._exp_types: list = []
 
     def produce_test_case(self, expr: ast.Expr) -> ast.Program:
         func_name = "test"
@@ -203,8 +206,7 @@ class APIGenerator(Generator):
             expr = ast.FunctionCall(api.name, args=call_args,
                                     receiver=receiver, type_args=type_args)
             if api.type_parameters:
-                self.type_eraser.erase_types(expr, api, [arg.path
-                                                         for arg in args])
+                self.type_eraser.erase_types(expr, api, args)
         elif isinstance(api, ag.Constructor):
             expr = ast.New(tp.Classifier(api.name), args=args)
         else:
@@ -233,13 +235,7 @@ class APIGenerator(Generator):
 
     def generate_lambda(self, expr_type: tp.Type, type_var_map: dict,
                         depth: int) -> ast.Lambda:
-        sub = {}
-        if expr_type.is_parameterized():
-            expr_type = expr_type.to_variance_free()
-            sub = expr_type.get_type_variable_assignments()
-            sub.update(type_var_map)
-        func_type = self.api_graph.get_functional_type(expr_type)
-        func_type = tp.substitute_type(func_type, sub)
+        func_type = self.api_graph.get_functional_type_instantiated(expr_type)
         shadow_name = "lambda_" + str(next(self.int_stream))
         prev_namespace = self.namespace
         self.namespace += (shadow_name,)
@@ -252,10 +248,16 @@ class APIGenerator(Generator):
         ret_type = func_type.type_args[-1]
         for p in params:
             self.context.add_var(self.namespace, p.name, p)
+        if self.type_eraser.expected_type:
+            self.reset_type_erasure()
+            self.on_erasure(func_type)
+        self.on_erasure(ret_type)
         expr = self._generate_expr_from_node(ret_type, depth + 1)[0]
         lambda_expr = ast.Lambda(shadow_name, params, ret_type, expr,
                                  func_type)
         self.namespace = prev_namespace
+        self.reset_type_erasure()
+        self.type_eraser.erase_types(lambda_expr, func_type, [])
         return lambda_expr
 
     def generate_func_ref(self, expr_type: tp.Type, type_var_map: dict,
@@ -428,8 +430,7 @@ class APIGenerator(Generator):
             expr = ast.FunctionCall(elem.name, args=call_args,
                                     receiver=receiver, type_args=type_args)
             if elem.type_parameters:
-                self.type_eraser.erase_types(expr, elem, [arg.path
-                                                          for arg in args])
+                self.type_eraser.erase_types(expr, elem, args)
         elif isinstance(elem, ag.Field):
             expr = ast.FieldAccess(receiver, elem.name)
         elif isinstance(elem, ag.Constructor):
@@ -441,8 +442,7 @@ class APIGenerator(Generator):
             con_type = _instantiate_type_con(con_type)
             expr = ast.New(con_type, call_args, receiver=receiver)
             if con_type.is_parameterized():
-                self.type_eraser.erase_types(expr, elem, [arg.path
-                                                          for arg in args])
+                self.type_eraser.erase_types(expr, elem, args)
         elif len(path) == 1:
             t = _instantiate_type_con(elem)
             expr = self.generate_expr(tp.substitute_type(t, type_var_map))
@@ -451,12 +451,15 @@ class APIGenerator(Generator):
         return expr
 
     def on_erasure(self, exp_type):
-        self._prev_type_erasure = self.type_eraser
+        self._exp_types.append(exp_type)
         self.type_eraser = te.TypeEraser(self.api_graph, exp_type,
                                          self.bt_factory)
 
     def reset_type_erasure(self):
-        self.type_eraser = self._prev_type_erasure
+        self._exp_types.pop()
+        exp_type = self._exp_types[-1] if self._exp_types else None
+        self.type_eraser = te.TypeEraser(self.api_graph, exp_type,
+                                         self.bt_factory)
 
     def enable_out_pos(self):
         self.out_pos = True
