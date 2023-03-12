@@ -383,10 +383,11 @@ class APIGraph():
     def add_variable_node(self, name: str, var_type: tp.Type):
         source = Variable(name)
         kwargs = {}
+        target = var_type
         if var_type.is_parameterized():
             kwargs["constraint"] = var_type \
                 .get_type_variable_assignments()
-        target = self.get_type_by_name(var_type.name)
+            target = self.get_type_by_name(var_type.name)
         self.api_graph.add_node(source)
         self.api_graph.add_node(target)
         self.api_graph.add_edge(source, target, **kwargs)
