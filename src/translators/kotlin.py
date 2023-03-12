@@ -547,7 +547,7 @@ class KotlinTranslator(BaseTranslator):
                 if node.receiver
                 else node.class_type.name
             )
-            cls = prefix + "<>"
+            cls = prefix
             self._children_res.append("{ident}{rec}{name}({args})".format(
                 ident=" " * self.ident,
                 rec=children_res[-1] + "." if node.receiver else "",
