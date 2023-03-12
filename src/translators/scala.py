@@ -324,11 +324,20 @@ class ScalaTranslator(BaseTranslator):
 
         param_res = [children_res[i] for i, _ in enumerate(node.params)]
         body_res = children_res[-1] if node.body else ''
+        ret_type_str = (
+            ":" + self.get_type_name(node.ret_type)
+            if node.ret_type
+            else ""
+        )
+        if node.can_infer_signature:
+            param_res = [p.name for p in node.params]
+            ret_type_str = ""
 
         # use the lambda syntax: { params -> stmt }
-        res = "({params}) => {body}".format(
+        res = "({params}) => {body}:{ret}".format(
             params=", ".join(param_res),
-            body=body_res
+            body=body_res,
+            ret=ret_type_str
         )
         self.is_unit = prev_is_unit
         self.is_lambda = prev_is_lambda

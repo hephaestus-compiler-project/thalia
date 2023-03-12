@@ -749,6 +749,9 @@ class JavaTranslator(BaseTranslator):
             else:
                 body = body_res
 
+        if node.can_infer_signature:
+            param_res = [p.name for p in node.params]
+
         res = "({params}) -> {body}".format(
             params=", ".join(param_res),
             body=body

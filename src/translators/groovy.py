@@ -72,7 +72,7 @@ class GroovyTranslator(BaseTranslator):
         self.always_cast_numbers = options.get('cast_numbers', False)
 
         # FIXME remove this option when they fix the bugs
-        self.always_cast_ftypes = True
+        self.always_cast_ftypes = False
 
         # A set of numbers where numbers is the number of type parameters that
         # an interface for a function should have.
@@ -553,8 +553,11 @@ class GroovyTranslator(BaseTranslator):
         ret_type = (ret_type if not ret_type.is_primitive()
                     else ret_type.box_type())
 
+        if node.can_infer_signature:
+            param_res = [p.name for p in node.params]
+
         cast = ""
-        if self.always_cast_ftypes:
+        if self.always_cast_ftypes and not node.can_infer_signature:
             cast = " as " + self.get_type_name(self._get_signature(node))
 
         res = "{{ {params} -> {body}}} {cast}".format(
