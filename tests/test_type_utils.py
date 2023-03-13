@@ -1257,6 +1257,11 @@ def test_unify_types_with_wildcards():
     assert tutils.unify_types(t1, t2, factory, same_type=False) == {}
     assert tutils.unify_types(t2, t1, factory, same_type=False) == {}
 
+    t1 = foo.new([tp.WildCardType()])
+    t2 = foo.new([type_param1])
+    params = tutils.unify_types(t1, t2, factory, same_type=True)
+    assert params == {type_param1: factory.get_any_type()}
+
 
 def test_unify_types_with_simple_and_parameterized_types():
     factory = kt.KotlinBuiltinFactory()

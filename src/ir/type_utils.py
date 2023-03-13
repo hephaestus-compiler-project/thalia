@@ -1052,12 +1052,14 @@ def is_builtin(t, builtin_factory):
         return isinstance(t_constructor, tp.Builtin)
 
 
-def _update_type_var_map(type_var_map, key, value):
+def _update_type_var_map(type_var_map, key, value, bt_factory):
     v = type_var_map.get(key)
     if v and v != value:
         return False
     if value.is_wildcard():
-        value = getattr(value, "bound", value)
+        value = getattr(value, "bound", None)
+        if value is None:
+            value = bt_factory.get_any_type()
     type_var_map[key] = value
     return True
 
@@ -1148,12 +1150,9 @@ def unify_types(t1: tp.Type, t2: tp.Type, factory,
         t_arg1 = t_arg
         t_arg2 = t2.type_args[i]
 
-        if t_arg2.is_wildcard() and not t_arg1.is_wildcard():
-            return {}
-
         if t_arg2.is_wildcard() and not t_arg2.is_invariant():
             t_arg2 = t_arg2.bound
-            t_arg1 = t_arg1.bound
+            t_arg1 = getattr(t_arg1, "bound", None) or t_arg1
 
         is_type_var = t_arg2.has_type_variables()
 
@@ -1170,7 +1169,8 @@ def unify_types(t1: tp.Type, t2: tp.Type, factory,
                     # This means that we found another mapping for the
                     # same type variable and this mapping does not
                     # correspond to t_arg1.
-                    if not _update_type_var_map(type_var_map, t_var, t_arg1):
+                    if not _update_type_var_map(type_var_map, t_var, t_arg1,
+                                                factory):
                         return {}
                     continue
                 is_parameterized = t_var.bound.is_parameterized()
@@ -1178,19 +1178,22 @@ def unify_types(t1: tp.Type, t2: tp.Type, factory,
                 if is_parameterized and is_parameterized2:
                     res = unify_types(t_arg1, t_var.bound, factory)
                     if not res or any(
-                            not _update_type_var_map(type_var_map, k, v)
+                            not _update_type_var_map(type_var_map, k, v,
+                                                     factory)
                             for k, v in res.items()):
                         return {}
                 else:
                     return {}
             elif t_var and t_var.bound is None:
                 # The same as the above comment.
-                if not _update_type_var_map(type_var_map, t_var, t_arg1):
+                if not _update_type_var_map(type_var_map, t_var, t_arg1,
+                                            factory):
                     return {}
             elif t_arg2.is_parameterized() and t_arg1.is_parameterized():
                 res = unify_types(t_arg1, t_arg2, factory)
                 if not res or any(
-                        not _update_type_var_map(type_var_map, k, v)
+                        not _update_type_var_map(type_var_map, k, v,
+                                                 factory)
                         for k, v in res.items()):
                     return {}
             else:
