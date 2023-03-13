@@ -1326,8 +1326,8 @@ class FunctionCall(Expr):
         self.type_parameters = []
 
     def has_variable(self):
-        return any(e.has_variable() for e in self.args + [self.receiver]
-                   if e is not None)
+        return any(getattr(e, "expr", e).has_variable()
+                   for e in self.args + [self.receiver] if e is not None)
 
     def children(self):
         if self.receiver is None:
