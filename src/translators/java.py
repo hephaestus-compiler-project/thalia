@@ -861,7 +861,7 @@ class JavaTranslator(BaseTranslator):
             c.accept(self)
         children_res = self.pop_children_res(children)
 
-        if (isinstance(node.array_type, tp.ParameterizedType) and
+        if (isinstance(node.array_type.type_args[0], tp.ParameterizedType) and
                 not node.array_type.type_args[0].is_primitive()):
             new_stmt = "({etype}) new Object[]".format(
                 etype=self.get_type_name(node.array_type)
