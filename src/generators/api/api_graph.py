@@ -401,7 +401,14 @@ class APIGraph():
         origin = target
         targets = []
         if target.is_parameterized():
-            target = self.get_type_by_name(target.name)
+            is_primitive = (
+                origin.t_constructor == self.bt_factory.get_array_type() and
+                origin.type_args[0].is_primitive()
+            )
+            target = (
+                origin if is_primitive
+                else self.get_type_by_name(target.name) or target.t_constructor
+            )
         if target not in self.api_graph:
             return None, None
         targets.append(target)
@@ -413,7 +420,6 @@ class APIGraph():
                            n.bound and origin.is_subtype(n.bound))
         # Pick a random target
         target = utils.random.choice(targets)
-
         source_nodes = self.source_nodes_of.get(target)
         if source_nodes is None:
             source_nodes = [

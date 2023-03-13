@@ -162,7 +162,8 @@ def instantiate_type_variables(api_graph, constraints,
         if len(eqs) == 1:
             if new_bounds and not eqs[0].is_subtype(new_bounds[0]):
                 return None
-
+            if eqs[0].is_primitive():
+                return None
             type_var_assignments[type_var] = eqs[0]
             continue
 

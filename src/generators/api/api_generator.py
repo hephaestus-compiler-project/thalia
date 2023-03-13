@@ -369,9 +369,10 @@ class APIGenerator(Generator):
             return stored_expr
         if node == self.api_graph.EMPTY:
             return ExprRes(None, {}, [])
+        is_array = node.name == self.bt_factory.get_array_type().name
         path = self.api_graph.find_API_path(node,
                                             with_constraints=constraints,
-                                            only_concrete_targets=False)
+                                            only_concrete_targets=is_array)
         if not path:
             if node.is_type_constructor():
                 handler = self.api_graph.get_instantiations_of_recursive_bound

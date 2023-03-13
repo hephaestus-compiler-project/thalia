@@ -231,10 +231,19 @@ class APIGraphBuilder(ABC):
     def get_api_outgoing_node(self, output_type: tp.Type):
         kwargs = {}
         if output_type.is_parameterized():
-            target_node = output_type.t_constructor
-            kwargs = {
-                "constraint": output_type.get_type_variable_assignments()
-            }
+            primitive_array = (
+                output_type.t_constructor == self.bt_factory.get_array_type()
+                and output_type.type_args[0].is_primitive()
+            )
+            if primitive_array:
+                # If we have a primitive array (e.g., boolean[]), the target
+                # node is the primitive array itself.
+                target_node = output_type
+            else:
+                target_node = self.class_nodes.get(output_type.name,
+                                                   output_type.t_constructor)
+                kwargs["constraint"] = \
+                    output_type.get_type_variable_assignments()
         else:
             target_node = output_type
 
