@@ -369,6 +369,8 @@ class APIGenerator(Generator):
             return stored_expr
         if node == self.api_graph.EMPTY:
             return ExprRes(None, {}, [])
+        # In case of arrays we don't examine abstract output types because
+        # we don't want to instantiate type variables with array types.
         is_array = node.name == self.bt_factory.get_array_type().name
         path = self.api_graph.find_API_path(node,
                                             with_constraints=constraints,
