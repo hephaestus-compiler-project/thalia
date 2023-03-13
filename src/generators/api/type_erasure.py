@@ -112,6 +112,7 @@ class TypeEraser():
             sub = tu.unify_types(expected_param_type, arg_type,
                                  self.bt_factory, same_type=False)
             if not sub:
+                print(expected_param_type, arg_type)
                 continue
             for mtpa in method_type_params:
                 if any(mtpa in get_type_variables(p.t, self.bt_factory)

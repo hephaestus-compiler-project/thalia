@@ -395,13 +395,25 @@ class APIGraph():
     def remove_variable_node(self, name: str):
         self.api_graph.remove_node(Variable(name))
 
-    def find_API_path(self, target: tp.Type,
-                      with_constraints: dict = None) -> (APIPath, dict):
+    def get_sources_and_target(
+            self, target: tp.Type,
+            only_concrete_targets: bool) -> (List[APINode], APINode):
         origin = target
+        targets = []
         if target.is_parameterized():
             target = self.get_type_by_name(target.name)
         if target not in self.api_graph:
-            return None
+            return None, None
+        targets.append(target)
+        if not only_concrete_targets:
+            # If this option is not enabled we also consider APIs that return
+            # a type variable as targets.
+            targets.extend(n for n in self.api_graph.nodes()
+                           if isinstance(n, tp.TypeParameter) and
+                           n.bound and origin.is_subtype(n.bound))
+        # Pick a random target
+        target = utils.random.choice(targets)
+
         source_nodes = self.source_nodes_of.get(target)
         if source_nodes is None:
             source_nodes = [
@@ -412,8 +424,20 @@ class APIGraph():
             ]
             self.source_nodes_of[target] = [s for s in source_nodes
                                             if not isinstance(s, Variable)]
-        if not source_nodes:
+        return source_nodes, target
+
+    def find_API_path(self, target: tp.Type,
+                      with_constraints: dict = None,
+                      only_concrete_targets: bool = True) -> (APIPath, dict):
+        origin = target
+        source_nodes, target = self.get_sources_and_target(
+            target, only_concrete_targets)
+        if target is None:
             return None
+
+        with_constraints = with_constraints or {}
+        if isinstance(target, tp.TypeParameter):
+            with_constraints[target] = origin.box_type()
 
         for source in source_nodes:
             if source == target:

@@ -283,8 +283,6 @@ class APIGraphBuilder(ABC):
                       self.get_type_parser().is_variable_argument(p))
             for p in method_api["parameters"]
         ]
-        for param in parameters:
-            self.graph.add_node(param.t)
         if is_constructor:
             method_node = Constructor(receiver_name, parameters)
         elif is_static:

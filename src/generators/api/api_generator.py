@@ -354,11 +354,6 @@ class APIGenerator(Generator):
         pass
 
     def _generate_expr_from_node(self, node, depth=1, constraints=None):
-        stored_expr = self.visited_exprs.get(node)
-        if stored_expr:
-            return stored_expr
-        if node == self.api_graph.EMPTY:
-            return ExprRes(None, {}, [])
         if depth > cfg.limits.max_depth:
             if node.is_type_constructor():
                 handler = self.api_graph.get_instantiations_of_recursive_bound
@@ -369,8 +364,14 @@ class APIGenerator(Generator):
             else:
                 t, type_var_map = node, {}
             return ExprRes(self.generate_expr(t), type_var_map, [t])
+        stored_expr = self.visited_exprs.get(node)
+        if stored_expr:
+            return stored_expr
+        if node == self.api_graph.EMPTY:
+            return ExprRes(None, {}, [])
         path = self.api_graph.find_API_path(node,
-                                            with_constraints=constraints)
+                                            with_constraints=constraints,
+                                            only_concrete_targets=False)
         if not path:
             if node.is_type_constructor():
                 handler = self.api_graph.get_instantiations_of_recursive_bound
