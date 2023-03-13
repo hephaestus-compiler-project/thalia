@@ -71,7 +71,7 @@ class APIGenerator(Generator):
         return ast.Program(deepcopy(self.context), self.language)
 
     def log_program_info(self, program_id, api, receivers, parameters,
-                         return_type):
+                         return_type, type_var_map):
         def to_str(t):
             if isinstance(t, int):
                 return str(t)
@@ -84,6 +84,11 @@ class APIGenerator(Generator):
 
         msg = "Generated program {id!s}\n".format(id=program_id)
         msg += "\tAPI: {api!r}\n".format(api=api)
+        msg += "\tType variable assignments:\n"
+        msg += "\n".join("\t\t" + k.name + " -> " + to_str(v)
+                         for k, v in type_var_map.items())
+        if type_var_map:
+            msg += "\n"
         msg += "\treceiver: {receiver!s}\n".format(receiver=log_types(
             receivers))
         msg += "\tparameters {params!s}\n".format(params=", ".join(
@@ -116,7 +121,8 @@ class APIGenerator(Generator):
                 expr = self.generate_from_type_combination(
                     api, [receiver], params, return_type, type_map)
                 yield self.produce_test_case(expr)
-                self.log_program_info(i, api, [receiver], params, return_type)
+                self.log_program_info(i, api, [receiver], params, return_type,
+                                      type_map)
                 program_index += 1
                 i += 1
             parameters = [
@@ -140,7 +146,7 @@ class APIGenerator(Generator):
                                                            type_map)
                 yield self.produce_test_case(expr)
                 self.log_program_info(i, api, receivers, parameters,
-                                      return_type)
+                                      return_type, type_map)
                 program_index += 1
                 i += 1
 
