@@ -73,9 +73,12 @@ def collect_constraints(target: tp.Type,
         constraints.update(eq_constraints)
     if with_constraints:
         # Gather equality constraints from any other given constraint.
-        constraints.update(build_equality_constraints(with_constraints,
-                                                      assignment_graph,
-                                                      bt_factory))
+        eq_constraints = build_equality_constraints(with_constraints,
+                                                    assignment_graph,
+                                                    bt_factory)
+        if eq_constraints is None:
+            return eq_constraints
+        constraints.update(eq_constraints)
     for node in type_variables:
         constraints[node]
         t = tp.substitute_type(node, assignment_graph)
@@ -145,24 +148,24 @@ def instantiate_type_variables(api_graph, constraints,
                         if isinstance(c, UpperBoundConstraint)]
         eqs = [c.t for c in type_var_constraints
                if isinstance(c, EqualityConstraint)]
-        if len(eqs) > 1:
+        new_bounds = upper_bounds
+        if len(upper_bounds) > 2:
+            new_bounds = {upper_bounds[0]}
+            for bound in set(upper_bounds[1:]):
+                supers = api_graph.supertypes(bound)
+                if any(s in upper_bounds for s in supers):
+                    new_bounds.append(bound)
+            new_bounds = list(new_bounds)
+
+        if len(new_bounds) > 1 or len(eqs) > 1:
             return None
         if len(eqs) == 1:
+            if new_bounds and not eqs[0].is_subtype(new_bounds[0]):
+                return None
+
             type_var_assignments[type_var] = eqs[0]
             continue
 
-        if len(upper_bounds) > 1:
-            type_var_assignments[type_var] = upper_bounds[0]
-            continue
-
-        new_bounds = set()
-
-        for bound in set(upper_bounds):
-            supers = api_graph.supertypes(bound)
-            if any(s in upper_bounds for s in supers):
-                new_bounds.append(bound)
-        if len(new_bounds) > 1:
-            return None
         if len(new_bounds) == 1:
             type_var_assignments[type_var] = new_bounds[0]
         return None
