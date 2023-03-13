@@ -384,7 +384,10 @@ class APIGenerator(Generator):
         path, type_var_map = path
         expr = self._generate_expression_from_path(path, depth=depth,
                                                    type_var_map=type_var_map)
-        if not any(isinstance(n, ag.Variable) for n in path):
+        if not expr.has_variable():
+            # If the generated expression contains a variable, we don't store
+            # this expression for later use because it refers to a variable
+            # that is no longer valid.
             self.visited_exprs[node] = ExprRes(expr, type_var_map, path)
         return ExprRes(expr, type_var_map, path)
 

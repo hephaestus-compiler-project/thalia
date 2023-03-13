@@ -27,7 +27,9 @@ def check_default_eq(first, second):
 
 
 class Expr(Node):
-    pass
+
+    def has_variable(self) -> bool:
+        return False
 
 
 class Program(Node):
@@ -491,6 +493,9 @@ class Lambda(Expr):
         self.signature = signature
         self._can_infer_signature = False
 
+    def has_variable(self):
+        return self.body.has_variable()
+
     def children(self):
         if self.body is None:
             return self.params
@@ -935,6 +940,9 @@ class ArrayExpr(Expr):
         self.array_type = array_type
         self.exprs = exprs
 
+    def has_variable(self):
+        return any(e.has_variable() for e in self.exprs)
+
     def children(self):
         return self.exprs
 
@@ -956,6 +964,9 @@ class ArrayExpr(Expr):
 class Variable(Expr):
     def __init__(self, name: str):
         self.name = name
+
+    def has_variable(self):
+        return True
 
     def children(self):
         return []
@@ -982,6 +993,10 @@ class Conditional(Expr):
         self.true_branch = true_branch
         self.false_branch = false_branch
         self.inferred_type = inferred_type
+
+    def has_variable(self):
+        return any(e.has_variable() for e in [self.cond, self.true_branch,
+                                              self.false_branch])
 
     def children(self):
         return [self.cond, self.true_branch, self.false_branch]
@@ -1055,6 +1070,9 @@ class BinaryOp(Expr):
         self.lexpr = lexpr
         self.rexpr = rexpr
         self.operator = operator
+
+    def has_variable(self):
+        return self.lexpr.has_variable() or self.rexpr.has_variable()
 
     def children(self):
         return [self.lexpr, self.rexpr]
@@ -1207,6 +1225,9 @@ class Is(BinaryOp):
         operator = Operator('is', is_not=is_not)
         super().__init__(expr, etype, operator)
 
+    def has_variable(self):
+        return self.expr.has_variable()
+
     def children(self):
         return [self.lexpr]
 
@@ -1223,6 +1244,9 @@ class New(Expr):
         self.class_type = class_type
         self.args = args
         self.receiver = receiver
+
+    def has_variable(self):
+        return any(e.has_variable() for e in self.args)
 
     def children(self):
         return self.args + ([self.receiver] if self.receiver else [])
@@ -1265,6 +1289,9 @@ class FieldAccess(Expr):
         self.expr = expr
         self.field = field
 
+    def has_variable(self):
+        return self.expr and self.expr.has_variable()
+
     def children(self):
         if self.expr:
             return [self.expr]
@@ -1297,6 +1324,10 @@ class FunctionCall(Expr):
         self.is_ref_call = is_ref_call
         self._can_infer_type_args = False
         self.type_parameters = []
+
+    def has_variable(self):
+        return any(e.has_variable() for e in self.args + [self.receiver]
+                   if e is not None)
 
     def children(self):
         if self.receiver is None:
@@ -1366,6 +1397,9 @@ class FunctionReference(Expr):
         self.receiver = receiver
         self.signature = signature
 
+    def has_variable(self):
+        return self.receiver and self.receiver.has_variable()
+
     def children(self):
         if not self.receiver:
             return []
@@ -1394,6 +1428,10 @@ class Assignment(Expr):
         self.name = name
         self.expr = expr
         self.receiver = receiver
+
+    def has_variable(self):
+        return self.expr.has_variable() or (self.receiver and
+                                            self.receiver.has_variable())
 
     def children(self):
         if self.receiver is not None:
