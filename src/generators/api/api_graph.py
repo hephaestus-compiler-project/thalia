@@ -416,10 +416,12 @@ class APIGraph():
             # If this option is not enabled we also consider APIs that return
             # a type variable as targets.
             targets.extend(n for n in self.api_graph.nodes()
-                           if isinstance(n, tp.TypeParameter) and
-                           n.bound and origin.is_subtype(n.bound))
+                           if isinstance(n, tp.TypeParameter)
+                           and (not n.bound or origin.is_subtype(n.bound)))
         # Pick a random target
         target = utils.random.choice(targets)
+
+        # Find all source nodes that reach the selected target.
         source_nodes = self.source_nodes_of.get(target)
         if source_nodes is None:
             source_nodes = [
