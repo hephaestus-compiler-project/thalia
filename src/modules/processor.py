@@ -119,7 +119,7 @@ class ProgramProcessor():
         self.program_generator.prepare_next_program(self.proc_id)
         self.current_transformation = 0
         program = self.program_generator.generate()
-        return program, True
+        return program, self.program_generator.error_injected
 
     def can_transform(self):
         return self.current_transformation < len(self.transformation_schedule)

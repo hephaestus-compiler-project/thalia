@@ -58,6 +58,11 @@ parser.add_argument(
     help="Maximum depth of conditionals"
 )
 parser.add_argument(
+    "--inject-type-error",
+    action="store_true",
+    help="Injects a type error in the generated program"
+)
+parser.add_argument(
     "-t", "--transformations",
     type=int,
     default=0,
@@ -221,6 +226,7 @@ args.options = {
             "start-index": args.start_index,
             "api-rules": args.api_rules,
             "max-conditional-depth": args.max_conditional_depth,
+            "inject-type-error": args.inject_type_error,
         }
     },
     'Translator': {

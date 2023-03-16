@@ -397,7 +397,12 @@ class APIGraph():
 
     def get_sources_and_target(
             self, target: tp.Type,
-            only_concrete_targets: bool) -> (List[APINode], APINode):
+            target_selection: str) -> (List[APINode], APINode):
+        if target_selection not in ["concrete", "abstract", "all"]:
+            msg = ("Target selection must be either one of 'concrete', "
+                   "'abstract' and 'all', not {sel!r}")
+            msg = msg.format(sel=target_selection)
+            return Exception(msg)
         origin = target
         targets = []
         if target.is_parameterized():
@@ -411,8 +416,10 @@ class APIGraph():
             )
         if target not in self.api_graph:
             return None, None
-        targets.append(target)
-        if not only_concrete_targets:
+        if target_selection in ["all", "concrete"] or \
+                target.is_type_constructor():
+            targets.append(target)
+        if target_selection in ["all", "abstract"]:
             # If this option is not enabled we also consider APIs that return
             # a type variable as targets.
             targets.extend(n for n in self.api_graph.nodes()
@@ -436,10 +443,10 @@ class APIGraph():
 
     def find_API_path(self, target: tp.Type,
                       with_constraints: dict = None,
-                      only_concrete_targets: bool = True) -> (APIPath, dict):
+                      target_selection: str = "concrete") -> (APIPath, dict):
         origin = target
-        source_nodes, target = self.get_sources_and_target(
-            target, only_concrete_targets)
+        source_nodes, target = self.get_sources_and_target(target,
+                                                           target_selection)
         if target is None:
             return None
 

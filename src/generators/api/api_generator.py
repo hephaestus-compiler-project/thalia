@@ -1,7 +1,7 @@
 from copy import deepcopy
 import functools
 import itertools
-from typing import List, NamedTuple, Union
+from typing import List, NamedTuple, Union, Iterable
 
 from src import utils
 from src.ir import ast, types as tp, type_utils as tu
@@ -12,6 +12,14 @@ from src.generators.api import (api_graph as ag, builder, matcher as match,
 from src.generators.config import cfg
 from src.modules.logging import log
 from src.translators import TRANSLATORS
+
+
+def get_type_variables(t: tp.Type, bt_factory) -> Iterable[tp.TypeParameter]:
+    if t.is_type_var():
+        return [t]
+    if t.is_wildcard() or t.is_parameterized():
+        return t.get_type_variables(bt_factory).keys()
+    return []
 
 
 class ExprRes(NamedTuple):
@@ -45,14 +53,18 @@ class APIGenerator(Generator):
         self.visited_exprs = {}
         self.programs_gen = self.compute_programs()
         self._has_next = True
+
+        self.inject_error_mode = options.get("inject-type-error", False)
         self.start_index = options.get("start-index", 0)
         self.max_conditional_depth = options.get("max-conditional-depth", 4)
+
         self.translator = TRANSLATORS[language]()
         self.type_eraser: te.TypeEraser = None
         # This is used for maintaining a stack of expected types used for
         # determining the expected types of the generated expressions.
         # This is used for type erasure.
         self._exp_types: list = []
+        self.error_injected = None
 
     def produce_test_case(self, expr: ast.Expr) -> ast.Program:
         func_name = "test"
@@ -208,10 +220,11 @@ class APIGenerator(Generator):
         self.on_erasure(var_type)
         if isinstance(api, ag.Method):
             call_args = [ast.CallArgument(arg.expr) for arg in args]
-            type_args = [type_var_map[tpa] for tpa in api.type_parameters]
+            type_args = self.substitute_types(api.type_parameters,
+                                              type_var_map)
             expr = ast.FunctionCall(api.name, args=call_args,
                                     receiver=receiver, type_args=type_args)
-            if api.type_parameters:
+            if api.type_parameters and not self.inject_error_mode:
                 self.type_eraser.erase_types(expr, api, args)
         elif isinstance(api, ag.Constructor):
             expr = ast.New(tp.Classifier(api.name), args=args)
@@ -265,7 +278,8 @@ class APIGenerator(Generator):
                                  func_type)
         self.namespace = prev_namespace
         self.reset_type_erasure()
-        self.type_eraser.erase_types(lambda_expr, func_type, [])
+        if not self.inject_error_mode:
+            self.type_eraser.erase_types(lambda_expr, func_type, [])
         for param in params:
             self.api_graph.remove_variable_node(param.name)
         return lambda_expr
@@ -295,7 +309,7 @@ class APIGenerator(Generator):
                     rec_bound_handler=handler
                 )
                 type_var_map.update(sub)
-            rec_type = tp.substitute_type(rec_type, type_var_map)
+            rec_type = self.substitute_types([rec_type], type_var_map)[0]
             rec = (
                 ast.New(rec_type, args=[])  # This is a constructor reference
                 if isinstance(api, ag.Constructor)
@@ -351,7 +365,15 @@ class APIGenerator(Generator):
         return self._has_next
 
     def prepare_next_program(self, program_id):
-        pass
+        self.error_injected = None
+
+    def _get_target_selection(self, target: tp.Type) -> str:
+        if self.inject_error_mode:
+            return "abstract"
+        # In case of arrays we don't examine abstract output types because
+        # we don't want to instantiate type variables with array types.
+        is_array = target.name == self.bt_factory.get_array_type().name
+        return "concrete" if is_array else "all"
 
     def _generate_expr_from_node(self, node, depth=1, constraints=None):
         if depth > cfg.limits.max_depth:
@@ -369,12 +391,10 @@ class APIGenerator(Generator):
             return stored_expr
         if node == self.api_graph.EMPTY:
             return ExprRes(None, {}, [])
-        # In case of arrays we don't examine abstract output types because
-        # we don't want to instantiate type variables with array types.
-        is_array = node.name == self.bt_factory.get_array_type().name
+        target_selection = self._get_target_selection(node)
         path = self.api_graph.find_API_path(node,
                                             with_constraints=constraints,
-                                            only_concrete_targets=is_array)
+                                            target_selection=target_selection)
         if not path:
             if node.is_type_constructor():
                 handler = self.api_graph.get_instantiations_of_recursive_bound
@@ -394,7 +414,7 @@ class APIGenerator(Generator):
         path, type_var_map = path
         expr = self._generate_expression_from_path(path, depth=depth,
                                                    type_var_map=type_var_map)
-        if not expr.has_variable():
+        if not expr.has_variable() and not self.error_injected:
             # If the generated expression contains a variable, we don't store
             # this expression for later use because it refers to a variable
             # that is no longer valid.
@@ -407,10 +427,7 @@ class APIGenerator(Generator):
             return []
         args = []
         for i, param in enumerate(parameters):
-            param_types = [
-                tp.substitute_type(param_type, type_var_map)
-                for param_type in actual_types[i]
-            ]
+            param_types = self.substitute_types(actual_types[i], type_var_map)
             param = tp.substitute_type(param, type_var_map)
             self.on_erasure(param)
             expr = self.generate_expr_from_nodes(param_types, {},
@@ -424,8 +441,8 @@ class APIGenerator(Generator):
                                        depth: int, type_var_map) -> ast.Expr:
         def _instantiate_type_con(t: tp.Type):
             if t.is_type_constructor():
-                return t.new([type_var_map[tpa]
-                              for tpa in t.type_parameters])
+                return t.new(self.substitute_types(t.type_parameters,
+                                                   type_var_map))
             return t
 
         elem = path[-1]
@@ -447,7 +464,7 @@ class APIGenerator(Generator):
             type_args = [type_var_map[tpa] for tpa in elem.type_parameters]
             expr = ast.FunctionCall(elem.name, args=call_args,
                                     receiver=receiver, type_args=type_args)
-            if elem.type_parameters:
+            if elem.type_parameters and not self.inject_error_mode:
                 self.type_eraser.erase_types(expr, elem, args)
         elif isinstance(elem, ag.Field):
             expr = ast.FieldAccess(receiver, elem.name)
@@ -459,13 +476,14 @@ class APIGenerator(Generator):
             con_type = self.api_graph.get_type_by_name(elem.get_class_name())
             con_type = _instantiate_type_con(con_type)
             expr = ast.New(con_type, call_args, receiver=receiver)
-            if con_type.is_parameterized():
+            if con_type.is_parameterized() and not self.inject_error_mode:
                 self.type_eraser.erase_types(expr, elem, args)
         elif isinstance(elem, ag.Variable):
             return ast.Variable(elem.name)
         elif len(path) == 1:
             t = _instantiate_type_con(elem)
-            expr = self.generate_expr(tp.substitute_type(t, type_var_map))
+            expr = self.generate_expr(self.substitute_types([t],
+                                                            type_var_map)[0])
         else:
             return receiver
         return expr
@@ -486,3 +504,25 @@ class APIGenerator(Generator):
 
     def disable_out_pos(self):
         self.out_pos = False
+
+    def substitute_types(self, types: List[tp.Type],
+                         type_var_map: dict) -> List[tp.Type]:
+        if not self.inject_error_mode or self.error_injected:
+            return [tp.substitute_type(t, type_var_map) for t in types]
+        type_variables = []
+        for t in types:
+            type_variables.extend(get_type_variables(t, self.bt_factory))
+        from copy import copy
+        type_var_map = copy(type_var_map)
+        for type_var in type_variables:
+            old_t = type_var_map[type_var]
+            new_t = tu.find_irrelevant_type(old_t,
+                                            self.api_graph.get_reg_types(),
+                                            self.bt_factory)
+            msg = "Changing assignment of {type_var!s} from {t1!r} to {t2!r}"
+            msg = msg.format(type_var=type_var.name,
+                             t1=self.translator.get_type_name(old_t),
+                             t2=self.translator.get_type_name(new_t))
+            self.error_injected = msg
+            type_var_map[type_var] = new_t
+        return [tp.substitute_type(t, type_var_map) for t in types]

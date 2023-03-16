@@ -258,7 +258,7 @@ def gen_program(pid, dirname, packages, program_processor=None):
                                                 cli_args.options['Translator'])
     proc = program_processor or ProgramProcessor(pid, cli_args)
     try:
-        program, oracle = proc.get_program()
+        program, error_injected = proc.get_program()
         if program is None:
             # There is nothing else to generate. Possibly, we have enumerated
             # all possible programs.
@@ -281,9 +281,9 @@ def gen_program(pid, dirname, packages, program_processor=None):
         stats = {
             'transformations': [t.get_name()
                                 for t in proc.get_transformations()],
-            'error': None,
+            'error': error_injected,
             'programs': {
-                correct_program: True
+                correct_program: error_injected is None
             },
         }
         if not cli_args.only_correctness_preserving_transformations:
