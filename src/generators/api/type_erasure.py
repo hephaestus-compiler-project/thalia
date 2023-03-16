@@ -25,11 +25,47 @@ def get_arg_api(arg):
 class TypeEraser():
     OUT = -1
 
-    def __init__(self, api_graph: ag.APIGraph, expected_type: tp.Type,
+    def __init__(self, api_graph: ag.APIGraph,
                  bt_factory: BuiltinFactory):
         self.api_graph = api_graph
-        self.expected_type = expected_type
         self.bt_factory = bt_factory
+        self.expected_types = []
+        self.assignment_graphs = []
+        self.required_type_parameters = []
+
+    @property
+    def expected_type(self):
+        if not self.expected_types:
+            return None
+        return self.expected_types[-1]
+
+    @property
+    def assignment_graph(self):
+        if not self.assignment_graphs:
+            return None
+        return self.assignment_graphs[-1]
+
+    def with_target(self, target_type):
+        self.expected_types.append(target_type)
+
+    def reset_target_type(self):
+        if self.expected_types:
+            self.expected_types = self.expected_types[:-1]
+
+    def with_assignment_graph(self, assignment_graph):
+        self.assignment_graphs.append(assignment_graph)
+
+    def reset_assignment_graph(self):
+        if self.assignment_graphs:
+            self.assignment_graphs = self.assignment_graphs[:-1]
+
+    def on_target(self, target_type: tp.Type):
+        self.expected_type = target_type
+        return self
+
+    def with_required_type_variables(self, type_variables):
+        self.required_type_parameters = type_variables
+        return self
 
     def get_api_output_type(self, api: ag.APINode) -> tp.Type:
         if isinstance(api, tp.Type):
@@ -98,6 +134,14 @@ class TypeEraser():
             if not type_parameters:
                 # The argument is not a polymorphic call. We can infer
                 # the argument type without a problem.
+                return True
+
+            if self.assignment_graph.get(type_param,
+                                         type_param) in self.required_type_parameters:
+                if hasattr(arg.expr, "can_infer_type_args"):
+                    arg.expr.can_infer_type_args = False
+                if hasattr(arg.expr, "can_infer_signature"):
+                    arg.expr.can_infer_signature = False
                 return True
 
             arg_type = self.get_api_output_type(arg_api)

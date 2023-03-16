@@ -443,7 +443,8 @@ class APIGraph():
 
     def find_API_path(self, target: tp.Type,
                       with_constraints: dict = None,
-                      target_selection: str = "concrete") -> (APIPath, dict):
+                      target_selection: str = "concrete") -> (APIPath, dict,
+                                                              dict):
         origin = target
         source_nodes, target = self.get_sources_and_target(target,
                                                            target_selection)
@@ -477,7 +478,7 @@ class APIGraph():
                     node_path[source] = True
                     node_path[target] = True
                 node_path = list(node_path.keys())
-                return node_path, assignments
+                return node_path, assignments, assignment_graph
         return None
 
     def get_instantiations_of_recursive_bound(
