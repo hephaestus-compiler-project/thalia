@@ -56,6 +56,7 @@ class APIGenerator(Generator):
         self._has_next = True
 
         self.inject_error_mode = options.get("inject-type-error", False)
+        self.type_erasure_mode = options.get("erase-types", False)
         self.start_index = options.get("start-index", 0)
         self.max_conditional_depth = options.get("max-conditional-depth", 4)
 
@@ -226,7 +227,7 @@ class APIGenerator(Generator):
                                               type_var_map)
             expr = ast.FunctionCall(api.name, args=call_args,
                                     receiver=receiver, type_args=type_args)
-            if api.type_parameters: # and not self.inject_error_mode:
+            if api.type_parameters and self.type_erasure_mode:
                 self.type_eraser.erase_types(expr, api, args)
         elif isinstance(api, ag.Constructor):
             expr = ast.New(tp.Classifier(api.name), args=args)
@@ -280,7 +281,8 @@ class APIGenerator(Generator):
                                  func_type)
         self.namespace = prev_namespace
         self.type_eraser.reset_target_type()
-        self.type_eraser.erase_types(lambda_expr, func_type, [])
+        if self.type_erasure_mode:
+            self.type_eraser.erase_types(lambda_expr, func_type, [])
         for param in params:
             self.api_graph.remove_variable_node(param.name)
         return lambda_expr
@@ -468,7 +470,7 @@ class APIGenerator(Generator):
             type_args = [type_var_map[tpa] for tpa in elem.type_parameters]
             expr = ast.FunctionCall(elem.name, args=call_args,
                                     receiver=receiver, type_args=type_args)
-            if elem.type_parameters:
+            if elem.type_parameters and self.type_erasure_mode:
                 self.type_eraser.erase_types(expr, elem, args)
         elif isinstance(elem, ag.Field):
             expr = ast.FieldAccess(receiver, elem.name)
@@ -480,7 +482,7 @@ class APIGenerator(Generator):
                                        depth + 1, type_var_map)
             call_args = [arg.expr for arg in args]
             expr = ast.New(con_type, call_args, receiver=receiver)
-            if con_type.is_parameterized():
+            if con_type.is_parameterized() and self.type_erasure_mode:
                 self.type_eraser.erase_types(expr, elem, args)
         elif isinstance(elem, ag.Variable):
             return ast.Variable(elem.name)
