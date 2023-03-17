@@ -58,6 +58,11 @@ parser.add_argument(
     help="Maximum depth of conditionals"
 )
 parser.add_argument(
+    "--erase-types",
+    action="store_true",
+    help="Erases types from the program while preserving its semantics"
+)
+parser.add_argument(
     "--inject-type-error",
     action="store_true",
     help="Injects a type error in the generated program"
@@ -227,6 +232,7 @@ args.options = {
             "api-rules": args.api_rules,
             "max-conditional-depth": args.max_conditional_depth,
             "inject-type-error": args.inject_type_error,
+            "erase-types": args.erase_types,
         }
     },
     'Translator': {
