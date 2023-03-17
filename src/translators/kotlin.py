@@ -636,12 +636,14 @@ class KotlinTranslator(BaseTranslator):
             args = children_res[1:]
         else:
             receiver_expr, func = (
-                ("this", func)
+                ("", node.func)
                 if len(segs) == 1
                 else (segs[0], segs[1])
             )
             args = children_res
-        res = "{ident}{rec}.{func}{type_args}({args})".format(
+        if receiver_expr:
+            receiver_expr += "."
+        res = "{ident}{rec}{func}{type_args}({args})".format(
             ident=" " * self.ident,
             rec=receiver_expr,
             func=func,

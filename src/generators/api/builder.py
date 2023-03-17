@@ -55,7 +55,8 @@ class APIGraphBuilder(ABC):
             self.api_language = api_doc.get("language", self.api_language)
             super_types = {
                 self.parse_type(st)
-                for st in api_doc["implements"] + api_doc["inherits"]
+                for st in api_doc.get("implements", []) + api_doc.get(
+                    "inherits", [])
             }
             dep_graph.add_node(name)
             parent = api_doc.get("parent")
@@ -101,7 +102,8 @@ class APIGraphBuilder(ABC):
             if api_doc:
                 self.api_language = api_doc.get("language", self.api_language)
                 self.class_name = api_doc["name"]
-                self.build_class_node(api_doc)
+                if api_doc.get("is_class", False):
+                    self.build_class_node(api_doc)
         # One more pass to handle recursive upper bounds.
         self.rename_class_type_parameters(docs, top_sort)
         for cls_name in top_sort:
@@ -451,11 +453,6 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         # We disable functional interfaces until this gets fixed:
         # https://youtrack.jetbrains.com/issue/KT-48838/Support-SAM-conversions-on-value-parameters-inferred-into-Kotlin-functional-interface
         pass
-
-    def build_topological_sort(self, docs: dict) -> List[str]:
-        docs = {k: v for k, v in docs.items()
-                if v.get("is_class", True)}
-        return super().build_topological_sort(docs)
 
 
 class ScalaAPIGraphBuilder(APIGraphBuilder):

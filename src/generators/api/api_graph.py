@@ -387,7 +387,7 @@ class APIGraph():
         if var_type.is_parameterized():
             kwargs["constraint"] = var_type \
                 .get_type_variable_assignments()
-            target = self.get_type_by_name(var_type.name)
+            target = self.get_type_by_name(var_type.name) or var_type
         self.api_graph.add_node(source)
         self.api_graph.add_node(target)
         self.api_graph.add_edge(source, target, **kwargs)
@@ -621,7 +621,7 @@ class APIGraph():
 
     def instantiate_receiver_type(self, receiver: tp.Type):
         type_var_map = {}
-        outer_type = self.api_graph.nodes[receiver]["outer_class"]
+        outer_type = self.api_graph.nodes[receiver].get("outer_class")
         if outer_type:
             ret = self.instantiate_receiver_type(outer_type)
             if ret is None:
@@ -655,6 +655,9 @@ class APIGraph():
                 return None
             type_var_map.update(func_type_var_map)
         else:
+            # Check if receiver is a concrete type rather than a type
+            # constructor, e.g., fun <T> Array<T>.all()
+            parameterized_rec = receiver.is_parameterized()
             ret = self.instantiate_receiver_type(receiver)
             if ret is None:
                 return None
@@ -669,6 +672,8 @@ class APIGraph():
             if func_type_var_map is None:
                 return None
             type_var_map.update(func_type_var_map)
+            if parameterized_rec:
+                receiver = tp.substitute_type(receiver, type_var_map)
             receivers = {receiver}
             if receiver != self.bt_factory.get_any_type():
                 include_self = not (receiver.is_parameterized() and

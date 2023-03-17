@@ -291,7 +291,7 @@ class APIGenerator(Generator):
                           depth: int) -> ast.FunctionReference:
         candidates = self.api_graph.get_function_refs_of(expr_type)
         if not candidates:
-            return self.generate_lambda(expr_type, depth, type_var_map)
+            return self.generate_lambda(expr_type, type_var_map, depth)
         api, sub = utils.random.choice(candidates)
         type_var_map.update(sub)
         segs = api.name.rsplit(".", 1)
@@ -304,8 +304,16 @@ class APIGenerator(Generator):
                 if is_constructor
                 else self.api_graph.get_input_type(api)
             )
+            handler = self.api_graph.get_instantiations_of_recursive_bound
+            if rec_type.is_parameterized() and getattr(api, "type_parameters",
+                                                       []):
+                # Instantiate a parameterized function that involves a
+                # receiver.
+                sub = tu.instantiate_parameterized_function(
+                    api.type_parameters, self.api_graph.get_reg_types(),
+                    type_var_map=type_var_map, rec_bound_handler=handler)
+                type_var_map.update(sub)
             if rec_type.is_type_constructor():
-                handler = self.api_graph.get_instantiations_of_recursive_bound
                 rec_type, sub = tu.instantiate_type_constructor(
                     rec_type, self.api_graph.get_reg_types(),
                     type_var_map=type_var_map,
