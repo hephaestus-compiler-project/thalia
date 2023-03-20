@@ -171,7 +171,7 @@ class APIGenerator(Generator):
                                 depth: int = 1) -> ExprRes:
         is_func = func_ref and self.api_graph.get_functional_type(
             node) is not None
-        return (
+        res = (
             ExprRes(self.generate_function_expr(node, constraints or {},
                                                 depth),
                     {}, [node])
@@ -179,6 +179,18 @@ class APIGenerator(Generator):
             else self._generate_expr_from_node(
                 node, depth, {} if func_ref else (constraints or {}))
         )
+        if node and utils.random.bool():
+            var_name = gu.gen_identifier("lower")
+            var_decl = ast.VariableDeclaration(
+                var_name,
+                res.expr,
+                is_final=True,
+                var_type=node,
+                inferred_type=node
+            )
+            self._add_node_to_parent(self.namespace, var_decl)
+            return ExprRes(ast.Variable(var_name), res.type_var_map, res.path)
+        return res
 
     def generate_expr_from_nodes(self, nodes: List[tp.Type],
                                  constraints: dict,
@@ -277,7 +289,15 @@ class APIGenerator(Generator):
             self.type_eraser.with_target(func_type)
         self.type_eraser.with_target(ret_type)
         expr = self._generate_expr_from_node(ret_type, depth + 1)[0]
-        lambda_expr = ast.Lambda(shadow_name, params, ret_type, expr,
+        decls = list(self.context.get_declarations(self.namespace,
+                                                   True).values())
+        var_decls = [d for d in decls
+                     if not isinstance(d, ast.ParameterDeclaration)]
+        if (not var_decls and ret_type != self.bt_factory.get_void_type()):
+            body = expr
+        else:
+            body = ast.Block(decls + [expr])
+        lambda_expr = ast.Lambda(shadow_name, params, ret_type, body,
                                  func_type)
         self.namespace = prev_namespace
         self.type_eraser.reset_target_type()
