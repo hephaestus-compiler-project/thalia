@@ -272,7 +272,7 @@ class KotlinAPIDocConverter(APIDocConverter):
         return re.findall(regex, type_parameters)
 
     def extract_field_receiver(self, field_doc):
-        regex = re.compile(".*va[lr] (<.+> )?([^\\.]+)\\.[^ <>\\.]+: .*")
+        regex = re.compile(".*va[lr] (<.+> )?(.+)\\.[a-zA-Z0-9_]+: .*")
         match = re.match(regex, field_doc.text)
         if not match:
             return None
