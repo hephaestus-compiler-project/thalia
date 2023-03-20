@@ -577,14 +577,18 @@ class JavaTranslator(BaseTranslator):
         #
         # Finally, Function Types cannot be inferred.
 
+        can_infer = node.is_type_inferred
+        if isinstance(node.expr, (ast.Lambda, ast.FunctionReference)):
+            can_infer = False
+
         var_type = self.get_type_name(node.inferred_type)
         main_prefix = self._get_main_prefix('vars', node.name) \
             if self._namespace != ast.GLOBAL_NAMESPACE else ""
         expr = children_res[0].lstrip()
         res = "{ident}{final}{var_type} {main_prefix}{name} = {expr};".format(
             ident=self.get_ident(),
-            final="final " if node.is_final else "",
-            var_type=var_type,
+            final="final " if can_infer else "",
+            var_type=var_type if not can_infer else "var",
             main_prefix=main_prefix,
             name=node.name,
             expr=expr

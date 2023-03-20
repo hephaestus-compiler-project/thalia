@@ -189,6 +189,8 @@ class APIGenerator(Generator):
                 inferred_type=node
             )
             self._add_node_to_parent(self.namespace, var_decl)
+            if self.type_erasure_mode:
+                self.type_eraser.erase_var_type(var_decl, res)
             return ExprRes(ast.Variable(var_name), res.type_var_map, res.path)
         return res
 
@@ -296,7 +298,7 @@ class APIGenerator(Generator):
         if (not var_decls and ret_type != self.bt_factory.get_void_type()):
             body = expr
         else:
-            body = ast.Block(decls + [expr])
+            body = ast.Block(var_decls + [expr])
         lambda_expr = ast.Lambda(shadow_name, params, ret_type, body,
                                  func_type)
         self.namespace = prev_namespace

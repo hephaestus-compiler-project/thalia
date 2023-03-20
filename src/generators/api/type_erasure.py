@@ -167,6 +167,41 @@ class TypeEraser():
                     can_infer = True
         return can_infer
 
+    def erase_var_type(self, var_decl, expr_res):
+        def get_expr_type(expr_res):
+            expr_type = expr_res.path[-1]
+            if expr_type.is_type_constructor():
+                return expr_type.new([expr_res.type_var_map[tpa]
+                                      for tpa in expr_type.type_parameters])
+            return tp.substitute_type(expr_type, expr_res.type_var_map)
+
+        expr = expr_res.expr
+        if isinstance(expr, (ast.Lambda, ast.FunctionReference)):
+            return
+
+        path = expr_res.path
+        expr_type = get_expr_type(expr_res)
+        if expr_type.name != var_decl.get_type().name:
+            return
+
+        if len(path) == 1:
+            var_decl.omit_type()
+            return
+
+        api = get_arg_api(expr_res)
+        type_parameters = self.get_type_parameters(api)
+        if not type_parameters:
+            var_decl.omit_type()
+            return
+        expr_type = self.get_api_output_type(api)
+        type_vars = get_type_variables(expr_type, self.bt_factory)
+        api_type_params = {
+            tpa for tpa in type_parameters
+            if tpa in type_vars
+        }
+        if not api_type_params:
+            var_decl.omit_type()
+
     def erase_types(self, expr: ast.Expr, api: ag.APINode,
                     args: List[ag.APIPath]):
         markings = self.compute_markings(api)
