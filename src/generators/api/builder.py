@@ -131,6 +131,9 @@ class APIGraphBuilder(ABC):
 
     def process_fields(self, fields: List[dict]):
         for field_api in fields:
+            if field_api["type_parameters"]:
+                # TODO support parameterized fields
+                continue
             receiver_name = self.get_receiver_name(field_api)
             receiver = self.get_api_incoming_node(field_api)
             prefix = receiver_name + "." if receiver_name else ""

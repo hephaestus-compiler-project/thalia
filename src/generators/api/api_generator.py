@@ -1,4 +1,4 @@
-from copy import copy, deepcopy
+from copy import deepcopy
 import functools
 import itertools
 from typing import List, NamedTuple, Union, Iterable
