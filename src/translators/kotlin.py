@@ -344,14 +344,9 @@ class KotlinTranslator(BaseTranslator):
 
         param_res = [children_res[i] for i, _ in enumerate(node.params)]
         body_res = children_res[-1] if node.body else ''
-        ret_type_str = (
-            ": " + self.get_type_name(node.ret_type)
-            if node.ret_type
-            else ""
-        )
+        ret_type = ": " + self.get_type_name(node.ret_type)
         if node.can_infer_signature:
             param_res = [p.name for p in node.params]
-            ret_type_str = ""
 
         if is_expression or use_lambda:
             # use the lambda syntax: { params -> stmt }
@@ -366,7 +361,7 @@ class KotlinTranslator(BaseTranslator):
             res = "{ident}fun ({params}){ret_type} {body}".format(
                 ident=" " * self.ident,
                 params=", ".join(param_res),
-                ret_type=ret_type_str,
+                ret_type=ret_type,  # We cannot omit return type in anonymous functions
                 body=body_res
             )
 
