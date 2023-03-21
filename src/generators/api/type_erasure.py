@@ -45,8 +45,8 @@ class TypeEraser():
             return None
         return self.assignment_graphs[-1]
 
-    def with_target(self, target_type):
-        self.expected_types.append(target_type)
+    def with_target(self, target_type, type_variables=None):
+        self.expected_types.append((target_type, type_variables or []))
 
     def reset_target_type(self):
         if self.expected_types:
@@ -58,10 +58,6 @@ class TypeEraser():
     def reset_assignment_graph(self):
         if self.assignment_graphs:
             self.assignment_graphs = self.assignment_graphs[:-1]
-
-    def on_target(self, target_type: tp.Type):
-        self.expected_type = target_type
-        return self
 
     def with_required_type_variables(self, type_variables):
         self.required_type_parameters = type_variables
@@ -113,10 +109,17 @@ class TypeEraser():
 
     def can_infer_out_position(self, type_param: tp.TypeParameter,
                                marks: Set[int], api_out_type: tp.Type) -> bool:
-        if self.OUT not in marks or self.expected_type is None:
+        target_type, type_vars = self.expected_type
+        if self.OUT not in marks or target_type is None:
             return False
-        return self.expected_type == api_out_type or bool(
-            tu.unify_types(self.expected_type, api_out_type, self.bt_factory,
+        if any(
+            self.assignment_graph.get(tvar,
+                                      tvar) in self.required_type_parameters
+            for tvar in type_vars
+        ):
+            return False
+        return target_type == api_out_type or bool(
+            tu.unify_types(target_type, api_out_type, self.bt_factory,
                            same_type=False, subtype_on_left=False))
 
     def can_infer_in_position(self, type_param: tp.TypeParameter,

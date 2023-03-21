@@ -232,9 +232,13 @@ class APIGenerator(Generator):
         type_var_map.update(type_map)
         exp_parameters = [p.t for p in getattr(api, "parameters", [])]
         args = self._generate_args(exp_parameters, parameters,
-                                   depth=1, type_var_map=type_var_map)
-        var_type = tp.substitute_type(return_type, type_var_map)
-        self.type_eraser.with_target(var_type)
+                                   depth=1, type_var_map=type_var_map,
+                                   inject_fault=False)
+        if self.inject_error_mode and not self.error_injected:
+            var_type = self.api_graph.get_concrete_output_type(api)
+        else:
+            var_type = return_type
+        self.type_eraser.with_target(return_type)
         if isinstance(api, ag.Method):
             call_args = [ast.CallArgument(arg.expr) for arg in args]
             type_args = self.substitute_types(api.type_parameters,
@@ -248,9 +252,11 @@ class APIGenerator(Generator):
         else:
             assert isinstance(api, ag.Field)
             expr = ast.FieldAccess(expr=receiver, field=api.name)
+        var_type = tp.substitute_type(var_type, type_var_map)
 
         if not var_type or var_type == self.bt_factory.get_void_type():
             return expr
+
         var_decl = ast.VariableDeclaration(
             gu.gen_identifier('lower'),
             expr=expr,
@@ -287,8 +293,9 @@ class APIGenerator(Generator):
         for p in params:
             self.context.add_var(self.namespace, p.name, p)
         if self.type_eraser.expected_type:
+            _, type_vars = self.type_eraser.expected_type
             self.type_eraser.reset_target_type()
-            self.type_eraser.with_target(func_type)
+            self.type_eraser.with_target(func_type, type_vars)
         self.type_eraser.with_target(ret_type)
         expr = self._generate_expr_from_node(ret_type, depth + 1)[0]
         decls = list(self.context.get_declarations(self.namespace,
@@ -460,14 +467,16 @@ class APIGenerator(Generator):
         return ExprRes(expr, type_var_map, path)
 
     def _generate_args(self, parameters, actual_types, depth,
-                       type_var_map):
+                       type_var_map, inject_fault=True):
         if not parameters:
             return []
         args = []
         for i, param in enumerate(parameters):
-            param_types = self.substitute_types(actual_types[i], type_var_map)
+            param_types = self.substitute_types(actual_types[i], type_var_map,
+                                                inject_fault)
+            self.type_eraser.with_target(param, get_type_variables(
+                param, self.bt_factory))
             param = tp.substitute_type(param, type_var_map)
-            self.type_eraser.with_target(param)
             expr = self.generate_expr_from_nodes(param_types, {},
                                                  func_ref=True,
                                                  depth=depth)
@@ -533,8 +542,10 @@ class APIGenerator(Generator):
         self.out_pos = False
 
     def substitute_types(self, types: List[tp.Type],
-                         type_var_map: dict) -> List[tp.Type]:
-        if not self.inject_error_mode or self.error_injected:
+                         type_var_map: dict,
+                         inject_fault: bool = True) -> List[tp.Type]:
+        if not inject_fault or not self.inject_error_mode or \
+                self.error_injected:
             return [tp.substitute_type(t, type_var_map) for t in types]
         type_variables = []
         for t in types:
