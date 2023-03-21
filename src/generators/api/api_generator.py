@@ -424,6 +424,8 @@ class APIGenerator(Generator):
             return stored_expr
         if node == self.api_graph.EMPTY:
             return ExprRes(None, {}, [])
+        if node.name == self.bt_factory.get_void_type().name:
+            return ExprRes(ast.Block(), {}, [node])
         target_selection = self._get_target_selection(node)
         path = self.api_graph.find_API_path(node,
                                             with_constraints=constraints,
