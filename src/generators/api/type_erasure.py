@@ -177,11 +177,16 @@ class TypeEraser():
 
         expr = expr_res.expr
         if isinstance(expr, (ast.Lambda, ast.FunctionReference)):
+            # We don't erase the target type of lambdas and function
+            # references
             return
 
         path = expr_res.path
         expr_type = get_expr_type(expr_res)
         if expr_type.name != var_decl.get_type().name:
+            # The type of the expression has a different type from the
+            # explicit type of the variable. We are conservative; we cannot
+            # erase.
             return
 
         if len(path) == 1:
@@ -191,15 +196,23 @@ class TypeEraser():
         api = get_arg_api(expr_res)
         type_parameters = self.get_type_parameters(api)
         if not type_parameters:
+            # The API is not polymorphic, so we are free to omit the variable
+            # type.
             var_decl.omit_type()
             return
+
+        # Now, check if the output type of the API contains type variables
+        # defined inside API, e.g., fun <T> m(): T
         expr_type = self.get_api_output_type(api)
         type_vars = get_type_variables(expr_type, self.bt_factory)
         api_type_params = {
             tpa for tpa in type_parameters
             if tpa in type_vars
         }
-        if not api_type_params:
+        if not api_type_params or all(
+                tpa in get_type_variables(p.t, self.bt_factory)
+                for tpa in api_type_params
+                for p in getattr(api, "parameters", [])):
             var_decl.omit_type()
 
     def erase_types(self, expr: ast.Expr, api: ag.APINode,
