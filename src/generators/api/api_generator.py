@@ -361,6 +361,8 @@ class APIGenerator(Generator):
                       exclude_var=False,
                       gen_bottom=False,
                       sam_coercion=False) -> ast.Expr:
+        if expr_type.name == self.bt_factory.get_void_type().name:
+            return ast.Block(body=[])
         assert expr_type is not None
         constant_candidates = {
             self.bt_factory.get_number_type().name: gens.gen_integer_constant,
@@ -424,8 +426,6 @@ class APIGenerator(Generator):
             return stored_expr
         if node == self.api_graph.EMPTY:
             return ExprRes(None, {}, [])
-        if node.name == self.bt_factory.get_void_type().name:
-            return ExprRes(ast.Block(), {}, [node])
         target_selection = self._get_target_selection(node)
         path = self.api_graph.find_API_path(node,
                                             with_constraints=constraints,

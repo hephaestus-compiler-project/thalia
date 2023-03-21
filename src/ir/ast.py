@@ -151,6 +151,10 @@ class Block(Node):
             return check_list_eq(self.body, other.body)
         return False
 
+    def has_variable(self):
+        return any(x.has_variable() for x in self.body
+                   if isinstance(x, Expr))
+
 
 class Declaration(Node):
     def get_type(self):
