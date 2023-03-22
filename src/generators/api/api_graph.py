@@ -443,8 +443,8 @@ class APIGraph():
 
     def find_API_path(self, target: tp.Type,
                       with_constraints: dict = None,
-                      target_selection: str = "concrete") -> (APIPath, dict,
-                                                              dict):
+                      target_selection: str = "concrete",
+                      infeasible: bool = False) -> (APIPath, dict, dict):
         origin = target
         source_nodes, target = self.get_sources_and_target(target,
                                                            target_selection)
@@ -461,6 +461,7 @@ class APIGraph():
             paths = nx.shortest_simple_paths(self.api_graph, source=source,
                                              target=target)
             for path in sorted(paths, key=len, reverse=True):
+                node_path = path
                 path = list(zip(path, path[1:]))
                 assignment_graph = au.compute_assignment_graph(self.api_graph,
                                                                path)
@@ -471,14 +472,25 @@ class APIGraph():
                                                      self.bt_factory)
                 assignments = au.instantiate_type_variables(self, constraints,
                                                             assignment_graph)
-                if assignments is None:
-                    continue
-                node_path = OrderedDict()
-                for source, target in path:
-                    node_path[source] = True
-                    node_path[target] = True
-                node_path = list(node_path.keys())
-                return node_path, assignments, assignment_graph
+                if not infeasible and assignments is not None:
+                    return node_path, assignments, assignment_graph
+                elif infeasible and assignments is None:
+                    assignments = au.instantiate_type_variables(
+                        self, constraints, assignment_graph,
+                        respect_constraints=False
+                    )
+                    assert assignments is not None
+                    assignments = {
+                        k: (v if v != tp.WildCardType()
+                            else self.bt_factory.get_any_type())
+                        for k, v in assignments.items()
+                    }
+                    if target.is_type_var():
+                        assignments[target] = tu.find_irrelevant_type(
+                            origin.box_type(), self.get_reg_types(),
+                            self.bt_factory)
+                    return node_path, assignments, assignment_graph
+
         return None
 
     def get_instantiations_of_recursive_bound(

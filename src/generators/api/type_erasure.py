@@ -29,6 +29,9 @@ class TypeEraser():
                  bt_factory: BuiltinFactory):
         self.api_graph = api_graph
         self.bt_factory = bt_factory
+        # This is used for maintaining a stack of expected types used for
+        # determining the expected types of the generated expressions.
+        # This is used for type erasure.
         self.expected_types = []
         self.assignment_graphs = []
         self.required_type_parameters = set()

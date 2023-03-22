@@ -63,10 +63,6 @@ class APIGenerator(Generator):
         self.translator = TRANSLATORS[language]()
         self.type_eraser: te.TypeEraser = te.TypeEraser(self.api_graph,
                                                         self.bt_factory)
-        # This is used for maintaining a stack of expected types used for
-        # determining the expected types of the generated expressions.
-        # This is used for type erasure.
-        self._exp_types: list = []
         self.error_injected = None
 
     def produce_test_case(self, expr: ast.Expr) -> ast.Program:
@@ -233,10 +229,18 @@ class APIGenerator(Generator):
         exp_parameters = [p.t for p in getattr(api, "parameters", [])]
         args = self._generate_args(exp_parameters, parameters,
                                    depth=1, type_var_map=type_var_map)
-        if self.inject_error_mode and not self.error_injected:
+        var_type = return_type
+        if self.inject_error_mode:
+            # We are in fault injection mode, but no error has been injected
+            # so far. Therefore, compute an incompatible target type.
             var_type = self.api_graph.get_concrete_output_type(api)
-        else:
-            var_type = return_type
+            var_type = tp.substitute_type(var_type, type_map)
+            if not self.error_injected:
+                var_type = tu.find_irrelevant_type(
+                    var_type, self.api_graph.get_reg_types(), self.bt_factory)
+                msg = "Expecting variable of {left!s}, but {right!s} is given"
+                self.error_injected = msg.format(left=var_type,
+                                                 right=return_type)
         self.type_eraser.with_target(return_type)
         if isinstance(api, ag.Method):
             call_args = [ast.CallArgument(arg.expr) for arg in args]
@@ -251,8 +255,6 @@ class APIGenerator(Generator):
         else:
             assert isinstance(api, ag.Field)
             expr = ast.FieldAccess(expr=receiver, field=api.name)
-        var_type = tp.substitute_type(var_type, type_var_map)
-
         if not var_type or var_type == self.bt_factory.get_void_type():
             return expr
 
@@ -433,9 +435,10 @@ class APIGenerator(Generator):
         if node == self.api_graph.EMPTY:
             return ExprRes(None, {}, [])
         target_selection = self._get_target_selection(node)
-        path = self.api_graph.find_API_path(node,
-                                            with_constraints=constraints,
-                                            target_selection=target_selection)
+        find_infeasible = self.inject_error_mode and not self.error_injected
+        path = self.api_graph.find_API_path(
+            node, with_constraints=constraints,
+            target_selection=target_selection, infeasible=find_infeasible)
         if not path:
             if node.is_type_constructor():
                 handler = self.api_graph.get_instantiations_of_recursive_bound
@@ -453,6 +456,14 @@ class APIGenerator(Generator):
                 )
             return ExprRes(self.generate_expr(t), type_var_map, [t])
         path, type_var_map, assignment_graph = path
+        if find_infeasible:
+            msg = "\n".join(
+                "Assigning an incompatible type {t!r} to {type_var!s}".format(
+                    type_var=k, t=v
+                )
+                for k, v in type_var_map.items()
+            )
+            self.error_injected = msg
         self.type_eraser.with_assignment_graph(assignment_graph)
         expr = self._generate_expression_from_path(path, depth=depth,
                                                    type_var_map=type_var_map)
@@ -543,6 +554,10 @@ class APIGenerator(Generator):
     def substitute_types(self, types: List[tp.Type],
                          type_var_map: dict) -> List[tp.Type]:
         if not self.inject_error_mode or self.error_injected:
+            return [tp.substitute_type(t, type_var_map) for t in types]
+        if utils.random.bool():
+            # With a probability decide if it's time to inject a type error
+            # now or later.
             return [tp.substitute_type(t, type_var_map) for t in types]
         type_variables = set()
         for t in types:
