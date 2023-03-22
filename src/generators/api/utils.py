@@ -48,6 +48,7 @@ def build_equality_constraints(
                                  strict_mode=False, subtype_on_left=False)
             if not sub:
                 constraints[k].add(EqualityConstraint(v))
+                constraints[k].add(EqualityConstraint(t))
                 continue
             for k, v in sub.items():
                 if not v.is_wildcard():
@@ -95,6 +96,7 @@ def collect_constraints(target: tp.Type,
                                  strict_mode=False, subtype_on_left=False)
             if not sub:
                 constraints[node].add(EqualityConstraint(node.bound))
+                constraints[node].add(EqualityConstraint(t))
                 continue
             for k, v in sub.items():
                 constraint = (

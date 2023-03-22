@@ -234,7 +234,11 @@ def test_collect_constraints_parameterized():
     assignment_graph = {t2: t, t3: t}
     target = tp.TypeConstructor("T", [t3]).new([kt.String])
     assert au.collect_constraints(
-        target, [t1, t2, t3], assignment_graph) is None
+        target, [t1, t2, t3], assignment_graph) == {
+            t1: set(),
+            t2: set(),
+            t3: {au.EqualityConstraint(kt.String), au.EqualityConstraint(t)}
+        }
 
     # Case 2
     # T1:
