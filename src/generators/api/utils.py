@@ -1,8 +1,9 @@
 from collections import OrderedDict, defaultdict
-from typing import NamedTuple, List, Set, Dict
+from typing import NamedTuple, List, Set, Dict, Union
 
 import networkx as nx
 
+from src import utils
 from src.ir import types as tp, type_utils as tu
 
 
@@ -12,6 +13,9 @@ class UpperBoundConstraint(NamedTuple):
 
 class EqualityConstraint(NamedTuple):
     t: tp.Type
+
+
+Constraint = Union[UpperBoundConstraint, EqualityConstraint]
 
 
 def compute_assignment_graph(api_graph: nx.DiGraph, path: list) -> OrderedDict:
@@ -43,7 +47,8 @@ def build_equality_constraints(
             sub = tu.unify_types(v, t, bt_factory, same_type=False,
                                  strict_mode=False, subtype_on_left=False)
             if not sub:
-                return None
+                constraints[k].add(EqualityConstraint(v))
+                continue
             for k, v in sub.items():
                 if not v.is_wildcard():
                     constraints[k].add(EqualityConstraint(v))
@@ -89,7 +94,8 @@ def collect_constraints(target: tp.Type,
                                  same_type=False,
                                  strict_mode=False, subtype_on_left=False)
             if not sub:
-                return None
+                constraints[node].add(EqualityConstraint(node.bound))
+                continue
             for k, v in sub.items():
                 constraint = (
                     UpperBoundConstraint(node.bound)
@@ -125,8 +131,55 @@ def _assign_type_unconstrained(api_graph, type_var,
     return {type_var: tp.substitute_type(t, type_var_assignments)}
 
 
-def instantiate_type_variables(api_graph, constraints,
-                               assignment_graph):
+def _instantiate_type_variable_no_constraints(
+    type_var: tp.TypeParameter,
+    constraints: Set[Constraint]
+) -> tp.Type:
+    upper_bounds = [c.bound for c in constraints
+                    if isinstance(c, UpperBoundConstraint)]
+    eqs = [c.t for c in constraints
+           if isinstance(c, EqualityConstraint)]
+    if len(eqs) > 1:
+        return utils.random.choice(eqs)
+    if len(upper_bounds) > 1:
+        return utils.random.choice(upper_bounds)
+    return utils.random.choice(eqs + upper_bounds)
+
+
+def _instantiate_type_variable_with_constraints(
+    type_var: tp.TypeParameter,
+    constraints: Set[Constraint],
+    api_graph
+) -> tp.Type:
+    upper_bounds = [c.bound for c in constraints
+                    if isinstance(c, UpperBoundConstraint)]
+    eqs = [c.t for c in constraints
+           if isinstance(c, EqualityConstraint)]
+    new_bounds = upper_bounds
+    if len(upper_bounds) > 2:
+        new_bounds = {upper_bounds[0]}
+        for bound in set(upper_bounds[1:]):
+            supers = api_graph.supertypes(bound)
+            if any(s in upper_bounds for s in supers):
+                new_bounds.append(bound)
+        new_bounds = list(new_bounds)
+
+    if len(new_bounds) > 1 or len(eqs) > 1:
+        return None
+    if len(eqs) == 1:
+        if new_bounds and not eqs[0].is_subtype(new_bounds[0]):
+            return None
+        if eqs[0].is_primitive():
+            return None
+        return eqs[0]
+
+    if len(new_bounds) == 1:
+        return new_bounds[0]
+    return None
+
+
+def _instantiate_type_variables_unconstrained(api_graph, constraints,
+                                              assignment_graph):
     if constraints is None:
         # Unable to build constraints. This means that type unifation failed.
         return None
@@ -148,27 +201,45 @@ def instantiate_type_variables(api_graph, constraints,
                         if isinstance(c, UpperBoundConstraint)]
         eqs = [c.t for c in type_var_constraints
                if isinstance(c, EqualityConstraint)]
-        new_bounds = upper_bounds
-        if len(upper_bounds) > 2:
-            new_bounds = {upper_bounds[0]}
-            for bound in set(upper_bounds[1:]):
-                supers = api_graph.supertypes(bound)
-                if any(s in upper_bounds for s in supers):
-                    new_bounds.append(bound)
-            new_bounds = list(new_bounds)
+        if len(eqs) > 1:
+            type_var_assignments[type_var] = utils.random.choice(eqs)
+            continue
+        if len(upper_bounds) > 1:
+            type_var_assignments[type_var] = utils.random.choice(upper_bounds)
+            continue
+        type_var_assignments[type_var] = utils.random.choice(
+            eqs + upper_bounds)
+    return type_var_assignments
 
-        if len(new_bounds) > 1 or len(eqs) > 1:
-            return None
-        if len(eqs) == 1:
-            if new_bounds and not eqs[0].is_subtype(new_bounds[0]):
-                return None
-            if eqs[0].is_primitive():
-                return None
-            type_var_assignments[type_var] = eqs[0]
+
+def instantiate_type_variables(api_graph, constraints,
+                               assignment_graph,
+                               respect_constraints: bool = True):
+    if constraints is None:
+        # Unable to build constraints. This means that type unifation failed.
+        return None
+    type_var_assignments = {}
+    free_variables = {
+        k
+        for k in constraints.keys()
+        if k not in assignment_graph
+    }
+    for type_var in list(free_variables) + list(assignment_graph.keys()):
+        type_var_constraints = constraints[type_var]
+        if not type_var_constraints:
+            type_var_assignments.update(_assign_type_unconstrained(
+                api_graph, type_var, assignment_graph,
+                type_var_assignments))
             continue
 
-        if len(new_bounds) == 1:
-            type_var_assignments[type_var] = new_bounds[0]
-        return None
+        if respect_constraints:
+            t = _instantiate_type_variable_with_constraints(
+                type_var, type_var_constraints, api_graph)
+        else:
+            t = _instantiate_type_variable_no_constraints(type_var,
+                                                          type_var_constraints)
+        if t is None:
+            return None
+        type_var_assignments[type_var] = t
 
     return type_var_assignments
