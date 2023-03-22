@@ -540,12 +540,6 @@ class APIGenerator(Generator):
             return receiver
         return expr
 
-    def enable_out_pos(self):
-        self.out_pos = True
-
-    def disable_out_pos(self):
-        self.out_pos = False
-
     def substitute_types(self, types: List[tp.Type],
                          type_var_map: dict) -> List[tp.Type]:
         if not self.inject_error_mode or self.error_injected:
