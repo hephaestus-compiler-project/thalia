@@ -31,7 +31,7 @@ class TypeEraser():
         self.bt_factory = bt_factory
         self.expected_types = []
         self.assignment_graphs = []
-        self.required_type_parameters = []
+        self.required_type_parameters = set()
 
     @property
     def expected_type(self):
@@ -58,10 +58,6 @@ class TypeEraser():
     def reset_assignment_graph(self):
         if self.assignment_graphs:
             self.assignment_graphs = self.assignment_graphs[:-1]
-
-    def with_required_type_variables(self, type_variables):
-        self.required_type_parameters = type_variables
-        return self
 
     def get_api_output_type(self, api: ag.APINode) -> tp.Type:
         if isinstance(api, tp.Type):
@@ -112,9 +108,9 @@ class TypeEraser():
         target_type, type_vars = self.expected_type
         if self.OUT not in marks or target_type is None:
             return False
+        assignment_graph = self.assignment_graph or {}
         if any(
-            self.assignment_graph.get(tvar,
-                                      tvar) in self.required_type_parameters
+            assignment_graph.get(tvar, tvar) in self.required_type_parameters
             for tvar in type_vars
         ):
             return False
@@ -138,9 +134,10 @@ class TypeEraser():
                 # The argument is not a polymorphic call. We can infer
                 # the argument type without a problem.
                 return True
+            assignment_graph = self.assignment_graph or {}
 
-            if self.assignment_graph.get(type_param,
-                                         type_param) in self.required_type_parameters:
+            if assignment_graph.get(type_param,
+                                    type_param) in self.required_type_parameters:
                 if hasattr(arg.expr, "can_infer_type_args"):
                     arg.expr.can_infer_type_args = False
                 if hasattr(arg.expr, "can_infer_signature"):

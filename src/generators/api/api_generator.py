@@ -232,8 +232,7 @@ class APIGenerator(Generator):
         type_var_map.update(type_map)
         exp_parameters = [p.t for p in getattr(api, "parameters", [])]
         args = self._generate_args(exp_parameters, parameters,
-                                   depth=1, type_var_map=type_var_map,
-                                   inject_fault=False)
+                                   depth=1, type_var_map=type_var_map)
         if self.inject_error_mode and not self.error_injected:
             var_type = self.api_graph.get_concrete_output_type(api)
         else:
@@ -457,8 +456,6 @@ class APIGenerator(Generator):
         self.type_eraser.with_assignment_graph(assignment_graph)
         expr = self._generate_expression_from_path(path, depth=depth,
                                                    type_var_map=type_var_map)
-        if self.type_eraser:
-            self.type_eraser.required_type_parameters = []
         if not expr.has_variable() and not self.error_injected:
             # If the generated expression contains a variable, we don't store
             # this expression for later use because it refers to a variable
@@ -467,13 +464,21 @@ class APIGenerator(Generator):
         return ExprRes(expr, type_var_map, path)
 
     def _generate_args(self, parameters, actual_types, depth,
-                       type_var_map, inject_fault=True):
+                       type_var_map):
         if not parameters:
             return []
         args = []
         for i, param in enumerate(parameters):
-            param_types = self.substitute_types(actual_types[i], type_var_map,
-                                                inject_fault)
+            arg_types = actual_types[i]
+            if self.inject_error_mode:
+                # If we are in a fault injection mode, we consider the
+                # parameter types that actually contains all type variables.
+                # e.g., we use A<T> instead of A<String>
+                arg_types = [
+                    t if t.name != param.name else param
+                    for t in actual_types[i]
+                ]
+            param_types = self.substitute_types(arg_types, type_var_map)
             self.type_eraser.with_target(param, get_type_variables(
                 param, self.bt_factory))
             param = tp.substitute_type(param, type_var_map)
@@ -542,14 +547,12 @@ class APIGenerator(Generator):
         self.out_pos = False
 
     def substitute_types(self, types: List[tp.Type],
-                         type_var_map: dict,
-                         inject_fault: bool = True) -> List[tp.Type]:
-        if not inject_fault or not self.inject_error_mode or \
-                self.error_injected:
+                         type_var_map: dict) -> List[tp.Type]:
+        if not self.inject_error_mode or self.error_injected:
             return [tp.substitute_type(t, type_var_map) for t in types]
-        type_variables = []
+        type_variables = set()
         for t in types:
-            type_variables.extend(get_type_variables(t, self.bt_factory))
+            type_variables.update(get_type_variables(t, self.bt_factory))
         for type_var in type_variables:
             old_t = type_var_map[type_var]
             new_t = tu.find_irrelevant_type(old_t,
@@ -564,6 +567,5 @@ class APIGenerator(Generator):
                 self.error_injected = (msg if not self.error_injected
                                        else self.error_injected + "\n" + msg)
                 type_var_map[type_var] = new_t
-                if self.type_eraser:
-                    self.type_eraser.required_type_parameters.append(type_var)
+                self.type_eraser.required_type_parameters.add(type_var)
         return [tp.substitute_type(t, type_var_map) for t in types]
