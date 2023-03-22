@@ -514,11 +514,11 @@ class ScalaTranslator(BaseTranslator):
                 ident=" " * self.ident))
         # Remove type arguments from Parameterized Type
         elif getattr(node.class_type, 'can_infer_type_args', None) is True:
-            self._children_res.append("{prefix}({values})".format(
+            self._children_res.append("new {prefix}({values})".format(
                 prefix=" " * self.ident + node.class_type.name,
                 values=", ".join(children_res)))
         else:
-            self._children_res.append("{prefix}({values})".format(
+            self._children_res.append("new {prefix}({values})".format(
                 prefix=" " * self.ident + self.get_type_name(node.class_type),
                 values=", ".join(children_res)))
 
