@@ -102,7 +102,7 @@ class APIGraphBuilder(ABC):
             if api_doc:
                 self.api_language = api_doc.get("language", self.api_language)
                 self.class_name = api_doc["name"]
-                if api_doc.get("is_class", False):
+                if api_doc.get("is_class") is not False:
                     self.build_class_node(api_doc)
         # One more pass to handle recursive upper bounds.
         self.rename_class_type_parameters(docs, top_sort)
