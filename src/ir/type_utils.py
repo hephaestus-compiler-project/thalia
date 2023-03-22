@@ -339,6 +339,7 @@ def find_irrelevant_type(etype: tp.Type, types: List[tp.Type],
     if not available_types:
         return None
     reg_supertypes = etype.get_supertypes()
+    found = False
     while available_types:
         t = utils.random.choice(available_types)
         available_types.remove(t)
@@ -346,8 +347,9 @@ def find_irrelevant_type(etype: tp.Type, types: List[tp.Type],
         # We search for a type that does not have the same inheritance chain
         # with the given type etype.
         if supers != reg_supertypes:
+            found = True
             break
-    if not available_types:
+    if not found:
         return None
     if t.is_type_constructor():
         # Must instantiate the given type constrcutor. Also pass the map of
