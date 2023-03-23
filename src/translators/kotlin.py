@@ -595,13 +595,23 @@ class KotlinTranslator(BaseTranslator):
         self.ident = old_ident
 
         children_res = self.pop_children_res(children)
-        # TODO handle lambdas
-        receiver = children_res[0] if children_res else ""
+        segs = node.func.rsplit(".", 1)
+        func_name = segs[-1]
+        receiver = (
+            (
+                "" if node.func == ast.FunctionReference.NEW_REF
+                else children_res[0]
+            )
+            if children_res
+            else ""
+        )
         receiver += "::"
+        if isinstance(node.receiver, ast.New):
+            func_name = node.receiver.class_type.name.rsplit(".", 1)[-1]
         res = "{ident}{receiver}{name}".format(
             ident=" " * self.ident,
             receiver=receiver,
-            name=node.func
+            name=func_name,
         )
         self._children_res.append(res)
 
