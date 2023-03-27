@@ -153,6 +153,10 @@ class RandomUtils():
         k = k or self.integer(0, len(choices))
         return self.r.sample(choices, k)
 
+    def shuffle(self, lst):
+        self.r.shuffle(lst)
+        return lst
+
     def str(self, length=5):
         return ''.join(self.r.sample(
             string.ascii_letters + string.digits, length))
