@@ -372,12 +372,16 @@ class APIGraph():
                     t = tp.substitute_type(type_v, constraints)
                 else:
                     t = type_v
+                if t.is_wildcard():
+                    if type_k.is_covariant() and t.is_contravariant():
+                        t = t.bound
+                    if type_k.is_contravariant() and t.is_covariant():
+                        t = t.bound
                 constraints[type_k] = t
-            else:
-                handler = self.get_instantiations_of_recursive_bound
-                supertypes.add(tu.instantiate_type_constructor(
-                    v, {}, type_var_map=constraints,
-                    rec_bound_handler=handler)[0])
+            handler = self.get_instantiations_of_recursive_bound
+            supertypes.add(tu.instantiate_type_constructor(
+                v, {}, type_var_map=constraints,
+                rec_bound_handler=handler)[0])
         return supertypes
 
     def add_variable_node(self, name: str, var_type: tp.Type):
@@ -760,8 +764,7 @@ class APIGraph():
             if ret_type.is_type_constructor():
                 ret_type = ret_type.new(ret_type.type_parameters)
             ret_type = tp.substitute_type(ret_type, type_var_map)
-            ret_types = set(tu.find_supertypes(ret_type, self.get_reg_types(),
-                                               include_self=False))
+            ret_types = self.supertypes(ret_type)
             ret_types.add(ret_type)
             encodings.append(APIEncoding(node, frozenset(receivers),
                                          parameters,
