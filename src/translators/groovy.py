@@ -230,7 +230,6 @@ class GroovyTranslator(BaseTranslator):
                 stmts=";\n".join(children_res),
                 old_ident=self.get_ident(extra=-2)
             )
-        res += ";"
         # When block is inside is then it is recognised as closure, thus
         # we must append () to call it.
         if self._inside_is and not self._inside_is_function:
