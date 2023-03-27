@@ -221,12 +221,11 @@ def instantiate_type_variables(api_graph, constraints,
         # Unable to build constraints. This means that type unifation failed.
         return None
     type_var_assignments = {}
-    free_variables = {
-        k
-        for k in constraints.keys()
+    free_variables = [
+        k for k in constraints.keys()
         if k not in assignment_graph
-    }
-    for type_var in list(free_variables) + list(assignment_graph.keys()):
+    ]
+    for type_var in free_variables + list(assignment_graph.keys()):
         type_var_constraints = constraints[type_var]
         if not type_var_constraints:
             type_var_assignments.update(_assign_type_unconstrained(
@@ -242,6 +241,29 @@ def instantiate_type_variables(api_graph, constraints,
                                                           type_var_constraints)
         if t is None:
             return None
-        type_var_assignments[type_var] = t
+        # An upper bound might depend on other variables. Therefore,
+        # substitute all type variable occurences that appear in the upper
+        # bound of 'type_var'.
+        if type_var.has_recursive_bound():
+            # Case 1: recursive bounds
+            assigned_t = api_graph.get_instantiations_of_recursive_bound(
+                type_var, type_var_assignments, api_graph.get_reg_types())
+            if not assigned_t and respect_constraints:
+                # We were not able to find a suitable instantiation of
+                # this recursive bound. We need to respect the constraints
+                # and thus we return None.
+                return None
+            if not assigned_t:
+                # We were not able to find a suitable instantiation of
+                # this recursive bound. However, we are in a mode where
+                # we are free to disregard constraints. So we pick a random
+                # type. TODO: Create an invalid instantiation of the
+                # upper bound type.
+                assigned_t = api_graph.get_reg_types()
+            assigned_t = utils.random.choice(list(assigned_t))
+        else:
+            # Case 2: regular bounds
+            assigned_t = tp.substitute_type(t, type_var_assignments)
+        type_var_assignments[type_var] = assigned_t
 
     return type_var_assignments
