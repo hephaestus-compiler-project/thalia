@@ -113,9 +113,6 @@ class APIGenerator(Generator):
         func_name = "test"
         test_namespace = ast.GLOBAL_NAMESPACE + (func_name,)
         for api, receivers, parameters, returns, type_map in self.encodings:
-            if isinstance(api, ag.Constructor):
-                # TODO
-                continue
             types = (receivers, *parameters, returns)
             if types in self.visited:
                 continue
@@ -251,7 +248,17 @@ class APIGenerator(Generator):
             if api.type_parameters and self.type_erasure_mode:
                 self.type_eraser.erase_types(expr, api, args)
         elif isinstance(api, ag.Constructor):
-            expr = ast.New(tp.Classifier(api.name), args=args)
+            def _instantiate_type_con(t: tp.Type):
+                if t.is_type_constructor():
+                    return t.new(self.substitute_types(t.type_parameters,
+                                                       type_var_map))
+                return t
+            con_type = self.api_graph.get_type_by_name(api.get_class_name())
+            con_type = _instantiate_type_con(con_type)
+            call_args = [arg.expr for arg in args]
+            expr = ast.New(con_type, call_args, receiver=receiver)
+            if con_type.is_parameterized() and self.type_erasure_mode:
+                self.type_eraser.erase_types(expr, api, args)
         else:
             assert isinstance(api, ag.Field)
             expr = ast.FieldAccess(expr=receiver, field=api.name)

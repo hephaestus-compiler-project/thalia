@@ -455,7 +455,7 @@ class APIGraph():
         if isinstance(target, tp.TypeParameter):
             with_constraints[target] = origin.box_type()
 
-        for source in source_nodes:
+        for source in utils.random.shuffle(source_nodes):
             if source == target:
                 continue
             paths = nx.shortest_simple_paths(self.api_graph, source=source,
@@ -661,6 +661,11 @@ class APIGraph():
         if not receiver:
             # API is not associated with a receiver
             receivers = {self.EMPTY}
+            if isinstance(api_node, Constructor):
+                # If the API is a constructor, we treat it as a
+                # parameterized function.
+                func_type_parameters = self.get_type_by_name(
+                    api_node.get_class_name()).type_parameters
             func_type_var_map = self.instantiate_func_type_variables(
                 api_node, func_type_parameters)
             if func_type_var_map is None:
@@ -752,6 +757,8 @@ class APIGraph():
                 ret_type = ret_type.new(
                     [constraint[tpa] for tpa in ret_type.type_parameters]
                 )
+            if ret_type.is_type_constructor():
+                ret_type = ret_type.new(ret_type.type_parameters)
             ret_type = tp.substitute_type(ret_type, type_var_map)
             ret_types = set(tu.find_supertypes(ret_type, self.get_reg_types(),
                                                include_self=False))
