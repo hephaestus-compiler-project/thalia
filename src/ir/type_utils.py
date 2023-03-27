@@ -567,6 +567,10 @@ def _find_candidate_types_for_bound(
         bound = tp.substitute_type(type_param.bound, type_var_map)
     else:
         bound = type_param.bound
+    if bound.is_parameterized() and bound.has_invariant_wildcards():
+        # We substitute invariant wildcard with a concrete type,
+        # e.g., A<*> => A<String>
+        bound = substitute_invariant_wildcard_with(bound, list(types))
     # If the type parameter has a bound, then find types
     # that are subtypes to this bound.
     # Note that at this point we ignore use variance
@@ -581,6 +585,18 @@ def _find_candidate_types_for_bound(
         if isinstance(t, tp.ParameterizedType):
             a_types[i] = t.to_variance_free()
     return a_types
+
+
+def substitute_invariant_wildcard_with(
+    t: tp.ParameterizedType, types: List[tp.Type]
+) -> tp.ParameterizedType:
+    type_args = []
+    for t_arg in t.type_args:
+        if t_arg.is_wildcard() and t_arg.is_invariant():
+            type_args.append(utils.random.choice(types))
+        else:
+            type_args.append(t_arg)
+    return t.t_constructor.new(type_args)
 
 
 def _compute_type_variable_assignments(

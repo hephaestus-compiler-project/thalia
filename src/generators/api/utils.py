@@ -264,6 +264,11 @@ def instantiate_type_variables(api_graph, constraints,
         else:
             # Case 2: regular bounds
             assigned_t = tp.substitute_type(t, type_var_assignments)
+        if assigned_t.is_parameterized() and \
+                assigned_t.has_invariant_wildcards():
+            # We substitute invariant wildcard with concrete type.
+            assigned_t = tu.substitute_invariant_wildcard_with(
+                assigned_t, api_graph.get_reg_types())
         type_var_assignments[type_var] = assigned_t
 
     return type_var_assignments

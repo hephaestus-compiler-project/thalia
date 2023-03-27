@@ -1414,3 +1414,14 @@ def test_update_type_var_bound_rec():
                                      targs, indexes, type_var_map)
     assert type_var_map == {type_param1: kt.Number, type_param2: kt.Number}
     assert targs == [kt.Number, kt.Number]
+
+
+def test_substitute_invariant_with():
+    foo = tp.TypeConstructor("Foo", [tp.TypeParameter("T")])
+    foo_t = foo.new([tp.WildCardType()])
+    assert tutils.substitute_invariant_wildcard_with(foo_t,
+                                                     [kt.String]) == foo.new([kt.String])
+    foo_t = foo.new([kt.Number])
+    assert tutils.substitute_invariant_wildcard_with(foo_t,
+                                                     [kt.String]) == foo_t
+

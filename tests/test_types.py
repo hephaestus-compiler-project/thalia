@@ -406,6 +406,14 @@ def test_to_type_variable_free():
         [tp.WildCardType(kt.Number, variance=tp.Covariant)])
 
 
+def test_has_invariant_wildcards():
+    foo = tp.TypeConstructor("Foo", [tp.TypeParameter("T")])
+    assert not foo.new([kt.String]).has_invariant_wildcards()
+    assert not foo.new([tp.WildCardType(bound=kt.String,
+                                        variance=tp.Covariant)]).has_invariant_wildcards()
+    assert foo.new([tp.WildCardType()]).has_invariant_wildcards()
+
+
 def test_wildcard_types():
     t1 = tp.WildCardType()
     t2 = tp.WildCardType()

@@ -627,6 +627,12 @@ class ParameterizedType(SimpleClassifier):
             for t_arg in self.type_args
         )
 
+    def has_invariant_wildcards(self):
+        return any(
+            t_arg.is_wildcard() and t_arg.is_invariant()
+            for t_arg in self.type_args
+        )
+
     def to_variance_free(self, type_var_map=None):
         type_args = []
         for i, t_arg in enumerate(self.type_args):
