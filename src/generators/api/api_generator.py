@@ -118,11 +118,11 @@ class APIGenerator(Generator):
                 continue
             self.visited.add(types)
             for combination in itertools.product(*types):
+                receiver, parameters, return_type = (
+                    combination[0], combination[1:-1], combination[-1])
                 if program_index < self.start_index:
                     program_index += 1
                     continue
-                receiver, parameters, return_type = (
-                    combination[0], combination[1:-1], combination[-1])
                 self.context = Context()
                 self.namespace = test_namespace
                 params = [[p] for p in parameters]

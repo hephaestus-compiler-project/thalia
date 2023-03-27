@@ -210,8 +210,7 @@ class APIGraph():
             functional_types
         self.bt_factory = bt_factory
         self._types = {node
-                       for node in self.subtyping_graph.nodes()
-                       if not node.is_type_constructor()}
+                       for node in self.subtyping_graph.nodes()}
         self._all_types = {node.name: node
                            for node in self.subtyping_graph.nodes()}
         self.source_nodes_of = {}
@@ -230,7 +229,12 @@ class APIGraph():
 
     def get_random_type(self):
         types = self.get_reg_types()
-        return utils.random.choice(types)
+        t = utils.random.choice(types)
+        if t.is_type_constructor():
+            return tu.instantiate_type_constructor(
+                t, types, only_regular=True,
+                rec_bound_handler=self.get_instantiations_of_recursive_bound)
+        return t
 
     def get_type_by_name(self, typename):
         return self._all_types.get(typename)
@@ -265,7 +269,9 @@ class APIGraph():
 
             # Type argument invariant
             if t_arg.is_wildcard() and t_arg.is_invariant():
-                possible_type_args.append(self.get_reg_types())
+                possible_type_args.append(
+                    [t for t in self.get_reg_types()
+                     if not t.is_type_constructor()])
 
             # Type argument covariant or type param covariant
             elif (t_arg.is_wildcard() and t_arg.is_covariant() or
@@ -668,8 +674,8 @@ class APIGraph():
             if isinstance(api_node, Constructor):
                 # If the API is a constructor, we treat it as a
                 # parameterized function.
-                func_type_parameters = self.get_type_by_name(
-                    api_node.get_class_name()).type_parameters
+                func_type_parameters = getattr(self.get_type_by_name(
+                    api_node.get_class_name()), "type_parameters", [])
             func_type_var_map = self.instantiate_func_type_variables(
                 api_node, func_type_parameters)
             if func_type_var_map is None:
@@ -764,7 +770,8 @@ class APIGraph():
             if ret_type.is_type_constructor():
                 ret_type = ret_type.new(ret_type.type_parameters)
             ret_type = tp.substitute_type(ret_type, type_var_map)
-            ret_types = self.supertypes(ret_type)
+            ret_types = set(tu.find_supertypes(ret_type, self.get_reg_types(),
+                                               concrete_only=True))
             ret_types.add(ret_type)
             encodings.append(APIEncoding(node, frozenset(receivers),
                                          parameters,
