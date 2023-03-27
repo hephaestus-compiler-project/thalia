@@ -603,7 +603,7 @@ class KotlinTranslator(BaseTranslator):
                 else children_res[0]
             )
             if children_res
-            else ""
+            else segs[0]
         )
         receiver += "::"
         if isinstance(node.receiver, ast.New):
