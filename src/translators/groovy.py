@@ -181,7 +181,7 @@ class GroovyTranslator(BaseTranslator):
         for c in children:
             c.accept(self)
         if self.package:
-            package_str = 'package ' + self.package + '\n\n'
+            package_str = 'package ' + self.package + ';\n\n'
         else:
             package_str = ''
         self.ident = 2
@@ -230,6 +230,7 @@ class GroovyTranslator(BaseTranslator):
                 stmts=";\n".join(children_res),
                 old_ident=self.get_ident(extra=-2)
             )
+        res += ";"
         # When block is inside is then it is recognised as closure, thus
         # we must append () to call it.
         if self._inside_is and not self._inside_is_function:
@@ -384,7 +385,7 @@ class GroovyTranslator(BaseTranslator):
         res = "{ident}{final}{var_type}{main_prefix}{name} = {expr}".format(
             ident=self.get_ident(),
             final="final " if node.is_final else "",
-            var_type=var_type or "def ",
+            var_type=var_type or "var ",
             main_prefix=main_prefix,
             name=node.name,
             expr=expr
@@ -560,7 +561,7 @@ class GroovyTranslator(BaseTranslator):
         if self.always_cast_ftypes and not node.can_infer_signature:
             cast = " as " + self.get_type_name(self._get_signature(node))
 
-        res = "{{ {params} -> {body}}} {cast}".format(
+        res = "({params}) -> {body} {cast}".format(
             params=", ".join(param_res),
             body=body_res,
             cast=cast
