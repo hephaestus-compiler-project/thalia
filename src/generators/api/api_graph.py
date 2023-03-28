@@ -212,8 +212,8 @@ class APIGraph():
         self._all_types = {node.name: node
                            for node in self.subtyping_graph.nodes()}
         self.source_nodes_of = {}
-        self.bounded_type_parameters = kwargs.get("bounded_type_parameters",
-                                                  False)
+        self.disable_bounded_type_parameters = kwargs.get(
+            "disable_bounded_type_parameters", False)
 
     def get_reg_types(self):
         types = [
@@ -659,7 +659,7 @@ class APIGraph():
                 # We were unable to instantiate the given type
                 # constructor.
                 return None
-            if self.bounded_type_parameters:
+            if not self.disable_bounded_type_parameters:
                 inst = au.replace_instantiation_with_fresh_type_variables(
                     receiver, inst[1])
             assert inst is not None

@@ -57,8 +57,8 @@ class APIGenerator(Generator):
 
         self.inject_error_mode = options.get("inject-type-error", False)
         self.type_erasure_mode = options.get("erase-types", False)
-        self.bounded_type_parameters_mode = options.get(
-            "bounded_type_parameters", False
+        self.disable_bounded_type_parameters = options.get(
+            "disable_bounded_type_parameters", False
         )
         self.start_index = options.get("start-index", 0)
         self.max_conditional_depth = options.get("max-conditional-depth", 4)
@@ -155,7 +155,7 @@ class APIGenerator(Generator):
                 params = [[p] for p in parameters]
                 receivers = (
                     [receiver]
-                    if not self.bounded_type_parameters_mode
+                    if self.disable_bounded_type_parameters
                     else self.wrap_types_with_type_parameter([receiver])
                 )
                 expr = self.generate_from_type_combination(
