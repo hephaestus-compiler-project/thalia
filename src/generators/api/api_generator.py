@@ -1,4 +1,4 @@
-from copy import deepcopy
+from copy import deepcopy, copy
 import functools
 import itertools
 from typing import List, NamedTuple, Union, Iterable
@@ -43,8 +43,8 @@ class APIGenerator(Generator):
     def __init__(self, api_docs, options={}, language=None, logger=None):
         super().__init__(language=language, logger=logger)
         self.logger.update_filename("api-generator")
-        self.api_graph = self.API_GRAPH_BUILDERS[language](language).build(
-            api_docs)
+        self.api_graph = self.API_GRAPH_BUILDERS[language](
+            language, **options).build(api_docs)
         api_rules_file = options.get("api-rules")
         kwargs = {}
         if api_rules_file:
@@ -57,6 +57,9 @@ class APIGenerator(Generator):
 
         self.inject_error_mode = options.get("inject-type-error", False)
         self.type_erasure_mode = options.get("erase-types", False)
+        self.bounded_type_parameters_mode = options.get(
+            "bounded_type_parameters", False
+        )
         self.start_index = options.get("start-index", 0)
         self.max_conditional_depth = options.get("max-conditional-depth", 4)
 
@@ -64,17 +67,23 @@ class APIGenerator(Generator):
         self.type_eraser: te.TypeEraser = te.TypeEraser(self.api_graph,
                                                         self.bt_factory)
         self.error_injected = None
+        self.test_case_type_params: List[tp.TypeParameter] = []
 
-    def produce_test_case(self, expr: ast.Expr) -> ast.Program:
+    def produce_test_case(self, expr: ast.Expr,
+                          receivers, type_var_map) -> ast.Program:
         func_name = "test"
         decls = list(self.context.get_declarations(
             self.namespace, True).values())
         decls = [d for d in decls
                  if not isinstance(d, ast.ParameterDeclaration)]
         body = decls + ([expr] if expr else [])
+        type_parameters = [v for v in type_var_map.values()
+                           if v.is_type_var()]
+        type_parameters.extend(self.test_case_type_params)
         main_func = ast.FunctionDeclaration(
             func_name,
             params=[],
+            type_parameters=type_parameters,
             ret_type=self.bt_factory.get_void_type(),
             body=ast.Block(body),
             func_type=ast.FunctionDeclaration.FUNCTION)
@@ -107,6 +116,24 @@ class APIGenerator(Generator):
         msg += "\treturn: {ret!s}\n".format(ret=log_types([return_type]))
         log(self.logger, msg)
 
+    def wrap_types_with_type_parameter(self, types: List[tp.TypeParameter]):
+        if utils.random.bool() or types == [self.api_graph.EMPTY]:
+            return types
+        types = list(types)
+        upper_bound = functools.reduce(
+            lambda acc, x: acc if x.is_subtype(acc) else x,
+            types,
+            types[0]
+        )
+        blacklist = [tpa.name for tpa in self.test_case_type_params]
+        type_param = tp.TypeParameter(utils.random.caps(blacklist=blacklist),
+                                      bound=upper_bound)
+        self.test_case_type_params.append(type_param)
+        new_types = [type_param]
+        if len(types) > 1:
+            new_types.extend(types)
+        return new_types
+
     def compute_programs(self):
         program_index = 0
         i = 1
@@ -126,9 +153,14 @@ class APIGenerator(Generator):
                 self.context = Context()
                 self.namespace = test_namespace
                 params = [[p] for p in parameters]
+                receivers = (
+                    [receiver]
+                    if not self.bounded_type_parameters_mode
+                    else self.wrap_types_with_type_parameter([receiver])
+                )
                 expr = self.generate_from_type_combination(
-                    api, [receiver], params, return_type, type_map)
-                yield self.produce_test_case(expr)
+                    api, receivers, params, return_type, type_map)
+                yield self.produce_test_case(expr, [receiver], type_map)
                 self.log_program_info(i, api, [receiver], params, return_type,
                                       type_map)
                 program_index += 1
@@ -152,7 +184,7 @@ class APIGenerator(Generator):
                 expr = self.generate_from_type_combination(api, receivers,
                                                            parameters, ret,
                                                            type_map)
-                yield self.produce_test_case(expr)
+                yield self.produce_test_case(expr, [receiver], type_map)
                 self.log_program_info(i, api, receivers, parameters,
                                       return_type, type_map)
                 program_index += 1
@@ -220,6 +252,7 @@ class APIGenerator(Generator):
 
     def generate_from_type_combination(self, api, receiver, parameters,
                                        return_type, type_map) -> ast.Expr:
+        type_map = copy(type_map)
         receiver, type_var_map, _ = self.generate_expr_from_nodes(
             receiver, type_map, func_ref=False)
         type_var_map.update(type_map)
@@ -416,6 +449,7 @@ class APIGenerator(Generator):
 
     def prepare_next_program(self, program_id):
         self.error_injected = None
+        self.test_case_type_params = []
 
     def _get_target_selection(self, target: tp.Type) -> str:
         if self.inject_error_mode:

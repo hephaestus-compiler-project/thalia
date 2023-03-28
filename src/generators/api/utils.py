@@ -275,3 +275,21 @@ def instantiate_type_variables(api_graph, constraints,
         type_var_assignments[type_var] = assigned_t
 
     return type_var_assignments
+
+
+def replace_instantiation_with_fresh_type_variables(
+    ptype: tp.ParameterizedType,
+    type_var_map: dict
+) -> (tp.ParameterizedType, dict):
+
+    type_vars = utils.random.sample(
+        type_var_map.keys(),
+        utils.random.integer(0, len(type_var_map)))
+
+    for i, type_var in enumerate(type_vars):
+        value = type_var_map[type_var]
+        new_t = tp.TypeParameter("T" + str(i), bound=value)
+        type_var_map[type_var] = new_t
+
+    return tu.instantiate_type_constructor(ptype, [],
+                                           type_var_map=type_var_map)

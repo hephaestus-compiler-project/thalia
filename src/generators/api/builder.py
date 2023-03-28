@@ -17,7 +17,7 @@ PROTECTED = "protected"
 
 
 class APIGraphBuilder(ABC):
-    def __init__(self, target_language):
+    def __init__(self, target_language, **kwargs):
         self.target_language: str = target_language
         self.bt_factory: BuiltinFactory = BUILTIN_FACTORIES[target_language]
         self.api_language: str = None
@@ -35,6 +35,7 @@ class APIGraphBuilder(ABC):
 
         self.parsed_types: Dict[str, tp.Type] = {}
         self.parent_cls: tp.Type = None
+        self.options = kwargs
 
     @abstractmethod
     def get_type_parser(self) -> TypeParser:
@@ -113,7 +114,8 @@ class APIGraphBuilder(ABC):
                 # the corresponding API graph.
                 self.process_class(api_doc)
         return APIGraph(self.graph, self.subtyping_graph,
-                        self.functional_types, self.bt_factory)
+                        self.functional_types, self.bt_factory,
+                        **self.options)
 
     def process_class(self, class_api: dict):
         self.api_language = class_api.get("language", self.api_language)
@@ -375,8 +377,8 @@ class APIGraphBuilder(ABC):
 
 class JavaAPIGraphBuilder(APIGraphBuilder):
 
-    def __init__(self, target_language):
-        super().__init__(target_language)
+    def __init__(self, target_language, **kwargs):
+        super().__init__(target_language, **kwargs)
         self.api_language = "java"
 
     def get_type_parser(self):
@@ -420,8 +422,8 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         "java.util.Map.Entry": "kotlin.collections.MutableMap.MutableEntry"
     }
 
-    def __init__(self, target_language="kotlin"):
-        super().__init__(target_language)
+    def __init__(self, target_language="kotlin", **kwargs):
+        super().__init__(target_language, **kwargs)
 
     def get_type_parser(self):
         parsers = {
@@ -459,8 +461,8 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
 
 
 class ScalaAPIGraphBuilder(APIGraphBuilder):
-    def __init__(self, target_language="scala"):
-        super().__init__(target_language)
+    def __init__(self, target_language="scala", **kwargs):
+        super().__init__(target_language, **kwargs)
 
     def get_type_parser(self):
         return ScalaTypeParser(

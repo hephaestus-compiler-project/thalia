@@ -68,6 +68,11 @@ parser.add_argument(
     help="Injects a type error in the generated program"
 )
 parser.add_argument(
+    "--bounded-type-parameters",
+    action="store_true",
+    help="Creates a test case that involves bounded type parameters"
+)
+parser.add_argument(
     "-t", "--transformations",
     type=int,
     default=0,
@@ -233,6 +238,7 @@ args.options = {
             "max-conditional-depth": args.max_conditional_depth,
             "inject-type-error": args.inject_type_error,
             "erase-types": args.erase_types,
+            "bounded-type-parameters": args.bounded_type_parameters,
         }
     },
     'Translator': {

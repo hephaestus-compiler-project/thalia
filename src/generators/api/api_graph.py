@@ -198,12 +198,10 @@ def _get_type_variables(path: list) -> List[tp.TypeParameter]:
 
 
 class APIGraph():
-    # TODO
-
     EMPTY = 0
 
     def __init__(self, api_graph, subtyping_graph, functional_types,
-                 bt_factory):
+                 bt_factory, **kwargs):
         self.api_graph: nx.DiGraph = api_graph
         self.subtyping_graph: nx.DiGraph = subtyping_graph
         self.functional_types: Dict[tp.Type, tp.ParameterizedType] = \
@@ -214,6 +212,8 @@ class APIGraph():
         self._all_types = {node.name: node
                            for node in self.subtyping_graph.nodes()}
         self.source_nodes_of = {}
+        self.bounded_type_parameters = kwargs.get("bounded_type_parameters",
+                                                  False)
 
     def get_reg_types(self):
         types = [
@@ -425,7 +425,7 @@ class APIGraph():
                 else self.get_type_by_name(target.name) or target.t_constructor
             )
         if target not in self.api_graph:
-            return None, None
+            target_selection = "abstract"
         if target_selection in ["all", "concrete"] or \
                 target.is_type_constructor():
             targets.append(target)
@@ -659,6 +659,10 @@ class APIGraph():
                 # We were unable to instantiate the given type
                 # constructor.
                 return None
+            if self.bounded_type_parameters:
+                inst = au.replace_instantiation_with_fresh_type_variables(
+                    receiver, inst[1])
+            assert inst is not None
             type_var_map.update(inst[1])
             return inst[0], type_var_map
         else:
