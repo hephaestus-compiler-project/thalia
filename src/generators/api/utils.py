@@ -260,7 +260,7 @@ def instantiate_type_variables(api_graph, constraints,
                 # type. TODO: Create an invalid instantiation of the
                 # upper bound type.
                 assigned_t = api_graph.get_reg_types()
-            assigned_t = utils.random.choice(list(assigned_t))
+            assigned_t = tu.select_random_type(list(assigned_t), uniform=True)
         else:
             # Case 2: regular bounds
             assigned_t = tp.substitute_type(t, type_var_assignments)

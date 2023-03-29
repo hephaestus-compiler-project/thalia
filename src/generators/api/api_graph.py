@@ -563,7 +563,7 @@ class APIGraph():
                 possibles_types.add(sub_t)
         return possibles_types
 
-    def _get_functional_type(self, etype: tp.Type) -> tp.ParameterizedType:
+    def get_functional_type(self, etype: tp.Type) -> tp.ParameterizedType:
         if etype.is_parameterized():
             # Check if this the given type is a native function type, e.g.,
             # (Boolean) -> String.
@@ -577,22 +577,6 @@ class APIGraph():
             class_type = self.get_type_by_name(
                 etype.name) or etype.t_constructor
         return self.functional_types.get(class_type)
-
-    def get_functional_type(self, etype: tp.Type) -> tp.ParameterizedType:
-        func_type = self._get_functional_type(etype)
-        if func_type:
-            return func_type
-        # We should not inspect the inheritance chain to retrieve function
-        # type.
-        # supertypes = self.supertypes(etype)
-        # for supertype in supertypes:
-        #     type_var_map = {}
-        #     if supertype.is_parameterized():
-        #         type_var_map = supertype.get_type_variable_assignments()
-        #     func_type = self._get_functional_type(supertype)
-        #     if func_type:
-        #         return tp.substitute_type(func_type, type_var_map)
-        return None
 
     def get_functional_type_instantiated(
             self, etype: tp.Type) -> tp.ParameterizedType:
@@ -653,7 +637,8 @@ class APIGraph():
         blacklist = []
         for i in range(cfg.limits.max_type_params):
             bound = None
-            if utils.random.bool():
+            if utils.random.bool(cfg.prob.bounded_type_parameters):
+                # Add a bound to the generated type parameter
                 bound = self.get_random_type().box_type()
                 source = bound
                 kwargs = {}
@@ -666,6 +651,7 @@ class APIGraph():
             blacklist.append(type_param.name)
             self.subtyping_graph.add_node(type_param)
             if bound:
+                # Capture subtyping relationship in the subtyping graph.
                 self.subtyping_graph.add_edge(source, type_param, **kwargs)
 
     def get_type_parameters(self):

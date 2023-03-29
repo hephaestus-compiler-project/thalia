@@ -416,7 +416,9 @@ class APIGenerator(Generator):
                       gen_bottom=False,
                       sam_coercion=False) -> ast.Expr:
         if expr_type.name == self.bt_factory.get_void_type().name:
-            return ast.Block(body=[])
+            if getattr(expr_type, "primitive", False):
+                # For primitive void we generate an empty block
+                return ast.Block(body=[])
         assert expr_type is not None
         constant_candidates = {
             self.bt_factory.get_number_type().name: gens.gen_integer_constant,
