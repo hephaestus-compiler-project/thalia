@@ -230,17 +230,11 @@ class APIGraph():
 
     def get_random_type(self):
         types = self.get_reg_types()
-        type_params = self.get_type_parameters()
-        if type_params and utils.random.bool():
-            return utils.random.choice(type_params)
-
-        t = utils.random.choice(types)
+        t = tu.select_random_type(types)
         if t.is_type_constructor():
             inst = tu.instantiate_type_constructor(
                 t, types, only_regular=True,
                 rec_bound_handler=self.get_instantiations_of_recursive_bound)
-            if inst is None:
-                import pdb; pdb.set_trace()
             return inst[0]
         return t
 
@@ -551,9 +545,10 @@ class APIGraph():
                        for k, v in sub.items()
                        if v.is_type_var()}
             t = st
-            if any(v != tp.substitute_type(sub.get(k, v), reverse)
-                   for k, v in type_var_map.items()):
-                continue
+            for k, v in type_var_map.items():
+                sub_t = tp.substitute_type(sub.get(k, v), reverse)
+                if v != sub_t or not v.is_subtype(sub_t):
+                    continue
             if st.is_type_constructor():
                 t = st.new(st.type_parameters)
             if t == bound_found:
@@ -652,10 +647,6 @@ class APIGraph():
                     rec_bound_handler=handler)
             if not func_type_var_map:
                 return None
-            if not self.disable_bounded_type_parameters:
-                return self.replace_instantiation_with_fresh_type_variables(
-                    func_type_var_map
-                )
             return func_type_var_map
         return {}
 
@@ -679,19 +670,6 @@ class APIGraph():
     def get_type_parameters(self):
         return [t for t in self.get_reg_types() if t.is_type_var()]
 
-    def replace_instantiation_with_fresh_type_variables(
-        self, type_var_map: dict
-    ) -> (tp.ParameterizedType, dict):
-
-        type_vars = utils.random.sample(
-            type_var_map.keys(),
-            utils.random.integer(0, len(type_var_map)))
-
-        for i, type_var in enumerate(type_vars):
-            new_t = utils.random.choice(self.get_type_parameters())
-            type_var_map[type_var] = new_t
-        return type_var_map
-
     def instantiate_receiver_type(self, receiver: tp.Type):
         type_var_map = {}
         outer_type = self.api_graph.nodes[receiver].get("outer_class")
@@ -710,13 +688,6 @@ class APIGraph():
                 # We were unable to instantiate the given type
                 # constructor.
                 return None
-            if not self.disable_bounded_type_parameters:
-                rec_type_map = \
-                    self.replace_instantiation_with_fresh_type_variables(
-                        inst[1])
-                inst = tu.instantiate_type_constructor(
-                    receiver, [], type_var_map=rec_type_map)
-            assert inst is not None
             type_var_map.update(inst[1])
             return inst[0], type_var_map
         else:
