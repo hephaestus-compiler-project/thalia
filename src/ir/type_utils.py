@@ -24,6 +24,23 @@ and the second for contravariance.
 """
 
 
+def select_random_type(types: List[tp.Type], uniform=False) -> tp.Type:
+    assert len(types) != 0
+    if uniform:
+        return utils.random.choice(types)
+    type_vars, reg_types = [], []
+    weights = []
+    for t in types:
+        (reg_types, type_vars)[int(isinstance(t, tp.TypeParameter))].append(t)
+
+    for t in types:
+        if isinstance(t, tp.TypeParameter):
+            weights.append(0.5 / len(type_vars))
+        else:
+            weights.append(0.5 / len(reg_types))
+    return utils.random.choices(types, weights=weights, k=1)[0]
+
+
 def _replace_type_argument(base_targ: tp.Type, bound: tp.Type, types,
                            has_type_variables):
     # If the bound of the corresponding parameter does not contain type
@@ -210,7 +227,7 @@ def _construct_related_types(etype: tp.ParameterizedType, types, get_subtypes,
             # Type argument should not be primitives.
             if etype.t_constructor.name != "Array":
                 t_args = [t for t in t_args if not t.is_primitive()]
-            t_arg = utils.random.choice(t_args)
+            t_arg = select_random_type(t_args, uniform=True)
             type_var_map[t_param] = t_arg
     return etype.t_constructor.new(list(type_var_map.values()))
 
@@ -287,7 +304,7 @@ def get_irrelevant_parameterized_type(etype, types, type_args_map,
             type_list = [to_type(t, types)
                          for t in types
                          if t != type_args[i]]
-            new_type_args[i] = utils.random.choice(type_list)
+            new_type_args[i] = select_random_type(type_list)
         else:
             t = find_irrelevant_type(type_args[i], types, factory)
             if t is None:
@@ -341,7 +358,7 @@ def find_irrelevant_type(etype: tp.Type, types: List[tp.Type],
     reg_supertypes = etype.get_supertypes()
     found = False
     while available_types:
-        t = utils.random.choice(available_types)
+        t = select_random_type(available_types)
         available_types.remove(t)
         supers = t.get_supertypes()
         # We search for a type that does not have the same inheritance chain
@@ -593,7 +610,7 @@ def substitute_invariant_wildcard_with(
     type_args = []
     for t_arg in t.type_args:
         if t_arg.is_wildcard() and t_arg.is_invariant():
-            type_args.append(utils.random.choice(types))
+            type_args.append(select_random_type(types))
         else:
             type_args.append(t_arg)
     return t.t_constructor.new(type_args)
@@ -700,7 +717,7 @@ def _compute_type_variable_assignments(
             # Unfortunately, we are unable to instantiate type variables with
             # the given constructors.
             return None
-        c = utils.random.choice(a_types)
+        c = select_random_type(a_types)
         if isinstance(c, ast.ClassDeclaration):
             cls_type = c.get_type()
         else:
@@ -816,7 +833,7 @@ def instantiate_parameterized_function(
 def choose_type(types: List[tp.Type], only_regular=True):
     # Randomly choose a type from the list of available types.
     types = _get_available_types(None, types, only_regular)
-    c = utils.random.choice(types)
+    c = select_random_type(types)
     if isinstance(c, ast.ClassDeclaration):
         cls_type = c.get_type()
     else:
