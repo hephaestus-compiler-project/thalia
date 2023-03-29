@@ -1090,6 +1090,9 @@ class JavaTranslator(BaseTranslator):
                 if node.func != ast.FunctionReference.NEW_REF
                 else self.get_type_name(node.receiver.class_type)
             )
+            if isinstance(node.receiver, ast.Constant):
+                # e.g., ((Integer) 1)::toString
+                receiver = "(" + receiver + ")"
         else:
             # Global function
             receiver = ""

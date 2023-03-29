@@ -862,6 +862,10 @@ class GroovyTranslator(BaseTranslator):
             )
         )
 
+        if isinstance(node.receiver, ast.Constant):
+            # e.g., ((Integer) 1)::toString
+            receiver = "(" + receiver + ")"
+
         receiver += "::"  # We can also use .&
         res = "{ident}{receiver}{name}{cast}".format(
             ident=self.get_ident(),
