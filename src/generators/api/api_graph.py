@@ -6,7 +6,7 @@ import networkx as nx
 
 from src import utils
 from src.ir import types as tp, type_utils as tu
-from src.generators import config as cfg
+from src.generators.config import cfg
 from src.generators.api import utils as au
 from src.generators.api.matcher import Matcher
 
@@ -810,8 +810,7 @@ class APIGraph():
             self.generate_type_params()
             ret = self.encode_receiver(node)
             if ret is None:
-                for tpa in self.get_type_parameters():
-                    self.subtyping_graph.remove_node(tpa)
+                self.remove_types(self.get_type_parameters())
                 continue
             receivers, type_var_map = ret
             parameters = [{tp.substitute_type(p.t, type_var_map)}
@@ -840,6 +839,5 @@ class APIGraph():
                                          frozenset(ret_types),
                                          type_var_map,
                                          self.get_type_parameters()))
-            for tpa in self.get_type_parameters():
-                self.subtyping_graph.remove_node(tpa)
+            self.remove_types(self.get_type_parameters())
         return encodings
