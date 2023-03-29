@@ -214,7 +214,6 @@ class APIGraph():
         self.source_nodes_of = {}
         self.disable_bounded_type_parameters = kwargs.get(
             "disable_bounded_type_parameters", False)
-        self.blacklist = []
 
     def get_reg_types(self):
         types = [
@@ -651,6 +650,7 @@ class APIGraph():
         return {}
 
     def generate_type_params(self):
+        blacklist = []
         for i in range(cfg.limits.max_type_params):
             bound = None
             if utils.random.bool():
@@ -662,7 +662,8 @@ class APIGraph():
                         bound.get_type_variable_assignments()
                     source = self.get_type_by_name(bound.name)
             type_param = tp.TypeParameter(utils.random.caps(
-                blacklist=self.blacklist), bound=bound)
+                blacklist=blacklist), bound=bound)
+            blacklist.append(type_param.name)
             self.subtyping_graph.add_node(type_param)
             if bound:
                 self.subtyping_graph.add_edge(source, type_param, **kwargs)
@@ -777,7 +778,6 @@ class APIGraph():
         for node in api_nodes:
             if matcher and not matcher.match(node):
                 continue
-            self.blacklist = []
             self.generate_type_params()
             ret = self.encode_receiver(node)
             if ret is None:
