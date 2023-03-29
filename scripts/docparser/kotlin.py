@@ -12,6 +12,9 @@ class KotlinAPIDocConverter(APIDocConverter):
     PROTECTED = "protected"
     PUBLIC = "public"
 
+    def __init__(self, args):
+        super().__init__()
+
     def process(self, args):
         toplevel_path = Path(args.input).joinpath("index.html")
         self.api_path = os.path.dirname(toplevel_path)

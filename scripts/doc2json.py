@@ -39,20 +39,25 @@ def get_args():
         required=True,
         help="Input directory of API docs"
     )
+    parser.add_argument(
+        "--jdk-docs",
+        action="store_true",
+        help="Indicate whether the documentation is related to JDK"
+    )
     return parser.parse_args()
 
 
 CONVERTERS = {
-    "java": JavaAPIDocConverter(),
-    "kotlin": KotlinAPIDocConverter(),
-    "scala": ScalaAPIDocConverter(),
+    "java": JavaAPIDocConverter,
+    "kotlin": KotlinAPIDocConverter,
+    "scala": ScalaAPIDocConverter,
 }
 
 
 def main():
     args = get_args()
     preprocess_args(args)
-    converter = CONVERTERS.get(args.language)
+    converter = CONVERTERS.get(args.language)(args)
     converter.process(args)
 
 

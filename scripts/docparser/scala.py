@@ -14,7 +14,7 @@ class ScalaAPIDocConverter(APIDocConverter):
     PUBLIC = "public"
     OBJECT = 5
 
-    def __init__(self):
+    def __init__(self, args):
         super().__init__()
         self.class_name = None
         self.is_object = False

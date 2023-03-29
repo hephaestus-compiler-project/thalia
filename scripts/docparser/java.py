@@ -3,7 +3,7 @@ import re
 import urllib
 
 from docparser.base import APIDocConverter
-from docparser.utils import file2html, dict2json
+from docparser.utils import file2html, dict2json, top_level_split
 
 
 class JavaAPIDocConverter(APIDocConverter):
@@ -15,12 +15,18 @@ class JavaAPIDocConverter(APIDocConverter):
     PROTECTED = "protected"
     PUBLIC = "public"
 
-    def __init__(self):
+    def __init__(self, args):
         super().__init__()
         self._current_api_cls = None
+        self.jdk_docs = args.jdk_docs
 
     def extract_package_name(self, html_doc):
-        return html_doc.find_all(class_="subTitle")[0].find_all(text=True)[2]
+        if self.jdk_docs:
+            return html_doc.find_all(class_="subTitle")[1].find_all(
+                text=True)[2]
+        else:
+            return html_doc.find_all(class_="subTitle")[0].find_all(
+                text=True)[0]
 
     def extract_class_name(self, html_doc):
         regex = re.compile("([@A-Za-z0-9\\.]+).*")
@@ -45,7 +51,6 @@ class JavaAPIDocConverter(APIDocConverter):
         return re.findall(regex, text)
 
     def extract_super_class(self, html_doc):
-        regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
         supercls_defs = html_doc.select(".description .blockList pre")[0]
         self._replace_anchors_with_package_prefix(supercls_defs.select("a"))
         text = supercls_defs.text.encode("ascii", "ignore").decode()
@@ -56,7 +61,7 @@ class JavaAPIDocConverter(APIDocConverter):
             return []
 
         text = match.group(1).split(" implements ")[0].replace(", ", ",")
-        return [p for p in re.findall(regex, text)]
+        return top_level_split(text)
 
     def extract_class_type(self, html_doc):
         text = html_doc.select(".description pre")[0].text
@@ -69,7 +74,6 @@ class JavaAPIDocConverter(APIDocConverter):
         return self.REGULAR_CLASS
 
     def extract_super_interfaces(self, html_doc):
-        regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
         text = html_doc.select(".description .blockList pre")[0].text.encode(
             "ascii", "ignore").decode()
         text = text.replace("\n", " ")
@@ -77,7 +81,7 @@ class JavaAPIDocConverter(APIDocConverter):
         if len(segs) == 1:
             return []
         text = segs[1].replace(", ", ",")
-        return [p for p in re.findall(regex, text)]
+        return top_level_split(text)
 
     def extract_functional_interface(self, html_doc):
         text = html_doc.select(".description .blockList pre")[0].text.encode(
@@ -167,8 +171,7 @@ class JavaAPIDocConverter(APIDocConverter):
                 text))
         type_parameters = match.group(4)
         if type_parameters:
-            regex = re.compile(r"(?:[^,<]|<[^>]*>)+")
-            type_parameters = re.findall(regex, type_parameters)
+            type_parameters = top_level_split(type_parameters)
         return type_parameters or []
 
     def extract_method_return_type(self, method_doc, is_constructor):
@@ -205,9 +208,13 @@ class JavaAPIDocConverter(APIDocConverter):
                 anchor.string.replace_with(package_prefix + "." + anchor.text)
 
     def extract_method_parameter_types(self, method_doc, is_constructor):
-        key = (".colConstructorName code"
-               if is_constructor else ".colSecond code")
-        regex = re.compile(r'(?:[^ <]|<[^>]*>)+')
+        regex = re.compile(r'(.+) [a-zA-Z_]+')
+        if self.jdk_docs:
+            key = ".colConstructorName code" if is_constructor else \
+                ".colSecond code"
+        else:
+            key = (".colOne code"
+                   if is_constructor else ".colLast code")
         self._replace_anchors_with_package_prefix(
             method_doc.select(key + " a"))
         try:
@@ -219,8 +226,8 @@ class JavaAPIDocConverter(APIDocConverter):
             return None
         if not text:
             return []
-        elements = re.findall(regex, text)
-        param_types = [elements[i] for i in range(0, len(elements), 2)]
+        elements = top_level_split(text)
+        param_types = [regex.search(elem).group(1) for elem in elements]
         return param_types
 
     def extract_method_access_mod(self, method_doc, is_con):
@@ -234,7 +241,11 @@ class JavaAPIDocConverter(APIDocConverter):
 
     def extract_method_name(self, method_doc, is_constructor):
         try:
-            key = ".colConstructorName a" if is_constructor else ".colSecond a"
+            if self.jdk_docs:
+                key = ".colConstructorName a" if is_constructor else \
+                    ".colSecond a"
+            else:
+                key = ".memberNameLink a" if is_constructor else ".colLast a"
             return method_doc.select(key)[0].text
         except IndexError:
             # We are probably in a field
@@ -256,6 +267,8 @@ class JavaAPIDocConverter(APIDocConverter):
         # This is a ref to another class
         if href.endswith(".html"):
             return []
+        if not self.jdk_docs:
+            return []
         method_summary = self._current_api_cls.find(
             id=href[1:]).nextSibling.nextSibling
         throws_summary = method_summary.find(class_="throwsLabel")
@@ -274,10 +287,14 @@ class JavaAPIDocConverter(APIDocConverter):
         return exception_refs
 
     def is_constructor(self, method_doc):
-        return method_doc.find(class_="colConstructorName") is not None
+        if self.jdk_docs:
+            return method_doc.find(class_="colConstructorName") is not None
+        return method_doc.find(class_="memberNameLink") is not None and \
+            method_doc.find(class_="colLast") is None
 
     def extract_field_name(self, field_doc):
-        return field_doc.select(".colSecond a")[0].text
+        key = ".colSecond a" if self.jdk_docs else ".colLast a"
+        return field_doc.select(key)[0].text
 
     def extract_field_type(self, field_doc):
         return self.extract_method_return_type(field_doc, False)
