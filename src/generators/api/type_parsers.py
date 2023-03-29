@@ -4,6 +4,7 @@ from typing import Dict
 import re
 
 
+from src import utils
 from src.ir import (BUILTIN_FACTORIES, types as tp, kotlin_types as kt,
                     scala_types as sc)
 from src.ir.builtins import BuiltinFactory
@@ -58,8 +59,6 @@ class TypeParser(ABC):
 
 
 class JavaTypeParser(TypeParser):
-    TYPE_ARG_REGEX = re.compile(r'(?:[^,<]|<[^>]*>)+')
-
     def __init__(self, target_language: str,
                  class_type_name_map: Dict[str, tp.TypeParameter] = None,
                  func_type_name_map: Dict[str, tp.TypeParameter] = None,
@@ -121,7 +120,7 @@ class JavaTypeParser(TypeParser):
             parsed_t = tp.SimpleClassifier(str_t)
             return self.type_spec.get(str_t, parsed_t)
         base, type_args_str = segs[0], segs[1][:-1]
-        type_args = re.findall(self.TYPE_ARG_REGEX, type_args_str)
+        type_args = utils.top_level_split(type_args_str)
         new_type_args = []
         for type_arg in type_args:
             new_type_args.append(self.parse_type(type_arg))

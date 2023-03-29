@@ -1,4 +1,5 @@
 from collections import defaultdict
+from typing import Tuple, List
 import random
 import string
 import pickle
@@ -27,6 +28,36 @@ def is_number(string_var):
         return True
     except ValueError:
         return False
+
+
+def top_level_split(s: str, signs: Tuple[str] = ("<", ">")) -> List[str]:
+    """
+    Split `s` by top-level commas only.
+    Commas within signs are ignored.
+
+    Taken from: https://stackoverflow.com/a/33527583
+    """
+    # Parse the string tracking whether the current character is within
+    # parentheses.
+    balance = 0
+    parts = []
+    part = ''
+    start, end = signs
+
+    for c in s:
+        part += c
+        if c == start:
+            balance += 1
+        elif c == end:
+            balance -= 1
+        elif c == ',' and balance == 0:
+            parts.append(part[:-1].strip())
+            part = ''
+    # Capture last part
+    if len(part):
+        parts.append(part.strip())
+
+    return parts
 
 
 def lst_get(lst, index=0, default=None):

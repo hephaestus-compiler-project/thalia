@@ -57,6 +57,31 @@ def test_regular_types():
     assert t == t2
 
 
+def test_nested_parameterized_types():
+    b = JavaTypeParser("java")
+    actual_t = b.parse_type("java.Foo<java.lang.String,java.Map<java.List<java.lang.Integer>,java.lang.Object>>")
+    exp_t = tp.TypeConstructor(
+        "java.Foo",
+        [
+            tp.TypeParameter("java.Foo.T1"),
+            tp.TypeParameter("java.Foo.T2"),
+        ]
+    ).new([
+        jt.String,
+        tp.TypeConstructor(
+            "java.Map",
+            [tp.TypeParameter("java.Map.T1"),
+             tp.TypeParameter("java.Map.T2")]
+        ).new([
+            tp.TypeConstructor(
+                "java.List", [tp.TypeParameter("java.List.T1")]
+            ).new([jt.Integer]),
+            jt.Object
+        ]),
+    ])
+    assert actual_t == exp_t
+
+
 def test_type_variables():
     b = JavaTypeParser("java")
     assert b.parse_type("T") == tp.TypeParameter("T")
