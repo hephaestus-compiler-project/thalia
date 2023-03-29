@@ -70,15 +70,14 @@ class APIGenerator(Generator):
         self.test_case_type_params: List[tp.TypeParameter] = []
 
     def produce_test_case(self, expr: ast.Expr,
-                          receivers, type_var_map) -> ast.Program:
+                          type_parameters) -> ast.Program:
         func_name = "test"
         decls = list(self.context.get_declarations(
             self.namespace, True).values())
         decls = [d for d in decls
                  if not isinstance(d, ast.ParameterDeclaration)]
         body = decls + ([expr] if expr else [])
-        type_parameters = [v for v in type_var_map.values()
-                           if v.is_type_var()]
+        type_parameters = list(type_parameters)
         type_parameters.extend(self.test_case_type_params)
         main_func = ast.FunctionDeclaration(
             func_name,
@@ -116,7 +115,8 @@ class APIGenerator(Generator):
         msg += "\treturn: {ret!s}\n".format(ret=log_types([return_type]))
         log(self.logger, msg)
 
-    def wrap_types_with_type_parameter(self, types: List[tp.TypeParameter]):
+    def wrap_types_with_type_parameter(self, types: List[tp.TypeParameter],
+                                       blacklist):
         if utils.random.bool() or types == [self.api_graph.EMPTY]:
             return types
         types = list(types)
@@ -125,7 +125,6 @@ class APIGenerator(Generator):
             types,
             types[0]
         )
-        blacklist = [tpa.name for tpa in self.test_case_type_params]
         type_param = tp.TypeParameter(utils.random.caps(blacklist=blacklist),
                                       bound=upper_bound)
         self.test_case_type_params.append(type_param)
@@ -139,7 +138,8 @@ class APIGenerator(Generator):
         i = 1
         func_name = "test"
         test_namespace = ast.GLOBAL_NAMESPACE + (func_name,)
-        for api, receivers, parameters, returns, type_map in self.encodings:
+        for (api, receivers, parameters, returns,
+             type_map, type_parameters) in self.encodings:
             types = (receivers, *parameters, returns)
             if types in self.visited:
                 continue
@@ -150,17 +150,20 @@ class APIGenerator(Generator):
                 if program_index < self.start_index:
                     program_index += 1
                     continue
+                self.api_graph.add_types(type_parameters)
                 self.context = Context()
                 self.namespace = test_namespace
                 params = [[p] for p in parameters]
+                blacklist = [tpa.name for tpa in type_parameters]
                 receivers = (
                     [receiver]
                     if self.disable_bounded_type_parameters
-                    else self.wrap_types_with_type_parameter([receiver])
+                    else self.wrap_types_with_type_parameter([receiver],
+                                                             blacklist)
                 )
                 expr = self.generate_from_type_combination(
                     api, receivers, params, return_type, type_map)
-                yield self.produce_test_case(expr, [receiver], type_map)
+                yield self.produce_test_case(expr, type_parameters)
                 self.log_program_info(i, api, [receiver], params, return_type,
                                       type_map)
                 program_index += 1
@@ -174,21 +177,24 @@ class APIGenerator(Generator):
                 self.max_conditional_depth, len(types[0])))
             if all(len(p) == 1 for p in parameters) and len(receivers) == 1:
                 # No conditinal can be created.
+                self.api_graph.remove_types(type_parameters)
                 continue
             for ret in types[-1]:
                 if program_index < self.start_index:
                     program_index += 1
+                    self.api_graph.remove_types(type_parameters)
                     continue
                 self.context = Context()
                 self.namespace = test_namespace
                 expr = self.generate_from_type_combination(api, receivers,
                                                            parameters, ret,
                                                            type_map)
-                yield self.produce_test_case(expr, [receiver], type_map)
+                yield self.produce_test_case(expr, type_parameters)
                 self.log_program_info(i, api, receivers, parameters,
                                       return_type, type_map)
                 program_index += 1
                 i += 1
+                self.api_graph.remove_types(type_parameters)
 
     def generate_expr_from_node(self, node: tp.Type,
                                 func_ref: bool,

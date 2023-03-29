@@ -6,6 +6,7 @@ import networkx as nx
 
 from src import utils
 from src.ir import types as tp, type_utils as tu
+from src.generators import config as cfg
 from src.generators.api import utils as au
 from src.generators.api.matcher import Matcher
 
@@ -179,6 +180,7 @@ class APIEncoding(NamedTuple):
     parameters: Set[tp.Type]
     returns: Set[tp.Type]
     type_var_map: dict
+    type_parameters: List[tp.TypeParameter]
 
 
 def _get_type_variables(path: list) -> List[tp.TypeParameter]:
@@ -207,20 +209,19 @@ class APIGraph():
         self.functional_types: Dict[tp.Type, tp.ParameterizedType] = \
             functional_types
         self.bt_factory = bt_factory
-        self._types = {node
-                       for node in self.subtyping_graph.nodes()}
         self._all_types = {node.name: node
                            for node in self.subtyping_graph.nodes()}
         self.source_nodes_of = {}
         self.disable_bounded_type_parameters = kwargs.get(
             "disable_bounded_type_parameters", False)
+        self.blacklist = []
 
     def get_reg_types(self):
         types = [
             t
-            for t in self._types
+            for t in self.subtyping_graph.nodes()
             if (
-                not t.has_type_variables() and
+                not (t.is_parameterized() and t.has_type_variables()) and
                 t != self.bt_factory.get_void_type() and
                 not getattr(t, "primitive", False)
             )
@@ -229,11 +230,18 @@ class APIGraph():
 
     def get_random_type(self):
         types = self.get_reg_types()
+        type_params = self.get_type_parameters()
+        if type_params and utils.random.bool():
+            return utils.random.choice(type_params)
+
         t = utils.random.choice(types)
         if t.is_type_constructor():
-            return tu.instantiate_type_constructor(
+            inst = tu.instantiate_type_constructor(
                 t, types, only_regular=True,
                 rec_bound_handler=self.get_instantiations_of_recursive_bound)
+            if inst is None:
+                import pdb; pdb.set_trace()
+            return inst[0]
         return t
 
     def get_type_by_name(self, typename):
@@ -405,6 +413,12 @@ class APIGraph():
     def remove_variable_node(self, name: str):
         self.api_graph.remove_node(Variable(name))
 
+    def add_types(self, nodes: List[tp.Type]):
+        self.subtyping_graph.add_nodes_from(nodes)
+
+    def remove_types(self, nodes: List[tp.Type]):
+        self.subtyping_graph.remove_nodes_from(nodes)
+
     def get_sources_and_target(
             self, target: tp.Type,
             target_selection: str) -> (List[APINode], APINode):
@@ -462,7 +476,7 @@ class APIGraph():
             return None
 
         with_constraints = with_constraints or {}
-        if isinstance(target, tp.TypeParameter):
+        if target.is_type_var():
             with_constraints[target] = origin.box_type()
 
         for source in utils.random.shuffle(source_nodes):
@@ -638,8 +652,45 @@ class APIGraph():
                     rec_bound_handler=handler)
             if not func_type_var_map:
                 return None
+            if not self.disable_bounded_type_parameters:
+                return self.replace_instantiation_with_fresh_type_variables(
+                    func_type_var_map
+                )
             return func_type_var_map
         return {}
+
+    def generate_type_params(self):
+        for i in range(cfg.limits.max_type_params):
+            bound = None
+            if utils.random.bool():
+                bound = self.get_random_type().box_type()
+                source = bound
+                kwargs = {}
+                if bound.is_parameterized():
+                    kwargs["constraint"] = \
+                        bound.get_type_variable_assignments()
+                    source = self.get_type_by_name(bound.name)
+            type_param = tp.TypeParameter(utils.random.caps(
+                blacklist=self.blacklist), bound=bound)
+            self.subtyping_graph.add_node(type_param)
+            if bound:
+                self.subtyping_graph.add_edge(source, type_param, **kwargs)
+
+    def get_type_parameters(self):
+        return [t for t in self.get_reg_types() if t.is_type_var()]
+
+    def replace_instantiation_with_fresh_type_variables(
+        self, type_var_map: dict
+    ) -> (tp.ParameterizedType, dict):
+
+        type_vars = utils.random.sample(
+            type_var_map.keys(),
+            utils.random.integer(0, len(type_var_map)))
+
+        for i, type_var in enumerate(type_vars):
+            new_t = utils.random.choice(self.get_type_parameters())
+            type_var_map[type_var] = new_t
+        return type_var_map
 
     def instantiate_receiver_type(self, receiver: tp.Type):
         type_var_map = {}
@@ -660,8 +711,11 @@ class APIGraph():
                 # constructor.
                 return None
             if not self.disable_bounded_type_parameters:
-                inst = au.replace_instantiation_with_fresh_type_variables(
-                    receiver, inst[1])
+                rec_type_map = \
+                    self.replace_instantiation_with_fresh_type_variables(
+                        inst[1])
+                inst = tu.instantiate_type_constructor(
+                    receiver, [], type_var_map=rec_type_map)
             assert inst is not None
             type_var_map.update(inst[1])
             return inst[0], type_var_map
@@ -752,8 +806,12 @@ class APIGraph():
         for node in api_nodes:
             if matcher and not matcher.match(node):
                 continue
+            self.blacklist = []
+            self.generate_type_params()
             ret = self.encode_receiver(node)
             if ret is None:
+                for tpa in self.get_type_parameters():
+                    self.subtyping_graph.remove_node(tpa)
                 continue
             receivers, type_var_map = ret
             parameters = [{tp.substitute_type(p.t, type_var_map)}
@@ -780,5 +838,8 @@ class APIGraph():
             encodings.append(APIEncoding(node, frozenset(receivers),
                                          parameters,
                                          frozenset(ret_types),
-                                         type_var_map))
+                                         type_var_map,
+                                         self.get_type_parameters()))
+            for tpa in self.get_type_parameters():
+                self.subtyping_graph.remove_node(tpa)
         return encodings
