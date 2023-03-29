@@ -149,6 +149,9 @@ class RandomUtils():
     def choice(self, choices):
         return self.r.choice(choices)
 
+    def choices(self, choices, weights, k):
+        return self.r.choices(choices, weights=weights, k=k)
+
     def sample(self, choices, k=None):
         k = k or self.integer(0, len(choices))
         return self.r.sample(choices, k)
