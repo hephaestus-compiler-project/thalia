@@ -1,0 +1,192 @@
+{
+  "name": "java.io.Writer",
+  "type_parameters": [],
+  "implements": [
+    "java.lang.Appendable",
+    "java.io.Closeable",
+    "java.io.Flushable"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "append",
+      "parameters": [
+        "java.lang.CharSequence"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.Writer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "close",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "nullWriter",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.io.Writer",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "char[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "append",
+      "parameters": [
+        "char"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.Writer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "append",
+      "parameters": [
+        "java.lang.CharSequence",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.Writer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "flush",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "char[]"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.lang.String",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "lock",
+      "type": "java.lang.Object",
+      "is_static": false,
+      "access_mod": "protected"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

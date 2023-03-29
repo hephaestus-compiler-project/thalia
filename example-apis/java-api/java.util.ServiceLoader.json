@@ -1,0 +1,147 @@
+{
+  "name": "java.util.ServiceLoader",
+  "type_parameters": [
+    "S"
+  ],
+  "implements": [
+    "java.lang.Iterable<S>"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "iterator",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Iterator<S>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "load",
+      "parameters": [
+        "java.lang.Class<S>",
+        "java.lang.ClassLoader"
+      ],
+      "type_parameters": [
+        "S"
+      ],
+      "return_type": "java.util.ServiceLoader<S>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.ServiceConfigurationError"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "loadInstalled",
+      "parameters": [
+        "java.lang.Class<S>"
+      ],
+      "type_parameters": [
+        "S"
+      ],
+      "return_type": "java.util.ServiceLoader<S>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.ServiceConfigurationError"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "stream",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.Stream<java.util.ServiceLoader.Provider<S>>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "findFirst",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Optional<S>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.ServiceConfigurationError",
+        "Errors"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "load",
+      "parameters": [
+        "java.lang.Class<S>"
+      ],
+      "type_parameters": [
+        "S"
+      ],
+      "return_type": "java.util.ServiceLoader<S>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.ServiceConfigurationError"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "load",
+      "parameters": [
+        "java.lang.ModuleLayer",
+        "java.lang.Class<S>"
+      ],
+      "type_parameters": [
+        "S"
+      ],
+      "return_type": "java.util.ServiceLoader<S>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.ServiceConfigurationError"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "reload",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

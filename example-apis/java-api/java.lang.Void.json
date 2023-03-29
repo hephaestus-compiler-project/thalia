@@ -1,0 +1,21 @@
+{
+  "name": "java.lang.Void",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [],
+  "fields": [
+    {
+      "name": "TYPE",
+      "type": "java.lang.Class<java.lang.Void>",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

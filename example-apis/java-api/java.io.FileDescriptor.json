@@ -1,0 +1,69 @@
+{
+  "name": "java.io.FileDescriptor",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "valid",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "sync",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.SyncFailedException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "FileDescriptor",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "in",
+      "type": "java.io.FileDescriptor",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "err",
+      "type": "java.io.FileDescriptor",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "out",
+      "type": "java.io.FileDescriptor",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

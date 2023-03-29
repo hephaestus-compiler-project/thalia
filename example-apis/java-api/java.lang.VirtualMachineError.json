@@ -1,0 +1,14 @@
+{
+  "name": "java.lang.VirtualMachineError",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Error"
+  ],
+  "class_type": 2,
+  "methods": [],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

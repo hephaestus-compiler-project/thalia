@@ -1,0 +1,76 @@
+{
+  "name": "java.lang.System.LoggerFinder",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getLogger",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Module"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.System.Logger",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getLocalizedLogger",
+      "parameters": [
+        "java.lang.String",
+        "java.util.ResourceBundle",
+        "java.lang.Module"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.System.Logger",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getLoggerFinder",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.System.LoggerFinder",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "LoggerFinder",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "protected",
+      "throws": [
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": "System",
+  "language": "java"
+}

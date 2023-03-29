@@ -1,0 +1,41 @@
+{
+  "name": "java.util.Spliterator.OfInt",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.util.Spliterator.OfPrimitive<java.lang.Integer,java.util.function.IntConsumer,java.util.Spliterator.OfInt>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "tryAdvance",
+      "parameters": [
+        "java.util.function.Consumer<? super java.lang.Integer>"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "forEachRemaining",
+      "parameters": [
+        "java.util.function.Consumer<? super java.lang.Integer>"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": "Spliterator",
+  "language": "java"
+}

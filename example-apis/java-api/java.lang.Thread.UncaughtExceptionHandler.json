@@ -1,0 +1,27 @@
+{
+  "name": "java.lang.Thread.UncaughtExceptionHandler",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "uncaughtException",
+      "parameters": [
+        "java.lang.Thread",
+        "java.lang.Throwable"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": true,
+  "parent": "Thread",
+  "language": "java"
+}

@@ -1,0 +1,76 @@
+{
+  "name": "java.lang.ModuleLayer.Controller",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "addOpens",
+      "parameters": [
+        "java.lang.Module",
+        "java.lang.String",
+        "java.lang.Module"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ModuleLayer.Controller",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "layer",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.ModuleLayer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "addExports",
+      "parameters": [
+        "java.lang.Module",
+        "java.lang.String",
+        "java.lang.Module"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ModuleLayer.Controller",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "addReads",
+      "parameters": [
+        "java.lang.Module",
+        "java.lang.Module"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ModuleLayer.Controller",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": "ModuleLayer",
+  "language": "java"
+}
