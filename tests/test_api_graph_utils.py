@@ -106,11 +106,14 @@ def test_collect_constraints():
     t1 = tp.TypeParameter("T1")
     t2 = tp.TypeParameter("T2")
     t3 = tp.TypeParameter("T3")
-    assignment_graph = {t2: t1, t3: t1}
+    assignment_graph = {t2: t1, t3: t2}
     target = tp.SimpleClassifier("T")
     assert au.collect_constraints(target, [t1, t2, t3],
-                                  assignment_graph) == {t1: set(), t2: set(),
-                                                        t3: set()}
+                                  assignment_graph) == {
+                                      t1: set(),
+                                      t2: {au.EqualityConstraint(t1)},
+                                      t3: {au.EqualityConstraint(t2)}
+                                  }
 
     # Case 2
     # T1:
@@ -125,7 +128,7 @@ def test_collect_constraints():
         target, [t1, t2, t3], assignment_graph) == {
             t1: set(),
             t2: {au.UpperBoundConstraint(kt.Number)},
-            t3: set()}
+            t3: {au.EqualityConstraint(t2)}}
 
     # Case 3
     # T1:
@@ -140,9 +143,9 @@ def test_collect_constraints():
     target = tp.TypeConstructor("F", [t3]).new([kt.String])
     assert au.collect_constraints(
         target, [t1, t2, t3], assignment_graph) == {
-            t1: {au.UpperBoundConstraint(kt.Number), au.EqualityConstraint(kt.String)},
-            t2: set(),
-            t3: set()}
+            t1: {au.EqualityConstraint(kt.String)},
+            t2: {au.UpperBoundConstraint(kt.Number), au.EqualityConstraint(t1)},
+            t3: {au.EqualityConstraint(t1)}}
 
 
     # Case 4
@@ -194,10 +197,10 @@ def test_collect_constraints():
     assert au.collect_constraints(
         target, [t1, t2, t3, t4, t5], assignment_graph) == {
             t1: {au.EqualityConstraint(kt.Integer), au.UpperBoundConstraint(kt.Number)},
-            t2: set(),
+            t2: {au.EqualityConstraint(t1)},
             t3: {au.EqualityConstraint(kt.String)},
-            t4: set(),
-            t5: set(),
+            t4: {au.EqualityConstraint(t1)},
+            t5: {au.EqualityConstraint(t1)},
         }
 
     # Case 7
@@ -213,10 +216,10 @@ def test_collect_constraints():
     assert au.collect_constraints(
         target, [t1, t2, t3, t4, t5], assignment_graph) == {
             t1: {au.EqualityConstraint(kt.Integer), au.UpperBoundConstraint(kt.Number)},
-            t2: set(),
+            t2: {au.EqualityConstraint(t1)},
             t3: {au.EqualityConstraint(kt.String)},
-            t4: set(),
-            t5: set(),
+            t4: {au.EqualityConstraint(t1)},
+            t5: {au.EqualityConstraint(t1)},
         }
 
 
@@ -266,7 +269,7 @@ def test_collect_constraints_wildcard():
     assert au.collect_constraints(
         target, [t1, t2], assignment_graph) == {
             t1: set(),
-            t2: set(),
+            t2: {au.EqualityConstraint(t1)},
         }
 
     # Case 2
@@ -279,5 +282,5 @@ def test_collect_constraints_wildcard():
     assert au.collect_constraints(
         target, [t1, t2], assignment_graph) == {
             t1: {au.EqualityConstraint(kt.Number)},
-            t2: set(),
+            t2: {au.EqualityConstraint(t1)},
         }

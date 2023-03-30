@@ -88,7 +88,7 @@ def collect_constraints(target: tp.Type,
     for node in type_variables:
         constraints[node]
         t = tp.substitute_type(node, assignment_graph)
-        if t.has_type_variables():
+        if t.is_parameterized() and t.has_type_variables():
             if node.bound is None:
                 continue
             sub = tu.unify_types(node.bound, t, bt_factory,
@@ -111,7 +111,8 @@ def collect_constraints(target: tp.Type,
                 if constraint:
                     constraints[k].add(constraint)
         else:
-            constraints[node].add(EqualityConstraint(t))
+            if t != node:
+                constraints[node].add(EqualityConstraint(t))
             if node.bound:
                 constraints[node].add(UpperBoundConstraint(
                     tp.substitute_type(node.bound, assignment_graph)))
@@ -148,6 +149,16 @@ def _instantiate_type_variable_no_constraints(
     return utils.random.choice(eqs + upper_bounds)
 
 
+def merge_type_wildcards(eqs: List[tp.Type]) -> List[tp.Type]:
+    bounds = set()
+    for eq in eqs:
+        if eq.is_wildcard() and eq.bound:
+            bounds.add(eq.bound)
+        else:
+            bounds.add(eq)
+    return list(eqs)
+
+
 def _instantiate_type_variable_with_constraints(
     type_var: tp.TypeParameter,
     constraints: Set[Constraint],
@@ -166,6 +177,8 @@ def _instantiate_type_variable_with_constraints(
                 new_bounds.append(bound)
         new_bounds = list(new_bounds)
 
+    # Merge equality constraints of the form {out Integer, Integer}.
+    eqs = merge_type_wildcards(eqs)
     if len(new_bounds) > 1 or len(eqs) > 1:
         return None
     if len(eqs) == 1:
@@ -270,8 +283,19 @@ def instantiate_type_variables(api_graph, constraints,
             assigned_t = tu.substitute_invariant_wildcard_with(
                 assigned_t, [t for t in api_graph.get_reg_types()
                              if not t.is_type_constructor()])
-        if assigned_t == tp.WildCardType():
-            assigned_t = api_graph.get_random_type()
         type_var_assignments[type_var] = assigned_t
 
     return type_var_assignments
+
+
+def check_validity_api_parameters(api, type_var_assignments: dict) -> bool:
+    """
+    Checks whether the parameter types of the API (with the respect) to the
+    given type variable assignments are valid (e.g., they are not wildcard
+    types).
+    """
+    for param in getattr(api, "parameters", []):
+        param_type = tp.substitute_type(param.t, type_var_assignments)
+        if param_type.is_wildcard() and not param_type.is_contravariant():
+            return False
+    return True

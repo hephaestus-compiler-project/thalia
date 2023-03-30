@@ -490,6 +490,9 @@ class APIGraph():
                 assignments = au.instantiate_type_variables(self, constraints,
                                                             assignment_graph)
                 if not infeasible and assignments is not None:
+                    if not au.check_validity_api_parameters(node_path[-2],
+                                                            assignments):
+                        return None
                     return node_path, assignments, assignment_graph
                 elif infeasible and assignments is None:
                     assignments = au.instantiate_type_variables(
