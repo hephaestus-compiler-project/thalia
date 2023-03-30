@@ -318,14 +318,14 @@ class APIGraphBuilder(ABC):
         if self._is_func_interface and is_abstract:
             func_params = [
                 (
-                    self.bt_factory.get_array_type().new([param.t.box_type()])
+                    self.bt_factory.get_array_type().new([param.t])
                     if param.variable
-                    else param.t.box_type()
+                    else param.t
                 )
                 for param in parameters
             ]
             func_type = self.bt_factory.get_function_type(
-                len(func_params)).new(func_params + [ret_type.box_type()])
+                len(func_params)).new(func_params + [ret_type])
             class_node = self.class_nodes.get(self.class_name)
             assert class_node, ("A functional interface detected. "
                                 "This can be None")
