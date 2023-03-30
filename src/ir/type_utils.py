@@ -1009,6 +1009,8 @@ def get_type_hint(expr, context: ctx.Context, namespace: Tuple[str],
             return _return_type_hint(expr.signature)
 
         if isinstance(expr, ast.Block):
+            if not expr.body:
+                return factory.get_void_type()
             return _return_type_hint(get_type_hint(
                 expr.body[-1], context, namespace, factory, types,
                 smart_casts=smart_casts))
