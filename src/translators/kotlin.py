@@ -425,11 +425,19 @@ class KotlinTranslator(BaseTranslator):
     def visit_array_expr(self, node):
         is_specialized = isinstance(
             node.array_type.t_constructor, kt.SpecializedArrayType)
+        has_type_var = node.array_type.type_args[0].is_type_var()
         if not node.length:
             if not is_specialized:
-                self._children_res.append("{}emptyArray<{}>()".format(
-                    " " * self.ident,
-                    self.get_type_name(node.array_type.type_args[0])))
+                if has_type_var:
+                    t_arg = "Any"
+                else:
+                    t_arg = self.get_type_name(node.array_type.type_args[0])
+                array_str = "{}emptyArray<{}>()".format(
+                    " " * self.ident, t_arg)
+                if has_type_var:
+                    array_str = "({expr} as {t})".format(
+                        expr=array_str, t=self.get_type_name(node.array_type))
+                self._children_res.append(array_str)
             else:
                 # Specialized array
                 t_arg = self.get_type_name(node.array_type.type_args[0])
@@ -452,10 +460,14 @@ class KotlinTranslator(BaseTranslator):
         t_arg = self.get_type_name(node.array_type.type_args[0])
         if is_specialized:
             t_arg = t_arg.lower()
-        return self._children_res.append(template.format(
-            " " * self.ident,
-            t_arg,
-            ", ".join(children_res)))
+        if has_type_var:
+            t_arg = "Any"
+        array_str = template.format(" " * self.ident, t_arg,
+                                    ", ".join(children_res))
+        if has_type_var:
+            array_str = "({expr} as {t})".format(
+                expr=array_str, t=self.get_type_name(node.array_type))
+        self._children_res.append(array_str)
 
     @append_to
     def visit_variable(self, node):
