@@ -258,10 +258,9 @@ class APIGenerator(Generator):
 
     def generate_from_type_combination(self, api, receiver, parameters,
                                        return_type, type_map) -> ast.Expr:
-        type_map = copy(type_map)
-        receiver, type_var_map, _ = self.generate_expr_from_nodes(
-            receiver, type_map, func_ref=False)
-        type_var_map.update(type_map)
+        type_var_map = copy(type_map)
+        receiver, _, _ = self.generate_expr_from_nodes(
+            receiver, type_var_map, func_ref=False)
         exp_parameters = [p.t for p in getattr(api, "parameters", [])]
         args = self._generate_args(exp_parameters, parameters,
                                    depth=1, type_var_map=type_var_map)
@@ -349,7 +348,7 @@ class APIGenerator(Generator):
                                                    True).values())
         var_decls = [d for d in decls
                      if not isinstance(d, ast.ParameterDeclaration)]
-        if (not var_decls and ret_type != self.bt_factory.get_void_type()):
+        if not var_decls:
             body = expr
         else:
             body = ast.Block(var_decls + [expr])
@@ -415,10 +414,9 @@ class APIGenerator(Generator):
                       exclude_var=False,
                       gen_bottom=False,
                       sam_coercion=False) -> ast.Expr:
-        if expr_type.name == self.bt_factory.get_void_type().name:
-            if getattr(expr_type, "primitive", False):
-                # For primitive void we generate an empty block
-                return ast.Block(body=[])
+        if expr_type == self.bt_factory.get_void_type():
+            # For primitive void we generate an empty block
+            return ast.Block(body=[])
         assert expr_type is not None
         constant_candidates = {
             self.bt_factory.get_number_type().name: gens.gen_integer_constant,

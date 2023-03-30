@@ -221,8 +221,8 @@ class APIGraph():
             for t in self.subtyping_graph.nodes()
             if (
                 not (t.is_parameterized() and t.has_type_variables()) and
-                t != self.bt_factory.get_void_type() and
-                not getattr(t, "primitive", False)
+                not (t.name == self.bt_factory.get_void_type().name and
+                     getattr(t, "primive", False))
             )
         ]
         return types
@@ -614,10 +614,18 @@ class APIGraph():
                 out_type = out_type.new(
                     [constraint.get(tpa, tpa)
                      for tpa in out_type.type_parameters])
+            if out_type != self.bt_factory.get_void_type():
+                out_type = out_type.box_type()
             api_type = self.bt_factory.get_function_type(
-                len(param_types)).new(param_types + [out_type.box_type()])
+                len(param_types)).new(param_types + [out_type])
             sub = tu.unify_types(func_type, api_type, self.bt_factory,
                                  same_type=True)
+            if any(v == self.bt_factory.get_void_type()
+                   for v in sub.values()):
+                # We don't want to match something that is needed to be
+                # instantiated with void, e.g.,
+                # Consumer<Int> != Function<Int, void>
+                continue
             if sub or func_type == api_type:
                 candidate_functions.append((api, sub))
         return candidate_functions
