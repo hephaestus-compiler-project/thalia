@@ -147,8 +147,8 @@ install_kotlin_all() {
 }
 
 install_check_type_systems() {
-    git clone git@github.com:theosotr/check-type-system.git
-    cd check-type-system
+    git clone git@github.com:theosotr/api-hephaestus.git
+    cd api-hephaestus
     git fetch && git pull
     git checkout stable
     git pull

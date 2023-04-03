@@ -13,9 +13,18 @@ simple_run_groovy() {
     source "$HOME/.sdkman/bin/sdkman-init.sh"
     # sdk install groovy
     cd $CHECK_TYPE_SYSTEMS
-    git pull
-    python3 hephaestus.py -s $TIME_TO_RUN -t $TRANSFORMATIONS -w $CORES --batch 30 -P \
-        --language groovy --cast-numbers
+    git pull origin stable
+    python3 hephaestus.py -s $TIME_TO_RUN --language groovy --transformations 0 \
+      --batch 30 -P \
+      --generator api \
+      --cast-numbers \
+      -L --max-depth 2 \
+      --api-doc-path example-apis/java-api \
+      --api-rules api-rules.json \
+      --max-conditional-depth 2 \
+      --max-type-params 3 \
+      --erase-types \
+      --disable-expression-cache
 }
 
 simple_run() {
@@ -42,9 +51,18 @@ run_groovy_from_source() {
     git pull
     ./gradlew clean dist --continue
     cd $CHECK_TYPE_SYSTEMS
-    git pull
-    python3 hephaestus.py -s $TIME_TO_RUN -t $TRANSFORMATIONS -w $CORES --batch 30 -P \
-        --language groovy --cast-numbers
+    git pull origin stable
+    python3 hephaestus.py -s $TIME_TO_RUN --language groovy --transformations 0 \
+      --batch 30 -P \
+      --generator api \
+      --cast-numbers \
+      -L --max-depth 2 \
+      --api-doc-path example-apis/java-api \
+      --api-rules api-rules.json \
+      --max-conditional-depth 2 \
+      --max-type-params 3 \
+      --erase-types \
+      --disable-expression-cache
 }
 
 run_multiple_versions() {
