@@ -221,6 +221,7 @@ class APIGenerator(Generator):
             except Exception:
                 # Handle any exception in order to prevent the termination
                 # of iteration.
+                self.api_graph.remove_types(encoding.type_parameters)
                 program_index += 1
 
     def generate_expr_from_node(self, node: tp.Type,
