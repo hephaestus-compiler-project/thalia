@@ -17,6 +17,16 @@ WIDENING = 2
 PROTECTED = "protected"
 
 
+def compatible(type_var_map: dict, type_var_map2: dict,
+               type_var_renaming: dict) -> bool:
+    for k, v in type_var_map.items():
+        sub_t = tp.substitute_type(type_var_renaming.get(k, v),
+                                   type_var_map2)
+        if v != sub_t and not v.is_subtype(sub_t):
+            return False
+    return True
+
+
 class Field(NamedTuple):
     name: str
     cls: str
@@ -431,12 +441,16 @@ class APIGraph():
                 origin if is_primitive
                 else self.get_type_by_name(target.name) or target.t_constructor
             )
-        if target not in self.api_graph:
+        in_graph = target in self.subtyping_graph
+        if not in_graph:
+            # Target node is not in the subtyping graph. Check if we can
+            # generate an expresion that yields the target node through the
+            # use of abstract types.
             target_selection = "abstract"
-        if target_selection in ["all", "concrete"] or \
-                target.is_type_constructor():
+        if target_selection in ["all", "concrete"] or (
+                target.is_type_constructor() and in_graph):
             targets.append(target)
-        if target_selection in ["all", "abstract"]:
+        if target_selection in ["all", "abstract"] or not in_graph:
             # If this option is not enabled we also consider APIs that return
             # a type variable as targets.
             targets.extend(n for n in self.api_graph.nodes()
@@ -547,10 +561,8 @@ class APIGraph():
                        for k, v in sub.items()
                        if v.is_type_var()}
             t = st
-            for k, v in type_var_map.items():
-                sub_t = tp.substitute_type(sub.get(k, v), reverse)
-                if v != sub_t or not v.is_subtype(sub_t):
-                    continue
+            if not compatible(type_var_map, reverse, sub):
+                continue
             if st.is_type_constructor():
                 t = st.new(st.type_parameters)
             if t == bound_found:

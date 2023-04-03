@@ -227,6 +227,8 @@ class TypeEraser():
             if self.can_infer_out_position(type_param, marks, ret_type):
                 omittable_type_params.add(type_param)
                 continue
+            if type_param in self.required_type_parameters:
+                continue
             if self.can_infer_in_position(type_param, marks,
                                           getattr(api, "parameters", []),
                                           args):
