@@ -73,6 +73,12 @@ parser.add_argument(
     help="Stop caching expressions that yield certain types"
 )
 parser.add_argument(
+    "--path-search-strategy",
+    choices=["shortest", "ksimple"],
+    default="shortest",
+    help="Stategy for enumerating paths between two nodes"
+)
+parser.add_argument(
     "-t", "--transformations",
     type=int,
     default=0,
@@ -239,6 +245,7 @@ args.options = {
             "inject-type-error": args.inject_type_error,
             "erase-types": args.erase_types,
             "disable-expression-cache": args.disable_expression_cache,
+            "path-search-strategy": args.path_search_strategy,
         }
     },
     'Translator': {

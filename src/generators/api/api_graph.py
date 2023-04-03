@@ -224,6 +224,7 @@ class APIGraph():
         self.source_nodes_of = {}
         self.disable_bounded_type_parameters = kwargs.get(
             "disable_bounded_type_parameters", False)
+        self.path_search_strategy = kwargs["path-search-strategy"]
 
     def get_reg_types(self):
         types = [
@@ -472,6 +473,13 @@ class APIGraph():
                                             if not isinstance(s, Variable)]
         return source_nodes, target
 
+    def _get_paths(self, source, target):
+        if self.path_search_strategy == "shortest":
+            return nx.all_shortest_paths(self.api_graph, source=source,
+                                         target=target)
+        return nx.shortest_simple_paths(self.api_graph, source=source,
+                                        target=target)
+
     def find_API_path(self, target: tp.Type,
                       with_constraints: dict = None,
                       target_selection: str = "concrete",
@@ -489,8 +497,7 @@ class APIGraph():
         for source in utils.random.shuffle(source_nodes):
             if source == target:
                 continue
-            paths = nx.shortest_simple_paths(self.api_graph, source=source,
-                                             target=target)
+            paths = self._get_paths(source, target)
             for path in sorted(paths, key=len, reverse=True):
                 node_path = path
                 path = list(zip(path, path[1:]))
