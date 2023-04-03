@@ -57,9 +57,6 @@ class APIGenerator(Generator):
 
         self.inject_error_mode = options.get("inject-type-error", False)
         self.type_erasure_mode = options.get("erase-types", False)
-        self.disable_bounded_type_parameters = options.get(
-            "disable_bounded_type_parameters", False
-        )
         self.start_index = options.get("start-index", 0)
         self.max_conditional_depth = options.get("max-conditional-depth", 4)
 
@@ -156,10 +153,9 @@ class APIGenerator(Generator):
                 params = [[p] for p in parameters]
                 blacklist = [tpa.name for tpa in type_parameters]
                 receivers = (
-                    [receiver]
-                    if self.disable_bounded_type_parameters
-                    else self.wrap_types_with_type_parameter([receiver],
-                                                             blacklist)
+                    self.wrap_types_with_type_parameter([receiver], blacklist)
+                    if utils.random.bool(cfg.prob.bounded_type_parameters)
+                    else [receiver]
                 )
                 expr = self.generate_from_type_combination(
                     api, receivers, params, return_type, type_map)
@@ -316,13 +312,12 @@ class APIGenerator(Generator):
                                depth: int) -> Union[ast.Lambda,
                                                     ast.FunctionReference]:
         return (
-            self.generate_lambda(expr_type, type_var_map, depth)
+            self.generate_lambda(expr_type, depth)
             if utils.random.bool()
             else self.generate_func_ref(expr_type, type_var_map, depth)
         )
 
-    def generate_lambda(self, expr_type: tp.Type, type_var_map: dict,
-                        depth: int) -> ast.Lambda:
+    def generate_lambda(self, expr_type: tp.Type, depth: int) -> ast.Lambda:
         func_type = self.api_graph.get_functional_type_instantiated(expr_type)
         shadow_name = "lambda_" + str(next(self.int_stream))
         prev_namespace = self.namespace
@@ -348,10 +343,7 @@ class APIGenerator(Generator):
                                                    True).values())
         var_decls = [d for d in decls
                      if not isinstance(d, ast.ParameterDeclaration)]
-        if not var_decls:
-            body = expr
-        else:
-            body = ast.Block(var_decls + [expr])
+        body = expr if not var_decls else ast.Block(var_decls + [expr])
         lambda_expr = ast.Lambda(shadow_name, params, ret_type, body,
                                  func_type)
         self.namespace = prev_namespace
@@ -366,7 +358,7 @@ class APIGenerator(Generator):
                           depth: int) -> ast.FunctionReference:
         candidates = self.api_graph.get_function_refs_of(expr_type)
         if not candidates:
-            return self.generate_lambda(expr_type, type_var_map, depth)
+            return self.generate_lambda(expr_type, depth)
         api, sub = utils.random.choice(candidates)
         type_var_map.update(sub)
         segs = api.name.rsplit(".", 1)

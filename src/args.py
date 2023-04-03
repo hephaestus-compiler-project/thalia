@@ -233,7 +233,6 @@ args.options = {
             "max-conditional-depth": args.max_conditional_depth,
             "inject-type-error": args.inject_type_error,
             "erase-types": args.erase_types,
-            "disable-bounded-type-parameters": args.disable_bounded_type_parameters,
         }
     },
     'Translator': {
