@@ -19,6 +19,8 @@ update_and_install_common_pks() {
     update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
     cd ..
     rm Python-3.8.9.tgz
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python3 get-pip.py
 }
 
 install_sdkman() {

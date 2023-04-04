@@ -19,13 +19,13 @@ class GroovyCompiler(BaseCompiler):
 
     @classmethod
     def get_compiler_version(cls):
-        return ['groovyc-l', '-version']
+        return ['groovyc', '-version']
 
     def get_compiler_cmd(self):
         extra_options = []
         if self.library_path:
             extra_options = ["-cp", self.library_path]
-        return ['groovyc-l', '--compile-static'] + extra_options + \
+        return ['groovyc', '--compile-static'] + extra_options + \
             [self.input_name]
 
     def get_filename(self, match):

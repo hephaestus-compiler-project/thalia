@@ -92,7 +92,8 @@ class Generator():
         self.int_stream = iter(range(1, 10000))
         self._in_super_call = False
         self._blacklisted_classes: set = set()
-        self.logger.update_filename(program_id)
+        if self.logger:
+            self.logger.update_filename(program_id)
 
     def has_next(self):
         """
