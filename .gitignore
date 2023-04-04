@@ -4,6 +4,7 @@ replay_tmp
 temp/
 notes/
 *.class
+*.tasty
 META-INF/
 *.jar
 logs
