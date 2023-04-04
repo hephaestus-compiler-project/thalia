@@ -394,9 +394,20 @@ class ScalaTranslator(BaseTranslator):
     @append_to
     def visit_array_expr(self, node):
         if not node.length:
-            self._children_res.append("{}Array[{}]()".format(
-                " " * self.ident,
-                self.get_type_name(node.array_type.type_args[0])))
+            if node.array_type.type_args[0].is_type_var():
+                self._children_res.append(
+                    "{}Array[Any]().asInstanceOf[Array[{}]]".format(
+                        " " * self.ident,
+                        self.get_type_name(node.array_type.type_args[0])
+                    )
+                )
+            else:
+                self._children_res.append(
+                    "{}Array[{}]()".format(
+                        " " * self.ident,
+                        self.get_type_name(node.array_type.type_args[0])
+                    )
+                )
             return
         old_ident = self.ident
         self.ident = 0
@@ -408,10 +419,15 @@ class ScalaTranslator(BaseTranslator):
 
         template = "{ident}Array[{type_arg}]({values})"
         t_arg = self.get_type_name(node.array_type.type_args[0])
-        return self._children_res.append(template.format(
-            ident=" " * self.ident,
-            type_arg=t_arg,
-            values=", ".join(children_res)))
+        if node.array_type.type_args[0].is_type_var():
+            t_arg = "Any"
+        array_expr = template.format(ident=" " * self.ident,
+                                     type_arg=t_arg,
+                                     values=", ".join(children_res))
+        if node.array_type.type_args[0].is_type_var():
+            array_expr += ".asInstanceOf[Array[{}]]".format(
+                self.get_type_name(node.array_expr.type_args[0]))
+        self._children_res.append(array_expr)
 
     @append_to
     def visit_variable(self, node):
