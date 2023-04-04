@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from copy import copy
 import itertools
 from typing import NamedTuple, List, Union, Set, Dict, Tuple
 
@@ -211,6 +212,7 @@ def _get_type_variables(path: list) -> List[tp.TypeParameter]:
 
 class APIGraph():
     EMPTY = 0
+    DEFAULT_PATH_SEARCH_STRATEGY = "shortest"
 
     def __init__(self, api_graph, subtyping_graph, functional_types,
                  bt_factory, **kwargs):
@@ -224,7 +226,8 @@ class APIGraph():
         self.source_nodes_of = {}
         self.disable_bounded_type_parameters = kwargs.get(
             "disable_bounded_type_parameters", False)
-        self.path_search_strategy = kwargs["path-search-strategy"]
+        self.path_search_strategy = kwargs.get(
+            "path-search-strategy", self.DEFAULT_PATH_SEARCH_STRATEGY)
 
     def get_reg_types(self):
         types = [
@@ -459,6 +462,8 @@ class APIGraph():
                            and (not n.bound or origin.is_subtype(n.bound)))
         # Pick a random target
         target = utils.random.choice(targets)
+        if target not in self.api_graph:
+            return None, None
 
         # Find all source nodes that reach the selected target.
         source_nodes = self.source_nodes_of.get(target)
@@ -485,12 +490,15 @@ class APIGraph():
                       target_selection: str = "concrete",
                       infeasible: bool = False) -> (APIPath, dict, dict):
         origin = target
+        if origin.is_type_constructor():
+            # FIXME
+            target_selection = "concrete"
         source_nodes, target = self.get_sources_and_target(target,
                                                            target_selection)
         if target is None:
             return None
 
-        with_constraints = with_constraints or {}
+        with_constraints = copy(with_constraints) or {}
         if target.is_type_var():
             with_constraints[target] = origin.box_type()
 

@@ -128,6 +128,8 @@ class APIGenerator(Generator):
             types,
             types[0]
         )
+        if upper_bound.is_type_constructor():
+            return types
         type_param = tp.TypeParameter(utils.random.caps(blacklist=blacklist),
                                       bound=upper_bound)
         self.test_case_type_params.append(type_param)
@@ -241,6 +243,9 @@ class APIGenerator(Generator):
         )
         if node and utils.random.bool():
             var_name = gu.gen_identifier("lower")
+            if node.is_type_constructor():
+                node = node.new(node.type_parameters)
+                node = tp.substitute_type(node, res.type_var_map)
             var_decl = ast.VariableDeclaration(
                 var_name,
                 res.expr,
