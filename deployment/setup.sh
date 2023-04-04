@@ -182,7 +182,8 @@ install_check_type_systems() {
     cd api-hephaestus
     git fetch && git pull
     git checkout stable
-    git pull
+    git pull origin stable
+    pip3 install -r requirements.txt
     echo "CHECK_TYPE_SYSTEMS=$(pwd)" >> $HOME/.bash_profile
     cd ..
 }
