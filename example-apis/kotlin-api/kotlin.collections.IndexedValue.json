@@ -1,0 +1,113 @@
+{
+  "name": "kotlin.collections.IndexedValue",
+  "type_parameters": [
+    "out T"
+  ],
+  "implements": [],
+  "inherits": [],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "component1",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "component2",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "copy",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "kotlin.Any?"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "IndexedValue",
+      "parameters": [
+        "kotlin.Int",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "index",
+      "type": "kotlin.Int",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "value",
+      "type": "T",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

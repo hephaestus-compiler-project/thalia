@@ -1,0 +1,29 @@
+{
+  "name": "java.util.function.UnaryOperator",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.util.function.Function<T,T>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "identity",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.function.UnaryOperator<T>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": true,
+  "language": "java"
+}

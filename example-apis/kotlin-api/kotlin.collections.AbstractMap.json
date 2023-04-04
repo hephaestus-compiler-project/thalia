@@ -1,0 +1,139 @@
+{
+  "name": "kotlin.collections.AbstractMap",
+  "type_parameters": [
+    "K",
+    "out V"
+  ],
+  "implements": [
+    "kotlin.collections.Map<K,V>"
+  ],
+  "inherits": [
+    "kotlin.collections.Map<K,V>"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "containsKey",
+      "parameters": [
+        "K"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "containsValue",
+      "parameters": [
+        "V"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "kotlin.Any?"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "K"
+      ],
+      "type_parameters": [],
+      "return_type": "V?",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "isEmpty",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "entries",
+      "type": "kotlin.collections.Set<kotlin.collections.Map.Entry<K, V>>",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "keys",
+      "type": "kotlin.collections.Set<K>",
+      "is_final": true,
+      "is_override": true,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "size",
+      "type": "kotlin.Int",
+      "is_final": true,
+      "is_override": true,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "values",
+      "type": "kotlin.collections.Collection<V>",
+      "is_final": true,
+      "is_override": true,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

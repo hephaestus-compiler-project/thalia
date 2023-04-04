@@ -1,0 +1,108 @@
+{
+  "name": "kotlin.collections.AbstractCollection",
+  "type_parameters": [
+    "out E"
+  ],
+  "implements": [
+    "kotlin.collections.Collection<E>"
+  ],
+  "inherits": [
+    "kotlin.collections.Collection<E>"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "contains",
+      "parameters": [
+        "E"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "containsAll",
+      "parameters": [
+        "kotlin.collections.Collection<E>"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "isEmpty",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "iterator",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.collections.Iterator<E>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "toArray",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Array<kotlin.Any?>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected"
+    },
+    {
+      "name": "toArray",
+      "parameters": [
+        "kotlin.Array<T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Array<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected"
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "size",
+      "type": "kotlin.Int",
+      "is_final": true,
+      "is_override": true,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

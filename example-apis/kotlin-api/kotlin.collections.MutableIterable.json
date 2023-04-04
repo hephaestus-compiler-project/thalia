@@ -1,0 +1,29 @@
+{
+  "name": "kotlin.collections.MutableIterable",
+  "type_parameters": [
+    "out T"
+  ],
+  "implements": [
+    "kotlin.collections.Iterable<T>"
+  ],
+  "inherits": [
+    "kotlin.collections.Iterable<T>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "iterator",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.collections.MutableIterator<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

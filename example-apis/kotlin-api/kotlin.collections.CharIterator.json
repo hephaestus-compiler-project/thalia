@@ -1,0 +1,47 @@
+{
+  "name": "kotlin.collections.CharIterator",
+  "type_parameters": [],
+  "implements": [
+    "kotlin.collections.Iterator<kotlin.Char>"
+  ],
+  "inherits": [
+    "kotlin.collections.Iterator<kotlin.Char>"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "hasNext",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "next",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Char",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "nextChar",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Char",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

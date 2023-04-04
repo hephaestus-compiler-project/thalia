@@ -1,0 +1,53 @@
+{
+  "name": "kotlin.collections.MutableMap.MutableEntry",
+  "type_parameters": [
+    "K",
+    "V"
+  ],
+  "implements": [
+    "kotlin.collections.Map.Entry<K,V>"
+  ],
+  "inherits": [
+    "kotlin.collections.Map.Entry<K,V>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "setValue",
+      "parameters": [
+        "V"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "key",
+      "type": "K",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "value",
+      "type": "V",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

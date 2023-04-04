@@ -1,0 +1,249 @@
+{
+  "name": "kotlin.collections.HashSet",
+  "type_parameters": [
+    "E"
+  ],
+  "implements": [
+    "kotlin.collections.AbstractMutableSet<E>",
+    "kotlin.collections.MutableSet<E>"
+  ],
+  "inherits": [
+    "kotlin.collections.AbstractMutableSet<E>",
+    "kotlin.collections.MutableSet<E>"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "add",
+      "parameters": [
+        "E"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "addAll",
+      "parameters": [
+        "kotlin.collections.Collection<E>"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "clear",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "E"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "containsAll",
+      "parameters": [
+        "kotlin.collections.Collection<E>"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "kotlin.Any?"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "isEmpty",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "iterator",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.collections.MutableIterator<E>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "remove",
+      "parameters": [
+        "E"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "removeAll",
+      "parameters": [
+        "kotlin.collections.Collection<E>"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "retainAll",
+      "parameters": [
+        "kotlin.collections.Collection<E>"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "toArray",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Array<kotlin.Any?>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected"
+    },
+    {
+      "name": "toArray",
+      "parameters": [
+        "kotlin.Array<T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Array<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected"
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "HashSet",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HashSet",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HashSet",
+      "parameters": [
+        "kotlin.Int",
+        "kotlin.Float"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HashSet",
+      "parameters": [
+        "kotlin.collections.Collection<E>"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "size",
+      "type": "kotlin.Int",
+      "is_final": true,
+      "is_override": true,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

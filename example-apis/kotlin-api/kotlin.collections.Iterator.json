@@ -1,0 +1,35 @@
+{
+  "name": "kotlin.collections.Iterator",
+  "type_parameters": [
+    "out T"
+  ],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "hasNext",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "next",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

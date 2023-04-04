@@ -1,0 +1,558 @@
+{
+  "name": "java.util.stream.IntStream",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.util.stream.BaseStream<java.lang.Integer,java.util.stream.IntStream>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "anyMatch",
+      "parameters": [
+        "java.util.function.IntPredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "asLongStream",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "boxed",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.Stream<java.lang.Integer>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "collect",
+      "parameters": [
+        "java.util.function.Supplier<R>",
+        "java.util.function.ObjIntConsumer<R>",
+        "java.util.function.BiConsumer<R,R>"
+      ],
+      "type_parameters": [
+        "R"
+      ],
+      "return_type": "R",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "count",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "dropWhile",
+      "parameters": [
+        "java.util.function.IntPredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "filter",
+      "parameters": [
+        "java.util.function.IntPredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "findFirst",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalInt",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "forEach",
+      "parameters": [
+        "java.util.function.IntConsumer"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "generate",
+      "parameters": [
+        "java.util.function.IntSupplier"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "iterate",
+      "parameters": [
+        "int",
+        "java.util.function.IntUnaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "map",
+      "parameters": [
+        "java.util.function.IntUnaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "mapToLong",
+      "parameters": [
+        "java.util.function.IntToLongFunction"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "max",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalInt",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "noneMatch",
+      "parameters": [
+        "java.util.function.IntPredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "int..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "range",
+      "parameters": [
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "reduce",
+      "parameters": [
+        "int",
+        "java.util.function.IntBinaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "skip",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "sum",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "takeWhile",
+      "parameters": [
+        "java.util.function.IntPredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "allMatch",
+      "parameters": [
+        "java.util.function.IntPredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "asDoubleStream",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "average",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalDouble",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "builder",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream.Builder",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "concat",
+      "parameters": [
+        "java.util.stream.IntStream",
+        "java.util.stream.IntStream"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "distinct",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "empty",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "findAny",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalInt",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "flatMap",
+      "parameters": [
+        "java.util.function.IntFunction<? extends java.util.stream.IntStream>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "forEachOrdered",
+      "parameters": [
+        "java.util.function.IntConsumer"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "iterate",
+      "parameters": [
+        "int",
+        "java.util.function.IntPredicate",
+        "java.util.function.IntUnaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "limit",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mapToDouble",
+      "parameters": [
+        "java.util.function.IntToDoubleFunction"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "mapToObj",
+      "parameters": [
+        "java.util.function.IntFunction<? extends U>"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.stream.Stream<U>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "min",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalInt",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "peek",
+      "parameters": [
+        "java.util.function.IntConsumer"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "rangeClosed",
+      "parameters": [
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "reduce",
+      "parameters": [
+        "java.util.function.IntBinaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalInt",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "sorted",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "summaryStatistics",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.IntSummaryStatistics",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toArray",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "language": "java"
+}

@@ -1,0 +1,100 @@
+{
+  "name": "java.util.function.Predicate",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "isEqual",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.function.Predicate<T>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "not",
+      "parameters": [
+        "java.util.function.Predicate<? super T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.function.Predicate<T>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "test",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "and",
+      "parameters": [
+        "java.util.function.Predicate<? super T>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.function.Predicate<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "negate",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.function.Predicate<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "or",
+      "parameters": [
+        "java.util.function.Predicate<? super T>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.function.Predicate<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": true
+    }
+  ],
+  "fields": [],
+  "functional_interface": true,
+  "language": "java"
+}

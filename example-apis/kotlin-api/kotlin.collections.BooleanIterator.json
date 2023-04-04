@@ -1,0 +1,47 @@
+{
+  "name": "kotlin.collections.BooleanIterator",
+  "type_parameters": [],
+  "implements": [
+    "kotlin.collections.Iterator<kotlin.Boolean>"
+  ],
+  "inherits": [
+    "kotlin.collections.Iterator<kotlin.Boolean>"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "hasNext",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "next",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "nextBoolean",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}
