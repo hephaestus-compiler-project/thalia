@@ -46,7 +46,8 @@ class APIGenerator(Generator):
 
     def __init__(self, api_docs, options={}, language=None, logger=None):
         super().__init__(language=language, logger=logger)
-        self.logger.update_filename("api-generator")
+        if self.logger:
+            self.logger.update_filename("api-generator")
         self.api_graph = self.API_GRAPH_BUILDERS[language](
             language, **options).build(api_docs)
         api_rules_file = options.get("api-rules")
