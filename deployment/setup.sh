@@ -6,11 +6,19 @@ export DEBIAN_FRONTEND=noninteractive
 update_and_install_common_pks() {
     apt -yqq update && apt -yqq upgrade
     apt -yqq install $COMMON_PKGS
-    add-apt-repository ppa:deadsnakes/ppa
-    apt -yqq update
-    apt -yqq install python3.9 python3-pip
-    update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
-    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
+    apt install build-essential zlib1g-dev libncurses5-dev \
+      libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev \
+      libsqlite3-dev wget libbz2-dev
+    wget https://www.python.org/ftp/python/3.8.9/Python-3.8.9.tgz
+    tar -xf Python-3.8.9.tgz
+    cd Python-3.8.9
+    ./configure --enable-optimizations
+    make -j 8
+    sudo make install
+    update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1
+    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
+    cd ..
+    rm Python-3.8.9.tgz
 }
 
 install_sdkman() {
@@ -30,16 +38,20 @@ install_deps() {
     echo "source $HOME/.bash_profile >> $HOME/.bashrc"
 }
 
-install_java() {
+install_java_dep() {
     sdk install java 8.0.265-open
 }
 
 install_groovy() {
-    install_java
+    install_java_dep
     sdk install groovy 4.0.0-alpha-2
     echo "PATH=\"\$PATH:/root/.sdkman/candidates/kotlin/current/bin/\"" >> $HOME/.bash_profile
 }
 
+install_java() {
+    sdk install java 18.ea.2-open
+    echo "PATH=\"\$PATH:/root/.sdkman/candidates/java/current/bin/\"" >> $HOME/.bash_profile
+}
 
 install_kotlin_from_source() {
     sdk install java 9.0.4-open
@@ -77,14 +89,31 @@ install_groovy_from_source() {
     source $HOME/.bash_profile
 }
 
+install_java_from_source() {
+    sdk install java 16.0.1-open
+    apt -yqq install build-essential autoconf zip libxss-dev libxxf86vm-dev \
+        libxkbfile-dev libxv-dev libx11-dev libxext-dev libxrender-dev \
+        libxrandr-dev libxtst-dev libxt-dev libcups2 libcups2-dev \
+        libfontconfig-dev libasound2-dev
+    apt -yqq install python3.9-distutils
+    apt remove python3-apt && apt autoremove && apt autoclean
+    apt install python3-apt software-properties-common -yqq
+    # TODO we need gcc 10
+
+    git clone https://github.com/openjdk/jdk.git
+    cd jdk
+    bash configure
+    make java.Compiler
+}
+
 install_kotlin() {
-    install_java
+    install_java_dep
     sdk install kotlin
     echo "PATH=\"\$PATH:/root/.sdkman/candidates/kotlin/current/bin/\"" >> $HOME/.bash_profile
 }
 
 install_kotlin_all() {
-    install_java
+    install_java_dep
     sdk install kotlin 1.4.21  && \
     sdk install kotlin 1.4.20  && \
     sdk install kotlin 1.4.10  && \
@@ -157,7 +186,7 @@ install_check_type_systems() {
 }
 
 add_run_script_to_path() {
-    mkdir bin
+    mkdir -p bin
     cp run.sh bin
     echo "PATH=\"\$PATH:$HOME/bin\"" >> $HOME/.bash_profile
 }
@@ -170,7 +199,7 @@ then
         exit 0
 fi
 
-while getopts "hskagS" OPTION; do
+while getopts "hskagSjJ" OPTION; do
         case $OPTION in
 
                 k)
@@ -201,9 +230,23 @@ while getopts "hskagS" OPTION; do
                         add_run_script_to_path
                         ;;
 
-                g)
+                S)
                         install_deps
                         install_groovy_from_source
+                        install_check_type_systems
+                        add_run_script_to_path
+                        ;;
+
+                j)
+                        install_deps
+                        install_java
+                        install_check_type_systems
+                        add_run_script_to_path
+                        ;;
+
+                J)
+                        install_deps
+                        install_java_from_source
                         install_check_type_systems
                         add_run_script_to_path
                         ;;
@@ -221,6 +264,8 @@ while getopts "hskagS" OPTION; do
                         echo "   -a     Install all kotlin versions"
                         echo "   -g     Install latest groovy version"
                         echo "   -S     Install groovy from source"
+                        echo "   -j     Install latest Java version"
+                        echo "   -J     Install Java from source"
                         echo "   -h     help (this output)"
                         exit 0
                         ;;
