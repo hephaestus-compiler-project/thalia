@@ -24,17 +24,25 @@ simple_run_groovy() {
       --max-conditional-depth 2 \
       --max-type-params 3 \
       --erase-types \
+      --disable-bounded-type-parameters \
       --disable-expression-cache
 }
 
 simple_run_java() {
     source "$HOME/.sdkman/bin/sdkman-init.sh"
-    # sdk install groovy
     cd $CHECK_TYPE_SYSTEMS
     git pull origin stable
-    python3 main.py -s $TIME_TO_RUN -t $TRANSFORMATIONS -w $CORES --batch 30 -P \
-        --language java \
-        --disable-contravariance-use-site --disable-var-type-inference
+    python3 hephaestus.py -s $TIME_TO_RUN --language java --transformations 0 \
+      --batch 30 -P \
+      --generator api \
+      --cast-numbers \
+      -L --max-depth 2 \
+      --api-doc-path example-apis/java-api \
+      --api-rules api-rules.json \
+      --max-conditional-depth 2 \
+      --max-type-params 3 \
+      --erase-types \
+      --disable-expression-cache
 }
 
 simple_run() {
@@ -42,8 +50,17 @@ simple_run() {
     sdk install kotlin
     cd $CHECK_TYPE_SYSTEMS
     git pull origin stable
-    python3 main.py -s $TIME_TO_RUN -t $TRANSFORMATIONS -w $CORES --batch 30 -P \
-        --language kotlin
+    python3 hephaestus.py -s $TIME_TO_RUN --language kotlin --transformations 0 \
+      --batch 30 -P \
+      --generator api \
+      --cast-numbers \
+      -L --max-depth 2 \
+      --api-doc-path example-apis/kotlin-api \
+      --api-rules api-rules.json \
+      --max-conditional-depth 2 \
+      --max-type-params 3 \
+      --erase-types \
+      --disable-expression-cache
 }
 
 run_groovy_from_source() {
@@ -63,6 +80,7 @@ run_groovy_from_source() {
       --max-conditional-depth 2 \
       --max-type-params 3 \
       --erase-types \
+      --disable-bounded-type-parameters \
       --disable-expression-cache
 }
 
@@ -73,8 +91,17 @@ run_from_source() {
     ./gradlew -Dhttp.socketTimeout=60000 -Dhttp.connectionTimeout=60000 dist
     cd $CHECK_TYPE_SYSTEMS
     git pull origin stable
-    python3 main.py -s $TIME_TO_RUN -t $TRANSFORMATIONS -w $CORES --batch 30 -P \
-        --language kotlin
+    python3 hephaestus.py -s $TIME_TO_RUN --language kotlin --transformations 0 \
+      --batch 30 -P \
+      --generator api \
+      --cast-numbers \
+      -L --max-depth 2 \
+      --api-doc-path example-apis/kotlin-api \
+      --api-rules api-rules.json \
+      --max-conditional-depth 2 \
+      --max-type-params 3 \
+      --erase-types \
+      --disable-expression-cache
 }
 
 run_multiple_versions() {
@@ -86,7 +113,17 @@ run_multiple_versions() {
         rnum=$((1 + $RANDOM%$length+1));
         version=$(echo $VERSIONS | cut -d " " -f $rnum)
         sdk use kotlin $version
-        python3 hephaestus.py -s $HOUR -t $TRANSFORMATIONS -w $CORES --batch 30 -P
+        python3 hephaestus.py -s $TIME_TO_RUN --language kotlin --transformations 0 \
+          --batch 30 -P \
+          --generator api \
+          --cast-numbers \
+          -L --max-depth 2 \
+          --api-doc-path example-apis/kotlin-api \
+          --api-rules api-rules.json \
+          --max-conditional-depth 2 \
+          --max-type-params 3 \
+          --erase-types \
+          --disable-expression-cache
     done
 }
 
