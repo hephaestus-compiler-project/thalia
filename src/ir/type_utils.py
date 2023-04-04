@@ -138,16 +138,20 @@ def _find_candidate_type_args(t_param: tp.TypeParameter,
     if not base_targ.is_wildcard() or ignore_variance:
         return t_args
     if base_targ.is_covariant():
-        new_types = _find_types(
-            base_targ.bound,
-            types, get_subtypes, True, bound,
-            concrete_only=True)
+        new_types = []
+        if get_subtypes:
+            new_types.extend(_find_types(
+                base_targ.bound,
+                types, get_subtypes, True, bound,
+                concrete_only=True))
         new_types.extend([tp.WildCardType(t, tp.Covariant)
                           for t in new_types])
     elif base_targ.is_contravariant():
-        new_types = _find_types(
-            base_targ.bound, types,
-            not get_subtypes, True, bound, concrete_only=True)
+        new_types = []
+        if get_subtypes:
+            new_types.extend(_find_types(
+                base_targ.bound, types,
+                not get_subtypes, True, bound, concrete_only=True))
     else:
         new_types = []
     t_args.extend(new_types)
