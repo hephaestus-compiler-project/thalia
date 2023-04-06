@@ -524,7 +524,7 @@ class TypeConstructor(AbstractType):
         type_map = {tp: type_args[i]
                     for i, tp in enumerate(self.type_parameters)}
         old_supertypes = self.supertypes
-        type_con = perform_type_substitution(self, type_map)
+        type_con = perform_type_substitution(self, type_map, lambda t: False)
         etype = ParameterizedType(type_con, type_args)
         etype.t_constructor.supertypes = old_supertypes
         return etype
