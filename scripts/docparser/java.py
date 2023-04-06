@@ -10,7 +10,8 @@ class JavaAPIDocConverter(APIDocConverter):
     EXCLUDED_FILES = [
         'package-summary.html',
         'package-tree.html',
-        'package-use.html'
+        'package-use.html',
+        'package-fram.html'
     ]
     PROTECTED = "protected"
     PUBLIC = "public"
@@ -18,6 +19,7 @@ class JavaAPIDocConverter(APIDocConverter):
     def __init__(self, args):
         super().__init__()
         self._current_api_cls = None
+        self._cls_name = None
         self.jdk_docs = args.jdk_docs
 
     def extract_package_name(self, html_doc):
@@ -122,6 +124,7 @@ class JavaAPIDocConverter(APIDocConverter):
         package_name = self.extract_package_name(html_doc)
         full_class_name = "{pkg}.{cls}".format(pkg=package_name,
                                                cls=class_name)
+        self._cls_name = class_name
         super_class = self.extract_super_class(html_doc)
         super_interfaces = self.extract_super_interfaces(html_doc)
         class_type = self.extract_class_type(html_doc)
@@ -245,7 +248,7 @@ class JavaAPIDocConverter(APIDocConverter):
                 key = ".colConstructorName a" if is_constructor else \
                     ".colSecond a"
             else:
-                key = ".memberNameLink a" if is_constructor else ".colLast a"
+                key = ".memberNameLink a"
             return method_doc.select(key)[0].text
         except IndexError:
             # We are probably in a field
@@ -289,8 +292,9 @@ class JavaAPIDocConverter(APIDocConverter):
     def is_constructor(self, method_doc):
         if self.jdk_docs:
             return method_doc.find(class_="colConstructorName") is not None
-        return method_doc.find(class_="memberNameLink") is not None and \
-            method_doc.find(class_="colLast") is None
+        base_name = self._cls_name.rsplit(".", 1)[-1]
+        return self.extract_method_name(method_doc,
+                                        False) == base_name
 
     def extract_field_name(self, field_doc):
         key = ".colSecond a" if self.jdk_docs else ".colLast a"
