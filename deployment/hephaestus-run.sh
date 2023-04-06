@@ -37,9 +37,6 @@ if [ -z $libname ]; then
   exit 1
 fi
 
-cd $CHECK_TYPE_SYSTEMS
-git pull origin stable
-
 libjar=$(find $libpath/$libname -maxdepth 1 -name '*.jar')
 
 rm -rf libs

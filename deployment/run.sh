@@ -10,8 +10,9 @@ source /root/.bash_profile
 
 simple_run_groovy() {
     source "$HOME/.sdkman/bin/sdkman-init.sh"
-    # sdk install groovy
-
+    sdk install groovy
+    cd $CHECK_TYPE_SYSTEMS
+    git pull origin stable
     hephaestus-run.sh $CHECK_TYPE_SYSTEMS/example-apis/java-api \
       $CHECK_TYPE_SYSTEMS/3party-libs \
       "--language groovy --cast-numbers  --max-type-params 3  --erase-types --disable-bounded-type-parameters --disable-expression-cache"
@@ -19,6 +20,8 @@ simple_run_groovy() {
 
 simple_run_java() {
     source "$HOME/.sdkman/bin/sdkman-init.sh"
+    cd $CHECK_TYPE_SYSTEMS
+    git pull origin stable
     hephaestus-run.sh $CHECK_TYPE_SYSTEMS/example-apis/java-api \
       $CHECK_TYPE_SYSTEMS/3party-libs \
       "--language java --max-type-params 3  --erase-types --disable-expression-cache"
@@ -27,6 +30,8 @@ simple_run_java() {
 simple_run() {
     source "$HOME/.sdkman/bin/sdkman-init.sh"
     sdk install kotlin
+    cd $CHECK_TYPE_SYSTEMS
+    git pull origin stable
     hephaestus-run.sh $CHECK_TYPE_SYSTEMS/example-apis/java-api \
       $CHECK_TYPE_SYSTEMS/3party-libs \
       "--language kotlin --max-type-params 3  --erase-types --disable-expression-cache"
@@ -37,6 +42,8 @@ run_groovy_from_source() {
     cd $GROOVY_INSTALLATION
     git pull origin master
     ./gradlew clean dist --continue
+    cd $CHECK_TYPE_SYSTEMS
+    git pull origin stable
     hephaestus-run.sh $CHECK_TYPE_SYSTEMS/example-apis/java-api \
       $CHECK_TYPE_SYSTEMS/3party-libs \
       "--language groovy --cast-numbers  --max-type-params 3  --erase-types --disable-bounded-type-parameters --disable-expression-cache"
@@ -47,16 +54,12 @@ run_from_source() {
     git pull origin master
     ./gradlew clean
     ./gradlew -Dhttp.socketTimeout=60000 -Dhttp.connectionTimeout=60000 dist
-    cd $CHECK_TYPE_SYSTEMS
-    git pull origin stable
     hephaestus-run.sh $CHECK_TYPE_SYSTEMS/example-apis/java-api \
       $CHECK_TYPE_SYSTEMS/3party-libs \
       "--language kotlin --max-type-params 3  --erase-types --disable-expression-cache"
 }
 
 run_multiple_versions() {
-    cd $CHECK_TYPE_SYSTEMS
-    git pull origin stable
     source "$HOME/.sdkman/bin/sdkman-init.sh"
     for i in {1..22}; do
         length=$(echo "$VERSIONS" | wc -w)
