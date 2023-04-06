@@ -20,22 +20,22 @@ class ScalaBuiltinFactory(bt.BuiltinFactory):
     def get_number_type(self):
         return NumberType()
 
-    def get_integer_type(self):
+    def get_integer_type(self, primitive=False):
         return IntegerType()
 
-    def get_byte_type(self):
+    def get_byte_type(self, primitive=False):
         return ByteType()
 
-    def get_short_type(self):
+    def get_short_type(self, primitive=False):
         return ShortType()
 
-    def get_long_type(self):
+    def get_long_type(self, primitive=False):
         return LongType()
 
-    def get_float_type(self):
+    def get_float_type(self, primitive=False):
         return FloatType()
 
-    def get_double_type(self):
+    def get_double_type(self, primitive=False):
         return DoubleType()
 
     def get_big_decimal_type(self):
@@ -44,10 +44,10 @@ class ScalaBuiltinFactory(bt.BuiltinFactory):
     def get_big_integer_type(self):
         return IntegerType()
 
-    def get_boolean_type(self):
+    def get_boolean_type(self, primitive=False):
         return BooleanType()
 
-    def get_char_type(self):
+    def get_char_type(self, primitive=False):
         return CharType()
 
     def get_string_type(self):
