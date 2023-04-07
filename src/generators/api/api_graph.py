@@ -829,10 +829,9 @@ class APIGraph():
             ret_types = set(tu.find_supertypes(ret_type, self.get_reg_types(),
                                                concrete_only=True))
             ret_types.add(ret_type)
-            encodings.append(APIEncoding(node, frozenset(receivers),
-                                         parameters,
-                                         frozenset(ret_types),
-                                         type_var_map,
-                                         self.get_type_parameters()))
-            self.remove_types(self.get_type_parameters())
+            type_parameters = self.get_type_parameters()
+            self.remove_types(type_parameters)
+            yield APIEncoding(node, frozenset(receivers),
+                              parameters, frozenset(ret_types), type_var_map,
+                              type_parameters)
         return encodings
