@@ -393,17 +393,21 @@ class WildCardType(Type):
 
 
 def _get_type_substitution(etype, type_map,
-                           cond=lambda t: t.has_type_variables()):
+                           cond=lambda t: t.has_type_variables(),
+                           substitute_bound=True):
     if etype.is_parameterized():
         return substitute_type_args(etype, type_map, cond)
     if etype.is_wildcard() and etype.bound is not None:
-        new_bound = _get_type_substitution(etype.bound, type_map, cond)
+        new_bound = _get_type_substitution(etype.bound, type_map, cond,
+                                           substitute_bound)
         return WildCardType(new_bound, variance=etype.variance)
     t = type_map.get(etype)
     if t is None or cond(t):
         # Perform type substitution on the bound of the current type variable.
-        if etype.is_type_var() and etype.bound is not None:
-            new_bound = _get_type_substitution(etype.bound, type_map, cond)
+        if etype.is_type_var() and etype.bound is not None and \
+                substitute_bound:
+            new_bound = _get_type_substitution(etype.bound, type_map, cond,
+                                               substitute_bound)
             return TypeParameter(etype.name, etype.variance, new_bound)
         # The type parameter does not correspond to an abstract type
         # so, there is nothing to substitute.
@@ -412,26 +416,30 @@ def _get_type_substitution(etype, type_map,
 
 
 def substitute_type_args(etype, type_map,
-                         cond=lambda t: t.has_type_variables()):
+                         cond=lambda t: t.has_type_variables(),
+                         substitute_bound=True):
     assert etype.is_parameterized()
     type_args = []
     for t_arg in etype.type_args:
-        type_args.append(_get_type_substitution(t_arg, type_map, cond))
+        type_args.append(_get_type_substitution(t_arg, type_map, cond,
+                                                substitute_bound))
     new_type_map = {
         tp: type_args[i]
         for i, tp in enumerate(etype.t_constructor.type_parameters)
     }
     type_con = perform_type_substitution(
-        etype.t_constructor, new_type_map, cond)
+        etype.t_constructor, new_type_map, cond, substitute_bound)
     return ParameterizedType(type_con, type_args)
 
 
-def substitute_type(t, type_map):
-    return _get_type_substitution(t, type_map, lambda t: False)
+def substitute_type(t, type_map, substitute_bound=True):
+    return _get_type_substitution(t, type_map, lambda t: False,
+                                  substitute_bound)
 
 
 def perform_type_substitution(etype, type_map,
-                              cond=lambda t: t.has_type_variables()):
+                              cond=lambda t: t.has_type_variables(),
+                              substitute_bound=True):
     """
     This function performs the following substitution.
     Imagine that we have the following case.
@@ -450,7 +458,8 @@ def perform_type_substitution(etype, type_map,
     supertypes = []
     for t in etype.supertypes:
         if t.is_parameterized():
-            supertypes.append(substitute_type_args(t, type_map, cond))
+            supertypes.append(substitute_type_args(t, type_map, cond,
+                                                   substitute_bound))
         else:
             supertypes.append(t)
     type_params = []
