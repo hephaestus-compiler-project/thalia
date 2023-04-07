@@ -25,7 +25,8 @@ def compute_assignment_graph(api_graph: nx.DiGraph, path: list) -> OrderedDict:
         if not constraint:
             continue
         for type_k, type_v in constraint.items():
-            sub_t = tp.substitute_type(type_v, assignment_graph)
+            sub_t = tp.substitute_type(type_v, assignment_graph,
+                                       substitute_bound=False)
             if sub_t.has_type_variables():
                 assigned_t = sub_t
             else:
@@ -42,7 +43,7 @@ def build_equality_constraints(
 ) -> Dict[tp.TypeParameter, Set[EqualityConstraint]]:
     constraints = defaultdict(set)
     for k, v in assignments.items():
-        t = tp.substitute_type(k, assignment_graph)
+        t = tp.substitute_type(k, assignment_graph, substitute_bound=False)
         if t.has_type_variables():
             sub = tu.unify_types(v, t, bt_factory, same_type=False,
                                  strict_mode=False, subtype_on_left=False)
@@ -87,7 +88,7 @@ def collect_constraints(target: tp.Type,
         constraints.update(eq_constraints)
     for node in type_variables:
         constraints[node]
-        t = tp.substitute_type(node, assignment_graph)
+        t = tp.substitute_type(node, assignment_graph, substitute_bound=False)
         if t.is_parameterized() and t.has_type_variables():
             if node.bound is None:
                 continue
@@ -111,11 +112,12 @@ def collect_constraints(target: tp.Type,
                 if constraint:
                     constraints[k].add(constraint)
         else:
-            if t != node:
+            if t.name != node.name:
                 constraints[node].add(EqualityConstraint(t))
             if node.bound:
                 constraints[node].add(UpperBoundConstraint(
-                    tp.substitute_type(node.bound, assignment_graph)))
+                    tp.substitute_type(node.bound, assignment_graph,
+                                       substitute_bound=False)))
 
     ordered_constraints = OrderedDict()
     for node in type_variables:
@@ -199,12 +201,7 @@ def _instantiate_type_variables_unconstrained(api_graph, constraints,
         # Unable to build constraints. This means that type unifation failed.
         return None
     type_var_assignments = {}
-    free_variables = {
-        k
-        for k in constraints.keys()
-        if k not in assignment_graph
-    }
-    for type_var in list(free_variables) + list(assignment_graph.keys()):
+    for type_var in constraints.keys():
         type_var_constraints = constraints[type_var]
         if not type_var_constraints:
             type_var_assignments.update(_assign_type_unconstrained(
@@ -234,11 +231,7 @@ def instantiate_type_variables(api_graph, constraints,
         # Unable to build constraints. This means that type unifation failed.
         return None
     type_var_assignments = {}
-    free_variables = [
-        k for k in constraints.keys()
-        if k not in assignment_graph
-    ]
-    for type_var in free_variables + list(assignment_graph.keys()):
+    for type_var in constraints.keys():
         type_var_constraints = constraints[type_var]
         if not type_var_constraints:
             type_var_assignments.update(_assign_type_unconstrained(
@@ -284,7 +277,6 @@ def instantiate_type_variables(api_graph, constraints,
                 assigned_t, [t for t in api_graph.get_reg_types()
                              if not t.is_type_constructor()])
         type_var_assignments[type_var] = assigned_t
-
     return type_var_assignments
 
 
