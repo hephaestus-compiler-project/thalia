@@ -293,6 +293,9 @@ class TypeParameter(AbstractType):
         # that is type variable-free.
         # We do this, because the bound would contain type variables which
         # are out of scope in the context where we use this bound.
+        if t.is_type_constructor():
+            return t
+
         return t.to_type_variable_free(factory)
 
     def is_subtype(self, other):
