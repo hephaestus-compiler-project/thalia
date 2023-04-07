@@ -3,7 +3,18 @@ import re
 import urllib
 
 from docparser.base import APIDocConverter
-from docparser.utils import file2html, dict2json, top_level_split
+from docparser.utils import file2html, dict2json, top_level_split, decode
+
+
+def normalize(func):
+    def inner(*args):
+        ret = func(*args)
+        if isinstance(ret, (set, list, tuple)):
+            return [decode(r.replace("  ", " ")) for r in ret]
+        if isinstance(ret, str):
+            return decode(ret.replace("  ", " "))
+        return ret
+    return inner
 
 
 class JavaAPIDocConverter(APIDocConverter):
@@ -11,7 +22,7 @@ class JavaAPIDocConverter(APIDocConverter):
         'package-summary.html',
         'package-tree.html',
         'package-use.html',
-        'package-fram.html'
+        'package-frame.html'
     ]
     PROTECTED = "protected"
     PUBLIC = "public"
@@ -22,36 +33,46 @@ class JavaAPIDocConverter(APIDocConverter):
         self._cls_name = None
         self.jdk_docs = args.jdk_docs
 
+    @normalize
     def extract_package_name(self, html_doc):
         if self.jdk_docs:
             return html_doc.find_all(class_="subTitle")[1].find_all(
                 text=True)[2]
         else:
-            return html_doc.find_all(class_="subTitle")[0].find_all(
-                text=True)[0]
+            try:
+                return html_doc.select(".subTitle a")[0].text
+            except IndexError:
+                return html_doc.select(".subTitle")[0].text
 
+    @normalize
     def extract_class_name(self, html_doc):
+        if not self.jdk_docs:
+            title = html_doc.find(class_="title")["title"]
+            if "Annotation" in title:
+                return None
+            return title.rsplit(" ", 1)[-1]
         regex = re.compile("([@A-Za-z0-9\\.]+).*")
         type_name = html_doc.find(class_="typeNameLabel")
         if not type_name:
             return None
-        text = type_name.text
+        text = decode(type_name.text)
         match = re.match(regex, text)
         if not match:
             raise Exception("Cannot extract class name: {!r}".format(text))
         return match.group(1)
 
+    @normalize
     def extract_class_type_parameters(self, html_doc):
         regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
-        class_def = html_doc.find(class_="typeNameLabel")
+        class_def = html_doc.find(class_="title")
         self._replace_anchors_with_package_prefix(class_def.select("a"))
         text = class_def.text.split("<", 1)
         if len(text) == 1:
             return []
-        text = text[1][:-1].encode(
-            "ascii", "ignore").decode().replace(" , ", ",")
+        text = decode(text[1][:-1]).replace(" , ", ",")
         return re.findall(regex, text)
 
+    @normalize
     def extract_super_class(self, html_doc):
         supercls_defs = html_doc.select(".description .blockList pre")[0]
         self._replace_anchors_with_package_prefix(supercls_defs.select("a"))
@@ -75,6 +96,7 @@ class JavaAPIDocConverter(APIDocConverter):
             return self.ENUM
         return self.REGULAR_CLASS
 
+    @normalize
     def extract_super_interfaces(self, html_doc):
         text = html_doc.select(".description .blockList pre")[0].text.encode(
             "ascii", "ignore").decode()
@@ -85,15 +107,16 @@ class JavaAPIDocConverter(APIDocConverter):
         text = segs[1].replace(", ", ",")
         return top_level_split(text)
 
+    @normalize
     def extract_functional_interface(self, html_doc):
-        text = html_doc.select(".description .blockList pre")[0].text.encode(
-            "ascii", "ignore").decode()
+        text = decode(html_doc.select(".description .blockList pre")[0].text)
         return "@FunctionalInterface" in text
 
     def is_class_static(self, html_doc):
-        text = html_doc.select(".description .blockList pre")[0].text
+        text = decode(html_doc.select(".description .blockList pre")[0].text)
         return " static " in text
 
+    @normalize
     def extract_parent_class(self, html_doc, class_name, package_name):
         parent = None
         segs = class_name.split(".")
@@ -161,13 +184,14 @@ class JavaAPIDocConverter(APIDocConverter):
         }
         return class_obj
 
+    @normalize
     def extract_method_type_parameters(self, method_doc, is_constructor):
         if is_constructor:
             return []
         regex = re.compile(
             r"(static )?(default )?(<(.*)>)?[^<>\?](.*)?")
         text = method_doc.find(class_="colFirst").text.encode(
-            "ascii", "ignore").decode()
+            "ascii", "ignore").decode().replace("  ", " ")
         match = re.match(regex, text)
         if not match:
             raise Exception("Cannot match method's signature {!r}".format(
@@ -177,12 +201,13 @@ class JavaAPIDocConverter(APIDocConverter):
             type_parameters = top_level_split(type_parameters)
         return type_parameters or []
 
+    @normalize
     def extract_method_return_type(self, method_doc, is_constructor):
         if is_constructor:
             return None
 
         regex = re.compile(
-            r"(static )?(default )?(abstract )?(protected )?(<.*>)?([^<>\?](.*)?)")
+            r"(static )?(default )?(protected )?(abstract )?(<.*>)?([^<>\?](.*)?)")
         self._replace_anchors_with_package_prefix(
             method_doc.select(".colFirst a"))
         text = method_doc.find(class_="colFirst").text.encode(
@@ -201,6 +226,11 @@ class JavaAPIDocConverter(APIDocConverter):
         # type. The package prefix is found in a attribute of each anchor
         # named "title".
         for anchor in anchors:
+            if anchor.string.startswith("@"):
+                # Ignore annotations
+                if anchor.string not in ["@FunctionalInterface", "@interface"]:
+                    anchor.string.replace_with("")
+                continue
             title = anchor.get("title")
             if not title or "type parameter" in title:
                 # It's either a primitive type of a type parameter. We ignore
@@ -210,6 +240,7 @@ class JavaAPIDocConverter(APIDocConverter):
             if not anchor.string.startswith(package_prefix):
                 anchor.string.replace_with(package_prefix + "." + anchor.text)
 
+    @normalize
     def extract_method_parameter_types(self, method_doc, is_constructor):
         regex = re.compile(r'(.+) [a-zA-Z_]+')
         if self.jdk_docs:
@@ -217,7 +248,10 @@ class JavaAPIDocConverter(APIDocConverter):
                 ".colSecond code"
         else:
             key = (".colOne code"
-                   if is_constructor else ".colLast code")
+                   if is_constructor else ".colSecond code")
+        if not is_constructor and not self.jdk_docs:
+            if method_doc.find(class_="colSecond") is None:
+                key = ".colLast code"
         self._replace_anchors_with_package_prefix(
             method_doc.select(key + " a"))
         try:
@@ -242,6 +276,7 @@ class JavaAPIDocConverter(APIDocConverter):
         text = column.text.encode("ascii", "ignore").decode()
         return self.PROTECTED if self.PROTECTED in text else self.PUBLIC
 
+    @normalize
     def extract_method_name(self, method_doc, is_constructor):
         try:
             if self.jdk_docs:
@@ -249,7 +284,12 @@ class JavaAPIDocConverter(APIDocConverter):
                     ".colSecond a"
             else:
                 key = ".memberNameLink a"
-            return method_doc.select(key)[0].text
+            elements = method_doc.select(key)
+            if not elements and not self.jdk_docs and is_constructor:
+                key = ".colLast a"
+                return method_doc.select(key)[0].text
+            else:
+                return elements[0].text
         except IndexError:
             # We are probably in a field
             return None
@@ -265,12 +305,12 @@ class JavaAPIDocConverter(APIDocConverter):
         return "default" in method_doc.find(class_="colFirst").text
 
     def extract_exceptions(self, method_doc):
+        if not self.jdk_docs:
+            return []
         href = method_doc.select(".memberNameLink a")[0]["href"]
         href = urllib.parse.unquote(href)
         # This is a ref to another class
         if href.endswith(".html"):
-            return []
-        if not self.jdk_docs:
             return []
         method_summary = self._current_api_cls.find(
             id=href[1:]).nextSibling.nextSibling
@@ -296,10 +336,16 @@ class JavaAPIDocConverter(APIDocConverter):
         return self.extract_method_name(method_doc,
                                         False) == base_name
 
+    @normalize
     def extract_field_name(self, field_doc):
-        key = ".colSecond a" if self.jdk_docs else ".colLast a"
-        return field_doc.select(key)[0].text
+        key = ".colSecond a"
+        elements = field_doc.select(key)
+        if not elements and not self.jdk_docs:
+            key = ".colLast a"
+            return field_doc.select(key)[0].text
+        return elements[0].text
 
+    @normalize
     def extract_field_type(self, field_doc):
         return self.extract_method_return_type(field_doc, False)
 

@@ -4,6 +4,10 @@ import json
 from bs4 import BeautifulSoup
 
 
+def decode(string: str) -> str:
+    return string.encode("ascii", "ignore").decode()
+
+
 def file2html(path):
     with open(path, 'r') as f:
         return BeautifulSoup(f, "html.parser")
