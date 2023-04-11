@@ -96,6 +96,13 @@ class JavaAPIDocConverter(APIDocConverter):
             return self.ENUM
         return self.REGULAR_CLASS
 
+    def extract_class_access_modifier(self, html_doc):
+        text = html_doc.select(".description pre")[0].text
+        if "protected " in text:
+            return "protected"
+        else:
+            return "public"
+
     @normalize
     def extract_super_interfaces(self, html_doc):
         text = html_doc.select(".description .blockList pre")[0].text.encode(
@@ -151,6 +158,7 @@ class JavaAPIDocConverter(APIDocConverter):
         super_class = self.extract_super_class(html_doc)
         super_interfaces = self.extract_super_interfaces(html_doc)
         class_type = self.extract_class_type(html_doc)
+        access_mod = self.extract_class_access_modifier(html_doc)
         is_func_interface = self.extract_functional_interface(html_doc)
         if class_type == self.ENUM:
             # TODO handle enums
@@ -181,6 +189,7 @@ class JavaAPIDocConverter(APIDocConverter):
           'fields': field_objs,
           "functional_interface": is_func_interface,
           "parent": parent,
+          "access_mod": access_mod,
         }
         return class_obj
 
