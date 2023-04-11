@@ -461,16 +461,27 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
 
 
 class ScalaAPIGraphBuilder(APIGraphBuilder):
+    MAPPED_TYPES = {}
+
     def __init__(self, target_language="scala", **kwargs):
         super().__init__(target_language, **kwargs)
 
     def get_type_parser(self):
-        return ScalaTypeParser(
-            self.type_var_mappings,
-            self._current_func_type_var_map,
-            self._class_type_var_map,
-            self.parsed_types
-        )
+        parsers = {
+            "java": JavaTypeParser,
+            "scala": ScalaTypeParser
+        }
+        mapped_types = {
+            k: (v, self)
+            for k, v in self.MAPPED_TYPES.items()
+        }
+        args = (self.type_var_mappings,
+                self._current_func_type_var_map, self._class_type_var_map,
+                self.parsed_types, mapped_types)
+        if self.api_language == "java":
+            args = ("scala",) + args
+
+        return parsers[self.api_language](*args)
 
     def build(self, docs: dict) -> APIGraph:
         # XXX Filter nested classes / objects.
