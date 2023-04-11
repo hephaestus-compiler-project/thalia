@@ -198,7 +198,7 @@ class JavaAPIDocConverter(APIDocConverter):
         if is_constructor:
             return []
         regex = re.compile(
-            r"(static )?(default )?(<(.*)>)?[^<>\?](.*)?")
+            r"(static )?(default )?(<(.*)>)?[^<>,\?](.*)?")
         text = method_doc.find(class_="colFirst").text.encode(
             "ascii", "ignore").decode().replace("  ", " ")
         match = re.match(regex, text)
@@ -216,11 +216,11 @@ class JavaAPIDocConverter(APIDocConverter):
             return None
 
         regex = re.compile(
-            r"(static )?(default )?(protected )?(abstract )?(<.*>)?([^<>\?](.*)?)")
+            r"(static )?(default )?(protected )?(abstract )?(<.*>)?([^<>,\?](.*)?)")
         self._replace_anchors_with_package_prefix(
             method_doc.select(".colFirst a"))
-        text = method_doc.find(class_="colFirst").text.encode(
-            "ascii", "ignore").decode()
+        text = decode(method_doc.find(class_="colFirst").text).replace("  ",
+                                                                       " ")
         match = re.match(regex, text)
         if not match:
             raise Exception("Cannot match method's signature {!r}".format(
