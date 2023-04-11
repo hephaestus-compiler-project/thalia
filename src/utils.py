@@ -30,10 +30,11 @@ def is_number(string_var):
         return False
 
 
-def top_level_split(s: str, signs: Tuple[str] = ("<", ">")) -> List[str]:
+def top_level_split(s: str, signs: Tuple[str] = ("<", ">"),
+                    delim=",") -> List[str]:
     """
-    Split `s` by top-level commas only.
-    Commas within signs are ignored.
+    Split `s` by top-level `delim` only.
+    `delim`s within signs are ignored.
 
     Taken from: https://stackoverflow.com/a/33527583
     """
@@ -50,7 +51,7 @@ def top_level_split(s: str, signs: Tuple[str] = ("<", ">")) -> List[str]:
             balance += 1
         elif c == end:
             balance -= 1
-        elif c == ',' and balance == 0:
+        elif c == delim and balance == 0:
             parts.append(part[:-1].strip())
             part = ''
     # Capture last part

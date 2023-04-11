@@ -116,6 +116,41 @@ def test_wildcards():
     )
 
 
+def test_instance_types():
+    classifier = tp.SimpleClassifier("java.Foo")
+    type_con = tp.TypeConstructor("java.Foo", [tp.TypeParameter("java.Foo.T1")])
+    type_spec = {
+        "java.Foo": classifier
+    }
+
+    b = JavaTypeParser("java", type_spec=type_spec)
+    assert b.parse_type("java.Foo.Bar") == tp.InstanceType(
+        "java.Foo.Bar", tp.SimpleClassifier("java.Foo")
+    ).new([
+        tp.SimpleClassifier("java.Foo")
+    ])
+
+    b.type_spec["java.Foo"] = type_con
+    enclosing_type = type_con.new([jt.Integer])
+    assert b.parse_type("java.Foo<java.lang.Integer>.Bar") == tp.InstanceType(
+        "java.Foo.Bar", enclosing_type
+    ).new([enclosing_type])
+
+    b.type_spec["java.Foo"] = classifier
+    assert b.parse_type("java.Foo.Bar<java.lang.Integer>") == tp.InstanceType(
+        "java.Foo.Bar",
+        tp.SimpleClassifier("java.Foo"),
+        [tp.TypeParameter("java.Foo.Bar.T1")]
+    ).new([tp.SimpleClassifier("java.Foo"), jt.Integer])
+
+    b.type_spec["java.Foo"] = type_con
+    actual_t = b.parse_type("java.Foo<java.lang.Integer>.Bar<java.lang.String>")
+    exp_t = tp.InstanceType(
+        "java.Foo.Bar", enclosing_type, [tp.TypeParameter("java.Foo.Bar.T1")]
+    ).new([enclosing_type, jt.String])
+    assert actual_t == exp_t
+
+
 def test_kotlin_primitives():
     b = KotlinTypeParser()
     assert b.parse_type("kotlin.Char") == kt.CharType()

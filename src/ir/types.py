@@ -767,6 +767,16 @@ class ParameterizedType(SimpleClassifier):
         return self.is_subtype(other)
 
 
+class InstanceType(TypeConstructor):
+    def __init__(self, name: str, enclosing_type: Type,
+                 extra_type_params: List[TypeParameter] = []):
+        assert enclosing_type is not None and \
+            not enclosing_type.is_type_constructor()
+        enclosing_type_param = TypeParameter("R", bound=enclosing_type)
+        type_parameters = [enclosing_type_param] + extra_type_params
+        super().__init__(name, type_parameters)
+
+
 class NothingType(Classifier):
     def __init__(self):
         super().__init__("Nothing")

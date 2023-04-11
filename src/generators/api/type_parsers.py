@@ -69,6 +69,44 @@ class JavaTypeParser(TypeParser):
                          func_type_name_map, classes_type_parameters,
                          type_spec, mapped_types)
 
+    def is_instance_type(self, str_t: str) -> bool:
+        segs = utils.top_level_split(str_t, delim=".")
+        if len(segs) == 1:
+            return False
+        parent = ".".join(segs[:-1])
+        if parent.endswith(">"):
+            return True
+        return parent in self.type_spec
+
+    def parse_instance_type(self, str_t: str) -> tp.ParameterizedType:
+        segs = utils.top_level_split(str_t, delim=".")
+        if len(segs) == 1:
+            return False
+        parent, base = ".".join(segs[:-1]), segs[-1]
+        enclosing_type = self.parse_reg_type(parent)
+        segs = base.split("<", 1)
+        if len(segs) == 1:
+            name = enclosing_type.name + "." + base
+            return tp.InstanceType(name, enclosing_type).new([enclosing_type])
+        name, type_args_str = segs[0], segs[1][:-1]
+        name = enclosing_type.name + "." + name
+        type_args = utils.top_level_split(type_args_str)
+        new_type_args = []
+        for type_arg in type_args:
+            new_type_args.append(self.parse_type(type_arg))
+        type_var_map = self.classes_type_parameters.get(name) or {}
+        values = list(type_var_map.values())
+        type_vars = [
+            (
+                values[i]
+                if i < len(values)
+                else tp.TypeParameter(name + ".T" + str(i + 1))
+            )
+            for i in range(len(new_type_args))
+        ]
+        return tp.InstanceType(name, enclosing_type, type_vars).new(
+            [enclosing_type] + new_type_args)
+
     def parse_function_type(self, str_t: str) -> tp.ParameterizedType:
         pass
 
@@ -115,6 +153,8 @@ class JavaTypeParser(TypeParser):
         )
         if is_type_var:
             return self.parse_type_parameter(str_t)
+        if self.is_instance_type(str_t):
+            return self.parse_instance_type(str_t)
         segs = str_t.split("<", 1)
         if len(segs) == 1:
             parsed_t = tp.SimpleClassifier(str_t)
