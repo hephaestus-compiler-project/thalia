@@ -14,6 +14,7 @@ from src.generators.api.type_parsers import (TypeParser, KotlinTypeParser,
                                              JavaTypeParser, ScalaTypeParser)
 
 PROTECTED = "protected"
+PUBLIC = "public"
 
 
 class APIGraphBuilder(ABC):
@@ -118,6 +119,8 @@ class APIGraphBuilder(ABC):
                         **self.options)
 
     def process_class(self, class_api: dict):
+        if class_api.get("access_mod", PUBLIC) == PROTECTED:
+            return
         self.api_language = class_api.get("language", self.api_language)
         self.class_name = class_api["name"]
         class_node = self.build_class_node(class_api)
@@ -332,6 +335,7 @@ class APIGraphBuilder(ABC):
             self.functional_types[class_node] = func_type
 
     def build_class_node(self, class_api: dict) -> tp.Type:
+        self.parent_cls = self.class_nodes.get(class_api.get("parent"))
         super_types = {
             self.parse_type(st)
             for st in class_api["implements"] + class_api["inherits"]
@@ -340,18 +344,28 @@ class APIGraphBuilder(ABC):
             super_types.add(self.bt_factory.get_any_type())
         class_name = class_api["name"]
         super_types = list(super_types)
-        if class_api["type_parameters"]:
-            class_node = tp.TypeConstructor(
-                class_name,
-                list(self._class_type_var_map[class_name].values()),
-                super_types
-            )
+        if self.parent_cls is None or not self.parent_cls.is_type_constructor():
+            if class_api["type_parameters"]:
+                class_node = tp.TypeConstructor(
+                    class_name,
+                    list(self._class_type_var_map[class_name].values()),
+                    super_types
+                )
+            else:
+                class_node = self.parse_type(class_name)
+            if type(class_node) is tp.SimpleClassifier:
+                class_node = tp.SimpleClassifier(class_node.name, super_types)
         else:
-            class_node = self.parse_type(class_name)
-        if type(class_node) is tp.SimpleClassifier:
-            class_node = tp.SimpleClassifier(class_node.name, super_types)
+            type_params = (
+                list(self._class_type_var_map[class_name].values())
+                if class_api["type_parameters"]
+                else []
+            )
+            basename = class_name.rsplit(".")[-1]
+            class_node = tp.InstanceTypeConstructor(
+                class_name, self.parent_cls, basename, type_params,
+                super_types)
 
-        self.parent_cls = self.class_nodes.get(class_api.get("parent"))
         self.parsed_types[class_node.name] = class_node
         return class_node
 

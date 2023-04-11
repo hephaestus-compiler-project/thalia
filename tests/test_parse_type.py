@@ -124,30 +124,24 @@ def test_instance_types():
     }
 
     b = JavaTypeParser("java", type_spec=type_spec)
-    assert b.parse_type("java.Foo.Bar") == tp.InstanceType(
-        "java.Foo.Bar", tp.SimpleClassifier("java.Foo")
-    ).new([
-        tp.SimpleClassifier("java.Foo")
-    ])
+    assert b.parse_type("java.Foo.Bar") == tp.SimpleClassifier("java.Foo.Bar")
 
     b.type_spec["java.Foo"] = type_con
     enclosing_type = type_con.new([jt.Integer])
-    assert b.parse_type("java.Foo<java.lang.Integer>.Bar") == tp.InstanceType(
-        "java.Foo.Bar", enclosing_type
-    ).new([enclosing_type])
+    assert b.parse_type("java.Foo<java.lang.Integer>.Bar") == tp.InstanceTypeConstructor(
+        "java.Foo.Bar", type_con, "Bar"
+    ).new([jt.Integer])
 
     b.type_spec["java.Foo"] = classifier
-    assert b.parse_type("java.Foo.Bar<java.lang.Integer>") == tp.InstanceType(
-        "java.Foo.Bar",
-        tp.SimpleClassifier("java.Foo"),
-        [tp.TypeParameter("java.Foo.Bar.T1")]
-    ).new([tp.SimpleClassifier("java.Foo"), jt.Integer])
+    assert b.parse_type("java.Foo.Bar<java.lang.Integer>") == tp.TypeConstructor(
+        "java.Foo.Bar", [tp.TypeParameter("java.Foo.Bar.T1")]
+    ).new([jt.Integer])
 
     b.type_spec["java.Foo"] = type_con
     actual_t = b.parse_type("java.Foo<java.lang.Integer>.Bar<java.lang.String>")
-    exp_t = tp.InstanceType(
-        "java.Foo.Bar", enclosing_type, [tp.TypeParameter("java.Foo.Bar.T1")]
-    ).new([enclosing_type, jt.String])
+    exp_t = tp.InstanceTypeConstructor(
+        "java.Foo.Bar", type_con, "Bar", [tp.TypeParameter("java.Foo.Bar.T1")]
+    ).new([jt.Integer, jt.String])
     assert actual_t == exp_t
 
 

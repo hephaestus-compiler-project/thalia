@@ -622,6 +622,9 @@ class ParameterizedType(SimpleClassifier):
     def is_function_type(self):
         return self.t_constructor.name.startswith('Function')
 
+    def is_instance_type(self):
+        return isinstance(self.t_constructor, InstanceTypeConstructor)
+
     def get_type_variable_assignments(self):
         return {
             t_param: self.type_args[i]
@@ -767,14 +770,18 @@ class ParameterizedType(SimpleClassifier):
         return self.is_subtype(other)
 
 
-class InstanceType(TypeConstructor):
-    def __init__(self, name: str, enclosing_type: Type,
-                 extra_type_params: List[TypeParameter] = []):
+class InstanceTypeConstructor(TypeConstructor):
+    def __init__(self, name: str, enclosing_type: TypeConstructor,
+                 basename: str,
+                 extra_type_params: List[TypeParameter] = [],
+                 supertypes: List[Type] = []):
         assert enclosing_type is not None and \
-            not enclosing_type.is_type_constructor()
-        enclosing_type_param = TypeParameter("R", bound=enclosing_type)
-        type_parameters = [enclosing_type_param] + extra_type_params
-        super().__init__(name, type_parameters)
+            enclosing_type.is_type_constructor()
+        self.enclosing_type = enclosing_type
+        self.extra_type_params = extra_type_params
+        self.basename = basename
+        type_parameters = enclosing_type.type_parameters + extra_type_params
+        super().__init__(name, type_parameters, supertypes)
 
 
 class NothingType(Classifier):

@@ -160,6 +160,20 @@ class JavaTranslator(BaseTranslator):
         else:
             return "? super " + self.get_type_name(t_arg.bound, True, True)
 
+    def instance_type2str(self, t):
+        basename = t.t_constructor.basename
+        if not t.t_constructor.extra_type_params:
+            enclosing_str = self.get_type_name(
+                t.t_constructor.enclosing_type.new(t.type_args))
+            return f"{enclosing_str}.{basename}"
+
+        type_params = t.t_constructor.enclosing_type.type_parameters
+        enclosing_str = self.get_type_name(
+            t.t_constructor.enclosing_type.new(t.type_args[:len(type_params)]))
+        extra_type_args = ", ".join(self.type_arg2str(ta)
+                                    for ta in t.type_args[len(type_params):])
+        return f"{enclosing_str}.{basename}<{extra_type_args}>"
+
     def get_type_name(self, t, get_boxed_void=False, box=False):
         if t.is_wildcard():
             t = t.get_bound_rec()
@@ -174,6 +188,9 @@ class JavaTranslator(BaseTranslator):
         if isinstance(t_constructor, jt.ArrayType):
             return "{}[]".format(self.get_type_name(t.type_args[0], False,
                                                     box))
+        if t.is_instance_type():
+            return self.instance_type2str(t)
+
         return "{}<{}>".format(t.name, ", ".join([self.type_arg2str(ta)
                                                   for ta in t.type_args]))
 

@@ -87,7 +87,12 @@ class JavaTypeParser(TypeParser):
         segs = base.split("<", 1)
         if len(segs) == 1:
             name = enclosing_type.name + "." + base
-            return tp.InstanceType(name, enclosing_type).new([enclosing_type])
+            if not enclosing_type.is_parameterized():
+                return self.type_spec.get(name, tp.SimpleClassifier(name))
+            return tp.InstanceTypeConstructor(
+                name, enclosing_type.t_constructor, base).new(
+                    enclosing_type.type_args
+                )
         name, type_args_str = segs[0], segs[1][:-1]
         name = enclosing_type.name + "." + name
         type_args = utils.top_level_split(type_args_str)
@@ -104,8 +109,13 @@ class JavaTypeParser(TypeParser):
             )
             for i in range(len(new_type_args))
         ]
-        return tp.InstanceType(name, enclosing_type, type_vars).new(
-            [enclosing_type] + new_type_args)
+        if not enclosing_type.is_parameterized():
+            parsed_t = self.type_spec.get(name, tp.TypeConstructor(name,
+                                                                   type_vars))
+            return parsed_t.new(new_type_args)
+        return tp.InstanceTypeConstructor(
+            name, enclosing_type.t_constructor, base, type_vars).new(
+                enclosing_type.type_args + new_type_args)
 
     def parse_function_type(self, str_t: str) -> tp.ParameterizedType:
         pass
