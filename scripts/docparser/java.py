@@ -77,13 +77,19 @@ class JavaAPIDocConverter(APIDocConverter):
         supercls_defs = html_doc.select(".description .blockList pre")[0]
         self._replace_anchors_with_package_prefix(supercls_defs.select("a"))
         text = supercls_defs.text.encode("ascii", "ignore").decode()
-        text = text.replace("\n", " ")
-        regex2 = re.compile(".* extends (.*)( implements .*)?")
-        match = re.match(regex2, text)
-        if not match:
-            return []
+        text = text.replace("\n", " ").replace("  ", " ").replace(", ", ",")
+        if self._cls_name + "<" in text:
+            segs = text.split("> extends ")
+            if len(segs) == 1:
+                return []
+            text = segs[-1].split(" implements ")[0]
+        else:
+            regex2 = re.compile(".*[^?] extends (.*)( implements .*)?")
+            match = re.match(regex2, text)
+            if not match:
+                return []
+            text = match.group(1).split(" implements ")[0]
 
-        text = match.group(1).split(" implements ")[0].replace(", ", ",")
         return top_level_split(text)
 
     def extract_class_type(self, html_doc):
