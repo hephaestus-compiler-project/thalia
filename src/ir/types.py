@@ -767,36 +767,6 @@ class ParameterizedType(SimpleClassifier):
         return self.is_subtype(other)
 
 
-class Function(Classifier):
-    # FIXME: Represent function as a parameterized type
-    def __init__(self, name, param_types, ret_type):
-        super().__init__(name)
-        self.param_types = param_types
-        self.ret_type = ret_type
-
-    def __str__(self):
-        return self.name + "(" + ','.join(map(str, self.param_types)) +\
-            ") -> " + str(self.ret_type)
-
-    def is_subtype(self, other: Type):
-        return False
-
-
-class ParameterizedFunction(Function):
-    # FIXME: Represent function as a parameterized type
-    def __init__(self, name, type_parameters, param_types, ret_type):
-        super().__init__(name, param_types, ret_type)
-        self.type_parameters = type_parameters
-
-    def __str__(self):
-        return self.name + "<" ','.join(map(str, self.type_parameters)) + \
-            ">" + "(" + ','.join(map(str, self.param_types)) + \
-            ") -> " + str(self.ret_type)
-
-    def is_subtype(self, other: Type):
-        return False
-
-
 class NothingType(Classifier):
     def __init__(self):
         super().__init__("Nothing")
