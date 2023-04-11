@@ -144,7 +144,7 @@ class GroovyTranslator(BaseTranslator):
         if isinstance(t_constructor, gt.ArrayType):
             return "{}[]".format(self.get_type_name(t.type_args[0]))
         if t.is_instance_type():
-            return instance_type2str(t)
+            return self.instance_type2str(t)
         return "{}<{}>".format(t.name, ", ".join([self.type_arg2str(ta)
                                                   for ta in t.type_args]))
 
