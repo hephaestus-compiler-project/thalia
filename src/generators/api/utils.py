@@ -270,6 +270,11 @@ def instantiate_type_variables(api_graph, constraints,
         else:
             # Case 2: regular bounds
             assigned_t = tp.substitute_type(t, type_var_assignments)
+            if assigned_t.is_type_constructor():
+                assigned_t = tu.instantiate_type_constructor(
+                    assigned_t, api_graph.get_reg_types(),
+                    rec_bound_handler=api_graph.get_instantiations_of_recursive_bound
+                )
         if assigned_t.is_parameterized() and \
                 assigned_t.has_invariant_wildcards():
             # We substitute invariant wildcard with concrete type.
