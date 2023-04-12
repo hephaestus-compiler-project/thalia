@@ -23,7 +23,9 @@ class KotlinCompiler(BaseCompiler):
         if self.library_path:
             extra_options = ["-cp", self.library_path]
         return ['kotlinc', self.input_name, '-include-runtime', '-d',
-                'program.jar'] + extra_options
+                'program.jar',
+                '-Xnullability-annotations=@javax.annotation:ignore'
+                ] + extra_options
 
     def get_filename(self, match):
         return match[0]
