@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 TIME_TO_RUN=$((23 * 60 * 60))
-CORES=$(cat /proc/cpuinfo | grep processor | wc -l)
-CORES=$(($CORES - 2))
 TRANSFORMATIONS=0
 VERSIONS="1.4.21 1.4.20 1.4.10 1.4.0 1.3.72 1.3.71 1.3.70 1.3.61 1.3.60 1.3.50 1.3.41 1.3.40 1.3.31 1.3.30 1.3.21 1.3.20 1.3.11 1.3.10 1.3.0 1.2.71 1.2.70 1.2.61 1.2.60 1.2.51 1.2.50 1.2.41 1.2.40 1.2.31 1.2.30 1.2.21 1.2.20 1.2.10 1.2.0 1.1.61 1.1.60 1.1.51 1.1.50 1.1.4-3 1.1.4-2 1.1.4 1.1.3-2 1.1.3 1.1.2-5 1.1.2-2 1.1.2 1.1.1 1.1 1.0.7 1.0.6 1.0.5-2 1.0.5 1.0.4 1.0.3 1.0.2 1.0.1-2 1.0.1-1 1.0.1 1.0.0"
 source /root/.bashrc
@@ -15,7 +13,7 @@ simple_run_groovy() {
     git pull origin stable
     hephaestus-run.sh $CHECK_TYPE_SYSTEMS/example-apis/java-api \
       $CHECK_TYPE_SYSTEMS/3party-libs \
-      "--language groovy --cast-numbers  --max-type-params 3  --erase-types --disable-bounded-type-parameters --disable-expression-cache"
+      "--language groovy --cast-numbers  --max-type-params 3 --disable-bounded-type-parameters --disable-expression-cache"
 }
 
 simple_run_java() {
@@ -24,7 +22,7 @@ simple_run_java() {
     git pull origin stable
     hephaestus-run.sh $CHECK_TYPE_SYSTEMS/example-apis/java-api \
       $CHECK_TYPE_SYSTEMS/3party-libs \
-      "--language java --max-type-params 3  --erase-types --disable-expression-cache"
+      "--language java --max-type-params 3 --disable-expression-cache"
 }
 
 simple_run() {
@@ -34,7 +32,7 @@ simple_run() {
     git pull origin stable
     hephaestus-run.sh $CHECK_TYPE_SYSTEMS/example-apis/java-api \
       $CHECK_TYPE_SYSTEMS/3party-libs \
-      "--language kotlin --max-type-params 3  --erase-types --disable-expression-cache"
+      "--language kotlin --max-type-params 3 --disable-expression-cache"
 }
 
 run_groovy_from_source() {
@@ -46,7 +44,7 @@ run_groovy_from_source() {
     git pull origin stable
     hephaestus-run.sh $CHECK_TYPE_SYSTEMS/example-apis/java-api \
       $CHECK_TYPE_SYSTEMS/3party-libs \
-      "--language groovy --cast-numbers  --max-type-params 3  --erase-types --disable-bounded-type-parameters --disable-expression-cache"
+      "--language groovy --cast-numbers  --max-type-params 3 --disable-bounded-type-parameters --disable-expression-cache"
 }
 
 run_from_source() {
@@ -56,7 +54,7 @@ run_from_source() {
     ./gradlew -Dhttp.socketTimeout=60000 -Dhttp.connectionTimeout=60000 dist
     hephaestus-run.sh $CHECK_TYPE_SYSTEMS/example-apis/java-api \
       $CHECK_TYPE_SYSTEMS/3party-libs \
-      "--language kotlin --max-type-params 3  --erase-types --disable-expression-cache"
+      "--language kotlin --max-type-params 3 --disable-expression-cache"
 }
 
 run_multiple_versions() {
@@ -68,7 +66,7 @@ run_multiple_versions() {
         sdk use kotlin $version
         hephaestus-run.sh $CHECK_TYPE_SYSTEMS/example-apis/java-api \
           $CHECK_TYPE_SYSTEMS/3party-libs \
-          "--language kotlin --max-type-params 3  --erase-types --disable-expression-cache"
+          "--language kotlin --max-type-params 3 --disable-expression-cache"
     done
 }
 
