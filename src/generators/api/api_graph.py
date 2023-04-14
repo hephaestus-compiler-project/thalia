@@ -744,15 +744,12 @@ class APIGraph():
                 return None
             receiver, rec_var_map = ret
             type_var_map.update(rec_var_map)
-            func_type_parameters = [
-                tp.substitute_type(t, type_var_map)
-                for t in func_type_parameters
-            ]
             func_type_var_map = self.instantiate_func_type_variables(
                 api_node, func_type_parameters)
             if func_type_var_map is None:
                 return None
-            type_var_map.update(func_type_var_map)
+            type_var_map.update({k: tp.substitute_type(v, type_var_map)
+                                 for k, v in func_type_var_map.items()})
             if parameterized_rec:
                 receiver = tp.substitute_type(receiver, type_var_map)
             receivers = {receiver}
