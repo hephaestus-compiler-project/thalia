@@ -33,7 +33,7 @@ run_hephaestus()
   # Create api-rules.json
   ls $libpath/json-docs | $basedir/create-api-rules.py > api-rules.json
 
-  base_args="--iterations 10000 --batch 30 -P -L --transformations 0 \
+  base_args="--iterations 10000000 --batch 30 -P -L --transformations 0 \
     --max-depth 2 --generator api  \
     --library-path $libjar --api-doc-path libs --api-rules api-rules.json \
     --max-conditional-depth 2 $args"
@@ -41,6 +41,11 @@ run_hephaestus()
   echo "$base_args --erase-types" | xargs ./hephaestus.py
   echo "$base_args --inject-type-error" | xargs ./hephaestus.py
   echo "$base_args --erase-types --inject-type-error" | xargs ./hephaestus.py
+
+  echo "$base_args --path-search-strategy ksimple" | xargs ./hephaestus.py
+  echo "$base_args --erase-types --path-search-strategy ksimple" | xargs ./hephaestus.py
+  echo "$base_args --inject-type-error --path-search-strategy ksimple" | xargs ./hephaestus.py
+  echo "$base_args --erase-types --inject-type-error --path-search-strategy ksimple" | xargs ./hephaestus.py
 }
 
 if [ -z $libpath ]; then
