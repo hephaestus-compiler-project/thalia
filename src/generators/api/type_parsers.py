@@ -135,6 +135,17 @@ class JavaTypeParser(TypeParser):
     def parse_type_parameter(self, str_t: str,
                              keep: bool = False) -> tp.TypeParameter:
         segs = str_t.split(" extends ")
+        old_class_type_map = copy(self.class_type_name_map)
+        if keep:
+            # We handle the following case:
+            # class Foo<T> {
+            #  <T extends C<T>> void test()
+            # }
+            # In the above case, the type variable T in C<T> refers to
+            # the newly introduced function type parameter.
+            self.class_type_name_map = {k: v
+                                        for k, v in old_class_type_map.items()
+                                        if segs[0] != k}
         type_var_map = copy(self.class_type_name_map)
         type_var_map.update(self.func_type_name_map)
         if keep:
@@ -147,8 +158,10 @@ class JavaTypeParser(TypeParser):
         if len(segs) == 1:
             return type_var_map.get(str_t, tp.TypeParameter(str_t))
         bound = self.parse_type(segs[1])
-        return type_var_map.get(segs[0],
-                                tp.TypeParameter(segs[0], bound=bound))
+        parsed_t = type_var_map.get(segs[0],
+                                    tp.TypeParameter(segs[0], bound=bound))
+        self.class_type_name_map = old_class_type_map
+        return parsed_t
 
     def parse_reg_type(self, str_t: str) -> tp.Type:
         if str_t.startswith("?"):
@@ -310,6 +323,11 @@ class KotlinTypeParser(TypeParser):
             variance = tp.Invariant
             type_param = str_t
         segs = type_param.split(":")
+        old_class_type_map = copy(self.class_type_name_map)
+        if keep:
+            self.class_type_name_map = {k: v
+                                        for k, v in old_class_type_map.items()
+                                        if segs[0] != k}
         type_var_map = copy(self.class_type_name_map)
         type_var_map.update(self.func_type_name_map)
         if keep:
@@ -324,9 +342,11 @@ class KotlinTypeParser(TypeParser):
                                     tp.TypeParameter(type_param,
                                                      variance=variance))
         bound = self.parse_type(segs[1].lstrip())
-        return type_var_map.get(
+        parsed_t = type_var_map.get(
             segs[0].rstrip(),
             tp.TypeParameter(segs[0].rstrip(), variance=variance, bound=bound))
+        self.class_type_name_map = old_class_type_map
+        return parsed_t
 
     def parse_reg_type(self, str_t: str) -> tp.Type:
         if str_t.startswith("*") or str_t.startswith("out ") or \
@@ -539,6 +559,11 @@ class ScalaTypeParser(TypeParser):
         if "[" in segs[0]:
             # XXX Probably a higher-kinded type: not supported at the moment.
             return None
+        old_class_type_map = copy(self.class_type_name_map)
+        if keep:
+            self.class_type_name_map = {k: v
+                                        for k, v in old_class_type_map.items()
+                                        if segs[0] != k}
         type_var_map = copy(self.class_type_name_map)
         type_var_map.update(self.func_type_name_map)
         if keep:
@@ -553,9 +578,11 @@ class ScalaTypeParser(TypeParser):
                                     tp.TypeParameter(type_param,
                                                      variance=variance))
         bound = self.parse_type(segs[1].lstrip())
-        return type_var_map.get(
+        parsed_t = type_var_map.get(
             segs[0].rstrip(),
             tp.TypeParameter(segs[0].rstrip(), variance=variance, bound=bound))
+        self.class_type_name_map = old_class_type_map
+        return parsed_t
 
     def parse_reg_type(self, str_t: str) -> tp.Type:
         if str_t.startswith("?") or str_t.startswith("_"):
