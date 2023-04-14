@@ -213,6 +213,7 @@ def _get_type_variables(path: list) -> List[tp.TypeParameter]:
 class APIGraph():
     EMPTY = 0
     DEFAULT_PATH_SEARCH_STRATEGY = "shortest"
+    MAX_TYPES = 10
 
     def __init__(self, api_graph, subtyping_graph, functional_types,
                  bt_factory, **kwargs):
@@ -284,16 +285,22 @@ class APIGraph():
 
             # Type argument invariant
             if t_arg.is_wildcard() and t_arg.is_invariant():
-                possible_type_args.append(
-                    [t for t in self.get_reg_types()
-                     if not t.is_type_constructor()])
+                types = [t for t in self.get_reg_types()
+                         if not t.is_type_constructor()]
+                possible_type_args.append(utils.random.sample(
+                    types, min(self.MAX_TYPES, len(types))))
 
             # Type argument covariant or type param covariant
-            elif (t_arg.is_wildcard() and t_arg.is_covariant() or
+            elif ((t_arg.is_wildcard() and t_arg.is_covariant()) or
                   type_param.is_covariant()):
-                possible_type_args.append({
-                    n for n in self.subtypes(getattr(t_arg, "bound", t_arg) or t_arg)
-                    if not n.is_type_constructor()})
+                types = {t_arg}
+                if t_arg != self.bt_factory.get_any_type():
+                    types = {
+                        n for n in self.subtypes(
+                            getattr(t_arg, "bound", t_arg) or t_arg)
+                        if not n.is_type_constructor()
+                    }
+                possible_type_args.append(types)
             # Type argument contravariant or type param contravariant
             else:
                 possible_type_args.append({n for n in self.supertypes(
