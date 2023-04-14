@@ -423,13 +423,7 @@ def substitute_type_args(etype, type_map,
     for t_arg in etype.type_args:
         type_args.append(_get_type_substitution(t_arg, type_map, cond,
                                                 substitute_bound))
-    new_type_map = {
-        tp: type_args[i]
-        for i, tp in enumerate(etype.t_constructor.type_parameters)
-    }
-    type_con = perform_type_substitution(
-        etype.t_constructor, new_type_map, cond, substitute_bound)
-    return ParameterizedType(type_con, type_args)
+    return ParameterizedType(etype.t_constructor, type_args)
 
 
 def substitute_type(t, type_map, substitute_bound=True):
@@ -614,7 +608,10 @@ class ParameterizedType(SimpleClassifier):
         super().__init__(self.t_constructor.name,
                          self.t_constructor.supertypes)
         # XXX revisit
-        self.supertypes = copy(self.t_constructor.supertypes)
+        self.supertypes = [
+            substitute_type(st, self.get_type_variable_assignments())
+            for st in self.t_constructor.supertypes
+        ]
 
     def is_parameterized(self):
         return True
@@ -749,6 +746,18 @@ class ParameterizedType(SimpleClassifier):
                         return False
                 return True
         return False
+
+    def get_supertypes(self):
+        """Return self and the transitive closure of the supertypes"""
+        supertypes = super().get_supertypes()
+        new_supertypes = set()
+        assignments = self.get_type_variable_assignments()
+        for st in supertypes:
+            if st.is_parameterized() and st.name != self.name:
+                new_supertypes.add(substitute_type(st, assignments))
+            else:
+                new_supertypes.add(st)
+        return new_supertypes
 
     def is_assignable(self, other: Type):
         # Import here to prevent circular dependency.
