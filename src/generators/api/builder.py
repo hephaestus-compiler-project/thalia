@@ -6,7 +6,7 @@ from typing import List, Dict, Set
 
 import networkx as nx
 
-from src.ir import BUILTIN_FACTORIES, types as tp
+from src.ir import BUILTIN_FACTORIES, types as tp, kotlin_types as kt
 from src.ir.builtins import BuiltinFactory
 from src.generators.api.api_graph import (APIGraph, IN, OUT, Method,
                                           Constructor, Field, Parameter)
@@ -235,7 +235,7 @@ class APIGraphBuilder(ABC):
                         bound.t_constructor.type_parameters[i] = deepcopy(
                             renamed)
 
-    def parse_type(self, str_t: str) -> tp.Type:
+    def parse_type(self, str_t: str, **kwargs) -> tp.Type:
         return self.get_type_parser().parse_type(str_t)
 
     def get_api_outgoing_node(self, output_type: tp.Type):
@@ -337,7 +337,7 @@ class APIGraphBuilder(ABC):
     def build_class_node(self, class_api: dict) -> tp.Type:
         self.parent_cls = self.class_nodes.get(class_api.get("parent"))
         super_types = {
-            self.parse_type(st)
+            self.parse_type(st, build_class_node=True)
             for st in class_api["implements"] + class_api["inherits"]
         }
         if not super_types:
@@ -352,7 +352,7 @@ class APIGraphBuilder(ABC):
                     super_types
                 )
             else:
-                class_node = self.parse_type(class_name)
+                class_node = self.parse_type(class_name, build_class_node=True)
             if type(class_node) is tp.SimpleClassifier:
                 class_node = tp.SimpleClassifier(class_node.name, super_types)
         else:
@@ -371,7 +371,7 @@ class APIGraphBuilder(ABC):
 
     def build_subtyping_relations(self, class_api: dict):
         super_types = {
-            self.parse_type(st)
+            self.parse_type(st, build_class_node=True)
             for st in class_api["implements"] + class_api["inherits"]
         }
         if not super_types:
@@ -455,6 +455,14 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             args = ("kotlin",) + args
 
         return parsers[self.api_language](*args)
+
+    def parse_type(self, str_t: str, build_class_node=False) -> tp.Type:
+        parsed_t = self.get_type_parser().parse_type(str_t)
+        return (
+            kt.NullableType().new([parsed_t])
+            if self.api_language == "java" and not build_class_node
+            else parsed_t
+        )
 
     def process_class(self, class_api):
         self.api_language = class_api["language"]
