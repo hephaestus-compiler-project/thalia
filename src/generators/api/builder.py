@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from collections import OrderedDict
 from copy import deepcopy, copy
+import re
 from typing import List, Dict, Set
 
 
@@ -193,9 +194,9 @@ class APIGraphBuilder(ABC):
             out_node, kwargs = self.get_api_outgoing_node(output_type)
             self.graph.add_edge(method_node, out_node, label=OUT, **kwargs)
             self._current_func_type_var_map = {}
-            self.build_functional_interface(method_api,
-                                            method_node.parameters,
-                                            output_type)
+            self.build_functional_interface(
+                method_api, getattr(method_node, "parameters", []),
+                output_type)
 
     def rename_type_parameters(self, prefix: str,
                                type_parameters: List[str],
@@ -418,14 +419,14 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         "java.lang.String": "kotlin.String",
         "java.lang.Number": "kotlin.Number",
         "java.lang.Throwable": "kotlin.Throwable",
-        "java.lang.Byte": "kotlin.Byte?",
-        "java.lang.Short": "kotlin.Short?",
-        "java.lang.Integer": "kotlin.Int?",
-        "java.lang.Long": "kotlin.Long?",
-        "java.lang.Character": "kotlin.Char?",
-        "java.lang.Float": "kotlin.Float?",
-        "java.lang.Double": "kotlin.Double?",
-        "java.lang.Boolean": "kotlin.Boolean?",
+        "java.lang.Byte": "kotlin.Byte",
+        "java.lang.Short": "kotlin.Short",
+        "java.lang.Integer": "kotlin.Int",
+        "java.lang.Long": "kotlin.Long",
+        "java.lang.Character": "kotlin.Char",
+        "java.lang.Float": "kotlin.Float",
+        "java.lang.Double": "kotlin.Double",
+        "java.lang.Boolean": "kotlin.Boolean",
         "java.util.Iterator": "kotlin.collections.Iterator",
         "java.lang.Iterable": "kotlin.collections.Iterable",
         "java.util.Collection": "kotlin.collections.MutableCollection",
@@ -463,6 +464,29 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             if self.api_language == "java" and not build_class_node
             else parsed_t
         )
+
+    def build_method_node(self, method_api: dict,
+                          receiver_name: str) -> Method:
+        if not self.api_language == "java":
+            return super().build_method_node(method_api, receiver_name)
+
+        # If this method corresponds to a getter (e.g., getValue()), then
+        # treat this method as a property (e.g., value).
+        regex = re.compile("^get([A-Z].*)$")
+        excluded_set = {
+            "getOrElse"
+        }
+        name = method_api["name"]
+        match = regex.match(name)
+        parameters = method_api["parameters"]
+        is_static = method_api["is_static"]
+        if not match or name in excluded_set or parameters or is_static:
+            return super().build_method_node(method_api, receiver_name)
+
+        field_name = match.group(1)[0].lower() + match.group(1)[1:]
+        field_node = Field(field_name, receiver_name)
+        self.graph.add_node(field_node)
+        return field_node
 
     def process_class(self, class_api):
         self.api_language = class_api["language"]
