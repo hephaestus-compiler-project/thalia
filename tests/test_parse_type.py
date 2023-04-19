@@ -159,13 +159,14 @@ def test_kotlin_primitives():
 
 def test_kotlin_builtin_types():
     b = KotlinTypeParser()
-    assert b.parse_type("java.lang.Character") == tp.SimpleClassifier("Char?")
-    assert b.parse_type("java.lang.Byte") == tp.SimpleClassifier("Byte?")
-    assert b.parse_type("java.lang.Short") == tp.SimpleClassifier("Short?")
-    assert b.parse_type("java.lang.Integer") == tp.SimpleClassifier("Int?")
-    assert b.parse_type("java.lang.Long") == tp.SimpleClassifier("Long?")
-    assert b.parse_type("java.lang.Float") == tp.SimpleClassifier("Float?")
-    assert b.parse_type("java.lang.Double") == tp.SimpleClassifier("Double?")
+    assert b.parse_type("java.lang.Character") == kt.NullableType().new([kt.Char])
+    assert b.parse_type("java.lang.Byte") == kt.NullableType().new([kt.Byte])
+    assert b.parse_type("java.lang.Short") == kt.NullableType().new([kt.Short])
+    assert b.parse_type("java.lang.Integer") == kt.NullableType().new([kt.Integer])
+    assert b.parse_type("java.lang.Long") == kt.NullableType().new([kt.Long])
+    assert b.parse_type("java.lang.Float") == kt.NullableType().new([kt.Float])
+    assert b.parse_type("java.lang.Double") == kt.NullableType().new([kt.Double])
+    assert b.parse_type("java.lang.Boolean") == kt.NullableType().new([kt.Boolean])
     assert b.parse_type("java.lang.String") == kt.String
     assert b.parse_type("java.lang.Object") == kt.Any
     assert b.parse_type("void") == kt.Unit

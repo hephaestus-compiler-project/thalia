@@ -426,21 +426,21 @@ class KotlinTypeParser(TypeParser):
         elif str_t.startswith("vararg "):
             return self.parse_type(str_t.split("vararg ")[1])
         elif str_t == "java.lang.Byte":
-            return tp.SimpleClassifier("Byte?")
+            return self.parse_type("kotlin.Byte?")
         elif str_t == "java.lang.Short":
-            return tp.SimpleClassifier("Short?")
+            return self.parse_type("kotlin.Short?")
         elif str_t == "java.lang.Integer":
-            return tp.SimpleClassifier("Int?")
+            return self.parse_type("kotlin.Int?")
         elif str_t == "java.lang.Long":
-            return tp.SimpleClassifier("Long?")
+            return self.parse_type("kotlin.Long?")
         elif str_t == "java.lang.Float":
-            return tp.SimpleClassifier("Float?")
+            return self.parse_type("kotlin.Float?")
         elif str_t == "java.lang.Double":
-            return tp.SimpleClassifier("Double?")
+            return self.parse_type("kotlin.Double?")
         elif str_t == "java.lang.Character":
-            return tp.SimpleClassifier("Char?")
+            return self.parse_type("kotlin.Char?")
         elif str_t == "java.lang.Boolean":
-            return tp.SimpleClassifier("Boolean?")
+            return self.parse_type("kotlin.Boolean?")
         elif str_t in ["kotlin.Char", "char", "Char"]:
             return tf.get_char_type()
         elif str_t in ["kotlin.Byte", "byte", "Byte"]:
