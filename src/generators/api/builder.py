@@ -507,18 +507,32 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
 
 
 class ScalaAPIGraphBuilder(APIGraphBuilder):
-    MAPPED_TYPES = {}
+    MAPPED_TYPES = {
+        "java.lang.Byte": "java.lang.Byte",
+        "java.lang.Short": "java.lang.Short",
+        "java.lang.Integer": "java.lang.Integer",
+        "java.lang.Long": "java.lang.Long",
+        "java.lang.Float": "java.lang.Float",
+        "java.lang.Double": "java.lang.Double",
+        "java.lang.Character": "java.lang.Character",
+        "java.lang.Boolean": "java.lang.Boolean",
+    }
 
     def __init__(self, target_language="scala", **kwargs):
         super().__init__(target_language, **kwargs)
 
     def get_type_parser(self):
+        scala_parser = ScalaTypeParser(
+            self.type_var_mappings,
+            self._current_func_type_var_map, self._class_type_var_map,
+            self.parsed_types, {}
+        )
         parsers = {
             "java": JavaTypeParser,
             "scala": ScalaTypeParser
         }
         mapped_types = {
-            k: (v, self)
+            k: (v, scala_parser)
             for k, v in self.MAPPED_TYPES.items()
         }
         args = (self.type_var_mappings,
