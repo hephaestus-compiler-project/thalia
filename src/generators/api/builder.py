@@ -445,24 +445,26 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             "java": JavaTypeParser,
             "kotlin": KotlinTypeParser
         }
+        args = [self.type_var_mappings,
+                self._current_func_type_var_map, self._class_type_var_map,
+                self.parsed_types, {}]
+        kotlin_parser = KotlinTypeParser(*list(args))
         mapped_types = {
-            k: (v, self)
+            k: (v, kotlin_parser)
             for k, v in self.MAPPED_TYPES.items()
         }
-        args = (self.type_var_mappings,
-                self._current_func_type_var_map, self._class_type_var_map,
-                self.parsed_types, mapped_types)
+        args[-1] = mapped_types
         if self.api_language == "java":
-            args = ("kotlin",) + args
+            args = ["kotlin"] + args
 
         return parsers[self.api_language](*args)
 
     def parse_type(self, str_t: str, build_class_node=False) -> tp.Type:
         parsed_t = self.get_type_parser().parse_type(str_t)
         return (
-            kt.NullableType().new([parsed_t])
-            if self.api_language == "java" and not build_class_node
-            else parsed_t
+            parsed_t
+            if build_class_node or self.api_language == "kotlin"
+            else kt.NullableType().new([parsed_t])
         )
 
     def build_method_node(self, method_api: dict,
@@ -522,24 +524,21 @@ class ScalaAPIGraphBuilder(APIGraphBuilder):
         super().__init__(target_language, **kwargs)
 
     def get_type_parser(self):
-        scala_parser = ScalaTypeParser(
-            self.type_var_mappings,
-            self._current_func_type_var_map, self._class_type_var_map,
-            self.parsed_types, {}
-        )
         parsers = {
             "java": JavaTypeParser,
             "scala": ScalaTypeParser
         }
+        args = [self.type_var_mappings,
+                self._current_func_type_var_map, self._class_type_var_map,
+                self.parsed_types, {}]
+        scala_parser = ScalaTypeParser(*list(args))
         mapped_types = {
             k: (v, scala_parser)
             for k, v in self.MAPPED_TYPES.items()
         }
-        args = (self.type_var_mappings,
-                self._current_func_type_var_map, self._class_type_var_map,
-                self.parsed_types, mapped_types)
+        args[-1] = mapped_types
         if self.api_language == "java":
-            args = ("scala",) + args
+            args = ["scala"] + args
 
         return parsers[self.api_language](*args)
 
