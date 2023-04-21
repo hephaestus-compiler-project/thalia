@@ -445,7 +445,7 @@ class KotlinTranslator(BaseTranslator):
         if not node.length:
             if not is_specialized:
                 if has_type_var:
-                    t_arg = "Any"
+                    t_arg = "Any?"
                 else:
                     t_arg = self.get_type_name(node.array_type.type_args[0])
                 array_str = "{}emptyArray<{}>()".format(
@@ -477,7 +477,7 @@ class KotlinTranslator(BaseTranslator):
         if is_specialized:
             t_arg = t_arg.lower()
         if has_type_var:
-            t_arg = "Any"
+            t_arg = "Any?"
         array_str = template.format(" " * self.ident, t_arg,
                                     ", ".join(children_res))
         if has_type_var:
