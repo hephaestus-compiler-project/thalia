@@ -441,7 +441,7 @@ class KotlinTranslator(BaseTranslator):
     def visit_array_expr(self, node):
         is_specialized = isinstance(
             node.array_type.t_constructor, kt.SpecializedArrayType)
-        has_type_var = node.array_type.type_args[0].is_type_var()
+        has_type_var = node.array_type.type_args[0].has_type_variables()
         if not node.length:
             if not is_specialized:
                 if has_type_var:

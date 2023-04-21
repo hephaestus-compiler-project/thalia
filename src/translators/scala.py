@@ -394,7 +394,7 @@ class ScalaTranslator(BaseTranslator):
     @append_to
     def visit_array_expr(self, node):
         if not node.length:
-            if node.array_type.type_args[0].is_type_var():
+            if node.array_type.type_args[0].has_type_variables():
                 self._children_res.append(
                     "{}Array[Any]().asInstanceOf[Array[{}]]".format(
                         " " * self.ident,
