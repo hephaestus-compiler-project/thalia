@@ -439,31 +439,35 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
 
     def __init__(self, target_language="kotlin", **kwargs):
         super().__init__(target_language, **kwargs)
+        self._convert_nullable = True
 
     def get_type_parser(self):
         parsers = {
             "java": JavaTypeParser,
             "kotlin": KotlinTypeParser
         }
-        args = [self.type_var_mappings,
-                self._current_func_type_var_map, self._class_type_var_map,
-                self.parsed_types, {}]
-        kotlin_parser = KotlinTypeParser(*list(args))
         mapped_types = {
-            k: (v, kotlin_parser)
+            k: (v, self)
             for k, v in self.MAPPED_TYPES.items()
         }
-        args[-1] = mapped_types
+        args = [self.type_var_mappings,
+                self._current_func_type_var_map, self._class_type_var_map,
+                self.parsed_types, mapped_types]
         if self.api_language == "java":
             args = ["kotlin"] + args
 
         return parsers[self.api_language](*args)
 
     def parse_type(self, str_t: str, build_class_node=False) -> tp.Type:
+        to_nullable = self._convert_nullable
+        self._convert_nullable = False
         parsed_t = self.get_type_parser().parse_type(str_t)
+        self._convert_nullable = to_nullable
+        to_nullable = to_nullable and not (self.api_language == "kotlin"
+                                           or build_class_node)
         return (
             parsed_t
-            if build_class_node or self.api_language == "kotlin"
+            if not to_nullable
             else kt.NullableType().new([parsed_t])
         )
 
