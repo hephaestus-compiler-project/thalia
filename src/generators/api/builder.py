@@ -473,6 +473,8 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         self._convert_nullable = to_nullable
         to_nullable = to_nullable and not (self.api_language == "kotlin"
                                            or build_class_node)
+        if parsed_t.is_type_constructor():
+            to_nullable = False
         return (
             parsed_t
             if not to_nullable
