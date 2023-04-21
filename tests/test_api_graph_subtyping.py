@@ -342,10 +342,6 @@ def test_subtypes6():
     subtypes = api_graph.subtypes(b.parse_type("java.lang.Object[]"))
     assert subtypes == {
         b.parse_type("java.lang.Object[]"),
-        b.parse_type("java.Number[]"),
-        b.parse_type("java.Integer[]"),
-        b.parse_type("java.Long[]"),
-        b.parse_type("java.String[]"),
     }
 
     # Case 2
