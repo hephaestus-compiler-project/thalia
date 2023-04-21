@@ -437,14 +437,6 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         "java.util.Map.Entry": "kotlin.collections.MutableMap.MutableEntry"
     }
 
-    METHODS_TO_PROPERTIES = {
-        "keys",
-        "keySet",
-        "values",
-        "valueSet",
-        "size",
-    }
-
     def __init__(self, target_language="kotlin", **kwargs):
         super().__init__(target_language, **kwargs)
         self._convert_nullable = True
@@ -493,16 +485,13 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             "getOrElse"
         }
         name = method_api["name"]
-        match = regex.match(name) or name in self.METHODS_TO_PROPERTIES
+        match = regex.match(name)
         parameters = method_api["parameters"]
         is_static = method_api["is_static"]
         if not match or name in excluded_set or parameters or is_static:
             return super().build_method_node(method_api, receiver_name)
 
-        if name in self.METHODS_TO_PROPERTIES:
-            field_name = name
-        else:
-            field_name = match.group(1)[0].lower() + match.group(1)[1:]
+        field_name = match.group(1)[0].lower() + match.group(1)[1:]
         field_node = Field(field_name, receiver_name)
         self.graph.add_node(field_node)
         return field_node
