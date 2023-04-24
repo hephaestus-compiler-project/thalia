@@ -295,16 +295,16 @@ class APIGraph():
                   type_param.is_covariant()):
                 types = {t_arg}
                 if t_arg != self.bt_factory.get_any_type():
+                    base_t = t_arg.bound if t_arg.is_wildcard() else t_arg
                     types = {
-                        n for n in self.subtypes(
-                            getattr(t_arg, "bound", t_arg) or t_arg)
+                        n for n in self.subtypes(base_t)
                         if not n.is_type_constructor()
                     }
                 possible_type_args.append(types)
             # Type argument contravariant or type param contravariant
             else:
-                possible_type_args.append({n for n in self.supertypes(
-                    getattr(t_arg, "bound", t_arg) or t_arg)})
+                base_t = t_arg.bound if t_arg.is_wildcard() else t_arg
+                possible_type_args.append({n for n in self.supertypes(base_t)})
         for combination in itertools.product(*possible_type_args):
             t_constructor = self.get_type_by_name(
                 node.name) or node.t_constructor
