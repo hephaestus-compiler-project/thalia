@@ -57,7 +57,7 @@ class APIGraphBuilder(ABC):
             name = api_doc["name"]
             self.api_language = api_doc.get("language", self.api_language)
             super_types = {
-                self.parse_type(st)
+                self.parse_type(st, build_class_node=True)
                 for st in api_doc.get("implements", []) + api_doc.get(
                     "inherits", [])
             }
@@ -221,6 +221,11 @@ class APIGraphBuilder(ABC):
             bound = None
             if type_param.bound:
                 bound = tp.substitute_type(type_param.bound, type_var_map)
+                # Dirty solution: upper bounds should not be nullable types.
+                if (self.api_language == "java" and
+                        bound.is_parameterized() and
+                        isinstance(bound.t_constructor, kt.NullableType)):
+                    bound = bound.type_args[0]
 
             renamed = tp.TypeParameter(new_name, bound=bound)
             type_name_map[type_param.name] = renamed
@@ -441,16 +446,19 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         super().__init__(target_language, **kwargs)
         self._convert_nullable = True
 
-    def get_type_parser(self):
+    def get_type_parser(self, **kwargs):
         parsers = {
             "java": JavaTypeParser,
             "kotlin": KotlinTypeParser
         }
         mapped_types = {
-            k: (v, self)
+            k: (v, lambda str_t, parser: self.parse_type(
+                str_t, type_var_mappings=parser.class_type_name_map,
+                build_class_node=kwargs.get("build_class_node")
+            ))
             for k, v in self.MAPPED_TYPES.items()
         }
-        args = [self.type_var_mappings,
+        args = [kwargs.get("type_var_mappings") or self.type_var_mappings,
                 self._current_func_type_var_map, self._class_type_var_map,
                 self.parsed_types, mapped_types]
         if self.api_language == "java":
@@ -458,10 +466,13 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
 
         return parsers[self.api_language](*args)
 
-    def parse_type(self, str_t: str, build_class_node=False) -> tp.Type:
+    def parse_type(self, str_t: str, build_class_node=False,
+                   type_var_mappings=None) -> tp.Type:
         to_nullable = self._convert_nullable
-        self._convert_nullable = False
-        parsed_t = self.get_type_parser().parse_type(str_t)
+        parsed_t = self.get_type_parser(
+            type_var_mappings=type_var_mappings,
+            build_class_node=build_class_node
+        ).parse_type(str_t)
         self._convert_nullable = to_nullable
         to_nullable = to_nullable and not (self.api_language == "kotlin"
                                            or build_class_node)
@@ -539,7 +550,7 @@ class ScalaAPIGraphBuilder(APIGraphBuilder):
                 self.parsed_types, {}]
         scala_parser = ScalaTypeParser(*list(args))
         mapped_types = {
-            k: (v, scala_parser)
+            k: (v, lambda str_t, _: scala_parser.parse_type(str_t))
             for k, v in self.MAPPED_TYPES.items()
         }
         args[-1] = mapped_types
