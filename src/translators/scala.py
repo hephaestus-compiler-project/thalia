@@ -189,7 +189,7 @@ class ScalaTranslator(BaseTranslator):
             bound=' <: ' + (
                 self.get_type_name(node.bound)
                 if node.bound is not None
-                else sc.Any.name
+                else "Any & java.lang.Object"
             )
         ))
 
@@ -426,7 +426,7 @@ class ScalaTranslator(BaseTranslator):
                                      values=", ".join(children_res))
         if node.array_type.type_args[0].is_type_var():
             array_expr += ".asInstanceOf[Array[{}]]".format(
-                self.get_type_name(node.array_expr.type_args[0]))
+                self.get_type_name(node.array_type.type_args[0]))
         self._children_res.append(array_expr)
 
     @append_to
@@ -579,12 +579,22 @@ class ScalaTranslator(BaseTranslator):
 
         children_res = self.pop_children_res(children)
         receiver = children_res[0] + "." if children_res else ""
-        res = "{ident}{assign}{receiver}{name} _".format(
-            ident=" " * self.ident,
-            assign="" if not inside_block_unit_function() else "val _y = ",
-            receiver=receiver,
-            name=node.func
-        )
+        if len(node.function_type.type_args) != 1:
+            # We reference a method that takes at least one parameter
+            res = "{ident}{assign}{receiver}{name}".format(
+                ident=" " * self.ident,
+                assign="" if not inside_block_unit_function() else "val _y = ",
+                receiver=receiver,
+                name=node.func
+            )
+        else:
+            # We reference a method that takes no parameters
+            res = "{ident}{assign}() => {receiver}{name}()".format(
+                ident=" " * self.ident,
+                assign="" if not inside_block_unit_function() else "val _y = ",
+                receiver=receiver,
+                name=node.func
+            )
         self._children_res.append(res)
 
     @append_to
