@@ -579,7 +579,17 @@ class ScalaTranslator(BaseTranslator):
 
         children_res = self.pop_children_res(children)
         receiver = children_res[0] + "." if children_res else ""
-        if len(node.function_type.type_args) != 1:
+        if node.func == ast.FunctionReference.NEW_REF:
+            param_len = len(node.receiver.args)
+            param_str = ", ".join("_" for _ in range(param_len))
+            param_str = f"({param_str})"
+            res = "{ident}{assign}{params} => {receiver}".format(
+                ident=" " * self.ident,
+                assign="" if not inside_block_unit_function() else "val _y = ",
+                params=param_str,
+                receiver=receiver[:-1],
+            )
+        elif len(node.function_type.type_args) != 1:
             # We reference a method that takes at least one parameter
             res = "{ident}{assign}{receiver}{name}".format(
                 ident=" " * self.ident,
