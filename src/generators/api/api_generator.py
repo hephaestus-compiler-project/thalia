@@ -434,8 +434,11 @@ class APIGenerator(Generator):
         api_name = (
             ast.FunctionReference.NEW_REF
             if isinstance(api, ag.Constructor) else api.name)
+        func_type = tp.substitute_type(
+            self.api_graph.get_functional_type(expr_type), type_var_map)
         return ast.FunctionReference(api_name, receiver=rec,
-                                     signature=expr_type)
+                                     signature=expr_type,
+                                     function_type=func_type)
 
     def generate_expr(self,
                       expr_type: tp.Type = None,

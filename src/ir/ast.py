@@ -1398,10 +1398,12 @@ class FunctionCall(Expr):
 class FunctionReference(Expr):
     NEW_REF = "__init__"
 
-    def __init__(self, func: str, receiver: Expr, signature: types.Type):
+    def __init__(self, func: str, receiver: Expr, signature: types.Type,
+                 function_type: types.ParameterizedType):
         self.func = func
         self.receiver = receiver
         self.signature = signature
+        self.function_type = function_type
 
     def has_variable(self):
         return self.receiver and self.receiver.has_variable()

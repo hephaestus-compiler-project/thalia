@@ -1832,7 +1832,7 @@ class Generator():
             if func.attr_decl.name == self.namespace[-1]:
                 continue
             refs.append(ast.FunctionReference(
-                func.attr_decl.name, func.receiver_expr, etype))
+                func.attr_decl.name, func.receiver_expr, etype, etype))
 
         if refs:
             return ut.random.choice(refs)
@@ -1856,7 +1856,7 @@ class Generator():
                                         only_leaves=only_leaves)
             )
             ref = ast.FunctionReference(
-                type_fun.attr_decl.name, receiver, etype)
+                type_fun.attr_decl.name, receiver, etype, etype)
 
         return ref
 
