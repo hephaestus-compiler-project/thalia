@@ -134,7 +134,7 @@ class JavaTypeParser(TypeParser):
 
     def parse_type_parameter(self, str_t: str,
                              keep: bool = False) -> tp.TypeParameter:
-        segs = str_t.split(" extends ")
+        segs = str_t.split(" extends ", 1)
         old_class_type_map = copy(self.class_type_name_map)
         if keep:
             # We handle the following case:
