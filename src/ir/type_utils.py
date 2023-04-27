@@ -612,9 +612,13 @@ def substitute_invariant_wildcard_with(
     t: tp.ParameterizedType, types: List[tp.Type]
 ) -> tp.ParameterizedType:
     type_args = []
-    for t_arg in t.type_args:
+    for i, t_arg in enumerate(t.type_args):
+        type_param = t.t_constructor.type_parameters[i]
         if t_arg.is_wildcard() and t_arg.is_invariant():
-            type_args.append(select_random_type(types))
+            if type_param.bound:
+                type_args.append(type_param.bound)
+            else:
+                type_args.append(select_random_type(types))
         else:
             type_args.append(t_arg)
     return t.t_constructor.new(type_args)
