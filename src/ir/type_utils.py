@@ -320,8 +320,48 @@ def get_irrelevant_parameterized_type(etype, types, type_args_map,
     return etype.new(new_type_args)
 
 
+def find_incompatible_type_args(etype: tp.ParameterizedType,
+                                types: List[tp.Type],
+                                factory: bt.BuiltinFactory,
+                                supertypes_irrelevant: bool = False):
+
+    new_type_args = []
+    changed = False
+    for type_arg in etype.type_args:
+        if type_arg.is_wildcard() and type_arg.is_invariant():
+            new_type_args.append(type_arg)
+            continue
+
+        if not type_arg.is_wildcard() and supertypes_irrelevant and \
+                utils.random.bool():
+            variance = utils.random.choice([tp.Covariant,
+                                            tp.Contravariant])
+            bound = type_arg
+            new_type_arg = tp.WildCardType(bound=bound,
+                                           variance=variance)
+            new_type_args.append(new_type_arg)
+            changed = True
+            continue
+        if type_arg.is_wildcard():
+            type_arg = type_arg.bound
+        new_type_arg = find_irrelevant_type(type_arg, types, factory,
+                                            excluded_types=[])
+        if not new_type_arg:
+            new_type_args.append(type_arg)
+            continue
+        new_type_args.append(new_type_arg)
+        changed = True
+
+    if changed:
+        return etype.t_constructor.new(new_type_args)
+    return None
+
+
 def find_irrelevant_type(etype: tp.Type, types: List[tp.Type],
-                         factory: bt.BuiltinFactory) -> tp.Type:
+                         factory: bt.BuiltinFactory,
+                         subtypes_irrelevant: bool = False,
+                         supertypes_irrelevant: bool = False,
+                         excluded_types=None) -> tp.Type:
     """
     Find a type that is irrelevant to the given type.
 
@@ -334,20 +374,38 @@ def find_irrelevant_type(etype: tp.Type, types: List[tp.Type],
             return cls.get_type()
         return cls
 
-    if etype == factory.get_any_type():
+    if excluded_types is None:
+        excluded_types = [factory.get_any_type()]
+
+    if etype in excluded_types:
         return None
 
-    if isinstance(etype, tp.TypeParameter):
+    if etype.is_type_var():
         if etype.bound is None or etype.bound == factory.get_any_type():
+            types = set(types)
+            types.remove(etype)
             return choose_type(types, only_regular=True)
         else:
             etype = etype.bound
 
     types = [_cls2type(t) for t in types]
-    supertypes = find_supertypes(etype, types, include_self=True,
+
+    if etype.is_parameterized() and utils.random.bool():
+        irr_type = find_incompatible_type_args(etype, types, factory,
+                                               supertypes_irrelevant)
+        if irr_type is not None:
+            return irr_type
+
+    if supertypes_irrelevant:
+        supertypes = []
+    else:
+        supertypes = find_supertypes(etype, types, include_self=True,
+                                     concrete_only=True)
+    if subtypes_irrelevant:
+        subtypes = []
+    else:
+        subtypes = find_subtypes(etype, types, include_self=True,
                                  concrete_only=True)
-    subtypes = find_subtypes(etype, types, include_self=True,
-                             concrete_only=True)
     relevant_types = supertypes + subtypes
     # If any type included in the list of relevant types is parameterized,
     # then create a map with their type arguments.
