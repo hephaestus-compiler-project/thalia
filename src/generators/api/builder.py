@@ -442,6 +442,17 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         "java.util.Map.Entry": "kotlin.collections.MutableMap.MutableEntry"
     }
 
+    PRIMITIVE_TYPES = {
+        "char",
+        "byte",
+        "short",
+        "int",
+        "long",
+        "float",
+        "double",
+        "boolean"
+    }
+
     def __init__(self, target_language="kotlin", **kwargs):
         super().__init__(target_language, **kwargs)
         self._convert_nullable = True
@@ -476,6 +487,8 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
         self._convert_nullable = to_nullable
         to_nullable = to_nullable and not (self.api_language == "kotlin"
                                            or build_class_node)
+        if str_t in self.PRIMITIVE_TYPES:
+            to_nullable = False
         if parsed_t.is_type_constructor():
             to_nullable = False
         return (
@@ -516,13 +529,6 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
             self.class_name = None
             self.process_methods(class_api["methods"])
             self.process_fields(class_api["fields"])
-
-    def build_functional_interface(self, method_api: dict,
-                                   parameters: List[tp.Type],
-                                   ret_type: tp.Type):
-        # We disable functional interfaces until this gets fixed:
-        # https://youtrack.jetbrains.com/issue/KT-48838/Support-SAM-conversions-on-value-parameters-inferred-into-Kotlin-functional-interface
-        pass
 
 
 class ScalaAPIGraphBuilder(APIGraphBuilder):
