@@ -8,7 +8,7 @@ from src.ir import ast, types as tp, type_utils as tu
 from src.ir.context import Context
 from src.generators import generators as gens, utils as gu, Generator
 from src.generators.api import (api_graph as ag, builder, matcher as match,
-                                type_erasure as te)
+                                type_erasure as te, fault_injection as fi)
 from src.generators.config import cfg
 from src.modules.logging import log
 from src.translators import TRANSLATORS
@@ -69,7 +69,8 @@ class APIGenerator(Generator):
 
         self.translator = TRANSLATORS[language]()
         self.type_eraser: te.TypeEraser = te.TypeEraser(self.api_graph,
-                                                        self.bt_factory)
+                                                        self.bt_factory,
+                                                        self.inject_error_mode)
         self.error_injected = None
         self.test_case_type_params: List[tp.TypeParameter] = []
 
@@ -93,7 +94,7 @@ class APIGenerator(Generator):
         return ast.Program(deepcopy(self.context), self.language)
 
     def log_program_info(self, program_id, api, receivers, parameters,
-                         return_type, type_var_map):
+                         return_type, type_var_map, is_incorrect):
         def to_str(t):
             if isinstance(t, int):
                 return str(t)
@@ -116,6 +117,7 @@ class APIGenerator(Generator):
         msg += "\tparameters {params!s}\n".format(params=", ".join(
             log_types(p) for p in parameters))
         msg += "\treturn: {ret!s}\n".format(ret=log_types([return_type]))
+        msg += "Correctness: {corr!s}".format(corr=not is_incorrect)
         log(self.logger, msg)
 
     def wrap_types_with_type_parameter(self, types: List[tp.TypeParameter],
@@ -142,22 +144,27 @@ class APIGenerator(Generator):
                                        receivers: List[tp.Type],
                                        parameters: List[List[tp.Type]],
                                        return_type: tp.Type,
-                                       pid: int) -> ast.Program:
+                                       pid: int,
+                                       is_incorrect: bool) -> ast.Program:
         self.context = Context()
         self.namespace = self.TEST_NAMESPACE
         self.api_graph.add_types(encoding.type_parameters)
         expr = self.generate_from_type_combination(
             encoding.api, receivers, parameters,
             return_type, encoding.type_var_map)
+        if is_incorrect:
+            self.error_injected = "Incorrect api typing sequence"
         self.log_program_info(pid, encoding.api, receivers, parameters,
-                              return_type, encoding.type_var_map)
+                              return_type, encoding.type_var_map,
+                              is_incorrect)
         program = self.produce_test_case(expr, encoding.type_parameters)
         self.api_graph.remove_types(encoding.type_parameters)
         return program
 
     def generate_test_case_from_combination(self, combination,
                                             encoding: ag.APIEncoding,
-                                            pid: int) -> ast.Program:
+                                            pid: int,
+                                            is_incorrect: bool) -> ast.Program:
         receiver, parameters, return_type = (
             combination[0], combination[1:-1], combination[-1])
         params = [[p] for p in parameters]
@@ -167,11 +174,14 @@ class APIGenerator(Generator):
             if utils.random.bool(cfg.prob.bounded_type_parameters)
             else [receiver]
         )
+        if is_incorrect:
+            self.error_injected = "Incorrect api typing sequence"
         return self.prepare_and_generate_test_case(encoding, receivers,
-                                                   params, return_type, pid)
+                                                   params, return_type, pid,
+                                                   is_incorrect)
 
     def generate_test_case_conditional(self, encoding, return_type,
-                                       pid) -> ast.Program:
+                                       pid, is_incorrect: bool) -> ast.Program:
         types = (encoding.receivers, *encoding.parameters,
                  encoding.returns)
         parameters = [
@@ -185,7 +195,17 @@ class APIGenerator(Generator):
             return None
         return self.prepare_and_generate_test_case(encoding, receivers,
                                                    parameters, return_type,
-                                                   pid)
+                                                   pid, is_incorrect)
+
+    def compute_typing_sequences(self, encoding, types):
+        if not self.inject_error_mode:
+            return itertools.product(*types), False
+
+        self.api_graph.add_types(encoding.type_parameters)
+        finj = fi.FaultInjection(self.api_graph, self.bt_factory)
+        typing_seqs = finj.compute_incorrect_typing_sequences(encoding)
+        self.api_graph.remove_types(encoding.type_parameters)
+        return typing_seqs, True
 
     def compute_programs(self):
         program_index = 0
@@ -197,14 +217,17 @@ class APIGenerator(Generator):
                 continue
             self.visited.add(types)
             try:
-                for combination in itertools.product(*types):
-                    # Generate a test case from the combination:
+                typing_seqs, is_incorrect = self.compute_typing_sequences(
+                    encoding, types)
+                for typing_seq in typing_seqs:
+                    # Generate a test case from the typing sequence:
                     # (receiver, parameters, return_type)
                     if program_index < self.start_index:
                         program_index += 1
                         continue
-                    yield self.generate_test_case_from_combination(combination,
-                                                                   encoding, i)
+                    yield self.generate_test_case_from_combination(typing_seq,
+                                                                   encoding, i,
+                                                                   is_incorrect)
                     program_index += 1
                     i += 1
                 for ret in types[-1]:
@@ -214,7 +237,8 @@ class APIGenerator(Generator):
                     # Merge receivers and parameters, and generate a test
                     # case with conditionals
                     program = self.generate_test_case_conditional(encoding,
-                                                                  ret, i)
+                                                                  ret, i,
+                                                                  is_incorrect)
                     if program is None:
                         # No conditional can be created
                         continue
@@ -299,17 +323,6 @@ class APIGenerator(Generator):
         args = self._generate_args(exp_parameters, parameters,
                                    depth=1, type_var_map=type_var_map)
         var_type = return_type
-        if self.inject_error_mode:
-            # We are in fault injection mode, but no error has been injected
-            # so far. Therefore, compute an incompatible target type.
-            var_type = self.api_graph.get_concrete_output_type(api)
-            var_type = tp.substitute_type(var_type, type_map)
-            if not self.error_injected:
-                var_type = tu.find_irrelevant_type(
-                    var_type, self.api_graph.get_reg_types(), self.bt_factory)
-                msg = "Expecting variable of {left!s}, but {right!s} is given"
-                self.error_injected = msg.format(left=var_type,
-                                                 right=return_type)
         self.type_eraser.with_target(return_type)
         if isinstance(api, ag.Method):
             call_args = [ast.CallArgument(arg.expr) for arg in args]
@@ -491,8 +504,6 @@ class APIGenerator(Generator):
         self.test_case_type_params = []
 
     def _get_target_selection(self, target: tp.Type) -> str:
-        if self.inject_error_mode:
-            return "abstract"
         # In case of arrays we don't examine abstract output types because
         # we don't want to instantiate type variables with array types.
         is_array = target.name == self.bt_factory.get_array_type().name
@@ -515,10 +526,9 @@ class APIGenerator(Generator):
         if node == self.api_graph.EMPTY:
             return ExprRes(None, {}, [])
         target_selection = self._get_target_selection(node)
-        find_infeasible = self.inject_error_mode and not self.error_injected
         path = self.api_graph.find_API_path(
             node, with_constraints=constraints,
-            target_selection=target_selection, infeasible=find_infeasible)
+            target_selection=target_selection, infeasible=False)
         if not path:
             if node.is_type_constructor():
                 handler = self.api_graph.get_instantiations_of_recursive_bound
@@ -536,15 +546,6 @@ class APIGenerator(Generator):
                 )
             return ExprRes(self.generate_expr(t), type_var_map, [t])
         path, type_var_map, assignment_graph = path
-        if find_infeasible:
-            msg = "\n".join(
-                "Assigning an incompatible type {t!r} to {type_var!s}".format(
-                    type_var=k, t=v
-                )
-                for k, v in type_var_map.items()
-            )
-            self.error_injected = msg
-        self.type_eraser.with_assignment_graph(assignment_graph)
         expr = self._generate_expression_from_path(path, depth=depth,
                                                    type_var_map=type_var_map)
         if not expr.has_variable() and not self.error_injected:
@@ -562,18 +563,9 @@ class APIGenerator(Generator):
         args = []
         for i, param in enumerate(parameters):
             arg_types = actual_types[i]
-            if self.inject_error_mode:
-                # If we are in a fault injection mode, we consider the
-                # parameter types that actually contains all type variables.
-                # e.g., we use A<T> instead of A<String>
-                arg_types = [
-                    t if t.name != param.name else param
-                    for t in actual_types[i]
-                ]
             param_types = self.substitute_types(arg_types, type_var_map)
             self.type_eraser.with_target(param, get_type_variables(
                 param, self.bt_factory))
-            param = tp.substitute_type(param, type_var_map)
             expr = self.generate_expr_from_nodes(param_types, {},
                                                  func_ref=True,
                                                  depth=depth)
@@ -634,28 +626,4 @@ class APIGenerator(Generator):
 
     def substitute_types(self, types: List[tp.Type],
                          type_var_map: dict) -> List[tp.Type]:
-        if not self.inject_error_mode or self.error_injected:
-            return [tp.substitute_type(t, type_var_map) for t in types]
-        if utils.random.bool():
-            # With a probability decide if it's time to inject a type error
-            # now or later.
-            return [tp.substitute_type(t, type_var_map) for t in types]
-        type_variables = set()
-        for t in types:
-            type_variables.update(get_type_variables(t, self.bt_factory))
-        for type_var in type_variables:
-            old_t = type_var_map[type_var]
-            new_t = tu.find_irrelevant_type(old_t,
-                                            self.api_graph.get_reg_types(),
-                                            self.bt_factory)
-            if new_t:
-                msg = ("Changing assignment of {type_var!s} from {t1!r} to "
-                       "{t2!r}")
-                msg = msg.format(type_var=type_var.name,
-                                 t1=self.translator.get_type_name(old_t),
-                                 t2=self.translator.get_type_name(new_t))
-                self.error_injected = (msg if not self.error_injected
-                                       else self.error_injected + "\n" + msg)
-                type_var_map[type_var] = new_t
-                self.type_eraser.required_type_parameters.add(type_var)
         return [tp.substitute_type(t, type_var_map) for t in types]

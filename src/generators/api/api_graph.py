@@ -229,6 +229,9 @@ class APIGraph():
             "disable_bounded_type_parameters", False)
         self.path_search_strategy = kwargs.get(
             "path-search-strategy", self.DEFAULT_PATH_SEARCH_STRATEGY)
+        self.inject_type_error = kwargs.get(
+            "inject-type-error", False
+        )
 
     def get_reg_types(self):
         types = [
@@ -242,15 +245,22 @@ class APIGraph():
         ]
         return types
 
-    def get_random_type(self):
-        types = self.get_reg_types()
+    def _get_random_type(self, types):
         t = tu.select_random_type(types)
         if t.is_type_constructor():
             inst = tu.instantiate_type_constructor(
                 t, types, only_regular=True,
                 rec_bound_handler=self.get_instantiations_of_recursive_bound)
-            return inst[0]
-        return t
+            return None if inst is None else inst[0], t
+        return t, None
+
+    def get_random_type(self):
+        types = self.get_reg_types()
+        actual_t, type_con = self._get_random_type(types)
+        while actual_t is None:
+            types.remove(type_con)
+            actual_t, type_con = self._get_random_type(types)
+        return actual_t
 
     def get_type_by_name(self, typename):
         return self._all_types.get(typename)
@@ -285,8 +295,11 @@ class APIGraph():
 
             # Type argument invariant
             if t_arg.is_wildcard() and t_arg.is_invariant():
-                types = [t for t in self.get_reg_types()
-                         if not t.is_type_constructor()]
+                if type_param.bound:
+                    types = self.subtypes(type_param.bound)
+                else:
+                    types = [t for t in self.get_reg_types()
+                             if not t.is_type_constructor()]
                 possible_type_args.append(utils.random.sample(
                     types, min(self.MAX_TYPES, len(types))))
 
@@ -760,7 +773,8 @@ class APIGraph():
             if parameterized_rec:
                 receiver = tp.substitute_type(receiver, type_var_map)
             receivers = {receiver}
-            if receiver != self.bt_factory.get_any_type():
+            if receiver != self.bt_factory.get_any_type() and \
+                    not self.inject_type_error:
                 include_self = not (receiver.is_parameterized() and
                                     receiver.has_wildcards())
                 receivers.update(self.subtypes(receiver, include_self))
@@ -803,7 +817,7 @@ class APIGraph():
             if isinstance(n, api_components)
         ]
         encodings = []
-        for node in api_nodes:
+        for node in utils.random.shuffle(api_nodes):
             if matcher and not matcher.match(node):
                 continue
             self.generate_type_params()
@@ -816,7 +830,8 @@ class APIGraph():
                           for p in getattr(node, "parameters", [])]
             for param_set in parameters:
                 param = list(param_set)[0]
-                if param != self.bt_factory.get_any_type():
+                if param != self.bt_factory.get_any_type() and \
+                        not self.inject_type_error:
                     param_set.update(self.subtypes(param))
             if not parameters:
                 parameters = ({self.EMPTY},)
@@ -830,9 +845,11 @@ class APIGraph():
             if ret_type.is_type_constructor():
                 ret_type = ret_type.new(ret_type.type_parameters)
             ret_type = tp.substitute_type(ret_type, type_var_map)
-            ret_types = set(tu.find_supertypes(ret_type, self.get_reg_types(),
-                                               concrete_only=True))
-            ret_types.add(ret_type)
+            ret_types = {ret_type}
+            if not self.inject_type_error:
+                ret_types.update(
+                    tu.find_supertypes(ret_type, self.get_reg_types(),
+                                       concrete_only=True))
             type_parameters = self.get_type_parameters()
             self.remove_types(type_parameters)
             yield APIEncoding(node, frozenset(receivers),

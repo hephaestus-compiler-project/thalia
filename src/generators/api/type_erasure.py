@@ -26,15 +26,15 @@ class TypeEraser():
     OUT = -1
 
     def __init__(self, api_graph: ag.APIGraph,
-                 bt_factory: BuiltinFactory):
+                 bt_factory: BuiltinFactory,
+                 inject_error_mode: bool):
         self.api_graph = api_graph
         self.bt_factory = bt_factory
+        self.inject_error_mode = inject_error_mode
         # This is used for maintaining a stack of expected types used for
         # determining the expected types of the generated expressions.
         # This is used for type erasure.
         self.expected_types = []
-        self.assignment_graphs = []
-        self.required_type_parameters = set()
 
     @property
     def expected_type(self):
@@ -42,25 +42,12 @@ class TypeEraser():
             return None
         return self.expected_types[-1]
 
-    @property
-    def assignment_graph(self):
-        if not self.assignment_graphs:
-            return None
-        return self.assignment_graphs[-1]
-
     def with_target(self, target_type, type_variables=None):
         self.expected_types.append((target_type, type_variables or []))
 
     def reset_target_type(self):
         if self.expected_types:
             self.expected_types = self.expected_types[:-1]
-
-    def with_assignment_graph(self, assignment_graph):
-        self.assignment_graphs.append(assignment_graph)
-
-    def reset_assignment_graph(self):
-        if self.assignment_graphs:
-            self.assignment_graphs = self.assignment_graphs[:-1]
 
     def get_api_output_type(self, api: ag.APINode) -> tp.Type:
         if isinstance(api, tp.Type):
@@ -111,12 +98,10 @@ class TypeEraser():
         target_type, type_vars = self.expected_type
         if self.OUT not in marks or target_type is None:
             return False
-        assignment_graph = self.assignment_graph or {}
-        if any(
-            assignment_graph.get(tvar, tvar) in self.required_type_parameters
-            for tvar in type_vars
-        ):
+
+        if marks == {self.OUT} and self.inject_error_mode:
             return False
+
         return target_type == api_out_type or bool(
             tu.unify_types(target_type, api_out_type, self.bt_factory,
                            same_type=False, subtype_on_left=False))
@@ -136,15 +121,6 @@ class TypeEraser():
             if not type_parameters:
                 # The argument is not a polymorphic call. We can infer
                 # the argument type without a problem.
-                return True
-            assignment_graph = self.assignment_graph or {}
-
-            if assignment_graph.get(type_param,
-                                    type_param) in self.required_type_parameters:
-                if hasattr(arg.expr, "can_infer_type_args"):
-                    arg.expr.can_infer_type_args = False
-                if hasattr(arg.expr, "can_infer_signature"):
-                    arg.expr.can_infer_signature = False
                 return True
 
             arg_type = self.get_api_output_type(arg_api)
@@ -177,6 +153,11 @@ class TypeEraser():
                 return expr_type.new([expr_res.type_var_map[tpa]
                                       for tpa in expr_type.type_parameters])
             return tp.substitute_type(expr_type, expr_res.type_var_map)
+
+        if (self.inject_error_mode and
+                var_decl.get_type().is_parameterized() and
+                var_decl.get_type().has_wildcards()):
+            return
 
         expr = expr_res.expr
         if isinstance(expr, (ast.Lambda, ast.FunctionReference)):
@@ -226,8 +207,6 @@ class TypeEraser():
         for type_param, marks in markings.items():
             if self.can_infer_out_position(type_param, marks, ret_type):
                 omittable_type_params.add(type_param)
-                continue
-            if type_param in self.required_type_parameters:
                 continue
             if self.can_infer_in_position(type_param, marks,
                                           getattr(api, "parameters", []),
