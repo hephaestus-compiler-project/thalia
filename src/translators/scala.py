@@ -638,7 +638,7 @@ class ScalaTranslator(BaseTranslator):
                 else (segs[0], segs[1])
             )
             args = children_res
-        res = "{ident}{rec}.{name}{type_args}({args})".format(
+        res = "{ident}{rec}.`{name}`{type_args}({args})".format(
             ident=" " * self.ident,
             rec=receiver_expr,
             name=func,
