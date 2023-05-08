@@ -489,7 +489,7 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
                                            or build_class_node)
         if str_t in self.PRIMITIVE_TYPES:
             to_nullable = False
-        if parsed_t.is_type_constructor():
+        if parsed_t.is_type_constructor() or parsed_t.name == "Nullable":
             to_nullable = False
         return (
             parsed_t
