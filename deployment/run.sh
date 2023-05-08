@@ -25,6 +25,16 @@ simple_run_java() {
       "--language java --max-type-params 3 --disable-expression-cache"
 }
 
+simple_run_scala() {
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
+    sdk install scala
+    cd $CHECK_TYPE_SYSTEMS
+    git pull origin stable
+    hephaestus-run.sh $CHECK_TYPE_SYSTEMS/example-apis/scala-api \
+      $CHECK_TYPE_SYSTEMS/3party-libs \
+      "--language scala --max-type-params 3 --disable-expression-cache"
+}
+
 simple_run() {
     source "$HOME/.sdkman/bin/sdkman-init.sh"
     sdk install kotlin
@@ -78,9 +88,12 @@ then
         exit 0
 fi
 
-while getopts "hksagSj" OPTION; do
+while getopts "hksagSjd" OPTION; do
         case $OPTION in
 
+                d)
+                        simple_run_scala
+                        ;;
                 k)
                         simple_run
                         ;;
@@ -111,6 +124,7 @@ while getopts "hksagSj" OPTION; do
 
                 h)
                         echo "Usage:"
+                        echo "run.sh -d "
                         echo "run.sh -k "
                         echo "run.sh -s "
                         echo "run.sh -a "
@@ -119,7 +133,8 @@ while getopts "hksagSj" OPTION; do
                         echo "run.sh -j "
                         echo "run.sh -J "
                         echo ""
-                        echo "   -k     Simple run"
+                        echo "   -d     Simple run Scala"
+                        echo "   -k     Simple run kotlin"
                         echo "   -s     Run from source"
                         echo "   -a     Run multiple versions"
                         echo "   -g     Simple run groovy"

@@ -114,6 +114,12 @@ install_kotlin() {
     echo "PATH=\"\$PATH:/root/.sdkman/candidates/kotlin/current/bin/\"" >> $HOME/.bash_profile
 }
 
+install_scala() {
+    install_java_dep
+    sdk install scala
+    echo "PATH=\"\$PATH:/root/.sdkman/candidates/scala/current/bin/\"" >> $HOME/.bash_profile
+}
+
 install_kotlin_all() {
     install_java_dep
     sdk install kotlin 1.4.21  && \
@@ -202,8 +208,15 @@ then
         exit 0
 fi
 
-while getopts "hskagSjJ" OPTION; do
+
+while getopts "hskagSjJd" OPTION; do
         case $OPTION in
+                d)
+                        install_deps
+                        install_scala
+                        install_check_type_systems
+                        add_run_script_to_path
+                        ;;
 
                 k)
                         install_deps
@@ -256,12 +269,14 @@ while getopts "hskagSjJ" OPTION; do
 
                 h)
                         echo "Usage:"
-                        echo "init.sh -k "
-                        echo "init.sh -s "
-                        echo "init.sh -a "
-                        echo "init.sh -g "
-                        echo "init.sh -S "
+                        echo "setup.sh -d "
+                        echo "setup.sh -k "
+                        echo "setup.sh -s "
+                        echo "setup.sh -a "
+                        echo "setup.sh -g "
+                        echo "setup.sh -S "
                         echo ""
+                        echo "   -d     Install latest Scala version"
                         echo "   -k     Install latest kotlin version"
                         echo "   -s     Install kotlin from source"
                         echo "   -a     Install all kotlin versions"
