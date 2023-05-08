@@ -9,7 +9,7 @@ class JavaCompiler(BaseCompiler):
     ERROR_REGEX = re.compile(
         r'([a-zA-Z0-9\/_]+.java):(\d+:[ ]+error:[ ]+.*)(.*?(?=\n{1,}))')
 
-    CRASH_REGEX = re.compile(r'(java\.lang.*)\n(.*)')
+    CRASH_REGEX = re.compile(r'.*(at jdk\.)(.*)')
 
     def __init__(self, input_name, filter_patterns=None,
                  library_path=None):
