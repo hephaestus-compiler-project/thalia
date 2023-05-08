@@ -1,0 +1,67 @@
+{
+  "name": "java.util.PrimitiveIterator.OfDouble",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.util.PrimitiveIterator<java.lang.Double,java.util.function.DoubleConsumer>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "forEachRemaining",
+      "parameters": [
+        "java.util.function.DoubleConsumer"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "nextDouble",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "double",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.NoSuchElementException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "forEachRemaining",
+      "parameters": [
+        "java.util.function.Consumer<? super java.lang.Double>"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "next",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Double",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": "PrimitiveIterator",
+  "language": "java"
+}

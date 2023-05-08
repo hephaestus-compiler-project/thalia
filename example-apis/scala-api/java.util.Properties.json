@@ -1,0 +1,317 @@
+{
+  "name": "java.util.Properties",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.util.Hashtable<java.lang.Object,java.lang.Object>"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getProperty",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "list",
+      "parameters": [
+        "java.io.PrintWriter"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "load",
+      "parameters": [
+        "java.io.Reader"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "propertyNames",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Enumeration<?>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setProperty",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "store",
+      "parameters": [
+        "java.io.Writer",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.ClassCastException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "storeToXML",
+      "parameters": [
+        "java.io.OutputStream",
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.io.UnsupportedEncodingException",
+        "java.lang.NullPointerException",
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "stringPropertyNames",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Set<java.lang.String>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getProperty",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "list",
+      "parameters": [
+        "java.io.PrintStream"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "load",
+      "parameters": [
+        "java.io.InputStream"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "loadFromXML",
+      "parameters": [
+        "java.io.InputStream"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.io.UnsupportedEncodingException",
+        "java.util.InvalidPropertiesFormatException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "java.io.OutputStream",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "store",
+      "parameters": [
+        "java.io.OutputStream",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.ClassCastException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "storeToXML",
+      "parameters": [
+        "java.io.OutputStream",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.NullPointerException",
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "storeToXML",
+      "parameters": [
+        "java.io.OutputStream",
+        "java.lang.String",
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.NullPointerException",
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Properties",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Properties",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "Properties",
+      "parameters": [
+        "java.util.Properties"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "defaults",
+      "type": "java.util.Properties",
+      "is_static": false,
+      "access_mod": "protected"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

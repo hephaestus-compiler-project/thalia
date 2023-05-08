@@ -1,0 +1,41 @@
+{
+  "name": "java.util.InvalidPropertiesFormatException",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.io.IOException"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "InvalidPropertiesFormatException",
+      "parameters": [
+        "java.lang.Throwable"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "InvalidPropertiesFormatException",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

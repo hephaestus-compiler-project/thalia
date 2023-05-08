@@ -1,0 +1,12 @@
+{
+  "name": "java.util.RandomAccess",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

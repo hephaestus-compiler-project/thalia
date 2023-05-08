@@ -1,0 +1,119 @@
+{
+  "name": "java.util.SortedSet",
+  "type_parameters": [
+    "E"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.util.Set<E>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "first",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "E",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.NoSuchElementException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "last",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "E",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.NoSuchElementException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "subSet",
+      "parameters": [
+        "E",
+        "E"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.SortedSet<E>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "comparator",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Comparator<? super E>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "headSet",
+      "parameters": [
+        "E"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.SortedSet<E>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.Comparable",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "spliterator",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Spliterator<E>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "tailSet",
+      "parameters": [
+        "E"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.SortedSet<E>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.Comparable",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

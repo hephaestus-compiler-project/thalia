@@ -1,0 +1,210 @@
+{
+  "name": "java.util.OptionalInt",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "equals",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "ifPresentOrElse",
+      "parameters": [
+        "java.util.function.IntConsumer",
+        "java.lang.Runnable"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isPresent",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "orElse",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "orElseThrow",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.NoSuchElementException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "stream",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "empty",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalInt",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getAsInt",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.NoSuchElementException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "ifPresent",
+      "parameters": [
+        "java.util.function.IntConsumer"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isEmpty",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalInt",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "orElseGet",
+      "parameters": [
+        "java.util.function.IntSupplier"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "orElseThrow",
+      "parameters": [
+        "java.util.function.Supplier<? extends X>"
+      ],
+      "type_parameters": [
+        "X extends java.lang.Throwable"
+      ],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.Throwable"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

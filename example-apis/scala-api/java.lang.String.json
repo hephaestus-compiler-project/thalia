@@ -1,0 +1,1278 @@
+{
+  "name": "java.lang.String",
+  "type_parameters": [],
+  "implements": [
+    "java.io.Serializable",
+    "java.lang.Comparable<java.lang.String>",
+    "java.lang.CharSequence"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "chars",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "codePointBefore",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "codePoints",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "compareToIgnoreCase",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "java.lang.CharSequence"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "contentEquals",
+      "parameters": [
+        "java.lang.StringBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "copyValueOf",
+      "parameters": [
+        "char[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "format",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Object..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.IllegalFormatException",
+        "Details"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getBytes",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "byte[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getBytes",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "byte[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.UnsupportedEncodingException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getChars",
+      "parameters": [
+        "int",
+        "int",
+        "char[]",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "indexOf",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "indexOf",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "intern",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isEmpty",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "join",
+      "parameters": [
+        "java.lang.CharSequence",
+        "java.lang.Iterable<? extends java.lang.CharSequence>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "lastIndexOf",
+      "parameters": [
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "lastIndexOf",
+      "parameters": [
+        "java.lang.String",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "lines",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.Stream<java.lang.String>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "offsetByCodePoints",
+      "parameters": [
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "regionMatches",
+      "parameters": [
+        "int",
+        "java.lang.String",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "replace",
+      "parameters": [
+        "char",
+        "char"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "replaceAll",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.regex.PatternSyntaxException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "split",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.regex.PatternSyntaxException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "startsWith",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "strip",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "stripTrailing",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "substring",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toCharArray",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "char[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toLowerCase",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toUpperCase",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "trim",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "valueOf",
+      "parameters": [
+        "char"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "valueOf",
+      "parameters": [
+        "char[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "valueOf",
+      "parameters": [
+        "float"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "valueOf",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "charAt",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "char",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "codePointAt",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "codePointCount",
+      "parameters": [
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compareTo",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "concat",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "contentEquals",
+      "parameters": [
+        "java.lang.CharSequence"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "copyValueOf",
+      "parameters": [
+        "char[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "endsWith",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equalsIgnoreCase",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "format",
+      "parameters": [
+        "java.util.Locale",
+        "java.lang.String",
+        "java.lang.Object..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.IllegalFormatException",
+        "Details"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getBytes",
+      "parameters": [
+        "int",
+        "int",
+        "byte[]",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getBytes",
+      "parameters": [
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "byte[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "indexOf",
+      "parameters": [
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "indexOf",
+      "parameters": [
+        "java.lang.String",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isBlank",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "join",
+      "parameters": [
+        "java.lang.CharSequence",
+        "java.lang.CharSequence..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "lastIndexOf",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "lastIndexOf",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "length",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "matches",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.regex.PatternSyntaxException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "regionMatches",
+      "parameters": [
+        "boolean",
+        "int",
+        "java.lang.String",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "repeat",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "replace",
+      "parameters": [
+        "java.lang.CharSequence",
+        "java.lang.CharSequence"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "replaceFirst",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.regex.PatternSyntaxException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "split",
+      "parameters": [
+        "java.lang.String",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.regex.PatternSyntaxException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "startsWith",
+      "parameters": [
+        "java.lang.String",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "stripLeading",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "subSequence",
+      "parameters": [
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.CharSequence",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "substring",
+      "parameters": [
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toLowerCase",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toUpperCase",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "valueOf",
+      "parameters": [
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "valueOf",
+      "parameters": [
+        "char[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "valueOf",
+      "parameters": [
+        "double"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "valueOf",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "valueOf",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "String",
+      "parameters": [
+        "byte[]"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "String",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "String",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.io.UnsupportedEncodingException",
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "String",
+      "parameters": [
+        "byte[]",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.io.UnsupportedEncodingException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "String",
+      "parameters": [
+        "char[]"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "String",
+      "parameters": [
+        "int[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "String",
+      "parameters": [
+        "java.lang.StringBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "String",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "String",
+      "parameters": [
+        "byte[]",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "String",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "String",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int",
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "String",
+      "parameters": [
+        "byte[]",
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "String",
+      "parameters": [
+        "char[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "String",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "String",
+      "parameters": [
+        "java.lang.StringBuilder"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "CASE_INSENSITIVE_ORDER",
+      "type": "java.util.Comparator<java.lang.String>",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

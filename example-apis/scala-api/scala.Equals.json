@@ -1,0 +1,28 @@
+{
+  "name": "scala.Equals",
+  "type_parameters": [],
+  "implements": [
+    "scala.Any"
+  ],
+  "inherits": [
+    "scala.Any"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "canEqual",
+      "parameters": [
+        "scala.Any"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "language": "scala"
+}

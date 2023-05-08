@@ -1,0 +1,430 @@
+{
+  "name": "java.util.GregorianCalendar",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.util.Calendar"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "computeFields",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getActualMaximum",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getCalendarType",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getGregorianChange",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Date",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getMaximum",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getWeeksInWeekYear",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isWeekDateSupported",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "roll",
+      "parameters": [
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setWeekDate",
+      "parameters": [
+        "int",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "add",
+      "parameters": [
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "computeTime",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "from",
+      "parameters": [
+        "java.time.ZonedDateTime"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.GregorianCalendar",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getActualMinimum",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getGreatestMinimum",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getLeastMaximum",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getMinimum",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getWeekYear",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isLeapYear",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "roll",
+      "parameters": [
+        "int",
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setGregorianChange",
+      "parameters": [
+        "java.util.Date"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toZonedDateTime",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.ZonedDateTime",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "GregorianCalendar",
+      "parameters": [
+        "int",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "GregorianCalendar",
+      "parameters": [
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "GregorianCalendar",
+      "parameters": [
+        "java.util.TimeZone"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "GregorianCalendar",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "GregorianCalendar",
+      "parameters": [
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "GregorianCalendar",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "GregorianCalendar",
+      "parameters": [
+        "java.util.TimeZone",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "BC",
+      "type": "int",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "AD",
+      "type": "int",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

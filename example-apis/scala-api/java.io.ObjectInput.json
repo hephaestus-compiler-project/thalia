@@ -1,0 +1,116 @@
+{
+  "name": "java.io.ObjectInput",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.io.DataInput",
+    "java.lang.AutoCloseable"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "close",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "byte[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "readObject",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassNotFoundException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "available",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "skip",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

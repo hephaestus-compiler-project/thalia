@@ -1,0 +1,15 @@
+{
+  "name": "scala.languageFeature.postfixOps",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 1,
+  "methods": [],
+  "fields": [],
+  "is_class": true,
+  "language": "scala"
+}

@@ -1,0 +1,77 @@
+{
+  "name": "scala.Tuple2",
+  "type_parameters": [
+    "+T1",
+    "+T2"
+  ],
+  "implements": [
+    "scala.Product2[T1, T2]",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "scala.Product2[T1, T2]",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Predef.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple2",
+      "parameters": [
+        "T1",
+        "T2"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "_1",
+      "type": "T1",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "_2",
+      "type": "T2",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "swap",
+      "type": "(T2, T1)",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "language": "scala"
+}

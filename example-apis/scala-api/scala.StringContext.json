@@ -1,0 +1,143 @@
+{
+  "name": "scala.StringContext",
+  "type_parameters": [],
+  "implements": [
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "f",
+      "parameters": [
+        "A*"
+      ],
+      "type_parameters": [
+        "A >: scala.Any"
+      ],
+      "return_type": "scala.Predef.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "raw",
+      "parameters": [
+        "scala.Any*"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Predef.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "s",
+      "parameters": [
+        "scala.Any*"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Predef.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "StringContext",
+      "parameters": [
+        "scala.Predef.String*"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "checkLengths",
+      "parameters": [
+        "scala.collection.Seq[scala.Any]",
+        "scala.Seq[scala.Predef.String]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "glob",
+      "parameters": [
+        "scala.Seq[scala.Predef.String]",
+        "scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Option[scala.Seq[scala.Predef.String]]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "processEscapes",
+      "parameters": [
+        "scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Predef.String",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "processUnicode",
+      "parameters": [
+        "scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Predef.String",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "protected"
+    },
+    {
+      "name": "standardInterpolator",
+      "parameters": [
+        "(scala.Predef.String) => scala.Predef.String",
+        "scala.collection.Seq[scala.Any]",
+        "scala.Seq[scala.Predef.String]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Predef.String",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "parts",
+      "type": "scala.Predef.String*",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "language": "scala"
+}

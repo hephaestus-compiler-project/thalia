@@ -1,0 +1,221 @@
+{
+  "name": "java.lang.ModuleLayer",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "configuration",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.module.Configuration",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "defineModules",
+      "parameters": [
+        "java.lang.module.Configuration",
+        "java.util.List<java.lang.ModuleLayer>",
+        "java.util.function.Function<java.lang.String,java.lang.ClassLoader>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ModuleLayer.Controller",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.LayerInstantiationException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "defineModulesWithManyLoaders",
+      "parameters": [
+        "java.lang.module.Configuration",
+        "java.util.List<java.lang.ModuleLayer>",
+        "java.lang.ClassLoader"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ModuleLayer.Controller",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.LayerInstantiationException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "defineModulesWithOneLoader",
+      "parameters": [
+        "java.lang.module.Configuration",
+        "java.util.List<java.lang.ModuleLayer>",
+        "java.lang.ClassLoader"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ModuleLayer.Controller",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.LayerInstantiationException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "findLoader",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ClassLoader",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "modules",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Set<java.lang.Module>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "boot",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.ModuleLayer",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "defineModules",
+      "parameters": [
+        "java.lang.module.Configuration",
+        "java.util.function.Function<java.lang.String,java.lang.ClassLoader>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ModuleLayer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.LayerInstantiationException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "defineModulesWithManyLoaders",
+      "parameters": [
+        "java.lang.module.Configuration",
+        "java.lang.ClassLoader"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ModuleLayer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.LayerInstantiationException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "defineModulesWithOneLoader",
+      "parameters": [
+        "java.lang.module.Configuration",
+        "java.lang.ClassLoader"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ModuleLayer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.LayerInstantiationException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "empty",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.ModuleLayer",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "findModule",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Optional<java.lang.Module>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "parents",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.List<java.lang.ModuleLayer>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

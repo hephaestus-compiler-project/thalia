@@ -1,0 +1,49 @@
+{
+  "name": "scala.App",
+  "type_parameters": [],
+  "implements": [
+    "scala.DelayedInit"
+  ],
+  "inherits": [
+    "scala.DelayedInit"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "main",
+      "parameters": [
+        "scala.Array[scala.Predef.String]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "args",
+      "type": "scala.Array[scala.Predef.String]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "protected",
+      "is_static": false
+    },
+    {
+      "name": "executionStart",
+      "type": "scala.Long",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "language": "scala"
+}

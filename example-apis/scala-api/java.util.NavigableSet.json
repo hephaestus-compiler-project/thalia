@@ -1,0 +1,248 @@
+{
+  "name": "java.util.NavigableSet",
+  "type_parameters": [
+    "E"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.util.SortedSet<E>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "descendingIterator",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Iterator<E>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "floor",
+      "parameters": [
+        "E"
+      ],
+      "type_parameters": [],
+      "return_type": "E",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "headSet",
+      "parameters": [
+        "E",
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.NavigableSet<E>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.Comparable",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "iterator",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Iterator<E>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "pollFirst",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "E",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "subSet",
+      "parameters": [
+        "E",
+        "boolean",
+        "E",
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.NavigableSet<E>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "tailSet",
+      "parameters": [
+        "E"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.SortedSet<E>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.Comparable",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "ceiling",
+      "parameters": [
+        "E"
+      ],
+      "type_parameters": [],
+      "return_type": "E",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "descendingSet",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.NavigableSet<E>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "headSet",
+      "parameters": [
+        "E"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.SortedSet<E>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.Comparable",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "higher",
+      "parameters": [
+        "E"
+      ],
+      "type_parameters": [],
+      "return_type": "E",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "lower",
+      "parameters": [
+        "E"
+      ],
+      "type_parameters": [],
+      "return_type": "E",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "pollLast",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "E",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "subSet",
+      "parameters": [
+        "E",
+        "E"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.SortedSet<E>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "tailSet",
+      "parameters": [
+        "E",
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.NavigableSet<E>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.Comparable",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

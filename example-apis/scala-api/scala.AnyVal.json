@@ -1,0 +1,26 @@
+{
+  "name": "scala.AnyVal",
+  "type_parameters": [],
+  "implements": [
+    "scala.Any"
+  ],
+  "inherits": [
+    "scala.Any"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "getClass",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Predef.Class[_ <: scala.AnyVal]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "language": "scala"
+}

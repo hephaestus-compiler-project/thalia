@@ -1,0 +1,3683 @@
+{
+  "name": "java.util.Arrays",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "byte[]",
+        "byte"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "char[]",
+        "char"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "double[]",
+        "double"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "float[]",
+        "float"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "int[]",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "long[]",
+        "int",
+        "int",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "short[]",
+        "int",
+        "int",
+        "short"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "java.lang.Object[]",
+        "int",
+        "int",
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "T[]",
+        "int",
+        "int",
+        "T",
+        "java.util.Comparator<? super T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "boolean[]",
+        "boolean[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "byte[]",
+        "byte[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "char[]",
+        "char[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "double[]",
+        "double[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "float[]",
+        "float[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "int[]",
+        "int[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "long[]",
+        "int",
+        "int",
+        "long[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "short[]",
+        "int",
+        "int",
+        "short[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "T[]",
+        "int",
+        "int",
+        "T[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [
+        "T extends java.lang.Comparable<? super T>"
+      ],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "T[]",
+        "T[]"
+      ],
+      "type_parameters": [
+        "T extends java.lang.Comparable<? super T>"
+      ],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "compareUnsigned",
+      "parameters": [
+        "byte[]",
+        "byte[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "compareUnsigned",
+      "parameters": [
+        "int[]",
+        "int[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "compareUnsigned",
+      "parameters": [
+        "long[]",
+        "int",
+        "int",
+        "long[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compareUnsigned",
+      "parameters": [
+        "short[]",
+        "int",
+        "int",
+        "short[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOf",
+      "parameters": [
+        "boolean[]",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NegativeArraySizeException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOf",
+      "parameters": [
+        "char[]",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "char[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NegativeArraySizeException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOf",
+      "parameters": [
+        "float[]",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "float[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NegativeArraySizeException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOf",
+      "parameters": [
+        "long[]",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "long[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NegativeArraySizeException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOf",
+      "parameters": [
+        "T[]",
+        "int"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NegativeArraySizeException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOfRange",
+      "parameters": [
+        "boolean[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOfRange",
+      "parameters": [
+        "char[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "char[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOfRange",
+      "parameters": [
+        "float[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "float[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOfRange",
+      "parameters": [
+        "long[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "long[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOfRange",
+      "parameters": [
+        "T[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "deepEquals",
+      "parameters": [
+        "java.lang.Object[]",
+        "java.lang.Object[]"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "deepToString",
+      "parameters": [
+        "java.lang.Object[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "boolean[]",
+        "int",
+        "int",
+        "boolean[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int",
+        "byte[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "char[]",
+        "int",
+        "int",
+        "char[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "double[]",
+        "int",
+        "int",
+        "double[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "float[]",
+        "int",
+        "int",
+        "float[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "int[]",
+        "int",
+        "int",
+        "int[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "long[]",
+        "long[]"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "short[]",
+        "short[]"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "java.lang.Object[]",
+        "java.lang.Object[]"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "T[]",
+        "T[]",
+        "java.util.Comparator<? super T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "boolean[]",
+        "int",
+        "int",
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int",
+        "byte"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "char[]",
+        "int",
+        "int",
+        "char"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "double[]",
+        "int",
+        "int",
+        "double"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "float[]",
+        "int",
+        "int",
+        "float"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "int[]",
+        "int",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "long[]",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "short[]",
+        "short"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "java.lang.Object[]",
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayStoreException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [
+        "byte[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [
+        "double[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [
+        "int[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [
+        "short[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "boolean[]",
+        "boolean[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "byte[]",
+        "byte[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "char[]",
+        "char[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "double[]",
+        "double[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "float[]",
+        "float[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "int[]",
+        "int[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "long[]",
+        "int",
+        "int",
+        "long[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "short[]",
+        "int",
+        "int",
+        "short[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "java.lang.Object[]",
+        "int",
+        "int",
+        "java.lang.Object[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "T[]",
+        "int",
+        "int",
+        "T[]",
+        "int",
+        "int",
+        "java.util.Comparator<? super T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelPrefix",
+      "parameters": [
+        "double[]",
+        "int",
+        "int",
+        "java.util.function.DoubleBinaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelPrefix",
+      "parameters": [
+        "int[]",
+        "int",
+        "int",
+        "java.util.function.IntBinaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelPrefix",
+      "parameters": [
+        "long[]",
+        "int",
+        "int",
+        "java.util.function.LongBinaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelPrefix",
+      "parameters": [
+        "T[]",
+        "int",
+        "int",
+        "java.util.function.BinaryOperator<T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelSetAll",
+      "parameters": [
+        "double[]",
+        "java.util.function.IntToDoubleFunction"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelSetAll",
+      "parameters": [
+        "long[]",
+        "java.util.function.IntToLongFunction"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "byte[]"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "char[]"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "double[]"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "float[]"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "int[]"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "long[]"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "short[]"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "T[]"
+      ],
+      "type_parameters": [
+        "T extends java.lang.Comparable<? super T>"
+      ],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.Comparable"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "T[]",
+        "int",
+        "int",
+        "java.util.Comparator<? super T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.Comparable",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setAll",
+      "parameters": [
+        "double[]",
+        "java.util.function.IntToDoubleFunction"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setAll",
+      "parameters": [
+        "long[]",
+        "java.util.function.IntToLongFunction"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "byte[]"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "char[]"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "double[]"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "float[]"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "int[]"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "long[]"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "short[]"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "java.lang.Object[]"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.Comparable"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "T[]",
+        "int",
+        "int",
+        "java.util.Comparator<? super T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.IllegalArgumentException",
+        "java.util.Comparator",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "spliterator",
+      "parameters": [
+        "double[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Spliterator.OfDouble",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "spliterator",
+      "parameters": [
+        "int[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Spliterator.OfInt",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "spliterator",
+      "parameters": [
+        "long[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Spliterator.OfLong",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "spliterator",
+      "parameters": [
+        "T[]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.Spliterator<T>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "stream",
+      "parameters": [
+        "double[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "stream",
+      "parameters": [
+        "int[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "stream",
+      "parameters": [
+        "long[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "stream",
+      "parameters": [
+        "T[]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.stream.Stream<T>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [
+        "boolean[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [
+        "char[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [
+        "float[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [
+        "long[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [
+        "java.lang.Object[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "asList",
+      "parameters": [
+        "T..."
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.List<T>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int",
+        "byte"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "char[]",
+        "int",
+        "int",
+        "char"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "double[]",
+        "int",
+        "int",
+        "double"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "float[]",
+        "int",
+        "int",
+        "float"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "int[]",
+        "int",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "long[]",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "short[]",
+        "short"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "java.lang.Object[]",
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "binarySearch",
+      "parameters": [
+        "T[]",
+        "T",
+        "java.util.Comparator<? super T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "boolean[]",
+        "int",
+        "int",
+        "boolean[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int",
+        "byte[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "char[]",
+        "int",
+        "int",
+        "char[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "double[]",
+        "int",
+        "int",
+        "double[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "float[]",
+        "int",
+        "int",
+        "float[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "int[]",
+        "int",
+        "int",
+        "int[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "long[]",
+        "long[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "short[]",
+        "short[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "T[]",
+        "int",
+        "int",
+        "T[]",
+        "int",
+        "int",
+        "java.util.Comparator<? super T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "T[]",
+        "T[]",
+        "java.util.Comparator<? super T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compareUnsigned",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int",
+        "byte[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compareUnsigned",
+      "parameters": [
+        "int[]",
+        "int",
+        "int",
+        "int[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compareUnsigned",
+      "parameters": [
+        "long[]",
+        "long[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "compareUnsigned",
+      "parameters": [
+        "short[]",
+        "short[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "copyOf",
+      "parameters": [
+        "byte[]",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "byte[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NegativeArraySizeException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOf",
+      "parameters": [
+        "double[]",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "double[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NegativeArraySizeException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOf",
+      "parameters": [
+        "int[]",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NegativeArraySizeException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOf",
+      "parameters": [
+        "short[]",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "short[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NegativeArraySizeException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOf",
+      "parameters": [
+        "U[]",
+        "int",
+        "java.lang.Class<? extends T[]>"
+      ],
+      "type_parameters": [
+        "T",
+        "U"
+      ],
+      "return_type": "T[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NegativeArraySizeException",
+        "java.lang.NullPointerException",
+        "java.lang.ArrayStoreException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOfRange",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "byte[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOfRange",
+      "parameters": [
+        "double[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "double[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOfRange",
+      "parameters": [
+        "int[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOfRange",
+      "parameters": [
+        "short[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "short[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "copyOfRange",
+      "parameters": [
+        "U[]",
+        "int",
+        "int",
+        "java.lang.Class<? extends T[]>"
+      ],
+      "type_parameters": [
+        "T",
+        "U"
+      ],
+      "return_type": "T[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException",
+        "java.lang.ArrayStoreException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "deepHashCode",
+      "parameters": [
+        "java.lang.Object[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "boolean[]",
+        "boolean[]"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "byte[]",
+        "byte[]"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "char[]",
+        "char[]"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "double[]",
+        "double[]"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "float[]",
+        "float[]"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "int[]",
+        "int[]"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "long[]",
+        "int",
+        "int",
+        "long[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "short[]",
+        "int",
+        "int",
+        "short[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "java.lang.Object[]",
+        "int",
+        "int",
+        "java.lang.Object[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "T[]",
+        "int",
+        "int",
+        "T[]",
+        "int",
+        "int",
+        "java.util.Comparator<? super T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "boolean[]",
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "byte[]",
+        "byte"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "char[]",
+        "char"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "double[]",
+        "double"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "float[]",
+        "float"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "int[]",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "long[]",
+        "int",
+        "int",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "short[]",
+        "int",
+        "int",
+        "short"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "java.lang.Object[]",
+        "int",
+        "int",
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.ArrayStoreException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [
+        "boolean[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [
+        "char[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [
+        "float[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [
+        "long[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [
+        "java.lang.Object[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "boolean[]",
+        "int",
+        "int",
+        "boolean[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int",
+        "byte[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "char[]",
+        "int",
+        "int",
+        "char[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "double[]",
+        "int",
+        "int",
+        "double[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "float[]",
+        "int",
+        "int",
+        "float[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "int[]",
+        "int",
+        "int",
+        "int[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "long[]",
+        "long[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "short[]",
+        "short[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "java.lang.Object[]",
+        "java.lang.Object[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mismatch",
+      "parameters": [
+        "T[]",
+        "T[]",
+        "java.util.Comparator<? super T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelPrefix",
+      "parameters": [
+        "double[]",
+        "java.util.function.DoubleBinaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelPrefix",
+      "parameters": [
+        "int[]",
+        "java.util.function.IntBinaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelPrefix",
+      "parameters": [
+        "long[]",
+        "java.util.function.LongBinaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelPrefix",
+      "parameters": [
+        "T[]",
+        "java.util.function.BinaryOperator<T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelSetAll",
+      "parameters": [
+        "int[]",
+        "java.util.function.IntUnaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelSetAll",
+      "parameters": [
+        "T[]",
+        "java.util.function.IntFunction<? extends T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "char[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "double[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "float[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "int[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "long[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "short[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "T[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [
+        "T extends java.lang.Comparable<? super T>"
+      ],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.Comparable",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parallelSort",
+      "parameters": [
+        "T[]",
+        "java.util.Comparator<? super T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.IllegalArgumentException",
+        "java.util.Comparator"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setAll",
+      "parameters": [
+        "int[]",
+        "java.util.function.IntUnaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setAll",
+      "parameters": [
+        "T[]",
+        "java.util.function.IntFunction<? extends T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "char[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "double[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "float[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "int[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "long[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "short[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "java.lang.Object[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.Comparable",
+        "java.lang.ArrayIndexOutOfBoundsException",
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "sort",
+      "parameters": [
+        "T[]",
+        "java.util.Comparator<? super T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.IllegalArgumentException",
+        "java.util.Comparator"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "spliterator",
+      "parameters": [
+        "double[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Spliterator.OfDouble",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "spliterator",
+      "parameters": [
+        "int[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Spliterator.OfInt",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "spliterator",
+      "parameters": [
+        "long[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Spliterator.OfLong",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "spliterator",
+      "parameters": [
+        "T[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.Spliterator<T>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "stream",
+      "parameters": [
+        "double[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "stream",
+      "parameters": [
+        "int[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "stream",
+      "parameters": [
+        "long[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "stream",
+      "parameters": [
+        "T[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.stream.Stream<T>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [
+        "byte[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [
+        "double[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [
+        "int[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [
+        "short[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

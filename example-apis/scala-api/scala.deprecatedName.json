@@ -1,0 +1,31 @@
+{
+  "name": "scala.deprecatedName",
+  "type_parameters": [],
+  "implements": [
+    "scala.annotation.Annotation",
+    "scala.annotation.StaticAnnotation"
+  ],
+  "inherits": [
+    "scala.annotation.Annotation",
+    "scala.annotation.StaticAnnotation"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "deprecatedName",
+      "parameters": [
+        "scala.Predef.String",
+        "scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "language": "scala"
+}

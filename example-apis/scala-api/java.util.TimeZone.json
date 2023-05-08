@@ -1,0 +1,329 @@
+{
+  "name": "java.util.TimeZone",
+  "type_parameters": [],
+  "implements": [
+    "java.io.Serializable",
+    "java.lang.Cloneable"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "getAvailableIDs",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getDefault",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.TimeZone",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getDisplayName",
+      "parameters": [
+        "boolean",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDisplayName",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getID",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getOffset",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getTimeZone",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.TimeZone",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hasSameRules",
+      "parameters": [
+        "java.util.TimeZone"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "observesDaylightTime",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setID",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toZoneId",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.ZoneId",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "clone",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getAvailableIDs",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getDisplayName",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getDisplayName",
+      "parameters": [
+        "boolean",
+        "int",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDSTSavings",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getOffset",
+      "parameters": [
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRawOffset",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getTimeZone",
+      "parameters": [
+        "java.time.ZoneId"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.TimeZone",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "inDaylightTime",
+      "parameters": [
+        "java.util.Date"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setDefault",
+      "parameters": [
+        "java.util.TimeZone"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setRawOffset",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "useDaylightTime",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "SHORT",
+      "type": "int",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LONG",
+      "type": "int",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

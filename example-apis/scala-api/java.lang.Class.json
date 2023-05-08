@@ -1,0 +1,985 @@
+{
+  "name": "java.lang.Class",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [
+    "java.io.Serializable",
+    "java.lang.reflect.GenericDeclaration",
+    "java.lang.reflect.Type",
+    "java.lang.reflect.AnnotatedElement"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "cast",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "forName",
+      "parameters": [
+        "java.lang.Module",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.LinkageError",
+        "java.lang.SecurityException",
+        "ModuleReader.open(String)"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "forName",
+      "parameters": [
+        "java.lang.String",
+        "boolean",
+        "java.lang.ClassLoader"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.LinkageError",
+        "java.lang.ExceptionInInitializerError",
+        "java.lang.ClassNotFoundException",
+        "java.lang.SecurityException",
+        "java.lang.RuntimePermission"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getAnnotatedSuperclass",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.AnnotatedType",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getAnnotations",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.annotation.Annotation[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getCanonicalName",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getClassLoader",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.ClassLoader",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "java.lang.RuntimePermission"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getConstructor",
+      "parameters": [
+        "java.lang.Class<?>..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.Constructor<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NoSuchMethodException",
+        "java.lang.SecurityException",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDeclaredAnnotation",
+      "parameters": [
+        "java.lang.Class<A>"
+      ],
+      "type_parameters": [
+        "A extends java.lang.annotation.Annotation"
+      ],
+      "return_type": "A",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDeclaredAnnotationsByType",
+      "parameters": [
+        "java.lang.Class<A>"
+      ],
+      "type_parameters": [
+        "A extends java.lang.annotation.Annotation"
+      ],
+      "return_type": "A[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDeclaredConstructor",
+      "parameters": [
+        "java.lang.Class<?>..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.Constructor<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NoSuchMethodException",
+        "java.lang.SecurityException",
+        "s.checkPermission",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDeclaredField",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.Field",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NoSuchFieldException",
+        "java.lang.NullPointerException",
+        "java.lang.SecurityException",
+        "s.checkPermission",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDeclaredMethod",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Class<?>..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.Method",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NoSuchMethodException",
+        "java.lang.NullPointerException",
+        "java.lang.SecurityException",
+        "s.checkPermission",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDeclaringClass",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getEnclosingConstructor",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.Constructor<?>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "s.checkPermission",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getEnumConstants",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "T[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getFields",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.Field[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getGenericSuperclass",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.Type",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.reflect.GenericSignatureFormatError",
+        "java.lang.TypeNotPresentException",
+        "java.lang.reflect.MalformedParameterizedTypeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getMethod",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Class<?>..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.Method",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NoSuchMethodException",
+        "java.lang.NullPointerException",
+        "java.lang.SecurityException",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getModifiers",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getName",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getNestMembers",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.LinkageError",
+        "java.lang.SecurityException",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getPackageName",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getResource",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.net.URL",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getSigners",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Object[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getSuperclass",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<? super T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getTypeParameters",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.TypeVariable<java.lang.Class<T>>[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.reflect.GenericSignatureFormatError"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isAnnotationPresent",
+      "parameters": [
+        "java.lang.Class<? extends java.lang.annotation.Annotation>"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isArray",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isEnum",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isInterface",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isMemberClass",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isPrimitive",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "newInstance",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalAccessException",
+        "java.lang.InstantiationException",
+        "java.lang.ExceptionInInitializerError",
+        "java.lang.SecurityException",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "asSubclass",
+      "parameters": [
+        "java.lang.Class<U>"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.lang.Class<? extends U>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "desiredAssertionStatus",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "forName",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.LinkageError",
+        "java.lang.ExceptionInInitializerError",
+        "java.lang.ClassNotFoundException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getAnnotatedInterfaces",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.AnnotatedType[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getAnnotation",
+      "parameters": [
+        "java.lang.Class<A>"
+      ],
+      "type_parameters": [
+        "A extends java.lang.annotation.Annotation"
+      ],
+      "return_type": "A",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getAnnotationsByType",
+      "parameters": [
+        "java.lang.Class<A>"
+      ],
+      "type_parameters": [
+        "A extends java.lang.annotation.Annotation"
+      ],
+      "return_type": "A[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getClasses",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getComponentType",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getConstructors",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.Constructor<?>[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDeclaredAnnotations",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.annotation.Annotation[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getDeclaredClasses",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "s.checkPermission",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDeclaredConstructors",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.Constructor<?>[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "s.checkPermission",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDeclaredFields",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.Field[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "s.checkPermission",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDeclaredMethods",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.Method[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "s.checkPermission",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getEnclosingClass",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getEnclosingMethod",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.Method",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "s.checkPermission",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getField",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.Field",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NoSuchFieldException",
+        "java.lang.NullPointerException",
+        "java.lang.SecurityException",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getGenericInterfaces",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.Type[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.reflect.GenericSignatureFormatError",
+        "java.lang.TypeNotPresentException",
+        "java.lang.reflect.MalformedParameterizedTypeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getInterfaces",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getMethods",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.Method[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getModule",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Module",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getNestHost",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getPackage",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Package",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getProtectionDomain",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.security.ProtectionDomain",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getResourceAsStream",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.InputStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getSimpleName",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getTypeName",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isAnnotation",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isAnonymousClass",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isAssignableFrom",
+      "parameters": [
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isInstance",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isLocalClass",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isNestmateOf",
+      "parameters": [
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isSynthetic",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toGenericString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

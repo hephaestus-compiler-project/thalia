@@ -1,0 +1,86 @@
+{
+  "name": "java.io.FilterWriter",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.io.Writer"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "write",
+      "parameters": [
+        "char[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.lang.String",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "flush",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "out",
+      "type": "java.io.Writer",
+      "is_static": false,
+      "access_mod": "protected"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

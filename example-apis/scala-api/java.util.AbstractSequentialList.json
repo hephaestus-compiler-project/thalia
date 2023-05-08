@@ -1,0 +1,134 @@
+{
+  "name": "java.util.AbstractSequentialList",
+  "type_parameters": [
+    "E"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.util.AbstractList<E>"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "addAll",
+      "parameters": [
+        "int",
+        "java.util.Collection<? extends E>"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.ClassCastException",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "iterator",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Iterator<E>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "remove",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "E",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "add",
+      "parameters": [
+        "int",
+        "E"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.ClassCastException",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "E",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "listIterator",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.ListIterator<E>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "set",
+      "parameters": [
+        "int",
+        "E"
+      ],
+      "type_parameters": [],
+      "return_type": "E",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.ClassCastException",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

@@ -1,0 +1,1062 @@
+{
+  "name": "java.util.Scanner",
+  "type_parameters": [],
+  "implements": [
+    "java.util.Iterator<java.lang.String>",
+    "java.io.Closeable"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "delimiter",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.regex.Pattern",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "findAll",
+      "parameters": [
+        "java.util.regex.Pattern"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.Stream<java.util.regex.MatchResult>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "findInLine",
+      "parameters": [
+        "java.util.regex.Pattern"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "findWithinHorizon",
+      "parameters": [
+        "java.util.regex.Pattern",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNext",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNextBigDecimal",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNextBigInteger",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNextByte",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNextDouble",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNextInt",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNextLine",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNextLong",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNextShort",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "locale",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Locale",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "next",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "next",
+      "parameters": [
+        "java.util.regex.Pattern"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "nextBigInteger",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.math.BigInteger",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.InputMismatchException",
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "nextBoolean",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.InputMismatchException",
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "nextByte",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "byte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.InputMismatchException",
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "nextFloat",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "float",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.InputMismatchException",
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "nextInt",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.InputMismatchException",
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "nextLong",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.InputMismatchException",
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "nextShort",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "short",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.InputMismatchException",
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "radix",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "reset",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Scanner",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "skip",
+      "parameters": [
+        "java.util.regex.Pattern"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Scanner",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "useDelimiter",
+      "parameters": [
+        "java.util.regex.Pattern"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Scanner",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "useRadix",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Scanner",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "close",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "findAll",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.Stream<java.util.regex.MatchResult>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalStateException",
+        "java.util.regex.PatternSyntaxException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "findInLine",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "findWithinHorizon",
+      "parameters": [
+        "java.lang.String",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNext",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNext",
+      "parameters": [
+        "java.util.regex.Pattern"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNextBigInteger",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNextBoolean",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNextByte",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNextFloat",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNextInt",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNextLong",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasNextShort",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "ioException",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.io.IOException",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "match",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.regex.MatchResult",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "next",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "nextBigDecimal",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.math.BigDecimal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.InputMismatchException",
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "nextBigInteger",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.math.BigInteger",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.InputMismatchException",
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "nextByte",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "byte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.InputMismatchException",
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "nextDouble",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "double",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.InputMismatchException",
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "nextInt",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.InputMismatchException",
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "nextLine",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "nextLong",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.InputMismatchException",
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "nextShort",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "short",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.InputMismatchException",
+        "java.util.NoSuchElementException",
+        "java.lang.IllegalStateException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "remove",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "skip",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Scanner",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "tokens",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.Stream<java.lang.String>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "useDelimiter",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Scanner",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "useLocale",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Scanner",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "Scanner",
+      "parameters": [
+        "java.io.File",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.io.FileNotFoundException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Scanner",
+      "parameters": [
+        "java.io.InputStream"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "Scanner",
+      "parameters": [
+        "java.io.InputStream",
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "Scanner",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "Scanner",
+      "parameters": [
+        "java.nio.channels.ReadableByteChannel",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Scanner",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Scanner",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Scanner",
+      "parameters": [
+        "java.io.File"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.io.FileNotFoundException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Scanner",
+      "parameters": [
+        "java.io.File",
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Scanner",
+      "parameters": [
+        "java.io.InputStream",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Scanner",
+      "parameters": [
+        "java.lang.Readable"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "Scanner",
+      "parameters": [
+        "java.nio.channels.ReadableByteChannel"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "Scanner",
+      "parameters": [
+        "java.nio.channels.ReadableByteChannel",
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "Scanner",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

@@ -1,0 +1,67 @@
+{
+  "name": "java.util.function.LongUnaryOperator",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "applyAsLong",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "identity",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.function.LongUnaryOperator",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "andThen",
+      "parameters": [
+        "java.util.function.LongUnaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.function.LongUnaryOperator",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "compose",
+      "parameters": [
+        "java.util.function.LongUnaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.function.LongUnaryOperator",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": true
+    }
+  ],
+  "fields": [],
+  "functional_interface": true,
+  "parent": null,
+  "language": "java"
+}

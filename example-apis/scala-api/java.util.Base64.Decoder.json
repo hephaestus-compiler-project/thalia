@@ -1,0 +1,89 @@
+{
+  "name": "java.util.Base64.Decoder",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "decode",
+      "parameters": [
+        "byte[]",
+        "byte[]"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "decode",
+      "parameters": [
+        "java.nio.ByteBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.ByteBuffer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "decode",
+      "parameters": [
+        "byte[]"
+      ],
+      "type_parameters": [],
+      "return_type": "byte[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "decode",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "byte[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "wrap",
+      "parameters": [
+        "java.io.InputStream"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.InputStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": "Base64",
+  "language": "java"
+}

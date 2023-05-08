@@ -1,0 +1,302 @@
+{
+  "name": "scala.Enumeration.ValueSet",
+  "type_parameters": [],
+  "implements": [
+    "scala.collection.immutable.AbstractSet[scala.Enumeration.Value]",
+    "scala.collection.immutable.SortedSet[scala.Enumeration.Value]",
+    "scala.collection.immutable.SortedSetOps[scala.Enumeration.Value, scala.collection.immutable.SortedSet, scala.Enumeration.ValueSet]",
+    "scala.collection.StrictOptimizedIterableOps[scala.Enumeration.Value, scala.collection.immutable.Set, scala.Enumeration.ValueSet]",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "scala.collection.immutable.AbstractSet[scala.Enumeration.Value]",
+    "scala.collection.immutable.SortedSet[scala.Enumeration.Value]",
+    "scala.collection.immutable.SortedSetOps[scala.Enumeration.Value, scala.collection.immutable.SortedSet, scala.Enumeration.ValueSet]",
+    "scala.collection.StrictOptimizedIterableOps[scala.Enumeration.Value, scala.collection.immutable.Set, scala.Enumeration.ValueSet]",
+    "scala.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "collect",
+      "parameters": [
+        "scala.PartialFunction[scala.Enumeration.Value, B]"
+      ],
+      "type_parameters": [
+        "B"
+      ],
+      "return_type": "(scala.Ordering[B]) => scala.collection.immutable.SortedSet[B]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "scala.Enumeration.Value"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "excl",
+      "parameters": [
+        "scala.Enumeration.Value"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Enumeration.ValueSet",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "flatMap",
+      "parameters": [
+        "(scala.Enumeration.Value) => scala.IterableOnce[B]"
+      ],
+      "type_parameters": [
+        "B"
+      ],
+      "return_type": "(scala.Ordering[B]) => scala.collection.immutable.SortedSet[B]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "flatMap",
+      "parameters": [
+        "(scala.Enumeration.Value) => scala.IterableOnce[scala.Enumeration.Value]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Enumeration.ValueSet",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromSpecific",
+      "parameters": [
+        "scala.IterableOnce[scala.Enumeration.Value]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Enumeration.ValueSet",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected"
+    },
+    {
+      "name": "incl",
+      "parameters": [
+        "scala.Enumeration.Value"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Enumeration.ValueSet",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "iteratorFrom",
+      "parameters": [
+        "scala.Enumeration.Value"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Iterator[scala.Enumeration.Value]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "map",
+      "parameters": [
+        "(scala.Enumeration.Value) => B"
+      ],
+      "type_parameters": [
+        "B"
+      ],
+      "return_type": "(scala.Ordering[B]) => scala.collection.immutable.SortedSet[B]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "map",
+      "parameters": [
+        "(scala.Enumeration.Value) => scala.Enumeration.Value"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Enumeration.ValueSet",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "rangeImpl",
+      "parameters": [
+        "scala.Option[scala.Enumeration.Value]",
+        "scala.Option[scala.Enumeration.Value]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Enumeration.ValueSet",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "zip",
+      "parameters": [
+        "scala.IterableOnce[B]"
+      ],
+      "type_parameters": [
+        "B"
+      ],
+      "return_type": "(scala.Ordering[(scala.Enumeration.Value, B)]) => scala.collection.immutable.SortedSet[(scala.Enumeration.Value, B)]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromBitMask",
+      "parameters": [
+        "scala.Array[scala.Long]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Enumeration.ValueSet",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromSpecific",
+      "parameters": [
+        "scala.IterableOnce[scala.Enumeration.Value]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Enumeration.ValueSet",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "className",
+      "type": "scala.Predef.String",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "empty",
+      "type": "scala.Enumeration.ValueSet",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "isEmpty",
+      "type": "scala.Boolean",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "iterator",
+      "type": "scala.Iterator[scala.Enumeration.Value]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "knownSize",
+      "type": "scala.Int",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "newSpecificBuilder",
+      "type": "scala.collection.mutable.Builder[scala.Enumeration.Value, scala.Enumeration.ValueSet]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "protected",
+      "is_static": false
+    },
+    {
+      "name": "ordering",
+      "type": "scala.Ordering[scala.Enumeration.Value]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toBitMask",
+      "type": "scala.Array[scala.Long]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "empty",
+      "type": "scala.Enumeration.ValueSet",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "newBuilder",
+      "type": "scala.collection.mutable.Builder[scala.Enumeration.Value, scala.Enumeration.ValueSet]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    }
+  ],
+  "is_class": true,
+  "language": "scala"
+}

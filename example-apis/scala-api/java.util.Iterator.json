@@ -1,0 +1,68 @@
+{
+  "name": "java.util.Iterator",
+  "type_parameters": [
+    "E"
+  ],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "hasNext",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "remove",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "forEachRemaining",
+      "parameters": [
+        "java.util.function.Consumer<? super E>"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "next",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "E",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.NoSuchElementException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

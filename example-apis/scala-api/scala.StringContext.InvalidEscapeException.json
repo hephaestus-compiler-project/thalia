@@ -1,0 +1,40 @@
+{
+  "name": "scala.StringContext.InvalidEscapeException",
+  "type_parameters": [],
+  "implements": [
+    "scala.IllegalArgumentException"
+  ],
+  "inherits": [
+    "scala.IllegalArgumentException"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "InvalidEscapeException",
+      "parameters": [
+        "scala.Predef.String",
+        "scala.Int"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "index",
+      "type": "scala.Int",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "language": "scala"
+}

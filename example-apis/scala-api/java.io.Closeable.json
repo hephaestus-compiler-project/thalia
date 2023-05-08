@@ -1,0 +1,28 @@
+{
+  "name": "java.io.Closeable",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.AutoCloseable"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "close",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "language": "java"
+}

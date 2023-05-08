@@ -1,0 +1,51 @@
+{
+  "name": "java.util.function.BinaryOperator",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.util.function.BiFunction<T,T,T>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "minBy",
+      "parameters": [
+        "java.util.Comparator<? super T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.function.BinaryOperator<T>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "maxBy",
+      "parameters": [
+        "java.util.Comparator<? super T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.function.BinaryOperator<T>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": true,
+  "parent": null,
+  "language": "java"
+}

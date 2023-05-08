@@ -1,0 +1,1746 @@
+{
+  "name": "java.lang.Character.UnicodeBlock",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Character.Subset"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "of",
+      "parameters": [
+        "char"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "forName",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "AEGEAN_NUMBERS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ALCHEMICAL_SYMBOLS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ANATOLIAN_HIEROGLYPHS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ANCIENT_GREEK_NUMBERS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ARABIC",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ARABIC_MATHEMATICAL_ALPHABETIC_SYMBOLS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ARABIC_PRESENTATION_FORMS_B",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ARMENIAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "AVESTAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BAMUM",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BASIC_LATIN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BATAK",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BHAIKSUKI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BOPOMOFO",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BOX_DRAWING",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BRAILLE_PATTERNS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BUHID",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CARIAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CHAKMA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CHEROKEE",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CJK_COMPATIBILITY",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CJK_COMPATIBILITY_IDEOGRAPHS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CJK_RADICALS_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CJK_SYMBOLS_AND_PUNCTUATION",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CJK_UNIFIED_IDEOGRAPHS_EXTENSION_C",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CJK_UNIFIED_IDEOGRAPHS_EXTENSION_E",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "COMBINING_DIACRITICAL_MARKS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "COMBINING_DIACRITICAL_MARKS_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "COMBINING_MARKS_FOR_SYMBOLS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CONTROL_PICTURES",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "COPTIC_EPACT_NUMBERS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CUNEIFORM",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CURRENCY_SYMBOLS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CYRILLIC",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CYRILLIC_EXTENDED_B",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CYRILLIC_SUPPLEMENTARY",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "DEVANAGARI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "DINGBATS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "DUPLOYAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "EGYPTIAN_HIEROGLYPHS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "EMOTICONS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ENCLOSED_ALPHANUMERICS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ENCLOSED_IDEOGRAPHIC_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ETHIOPIC_EXTENDED",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ETHIOPIC_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "GEOMETRIC_SHAPES",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "GEORGIAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "GLAGOLITIC",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "GOTHIC",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "GREEK",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "GUJARATI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HALFWIDTH_AND_FULLWIDTH_FORMS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HANGUL_JAMO",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HANGUL_JAMO_EXTENDED_B",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HANUNOO",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HEBREW",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HIGH_SURROGATES",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "IDEOGRAPHIC_DESCRIPTION_CHARACTERS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "IMPERIAL_ARAMAIC",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "INSCRIPTIONAL_PARTHIAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "JAVANESE",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "KANA_EXTENDED_A",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "KANBUN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "KANNADA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "KATAKANA_PHONETIC_EXTENSIONS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "KHAROSHTHI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "KHMER_SYMBOLS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "KHUDAWADI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LATIN_1_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LATIN_EXTENDED_ADDITIONAL",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LATIN_EXTENDED_C",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LATIN_EXTENDED_E",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LETTERLIKE_SYMBOLS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LINEAR_A",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LINEAR_B_SYLLABARY",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LOW_SURROGATES",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LYDIAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MAHJONG_TILES",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MANDAIC",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MARCHEN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MATHEMATICAL_ALPHANUMERIC_SYMBOLS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MEETEI_MAYEK",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MENDE_KIKAKUI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MEROITIC_HIEROGLYPHS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MISCELLANEOUS_MATHEMATICAL_SYMBOLS_A",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MISCELLANEOUS_SYMBOLS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MISCELLANEOUS_SYMBOLS_AND_PICTOGRAPHS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MODI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MONGOLIAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MRO",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MUSICAL_SYMBOLS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MYANMAR_EXTENDED_A",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "NABATAEAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "NEWA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "NUMBER_FORMS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "OGHAM",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "OLD_HUNGARIAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "OLD_NORTH_ARABIAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "OLD_PERSIAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "OLD_TURKIC",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ORIYA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "OSAGE",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PAHAWH_HMONG",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PAU_CIN_HAU",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PHAISTOS_DISC",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PHONETIC_EXTENSIONS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PLAYING_CARDS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PSALTER_PAHLAVI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "RUMI_NUMERAL_SYMBOLS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SAMARITAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SHARADA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SHORTHAND_FORMAT_CONTROLS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SINHALA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SMALL_FORM_VARIANTS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SOYOMBO",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SPECIALS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SUNDANESE_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SUPPLEMENTAL_ARROWS_A",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SUPPLEMENTAL_ARROWS_C",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SUPPLEMENTAL_PUNCTUATION",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SUPPLEMENTARY_PRIVATE_USE_AREA_A",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SURROGATES_AREA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SYLOTI_NAGRI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SYRIAC_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TAGBANWA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TAI_LE",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TAI_VIET",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TAKRI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TANGUT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TELUGU",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "THAI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TIFINAGH",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TRANSPORT_AND_MAP_SYMBOLS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "VAI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "VARIATION_SELECTORS_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "VERTICAL_FORMS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "YI_RADICALS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "YIJING_HEXAGRAM_SYMBOLS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ADLAM",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "AHOM",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ALPHABETIC_PRESENTATION_FORMS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ANCIENT_GREEK_MUSICAL_NOTATION",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ANCIENT_SYMBOLS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ARABIC_EXTENDED_A",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ARABIC_PRESENTATION_FORMS_A",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ARABIC_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ARROWS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BALINESE",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BAMUM_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BASSA_VAH",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BENGALI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BLOCK_ELEMENTS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BOPOMOFO_EXTENDED",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BRAHMI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BUGINESE",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BYZANTINE_MUSICAL_SYMBOLS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CAUCASIAN_ALBANIAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CHAM",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CHEROKEE_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CJK_COMPATIBILITY_FORMS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CJK_COMPATIBILITY_IDEOGRAPHS_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CJK_STROKES",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CJK_UNIFIED_IDEOGRAPHS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CJK_UNIFIED_IDEOGRAPHS_EXTENSION_F",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "COMBINING_DIACRITICAL_MARKS_EXTENDED",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "COMBINING_HALF_MARKS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "COMMON_INDIC_NUMBER_FORMS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "COPTIC",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "COUNTING_ROD_NUMERALS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CUNEIFORM_NUMBERS_AND_PUNCTUATION",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CYPRIOT_SYLLABARY",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CYRILLIC_EXTENDED_A",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CYRILLIC_EXTENDED_C",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "DESERET",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "DEVANAGARI_EXTENDED",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "DOMINO_TILES",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "EARLY_DYNASTIC_CUNEIFORM",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ELBASAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ENCLOSED_ALPHANUMERIC_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ENCLOSED_CJK_LETTERS_AND_MONTHS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ETHIOPIC",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ETHIOPIC_EXTENDED_A",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "GENERAL_PUNCTUATION",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "GEOMETRIC_SHAPES_EXTENDED",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "GEORGIAN_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "GLAGOLITIC_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "GRANTHA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "GREEK_EXTENDED",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "GURMUKHI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HANGUL_COMPATIBILITY_JAMO",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HANGUL_JAMO_EXTENDED_A",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HANGUL_SYLLABLES",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HATRAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HIGH_PRIVATE_USE_SURROGATES",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HIRAGANA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "IDEOGRAPHIC_SYMBOLS_AND_PUNCTUATION",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "INSCRIPTIONAL_PAHLAVI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "IPA_EXTENSIONS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "KAITHI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "KANA_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "KANGXI_RADICALS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "KATAKANA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "KAYAH_LI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "KHMER",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "KHOJKI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LAO",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LATIN_EXTENDED_A",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LATIN_EXTENDED_B",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LATIN_EXTENDED_D",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LEPCHA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LIMBU",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LINEAR_B_IDEOGRAMS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LISU",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "LYCIAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MAHAJANI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MALAYALAM",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MANICHAEAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MASARAM_GONDI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MATHEMATICAL_OPERATORS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MEETEI_MAYEK_EXTENSIONS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MEROITIC_CURSIVE",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MIAO",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MISCELLANEOUS_MATHEMATICAL_SYMBOLS_B",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MISCELLANEOUS_SYMBOLS_AND_ARROWS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MISCELLANEOUS_TECHNICAL",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MODIFIER_TONE_LETTERS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MONGOLIAN_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MULTANI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MYANMAR",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MYANMAR_EXTENDED_B",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "NEW_TAI_LUE",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "NKO",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "NUSHU",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "OL_CHIKI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "OLD_ITALIC",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "OLD_PERMIC",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "OLD_SOUTH_ARABIAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "OPTICAL_CHARACTER_RECOGNITION",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ORNAMENTAL_DINGBATS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "OSMANYA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PALMYRENE",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PHAGS_PA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PHOENICIAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PHONETIC_EXTENSIONS_SUPPLEMENT",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PRIVATE_USE_AREA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "REJANG",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "RUNIC",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SAURASHTRA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SHAVIAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SIDDHAM",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SINHALA_ARCHAIC_NUMBERS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SORA_SOMPENG",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SPACING_MODIFIER_LETTERS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SUNDANESE",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SUPERSCRIPTS_AND_SUBSCRIPTS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SUPPLEMENTAL_ARROWS_B",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SUPPLEMENTAL_MATHEMATICAL_OPERATORS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SUPPLEMENTAL_SYMBOLS_AND_PICTOGRAPHS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SUPPLEMENTARY_PRIVATE_USE_AREA_B",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SUTTON_SIGNWRITING",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SYRIAC",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TAGALOG",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TAGS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TAI_THAM",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TAI_XUAN_JING_SYMBOLS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TAMIL",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TANGUT_COMPONENTS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "THAANA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TIBETAN",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TIRHUTA",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "UGARITIC",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS_EXTENDED",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "VARIATION_SELECTORS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "VEDIC_EXTENSIONS",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "WARANG_CITI",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "YI_SYLLABLES",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ZANABAZAR_SQUARE",
+      "type": "java.lang.Character.UnicodeBlock",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": "Character",
+  "language": "java"
+}

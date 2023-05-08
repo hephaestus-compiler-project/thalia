@@ -1,0 +1,31 @@
+{
+  "name": "scala.PartialFunction.ElementWiseExtractor",
+  "type_parameters": [
+    "-A",
+    "+B"
+  ],
+  "implements": [
+    "scala.AnyVal"
+  ],
+  "inherits": [
+    "scala.AnyVal"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "unapplySeq",
+      "parameters": [
+        "scala.Seq[A]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Option[scala.Seq[B]]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "language": "scala"
+}
