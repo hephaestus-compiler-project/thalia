@@ -161,6 +161,10 @@ class JavaAPIDocConverter(APIDocConverter):
         full_class_name = "{pkg}.{cls}".format(pkg=package_name,
                                                cls=class_name)
         self._cls_name = class_name
+        type_parameters = self.extract_class_type_parameters(html_doc)
+        type_parameters = [type_param.replace(f" {class_name}<",
+                                              f" {full_class_name}<")
+                           for type_param in type_parameters]
         super_class = self.extract_super_class(html_doc)
         super_interfaces = self.extract_super_interfaces(html_doc)
         class_type = self.extract_class_type(html_doc)
@@ -187,7 +191,7 @@ class JavaAPIDocConverter(APIDocConverter):
         parent = self.extract_parent_class(html_doc, class_name, package_name)
         class_obj = {
           'name': full_class_name,
-          'type_parameters': self.extract_class_type_parameters(html_doc),
+          'type_parameters': type_parameters,
           'implements': super_interfaces,
           'inherits': super_class,
           "class_type": class_type,
