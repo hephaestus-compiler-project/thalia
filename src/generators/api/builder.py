@@ -542,6 +542,7 @@ class ScalaAPIGraphBuilder(APIGraphBuilder):
         "java.lang.Character": "java.lang.Character",
         "java.lang.Boolean": "java.lang.Boolean",
     }
+    LANGUAGE = "scala"
 
     def __init__(self, target_language="scala", **kwargs):
         super().__init__(target_language, **kwargs)
@@ -570,7 +571,10 @@ class ScalaAPIGraphBuilder(APIGraphBuilder):
         filtered_docs = {}
         for k, v in docs.items():
             segs = v["name"].split(".")
-            if len(segs) >= 3 and segs[-2][0].isupper():
+            parent = v.get("parent")
+            lang = v["language"]
+            if (parent is not None or lang == self.LANGUAGE) and \
+                    len(segs) >= 3 and segs[-2][0].isupper():
                 continue
             filtered_docs[k] = v
         return super().build(filtered_docs)
