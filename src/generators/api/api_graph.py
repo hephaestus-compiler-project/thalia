@@ -338,7 +338,7 @@ class APIGraph():
             return subtypes
 
         excluded_nodes = set()
-        for k, v in nx.dfs_edges(self.subtyping_graph, node):
+        for k, v in nx.bfs_edges(self.subtyping_graph, node):
             if k in excluded_nodes:
                 # Type k has been excluded, so due to transitivity, we also
                 # exclude type v.
@@ -359,6 +359,7 @@ class APIGraph():
                     v, self.get_reg_types(), type_var_map=type_var_map,
                     rec_bound_handler=handler)
                 if inst_t:
+                    type_var_map.update(inst_t[1])
                     subtypes.add(inst_t[0])
             else:
                 subtypes.add(v)
