@@ -394,7 +394,6 @@ class APIGraph():
         return subtypes
 
     def supertypes(self, node: tp.Type):
-        reverse_graph = self.subtyping_graph.reverse()
         supertypes = set()
         constraints = {}
         if node.is_parameterized():
@@ -402,12 +401,13 @@ class APIGraph():
             node = self.get_type_by_name(node.name) or node.t_constructor
         if node not in self.subtyping_graph:
             return supertypes
-        if node not in reverse_graph:
+        if node not in self.subtyping_graph:
             return supertypes
-        for k, v in nx.dfs_edges(reverse_graph, node):
-            constraint = reverse_graph[k][v].get("constraint") or {}
+        for k, v, _ in nx.edge_dfs(self.subtyping_graph, node,
+                                   orientation="reverse"):
+            constraint = self.subtyping_graph[k][v].get("constraint") or {}
             if not constraint:
-                supertypes.add(v)
+                supertypes.add(k)
                 continue
             for type_k, type_v in constraint.items():
                 if type_v.has_type_variables():
@@ -422,7 +422,7 @@ class APIGraph():
                 constraints[type_k] = t
             handler = self.get_instantiations_of_recursive_bound
             supertypes.add(tu.instantiate_type_constructor(
-                v, {}, type_var_map=constraints,
+                k, {}, type_var_map=constraints,
                 rec_bound_handler=handler)[0])
         return supertypes
 
@@ -489,11 +489,13 @@ class APIGraph():
         # Find all source nodes that reach the selected target.
         source_nodes = self.source_nodes_of.get(target)
         if source_nodes is None:
+            ancestors = [(k, v) for k, v, _ in nx.edge_dfs(
+                self.api_graph, target, orientation="reverse")]
+            source_nodes = set(itertools.chain(*ancestors))
             source_nodes = [
                 node
-                for node, indegree in self.api_graph.in_degree(
-                    self.api_graph.nodes())
-                if indegree == 0 and nx.has_path(self.api_graph, node, target)
+                for node in source_nodes
+                if self.api_graph.in_degree(node) == 0
             ]
             self.source_nodes_of[target] = [s for s in source_nodes
                                             if not isinstance(s, Variable)]
