@@ -24,7 +24,7 @@ and the second for contravariance.
 """
 
 
-def select_random_type(types: List[tp.Type], uniform=False) -> tp.Type:
+def select_random_type(types: List[tp.Type], uniform=True) -> tp.Type:
     assert len(types) != 0
     if uniform:
         return utils.random.choice(types)

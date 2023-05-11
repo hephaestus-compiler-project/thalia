@@ -232,9 +232,7 @@ class APIGraph():
         self.inject_type_error = kwargs.get(
             "inject-type-error", False
         )
-
-    def get_reg_types(self):
-        types = [
+        self.types = [
             t
             for t in self.subtyping_graph.nodes()
             if (
@@ -243,7 +241,9 @@ class APIGraph():
                      getattr(t, "primive", False))
             )
         ]
-        return types
+
+    def get_reg_types(self):
+        return self.types
 
     def _get_random_type(self, types):
         t = tu.select_random_type(types)
@@ -255,7 +255,7 @@ class APIGraph():
         return t, None
 
     def get_random_type(self):
-        types = self.get_reg_types()
+        types = copy(self.get_reg_types())
         actual_t, type_con = self._get_random_type(types)
         while actual_t is None:
             types.remove(type_con)
@@ -443,9 +443,12 @@ class APIGraph():
 
     def add_types(self, nodes: List[tp.Type]):
         self.subtyping_graph.add_nodes_from(nodes)
+        self.types.extend(nodes)
 
     def remove_types(self, nodes: List[tp.Type]):
         self.subtyping_graph.remove_nodes_from(nodes)
+        self.types = [t for t in self.types
+                      if t not in nodes]
 
     def get_sources_and_target(
             self, target: tp.Type,

@@ -179,7 +179,7 @@ class RandomUtils():
         return self.r.choice(string.ascii_letters + string.digits)
 
     def choice(self, choices):
-        return self.r.choice(choices)
+        return self.r.choices(choices, k=1)[0]
 
     def choices(self, choices, weights, k):
         return self.r.choices(choices, weights=weights, k=k)
