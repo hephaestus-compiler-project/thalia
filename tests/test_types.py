@@ -16,6 +16,20 @@ def test_type_parameter_has_bound_of():
     assert type_param5.has_bound_of(type_param1)
 
 
+def test_type_parameter_constructor():
+    type_con = tp.TypeParameterConstructor("T", 1)
+    assert type_con.is_type_var()
+    assert type_con.is_type_constructor()
+    assert type_con.type_parameters == [tp.TypeParameter("T1")]
+
+    etype = type_con.new([kt.String])
+    assert etype.is_parameterized()
+    assert etype.type_args == [kt.String]
+    assert etype.t_constructor == type_con
+    assert not etype.is_type_constructor()
+    assert not etype.is_type_var()
+
+
 def test_parameterized_supertypes_simple():
     foo_tparam = tp.TypeParameter("T")
     foo_con = tp.TypeConstructor("Foo", [foo_tparam], [])
@@ -380,6 +394,28 @@ def test_type_substitution_wildcards():
     ptype = tp.substitute_type(foo_t, type_map)
     assert ptype.type_args[0] == t
     assert ptype.type_args[1] == tp.WildCardType(t, tp.Covariant)
+
+
+def test_type_substitution_type_param_con():
+    type_param1 = tp.TypeParameterConstructor("T", 2)
+    type_con = tp.TypeConstructor("Foo", [tp.TypeParameter("X"),
+                                          tp.TypeParameter("Y")])
+    etype = type_param1.new([kt.String, kt.Integer])
+    assert tp.substitute_type(etype, {}) == etype
+
+    sub = {type_param1: type_con}
+    new_type = tp.substitute_type(etype, sub)
+    assert new_type.is_parameterized()
+    assert new_type.t_constructor == type_con
+    assert new_type.type_args == [kt.String, kt.Integer]
+
+    type_param2 = tp.TypeParameter("T")
+    etype = type_param1.new([kt.String, type_param2])
+    sub = {type_param1: type_con, type_param2: kt.Boolean}
+    new_type = tp.substitute_type(etype, sub)
+    assert new_type.is_parameterized()
+    assert new_type.t_constructor == type_con
+    assert new_type.type_args == [kt.String, kt.Boolean]
 
 
 def test_to_type_variable_free():

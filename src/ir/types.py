@@ -408,7 +408,13 @@ def _get_type_substitution(etype, type_map,
                 substitute_bound:
             new_bound = _get_type_substitution(etype.bound, type_map, cond,
                                                substitute_bound)
-            return TypeParameter(etype.name, etype.variance, new_bound)
+            return (
+                TypeParameter(etype.name, etype.variance, new_bound)
+                if not etype.is_type_constructor()
+                else TypeParameterConstructor(etype.name,
+                                              etype.len_type_parameters,
+                                              etype.variance, new_bound)
+            )
         # The type parameter does not correspond to an abstract type
         # so, there is nothing to substitute.
         return etype
@@ -423,7 +429,14 @@ def substitute_type_args(etype, type_map,
     for t_arg in etype.type_args:
         type_args.append(_get_type_substitution(t_arg, type_map, cond,
                                                 substitute_bound))
-    return ParameterizedType(etype.t_constructor, type_args)
+    type_con = etype.t_constructor
+    t = type_map.get(type_con)
+    if t is None or cond(t) or not type_con.is_type_var():
+        return ParameterizedType(etype.t_constructor, type_args)
+
+    assert t.is_type_constructor()
+    assert len(t.type_parameters) == len(type_args)
+    return t.new(type_args)
 
 
 def substitute_type(t, type_map, substitute_bound=True):
@@ -534,6 +547,43 @@ class TypeConstructor(AbstractType):
         etype = ParameterizedType(type_con, type_args)
         etype.t_constructor.supertypes = old_supertypes
         return etype
+
+
+class TypeParameterConstructor(TypeParameter, TypeConstructor):
+    def __init__(self, name: str, len_type_parameters: int,
+                 variance=None, bound: Type = None):
+        self.name = name
+        self.variance = variance or Invariant
+        self.bound = bound
+        self.type_parameters = [
+            TypeParameter("T" + str(i + 1))
+            for i in range(len_type_parameters)
+        ]
+        self.supertypes = []
+
+    def __eq__(self, other):
+        return (self.__class__ == other.__class__ and
+                len(self.type_parameters) == len(other.type_parameters) and
+                self.name == other.name and
+                self.variance == other.variance and
+                self.bound == other.bound)
+
+    def __hash__(self):
+        return hash((self.name, self.variance, len(self.type_parameters)))
+
+    def __str__(self):
+        return "{variance}[{arity}]{name}{bound}".format(
+            variance=(
+                self.variance_to_string() +
+                ' ' if self.variance != Invariant else ''
+            ),
+            arity=len(self.type_parameters),
+            name=self.name,
+            bound=(
+                ' <: ' + self.bound.get_name()
+                if self.bound is not None else ''
+            )
+        )
 
 
 def _to_type_variable_free(t: Type, t_param, factory) -> Type:
