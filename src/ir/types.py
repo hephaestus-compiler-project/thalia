@@ -509,6 +509,10 @@ class TypeConstructor(AbstractType):
         return hash((self.name, tuple(self.supertypes),
                      tuple(self.type_parameters)))
 
+    @property
+    def arity(self):
+        return len(self.type_parameters)
+
     def is_type_constructor(self):
         return True
 
@@ -563,27 +567,31 @@ class TypeParameterConstructor(TypeParameter, TypeConstructor):
 
     def __eq__(self, other):
         return (self.__class__ == other.__class__ and
-                len(self.type_parameters) == len(other.type_parameters) and
                 self.name == other.name and
+                self.arity == other.arity and
                 self.variance == other.variance and
                 self.bound == other.bound)
 
     def __hash__(self):
-        return hash((self.name, self.variance, len(self.type_parameters)))
+        return hash((self.name, self.variance, self.arity))
 
     def __str__(self):
-        return "{variance}[{arity}]{name}{bound}".format(
+        return "{variance}{name}[{arity}]{bound}".format(
             variance=(
                 self.variance_to_string() +
                 ' ' if self.variance != Invariant else ''
             ),
-            arity=len(self.type_parameters),
+            arity=self.arity,
             name=self.name,
             bound=(
                 ' <: ' + self.bound.get_name()
                 if self.bound is not None else ''
             )
         )
+
+    @property
+    def arity(self):
+        return len(self.type_parameters)
 
 
 def _to_type_variable_free(t: Type, t_param, factory) -> Type:

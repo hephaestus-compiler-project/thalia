@@ -1303,6 +1303,58 @@ def test_unify_types_with_simple_and_parameterized_types_subtype_on_right():
     assert params == {type_param2: type_param1}
 
 
+def test_unify_types_higher_kinded_types():
+    factory = kt.KotlinBuiltinFactory()
+    type_param1 = tp.TypeParameterConstructor("T", 2)
+    t1 = type_param1.new([kt.String, kt.Integer])
+
+    # Foo<String> : T<String, Int> => {}
+    type_con = tp.TypeConstructor("Foo", [tp.TypeParameter("X")])
+    t2 = type_con.new([kt.String])
+    assert tutils.unify_types(t2, t1, factory) == {}
+
+    # Foo : T<String, Int> => {}
+    t2 = tp.SimpleClassifier("Foo")
+    assert tutils.unify_types(t2, t1, factory) == {}
+
+
+    # Foo<String, Int> : T<String, Int> => {T: Foo}
+    type_con = tp.TypeConstructor("Foo", [tp.TypeParameter("X"),
+                                          tp.TypeParameter("Y")])
+    t2 = type_con.new([kt.String, kt.Integer])
+    sub = tutils.unify_types(t2, t1, factory)
+    assert sub == {type_param1: type_con}
+
+    # Foo<Int, Int> : T<String, Int> => {}
+    t2 = type_con.new([kt.Integer, kt.Integer])
+    assert tutils.unify_types(t2, t1, factory) == {}
+
+    # Foo<Int, Int> : T<X, Y> => {T: Foo, X: Int, Y: Int}
+    type_param2 = tp.TypeParameter("X")
+    type_param3 = tp.TypeParameter("Y")
+    t1 = type_param1.new([type_param2, type_param3])
+    sub = tutils.unify_types(t2, t1, factory)
+    assert sub == {type_param1: type_con,
+                   type_param2: kt.Integer,
+                   type_param3: kt.Integer}
+
+    # Foo<Foo> : Foo<X[2]> => {} // different arity
+    type_con = tp.TypeConstructor("Foo", [tp.TypeParameter("X")])
+    t1 = type_con.new([type_param1])
+    t2 = type_con.new([type_con])
+    assert tutils.unify_types(t2, t1, factory) == {}
+
+    # Foo<String> : Foo<X[2]> = {}
+    t2 = type_con.new([kt.String])
+    assert tutils.unify_types(t2, t1, factory) == {}
+
+    type_con2 = tp.TypeConstructor("Bar", [tp.TypeParameter("X"),
+                                           tp.TypeParameter("Y")])
+    t2 = type_con.new([type_con2])
+    assert tutils.unify_types(t2, t1, factory) == {type_param1: type_con2}
+
+
+
 def test_build_type_variable_dependencies():
     assert tutils.build_type_variable_dependencies(kt.String, kt.String) == {}
     assert tutils.build_type_variable_dependencies(kt.String, kt.Integer) == {}

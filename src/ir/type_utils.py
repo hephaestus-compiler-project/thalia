@@ -1165,6 +1165,10 @@ def _update_type_var_map(type_var_map, key, value, bt_factory):
         value = getattr(value, "bound", None)
         if value is None:
             value = bt_factory.get_any_type()
+    if key.is_type_constructor() and not value.is_type_constructor():
+        return False
+    if key.is_type_constructor() and key.arity != value.arity:
+        return False
     type_var_map[key] = value
     return True
 
@@ -1201,6 +1205,28 @@ def _unify_type_with_type_var(t1: tp.Type, t2: tp.Type, factory,
         if strict_mode:
             return {}
     return {t2: t1}
+
+
+def unify_higher_kinded_types(t1: tp.Type, t2: tp.Type,
+                              factory):
+    assert t2.t_constructor.is_type_var()
+    assert t1.is_parameterized()
+
+    if t2.t_constructor.arity != t1.t_constructor.arity:
+        return {}
+
+    sub = {t2.t_constructor: t1.t_constructor}
+    for i, type_arg in enumerate(t2.type_args):
+        target_targ = t1.type_args[i]
+        if target_targ == type_arg:
+            continue
+
+        new_sub = unify_types(target_targ, type_arg, factory,
+                              same_type=False)
+        if not new_sub:
+            return {}
+        sub.update(new_sub)
+    return sub
 
 
 def unify_types(t1: tp.Type, t2: tp.Type, factory,
@@ -1246,6 +1272,9 @@ def unify_types(t1: tp.Type, t2: tp.Type, factory,
 
     if not t1.is_parameterized():
         return {}
+
+    if t2.t_constructor.is_type_var():
+        return unify_higher_kinded_types(t1, t2, factory)
 
     if t1.t_constructor != t2.t_constructor:
         return {}
