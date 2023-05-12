@@ -556,9 +556,14 @@ class ScalaTypeParser(TypeParser):
             # XXX Multi- and lower bounds: not supported at the moment.
             return None
         segs = type_param.split(" <: ")
-        if "[" in segs[0]:
-            # XXX Probably a higher-kinded type: not supported at the moment.
-            return None
+        type_params_str = segs[0].replace(", ", ",").split("[", 1)
+        if len(type_params_str) != 1:
+            type_args_str = type_params_str[1][:-1]
+            type_args = re.findall(self.COMMA_SEP_REGEX, type_args_str)
+            arity = len(type_args)
+        else:
+            arity = 0
+
         old_class_type_map = copy(self.class_type_name_map)
         if keep:
             self.class_type_name_map = {k: v
@@ -574,13 +579,19 @@ class ScalaTypeParser(TypeParser):
             type_var_map = {}
 
         if len(segs) == 1:
-            return type_var_map.get(type_param,
-                                    tp.TypeParameter(type_param,
-                                                     variance=variance))
-        bound = self.parse_type(segs[1].lstrip())
-        parsed_t = type_var_map.get(
-            segs[0].rstrip(),
-            tp.TypeParameter(segs[0].rstrip(), variance=variance, bound=bound))
+            type_param_name = type_param
+            bound = None
+        else:
+            type_param_name = segs[0].rstrip()
+            bound = self.parse_type(segs[1].rstrip())
+
+        if arity == 0:
+            type_param_obj = tp.TypeParameter(type_param_name,
+                                              variance=variance, bound=bound)
+        else:
+            type_param_obj = tp.TypeParameterConstructor(
+                type_params_str[0], arity, variance=variance, bound=bound)
+        parsed_t = type_var_map.get(type_param_name, type_param_obj)
         self.class_type_name_map = old_class_type_map
         return parsed_t
 

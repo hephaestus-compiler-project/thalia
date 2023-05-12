@@ -397,8 +397,6 @@ def test_scala_type_variables():
     assert b.parse_type("-T") == tp.TypeParameter("T", variance=tp.Contravariant)
     assert b.parse_type(
         "+CC[X] <: scala.SortedSet[X] with scala.SortedSetOps[X, CC, CC[X]]") is None
-    assert b.parse_type("+CC[X] <: scala.SortedSet[X]") is None
-    assert b.parse_type("+CC[_] <: scala.SortedSet") is None
     assert b.parse_type("X >: Y") is None
 
 
@@ -496,6 +494,16 @@ def test_scala_function_types():
          sc.Boolean
      ])
      assert t == exp_t
+
+
+def test_scala_higher_kinded_types():
+    b = ScalaTypeParser()
+    assert b.parse_type("X[_]") == tp.TypeParameterConstructor("X", 1)
+    assert b.parse_type("X[_,_]") == tp.TypeParameterConstructor("X", 2)
+    parsed_t = b.parse_type("X[_] <: scala.Foo[scala.String]")
+    bound = tp.TypeConstructor("scala.Foo", [tp.TypeParameter("scala.Foo.T1")])
+    assert parsed_t == tp.TypeParameterConstructor(
+        "X", 1, bound=bound.new([sc.String]))
 
 
 def test_scala_tuple_types():
