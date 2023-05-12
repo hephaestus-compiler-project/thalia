@@ -971,6 +971,21 @@ def test_instantiate_type_constructor_nested3():
     }
 
 
+def test_instantiate_type_constructor_higher_kinded_type():
+    type_param1 = tp.TypeParameterConstructor("T", 2)
+    type_con = tp.TypeConstructor("Foo", [tp.TypeParameter("T")])
+    type_con2 = tp.TypeConstructor("Bar", [tp.TypeParameter("T1"),
+                                           tp.TypeParameter("T2")])
+    t = tp.TypeConstructor("Baz", [type_param1, tp.TypeParameter("K")])
+    etype, sub = tutils.instantiate_type_constructor(t, [kt.String, type_con,
+                                                         type_con2])
+    assert not sub[tp.TypeParameter("K")].is_type_constructor()
+    assert sub[type_param1] == type_con2
+
+
+    assert tutils.instantiate_type_constructor(t, [kt.String, type_con]) is None
+
+
 def test_instantiate_type_constructor_bound():
     # class Foo<T>
     # class Bar<X, Y, Z>

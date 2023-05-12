@@ -553,11 +553,6 @@ def _get_available_types(type_constructor,
                                tp.TypeConstructor)
             if isinstance(ptype, forbidden_types):
                 continue
-        if isinstance(ptype, ast.ClassDeclaration) and (
-                ptype.class_type != ast.ClassDeclaration.REGULAR):
-            continue
-        if isinstance(ptype, tp.TypeConstructor):
-            continue
         if not primitives and hasattr(ptype, 'box_type'):
             ptype = ptype.box_type()
         available_types.append(ptype)
@@ -682,6 +677,14 @@ def substitute_invariant_wildcard_with(
     return t.t_constructor.new(type_args)
 
 
+def _get_types_for_type_param_assignment(type_param: tp.TypeParameter,
+                                         types: List[tp.Type]):
+    if not type_param.is_type_constructor():
+        return types
+    return [t for t in types
+            if t.is_type_constructor() and t.arity == type_param.arity]
+
+
 def _compute_type_variable_assignments(
         type_parameters: List[tp.TypeParameter],
         types: List[tp.Type],
@@ -770,30 +773,31 @@ def _compute_type_variable_assignments(
                             t_bound = tp.Nothing
                         a_types = [t_bound]
                 else:
-                    a_types = types
+                    a_types = _get_types_for_type_param_assignment(t_param,
+                                                                   types)
         if not a_types:
             # Unfortunately, we are unable to instantiate type variables with
             # the given constructors.
             return None
         c = select_random_type(a_types)
         if isinstance(c, ast.ClassDeclaration):
-            cls_type = c.get_type()
+            selected = c.get_type()
         else:
-            cls_type = c
-        if cls_type.is_type_constructor():
+            selected = c
+        if selected.is_type_constructor() and not t_param.is_type_constructor():
             # We just selected a parameterized class, so we need to instantiate
             # this too. Remove this class from available types to avoid
             # depthy instantiations.
             types = [t for t in types if t != c]
-            cls_type, _ = instantiate_type_constructor(
-                cls_type, types, True, type_var_map,
+            selected, _ = instantiate_type_constructor(
+                selected, types, True, type_var_map,
                 None if variance_choices is None else {},
             )
         variance = _get_type_arg_variance(
             t_param, variance_choices, type_parameters[i + 1: t_param_len])
-        t_arg = cls_type
-        if not variance.is_invariant() and not cls_type.is_wildcard():
-            t_arg = tp.WildCardType(cls_type, variance)
+        t_arg = selected
+        if not variance.is_invariant() and not selected.is_wildcard():
+            t_arg = tp.WildCardType(selected, variance)
         t_args.append(t_arg)
         type_var_map[t_param] = t_arg
     return t_args, type_var_map
