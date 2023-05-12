@@ -17,10 +17,10 @@ def test_type_parameter_has_bound_of():
 
 
 def test_type_parameter_constructor():
-    type_con = tp.TypeParameterConstructor("T", 1)
+    type_con = tp.TypeParameterConstructor("T", [tp.TypeParameter("X")])
     assert type_con.is_type_var()
     assert type_con.is_type_constructor()
-    assert type_con.type_parameters == [tp.TypeParameter("T1")]
+    assert type_con.type_parameters == [tp.TypeParameter("X")]
 
     etype = type_con.new([kt.String])
     assert etype.is_parameterized()
@@ -397,7 +397,8 @@ def test_type_substitution_wildcards():
 
 
 def test_type_substitution_type_param_con():
-    type_param1 = tp.TypeParameterConstructor("T", 2)
+    type_param1 = tp.TypeParameterConstructor("T", [tp.TypeParameter("X"),
+                                                    tp.TypeParameter("Y")])
     type_con = tp.TypeConstructor("Foo", [tp.TypeParameter("X"),
                                           tp.TypeParameter("Y")])
     etype = type_param1.new([kt.String, kt.Integer])

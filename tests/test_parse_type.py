@@ -498,12 +498,22 @@ def test_scala_function_types():
 
 def test_scala_higher_kinded_types():
     b = ScalaTypeParser()
-    assert b.parse_type("X[_]") == tp.TypeParameterConstructor("X", 1)
-    assert b.parse_type("X[_,_]") == tp.TypeParameterConstructor("X", 2)
+    assert b.parse_type("X[_]") == tp.TypeParameterConstructor("X", [tp.TypeParameter("T1")])
+    assert b.parse_type("X[_,_]") == tp.TypeParameterConstructor(
+        "X", [tp.TypeParameter("T1"), tp.TypeParameter("T2")])
     parsed_t = b.parse_type("X[_] <: scala.Foo[scala.String]")
     bound = tp.TypeConstructor("scala.Foo", [tp.TypeParameter("scala.Foo.T1")])
     assert parsed_t == tp.TypeParameterConstructor(
-        "X", 1, bound=bound.new([sc.String]))
+        "X", [tp.TypeParameter("T1")], bound=bound.new([sc.String]))
+
+    assert b.parse_type("X[T]") == tp.TypeParameterConstructor(
+        "X", [tp.TypeParameter("T")])
+
+    type_con = tp.TypeParameterConstructor("X", [tp.TypeParameter("T")])
+    type_spec = {"X": type_con}
+    b.type_spec = type_spec
+    parsed_t = b.parse_type("X[scala.String]")
+    assert parsed_t == type_con.new([sc.String])
 
 
 def test_scala_tuple_types():

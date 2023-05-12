@@ -559,10 +559,14 @@ class ScalaTypeParser(TypeParser):
         type_params_str = segs[0].replace(", ", ",").split("[", 1)
         if len(type_params_str) != 1:
             type_args_str = type_params_str[1][:-1]
-            type_args = re.findall(self.COMMA_SEP_REGEX, type_args_str)
-            arity = len(type_args)
+            type_params = [
+                self.parse_type(t) if t != "_" else tp.TypeParameter(
+                    "T" + str(i + 1))
+                for i, t in enumerate(re.findall(self.COMMA_SEP_REGEX,
+                                                 type_args_str))
+            ]
         else:
-            arity = 0
+            type_params = []
 
         old_class_type_map = copy(self.class_type_name_map)
         if keep:
@@ -585,17 +589,18 @@ class ScalaTypeParser(TypeParser):
             type_param_name = segs[0].rstrip()
             bound = self.parse_type(segs[1].rstrip())
 
-        if arity == 0:
+        if not type_params:
             type_param_obj = tp.TypeParameter(type_param_name,
                                               variance=variance, bound=bound)
         else:
             type_param_obj = tp.TypeParameterConstructor(
-                type_params_str[0], arity, variance=variance, bound=bound)
+                type_params_str[0], type_params, variance=variance,
+                bound=bound)
         parsed_t = type_var_map.get(type_param_name, type_param_obj)
         self.class_type_name_map = old_class_type_map
         return parsed_t
 
-    def parse_reg_type(self, str_t: str) -> tp.Type:
+    def parse_reg_type(self, str_t: str, usesite: bool = True) -> tp.Type:
         if str_t.startswith("?") or str_t.startswith("_"):
             return self.parse_wildcard(str_t)
         segs = str_t.split(".")
@@ -606,13 +611,15 @@ class ScalaTypeParser(TypeParser):
                 "." not in str_t.split(":")[0]
              )
         )
-        if is_type_var:
-            return self.parse_type_parameter(str_t)
         segs = str_t.replace(", ", ",").split("[", 1)
+        if is_type_var and len(segs) == 1:
+            return self.parse_type_parameter(str_t)
         if len(segs) == 1:
             parsed_t = tp.SimpleClassifier(str_t)
             return self.type_spec.get(str_t, parsed_t)
         base, type_args_str = segs[0], segs[1][:-1]
+        if is_type_var and base not in self.type_spec:
+            return self.parse_type_parameter(str_t)
         type_args = re.findall(self.COMMA_SEP_REGEX, type_args_str)
         new_type_args = []
         for type_arg in type_args:

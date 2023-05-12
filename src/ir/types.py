@@ -554,15 +554,12 @@ class TypeConstructor(AbstractType):
 
 
 class TypeParameterConstructor(TypeParameter, TypeConstructor):
-    def __init__(self, name: str, len_type_parameters: int,
+    def __init__(self, name: str, type_parameters: int,
                  variance=None, bound: Type = None):
         self.name = name
         self.variance = variance or Invariant
         self.bound = bound
-        self.type_parameters = [
-            TypeParameter("T" + str(i + 1))
-            for i in range(len_type_parameters)
-        ]
+        self.type_parameters = type_parameters
         self.supertypes = []
 
     def __eq__(self, other):

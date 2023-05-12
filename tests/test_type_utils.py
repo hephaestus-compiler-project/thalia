@@ -972,7 +972,8 @@ def test_instantiate_type_constructor_nested3():
 
 
 def test_instantiate_type_constructor_higher_kinded_type():
-    type_param1 = tp.TypeParameterConstructor("T", 2)
+    type_param1 = tp.TypeParameterConstructor("T", [tp.TypeParameter("X"),
+                                                    tp.TypeParameter("Y")])
     type_con = tp.TypeConstructor("Foo", [tp.TypeParameter("T")])
     type_con2 = tp.TypeConstructor("Bar", [tp.TypeParameter("T1"),
                                            tp.TypeParameter("T2")])
@@ -1320,7 +1321,8 @@ def test_unify_types_with_simple_and_parameterized_types_subtype_on_right():
 
 def test_unify_types_higher_kinded_types():
     factory = kt.KotlinBuiltinFactory()
-    type_param1 = tp.TypeParameterConstructor("T", 2)
+    type_param1 = tp.TypeParameterConstructor("T", [tp.TypeParameter("X"),
+                                                    tp.TypeParameter("Y")])
     t1 = type_param1.new([kt.String, kt.Integer])
 
     # Foo<String> : T<String, Int> => {}
