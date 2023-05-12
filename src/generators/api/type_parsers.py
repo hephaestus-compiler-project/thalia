@@ -617,8 +617,11 @@ class ScalaTypeParser(TypeParser):
         if len(segs) == 1:
             parsed_t = tp.SimpleClassifier(str_t)
             return self.type_spec.get(str_t, parsed_t)
+
+        type_var_name_mappings = copy(self.class_type_name_map)
+        type_var_name_mappings.update(self.func_type_name_map)
         base, type_args_str = segs[0], segs[1][:-1]
-        if is_type_var and base not in self.type_spec:
+        if is_type_var and base not in type_var_name_mappings:
             return self.parse_type_parameter(str_t)
         type_args = re.findall(self.COMMA_SEP_REGEX, type_args_str)
         new_type_args = []
@@ -634,6 +637,10 @@ class ScalaTypeParser(TypeParser):
             )
             for i in range(len(new_type_args))
         ]
+        type_con = type_var_name_mappings.get(base)
+        if type_con is not None:
+            return type_con.new(new_type_args)
+
         parsed_t = self.type_spec.get(base, tp.TypeConstructor(base,
                                                                type_vars))
         return parsed_t.new(new_type_args)

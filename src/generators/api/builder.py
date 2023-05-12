@@ -213,10 +213,19 @@ class APIGraphBuilder(ABC):
 
             # We use this auxiliarry type parameter to handle the renaming
             # of recursive bounds.
-            type_param_no_bound = tp.TypeParameter(
-                type_param.name, variance=type_param.variance)
+            if type_param.is_type_constructor():
+                type_param_no_bound = tp.TypeParameterConstructor(
+                    type_param.name, type_param.type_parameters,
+                    variance=type_param.variance
+                )
+            else:
+                type_param_no_bound = tp.TypeParameter(
+                    type_param.name, variance=type_param.variance)
+            copied_t = deepcopy(type_param)
             new_name = prefix + ".T" + str(i + 1)
-            type_var_map = {type_param_no_bound: tp.TypeParameter(new_name)}
+            copied_t.name = new_name
+            copied_t.bound = None
+            type_var_map = {type_param_no_bound: copied_t}
 
             bound = None
             if type_param.bound:
@@ -227,7 +236,8 @@ class APIGraphBuilder(ABC):
                         isinstance(bound.t_constructor, kt.NullableType)):
                     bound = bound.type_args[0]
 
-            renamed = tp.TypeParameter(new_name, bound=bound)
+            renamed = deepcopy(copied_t)
+            renamed.bound = bound
             type_name_map[type_param.name] = renamed
             if bound and bound.is_parameterized():
 
@@ -302,7 +312,6 @@ class APIGraphBuilder(ABC):
         is_static = method_api["is_static"]
         type_parameters = self.build_method_type_parameters(method_api,
                                                             method_fqn)
-
         parameters = [
             Parameter(self.parse_type(p),
                       self.get_type_parser().is_variable_argument(p))

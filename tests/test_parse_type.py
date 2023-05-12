@@ -508,10 +508,17 @@ def test_scala_higher_kinded_types():
 
     assert b.parse_type("X[T]") == tp.TypeParameterConstructor(
         "X", [tp.TypeParameter("T")])
+    assert b.parse_type("X[T] <: scala.Foo[X]") == tp.TypeParameterConstructor(
+        "X", [tp.TypeParameter("T1")],
+        bound=bound.new([tp.TypeParameter("X")])
+    )
+
+    type_con = tp.TypeConstructor("X", [tp.TypeParameter("X.T1")])
+    parsed_t = b.parse_type("X[scala.String]")
+    assert parsed_t == type_con.new([sc.String])
 
     type_con = tp.TypeParameterConstructor("X", [tp.TypeParameter("T")])
-    type_spec = {"X": type_con}
-    b.type_spec = type_spec
+    b.class_type_name_map["X"] = type_con
     parsed_t = b.parse_type("X[scala.String]")
     assert parsed_t == type_con.new([sc.String])
 
