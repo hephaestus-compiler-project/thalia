@@ -685,15 +685,7 @@ def _get_types_for_type_param_assignment(type_param: tp.TypeParameter,
     for t in types:
         if not t.is_type_constructor() or t.arity != type_param.arity:
             continue
-        matched = True
-        for i, tparam in enumerate(t.type_parameters):
-            hk_bound = type_param.type_parameters[i].bound
-            hk_bound = hk_bound or cfg.bt_factory.get_any_type()
-            bound = tparam.bound or cfg.bt_factory.get_any_type()
-            if not hk_bound.is_subtype(bound):
-                matched = False
-                break
-        if matched:
+        if type_param.match_type_con(t):
             matched_types.append(t)
     return matched_types
 

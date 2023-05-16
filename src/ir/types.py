@@ -4,6 +4,7 @@ from copy import copy
 from collections import defaultdict
 from typing import List, Dict, Set
 
+from src.config import cfg
 from src.ir.node import Node
 
 
@@ -264,7 +265,7 @@ class TypeParameter(AbstractType):
         if bound == other:
             return True
         if hasattr(bound, "get_type_variables"):
-            return other in bound.get_type_variables(None)
+            return other in bound.get_type_variables(cfg.bt_factory)
         return False
 
     def has_recursive_bound(self, factory=None) -> bool:
@@ -412,7 +413,7 @@ def _get_type_substitution(etype, type_map,
                 TypeParameter(etype.name, etype.variance, new_bound)
                 if not etype.is_type_constructor()
                 else TypeParameterConstructor(etype.name,
-                                              etype.len_type_parameters,
+                                              etype.type_parameters,
                                               etype.variance, new_bound)
             )
         # The type parameter does not correspond to an abstract type
@@ -590,6 +591,17 @@ class TypeParameterConstructor(TypeParameter, TypeConstructor):
     def arity(self):
         return len(self.type_parameters)
 
+    def match_type_con(self, type_con: TypeConstructor):
+        if self.arity != type_con.arity:
+            return
+        for i, tparam in enumerate(type_con.type_parameters):
+            hk_bound = self.type_parameters[i].bound
+            hk_bound = hk_bound or cfg.bt_factory.get_any_type()
+            bound = tparam.bound or cfg.bt_factory.get_any_type()
+            if not hk_bound.is_subtype(bound):
+                return False
+        return True
+
 
 def _to_type_variable_free(t: Type, t_param, factory) -> Type:
     if t.is_type_var():
@@ -604,7 +616,7 @@ def _to_type_variable_free(t: Type, t_param, factory) -> Type:
             (None, Invariant)
             if t_param.is_contravariant()
             else (
-                factory.get_any_type() if bound is None else bound,
+                cfg.bt_factory.get_any_type() if bound is None else bound,
                 Covariant
             )
         )
