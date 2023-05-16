@@ -516,8 +516,6 @@ class ScalaTypeParser(TypeParser):
             self.parse_type(tuple_str)
             for tuple_str in tuple_strs
         ]
-        if len(tuple_types) == 1:
-            return tuple_types[0]
         return sc.TupleType(len(tuple_types)).new(tuple_types)
 
     def parse_native_function_type(self, str_t: str) -> tp.ParameterizedType:

@@ -424,8 +424,7 @@ def test_scala_function_types():
      assert b.parse_type("(Boolean) => String") == sc.FunctionType(1).new(
          [sc.Boolean, sc.String])
      assert b.parse_type("(Boolean) => (String)") == sc.FunctionType(1).new(
-         [sc.Boolean, sc.String]
-     )
+         [sc.Boolean, sc.TupleType(1).new([sc.String])])
      assert b.parse_type("() => Unit") == sc.FunctionType(0).new([sc.Unit])
      t = b.parse_type("(Boolean, (Int) => Boolean, k.List[String]) => k.Set[String]")
      exp_t = sc.FunctionType(3).new([
@@ -525,6 +524,7 @@ def test_scala_higher_kinded_types():
 
 def test_scala_tuple_types():
      b = ScalaTypeParser()
+     assert b.parse_type("(String)") == sc.TupleType(1).new([sc.String])
      assert b.parse_type("(String, Int)") == sc.TupleType(2).new([sc.String, sc.Integer])
      assert b.parse_type("k.Map[String,(String,Int)]") == tp.TypeConstructor(
          "k.Map", [tp.TypeParameter("k.Map.T1"), tp.TypeParameter("k.Map.T2")]).new([
