@@ -17,6 +17,9 @@ class ScalaBuiltinFactory(bt.BuiltinFactory):
     def get_any_type(self):
         return AnyType()
 
+    def get_anyref_type(self):
+        return AnyRefType()
+
     def get_number_type(self):
         return NumberType()
 
@@ -86,6 +89,12 @@ class AnyType(ScalaBuiltin):
         return bt.Any
 
 
+class AnyRefType(AnyType):
+    def __init__(self, name="AnyRef"):
+        super().__init__(name)
+        self.supertypes.append(AnyType())
+
+
 class NothingType(ScalaBuiltin):
     def __init__(self, name="Nothing"):
         super().__init__(name)
@@ -106,10 +115,10 @@ class UnitType(AnyType):
         return bt.Void
 
 
-class NumberType(AnyType):
+class NumberType(AnyRefType):
     def __init__(self, name="Number"):
         super().__init__(name)
-        self.supertypes.append(AnyType())
+        self.supertypes.append(AnyRefType())
 
     def get_builtin_type(self):
         return bt.Number
@@ -178,10 +187,10 @@ class CharType(AnyType):
         return bt.Char
 
 
-class StringType(AnyType):
+class StringType(AnyRefType):
     def __init__(self, name="String"):
         super().__init__(name)
-        self.supertypes.append(AnyType())
+        self.supertypes.append(AnyRefType())
 
     def get_builtin_type(self):
         return bt.String
@@ -196,20 +205,20 @@ class BooleanType(AnyType):
         return bt.Boolean
 
 
-class ArrayType(tp.TypeConstructor, AnyType):
+class ArrayType(tp.TypeConstructor, AnyRefType):
     def __init__(self, name="Array"):
         # In Scala, arrays are invariant.
         super().__init__(name, [tp.TypeParameter("T")])
-        self.supertypes.append(AnyType())
+        self.supertypes.append(AnyRefType())
 
 
-class SeqType(tp.TypeConstructor, AnyType):
+class SeqType(tp.TypeConstructor, AnyRefType):
     def __init__(self, name="Seq"):
         super().__init__(name, [tp.TypeParameter("T", variance=tp.Covariant)])
-        self.supertypes.append(AnyType())
+        self.supertypes.append(AnyRefType())
 
 
-class FunctionType(tp.TypeConstructor, AnyType):
+class FunctionType(tp.TypeConstructor, AnyRefType):
     def __init__(self, nr_type_parameters: int):
         name = "Function" + str(nr_type_parameters)
         # We can have decl-variance in Scala
@@ -219,10 +228,10 @@ class FunctionType(tp.TypeConstructor, AnyType):
         ] + [tp.TypeParameter("R", tp.Covariant)]
         self.nr_type_parameters = nr_type_parameters
         super().__init__(name, type_parameters)
-        self.supertypes.append(AnyType())
+        self.supertypes.append(AnyRefType())
 
 
-class TupleType(tp.TypeConstructor, AnyType):
+class TupleType(tp.TypeConstructor, AnyRefType):
     def __init__(self, n_type_parameters: int):
         name = "Tuple" + str(n_type_parameters)
         # We can have decl-variance in Scala
@@ -232,7 +241,7 @@ class TupleType(tp.TypeConstructor, AnyType):
         ]
         self.nr_type_parameters = n_type_parameters
         super().__init__(name, type_parameters)
-        self.supertypes.append(AnyType())
+        self.supertypes.append(AnyRefType())
 
 
 Any = AnyType()
@@ -250,6 +259,7 @@ String = StringType()
 Boolean = BooleanType()
 Array = ArrayType()
 Seq = SeqType()
+AnyRef = AnyRefType()
 
 NonNothingTypes = [Any, Number, Integer, Short, Long, Byte, Float,
                    Double, Char, String, Boolean, Array, Seq]

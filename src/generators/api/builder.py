@@ -16,6 +16,11 @@ from src.generators.api.type_parsers import (TypeParser, KotlinTypeParser,
 
 PROTECTED = "protected"
 PUBLIC = "public"
+ROOT_CLASSES = {
+    "java": "java.lang.Object",
+    "kotlin": "scala.Kotlin",
+    "scala": "scala.Any"
+}
 
 
 class APIGraphBuilder(ABC):
@@ -355,8 +360,9 @@ class APIGraphBuilder(ABC):
             self.parse_type(st, build_class_node=True)
             for st in class_api["implements"] + class_api["inherits"]
         }
+
         if not super_types:
-            super_types.add(self.bt_factory.get_any_type())
+            super_types.add(self.parse_type(ROOT_CLASSES[self.api_language]))
         class_name = class_api["name"]
         super_types = list(super_types)
         if self.parent_cls is None or not self.parent_cls.is_type_constructor():
@@ -542,6 +548,7 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
 
 class ScalaAPIGraphBuilder(APIGraphBuilder):
     MAPPED_TYPES = {
+        "java.lang.Object": "scala.AnyRef",
         "java.lang.Byte": "java.lang.Byte",
         "java.lang.Short": "java.lang.Short",
         "java.lang.Integer": "java.lang.Integer",

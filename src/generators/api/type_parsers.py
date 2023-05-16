@@ -691,6 +691,8 @@ class ScalaTypeParser(TypeParser):
             return tf.get_number_type()
         elif str_t in ["scala.Any"]:
             return tf.get_any_type()
+        elif str_t in ["scala.AnyRef"]:
+            return tf.get_anyref_type()
         elif str_t in ["scala.Unit", "void", "Void", "Unit"]:
             return tf.get_void_type()
         else:

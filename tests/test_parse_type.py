@@ -336,6 +336,7 @@ def test_scala_builtin_types():
     assert b.parse_type("Unit") == sc.Unit
     assert b.parse_type("scala.Any") == sc.Any
     assert b.parse_type("scala.String") == sc.String
+    assert b.parse_type("scala.AnyRef") == sc.AnyRef
     assert b.parse_type("scala.Array[scala.String]") == sc.Array.new(
         [sc.String])
     assert b.parse_type("scala.Seq[scala.String]") == sc.Seq.new(
