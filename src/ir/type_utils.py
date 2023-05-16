@@ -805,6 +805,7 @@ def _compute_type_variable_assignments(
             selected, _ = instantiate_type_constructor(
                 selected, types, True, type_var_map,
                 None if variance_choices is None else {},
+                rec_bound_handler=rec_bound_handler
             )
         variance = _get_type_arg_variance(
             t_param, variance_choices, type_parameters[i + 1: t_param_len])
