@@ -715,6 +715,7 @@ class APIGraph():
                 blacklist=blacklist), bound=bound)
             blacklist.append(type_param.name)
             self.subtyping_graph.add_node(type_param)
+            self.types.append(type_param)
             if bound:
                 # Capture subtyping relationship in the subtyping graph.
                 self.subtyping_graph.add_edge(source, type_param, **kwargs)
