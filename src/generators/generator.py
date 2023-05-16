@@ -25,9 +25,9 @@ from copy import deepcopy
 from typing import Tuple, List, Callable
 
 from src import utils as ut
+from src.config import cfg
 from src.generators import generators as gens
 from src.generators import utils as gu
-from src.generators.config import cfg
 from src.ir import ast, types as tp, type_utils as tu, kotlin_types as kt
 from src.ir.context import Context
 from src.ir.builtins import BuiltinFactory

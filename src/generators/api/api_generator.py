@@ -4,12 +4,12 @@ import itertools
 from typing import List, NamedTuple, Union, Iterable
 
 from src import utils
+from src.config import cfg
 from src.ir import ast, types as tp, type_utils as tu
 from src.ir.context import Context
 from src.generators import generators as gens, utils as gu, Generator
 from src.generators.api import (api_graph as ag, builder, matcher as match,
                                 type_erasure as te, fault_injection as fi)
-from src.generators.config import cfg
 from src.modules.logging import log
 from src.translators import TRANSLATORS
 

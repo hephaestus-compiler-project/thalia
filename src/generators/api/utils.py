@@ -270,7 +270,7 @@ def instantiate_type_variables(api_graph, constraints,
         else:
             # Case 2: regular bounds
             assigned_t = tp.substitute_type(t, type_var_assignments)
-            if assigned_t.is_type_constructor():
+            if assigned_t.is_type_constructor() and not type_var.is_type_constructor():
                 assigned_t, _ = tu.instantiate_type_constructor(
                     assigned_t, api_graph.get_reg_types(),
                     rec_bound_handler=api_graph.get_instantiations_of_recursive_bound

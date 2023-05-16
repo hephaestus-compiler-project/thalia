@@ -1,9 +1,10 @@
 import argparse
 import os
 import sys
+from src.config import cfg
+from src.ir import BUILTIN_FACTORIES
 from src.utils import random, mkdir
 from src.modules.processor import ProgramProcessor
-from src.generators.config import cfg
 
 
 cwd = os.getcwd()
@@ -267,6 +268,7 @@ cfg.dis.use_site_variance = args.disable_use_site_variance
 cfg.dis.use_site_contravariance = args.disable_contravariance_use_site
 cfg.limits.max_depth = args.max_depth
 cfg.limits.max_type_params = args.max_type_params
+cfg.bt_factory = BUILTIN_FACTORIES[args.language]
 if args.disable_bounded_type_parameters:
     cfg.prob.bounded_type_parameters = 0
 if args.disable_parameterized_functions:

@@ -100,6 +100,7 @@ class GenConfig(metaclass=Singleton):
             use_site_variance=False,
             use_site_contravariance=False
         )
+        self.bt_factory = None
 
     def json_config(self, kwargs):
         for key, value in kwargs.items():
