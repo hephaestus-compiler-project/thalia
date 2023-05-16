@@ -241,6 +241,8 @@ class APIGraph():
                      getattr(t, "primive", False))
             )
         ]
+        self.type_constructors = [t for t in self.types
+                                  if t.is_type_constructor()]
 
     def get_reg_types(self):
         return self.types
@@ -261,6 +263,14 @@ class APIGraph():
             types.remove(type_con)
             actual_t, type_con = self._get_random_type(types)
         return actual_t
+
+    def get_matching_type_constructor(self, hk_type):
+        if not self.type_constructors:
+            return None
+        for type_con in utils.random.shuffle(self.type_constructors):
+            if hk_type.match_type_con(type_con):
+                return type_con
+        return None
 
     def get_type_by_name(self, typename):
         return self._all_types.get(typename)
