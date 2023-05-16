@@ -6,8 +6,8 @@ from typing import NamedTuple, List, Union, Set, Dict, Tuple
 import networkx as nx
 
 from src import utils
+from src.config import cfg
 from src.ir import types as tp, type_utils as tu
-from src.generators.config import cfg
 from src.generators.api import utils as au
 from src.generators.api.matcher import Matcher
 

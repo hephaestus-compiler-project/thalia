@@ -1,6 +1,7 @@
 from collections import OrderedDict
 from typing import TypeVar, List, Tuple, Dict, Callable, Set, Iterable
 
+from src.config import cfg
 import src.ir.types as tp
 import src.ir.context as ctx
 import src.ir.builtins as bt
@@ -561,7 +562,6 @@ def _get_available_types(type_constructor,
 
 def _get_type_arg_variance(t_param, variance_choices, other_type_params):
     # import it here to prevent circular dependency
-    from src.generators.config import cfg
     in_bound = any(tpa.has_bound_of(t_param) for tpa in other_type_params)
     if variance_choices is None or in_bound:
         return tp.Invariant
@@ -681,8 +681,21 @@ def _get_types_for_type_param_assignment(type_param: tp.TypeParameter,
                                          types: List[tp.Type]):
     if not type_param.is_type_constructor():
         return types
-    return [t for t in types
-            if t.is_type_constructor() and t.arity == type_param.arity]
+    matched_types = []
+    for t in types:
+        if not t.is_type_constructor() or t.arity != type_param.arity:
+            continue
+        matched = True
+        for i, tparam in enumerate(t.type_parameters):
+            hk_bound = type_param.type_parameters[i].bound
+            hk_bound = hk_bound or cfg.bt_factory.get_any_type()
+            bound = tparam.bound or cfg.bt_factory.get_any_type()
+            if not hk_bound.is_subtype(bound):
+                matched = False
+                break
+        if matched:
+            matched_types.append(t)
+    return matched_types
 
 
 def _compute_type_variable_assignments(

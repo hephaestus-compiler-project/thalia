@@ -1,10 +1,12 @@
 from copy import deepcopy
 
+from src.config import cfg
 from src.ir import types as tp, kotlin_types as kt
 from src.ir import ast, type_utils as tutils, context as ctx
 
 
 KT_FACTORY = kt.KotlinBuiltinFactory()
+cfg.bt_factory = KT_FACTORY
 
 
 def assert_is_subset(actual, expected):
