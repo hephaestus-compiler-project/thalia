@@ -29,6 +29,13 @@ def test_type_parameter_constructor():
     assert not etype.is_type_constructor()
     assert not etype.is_type_var()
 
+    type_param = tp.TypeParameterConstructor("T", [
+        tp.TypeParameter("X")], bound=kt.String)
+    type_con = tp.TypeConstructor("Foo", [type_param])
+    type_con2 = tp.TypeConstructor("Bar", [tp.TypeParameter("T")])
+    etype = type_con.new([type_con2])
+    assert etype.t_constructor == type_con
+
 
 def test_parameterized_supertypes_simple():
     foo_tparam = tp.TypeParameter("T")

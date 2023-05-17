@@ -477,7 +477,13 @@ def perform_type_substitution(etype, type_map,
             continue
 
         new_bound = t_param.bound
-        t_param = TypeParameter(t_param.name, t_param.variance, new_bound)
+        if t_param.is_type_constructor():
+            t_param = TypeParameterConstructor(
+                t_param.name, t_param.type_parameters, t_param.variance,
+                new_bound
+            )
+        else:
+            t_param = TypeParameter(t_param.name, t_param.variance, new_bound)
         type_params.append(t_param)
 
     etype = copy(etype)
