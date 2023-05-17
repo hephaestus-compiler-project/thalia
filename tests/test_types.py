@@ -554,3 +554,21 @@ def test_type_constructor_multiple_instantiations_with_bounds():
     assert not t1.is_subtype(t4)
     assert not t2.is_subtype(t3)
     assert t2.is_subtype(t4)
+
+def test_match_type_con():
+    type_param = tp.TypeParameterConstructor("X", [tp.TypeParameter("T")])
+    assert not type_param.match_type_con(tp.TypeConstructor(
+        "X", [tp.TypeParameter("T1"), tp.TypeParameter("T2")]))
+    assert type_param.match_type_con(tp.TypeConstructor(
+        "X", [tp.TypeParameter("T1")]))
+    assert not type_param.match_type_con(tp.TypeConstructor(
+        "X", [tp.TypeParameter("T1", bound=kt.String)]))
+
+    type_param = tp.TypeParameterConstructor("X", [
+        tp.TypeParameter("T", bound=kt.String)])
+    assert type_param.match_type_con(tp.TypeConstructor(
+        "X", [tp.TypeParameter("T1")]))
+    assert type_param.match_type_con(tp.TypeConstructor(
+        "X", [tp.TypeParameter("T1", bound=kt.String)]))
+    assert not type_param.match_type_con(tp.TypeConstructor(
+        "X", [tp.TypeParameter("T1", bound=kt.Integer)]))
