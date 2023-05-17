@@ -1,0 +1,32 @@
+{
+  "name": "scala.collection.BuildFromLowPriority1",
+  "type_parameters": [],
+  "implements": [
+    "scala.collection.BuildFromLowPriority2"
+  ],
+  "inherits": [
+    "scala.collection.BuildFromLowPriority2"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "buildFromSortedSetOps",
+      "parameters": [
+        "scala.Ordering[A]"
+      ],
+      "type_parameters": [
+        "CC[X] <: scala.collection.SortedSet[X] with scala.collection.SortedSetOps[X, CC, _]",
+        "A0",
+        "A"
+      ],
+      "return_type": "scala.collection.BuildFrom[CC[A0], A, CC[A]]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "language": "scala"
+}

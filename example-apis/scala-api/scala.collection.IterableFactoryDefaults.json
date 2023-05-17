@@ -1,0 +1,52 @@
+{
+  "name": "scala.collection.IterableFactoryDefaults",
+  "type_parameters": [
+    "+A",
+    "+CC[x] <: scala.collection.IterableOps[x, CC, CC[x]]"
+  ],
+  "implements": [
+    "scala.collection.IterableOps[A, CC, CC[A]]"
+  ],
+  "inherits": [
+    "scala.collection.IterableOps[A, CC, CC[A]]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "fromSpecific",
+      "parameters": [
+        "scala.collection.IterableOnce[A]"
+      ],
+      "type_parameters": [],
+      "return_type": "CC[A]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected"
+    }
+  ],
+  "fields": [
+    {
+      "name": "empty",
+      "type": "CC[A]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "newSpecificBuilder",
+      "type": "scala.collection.mutable.Builder[A, CC[A]]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "protected",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "language": "scala"
+}
