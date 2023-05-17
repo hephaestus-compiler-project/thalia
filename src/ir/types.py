@@ -189,10 +189,8 @@ class SimpleClassifier(Classifier):
         return False
 
     def __str__(self):
-        return "{}{}".format(
-            self.name,
-            '' if not self.supertypes else " <: (" +
-            ', '.join(map(str, self.supertypes)) + ")"
+        return "Classifier[{}]".format(
+            self.name
         )
 
     def __eq__(self, other: Type):
@@ -501,11 +499,9 @@ class TypeConstructor(AbstractType):
         self.supertypes = supertypes if supertypes is not None else []
 
     def __str__(self):
-        return "{}<{}> {} {}".format(
+        return "{}<{}>".format(
             self.name,
-            ', '.join(map(str, self.type_parameters)),
-            ' <:' if self.supertypes else '',
-            ', '.join(map(str, self.supertypes)))
+            ', '.join(map(str, self.type_parameters)))
 
     def __eq__(self, other: AbstractType):
         return (self.__class__ == other.__class__ and
