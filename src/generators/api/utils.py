@@ -134,7 +134,6 @@ def _assign_type_unconstrained(api_graph, type_var,
         # It's a free variable. Assign a random type to it.
         if type_var.is_type_constructor():
             t = api_graph.get_matching_type_constructor(type_var)
-            print(t, type_var)
         else:
             t = api_graph.get_random_type()
     return {type_var: tp.substitute_type(t, type_var_assignments)}
