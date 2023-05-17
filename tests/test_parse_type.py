@@ -508,9 +508,9 @@ def test_scala_higher_kinded_types():
 
     assert b.parse_type("X[T]") == tp.TypeParameterConstructor(
         "X", [tp.TypeParameter("T")])
-    assert b.parse_type("X[T] <: scala.Foo[X]") == tp.TypeParameterConstructor(
-        "X", [tp.TypeParameter("T1")],
-        bound=bound.new([tp.TypeParameter("X")])
+    assert b.parse_type("X[T] <: scala.Foo[T]") == tp.TypeParameterConstructor(
+        "X", [tp.TypeParameter("T")],
+        bound=bound.new([tp.TypeParameter("T")])
     )
 
     type_con = tp.TypeConstructor("X", [tp.TypeParameter("X.T1")])
@@ -521,6 +521,21 @@ def test_scala_higher_kinded_types():
     b.class_type_name_map["X"] = type_con
     parsed_t = b.parse_type("X[scala.String]")
     assert parsed_t == type_con.new([sc.String])
+
+    t1 = tp.TypeConstructor(
+        "scala.Foo", [tp.TypeParameter("scala.Foo.T1"),
+                      tp.TypeParameterConstructor(
+                          "scala.Foo.T2",
+                          [tp.TypeParameter("x")]
+                      ),
+                      tp.TypeParameter("scala.Foo.T3")])
+    b.type_spec["scala.Foo"] = t1
+    exp_t = tp.TypeParameterConstructor("CC", [tp.TypeParameter("x")])
+    bound = t1.new([tp.TypeParameter("x"), exp_t, exp_t.new([tp.TypeParameter("x")])])
+    exp_t = tp.TypeParameterConstructor("CC", [tp.TypeParameter("x")],
+                                        bound=bound)
+    parsed_t = b.parse_type("CC[x] <: scala.Foo[x,CC,CC[x]]")
+    assert parsed_t == exp_t
 
 
 def test_scala_tuple_types():

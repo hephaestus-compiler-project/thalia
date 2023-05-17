@@ -571,7 +571,8 @@ class ScalaTypeParser(TypeParser):
             self.class_type_name_map = {k: v
                                         for k, v in old_class_type_map.items()
                                         if segs[0] != k}
-        type_var_map = copy(self.class_type_name_map)
+        old_class_type_map = copy(self.class_type_name_map)
+        type_var_map = copy(old_class_type_map)
         type_var_map.update(self.func_type_name_map)
         if keep:
             # It might be the case where the names of function's and class's
@@ -585,7 +586,14 @@ class ScalaTypeParser(TypeParser):
             bound = None
         else:
             type_param_name = segs[0].rstrip()
-            bound = self.parse_type(segs[1].rstrip())
+            if type_params:
+                type_param_obj = tp.TypeParameterConstructor(
+                    type_params_str[0], type_params, variance=variance)
+                self.class_type_name_map[type_params_str[0]] = type_param_obj
+                bound = self.parse_type(segs[1].rstrip())
+                self.class_type_name_map = old_class_type_map
+            else:
+                bound = self.parse_type(segs[1].rstrip())
 
         if not type_params:
             type_param_obj = tp.TypeParameter(type_param_name,

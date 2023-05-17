@@ -218,19 +218,16 @@ class APIGraphBuilder(ABC):
 
             # We use this auxiliarry type parameter to handle the renaming
             # of recursive bounds.
+            type_param_no_bounds = [tp.TypeParameter(type_param.name)]
             if type_param.is_type_constructor():
-                type_param_no_bound = tp.TypeParameterConstructor(
+                type_param_no_bounds.append(tp.TypeParameterConstructor(
                     type_param.name, type_param.type_parameters,
-                    variance=type_param.variance
-                )
-            else:
-                type_param_no_bound = tp.TypeParameter(
-                    type_param.name, variance=type_param.variance)
+                    type_param.variance))
             copied_t = deepcopy(type_param)
             new_name = prefix + ".T" + str(i + 1)
             copied_t.name = new_name
             copied_t.bound = None
-            type_var_map = {type_param_no_bound: copied_t}
+            type_var_map = {k: copied_t for k in type_param_no_bounds}
 
             bound = None
             if type_param.bound:
@@ -255,6 +252,12 @@ class APIGraphBuilder(ABC):
                     if tpa.name == renamed.name:
                         bound.t_constructor.type_parameters[i] = deepcopy(
                             renamed)
+                # for i, targ in enumerate(list(bound.type_args)):
+                #     if targ.name == renamed.name and targ.is_type_constructor():
+                #         bound.type_args[i] = deepcopy(renamed)
+                #     if targ.is_parameterized() and \
+                #             targ.t_constructor.name == renamed.name:
+                #         bound.type_args[i].t_constructor = deepcopy(renamed)
 
     def parse_type(self, str_t: str, **kwargs) -> tp.Type:
         return self.get_type_parser().parse_type(str_t)
@@ -354,8 +357,21 @@ class APIGraphBuilder(ABC):
                                 "This can be None")
             self.functional_types[class_node] = func_type
 
+    def build_tentative_type(self, class_api):
+        # We use this auxiliary type constructor for recursive cases in the
+        # presence of hk types, such as class Foo extends Bar[Foo]
+        if not class_api["type_parameters"]:
+            return
+        class_name = class_api["name"]
+        class_node = tp.TypeConstructor(
+            class_name,
+            list(self._class_type_var_map[class_name].values())
+        )
+        self.parsed_types[class_name] = class_node
+
     def build_class_node(self, class_api: dict) -> tp.Type:
         self.parent_cls = self.class_nodes.get(class_api.get("parent"))
+        self.build_tentative_type(class_api)
         super_types = {
             self.parse_type(st, build_class_node=True)
             for st in class_api["implements"] + class_api["inherits"]
