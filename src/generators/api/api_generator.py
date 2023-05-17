@@ -74,6 +74,13 @@ class APIGenerator(Generator):
         self.error_injected = None
         self.test_case_type_params: List[tp.TypeParameter] = []
 
+    def parse_builtin_type(self, cls_name: str) -> tp.Type:
+        api_language = "java" if cls_name.startswith("java") else self.language
+        api_graph_builder = self.API_GRAPH_BUILDERS[self.language](
+           self.language)
+        api_graph_builder.api_language = api_language
+        return api_graph_builder.parse_type(cls_name)
+
     def produce_test_case(self, expr: ast.Expr,
                           type_parameters) -> ast.Program:
         decls = list(self.context.get_declarations(
@@ -245,11 +252,12 @@ class APIGenerator(Generator):
                     yield program
                     i += 1
                     program_index += 1
-            except Exception:
+            except Exception as e:
                 # Handle any exception in order to prevent the termination
                 # of iteration.
                 self.api_graph.remove_types(encoding.type_parameters)
                 program_index += 1
+                raise e
 
     def generate_expr_from_node(self, node: tp.Type,
                                 func_ref: bool,
@@ -338,7 +346,9 @@ class APIGenerator(Generator):
                     return t.new(self.substitute_types(t.type_parameters,
                                                        type_var_map))
                 return t
-            con_type = self.api_graph.get_type_by_name(api.get_class_name())
+            cls_name = api.get_class_name()
+            con_type = self.api_graph.get_type_by_name(
+                cls_name) or self.parse_builtin_type(cls_name)
             con_type = _instantiate_type_con(con_type)
             call_args = [arg.expr for arg in args]
             expr = ast.New(con_type, call_args, receiver=receiver)
@@ -605,7 +615,9 @@ class APIGenerator(Generator):
         elif isinstance(elem, ag.Field):
             expr = ast.FieldAccess(receiver, elem.name)
         elif isinstance(elem, ag.Constructor):
-            con_type = self.api_graph.get_type_by_name(elem.get_class_name())
+            cls_name = elem.get_class_name()
+            con_type = self.api_graph.get_type_by_name(
+                cls_name) or self.parse_builtin_type(cls_name)
             con_type = _instantiate_type_con(con_type)
             parameters = [param.t for param in elem.parameters]
             args = self._generate_args(parameters, [[p] for p in parameters],
