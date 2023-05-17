@@ -1,5 +1,6 @@
 from src.generators.api import api_graph as ag
-from src.generators.api.builder import JavaAPIGraphBuilder
+from src.generators.api.builder import (JavaAPIGraphBuilder,
+                                        ScalaAPIGraphBuilder)
 
 
 DOCS1 = {
@@ -455,6 +456,68 @@ def test_supertypes5():
     }
 
 
+DOCS7 = {
+    "scala.IterableOps": {
+        "language": "scala",
+        "name": "scala.IterableOps",
+        "inherits": ["scala.AnyRef"],
+        "implements": [],
+        "fields": [],
+        "methods": [],
+        "type_parameters": ["+A", "+CC[_]", "+C"]
+    },
+    "scala.IterableFactoryDefaults": {
+        "language": "scala",
+        "name": "scala.IterablefactoryDefaults",
+        "inherits": ["scala.IterableOps[A,CC,CC[A]]"],
+        "implements": [],
+        "fields": [],
+        "methods": [],
+        "type_parameters": [
+            "+A",
+            "+CC[x] <: scala.IterableOps[x,CC,CC[x]]"
+        ]
+    },
+    "scala.View": {
+        "language": "scala",
+        "name": "scala.View",
+        "inherits": ["scala.IterableOps[A,scala.View,scala.View[A]]"],
+        "implements": [],
+        "fields": [],
+        "methods": [],
+        "type_parameters": ["+A"]
+    },
+    "scala.Iterable": {
+        "language": "scala",
+        "name": "scala.Iterable",
+        "inherits": ["scala.IterableOps[A,scala.Iterable,scala.Iterable[A]]"],
+        "implements": [],
+        "fields": [],
+        "methods": [],
+        "type_parameters": ["+A"]
+    },
+    "scala.SeqView": {
+        "language": "scala",
+        "name": "scala.SeqView",
+        "inherits": ["scala.View[A]"],
+        "implements": [],
+        "fields": [],
+        "methods": [],
+        "type_parameters": ["+A"]
+    },
+    "scala.MyView": {
+        "language": "scala",
+        "name": "scala.MyView",
+        "inherits": ["scala.IterableOps[scala.String,scala.View,scala.View[scala.String]]"],
+        "implements": [],
+        "fields": [],
+        "methods": [],
+        "type_parameters": ["+A"]
+    }
+
+}
+
+
 def test_get_instantiations_of_recursive_bound():
     b = JavaAPIGraphBuilder("java")
     api_graph = b.build(DOCS6)
@@ -474,7 +537,7 @@ def test_get_instantiations_of_recursive_bound():
     # Case 3
     type_param = b.parse_type("R extends java.Comparable<java.String>")
     types = api_graph.get_instantiations_of_recursive_bound(type_param, {})
-    assert types == set()
+    assert types == {b.parse_type("java.String")}
 
     # Case 4 / BaseStream
     b._class_name = "java.BaseStream"
@@ -483,3 +546,32 @@ def test_get_instantiations_of_recursive_bound():
     types = api_graph.get_instantiations_of_recursive_bound(
         type_param, type_var_map)
     assert types == { b.parse_type("java.Stream<java.lang.Object>") }
+
+
+def test_get_instantiations_of_recursive_bound_hk_types():
+    b = ScalaAPIGraphBuilder("scala")
+    api_graph = b.build(DOCS7)
+
+    # Case 1
+    type_param = b.parse_type("CC[x] <: scala.IterableOps[x,CC,CC[x]]")
+    types = api_graph.get_instantiations_of_recursive_bound(
+        type_param, {}, api_graph.get_reg_types())
+    assert types == {b.parse_type("scala.Iterable"), b.parse_type("scala.View")}
+
+    # Case 2
+    type_param = b.parse_type("CC[x] <: scala.IterableOps[scala.Int,CC,CC[x]]")
+    types = api_graph.get_instantiations_of_recursive_bound(
+        type_param, {}, api_graph.get_reg_types())
+    assert types == set()
+
+    # Case 3
+    type_param = b.parse_type("CC[x] <: scala.IterableOps[scala.String,scala.View,scala.View[scala.String]]")
+    types = api_graph.get_instantiations_of_recursive_bound(
+        type_param, {}, api_graph.get_reg_types())
+    assert types == {b.parse_type("scala.MyView")}
+
+    # Case 4
+    type_param = b.parse_type("CC[x] <: scala.IterableOps[scala.String,CC,CC[x]]")
+    types = api_graph.get_instantiations_of_recursive_bound(
+        type_param, {}, api_graph.get_reg_types())
+    assert types == set()

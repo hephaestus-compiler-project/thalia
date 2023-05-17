@@ -604,6 +604,9 @@ class APIGraph():
             # is a valid instantiation.
             supertype = [t for t in self.supertypes(st)
                          if bound.name == t.name][0]
+            if supertype == bound:
+                possibles_types.add(st)
+                continue
             sub = tu.unify_types(supertype, bound, self.bt_factory)
             if not sub:
                 continue
@@ -615,6 +618,9 @@ class APIGraph():
             t = st
             if not compatible(type_var_map, reverse, sub):
                 continue
+            if bound_found.is_type_constructor() and st.is_type_constructor():
+                if st.arity == type_param.arity and bound_found == st:
+                    possibles_types.add(st)
             if st.is_type_constructor():
                 t = st.new(st.type_parameters)
             if t == bound_found:
@@ -628,6 +634,7 @@ class APIGraph():
                 else:
                     sub_t = st
                 possibles_types.add(sub_t)
+
         return possibles_types
 
     def get_functional_type(self, etype: tp.Type) -> tp.ParameterizedType:
