@@ -257,7 +257,6 @@ class APIGenerator(Generator):
                 # of iteration.
                 self.api_graph.remove_types(encoding.type_parameters)
                 program_index += 1
-                raise e
 
     def generate_expr_from_node(self, node: tp.Type,
                                 func_ref: bool,
@@ -576,6 +575,13 @@ class APIGenerator(Generator):
             param_types = self.substitute_types(arg_types, type_var_map)
             self.type_eraser.with_target(param, get_type_variables(
                 param, self.bt_factory))
+            for i, param_t in enumerate(list(param_types)):
+                # If encountering a raw type, instantiate the corresponding
+                # type constructor.
+                if param_t.is_type_constructor():
+                    param_types[i] = tu.instantiate_type_constructor(
+                        param_t, self.api_graph.get_reg_types(), True,
+                        rec_bound_handler=self.api_graph.get_instantiations_of_recursive_bound)
             expr = self.generate_expr_from_nodes(param_types, {},
                                                  func_ref=True,
                                                  depth=depth)
