@@ -416,7 +416,8 @@ class APIGenerator(Generator):
 
     def generate_func_ref(self, expr_type: tp.Type, type_var_map: dict,
                           depth: int) -> ast.FunctionReference:
-        candidates = self.api_graph.get_function_refs_of(expr_type)
+        candidates = self.api_graph.get_function_refs_of(expr_type,
+                                                         single=True)
         if not candidates:
             return self.generate_lambda(expr_type, depth)
         api, sub = utils.random.choice(candidates)

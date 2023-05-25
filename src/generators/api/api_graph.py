@@ -663,12 +663,18 @@ class APIGraph():
             return None
         return tp.substitute_type(func_type, type_var_map)
 
-    def get_function_refs_of(self, etype: tp.Type) -> List[Tuple[Method, dict]]:
+    def get_function_refs_of(self, etype: tp.Type,
+                             single: bool = False) -> List[Tuple[Method, dict]]:
         func_type = self.get_functional_type_instantiated(etype)
         if func_type is None:
             return []
         candidate_functions = []
-        for api in self.api_graph.nodes():
+        api_components = (
+            utils.random.shuffle(list(self.api_graph.nodes()))
+            if single
+            else self.api_graph.nodes()
+        )
+        for api in api_components:
             if not isinstance(api, (Method, Constructor)):
                 continue
             param_types = [
@@ -701,6 +707,8 @@ class APIGraph():
                 # Consumer<Int> != Function<Int, void>
                 continue
             if sub or func_type == api_type:
+                if single:
+                    return [(api, sub)]
                 candidate_functions.append((api, sub))
         return candidate_functions
 
@@ -872,9 +880,7 @@ class APIGraph():
             ret_type = tp.substitute_type(ret_type, type_var_map)
             ret_types = {ret_type}
             if not self.inject_type_error:
-                ret_types.update(
-                    tu.find_supertypes(ret_type, self.get_reg_types(),
-                                       concrete_only=True))
+                ret_types.update(self.supertypes(ret_type))
             type_parameters = self.get_type_parameters()
             self.remove_types(type_parameters)
             yield APIEncoding(node, frozenset(receivers),
