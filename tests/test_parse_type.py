@@ -495,6 +495,23 @@ def test_scala_function_types():
      ])
      assert t == exp_t
 
+     t = b.parse_type("((A) => B) => ((B, B) => B) => C")
+     exp_t = sc.FunctionType(1).new([
+         sc.FunctionType(1).new([
+             tp.TypeParameter("A"),
+             tp.TypeParameter("B")
+         ]),
+         sc.FunctionType(1).new([
+             sc.FunctionType(2).new([
+                 tp.TypeParameter("B"),
+                 tp.TypeParameter("B"),
+                 tp.TypeParameter("B")
+             ]),
+             tp.TypeParameter("C")
+         ])
+     ])
+     assert t == exp_t
+
 
 def test_scala_higher_kinded_types():
     b = ScalaTypeParser()
