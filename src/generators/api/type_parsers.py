@@ -498,14 +498,20 @@ class ScalaTypeParser(TypeParser):
         return str_t.startswith("scala.Function")
 
     def parse_function_type(self, str_t: str) -> tp.ParameterizedType:
-        segs = self.FUNC_SEP_REGEX.split(str_t, 1)
-        assert len(segs) == 2
+        segs = utils.top_level_split(str_t, signs=("(", ")"), delim="=")
+        assert len(segs) >= 2
+        suffix = " =".join(segs[1:])
+        segs = (segs[0], suffix[2:])
         param_strs = re.findall(self.COMMA_SEP_REGEX, segs[0].rstrip()[1:-1])
         param_types = [
             self.parse_type(param_str.strip().split(": ", 1)[-1])
             for param_str in param_strs
         ]
-        ret_type = self.parse_type(segs[1].lstrip())
+        ret_type_str = segs[1].lstrip()
+        if self.is_func_type(ret_type_str):
+            if ret_type_str.startswith("(") and ret_type_str.endswith(")"):
+                ret_type_str = ret_type_str[1:-1]
+        ret_type = self.parse_type(ret_type_str)
         return self.bt_factory.get_function_type(len(param_types)).new(
             param_types + [ret_type]
         )
