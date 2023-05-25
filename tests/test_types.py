@@ -562,20 +562,47 @@ def test_type_constructor_multiple_instantiations_with_bounds():
     assert not t2.is_subtype(t3)
     assert t2.is_subtype(t4)
 
+
 def test_match_type_con():
     type_param = tp.TypeParameterConstructor("X", [tp.TypeParameter("T")])
+
+    # Foo[X[_]] : Bar[_, _]
     assert not type_param.match_type_con(tp.TypeConstructor(
         "X", [tp.TypeParameter("T1"), tp.TypeParameter("T2")]))
+    # Foo[X[_]] : Bar[_]
     assert type_param.match_type_con(tp.TypeConstructor(
         "X", [tp.TypeParameter("T1")]))
+    # Foo[X[_]] : Bar[X <: String]
     assert not type_param.match_type_con(tp.TypeConstructor(
         "X", [tp.TypeParameter("T1", bound=kt.String)]))
+    # Foo[X[_]]: Bar[X[_]]
+    assert not type_param.match_type_con(tp.TypeConstructor(
+        "Y", [tp.TypeParameterConstructor("X", [tp.TypeParameter("T")])]))
 
     type_param = tp.TypeParameterConstructor("X", [
         tp.TypeParameter("T", bound=kt.String)])
+    # Foo[X[T <: String]] : Bar[_]
     assert type_param.match_type_con(tp.TypeConstructor(
         "X", [tp.TypeParameter("T1")]))
+    # Foo[X[T <: String]] : Bar[T <: String]
     assert type_param.match_type_con(tp.TypeConstructor(
         "X", [tp.TypeParameter("T1", bound=kt.String)]))
+    # Foo[X[T <: String]] : Bar[T <: Int]
     assert not type_param.match_type_con(tp.TypeConstructor(
         "X", [tp.TypeParameter("T1", bound=kt.Integer)]))
+
+    type_param = tp.TypeParameterConstructor(
+        "X", [tp.TypeParameterConstructor("Y", [tp.TypeParameter("T")])])
+    type_con = tp.TypeParameterConstructor("Bar", [tp.TypeParameter("T")])
+    # Foo[X[Y[_]]] : Bar[_]
+    assert not type_param.match_type_con(type_con)
+    type_con = tp.TypeParameterConstructor("Bar", [
+        tp.TypeParameterConstructor("Y", [tp.TypeParameter("T1"),
+                                          tp.TypeParameter("T2")])])
+    # Foo[X[Y[_]]] : Bar[Y[_, _]]
+    assert not type_param.match_type_con(type_con)
+    type_con = tp.TypeParameterConstructor("Bar", [
+        tp.TypeParameterConstructor("Y", [tp.TypeParameter("T1")])])
+    assert type_param.match_type_con(type_con)
+
+

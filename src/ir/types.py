@@ -555,6 +555,26 @@ class TypeConstructor(AbstractType):
         etype.t_constructor.supertypes = old_supertypes
         return etype
 
+    def match_type_con(self, type_con: TypeConstructor):
+        if not type_con.is_type_constructor():
+            return False
+        if self.arity != type_con.arity:
+            return False
+
+        for i, tparam in enumerate(type_con.type_parameters):
+            self_tparam = self.type_parameters[i]
+            if type(tparam) != type(self_tparam):
+                return False
+            if self_tparam.is_type_constructor() and \
+                    not self_tparam.match_type_con(tparam):
+                return False
+            self_bound = self_tparam.bound
+            self_bound = self_bound or cfg.bt_factory.get_any_type()
+            bound = tparam.bound or cfg.bt_factory.get_any_type()
+            if not self_bound.is_subtype(bound):
+                return False
+        return True
+
 
 class TypeParameterConstructor(TypeParameter, TypeConstructor):
     def __init__(self, name: str, type_parameters: int,
@@ -592,17 +612,6 @@ class TypeParameterConstructor(TypeParameter, TypeConstructor):
     @property
     def arity(self):
         return len(self.type_parameters)
-
-    def match_type_con(self, type_con: TypeConstructor):
-        if self.arity != type_con.arity:
-            return
-        for i, tparam in enumerate(type_con.type_parameters):
-            hk_bound = self.type_parameters[i].bound
-            hk_bound = hk_bound or cfg.bt_factory.get_any_type()
-            bound = tparam.bound or cfg.bt_factory.get_any_type()
-            if not hk_bound.is_subtype(bound):
-                return False
-        return True
 
 
 def _to_type_variable_free(t: Type, t_param, factory) -> Type:
