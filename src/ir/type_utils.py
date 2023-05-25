@@ -676,13 +676,24 @@ def substitute_invariant_wildcard_with(
     type_args = []
     for i, t_arg in enumerate(t.type_args):
         type_param = t.t_constructor.type_parameters[i]
-        if t_arg.is_wildcard() and t_arg.is_invariant():
-            if type_param.bound:
-                type_args.append(type_param.bound)
-            else:
-                type_args.append(select_random_type(types))
-        else:
+        is_invariant = t_arg.is_wildcard() and t_arg.is_invariant()
+        if not is_invariant:
             type_args.append(t_arg)
+            continue
+        if type_param.bound:
+            type_args.append(type_param.bound)
+        else:
+            if not type_param.is_type_constructor():
+                type_args.append(select_random_type(
+                    [t for t in types if not t.is_type_constructor()]))
+            else:
+                type_constructors = [t for t in types
+                                     if type_param.match_type_con(t)]
+                if type_constructors:
+                    type_args.append(utils.random.choice(
+                        type_constructors))
+                else:
+                    type_args.append(t_arg)
     return t.t_constructor.new(type_args)
 
 
