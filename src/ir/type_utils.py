@@ -1292,7 +1292,7 @@ def unify_types(t1: tp.Type, t2: tp.Type, factory,
     if not t1.is_parameterized():
         return {}
 
-    if t2.t_constructor.is_type_var():
+    if t2.is_parameterized() and t2.t_constructor.is_type_var():
         return unify_higher_kinded_types(t1, t2, factory)
 
     if t1.t_constructor != t2.t_constructor:
