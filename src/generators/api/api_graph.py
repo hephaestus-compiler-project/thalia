@@ -493,8 +493,8 @@ class APIGraph():
             # a type variable as targets.
             targets.extend(n for n in self.api_graph.nodes()
                            if isinstance(n, tp.TypeParameter)
-                           and (not n.bound or origin.is_subtype(n.bound))
-                           and origin.is_type_constructor() == n.is_type_constructor())
+                           and origin.is_type_constructor() == n.is_type_constructor()
+                           and not n.bound)
         # Pick a random target
         target = utils.random.choice(targets)
         if target not in self.api_graph:
