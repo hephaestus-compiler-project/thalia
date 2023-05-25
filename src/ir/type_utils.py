@@ -645,18 +645,27 @@ def _find_candidate_types_for_bound(
         # We substitute invariant wildcard with a concrete type,
         # e.g., A<*> => A<String>
         bound = substitute_invariant_wildcard_with(bound, list(types))
-    # If the type parameter has a bound, then find types
-    # that are subtypes to this bound.
-    # Note that at this point we ignore use variance
-    # to prevent creating invalid types, e.g.,
-    #  * bound: Foo<X, X>
-    #  * X is assigned to out Number
-    #  * class Bar<X, T extends Foo<X, X>>
-    #  * Prevent creating Bar<out Number, Foo<Long, Number>>
-    a_types = find_subtypes(bound, types, True,
-                            ignore_variance=True)
+    a_types = []
+    if type_param.is_type_constructor():
+        # Here we handle cases like the following:
+        #
+        # class Foo[X[T] <: Bar[T, String]]
+        #
+        # In the example above, we need to instantiate Foo with a type
+        # constructor that extends type Bar[T, String]. Therefore, we
+        # iterate over types to find such a compatible type.
+        for t in types:
+            if not type_param.match_type_con(t):
+                continue
+            type_var_map = {type_param.type_parameters[i]: tparam
+                            for i, tparam in enumerate(t.type_parameters)}
+            t_bound = tp.substitute_type(bound, type_var_map)
+            if t.is_subtype(t_bound):
+                a_types.append(t)
+    else:
+        a_types = [bound]
     for i, t in enumerate(a_types):
-        if isinstance(t, tp.ParameterizedType):
+        if t.is_parameterized():
             a_types[i] = t.to_variance_free()
     return a_types
 

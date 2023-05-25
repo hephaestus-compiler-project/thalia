@@ -192,7 +192,7 @@ def test_subtype_type_constructor_paramerized():
                              [foo.new([kt.String, type_param1])])
 
     foo_type = foo.new([kt.String, type_param1])
-    assert not bar.is_subtype(foo_type)
+    assert bar.is_subtype(foo_type)
 
     bar = tp.TypeConstructor("Bar", [type_param1],
                              [foo.new([kt.String, kt.Integer])])
