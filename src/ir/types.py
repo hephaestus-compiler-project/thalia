@@ -201,7 +201,7 @@ class SimpleClassifier(Classifier):
 
     def __hash__(self):
         """Hash based on the Type"""
-        return hash((self.__class__, self.name, tuple(self.supertypes)))
+        return hash((self.__class__, self.name))
 
     def _check_supertypes(self):
         """The transitive closure of supertypes must be consistent, i.e., does
@@ -783,7 +783,7 @@ class ParameterizedType(SimpleClassifier):
                 self.type_args == other.type_args)
 
     def __hash__(self):
-        return hash((self.name, tuple(self.supertypes), tuple(self.type_args),
+        return hash((self.__class__, self.name, tuple(self.type_args),
                      tuple(self.t_constructor.type_parameters)))
 
     def __str__(self):
