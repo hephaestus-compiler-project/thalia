@@ -1,6 +1,4 @@
 #! /bin/bash
-
-basedir=$(dirname "$0")
 language=""
 
 while getopts "d:l:L:" opt; do
@@ -53,7 +51,7 @@ parse_docs()
   sort |
   uniq |
   while read package; do
-    $basedir/doc2json.py -i $package -o $output --language $language 2>/dev/null
+    doc2json -i $package -o $output --language $language
     if [ $? -ne 0 ]; then
       echo $package >> err
       return 1
@@ -65,7 +63,7 @@ parse_docs()
 
 if [ ! -z $lib ]; then
   parse_docs "$libpath/$lib" "$libpath/$lib/json-docs"
-  exit 0
+  exit $?
 fi
 
 for lib in $libpath/*; do
