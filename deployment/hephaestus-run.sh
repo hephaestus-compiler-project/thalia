@@ -1,7 +1,5 @@
 #! /bin/bash
 
-blacklist=blacklist
-
 basedir=$(dirname "$0")
 stdlib=$1
 libpath=$2
@@ -20,8 +18,6 @@ run_hephaestus()
     return 1
   fi
 
-  libjar=$(find $libpath -maxdepth 1 -name '*.jar')
-
   rm -rf libs
 
   # Create a directory containing API docs (in JSON format) coming from
@@ -30,12 +26,16 @@ run_hephaestus()
   cp $stdlib/* libs
   cp $libpath/json-docs/* libs
 
+  rm -rf ~/.m2
+  mvn -f $libpath dependency:tree
+  classpath=$(mvn -f $libpath dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)
+
   # Create api-rules.json
   ls $libpath/json-docs | $basedir/create-api-rules.py > api-rules.json
 
   base_args="--iterations 10000000 --batch 30 -P -L --transformations 0 \
     --max-depth 2 --generator api  \
-    --library-path $libjar --api-doc-path libs --api-rules api-rules.json \
+    --library-path "$classpath" --api-doc-path libs --api-rules api-rules.json \
     --max-conditional-depth 2 $args"
   echo "$base_args" | xargs ./hephaestus.py
   echo "$base_args --erase-types" | xargs ./hephaestus.py
@@ -58,10 +58,6 @@ if [ -z $stdlib ]; then
   exit 1
 fi
 
-
-if [ ! -f $blacklist ]; then
-  touch $blacklist
-fi
 
 if [ ! -z $libname ]; then
   echo "Testing library $libname"
