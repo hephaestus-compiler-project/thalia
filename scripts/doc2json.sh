@@ -26,7 +26,7 @@ if [ -z $language ]; then
   exit 1
 fi
 
-set +e 
+set +e
 
 parse_docs()
 {
@@ -48,7 +48,6 @@ parse_docs()
   jar xvf *.jar >/dev/null 2>&1
   cd - >/dev/null
 
-  at_least_one=0
   find $docpath -type f -name 'package-summary.html' |
   sed -r 's|/[^/]+$||' |
   sort |
@@ -59,11 +58,7 @@ parse_docs()
       echo $package >> err
       return 1
     fi
-    at_least_one=1
   done
-  if [ "$at_least_one" = "0" ]; then
-    echo "$docpath: no package detected" >> err
-  fi
   return 0
 }
 
