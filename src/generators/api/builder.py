@@ -252,12 +252,16 @@ class APIGraphBuilder(ABC):
                     if tpa.name == renamed.name:
                         bound.t_constructor.type_parameters[i] = deepcopy(
                             renamed)
-                # for i, targ in enumerate(list(bound.type_args)):
-                #     if targ.name == renamed.name and targ.is_type_constructor():
-                #         bound.type_args[i] = deepcopy(renamed)
-                #     if targ.is_parameterized() and \
-                #             targ.t_constructor.name == renamed.name:
-                #         bound.type_args[i].t_constructor = deepcopy(renamed)
+        # One more pass to handle cases like the following:
+        # class Foo<T extends Foo<Y>, Y>
+        for type_param in type_name_map.values():
+            if not type_param.bound or not type_param.bound.is_parameterized():
+                continue
+            for type_var in type_param.bound.get_type_variables(
+                    self.bt_factory):
+                new_name = type_name_map.get(type_var.name)
+                if new_name is not None:
+                    type_var.name = new_name
 
     def parse_type(self, str_t: str, **kwargs) -> tp.Type:
         return self.get_type_parser().parse_type(str_t)

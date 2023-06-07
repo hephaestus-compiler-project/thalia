@@ -1,6 +1,8 @@
 from collections import OrderedDict
 from typing import TypeVar, List, Tuple, Dict, Callable, Set, Iterable
 
+import networkx as nx
+
 from src.config import cfg
 import src.ir.types as tp
 import src.ir.context as ctx
@@ -710,6 +712,29 @@ def _get_types_for_type_param_assignment(type_param: tp.TypeParameter,
     return matched_types
 
 
+def _in_topological_order(type_parameters: List[tp.TypeParameter]):
+    # This is a utility method that allows us to visit the given type
+    # parameters in topological order.
+    # For example, we might encounter a class like that one:
+    #
+    # class Foo<T extends Foo<Y>, Y>
+    #
+    # The first type parameter depends on the first one. Therefore, we need
+    # to instantiate the second parameter fist, and then the second one.
+    graph = nx.DiGraph()
+    for type_param in type_parameters:
+        graph.add_node(type_param)
+        if not type_param.bound or not type_param.is_parameterized():
+            continue
+        type_variables = type_param.bound.get_type_variables(cfg.bt_factory)
+        type_variables = [t for t in type_variables
+                          if t in type_parameters]
+        for type_var in type_variables:
+            if type_var != type_param:
+                graph.add_edge(type_var, type_param)
+    return nx.topological_sort(graph)
+
+
 def _compute_type_variable_assignments(
         type_parameters: List[tp.TypeParameter],
         types: List[tp.Type],
@@ -724,7 +749,7 @@ def _compute_type_variable_assignments(
     type_var_map = dict(type_var_map or {})
     indexes = {}
     t_param_len = len(type_parameters)
-    for i, t_param in enumerate(type_parameters):
+    for i, t_param in enumerate(_in_topological_order(type_parameters)):
         indexes[t_param] = i
         t = type_var_map.get(t_param)
         if t:
