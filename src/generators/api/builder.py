@@ -272,7 +272,7 @@ class APIGraphBuilder(ABC):
         self._update_recursive_type_parameters(type_name_map.values(),
                                                type_name_map)
 
-    def _update_recurive_type_parameters(self, type_parameters, type_name_map):
+    def _update_recursive_type_parameters(self, type_parameters, type_name_map):
         for type_param in type_parameters:
             new_type_param = type_name_map.get(type_param.name)
             if new_type_param is not None:
