@@ -56,6 +56,20 @@ class APIGraphBuilder(ABC):
             self.class_name, {}))
         return type_var_mappings
 
+    def _update_supertypes(self):
+        for type_var_name_map in self._class_type_var_map.values():
+            for type_param in type_var_name_map.values():
+                if not type_param.bound:
+                    continue
+                bound = type_param.bound
+                parsed_t = self.parsed_types.get(bound.name)
+                if parsed_t is None:
+                    continue
+                if bound.is_parameterized():
+                    bound.t_constructor.supertypes = parsed_t.supertypes
+                else:
+                    bound.supertypes = parsed_t.supertypes
+
     def build_topological_sort(self, docs: dict) -> List[str]:
         dep_graph = nx.DiGraph()
         for api_doc in docs.values():
@@ -113,6 +127,7 @@ class APIGraphBuilder(ABC):
                 if api_doc.get("is_class") is not False:
                     self.build_class_node(api_doc)
         # One more pass to handle recursive upper bounds.
+        self._update_supertypes()
         self.rename_class_type_parameters(docs, top_sort)
         for cls_name in top_sort:
             api_doc = docs.get(cls_name)
@@ -254,14 +269,26 @@ class APIGraphBuilder(ABC):
                             renamed)
         # One more pass to handle cases like the following:
         # class Foo<T extends Foo<Y>, Y>
-        for type_param in type_name_map.values():
+        self._update_recursive_type_parameters(type_name_map.values(),
+                                               type_name_map)
+
+    def _update_recurive_type_parameters(self, type_parameters, type_name_map):
+        for type_param in type_parameters:
+            new_type_param = type_name_map.get(type_param.name)
+            if new_type_param is not None:
+                type_param.name = new_type_param.name
+                type_param.bound = new_type_param.bound
             if not type_param.bound or not type_param.bound.is_parameterized():
                 continue
             for type_var in type_param.bound.get_type_variables(
                     self.bt_factory):
-                new_name = type_name_map.get(type_var.name)
-                if new_name is not None:
-                    type_var.name = new_name
+                new_type_param = type_name_map.get(type_var.name)
+                if new_type_param is not None:
+                    type_var.name = new_type_param.name
+                    type_var.bound = new_type_param.bound
+                if type_param.bound.name == self.class_name:
+                    type_param.bound.t_constructor.type_parameters = list(
+                        type_name_map.values())
 
     def parse_type(self, str_t: str, **kwargs) -> tp.Type:
         return self.get_type_parser().parse_type(str_t)
