@@ -74,4 +74,5 @@ for lib in $libpath/*; do
   if [ $? -ne 0 ]; then
     rm -r "$libpath/$lib/json-docs"
   fi
+  touch $libpath/$lib/touched
 done
