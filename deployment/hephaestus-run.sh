@@ -13,9 +13,12 @@ run_hephaestus()
   local libname=$(basename $libpath)
   local args=$2
 
-  if [ ! -d $libpath/json-docs ]; then
-    echo "Lib specification was not found for $libpath"
-    return 1
+  if [[ ! -d "$libpath/json-docs" || -z $(find "$libpath/json-docs" -mindepth 1 -print -quit) ]]; then
+    # Create API specification from javadoc
+    doc2json.sh -d "$(dirname $libpath)" -l $libname -L java
+    if [ $? -ne 0 ]; then
+      return 1
+    fi
   fi
 
   rm -rf libs
