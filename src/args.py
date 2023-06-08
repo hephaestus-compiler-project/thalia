@@ -202,6 +202,11 @@ parser.add_argument(
           " a specific Groovy bug)")
 )
 parser.add_argument(
+    "--disable-function-references",
+    action="store_true",
+    help="Disable function references"
+)
+parser.add_argument(
     "--disable-use-site-variance",
     action="store_true",
     help="Disable use-site variance"
@@ -273,6 +278,8 @@ if args.disable_bounded_type_parameters:
     cfg.prob.bounded_type_parameters = 0
 if args.disable_parameterized_functions:
     cfg.prob.parameterized_functions = 0
+if args.disable_function_references:
+    cfg.prob.func_ref = 0
 
 
 def validate_args(args):

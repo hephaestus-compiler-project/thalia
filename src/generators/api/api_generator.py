@@ -372,9 +372,9 @@ class APIGenerator(Generator):
                                depth: int) -> Union[ast.Lambda,
                                                     ast.FunctionReference]:
         return (
-            self.generate_lambda(expr_type, depth)
-            if utils.random.bool()
-            else self.generate_func_ref(expr_type, type_var_map, depth)
+            self.generate_func_ref(expr_type, type_var_map, depth)
+            if utils.random.bool(prob=cfg.prob.func_ref)
+            else self.generate_lambda(expr_type, depth)
         )
 
     def generate_lambda(self, expr_type: tp.Type, depth: int) -> ast.Lambda:
