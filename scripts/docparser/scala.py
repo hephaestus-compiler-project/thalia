@@ -10,6 +10,7 @@ def map_type(func):
         _map = {
             "Any": "scala.Any",
             "AnyRef": "scala.AnyRef",
+            "AnyVal": "scala.AnyVal",
             "Product": "scala.Product",
             "Serializable": "java.io.Serializable",
             "RuntimeException": "java.lang.RuntimeException",
@@ -112,7 +113,10 @@ class ScalaAPIDocConverter(APIDocConverter):
                 continue
             fname = span.get("name")
             if fname != span.string:
-                package, _ = tuple(fname.rsplit(span.string, 1))
+                try:
+                    package, _ = tuple(fname.rsplit(span.string, 1))
+                except ValueError:
+                    continue
                 if not any(s == self.class_name.rsplit(".", 1)[-1]
                            for s in package.split(".")):
                     span.string.replace_with(fname)
@@ -167,6 +171,10 @@ class ScalaAPIDocConverter(APIDocConverter):
     def process_class(self, html_doc):
         class_name = self.extract_class_name(html_doc)
         self.class_name = class_name
+        self._replace_span_with_package_prefix(
+            html_doc.select("#signature .tparams span")
+            + html_doc.select("#signature .result span")
+        )
         package_name = self.extract_package_name(html_doc)
         full_class_name = "{pkg}.{cls}".format(pkg=package_name,
                                                cls=class_name)
