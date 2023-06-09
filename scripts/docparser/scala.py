@@ -5,6 +5,27 @@ from docparser.base import APIDocConverter
 from docparser.utils import file2html, dict2json
 
 
+def map_type(func):
+    def inner_func(*args):
+        _map = {
+            "Any": "scala.Any",
+            "AnyRef": "scala.AnyRef",
+            "Product": "scala.Product",
+            "Serializable": "java.io.Serializable",
+            "RuntimeException": "java.lang.RuntimeException",
+        }
+
+        def _map_type(str_t):
+            return _map.get(str_t, str_t)
+
+        res = func(*args)
+        if isinstance(res, (list, tuple, set)):
+            return [_map_type(t) for t in res]
+        return _map_type(res)
+
+    return inner_func
+
+
 class ScalaAPIDocConverter(APIDocConverter):
     EXCLUDED_FILES = [
         'index.html',
@@ -87,6 +108,7 @@ class ScalaAPIDocConverter(APIDocConverter):
         return html_doc.select("#definition h1")[0].text.encode(
             "ascii", "ignore").decode()
 
+    @map_type
     def extract_class_type_parameters(self, html_doc):
         tparams = html_doc.select("#signature .tparams")
         if not tparams:
@@ -96,9 +118,11 @@ class ScalaAPIDocConverter(APIDocConverter):
             for elem in tparams[0].find_all("span", recursive=False)
         ]
 
+    @map_type
     def extract_super_class(self, html_doc):
         return self._get_super_classes_interfaces(html_doc)
 
+    @map_type
     def extract_class_type(self, html_doc):
         text = html_doc.select("#signature .modifier_kind")[0].text
         text = re.sub(" +", " ", text)
@@ -112,6 +136,7 @@ class ScalaAPIDocConverter(APIDocConverter):
             return self.OBJECT
         return self.REGULAR_CLASS
 
+    @map_type
     def extract_super_interfaces(self, html_doc):
         return self._get_super_classes_interfaces(html_doc)
 
@@ -148,8 +173,19 @@ class ScalaAPIDocConverter(APIDocConverter):
             "methods": method_objs + constructor_objs,
             'fields': field_objs,
             "is_class": True,
+            "access_mod": self.extract_class_access_mod(html_doc),
         }
         return class_obj
+
+    def extract_class_access_mod(self, class_doc):
+        element = class_doc.select("#comment dl.attributes.block")
+        if not element:
+            return "public"
+        if "protected" in element[0].text:
+            return "protected"
+        elif "private" in element[0].text:
+            return "private"
+        return "public"
 
     def extract_method_type_parameters(self, method_doc, is_constructor):
         if is_constructor:
@@ -162,6 +198,7 @@ class ScalaAPIDocConverter(APIDocConverter):
             for elem in tparams[0].find_all("span", recursive=False)
         ]
 
+    @map_type
     def extract_method_return_type(self, method_doc, is_constructor):
         if is_constructor:
             return None
@@ -196,6 +233,7 @@ class ScalaAPIDocConverter(APIDocConverter):
 
     extract_field_name = extract_method_name
 
+    @map_type
     def extract_field_type(self, field_doc):
         return self.extract_method_return_type(field_doc, False)
 
