@@ -16,6 +16,9 @@ def map_type(func):
         }
 
         def _map_type(str_t):
+            if isinstance(str_t, (list, tuple, set)):
+                return [_map_type(t) for t in str_t]
+
             str_t = _map.get(str_t, str_t)
             if not isinstance(str_t, str):
                 return str_t
@@ -38,11 +41,10 @@ def map_type(func):
                 return "Double"
             elif str_t.startswith("Boolean("):
                 return "Boolean"
-            return str_t
+            # Now handle named arguments (e.g., val x: String = "fda")
+            return str_t.split(" = ", 1)[0]
 
         res = func(*args)
-        if isinstance(res, (list, tuple, set)):
-            return [_map_type(t) for t in res]
         return _map_type(res)
 
     return inner_func
@@ -220,7 +222,6 @@ class ScalaAPIDocConverter(APIDocConverter):
             for elem in tparams[0].find_all("span", recursive=False)
         ]
 
-    @map_type
     def extract_method_return_type(self, method_doc, is_constructor):
         if is_constructor:
             return None
@@ -323,6 +324,7 @@ class ScalaAPIDocConverter(APIDocConverter):
         text = dt.nextSibling.text
         return any(seg == self.class_name for seg in text.split(" \u2192 "))
 
+    @map_type
     def _get_param_ret_types(self, param_types, ret_type):
         # This constructs method signatures in the presence of curried
         # functions.
