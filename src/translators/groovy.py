@@ -547,6 +547,8 @@ class GroovyTranslator(BaseTranslator):
     @append_to
     @change_namespace
     def visit_lambda(self, node):
+        prev_is = self._inside_is
+        self._inside_is = False
         old_ident = self.ident
         if (self._namespace[-2],) == ast.GLOBAL_NAMESPACE:
             old_ident += 2
@@ -587,6 +589,7 @@ class GroovyTranslator(BaseTranslator):
         self.ident = old_ident
         self.is_unit = prev
         self._cast_number = prev_cast_number
+        self._inside_is = prev_is
         return res
 
     @append_to
@@ -893,6 +896,8 @@ class GroovyTranslator(BaseTranslator):
 
     @append_to
     def visit_func_call(self, node):
+        prev_is = self._inside_is
+        self._inside_is = False
         old_ident = self.ident
         self.ident = 0
         prev_cast_number = self._cast_number
@@ -934,6 +939,7 @@ class GroovyTranslator(BaseTranslator):
             args=", ".join(args)
         )
         self._cast_number = prev_cast_number
+        self._inside_is = prev_is
         return res
 
     @append_to
