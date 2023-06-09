@@ -636,7 +636,7 @@ def _find_candidate_types_for_bound(
             Iterable[tp.Type]
         ]
 ) -> List[tp.Type]:
-    if type_param.has_recursive_bound() and rec_bound_handler:
+    if type_param.has_recursive_bound(cfg.bt_factory) and rec_bound_handler:
         return list(rec_bound_handler(type_param, type_var_map, types))
 
     if type_param.bound.has_type_variables():
@@ -724,7 +724,7 @@ def _in_topological_order(type_parameters: List[tp.TypeParameter]):
     graph = nx.DiGraph()
     for type_param in type_parameters:
         graph.add_node(type_param)
-        if not type_param.bound or not type_param.is_parameterized():
+        if not type_param.bound or not type_param.bound.is_parameterized():
             continue
         type_variables = type_param.bound.get_type_variables(cfg.bt_factory)
         type_variables = [t for t in type_variables
@@ -829,7 +829,9 @@ def _compute_type_variable_assignments(
             # Unfortunately, we are unable to instantiate type variables with
             # the given constructors.
             return None
-        c = select_random_type(a_types)
+        c = select_random_type([t for t in a_types
+                                if not t.is_type_constructor()
+                                or not t.has_recursive_bounds(cfg.bt_factory)])
         if isinstance(c, ast.ClassDeclaration):
             selected = c.get_type()
         else:
@@ -851,7 +853,8 @@ def _compute_type_variable_assignments(
             t_arg = tp.WildCardType(selected, variance)
         t_args.append(t_arg)
         type_var_map[t_param] = t_arg
-    return t_args, type_var_map
+    return [type_var_map[type_param]
+            for type_param in type_parameters], type_var_map
 
 
 def instantiate_type_constructor(
