@@ -16,7 +16,29 @@ def map_type(func):
         }
 
         def _map_type(str_t):
-            return _map.get(str_t, str_t)
+            str_t = _map.get(str_t, str_t)
+            if not isinstance(str_t, str):
+                return str_t
+
+            # Now replace literal types to standard types, e.g.,
+            # Char("\") => Char.
+            if str_t.startswith("Char("):
+                return "Char"
+            elif str_t.startswith("Byte("):
+                return "Byte"
+            elif str_t.startswith("Short("):
+                return "Short"
+            elif str_t.startswith("Int("):
+                return "Int"
+            elif str_t.startswith("Long("):
+                return "Long"
+            elif str_t.startswith("Float("):
+                return "Float"
+            elif str_t.startswith("Double("):
+                return "Double"
+            elif str_t.startswith("Boolean("):
+                return "Boolean"
+            return str_t
 
         res = func(*args)
         if isinstance(res, (list, tuple, set)):
