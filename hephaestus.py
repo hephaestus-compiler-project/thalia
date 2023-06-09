@@ -32,7 +32,11 @@ STATS = {
         "transformation_types": ",".join(cli_args.transformation_types),
         "bugs": cli_args.bugs,
         "name": cli_args.name,
-        "language": cli_args.language
+        "language": cli_args.language,
+        "generator": cli_args.generator,
+        "library_path": cli_args.library_path,
+        "erase_types": cli_args.erase_types,
+        "inject_type_error": cli_args.inject_type_error,
     },
     "totals": {
         "passed": 0,
