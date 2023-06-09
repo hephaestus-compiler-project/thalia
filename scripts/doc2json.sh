@@ -46,7 +46,7 @@ parse_docs()
   jar xvf *.jar >/dev/null 2>&1
   cd - >/dev/null
 
-  find $docpath -type f -name 'package-summary.html' |
+  find $docpath -type f -name 'package-summary.html' -o -name 'index.html' |
   sed -r 's|/[^/]+$||' |
   sort |
   uniq |

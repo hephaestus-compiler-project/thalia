@@ -15,7 +15,11 @@ run_hephaestus()
 
   if [[ ! -d "$libpath/json-docs" || -z $(find "$libpath/json-docs" -mindepth 1 -print -quit) ]]; then
     # Create API specification from javadoc
-    doc2json.sh -d "$(dirname $libpath)" -l $libname -L java
+    language=java
+    if grep -q -oP "\-\-language scala" <<< "$args"; then
+      language=scala
+    fi
+    doc2json.sh -d "$(dirname $libpath)" -l $libname -L "$language"
     if [ $? -ne 0 ]; then
       return 1
     fi
