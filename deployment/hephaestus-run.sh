@@ -30,8 +30,12 @@ run_hephaestus()
   cp $libpath/json-docs/* libs
 
   rm -rf ~/.m2
-  mvn -f $libpath dependency:tree
-  classpath=$(mvn -f $libpath dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)
+  mvn -f $libpath/pom.xml dependency:tree
+  mvn -f $libpath/dependency.xml dependency:tree
+
+  classpath=$(mvn -f $libpath/pom.xml dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)
+  depspath=$(mvn -f $libpath/dependency.xml dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)
+  classpath="$classpath:$depspath"
 
   # Create api-rules.json
   ls $libpath/json-docs | $basedir/create-api-rules.py > api-rules.json
