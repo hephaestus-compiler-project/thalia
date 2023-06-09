@@ -512,6 +512,10 @@ class TypeConstructor(AbstractType):
         return hash((self.name, tuple(self.supertypes),
                      tuple(self.type_parameters)))
 
+    def has_recursive_bounds(self, factory):
+        return any(type_param.has_recursive_bound(factory)
+                   for type_param in self.type_parameters)
+
     @property
     def arity(self):
         return len(self.type_parameters)
@@ -778,8 +782,7 @@ class ParameterizedType(SimpleClassifier):
             return False
         return (self.name == other.name and
                 self.t_constructor.__class__ == other.t_constructor.__class__ and
-                self.t_constructor.type_parameters ==
-                other.t_constructor.type_parameters and
+                self.t_constructor == other.t_constructor and
                 self.type_args == other.type_args)
 
     def __hash__(self):
