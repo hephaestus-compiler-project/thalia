@@ -15,7 +15,7 @@ def longest_common_prefix(strs: List[str]) -> str:
     return strs[0][0:length]
 
 
-files = [line for line in fileinput.input()]
+files = [line.replace(".json", "").strip() for line in fileinput.input()]
 prefix = longest_common_prefix(files)
 
 assert prefix is not None
