@@ -1,6 +1,7 @@
 from collections import OrderedDict
 from copy import copy
 import itertools
+import statistics
 from typing import NamedTuple, List, Union, Set, Dict, Tuple
 
 import networkx as nx
@@ -210,6 +211,19 @@ def _get_type_variables(path: list) -> List[tp.TypeParameter]:
     return nodes
 
 
+class APIGraphStatistics(NamedTuple):
+    nodes: int
+    edges: int
+    methods: int
+    polymorphic_methods: int
+    fields: int
+    constructors: int
+    types: int
+    type_constructors: int
+    inheritance_chain_size: float
+    signature_length: float
+
+
 class APIGraph():
     EMPTY = 0
     DEFAULT_PATH_SEARCH_STRATEGY = "shortest"
@@ -243,6 +257,43 @@ class APIGraph():
         ]
         self.type_constructors = [t for t in self.types
                                   if t.is_type_constructor()]
+
+    def statistics(self) -> APIGraphStatistics:
+        nodes = self.api_graph.number_of_nodes()
+        edges = self.api_graph.number_of_edges()
+        methods = [n for n in self.api_graph.nodes()
+                   if isinstance(n, Method)]
+        methods_n = len(methods)
+        polymorphic_methods = len([m for m in methods if m.type_parameters])
+        fields = len([n for n in self.api_graph.nodes()
+                     if isinstance(n, Field)])
+        constructors = len([n for n in self.api_graph.nodes()
+                           if isinstance(n, Constructor)])
+        types = self.subtyping_graph.nodes()
+        types_n = len(types)
+        type_constructors = len([n for n in types if n.is_type_constructor()])
+        inheritance_sizes = [len(t.get_supertypes())
+                             for t in types]
+        inheritance_chain_size = statistics.fmean(inheritance_sizes)
+        signatures = []
+        for n in self.api_graph.nodes():
+            if isinstance(n, tp.Type):
+                continue
+            size = 0
+            rec = self.get_input_type(n)
+            if rec is not None:
+                size += 1
+            output_type = self.get_output_type(n)
+            if output_type != self.bt_factory.get_void_type():
+                size += 1
+            if isinstance(n, (Method, Constructor)):
+                size += len(n.parameters)
+            signatures.append(size)
+        signature_length = statistics.fmean(signatures)
+        return APIGraphStatistics(nodes, edges, methods_n, polymorphic_methods,
+                                  fields, constructors, types_n,
+                                  type_constructors, inheritance_chain_size,
+                                  signature_length)
 
     def get_reg_types(self):
         return self.types
@@ -626,11 +677,14 @@ class APIGraph():
             if t == bound_found:
                 if st.is_type_constructor():
                     handler = self.get_instantiations_of_recursive_bound
-                    sub_t, _ = tu.instantiate_type_constructor(
+                    res = tu.instantiate_type_constructor(
                         st, types or self.get_reg_types(),
                         type_var_map=reverse,
                         rec_bound_handler=handler
                     )
+                    if res is None:
+                        continue
+                    sub_t, _ = res
                 else:
                     sub_t = st
                 possibles_types.add(sub_t)
@@ -853,37 +907,42 @@ class APIGraph():
         for node in utils.random.shuffle(api_nodes):
             if matcher and not matcher.match(node):
                 continue
-            self.generate_type_params()
-            ret = self.encode_receiver(node)
-            if ret is None:
+            try:
+                self.generate_type_params()
+                ret = self.encode_receiver(node)
+                if ret is None:
+                    self.remove_types(self.get_type_parameters())
+                    continue
+                receivers, type_var_map = ret
+                parameters = [{tp.substitute_type(p.t, type_var_map)}
+                              for p in getattr(node, "parameters", [])]
+                for param_set in parameters:
+                    param = list(param_set)[0]
+                    if param != self.bt_factory.get_any_type() and \
+                            not self.inject_type_error:
+                        param_set.update(self.subtypes(param))
+                if not parameters:
+                    parameters = ({self.EMPTY},)
+                parameters = tuple([frozenset(s) for s in parameters])
+                ret_type = self.get_output_type(node)
+                constraint = self.api_graph[node][ret_type].get("constraint",
+                                                                {})
+                if constraint:
+                    ret_type = ret_type.new(
+                        [constraint[tpa] for tpa in ret_type.type_parameters]
+                    )
+                if ret_type.is_type_constructor():
+                    ret_type = ret_type.new(ret_type.type_parameters)
+                ret_type = tp.substitute_type(ret_type, type_var_map)
+                ret_types = {ret_type}
+                if not self.inject_type_error:
+                    ret_types.update(self.supertypes(ret_type))
+                type_parameters = self.get_type_parameters()
+                self.remove_types(type_parameters)
+                yield APIEncoding(node, frozenset(receivers),
+                                  parameters, frozenset(ret_types),
+                                  type_var_map,
+                                  type_parameters)
+            except Exception:
                 self.remove_types(self.get_type_parameters())
-                continue
-            receivers, type_var_map = ret
-            parameters = [{tp.substitute_type(p.t, type_var_map)}
-                          for p in getattr(node, "parameters", [])]
-            for param_set in parameters:
-                param = list(param_set)[0]
-                if param != self.bt_factory.get_any_type() and \
-                        not self.inject_type_error:
-                    param_set.update(self.subtypes(param))
-            if not parameters:
-                parameters = ({self.EMPTY},)
-            parameters = tuple([frozenset(s) for s in parameters])
-            ret_type = self.get_output_type(node)
-            constraint = self.api_graph[node][ret_type].get("constraint", {})
-            if constraint:
-                ret_type = ret_type.new(
-                    [constraint[tpa] for tpa in ret_type.type_parameters]
-                )
-            if ret_type.is_type_constructor():
-                ret_type = ret_type.new(ret_type.type_parameters)
-            ret_type = tp.substitute_type(ret_type, type_var_map)
-            ret_types = {ret_type}
-            if not self.inject_type_error:
-                ret_types.update(self.supertypes(ret_type))
-            type_parameters = self.get_type_parameters()
-            self.remove_types(type_parameters)
-            yield APIEncoding(node, frozenset(receivers),
-                              parameters, frozenset(ret_types), type_var_map,
-                              type_parameters)
         return encodings

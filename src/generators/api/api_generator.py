@@ -50,6 +50,7 @@ class APIGenerator(Generator):
             self.logger.update_filename("api-generator")
         self.api_graph = self.API_GRAPH_BUILDERS[language](
             language, **options).build(api_docs)
+        self.log_api_graph_statistics()
         api_rules_file = options.get("api-rules")
         kwargs = {}
         if api_rules_file:
@@ -73,6 +74,27 @@ class APIGenerator(Generator):
                                                         self.inject_error_mode)
         self.error_injected = None
         self.test_case_type_params: List[tp.TypeParameter] = []
+
+    def log_api_graph_statistics(self):
+        if self.logger is None:
+            return
+        statistics = self.api_graph.statistics()
+        log(self.logger, "Built API with the following statistics:")
+        log(self.logger, f"\tNumber of nodes:{statistics.nodes}")
+        log(self.logger, f"\tNumber of edges:{statistics.edges}")
+        log(self.logger, f"\tNumber of methods:{statistics.methods}")
+        log(self.logger,
+            f"\tNumber of polymorphic methods:{statistics.polymorphic_methods}")
+        log(self.logger, f"\tNumber of fields:{statistics.fields}")
+        log(self.logger,
+            f"\tNumber of constructors:{statistics.constructors}")
+        log(self.logger, f"\tNumber of types:{statistics.types}")
+        log(self.logger,
+            f"\tNumber of type constructors:{statistics.type_constructors}")
+        log(self.logger,
+            f"\tAvg inheritance chain size:{statistics.inheritance_chain_size:.2f}")
+        log(self.logger,
+            f"\tAvg API signature size:{statistics.signature_length:.2f}\n")
 
     def parse_builtin_type(self, cls_name: str) -> tp.Type:
         api_language = "java" if cls_name.startswith("java") else self.language
