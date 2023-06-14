@@ -46,7 +46,11 @@ parse_docs()
   jar xvf *.jar >/dev/null 2>&1
   cd - >/dev/null
 
-  find $docpath -type f -name 'package-summary.html' -o -name 'index.html' |
+  index_file="package-summary.html"
+  if [ "$language" = "scala" ]; then
+    index_file="index.html"
+  fi
+  find $docpath -type f -name "$index_file" |
   sed -r 's|/[^/]+$||' |
   sort |
   uniq |
