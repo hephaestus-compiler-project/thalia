@@ -258,25 +258,33 @@ class APIGraph():
         self.type_constructors = [t for t in self.types
                                   if t.is_type_constructor()]
 
-    def statistics(self) -> APIGraphStatistics:
+    def statistics(self, matcher=None) -> APIGraphStatistics:
+        class _Type(NamedTuple):
+            class_: str
+            api_name: str
+            t: tp.Type
         nodes = self.api_graph.number_of_nodes()
         edges = self.api_graph.number_of_edges()
-        methods = [n for n in self.api_graph.nodes()
+        lib_nodes = [n for n in self.api_graph.nodes()
+                     if not matcher or matcher.match(n)]
+        methods = [n for n in lib_nodes
                    if isinstance(n, Method)]
         methods_n = len(methods)
         polymorphic_methods = len([m for m in methods if m.type_parameters])
-        fields = len([n for n in self.api_graph.nodes()
+        fields = len([n for n in lib_nodes
                      if isinstance(n, Field)])
-        constructors = len([n for n in self.api_graph.nodes()
+        constructors = len([n for n in lib_nodes
                            if isinstance(n, Constructor)])
-        types = self.subtyping_graph.nodes()
+        types = [_Type(n.name, n.name, n) for n in self.subtyping_graph.nodes()]
+        types = [t for t in types if not matcher or matcher.match(t)]
         types_n = len(types)
-        type_constructors = len([n for n in types if n.is_type_constructor()])
-        inheritance_sizes = [len(t.get_supertypes())
-                             for t in types]
+        type_constructors = len([n for n in types
+                                 if n.t.is_type_constructor()])
+        inheritance_sizes = [len(n.t.get_supertypes())
+                             for n in types]
         inheritance_chain_size = statistics.fmean(inheritance_sizes)
         signatures = []
-        for n in self.api_graph.nodes():
+        for n in lib_nodes:
             if isinstance(n, tp.Type):
                 continue
             size = 0

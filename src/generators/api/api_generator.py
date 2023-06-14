@@ -50,11 +50,11 @@ class APIGenerator(Generator):
             self.logger.update_filename("api-generator")
         self.api_graph = self.API_GRAPH_BUILDERS[language](
             language, **options).build(api_docs)
-        self.log_api_graph_statistics()
         api_rules_file = options.get("api-rules")
         kwargs = {}
         if api_rules_file:
             kwargs["matcher"] = match.parse_rule_file(api_rules_file)
+        self.log_api_graph_statistics(**kwargs)
         self.encodings = self.api_graph.encode_api_components(**kwargs)
         self.visited = set()
         self.visited_exprs = {}
@@ -75,10 +75,10 @@ class APIGenerator(Generator):
         self.error_injected = None
         self.test_case_type_params: List[tp.TypeParameter] = []
 
-    def log_api_graph_statistics(self):
+    def log_api_graph_statistics(self, matcher):
         if self.logger is None:
             return
-        statistics = self.api_graph.statistics()
+        statistics = self.api_graph.statistics(matcher)
         log(self.logger, "Built API with the following statistics:")
         log(self.logger, f"\tNumber of nodes:{statistics.nodes}")
         log(self.logger, f"\tNumber of edges:{statistics.edges}")
