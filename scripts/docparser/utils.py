@@ -9,7 +9,7 @@ def decode(string: str) -> str:
 
 
 def file2html(path):
-    with open(path, 'r') as f:
+    with open(path, 'r', encoding="utf-8", errors="ignore") as f:
         return BeautifulSoup(f, "html.parser")
 
 

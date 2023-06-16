@@ -53,9 +53,11 @@ class JavaAPIDocConverter(APIDocConverter):
     def extract_class_name(self, html_doc):
         if not self.jdk_docs:
             title = html_doc.find(class_="title")["title"]
+            # This is an annotation; we don't handle it.
             if "Annotation" in title:
                 return None
-            if "Record" in title:
+            # This is a Java record class; currently, we don't support it.
+            if "Record " in title:
                 return None
             return title.rsplit(" ", 1)[-1]
         regex = re.compile("([@A-Za-z0-9\\.]+).*")
