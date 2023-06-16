@@ -30,6 +30,8 @@ def test_builtin_types():
     assert b.parse_type("void") == jt.Void
     assert b.parse_type("java.lang.String[]") == jt.Array.new([jt.String])
     assert b.parse_type("int[]") == jt.Array.new([jt.IntegerType(primitive=True)])
+    assert b.parse_type("int[][]") == jt.Array.new(
+        [jt.Array.new([jt.IntegerType(primitive=True)])])
 
 
 def test_regular_types():

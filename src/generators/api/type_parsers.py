@@ -157,6 +157,9 @@ class JavaTypeParser(TypeParser):
 
         if len(segs) == 1:
             return type_var_map.get(str_t, tp.TypeParameter(str_t))
+        if " & " in segs[1]:
+            # TODO We currently don't support intersection types
+            return None
         bound = self.parse_type(segs[1])
         parsed_t = type_var_map.get(segs[0],
                                     tp.TypeParameter(segs[0], bound=bound))
@@ -204,7 +207,7 @@ class JavaTypeParser(TypeParser):
     def parse_type(self, str_t: str) -> tp.Type:
         tf = self.bt_factory
         if str_t.endswith("[]"):
-            str_t = str_t.split("[]")[0]
+            str_t = str_t[:-2]
             return tf.get_array_type().new([self.parse_type(str_t)])
         elif str_t.endswith("..."):
             # TODO consider this as a vararg rather than a single type.
