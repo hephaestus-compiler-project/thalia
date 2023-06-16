@@ -2,6 +2,8 @@ import os
 import re
 import urllib
 
+from bs4 import BeautifulSoup
+
 from docparser.base import APIDocConverter
 from docparser.utils import file2html, dict2json, top_level_split, decode
 
@@ -32,6 +34,7 @@ class JavaAPIDocConverter(APIDocConverter):
         self._current_api_cls = None
         self._cls_name = None
         self.jdk_docs = args.jdk_docs
+        self.new_javadoc = False
 
     @normalize
     def extract_package_name(self, html_doc):
@@ -39,16 +42,20 @@ class JavaAPIDocConverter(APIDocConverter):
             return html_doc.find_all(class_="subTitle")[1].find_all(
                 text=True)[2]
         else:
-            try:
-                return html_doc.select(".subTitle a")[0].text
-            except IndexError:
-                return html_doc.select(".subTitle")[0].text
+            element = html_doc.find(
+                True, {"class": ["subTitle", "sub-title"]})
+            element_a = element.find("a")
+            if element_a is None:
+                return element.text
+            return element_a.text
 
     @normalize
     def extract_class_name(self, html_doc):
         if not self.jdk_docs:
             title = html_doc.find(class_="title")["title"]
             if "Annotation" in title:
+                return None
+            if "Record" in title:
                 return None
             return title.rsplit(" ", 1)[-1]
         regex = re.compile("([@A-Za-z0-9\\.]+).*")
@@ -74,7 +81,10 @@ class JavaAPIDocConverter(APIDocConverter):
 
     @normalize
     def extract_super_class(self, html_doc):
-        supercls_defs = html_doc.select(".description .blockList pre")[0]
+        try:
+            supercls_defs = html_doc.select(".description .blockList pre")[0]
+        except:
+            supercls_defs = html_doc.find(True, {"class": "type-signature"})
         self._replace_anchors_with_package_prefix(supercls_defs.select("a"))
         text = supercls_defs.text.encode("ascii", "ignore").decode()
         text = text.replace("\n", " ").replace("  ", " ").replace(", ", ",")
@@ -93,7 +103,11 @@ class JavaAPIDocConverter(APIDocConverter):
         return top_level_split(text)
 
     def extract_class_type(self, html_doc):
-        text = html_doc.select(".description pre")[0].text
+        elem = html_doc.select(".description pre")
+        if elem:
+            text = elem[0].text
+        else:
+            text = html_doc.select(".type-signature .modifiers")[0].text
         if 'interface' in text:
             return self.INTERFACE
         if 'abstract class' in text:
@@ -103,7 +117,12 @@ class JavaAPIDocConverter(APIDocConverter):
         return self.REGULAR_CLASS
 
     def extract_class_access_modifier(self, html_doc):
-        text = html_doc.select(".description pre")[0].text
+        elem = html_doc.select(".description pre")
+        if not elem:
+            self.new_javadoc = True
+            text = html_doc.select(".type-signature .modifiers")[0].text
+        else:
+            text = elem[0].text
         if "protected " in text:
             return "protected"
         else:
@@ -111,8 +130,11 @@ class JavaAPIDocConverter(APIDocConverter):
 
     @normalize
     def extract_super_interfaces(self, html_doc):
-        text = html_doc.select(".description .blockList pre")[0].text.encode(
-            "ascii", "ignore").decode()
+        elem = html_doc.select(".description .blockList pre")
+        if elem:
+            text = elem[0].text.encode("ascii", "ignore").decode()
+        else:
+            text = html_doc.find(True, {"class": "type-signature"}).text
         text = text.replace("\n", " ")
         segs = text.split(" implements ")
         if len(segs) == 1:
@@ -122,11 +144,23 @@ class JavaAPIDocConverter(APIDocConverter):
 
     @normalize
     def extract_functional_interface(self, html_doc):
-        text = decode(html_doc.select(".description .blockList pre")[0].text)
+        elem = html_doc.select(".description .blockList pre")
+        if elem:
+            text = decode(elem[0].text)
+        else:
+            elem = html_doc.select(".type-signature .annotations")
+            if not elem:
+                return False
+            text = decode(elem[0].text)
         return "@FunctionalInterface" in text
 
     def is_class_static(self, html_doc):
-        text = decode(html_doc.select(".description .blockList pre")[0].text)
+        elem = html_doc.select(".description .blockList pre")
+        if elem:
+            text = decode(elem[0].text)
+        else:
+            text = decode(
+                html_doc.select(".type-signature .modifiers")[0].text)
         return " static " in text
 
     @normalize
@@ -151,6 +185,45 @@ class JavaAPIDocConverter(APIDocConverter):
                 data["language"] = args.language
             dict2json(args.output, data)
 
+    def _extract_methods_old_javadoc(self, html_doc, class_type):
+        methods = html_doc.find_all(class_="rowColor") + html_doc.find_all(
+            class_="altColor")
+        methods_ = []
+        constructors = []
+        for m in methods:
+            if self.is_constructor(m):
+                if class_type != self.ABSTRACT_CLASS:
+                    constructors.append(m)
+            else:
+                methods_.append(m)
+        return methods_, constructors
+
+    def _extract_methods_new_javadoc(self, html_doc, class_type):
+        constructors = html_doc.select(
+            ".constructor-summary .col-constructor-name")
+        elem = methods = html_doc.find(id="method-summary-table")
+        if not elem:
+            return [], constructors
+        methods = elem.find_all(True, {"class": ["col-first", "col-second"]})
+        methods = [(methods[i], methods[i + 1])
+                   for i in range(0, len(methods)-1, 2)]
+        methods_ = []
+        for elem1, elem2 in methods:
+            if "table-header" in elem1["class"]:
+                continue
+            soup = BeautifulSoup()
+            div_elem = soup.new_tag("div")
+            div_elem.append(elem1)
+            div_elem.append(elem2)
+            methods_.append(div_elem)
+        return methods_, constructors
+
+    def extract_methods(self, html_doc, class_type):
+        if self.new_javadoc:
+            return self._extract_methods_new_javadoc(html_doc, class_type)
+        else:
+            return self._extract_methods_old_javadoc(html_doc, class_type)
+
     def process_class(self, html_doc):
         class_name = self.extract_class_name(html_doc)
         if not class_name:
@@ -174,17 +247,8 @@ class JavaAPIDocConverter(APIDocConverter):
             # TODO handle enums
             return None
         self._current_api_cls = html_doc
-        methods = html_doc.find_all(class_="rowColor") + html_doc.find_all(
-            class_="altColor")
-        methods_ = []
-        constructors = []
-        for m in methods:
-            if self.is_constructor(m):
-                if class_type != self.ABSTRACT_CLASS:
-                    constructors.append(m)
-            else:
-                methods_.append(m)
-        fields = self._extract_fields(html_doc)
+        methods_, constructors = self.extract_methods(html_doc, class_type)
+        fields = self.extract_fields(html_doc)
         method_objs = self.process_methods(methods_, False)
         constructor_objs = self.process_methods(constructors, True)
         field_objs = self.process_fields(fields)
@@ -209,8 +273,10 @@ class JavaAPIDocConverter(APIDocConverter):
             return []
         regex = re.compile(
             r"(static )?(default )?(<(.*)>)?[^<>,\[\]\?](.*)?(\[\])?")
-        text = method_doc.find(class_="colFirst").text.encode(
-            "ascii", "ignore").decode().replace("  ", " ")
+        text = method_doc.find(
+            True, {"class": ["colFirst", "col-first"]}).text.encode(
+                "ascii", "ignore").decode().replace("  ", " ").replace(
+                    "\n", "")
         match = re.match(regex, text)
         if not match:
             raise Exception("Cannot match method's signature {!r}".format(
@@ -220,24 +286,30 @@ class JavaAPIDocConverter(APIDocConverter):
             type_parameters = top_level_split(type_parameters)
         return type_parameters or []
 
+    def _extract_key_for_return_type(self):
+        if self.new_javadoc:
+            return "col-first"
+        return "colFirst"
+
     @normalize
     def extract_method_return_type(self, method_doc, is_constructor):
         if is_constructor:
             return None
 
+        key = self._extract_key_for_return_type()
         regex = re.compile(
             r"(static )?(default )?(protected )?(abstract )?(<.*>)?([^<>^\[\],\?](.*)(\[\])?)")
         self._replace_anchors_with_package_prefix(
-            method_doc.select(".colFirst a"))
-        text = decode(method_doc.find(class_="colFirst").text).replace("  ",
-                                                                       " ")
+            method_doc.select(f".{key} a"))
+        text = decode(method_doc.find(class_=key).text).replace(
+            "  ", " ").replace("\n", "")
         match = re.match(regex, text)
         if not match:
             raise Exception("Cannot match method's signature {!r}".format(
                 text))
         return_type = match.group(6)
         assert return_type is not None
-        return return_type
+        return return_type.replace("final ", "")
 
     def _replace_anchors_with_package_prefix(self, anchors):
         # This method replaces the text of all anchors (note that the text
@@ -259,9 +331,10 @@ class JavaAPIDocConverter(APIDocConverter):
             if not anchor.string.startswith(package_prefix):
                 anchor.string.replace_with(package_prefix + "." + anchor.text)
 
-    @normalize
-    def extract_method_parameter_types(self, method_doc, is_constructor):
-        regex = re.compile(r'(.+) [a-zA-Z_]+')
+    def _extract_key_for_parameter_types(self, method_doc, is_constructor):
+        if self.new_javadoc:
+            key = ".col-second code"
+            return key
         if self.jdk_docs:
             key = ".colConstructorName code" if is_constructor else \
                 ".colSecond code"
@@ -271,6 +344,12 @@ class JavaAPIDocConverter(APIDocConverter):
         if not is_constructor and not self.jdk_docs:
             if method_doc.find(class_="colSecond") is None:
                 key = ".colLast code"
+        return key
+
+    @normalize
+    def extract_method_parameter_types(self, method_doc, is_constructor):
+        regex = re.compile(r'(.+) [a-zA-Z_]+')
+        key = self._extract_key_for_parameter_types(method_doc, is_constructor)
         self._replace_anchors_with_package_prefix(
             method_doc.select(key + " a"))
         try:
@@ -287,7 +366,7 @@ class JavaAPIDocConverter(APIDocConverter):
         return param_types
 
     def extract_method_access_mod(self, method_doc, is_con):
-        column = method_doc.find(class_="colFirst")
+        column = method_doc.find(True, {"class": ["colFirst", "col-first"]})
         if column is None and is_con:
             # We have a public constructor
             return self.PUBLIC
@@ -297,6 +376,8 @@ class JavaAPIDocConverter(APIDocConverter):
 
     @normalize
     def extract_method_name(self, method_doc, is_constructor):
+        if self.new_javadoc:
+            return method_doc.find("a", class_="member-name-link").text
         try:
             if self.jdk_docs:
                 key = ".colConstructorName a" if is_constructor else \
@@ -316,12 +397,14 @@ class JavaAPIDocConverter(APIDocConverter):
     def extract_isstatic(self, method_doc, is_constructor):
         if is_constructor:
             return False
-        return 'static' in method_doc.find(class_="colFirst").text
+        return 'static' in method_doc.find(
+            True, {"class": ["colFirst", "col-first"]}).text
 
     def extract_isdefault(self, method_doc, is_constructor):
         if is_constructor:
             return False
-        return "default" in method_doc.find(class_="colFirst").text
+        return "default" in method_doc.find(
+            True, {"class": ["colFirst", "col-first"]}).text
 
     def extract_exceptions(self, method_doc):
         if not self.jdk_docs:
@@ -357,6 +440,8 @@ class JavaAPIDocConverter(APIDocConverter):
 
     @normalize
     def extract_field_name(self, field_doc):
+        if self.new_javadoc:
+            return field_doc.find("a", class_="member-name-link").text
         key = ".colSecond a"
         elements = field_doc.select(key)
         if not elements and not self.jdk_docs:
@@ -419,7 +504,25 @@ class JavaAPIDocConverter(APIDocConverter):
             field_objs.append(field_obj)
         return field_objs
 
-    def _extract_fields(self, html_doc):
+    def _extract_fields_new_javadoc(self, html_doc):
+        elem = html_doc.find(id="field-summary")
+        if not elem:
+            return []
+        fields = elem.find_all(True, {"class": ["col-first", "col-second"]})
+        fields = [(fields[i], fields[i + 1])
+                  for i in range(0, len(fields)-1, 2)]
+        fields_ = []
+        for elem1, elem2 in fields:
+            if "table-header" in elem1["class"]:
+                continue
+            soup = BeautifulSoup()
+            div_elem = soup.new_tag("div")
+            div_elem.append(elem1)
+            div_elem.append(elem2)
+            fields_.append(div_elem)
+        return fields_
+
+    def _extract_fields_old_javadoc(self, html_doc):
         doc = html_doc.find(class_="memberSummary")
         if doc is None:
             # Handle IllegalFormatException.html
@@ -429,3 +532,9 @@ class JavaAPIDocConverter(APIDocConverter):
 
         return doc.find_all(class_="rowColor") + doc.find_all(
             class_="altColor")
+
+    def extract_fields(self, html_doc):
+        if self.new_javadoc:
+            return self._extract_fields_new_javadoc(html_doc)
+        else:
+            return self._extract_fields_old_javadoc(html_doc)
