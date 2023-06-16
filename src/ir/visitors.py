@@ -12,6 +12,7 @@ class ASTVisitor():
             ast.SuperClassInstantiation: self.visit_super_instantiation,
             ast.ClassDeclaration: self.visit_class_decl,
             types.TypeParameter: self.visit_type_param,
+            types.TypeParameterConstructor: self.visit_type_param,
             ast.CallArgument: self.visit_call_argument,
             ast.FieldDeclaration: self.visit_field_decl,
             ast.VariableDeclaration: self.visit_var_decl,
