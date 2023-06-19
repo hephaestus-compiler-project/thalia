@@ -1,17 +1,17 @@
-"""Fetch kotlin bugs.
-oracle, mutator, resolution, status, symptom must be completed manually
+"""Fetch scala/dotty bugs.
+
 """
 import argparse
 import requests
 import os
 import json
 import re
-from datetime import datetime
 from copy import deepcopy
+from datetime import datetime
 
 
-COMPILER = "kotlinc"
-LANGUAGE = "Kotlin"
+COMPILER = "dotty"
+LANGUAGE = "Scala"
 SCHEMA = {
     "date": "",
     "language": LANGUAGE,
@@ -47,64 +47,58 @@ def get_code_fragments(text):
     res = []
     for m in matches:
         res.append([x.replace('\t', '  ') for x in m.splitlines()
-                    if x.strip() not in ('', 'kotlin')])
+                    if x.strip() not in ('', 'scala')])
         res = [r for r in res if len(r) > 0]
     return res
 
 
 def get_data(lookup, later_than):
-    skip = 0
-    top = 2500
-    results = []
-
-    # we don't need to loop (< 2500 bugs)
-    base = "https://youtrack.jetbrains.com/api/issues"
-    search_terms = [
-        "project: Kotlin",
-        "Reporter: theosotr, stefanoshaliassos"
-    ]
-    query = "%20".join(map(lambda x: x.replace(" ", "%20"), search_terms))
-    fields = "idReadable,description,created,reporter(login),resolved,"
-    fields += "summary,fields(value(login))"
-    url = "{base}?query={query}&fields={fields}&$skip={skip}&$top={top}"
-    url = url.format(
+    page = 1
+    max_per_request = 100
+    base = "https://api.github.com/repos/lampepfl/dotty/issues"
+    url1 = "{base}?state=all&creator={creator}&per_page={pp}&page={p}".format(
         base=base,
-        query=query,
-        fields=fields,
-        skip=skip,
-        top=top
+        creator="theosotr",
+        pp=max_per_request,
+        p=page
     )
-    response = requests.get(url)
-    youtrack_url = "https://youtrack.jetbrains.com/issue/"
-    for item in response.json():
-        created = datetime.utcfromtimestamp(int(item['created']) / 1000.0)
+    url2 = "{base}?state=all&creator={creator}&per_page={pp}&page={p}".format(
+        base=base,
+        creator="stefanoschaliasos",
+        pp=max_per_request,
+        p=page
+    )
+    response = requests.get(url1).json()
+    response.extend(requests.get(url2).json())
+    results = []
+    dotty_github_url = "https://github.com/lampepfl/dotty/issues/"
+    for item in response:
+        created = datetime.strptime(
+            item['created_at'], "%Y-%m-%dT%H:%M:%S%z")
         if later_than and created.date() < later_than.date():
             continue
         try:
-            resolution = datetime.utcfromtimestamp(
-                int(item['resolved']) / 1000.0)
+            resolution = datetime.strptime(
+                item['closed_at'], "%Y-%m-%dT%H:%M:%S.%f%z")
         except:
             resolution = None
         passed = resolution - created if resolution else None
-        reporter = item['reporter']['login']
-
-        bid = item['idReadable']
-        if bid in lookup:
-            bug = lookup[bid]
+        reporter = item['user']['login']
+        bugid = str(item['number'])
+        if bugid in lookup:
+            bug = lookup[bugid]
         else:
             bug = deepcopy(SCHEMA)
         bug['date'] = str(created)
         bug['resolutiondate'] = str(resolution)
         bug['resolvedin'] = str(passed)
-        bug['bugid'] = bid
-        bug['title'] = item['summary']
-        bug['links']['issuetracker'] = youtrack_url + bid
+        bug['bugid'] = bugid
+        bug['title'] = item['title']
+        bug['links']['issuetracker'] = dotty_github_url + bugid
         bug['reporter'] = reporter
-        if bug.get('chars', None) is None:
-            bug['chars'] = SCHEMA['chars']
+        bug['status'] = str(item['state'])
 
-        description = item['description']
-        description = description if description is not None else ""
+        description = item['body']
         code_fragments = get_code_fragments(description)
         if len(code_fragments) >= 1:
             if not len(lookup.get(bug['bugid'], {}).get('test', [])) >= 1:
@@ -116,6 +110,8 @@ def get_data(lookup, later_than):
             print("{}: code fragments {}".format(
                 bug['bugid'], len(code_fragments)
             ))
+        if bug.get('chars', None) is None:
+            bug['chars'] = SCHEMA['chars']
         results.append(bug)
     # Add bugs in lookup but not in current set (e.g. from another tracker)
     ids = {bug['bugid'] for bug in results}

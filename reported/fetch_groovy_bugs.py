@@ -51,7 +51,7 @@ def get_code_fragments(text):
     return res
 
 
-def get_data(lookup):
+def get_data(lookup, later_than):
     start_at = 0
     max_results = 50
     total = 0
@@ -82,6 +82,8 @@ def get_data(lookup):
         for item in response['issues']:
             created = datetime.strptime(
                 item['fields']['created'], "%Y-%m-%dT%H:%M:%S.%f%z")
+            if later_than and created.date() < later_than.date():
+                continue
             try:
                 resolution = datetime.strptime(
                     item['fields']['resolutiondate'], "%Y-%m-%dT%H:%M:%S.%f%z")
@@ -135,7 +137,9 @@ def get_args():
     parser = argparse.ArgumentParser(
         description='Fetch groovy front-end bugs.')
     parser.add_argument("output", help="File to save the bugs.")
+    parser.add_argument("--later-than", type=str, required=False)
     return parser.parse_args()
+
 
 def main():
     args = get_args()
@@ -145,7 +149,10 @@ def main():
             tmp = json.load(f)
             for bug in tmp:
                 lookup[bug['bugid']] = bug
-    data = get_data(lookup)
+    if args.later_than:
+        later_than = datetime.strptime(args.later_than,
+                                       "%Y-%m-%d")
+    data = get_data(lookup, later_than)
     with open(args.output, 'w') as f:
         json.dump(data, f, indent=4)
 
