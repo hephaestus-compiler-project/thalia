@@ -96,7 +96,7 @@ def get_data(lookup, later_than):
         bug['title'] = item['title']
         bug['links']['issuetracker'] = dotty_github_url + bugid
         bug['reporter'] = reporter
-        bug['status'] = str(item['state'])
+        bug['status'] = str(item['state'].capitalize())
 
         description = item['body']
         code_fragments = get_code_fragments(description)

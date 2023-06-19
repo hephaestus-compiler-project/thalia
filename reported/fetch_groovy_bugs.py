@@ -45,7 +45,7 @@ SCHEMA = {
 def get_code_fragments(text):
     matches = re.findall('(?:{code:?(?:java|groovy)?})(.*?)(?:{code})', text, flags=re.I | re.DOTALL)
     res = []
-    for m in matches[:1]:
+    for m in matches:
         res.append([x.replace('\t', '  ') for x in m.splitlines() if x.strip() != ''])
         res = [r for r in res if len(r) > 0]
     return res
