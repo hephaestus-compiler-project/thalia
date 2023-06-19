@@ -183,7 +183,7 @@ def update_stats(res, batch):
                                   0)
     STATS['totals']['failed'] += failed
     STATS['totals']['passed'] += passed
-    STATS["time"] += round(batch_time / 1000000000, 2)
+    STATS["time"] += batch_time
     STATS['faults'].update(res)
     if not cli_args.debug:
         print_msg()
@@ -267,7 +267,7 @@ def gen_program(pid, dirname, packages, program_processor=None):
                                                 cli_args.options['Translator'])
     proc = program_processor or ProgramProcessor(pid, cli_args)
     try:
-        start_time = time.process_time_ns()
+        start_time_gen = time.perf_counter()
         program, error_injected = proc.get_program()
         if program is None:
             # There is nothing else to generate. Possibly, we have enumerated
@@ -295,7 +295,7 @@ def gen_program(pid, dirname, packages, program_processor=None):
             'programs': {
                 correct_program: error_injected is None
             },
-            "time": time.process_time_ns() - start_time,
+            "time": time.perf_counter() - start_time_gen,
         }
         if not cli_args.only_correctness_preserving_transformations:
             incorrect_program = process_ncp_transformations(
