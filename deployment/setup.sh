@@ -4,9 +4,9 @@ SDKMAN_DEPS="curl unzip zip"
 export DEBIAN_FRONTEND=noninteractive
 
 update_and_install_common_pks() {
-    apt -yqq update && apt -yqq upgrade
-    apt -yqq install $COMMON_PKGS
-    apt install build-essential zlib1g-dev libncurses5-dev \
+    sudo apt -yqq update && sudo apt -yqq upgrade
+    sudo apt -yqq install $COMMON_PKGS
+    sudo apt install build-essential zlib1g-dev libncurses5-dev \
       libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev \
       libsqlite3-dev wget libbz2-dev
     wget https://www.python.org/ftp/python/3.8.9/Python-3.8.9.tgz
@@ -24,14 +24,14 @@ update_and_install_common_pks() {
 }
 
 install_sdkman() {
-    apt -yqq install $SDKMAN_DEPS
+    sudo apt -yqq install $SDKMAN_DEPS
     curl -s https://get.sdkman.io | /bin/bash
     chmod a+x "$HOME/.sdkman/bin/sdkman-init.sh"
     source "$HOME/.sdkman/bin/sdkman-init.sh"
     mkdir -p $HOME/.sdkman/etc/
     echo "sdkman_auto_answer=true" >> $HOME/.sdkman/etc/config
-    echo "SDKMAN_DIR=\"/root/.sdkman\"" >> $HOME/.bash_profile
-    echo "source \"/root/.sdkman/bin/sdkman-init.sh\"" >> $HOME.bash_profile
+    echo "SDKMAN_DIR=\"$HOME/.sdkman\"" >> $HOME/.bash_profile
+    echo "source \"$HOME/.sdkman/bin/sdkman-init.sh\"" >> $HOME/.bash_profile
 }
 
 install_deps() {
@@ -47,12 +47,12 @@ install_java_dep() {
 install_groovy() {
     install_java_dep
     sdk install groovy 4.0.0-alpha-2
-    echo "PATH=\"\$PATH:/root/.sdkman/candidates/kotlin/current/bin/\"" >> $HOME/.bash_profile
+    echo "PATH=\"\$PATH:$HOME/.sdkman/candidates/kotlin/current/bin/\"" >> $HOME/.bash_profile
 }
 
 install_java() {
     sdk install java 18.ea.2-open
-    echo "PATH=\"\$PATH:/root/.sdkman/candidates/java/current/bin/\"" >> $HOME/.bash_profile
+    echo "PATH=\"\$PATH:$HOME/.sdkman/candidates/java/current/bin/\"" >> $HOME/.bash_profile
 }
 
 install_kotlin_from_source() {
@@ -111,13 +111,13 @@ install_java_from_source() {
 install_kotlin() {
     install_java_dep
     sdk install kotlin
-    echo "PATH=\"\$PATH:/root/.sdkman/candidates/kotlin/current/bin/\"" >> $HOME/.bash_profile
+    echo "PATH=\"\$PATH:$HOME/.sdkman/candidates/kotlin/current/bin/\"" >> $HOME/.bash_profile
 }
 
 install_scala() {
     install_java_dep
     sdk install scala
-    echo "PATH=\"\$PATH:/root/.sdkman/candidates/scala/current/bin/\"" >> $HOME/.bash_profile
+    echo "PATH=\"\$PATH:$HOME/.sdkman/candidates/scala/current/bin/\"" >> $HOME/.bash_profile
 }
 
 install_kotlin_all() {
@@ -180,7 +180,7 @@ install_kotlin_all() {
     sdk install kotlin 1.0.1-1 && \
     sdk install kotlin 1.0.1   && \
     sdk install kotlin 1.0.0
-    echo "PATH=\"\$PATH:/root/.sdkman/candidates/kotlin/current/bin/\"" >> $HOME/.bash_profile
+    echo "PATH=\"\$PATH:$HOME/.sdkman/candidates/kotlin/current/bin/\"" >> $HOME/.bash_profile
 }
 
 install_check_type_systems() {
