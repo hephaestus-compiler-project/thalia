@@ -176,11 +176,9 @@ def stop_condition(iteration, time_passed):
     return True
 
 
-def update_stats(res, batch):
+def update_stats(res, batch, batch_time):
     failed = len(res)
     passed = batch - failed
-    batch_time = functools.reduce(lambda acc, x: acc + x["time"], res.values(),
-                                  0)
     STATS['totals']['failed'] += failed
     STATS['totals']['passed'] += passed
     STATS["time"] += batch_time
@@ -267,7 +265,7 @@ def gen_program(pid, dirname, packages, program_processor=None):
                                                 cli_args.options['Translator'])
     proc = program_processor or ProgramProcessor(pid, cli_args)
     try:
-        start_time_gen = time.perf_counter()
+        start_time_gen = time.process_time()
         program, error_injected = proc.get_program()
         if program is None:
             # There is nothing else to generate. Possibly, we have enumerated
@@ -295,7 +293,7 @@ def gen_program(pid, dirname, packages, program_processor=None):
             'programs': {
                 correct_program: error_injected is None
             },
-            "time": time.perf_counter() - start_time_gen,
+            "time": time.process_time() - start_time_gen,
         }
         if not cli_args.only_correctness_preserving_transformations:
             incorrect_program = process_ncp_transformations(
@@ -518,8 +516,11 @@ def run():
         batch = min(len(res), batch)
         for i, r in enumerate(res):
             oracles[start_index + i] = r
+
+        batch_time = functools.reduce(lambda acc, x: acc + x.stats["time"],
+                                      res, 0)
         res = {} if cli_args.dry_run else check_oracle(testdir, oracles)
-        update_stats(res, batch)
+        update_stats(res, batch, batch_time)
 
     try:
         _run(process_program, process_res)
@@ -545,8 +546,11 @@ def run_parallel():
             STOP_COND = True
 
     def process_res(start_index, res, testdir, batch):
+        batch_time = functools.reduce(lambda acc, x: acc + x.stats["time"],
+                                      res, 0)
+
         def update(res):
-            update_stats(res, batch)
+            update_stats(res, batch, batch_time)
 
         try:
             res = [r.get() for r in res]
