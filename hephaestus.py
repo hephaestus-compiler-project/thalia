@@ -2,6 +2,7 @@
 # pylint: disable=too-few-public-methods
 from datetime import datetime
 import json
+import functools
 import multiprocessing as mp
 import os
 import tempfile
@@ -42,6 +43,7 @@ STATS = {
         "passed": 0,
         "failed": 0
     },
+    "time": 0,
     "faults": {}
 }
 TEMPLATE_MSG = (u"Test Programs Passed {} / {} \u2714\t\t"
@@ -177,8 +179,11 @@ def stop_condition(iteration, time_passed):
 def update_stats(res, batch):
     failed = len(res)
     passed = batch - failed
+    batch_time = functools.reduce(lambda acc, x: acc + x["time"], res.values(),
+                                  0)
     STATS['totals']['failed'] += failed
     STATS['totals']['passed'] += passed
+    STATS["time"] += round(batch_time / 1000000000, 2)
     STATS['faults'].update(res)
     if not cli_args.debug:
         print_msg()
@@ -262,6 +267,7 @@ def gen_program(pid, dirname, packages, program_processor=None):
                                                 cli_args.options['Translator'])
     proc = program_processor or ProgramProcessor(pid, cli_args)
     try:
+        start_time = time.process_time_ns()
         program, error_injected = proc.get_program()
         if program is None:
             # There is nothing else to generate. Possibly, we have enumerated
@@ -289,6 +295,7 @@ def gen_program(pid, dirname, packages, program_processor=None):
             'programs': {
                 correct_program: error_injected is None
             },
+            "time": time.process_time_ns() - start_time,
         }
         if not cli_args.only_correctness_preserving_transformations:
             incorrect_program = process_ncp_transformations(
@@ -310,7 +317,8 @@ def gen_program(pid, dirname, packages, program_processor=None):
             'transformations': [t.get_name()
                                 for t in proc.get_transformations()],
             'error': err,
-            'program': None
+            'program': None,
+            "time": 0,
         }
         return ProgramRes(True, stats)
 
