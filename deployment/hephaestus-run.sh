@@ -45,18 +45,13 @@ run_hephaestus()
   ls $libpath/json-docs | $basedir/create-api-rules.py > api-rules.json
 
   base_args="--iterations 10000000 --batch 30 -P -L --transformations 0 \
-    --max-depth 2 --generator api  \
+    --max-depth 2 --generator api  -k \
     --library-path "$classpath" --api-doc-path libs --api-rules api-rules.json \
-    --max-conditional-depth 2 $args"
-  echo "$base_args" | xargs ./hephaestus.py
-  echo "$base_args --erase-types" | xargs ./hephaestus.py
-  echo "$base_args --inject-type-error" | xargs ./hephaestus.py
-  echo "$base_args --erase-types --inject-type-error" | xargs ./hephaestus.py
-
-  echo "$base_args --path-search-strategy ksimple" | xargs ./hephaestus.py
-  echo "$base_args --erase-types --path-search-strategy ksimple" | xargs ./hephaestus.py
-  echo "$base_args --inject-type-error --path-search-strategy ksimple" | xargs ./hephaestus.py
-  echo "$base_args --erase-types --inject-type-error --path-search-strategy ksimple" | xargs ./hephaestus.py
+    --max-conditional-depth 3 $args"
+  echo "$base_args --name $libname-base" | xargs ./hephaestus.py
+  echo "$base_args --name $libname-erase --erase-types" | xargs ./hephaestus.py
+  echo "$base_args --name $libname-inject --inject-type-error" | xargs ./hephaestus.py
+  echo "$base_args --name $libname-both --erase-types --inject-type-error" | xargs ./hephaestus.py
 }
 
 if [ -z $libpath ]; then

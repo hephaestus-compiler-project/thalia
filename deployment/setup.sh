@@ -21,6 +21,11 @@ update_and_install_common_pks() {
     rm Python-3.8.9.tgz
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     python3 get-pip.py
+
+    # Install Maven
+    wget -O $HOME/maven.zip "https://dlcdn.apache.org/maven/maven-3/3.9.2/binaries/apache-maven-3.9.2-bin.zip"
+    unzip $HOME/maven.zip -d $HOME
+    echo "export PATH=\"\$PATH:$HOME/apache-maven-3.9.2/bin\"" >> $HOME/.bash_profile
 }
 
 install_sdkman() {

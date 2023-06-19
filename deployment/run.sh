@@ -2,8 +2,8 @@
 TIME_TO_RUN=$((23 * 60 * 60))
 TRANSFORMATIONS=0
 VERSIONS="1.4.21 1.4.20 1.4.10 1.4.0 1.3.72 1.3.71 1.3.70 1.3.61 1.3.60 1.3.50 1.3.41 1.3.40 1.3.31 1.3.30 1.3.21 1.3.20 1.3.11 1.3.10 1.3.0 1.2.71 1.2.70 1.2.61 1.2.60 1.2.51 1.2.50 1.2.41 1.2.40 1.2.31 1.2.30 1.2.21 1.2.20 1.2.10 1.2.0 1.1.61 1.1.60 1.1.51 1.1.50 1.1.4-3 1.1.4-2 1.1.4 1.1.3-2 1.1.3 1.1.2-5 1.1.2-2 1.1.2 1.1.1 1.1 1.0.7 1.0.6 1.0.5-2 1.0.5 1.0.4 1.0.3 1.0.2 1.0.1-2 1.0.1-1 1.0.1 1.0.0"
-source /root/.bashrc
-source /root/.bash_profile
+source $HOME/.bashrc
+source $HOME/.bash_profile
 
 
 simple_run_groovy() {
@@ -13,7 +13,7 @@ simple_run_groovy() {
     git pull origin stable
     hephaestus-run.sh $CHECK_TYPE_SYSTEMS/example-apis/java-api \
       $CHECK_TYPE_SYSTEMS/3party-libs \
-      "--language groovy --cast-numbers  --max-type-params 3 --disable-bounded-type-parameters --disable-expression-cache"
+      "--language groovy --cast-numbers  --max-type-params 3 --disable-expression-cache"
 }
 
 simple_run_java() {
