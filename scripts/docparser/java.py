@@ -280,7 +280,8 @@ class JavaAPIDocConverter(APIDocConverter):
                 "ascii", "ignore").decode().replace("  ", " ").replace(
                     "\n", " ").replace("static ", "").replace(
                         "default ", "").replace("abstract ", "").replace(
-                            "protected ", "").strip()
+                            "protected ", "").replace("final ", "").replace(
+                                "synchronized ", "").strip()
         match = re.match(regex, text)
         if not match:
             raise Exception("Cannot match method's signature {!r}".format(
@@ -306,7 +307,10 @@ class JavaAPIDocConverter(APIDocConverter):
         self._replace_anchors_with_package_prefix(
             method_doc.select(f".{key} a"))
         text = decode(method_doc.find(class_=key).text).replace(
-            "  ", " ").replace("\n", "")
+            "  ", " ").replace("\n", "").replace("static ", "").replace(
+                "default ", "").replace("protected ", "").replace(
+                    "abstract ", "").replace("final ", "").replace(
+                        "synchronized ", "").strip()
         match = re.match(regex, text)
         if not match:
             raise Exception("Cannot match method's signature {!r}".format(
