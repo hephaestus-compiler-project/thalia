@@ -278,7 +278,9 @@ class JavaAPIDocConverter(APIDocConverter):
         text = method_doc.find(
             True, {"class": ["colFirst", "col-first"]}).text.encode(
                 "ascii", "ignore").decode().replace("  ", " ").replace(
-                    "\n", "")
+                    "\n", " ").replace("static ", "").replace(
+                        "default ", "").replace("abstract ", "").replace(
+                            "protected ", "").strip()
         match = re.match(regex, text)
         if not match:
             raise Exception("Cannot match method's signature {!r}".format(
