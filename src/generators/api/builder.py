@@ -517,7 +517,6 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
 
     def __init__(self, target_language="kotlin", **kwargs):
         super().__init__(target_language, **kwargs)
-        self._convert_nullable = True
 
     def get_type_parser(self, **kwargs):
         parsers = {
@@ -541,23 +540,11 @@ class KotlinAPIGraphBuilder(APIGraphBuilder):
 
     def parse_type(self, str_t: str, build_class_node=False,
                    type_var_mappings=None) -> tp.Type:
-        to_nullable = self._convert_nullable
         parsed_t = self.get_type_parser(
             type_var_mappings=type_var_mappings,
             build_class_node=build_class_node
         ).parse_type(str_t)
-        self._convert_nullable = to_nullable
-        to_nullable = to_nullable and not (self.api_language == "kotlin"
-                                           or build_class_node)
-        if str_t in self.PRIMITIVE_TYPES:
-            to_nullable = False
-        if parsed_t.is_type_constructor() or parsed_t.name == "Nullable":
-            to_nullable = False
-        return (
-            parsed_t
-            if not to_nullable
-            else kt.NullableType().new([parsed_t])
-        )
+        return parsed_t
 
     def build_method_node(self, method_api: dict,
                           receiver_name: str) -> Method:
