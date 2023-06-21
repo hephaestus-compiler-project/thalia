@@ -382,11 +382,14 @@ class APIGraph():
                         n for n in self.subtypes(base_t)
                         if not n.is_type_constructor()
                     }
-                possible_type_args.append(types)
+                possible_type_args.append(utils.random.sample(
+                    types, min(self.MAX_TYPES, len(types))))
             # Type argument contravariant or type param contravariant
             else:
                 base_t = t_arg.bound if t_arg.is_wildcard() else t_arg
-                possible_type_args.append({n for n in self.supertypes(base_t)})
+                types = self.supertypes(base_t)
+                possible_type_args.append(utils.random.sample(
+                    types, min(self.MAX_TYPES, len(types))))
         for combination in itertools.product(*possible_type_args):
             t_constructor = self.get_type_by_name(
                 node.name) or node.t_constructor
