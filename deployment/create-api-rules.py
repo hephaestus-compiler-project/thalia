@@ -18,14 +18,25 @@ def longest_common_prefix(strs: List[str]) -> str:
 files = [line.replace(".json", "").strip() for line in fileinput.input()]
 prefix = longest_common_prefix(files)
 
-assert prefix is not None
+if prefix is not None:
+    rules = [
+        ["_" + prefix, "*"]
+    ]
+else:
+    rules = [
+        ["!_java.util", "*"],
+        ["!_java.io", "*"],
+        ["!_java.lang", "*"],
+        ["!_kotlin.collection", "*"],
+        ["!_kotlin.", "*"],
+        ["!_scala.", "*"],
+        ["!_scala.collection", "*"],
+    ]
 
 data = {
     "column_names": ["class_", "api_name"],
     "func": "all",
-    "rules": [
-        ["_" + prefix, "*"]
-    ]
+    "rules": rules,
 }
 
 print(json.dumps(data, indent=2))
