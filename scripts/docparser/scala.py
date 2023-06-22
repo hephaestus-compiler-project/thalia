@@ -84,10 +84,23 @@ class ScalaAPIDocConverter(APIDocConverter):
                 value["fields"].extend(data["fields"])
             else:
                 if data["class_type"] != self.OBJECT:
-                    data["methods"].extend(objects_methods.get(data["name"],
-                                                               []))
-                    data["fields"].extend(objects_fields.get(data["name"],
-                                                             []))
+                    obj_m = objects_methods.get(data["name"], [])
+                    obj_f = objects_fields.get(data["name"], [])
+                    method_names = [x["name"] for x in obj_m]
+                    field_names = [x["name"] for x in obj_f]
+                    # We might experience cases where
+                    # there are the same value members in both trait and
+                    # object.
+                    new_methods = [
+                        x for x in data["methods"]
+                        if x["name"] not in method_names
+                    ]
+                    new_fields = [
+                        x for x in data["fields"]
+                        if x["name"] not in field_names
+                    ]
+                    data["methods"] = new_methods + obj_m
+                    data["fields"] = new_fields + obj_f
                     docs[data["name"]] = data
                 else:
                     objects_methods[data["name"]] = data["methods"]
@@ -117,8 +130,12 @@ class ScalaAPIDocConverter(APIDocConverter):
                     package, _ = tuple(fname.rsplit(span.string, 1))
                 except ValueError:
                     continue
-                if not any(s == self.class_name.rsplit(".", 1)[-1]
-                           for s in package.split(".")):
+                # This heuristic: distinguishes between:
+                # * com.Foo.X   <- type parameter
+                # * com.Foo.Bar <- nested class
+                if len(span.string) > 3 or not any(
+                        s == self.class_name.rsplit(".", 1)[-1]
+                        for s in package.split(".")):
                     span.string.replace_with(fname)
 
     def _get_super_classes_interfaces(self, html_doc):
