@@ -562,7 +562,7 @@ class ScalaTypeParser(TypeParser):
         if " with " in type_param or ">:" in type_param:
             # XXX Multi- and lower bounds: not supported at the moment.
             return None
-        segs = type_param.split(" <: ")
+        segs = type_param.split(" <: ", 1)
         type_params_str = segs[0].replace(", ", ",").split("[", 1)
         if len(type_params_str) != 1:
             type_args_str = type_params_str[1][:-1]
@@ -656,9 +656,12 @@ class ScalaTypeParser(TypeParser):
         if type_con is not None:
             return type_con.new(new_type_args)
 
-        parsed_t = self.type_spec.get(base, tp.TypeConstructor(base,
-                                                               type_vars))
-        return parsed_t.new(new_type_args)
+        try:
+            parsed_t = self.type_spec.get(base, tp.TypeConstructor(base,
+                                                                   type_vars))
+            return parsed_t.new(new_type_args)
+        except:
+            import pdb; pdb.set_trace()
 
     def parse_type(self, str_t: str) -> tp.Type:
         tf = self.bt_factory
