@@ -165,6 +165,10 @@ class APIGraphBuilder(ABC):
             prefix = receiver_name + "." if receiver_name else ""
             if field_api["access_mod"] == PROTECTED:
                 continue
+            field_type = self.parse_type(field_api["type"])
+            if field_type is None:
+                # Field type is unsupported
+                continue
             if field_api["is_static"]:
                 field_node = Field(prefix + field_api["name"], receiver_name)
             else:
@@ -179,7 +183,6 @@ class APIGraphBuilder(ABC):
             if field_api["is_static"] and self.parent_cls:
                 # Handle fields of non-static inner classes.
                 self.graph.add_edge(self.parent_cls, field_node, label=IN)
-            field_type = self.parse_type(field_api["type"])
             out_node, kwargs = self.get_api_outgoing_node(field_type)
             self.graph.add_edge(field_node, out_node, label=OUT, **kwargs)
 
@@ -191,13 +194,23 @@ class APIGraphBuilder(ABC):
             receiver_name = self.get_receiver_name(method_api)
             try:
                 method_node = self.build_method_node(method_api, receiver_name)
+                if method_node is None:
+                    continue
             except NotImplementedError:
                 self._current_func_type_var_map = {}
                 continue
             receiver = self.get_api_incoming_node(method_api)
-
             is_constructor = method_api["is_constructor"]
             is_static = method_api["is_static"]
+            output_type = None
+            ret_type = method_api["return_type"]
+            if not is_constructor:
+                output_type = self.parse_type(ret_type)
+                if output_type is None:
+                    # Unable to parse output type
+                    continue
+            else:
+                output_type = self.class_nodes[self.class_name]
             if not (is_constructor or is_static or receiver is None):
                 self.graph.add_edge(receiver, method_node, label=IN)
 
@@ -205,12 +218,6 @@ class APIGraphBuilder(ABC):
                 # Handle the members of non-static inner classes
                 self.graph.add_edge(self.parent_cls, method_node, label=IN)
 
-            output_type = None
-            ret_type = method_api["return_type"]
-            if not is_constructor:
-                output_type = self.parse_type(ret_type)
-            else:
-                output_type = self.class_nodes[self.class_name]
             out_node, kwargs = self.get_api_outgoing_node(output_type)
             self.graph.add_edge(method_node, out_node, label=OUT, **kwargs)
             self._current_func_type_var_map = {}
@@ -351,11 +358,17 @@ class APIGraphBuilder(ABC):
         is_static = method_api["is_static"]
         type_parameters = self.build_method_type_parameters(method_api,
                                                             method_fqn)
+        if any(t is None for t in type_parameters):
+            # Unable to parse type parameters
+            return None
         parameters = [
             Parameter(self.parse_type(p),
                       self.get_type_parser().is_variable_argument(p))
             for p in method_api["parameters"]
         ]
+        if any(p.t is None for p in parameters):
+            # Unable to parse parameter types
+            return None
         if is_constructor:
             method_node = Constructor(receiver_name, parameters)
         elif is_static:
