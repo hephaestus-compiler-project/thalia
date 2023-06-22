@@ -30,7 +30,7 @@ def is_number(string_var):
         return False
 
 
-def top_level_split(s: str, signs: Tuple[str] = ("<", ">"),
+def top_level_split(s: str, signs: Tuple[str] = (["<"], [">"]),
                     delim=",") -> List[str]:
     """
     Split `s` by top-level `delim` only.
@@ -47,9 +47,9 @@ def top_level_split(s: str, signs: Tuple[str] = ("<", ">"),
 
     for c in s:
         part += c
-        if c == start:
+        if c in start:
             balance += 1
-        elif c == end:
+        elif c in end:
             balance -= 1
         elif c == delim and balance == 0:
             parts.append(part[:-1].strip())
