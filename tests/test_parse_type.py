@@ -566,3 +566,7 @@ def test_scala_tuple_types():
              sc.String,
              sc.TupleType(2).new([sc.String, sc.Integer])
      ])
+     assert b.parse_type("(String, (Int) => Int)") == sc.TupleType(2).new([
+         sc.String,
+         sc.FunctionType(1).new([sc.Integer, sc.Integer])
+     ])

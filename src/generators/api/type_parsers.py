@@ -296,7 +296,8 @@ class KotlinTypeParser(TypeParser):
     def parse_native_function_type(self, str_t: str) -> tp.ParameterizedType:
         segs = str_t.replace(", ", ",").split("[", 1)
         type_args_str = segs[1][:-1]
-        type_args = re.findall(self.COMMA_SEP_REGEX, type_args_str)
+        type_args = utils.top_level_split(
+            type_args_str, signs=(["(", "<"], [")", ">"]))
         new_type_args = []
         for type_arg in type_args:
             new_type_args.append(self.parse_type(type_arg))
@@ -370,7 +371,8 @@ class KotlinTypeParser(TypeParser):
             parsed_t = tp.SimpleClassifier(str_t)
             return self.type_spec.get(str_t, parsed_t)
         base, type_args_str = segs[0], segs[1][:-1]
-        type_args = re.findall(self.COMMA_SEP_REGEX, type_args_str)
+        type_args = utils.top_level_split(
+            type_args_str, signs=(["(", "<"], [")", ">"]))
         new_type_args = []
         for type_arg in type_args:
             new_type_args.append(self.parse_type(type_arg))
@@ -480,8 +482,6 @@ class KotlinTypeParser(TypeParser):
 class ScalaTypeParser(TypeParser):
     FUNC_SEP_REGEX = re.compile(r"=>(?!(?:[^(]*\([^)]*\))*[^()]*\))")
 
-    COMMA_SEP_REGEX = re.compile(r"(?:[^,\[(]|\([^)]*\)|\[[^\]]*\])+")
-
     FUNC_REGEX = re.compile(r"^\(.*\) => .*")
 
     def __init__(self,
@@ -498,14 +498,15 @@ class ScalaTypeParser(TypeParser):
         return bool(re.match(self.FUNC_REGEX, str_t))
 
     def is_native_func_type(self, str_t: str) -> bool:
-        return str_t.startswith("scala.Function")
+        return bool(re.match("scala.Function[0-9]+\\[", str_t))
 
     def parse_function_type(self, str_t: str) -> tp.ParameterizedType:
-        segs = utils.top_level_split(str_t, signs=("(", ")"), delim="=")
+        segs = utils.top_level_split(str_t, signs=(["(", "["], [")", "]"]), delim="=")
         assert len(segs) >= 2
         suffix = " =".join(segs[1:])
         segs = (segs[0], suffix[2:])
-        param_strs = re.findall(self.COMMA_SEP_REGEX, segs[0].rstrip()[1:-1])
+        param_strs = utils.top_level_split(segs[0].rstrip()[1:-1],
+                                           signs=(["(", "["], [")", "]"]))
         param_types = [
             self.parse_type(param_str.strip().split(": ", 1)[-1])
             for param_str in param_strs
@@ -520,7 +521,8 @@ class ScalaTypeParser(TypeParser):
         )
 
     def parse_tuple_type(self, str_t: str) -> tp.ParameterizedType:
-        tuple_strs = re.findall(self.COMMA_SEP_REGEX, str_t.replace(", ", ","))
+        tuple_strs = utils.top_level_split(str_t.replace(", ", ","),
+                                           signs=(["[", "("], ["]", ")"]))
         tuple_types = [
             self.parse_type(tuple_str)
             for tuple_str in tuple_strs
@@ -530,7 +532,8 @@ class ScalaTypeParser(TypeParser):
     def parse_native_function_type(self, str_t: str) -> tp.ParameterizedType:
         segs = str_t.replace(", ", ",").split("[", 1)
         type_args_str = segs[1][:-1]
-        type_args = re.findall(self.COMMA_SEP_REGEX, type_args_str)
+        type_args = utils.top_level_split(type_args_str,
+                                          signs=(["[", "("], ["]", ")"]))
         new_type_args = []
         for type_arg in type_args:
             new_type_args.append(self.parse_type(type_arg))
@@ -567,10 +570,13 @@ class ScalaTypeParser(TypeParser):
         if len(type_params_str) != 1:
             type_args_str = type_params_str[1][:-1]
             type_params = [
-                self.parse_type(t) if t != "_" else tp.TypeParameter(
-                    "T" + str(i + 1))
-                for i, t in enumerate(re.findall(self.COMMA_SEP_REGEX,
-                                                 type_args_str))
+                (
+                    self.parse_type(t)
+                    if t[0] not in ["_", "+", "-"]  # HK types -- revisit
+                    else tp.TypeParameter("T" + str(i + 1))
+                )
+                for i, t in enumerate(utils.top_level_split(
+                    type_args_str, signs=(["(", "["], [")", ])))
             ]
         else:
             type_params = []
@@ -629,6 +635,9 @@ class ScalaTypeParser(TypeParser):
         segs = str_t.replace(", ", ",").split("[", 1)
         if is_type_var and len(segs) == 1:
             return self.parse_type_parameter(str_t)
+        if " with " in str_t or " & " in str_t or " def " in str_t:
+            # Interesection types
+            return None
         if len(segs) == 1:
             parsed_t = tp.SimpleClassifier(str_t)
             return self.type_spec.get(str_t, parsed_t)
@@ -636,9 +645,13 @@ class ScalaTypeParser(TypeParser):
         type_var_name_mappings = copy(self.class_type_name_map)
         type_var_name_mappings.update(self.func_type_name_map)
         base, type_args_str = segs[0], segs[1][:-1]
+        if type_args_str.startswith("["):
+            # cats.Bifunctor[[a, b]F[G[a, b], G[a, b]]]
+            return None
         if is_type_var and base not in type_var_name_mappings:
             return self.parse_type_parameter(str_t)
-        type_args = re.findall(self.COMMA_SEP_REGEX, type_args_str)
+        type_args = utils.top_level_split(type_args_str,
+                                          signs=(["[", "("], ["]", ")"]))
         new_type_args = []
         for type_arg in type_args:
             new_type_args.append(self.parse_type(type_arg))
@@ -669,7 +682,11 @@ class ScalaTypeParser(TypeParser):
             # Vararg
             return self.parse_type(str_t[:-1])
         if self.is_func_type(str_t):
-            return self.parse_function_type(str_t)
+            try:
+                return self.parse_function_type(str_t)
+            except Exception:
+                # Handle (X, (Y) => Y)
+                pass
         if self.is_native_func_type(str_t):
             return self.parse_native_function_type(str_t)
         if str_t.startswith("(") and str_t.endswith(")"):
