@@ -73,11 +73,13 @@ fi
 
 if [ -f priority.csv ]; then
   echo "Found priority.csv file"
-	while IFS=',' read -r groupid artifactid version; do
-      groupname=${groupid//./\-}
-      libname="$groupname-$artifactid"
-      echo "Testing library $libname"
+  while IFS=',' read -r groupid artifactid version; do
+    groupname=${groupid//./\-}
+    libname="$groupname-$artifactid"
+    echo "Testing library $libname"
+    if [ -d "$libpath/$libname" ]; then
       run_hephaestus "$libpath/$libname" "$args"
+    fi
   done < priority.csv
 else
   for lib in $libpath/*; do
