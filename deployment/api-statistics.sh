@@ -88,7 +88,17 @@ if [ ! -z $libname ]; then
   exit 0
 fi
 
-for lib in $libpath/*; do
-  echo "Testing library $(basename $lib)"
-  run_hephaestus "$lib" "$args"
-done
+if [ -f priority.csv ]; then
+  echo "Found priority.csv file"
+	while IFS=',' read -r groupid artifactid version; do
+      groupname=${groupid//./\-}
+      libname="$groupname-$artifactid"
+      echo "Testing library $libname"
+      run_hephaestus "$libpath/$libname" "$args"
+  done < priority.csv
+else
+  for lib in $libpath/*; do
+    echo "Testing library $(basename $lib)"
+    run_hephaestus "$lib" "$args"
+  done
+fi
