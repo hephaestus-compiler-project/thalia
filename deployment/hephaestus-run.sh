@@ -30,23 +30,33 @@ run_hephaestus()
   # Create a directory containing API docs (in JSON format) coming from
   # the given stdlib and library being exercised.
   mkdir libs
-  cp $stdlib/* libs
+
+  if [ ! -f $libpath/pom.xml ]; then
+    cp $stdlib/* libs
+  fi
   cp $libpath/json-docs/* libs
 
-  rm -rf ~/.m2
-  mvn -f $libpath/pom.xml dependency:tree
-  mvn -f $libpath/dependency.xml dependency:tree
+  if [ -f $libpath/pom.xml ]; then
+    rm -rf ~/.m2
+    mvn -f $libpath/pom.xml dependency:tree
+    mvn -f $libpath/dependency.xml dependency:tree
 
-  classpath=$(mvn -f $libpath/pom.xml dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)
-  depspath=$(mvn -f $libpath/dependency.xml dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)
-  classpath="$classpath:$depspath"
+    classpath=$(mvn -f $libpath/pom.xml dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)
+    depspath=$(mvn -f $libpath/dependency.xml dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)
+    classpath="$classpath:$depspath"
+  else
+    classpath="$(pwd)"
+  fi
 
-  # Create api-rules.json
-  ls $libpath/json-docs | $basedir/create-api-rules.py > api-rules.json
+  rulespath=$libpath/api-rules.json
+  if [ ! -f $rulespath ]; then
+    # Create api-rules.json based on common prefix
+    ls $libpath/json-docs | $basedir/create-api-rules.py > $rulespath
+  fi
 
   base_args="--iterations 10000000 --batch 30 -P -L --transformations 0 \
-    --max-depth 2 --generator api  -k \
-    --library-path "$classpath" --api-doc-path libs --api-rules api-rules.json \
+    --max-depth 2 --generator api -k \
+    --library-path "$classpath" --api-doc-path libs --api-rules $rulespath \
     --max-conditional-depth 3 $args"
   echo "$base_args --name $libname-base" | xargs ./hephaestus.py
   echo "$base_args --name $libname-erase --erase-types" | xargs ./hephaestus.py
