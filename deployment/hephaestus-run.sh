@@ -58,10 +58,19 @@ run_hephaestus()
     --max-depth 2 --generator api -k \
     --library-path "$classpath" --api-doc-path libs --api-rules $rulespath \
     --max-conditional-depth 3 $args"
-  echo "$base_args --name $libname-base" | xargs ./hephaestus.py
-  echo "$base_args --name $libname-erase --erase-types" | xargs ./hephaestus.py
-  echo "$base_args --name $libname-inject --inject-type-error" | xargs ./hephaestus.py
-  echo "$base_args --name $libname-both --erase-types --inject-type-error" | xargs ./hephaestus.py
+
+  if [ ! -d bugs/$libname-base ]; then
+    echo "$base_args --name $libname-base" | xargs ./hephaestus.py
+  fi
+  if [ ! -d bugs/$libname-erase ]; then
+    echo "$base_args --name $libname-erase --erase-types" | xargs ./hephaestus.py
+  fi
+  if [ ! -d bugs/$libname-inject ]
+    echo "$base_args --name $libname-inject --inject-type-error" | xargs ./hephaestus.py
+  fi
+  if [ ! -d bugs/$libname-both ]; then
+    echo "$base_args --name $libname-both --erase-types --inject-type-error" | xargs ./hephaestus.py
+  fi
 }
 
 if [ -z $libpath ]; then
