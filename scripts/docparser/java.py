@@ -325,6 +325,8 @@ class JavaAPIDocConverter(APIDocConverter):
         # type. The package prefix is found in a attribute of each anchor
         # named "title".
         for anchor in anchors:
+            if anchor.string is None:
+                continue
             if anchor.string.startswith("@"):
                 # Ignore annotations
                 if anchor.string not in ["@FunctionalInterface", "@interface"]:
