@@ -31,7 +31,8 @@ run_hephaestus()
   # the given stdlib and library being exercised.
   mkdir libs
 
-  if [ ! -f $libpath/pom.xml ]; then
+  if [ -f $libpath/pom.xml ]; then
+    # This is an external lib; so add it on top of stdlib
     cp $stdlib/* libs
   fi
   cp $libpath/json-docs/* libs
@@ -65,7 +66,7 @@ run_hephaestus()
   if [ ! -d bugs/$libname-erase ]; then
     echo "$base_args --name $libname-erase --erase-types" | xargs ./hephaestus.py
   fi
-  if [ ! -d bugs/$libname-inject ]
+  if [ ! -d bugs/$libname-inject ]; then
     echo "$base_args --name $libname-inject --inject-type-error" | xargs ./hephaestus.py
   fi
   if [ ! -d bugs/$libname-both ]; then
