@@ -4,7 +4,7 @@ import re
 from pathlib import Path
 
 from docparser.base import APIDocConverter
-from docparser.utils import file2html, dict2json
+from docparser.utils import file2html, dict2json, top_level_split
 
 
 class KotlinAPIDocConverter(APIDocConverter):
@@ -14,6 +14,7 @@ class KotlinAPIDocConverter(APIDocConverter):
 
     def __init__(self, args):
         super().__init__()
+        self.class_name = None
 
     def process(self, args):
         toplevel_path = Path(args.input).joinpath("index.html")
@@ -25,6 +26,8 @@ class KotlinAPIDocConverter(APIDocConverter):
             apidoc_path = str(path)
             self.api_path = os.path.dirname(path)
             data = self.process_class(file2html(apidoc_path))
+            if data is None:
+                continue
             data["language"] = args.language
             dict2json(args.output, data)
 
@@ -86,7 +89,6 @@ class KotlinAPIDocConverter(APIDocConverter):
                 anchor.string.replace_with(package_prefix + "." + anchor.text)
 
     def _get_super_classes_interfaces(self, html_doc):
-        regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
         element = html_doc.select(".cover .platform-hinted .symbol")[0]
         # remove these elements
         rem_elems = element.find_all("span", {"class": "top-right-position"}) + \
@@ -94,13 +96,17 @@ class KotlinAPIDocConverter(APIDocConverter):
         for e in rem_elems:
             e.decompose()
         self._replace_anchors_with_package_prefix(element.select("a"))
-        segs = element.text.split(": ")
-        if len(segs) == 1:
-            # No super classes / interfaces.
-            return []
-        text = element.text.split(": ")[1].replace(" , ", ",").replace(
-            ", ", ",").strip(" ")
-        return re.findall(regex, text)
+        text = re.sub("\\(.+\\)", "", element.text)
+        if self.class_name + "<" in text:
+            segs = text.split("> : ")
+            if len(segs) == 1:
+                return []
+            text = segs[-1].strip()
+        else:
+            if " : " not in text:
+                return []
+            text = text.split(" : ")[-1].strip()
+        return top_level_split(text)
 
     def extract_package_name(self, html_doc, top_level=False):
         packages = html_doc.select(".breadcrumbs a")[1:]
@@ -109,7 +115,7 @@ class KotlinAPIDocConverter(APIDocConverter):
         return ".".join([p.text for p in packages])
 
     def extract_class_name(self, html_doc):
-        return html_doc.select(".cover a")[0].text
+        return html_doc.select(".cover .cover")[0].text
 
     def extract_class_type_parameters(self, html_doc):
         element = html_doc.select(".cover .platform-hinted .symbol")[0]
@@ -158,6 +164,9 @@ class KotlinAPIDocConverter(APIDocConverter):
         return parent
 
     def process_class(self, html_doc):
+        text = html_doc.select(".cover .platform-hinted .symbol")[0].text
+        if "annotation class" in text:
+            return None
         class_name = self.extract_class_name(html_doc)
         self.class_name = class_name
         package_name = self.extract_package_name(html_doc)
