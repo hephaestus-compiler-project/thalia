@@ -294,14 +294,14 @@ class KotlinTypeParser(TypeParser):
         )
 
     def parse_native_function_type(self, str_t: str) -> tp.ParameterizedType:
-        segs = str_t.replace(", ", ",").split("[", 1)
+        segs = str_t.replace(", ", ",").split("<", 1)
         type_args_str = segs[1][:-1]
         type_args = utils.top_level_split(
             type_args_str, signs=(["(", "<"], [")", ">"]))
         new_type_args = []
         for type_arg in type_args:
             new_type_args.append(self.parse_type(type_arg))
-        return sc.FunctionType(len(new_type_args) - 1).new(new_type_args)
+        return kt.FunctionType(len(new_type_args) - 1).new(new_type_args)
 
     def parse_wildcard(self, str_t) -> tp.WildCardType:
         if str_t == "*":
