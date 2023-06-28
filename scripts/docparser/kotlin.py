@@ -134,7 +134,7 @@ class KotlinAPIDocConverter(APIDocConverter):
         for e in rem_elems:
             e.decompose()
         self._replace_anchors_with_package_prefix(element.select("a"))
-        text = re.sub("\\(.+\\)", "", element.text).replace(", ", ",")
+        text = re.sub(r"\(.+\)", "", element.text).replace(", ", ",")
         if self.class_name + "<" in text:
             segs = text.split("> : ")
             if len(segs) == 1:
@@ -242,9 +242,9 @@ class KotlinAPIDocConverter(APIDocConverter):
         return class_obj
 
     @map_type
-    def extract_method_receiver(self, method_doc):
+    def extract_method_receiver(self, method_doc, name):
         regex = re.compile(
-            r".*fun (<.*> )?(.*)\.[a-zA-Z0-9_]+\(.*\).*")
+            r".*fun (<.*> )?(.*)\." + name + r"\(.*\).*")
         match = re.match(regex, method_doc.text)
         if not match:
             return None
@@ -298,7 +298,7 @@ class KotlinAPIDocConverter(APIDocConverter):
 
     def extract_field_name(self, field_doc):
         field_doc.find("span", {"class": "top-right-position"}).decompose()
-        regex = re.compile(".*va[lr] (.+\\.)?([^ <>\\.]+): .*")
+        regex = re.compile(r".*va[lr] (.+\.)?([^ <>\.]+): .*")
         match = re.match(regex, field_doc.text)
         assert match is not None
         return match.group(2)
@@ -333,7 +333,7 @@ class KotlinAPIDocConverter(APIDocConverter):
 
     @map_type
     def extract_field_receiver(self, field_doc):
-        regex = re.compile(".*va[lr] (<.+> )?(.+)\\.[a-zA-Z0-9_]+: .*")
+        regex = re.compile(r".*va[lr] (<.+> )?(.+)\.[a-zA-Z0-9_]+: .*")
         match = re.match(regex, field_doc.text)
         if not match:
             return None
@@ -378,15 +378,16 @@ class KotlinAPIDocConverter(APIDocConverter):
                 method_doc, is_constructor)
             param_types = self.extract_method_parameter_types(
                 method_doc, is_constructor)
-            access_mod = self.extract_method_access_mod(method_doc)
             if param_types is None:
                 continue
+            access_mod = self.extract_method_access_mod(method_doc)
+            receiver = self.extract_method_receiver(method_doc, method_name)
             method_obj = {
                 "name": method_name,
                 "parameters": param_types,
                 "type_parameters": type_params,
                 "return_type": ret_type,
-                "receiver": self.extract_method_receiver(method_doc),
+                "receiver": receiver,
                 "is_static": False,
                 "is_constructor": is_constructor,
                 "access_mod": access_mod
