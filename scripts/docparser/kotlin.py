@@ -53,7 +53,7 @@ class KotlinAPIDocConverter(APIDocConverter):
         java_regex = re.compile(
             "https://docs.oracle.com/.*/api/(.*)/[^/]+.html")
         kotlin_regex = re.compile(
-            ".*/(docs/kotlin|stdlib)/(.+)/-[^/]+/index.html"
+            ".*/(docs/kotlin|stdlib|kotlin-stdlib)/(.+)/-[^/]+/index.html"
         )
         for anchor in anchors:
             href = anchor.get("href")
@@ -73,7 +73,11 @@ class KotlinAPIDocConverter(APIDocConverter):
             match = re.match(regex, href)
             if not match:
                 continue
-            package_prefix = match.group(2).replace("/", ".")
+            if href.startswith("https://docs.oracle.com"):
+                group = match.group(1)
+            else:
+                group = match.group(2)
+            package_prefix = group.replace("/", ".")
             segs = package_prefix.rsplit(".", 1)
             if segs[-1].startswith("-"):
                 # Handle nested class
@@ -227,7 +231,7 @@ class KotlinAPIDocConverter(APIDocConverter):
             self._replace_anchors_with_package_prefix(param.select("a"))
             segs = param.text.strip(", ").split(": ", 1)
             assert len(segs) == 2
-            types.append(segs[1])
+            types.append(segs[1].replace('@kotlin.UnsafeVariance\xa0', ''))
         return types
 
     def extract_method_access_mod(self, method_doc):
