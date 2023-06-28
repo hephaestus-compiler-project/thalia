@@ -164,14 +164,24 @@ class KotlinAPIDocConverter(APIDocConverter):
         for e in rem_elems:
             e.decompose()
         self._replace_anchors_with_package_prefix(element.select("a"))
-        segs = element.text.split(":")
-        cls_text = segs[0].rstrip()
-        segs = cls_text.split("<")
+        segs = element.text.split(self.class_name + "<", 1)
         if len(segs) == 1:
             return []
-        regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
-        text = segs[1][:-1].replace(", ", ",")
-        return re.findall(regex, text)
+        text = "<" + segs[1]
+        balance = 1
+        type_param_str = ""
+        i = 1
+        while balance >= 1:
+            c = text[i]
+            if c == "<":
+                balance += 1
+            if c == ">":
+                balance -= 1
+            if balance:
+                type_param_str += c
+            i += 1
+        text = type_param_str.replace(", ", ",")
+        return top_level_split(text)
 
     def extract_super_class(self, html_doc):
         # In general, we cannot distinguish between interfaces and classes.
@@ -185,7 +195,7 @@ class KotlinAPIDocConverter(APIDocConverter):
         if 'abstract class' in text:
             return self.ABSTRACT_CLASS
         if 'enum' in text:
-            return self.ENUM
+            return self.INTERFACE
         return self.REGULAR_CLASS
 
     def extract_super_interfaces(self, html_doc):
