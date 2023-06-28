@@ -330,13 +330,14 @@ def find_incompatible_type_args(etype: tp.ParameterizedType,
 
     new_type_args = []
     changed = False
-    for type_arg in etype.type_args:
+    for i, type_arg in enumerate(etype.type_args):
         if type_arg.is_wildcard() and type_arg.is_invariant():
             new_type_args.append(type_arg)
             continue
 
         if not type_arg.is_wildcard() and supertypes_irrelevant and \
-                utils.random.bool():
+                utils.random.bool() and \
+                etype.t_constructor.type_parameters[i].is_invariant():
             variance = utils.random.choice([tp.Covariant,
                                             tp.Contravariant])
             bound = type_arg

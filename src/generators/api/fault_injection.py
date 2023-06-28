@@ -3,7 +3,8 @@ import itertools
 from typing import Iterable
 
 from src import utils
-from src.ir import types as tp, type_utils as tu
+from src.ir import (types as tp, type_utils as tu, groovy_types as gt,
+                    scala_types as sc)
 from src.ir.builtins import BuiltinFactory
 from src.generators.api import api_graph as ag
 
@@ -34,6 +35,24 @@ class FaultInjection():
                  bt_factory: BuiltinFactory):
         self.api_graph = api_graph
         self.bt_factory = bt_factory
+        self.excluded_types = {
+            "groovy": [
+                self.bt_factory.get_string_type(),
+                self.bt_factory.get_boolean_type(),
+                gt.Array.new([gt.Object])
+            ],
+            "scala": [
+                sc.AnyRef,
+                sc.Any,
+                tp.SimpleClassifier("scala.Singleton")
+            ]
+        }
+
+    def is_type_excluded(self, t: tp.Type) -> bool:
+        excluded_types = self.excluded_types.get(
+            self.bt_factory.get_language(), []
+        )
+        return t in excluded_types
 
     def compute_markings(self, t: tp.Type, api: ag.APINode):
         """
@@ -67,17 +86,22 @@ class FaultInjection():
         variances = {tp.Covariant, tp.Contravariant}
         return [v for v in variances if v != valid_variance]
 
-    def _create_wildcard_type_arg(self, type_arg, marks):
+    def _create_wildcard_type_arg(self, type_arg, marks, parameters):
         variances = self._get_incorrect_variances(marks)
         variance = utils.random.choice(variances)
         bound = type_arg
-        if utils.random.bool():
+        if utils.random.bool() and not all(parameters[m].is_wildcard() and
+                                           parameters[m].is_covariant()
+                                           for m in marks):
+            # We handle cases like:
+            # m(Foo<out T>): in this case the receiver should not be covariant.
             bound = self.api_graph.get_random_type()
         new_type_arg = tp.WildCardType(bound=bound,
                                        variance=variance)
         return new_type_arg
 
-    def tweak_type_arguments(self, t: tp.ParameterizedType, markings):
+    def tweak_type_arguments(self, t: tp.ParameterizedType, markings,
+                             parameters):
         new_type_args = []
         changed = False
         for i, type_arg in enumerate(t.type_args):
@@ -93,8 +117,8 @@ class FaultInjection():
                 continue
 
             if not type_arg.is_wildcard() and utils.random.bool():
-                new_type_args.append(self._create_wildcard_type_arg(type_arg,
-                                                                    marks))
+                new_type_args.append(self._create_wildcard_type_arg(
+                    type_arg, marks, parameters))
                 changed = True
                 continue
             new_type_arg = tu.find_irrelevant_type(
@@ -136,13 +160,18 @@ class FaultInjection():
             # The type parameters of receiver are not used in the signature
             # of the API. So we don't inject any fault here.
             return None
-        return self.tweak_type_arguments(receiver, markings)
+        if self.is_type_excluded(receiver):
+            return None
+        parameters = list(itertools.product(*encoding.parameters))
+        return self.tweak_type_arguments(receiver, markings,
+                                         parameters[0])
 
     def inject_fault_ret_type(self, encoding):
         assert len(encoding.returns) == 1
         ret_type = list(encoding.returns)[0]
-        irr_type = tu.find_irrelevant_type(ret_type,
-                                           self.api_graph.get_reg_types(),
+        types = [t for t in self.api_graph.get_reg_types()
+                 if not self.is_type_excluded(t)]
+        irr_type = tu.find_irrelevant_type(ret_type, types,
                                            self.bt_factory,
                                            subtypes_irrelevant=True)
         return irr_type
@@ -169,7 +198,8 @@ class FaultInjection():
         assert len(parameters) == 1
         parameters = {i: p for i, p in enumerate(parameters[0])
                       if (p != self.bt_factory.get_any_type() and
-                          p != self.api_graph.EMPTY)
+                          p != self.api_graph.EMPTY and
+                          not self.is_type_excluded(p))
                       }
         if not parameters:
             return None
