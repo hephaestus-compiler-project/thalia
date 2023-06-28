@@ -358,8 +358,7 @@ class KotlinAPIDocConverter(APIDocConverter):
         field_objs = []
         for field_doc in fields:
             field_name = self.extract_field_name(field_doc)
-            self._replace_anchors_with_package_prefix(field_doc.select("a"),
-                                                      [field_name])
+            self._replace_anchors_with_package_prefix(field_doc.select("a"))
             field_obj = {
                 "name": field_name,
                 "type": self.extract_field_type(field_doc),
@@ -378,8 +377,7 @@ class KotlinAPIDocConverter(APIDocConverter):
         method_objs = []
         for method_doc in methods:
             method_name = self.extract_method_name(method_doc, is_constructor)
-            self._replace_anchors_with_package_prefix(method_doc.select("a"),
-                                                      [method_name])
+            self._replace_anchors_with_package_prefix(method_doc.select("a"))
             if method_name == self.EXCLUDED_METHOD_NAME:
                 continue
             ret_type = self.extract_method_return_type(method_doc,
