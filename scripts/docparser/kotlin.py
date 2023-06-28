@@ -7,6 +7,41 @@ from docparser.base import APIDocConverter
 from docparser.utils import file2html, dict2json, top_level_split
 
 
+def map_type(func):
+    def inner_func(*args):
+        def _map_type(str_t):
+            if isinstance(str_t, (list, tuple, set)):
+                return [_map_type(t) for t in str_t]
+
+            # Now replace literal types to standard types, e.g.,
+            # Char("\") => Char.
+            if str_t.startswith("Char("):
+                return "Char"
+            elif str_t.startswith("Byte("):
+                return "Byte"
+            elif str_t.startswith("Short("):
+                return "Short"
+            elif str_t.startswith("Int("):
+                return "Int"
+            elif str_t.startswith("Long("):
+                return "Long"
+            elif str_t.startswith("Float("):
+                return "Float"
+            elif str_t.startswith("Double("):
+                return "Double"
+            elif str_t.startswith("Boolean("):
+                return "Boolean"
+            # Now handle named arguments (e.g., val x: String = "fda")
+            return str_t.split(" = ", 1)[0]
+
+        res = func(*args)
+        if res is None:
+            return None
+        return _map_type(res)
+
+    return inner_func
+
+
 class KotlinAPIDocConverter(APIDocConverter):
     EXCLUDED_METHOD_NAME = "<no name provided>"
     PROTECTED = "protected"
@@ -48,7 +83,8 @@ class KotlinAPIDocConverter(APIDocConverter):
         }
         return api
 
-    def _replace_anchors_with_package_prefix(self, anchors):
+    def _replace_anchors_with_package_prefix(self, anchors,
+                                             excluded_strs=[]):
         # This method replaces the text of all anchors (note that the text
         # corresponds to type names) with the fully quallified name of the
         # type. The package prefix is found in a attribute of each anchor
@@ -56,10 +92,12 @@ class KotlinAPIDocConverter(APIDocConverter):
         java_regex = re.compile(
             "https://docs.oracle.com/.*/api/(.*)/[^/]+.html")
         kotlin_regex = re.compile(
-            ".*/(docs/kotlin|stdlib|kotlin-stdlib)/(.+)/-[^/]+/index.html"
+            ".*/(docs/kotlin|stdlib|kotlin-stdlib)/(.+)/-[^/]+/index.html$"
         )
         for anchor in anchors:
             href = anchor.get("href")
+            if anchor.string in excluded_strs:
+                continue
             if not href.startswith("https") and (href.startswith("-")
                                                  or href.startswith(".")
                                                  or anchor.string.startswith(
@@ -96,7 +134,7 @@ class KotlinAPIDocConverter(APIDocConverter):
         for e in rem_elems:
             e.decompose()
         self._replace_anchors_with_package_prefix(element.select("a"))
-        text = re.sub("\\(.+\\)", "", element.text)
+        text = re.sub("\\(.+\\)", "", element.text).replace(", ", ",")
         if self.class_name + "<" in text:
             segs = text.split("> : ")
             if len(segs) == 1:
@@ -117,6 +155,7 @@ class KotlinAPIDocConverter(APIDocConverter):
     def extract_class_name(self, html_doc):
         return html_doc.select(".cover .cover")[0].text
 
+    @map_type
     def extract_class_type_parameters(self, html_doc):
         element = html_doc.select(".cover .platform-hinted .symbol")[0]
         # remove these elements
@@ -202,6 +241,7 @@ class KotlinAPIDocConverter(APIDocConverter):
         }
         return class_obj
 
+    @map_type
     def extract_method_receiver(self, method_doc):
         regex = re.compile(
             r".*fun (<.*> )?(.*)\.[a-zA-Z0-9_]+\(.*\).*")
@@ -210,6 +250,7 @@ class KotlinAPIDocConverter(APIDocConverter):
             return None
         return match.group(2)
 
+    @map_type
     def extract_method_type_parameters(self, method_doc, is_constructor):
         if is_constructor:
             return []
@@ -224,6 +265,7 @@ class KotlinAPIDocConverter(APIDocConverter):
             type_parameters = re.findall(regex, type_parameters)
         return type_parameters
 
+    @map_type
     def extract_method_return_type(self, method_doc, is_constructor):
         if is_constructor:
             return None
@@ -234,10 +276,10 @@ class KotlinAPIDocConverter(APIDocConverter):
             return "Unit"
         return segs[1]
 
+    @map_type
     def extract_method_parameter_types(self, method_doc, is_constructor):
         types = []
         for param in method_doc.select(".parameter"):
-            self._replace_anchors_with_package_prefix(param.select("a"))
             segs = param.text.strip(", ").split(": ", 1)
             assert len(segs) == 2
             types.append(segs[1].replace('@kotlin.UnsafeVariance\xa0', ''))
@@ -261,6 +303,7 @@ class KotlinAPIDocConverter(APIDocConverter):
         assert match is not None
         return match.group(2)
 
+    @map_type
     def extract_field_type(self, field_doc):
         return field_doc.text.split(": ")[1]
 
@@ -278,6 +321,7 @@ class KotlinAPIDocConverter(APIDocConverter):
         ]
         return "override" in keywords
 
+    @map_type
     def extract_field_type_parameters(self, field_doc):
         regex = re.compile(".*va[lr] <(.+)> .+: .*")
         match = re.match(regex, field_doc.text)
@@ -287,6 +331,7 @@ class KotlinAPIDocConverter(APIDocConverter):
         regex = re.compile(r'(?:[^,<]|<[^>]*>)+')
         return re.findall(regex, type_parameters)
 
+    @map_type
     def extract_field_receiver(self, field_doc):
         regex = re.compile(".*va[lr] (<.+> )?(.+)\\.[a-zA-Z0-9_]+: .*")
         match = re.match(regex, field_doc.text)
@@ -302,9 +347,11 @@ class KotlinAPIDocConverter(APIDocConverter):
     def process_fields(self, fields):
         field_objs = []
         for field_doc in fields:
-            self._replace_anchors_with_package_prefix(field_doc.select("a"))
+            field_name = self.extract_field_name(field_doc)
+            self._replace_anchors_with_package_prefix(field_doc.select("a"),
+                                                      [field_name])
             field_obj = {
-                "name": self.extract_field_name(field_doc),
+                "name": field_name,
                 "type": self.extract_field_type(field_doc),
                 "is_final": self.is_field_final(field_doc),
                 "is_override": self.is_field_override(field_doc),
@@ -320,8 +367,9 @@ class KotlinAPIDocConverter(APIDocConverter):
     def process_methods(self, methods, is_constructor):
         method_objs = []
         for method_doc in methods:
-            self._replace_anchors_with_package_prefix(method_doc.select("a"))
             method_name = self.extract_method_name(method_doc, is_constructor)
+            self._replace_anchors_with_package_prefix(method_doc.select("a"),
+                                                      [method_name])
             if method_name == self.EXCLUDED_METHOD_NAME:
                 continue
             ret_type = self.extract_method_return_type(method_doc,
