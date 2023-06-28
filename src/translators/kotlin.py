@@ -106,7 +106,20 @@ class KotlinTranslator(BaseTranslator):
             package_str = 'package ' + self.package + '\n'
         else:
             package_str = ''
-        self.program = package_str + '\n\n'.join(
+        imports = [
+            "import kotlin.collections.*",
+            "import kotlin.comparisons.*",
+            "import kotlin.concurrent.*",
+            "import kotlin.io.*",
+            "import kotlin.io.encoding.*",
+            "import kotlin.io.path.*",
+            "import kotlin.math.*",
+            "import kotlin.streams.*",
+            "import kotlin.text.*",
+            "import kotlin.time.*",
+        ]
+        imports = "\n".join(imports) + "\n"
+        self.program = package_str + "\n" + imports + '\n\n'.join(
             self.pop_children_res(children))
 
     @append_to
