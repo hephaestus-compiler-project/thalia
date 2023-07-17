@@ -10,6 +10,7 @@ from src.ir.context import Context
 from src.generators import generators as gens, utils as gu, Generator
 from src.generators.api import (api_graph as ag, builder, matcher as match,
                                 type_erasure as te, fault_injection as fi)
+from src.generators.api import utils as au
 from src.modules.logging import log
 from src.translators import TRANSLATORS
 
@@ -240,6 +241,10 @@ class APIGenerator(Generator):
         program_index = 0
         i = 1
         for encoding in self.encodings:
+            overloaded_methods = self.api_graph.get_overloaded_methods(
+                self.api_graph.get_input_type(encoding.api),
+                encoding.api,
+            )
             types = (encoding.receivers, *encoding.parameters,
                      encoding.returns)
             if types in self.visited:
@@ -249,6 +254,14 @@ class APIGenerator(Generator):
                 typing_seqs, is_incorrect = self.compute_typing_sequences(
                     encoding, types)
                 for typing_seq in typing_seqs:
+                    # There is a typing sequence that triggers overload
+                    # ambiguity.
+                    if any(au.is_typing_seq_ambiguous(encoding.api, m,
+                                                      typing_seq[1:-1])
+                           for m in overloaded_methods):
+                        program_index += 1
+                        continue
+
                     # Generate a test case from the typing sequence:
                     # (receiver, parameters, return_type)
                     if program_index < self.start_index:

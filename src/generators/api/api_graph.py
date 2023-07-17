@@ -551,6 +551,26 @@ class APIGraph():
 
         return possibles_types
 
+    def get_overloaded_methods(self, receiver: tp.Type,
+                               method: Union[Method, Constructor]
+                               ) -> Set[Method]:
+        if not isinstance(method, (Method, Constructor)):
+            return set()
+        methods = set()
+        if receiver.is_parameterized():
+            receiver = self.get_type_by_name(receiver.name)
+        if receiver is not None and receiver not in self.api_graph:
+            return methods
+
+        if receiver is None:
+            return {m for m in self.api_graph.nodes()
+                    if isinstance(m, Method) and (
+                        m.name == method.name and m != method)}
+
+        # TODO: Also, check the inheritance chain.
+        return {m for m in self.api_graph.neighbors(receiver)
+                if m.name == method.name and m != method}
+
     def get_functional_type(self, etype: tp.Type) -> tp.ParameterizedType:
         if etype.is_parameterized():
             # Check if this the given type is a native function type, e.g.,

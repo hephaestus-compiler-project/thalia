@@ -5,6 +5,7 @@ import networkx as nx
 
 from src import utils
 from src.ir import types as tp, type_utils as tu
+from src.generators.api.nodes import Method
 
 
 class UpperBoundConstraint(NamedTuple):
@@ -299,3 +300,25 @@ def check_validity_api_parameters(api, type_var_assignments: dict) -> bool:
         if param_type.is_wildcard() and not param_type.is_contravariant():
             return False
     return True
+
+
+def is_typing_seq_ambiguous(method: Method,
+                            other_method: Method,
+                            typing_seq: List[tp.Type]) -> bool:
+    """
+    Checks whether the given typing sequence can trigger an overload method
+    ambiguity.
+    """
+    if len(method.parameters) != len(other_method.parameters):
+        return False
+    other_typing_seq = [p.t for p in other_method.parameters]
+    curr_typing_seq = [p.t for p in method.parameters]
+    matches = all(t.is_subtype(other_typing_seq[i])
+                  for i, t in enumerate(typing_seq))
+    if not matches:
+        return False
+    for i, t in enumerate(curr_typing_seq):
+        other_t = other_typing_seq[i]
+        if not t.is_subtype(other_t) and not other_t.is_subtype(t):
+            return True
+    return False
