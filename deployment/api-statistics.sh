@@ -26,12 +26,15 @@ run_hephaestus()
   cp $stdlib/* libs
   cp $libpath/json-docs/* libs
 
-  # Create api-rules.json
-  ls $libpath/json-docs | $basedir/create-api-rules.py > api-rules.json
+  rulespath=$libpath/api-rules.json
+  if [ ! -f $rulespath ]; then
+    # Create api-rules.json based on common prefix
+    ls $libpath/json-docs | $basedir/create-api-rules.py > $rulespath
+  fi
 
   base_args="--iterations 1 --batch 1 -P -L --transformations 0 \
     --max-depth 2 --generator api  --dry-run \
-    --api-doc-path libs --api-rules api-rules.json \
+    --api-doc-path libs --api-rules $rulespath \
     --max-conditional-depth 2 --language "$language""
   echo "$base_args" | xargs ./hephaestus.py
   if [ $? -ne 0 ]; then
