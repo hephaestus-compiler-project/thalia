@@ -394,4 +394,16 @@ def test_is_typing_sequence_ambiguous_parameterized():
     assert not au.is_typing_seq_ambiguous(method2, method1, typing_seq,
                                           [kt.String])
     assert not au.is_typing_seq_ambiguous(method2, method1, typing_seq,
-                                          [kt.String], with_erasure=False)
+                                          [kt.String], with_erasure=True)
+
+    type_param1 = tp.TypeParameter("T", bound=t1)
+    type_param2 = tp.TypeParameter("T", bound=t3)
+    method1 = nodes.Method("m", "", [nodes.Parameter(type_param1, False)],
+                           [type_param1])
+    method2 = nodes.Method("m", "", [nodes.Parameter(type_param2, False)],
+                           [type_param2])
+    typing_seq = [t3]
+    assert not au.is_typing_seq_ambiguous(method1, method2, typing_seq,
+                                          [t1], with_erasure=False)
+    assert au.is_typing_seq_ambiguous(method1, method2, typing_seq,
+                                      [t1], with_erasure=True)
