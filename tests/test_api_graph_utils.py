@@ -1,7 +1,7 @@
 import networkx as nx
 
 from src.ir import types as tp, kotlin_types as kt
-from src.generators.api import utils as au
+from src.generators.api import utils as au, nodes
 
 
 def test_compute_assignment_graph():
@@ -284,3 +284,25 @@ def test_collect_constraints_wildcard():
             t1: {au.EqualityConstraint(kt.Number)},
             t2: {au.EqualityConstraint(t1)},
         }
+
+
+def test_is_typing_sequence_ambiguous_simple_classifier():
+    t1 = tp.SimpleClassifier("A")
+    t2 = tp.SimpleClassifier("B")
+    t3 = tp.SimpleClassifier("C", [t1])
+
+    method1 = nodes.Method("m", "", [nodes.Parameter(t1, False)], [])
+    method2 = nodes.Method("m", "", [nodes.Parameter(t2, False)], [])
+    typing_seq = [t1]
+    assert not au.is_typing_seq_ambiguous(method1, method2, typing_seq)
+
+    method1 = nodes.Method("m", "", [nodes.Parameter(t3, False)], [])
+    method2 = nodes.Method("m", "", [nodes.Parameter(t1, False)], [])
+    typing_seq = [t3]
+    assert not au.is_typing_seq_ambiguous(method1, method2, typing_seq)
+
+    t3 = tp.SimpleClassifier("C", [t1, t2])
+    method1 = nodes.Method("m", "", [nodes.Parameter(t1, False)], [])
+    method2 = nodes.Method("m", "", [nodes.Parameter(t2, False)], [])
+    typing_seq = [t3]
+    assert au.is_typing_seq_ambiguous(method1, method2, typing_seq)
