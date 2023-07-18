@@ -303,15 +303,16 @@ def check_validity_api_parameters(api, type_var_assignments: dict) -> bool:
     return True
 
 
+def _get_bound(t, sub):
+    return (
+        cfg.bt_factory.get_any_type()
+        if t.bound is None
+        else tp.substitute_type(t.bound, sub)
+    )
+
+
 def is_substitution_ambiguous(type_parameters, other_type_parameters,
                               s1, s2) -> bool:
-
-    def _get_bound(t, sub):
-        return (
-            cfg.bt_factory.get_any_type()
-            if t.bound is None
-            else tp.substitute_type(t.bound, sub)
-        )
 
     if len(s1) != len(s2):
         return False
@@ -327,11 +328,12 @@ def is_substitution_ambiguous(type_parameters, other_type_parameters,
     return True
 
 
-def _default_substitution(type_parameters: List[tp.TypeParameter]):
+def _default_substitution(type_parameters: List[tp.TypeParameter],
+                          with_erasure: bool):
     sub = {}
     for k in type_parameters:
         if k.bound is None:
-            sub[k] = cfg.bt_factory.get_any_type()
+            sub[k] = cfg.bt_factory.get_any_type() if not with_erasure else k
         else:
             sub[k] = tp.substitute_type(k.bound, sub)
     return sub
@@ -340,7 +342,8 @@ def _default_substitution(type_parameters: List[tp.TypeParameter]):
 def is_typing_seq_ambiguous(method: Method,
                             other_method: Method,
                             typing_seq: List[tp.Type],
-                            type_args: List[tp.Type]) -> bool:
+                            type_args: List[tp.Type],
+                            with_erasure: bool = False) -> bool:
     """
     Checks whether the given typing sequence can trigger an overload method
     ambiguity.
@@ -363,15 +366,20 @@ def is_typing_seq_ambiguous(method: Method,
                                else tp.substitute_type(type_param.bound, sub))
 
     sub1 = {k: type_args[i] for i, k in enumerate(method.type_parameters)}
-    if not is_substitution_ambiguous(method.type_parameters,
-                                     other_method.type_parameters,
-                                     sub1, sub):
+    if not with_erasure and not is_substitution_ambiguous(
+            method.type_parameters, other_method.type_parameters, sub1, sub):
         return False
-    sub1 = _default_substitution(method.type_parameters)
-    sub2 = _default_substitution(other_method.type_parameters)
+    sub1 = _default_substitution(method.type_parameters, with_erasure)
+    sub2 = _default_substitution(other_method.type_parameters, with_erasure)
     for i, t in enumerate(curr_typing_seq):
         t = tp.substitute_type(t, sub1)
         other_t = tp.substitute_type(other_typing_seq[i], sub2)
-        if not t.is_subtype(other_t):
+        is_subtype = t.is_subtype(other_t)
+        if not with_erasure and not is_subtype:
+            return True
+        if not with_erasure:
+            continue
+        if t == other_t or tu.unify_types(other_t, t, cfg.bt_factory,
+                                          same_type=False):
             return True
     return False

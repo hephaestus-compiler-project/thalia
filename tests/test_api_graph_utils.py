@@ -351,6 +351,8 @@ def test_is_typing_sequence_ambiguous_parameterized():
     typing_seq = [list_t.new([kt.String])]
     assert not au.is_typing_seq_ambiguous(method1, method2, typing_seq,
                                           [kt.String])
+    assert au.is_typing_seq_ambiguous(method1, method2, typing_seq,
+                                      [kt.String], with_erasure=True)
 
 
     # <T> m(List<T>)
@@ -363,6 +365,8 @@ def test_is_typing_sequence_ambiguous_parameterized():
     typing_seq = [list_t.new([kt.String])]
     assert not au.is_typing_seq_ambiguous(method1, method2, typing_seq,
                                           [kt.String])
+    assert not au.is_typing_seq_ambiguous(method1, method2, typing_seq,
+                                          [kt.String], with_erasure=True)
 
 
     # <T> m(T)
@@ -389,3 +393,5 @@ def test_is_typing_sequence_ambiguous_parameterized():
     typing_seq = [kt.String, t2]
     assert not au.is_typing_seq_ambiguous(method2, method1, typing_seq,
                                           [kt.String])
+    assert not au.is_typing_seq_ambiguous(method2, method1, typing_seq,
+                                          [kt.String], with_erasure=False)
