@@ -322,8 +322,7 @@ def is_substitution_ambiguous(type_parameters, other_type_parameters,
             return False
         t1_bound = _get_bound(k1, s1)
         t2_bound = _get_bound(other_type_parameters[i], s2)
-        if not t1_bound.is_subtype(t2_bound) and not t2_bound.is_subtype(
-                t1_bound):
+        if not t1_bound.is_subtype(t2_bound):
             return True
     return True
 
@@ -373,6 +372,6 @@ def is_typing_seq_ambiguous(method: Method,
     for i, t in enumerate(curr_typing_seq):
         t = tp.substitute_type(t, sub1)
         other_t = tp.substitute_type(other_typing_seq[i], sub2)
-        if not t.is_subtype(other_t) and not other_t.is_subtype(t):
+        if not t.is_subtype(other_t):
             return True
     return False
