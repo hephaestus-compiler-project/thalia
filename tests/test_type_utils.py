@@ -1496,3 +1496,21 @@ def test_substitute_invariant_with():
     assert tutils.substitute_invariant_wildcard_with(foo_t,
                                                      [kt.String]) == foo_t
 
+
+def test_merge_substitutions():
+    t1 = tp.TypeParameter("T1")
+    t2 = tp.TypeParameter("T2")
+    assert tutils.merge_substitutions({}, {}) == {}
+    assert tutils.merge_substitutions({t1: kt.String}, {}) == {t1: kt.String}
+    assert tutils.merge_substitutions({}, {t1: kt.String}) == {t1: kt.String}
+    assert tutils.merge_substitutions({t1: kt.String}, {t2: kt.String}) == {
+        t1: kt.String, t2: kt.String
+    }
+    assert tutils.merge_substitutions({t1: kt.String}, {t1: kt.Integer}) == {
+        t1: kt.Any
+    }
+
+    t1 = tp.TypeParameter("T1", bound=kt.Number)
+    assert tutils.merge_substitutions({t1: kt.Short}, {t1: kt.Integer}) == {
+        t1: kt.Number
+    }

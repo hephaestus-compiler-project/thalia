@@ -830,6 +830,8 @@ def _compute_type_variable_assignments(
             # Unfortunately, we are unable to instantiate type variables with
             # the given constructors.
             return None
+        a_types = [t.get_type() if isinstance(t, ast.ClassDeclaration) else t
+                   for t in a_types]
         c = select_random_type([t for t in a_types
                                 if not t.is_type_constructor()
                                 or not t.has_recursive_bounds(cfg.bt_factory)])
@@ -1621,3 +1623,23 @@ def build_type_variable_dependencies(t1: tp.Type, t2: tp.Type):
             parent = st
             supertypes = _get_supertypes(st)
     return type_deps
+
+
+def merge_substitutions(s1, s2):
+    """
+    This function merges two substitutions.
+    """
+    new_sub = {}
+    for k, t1 in s1.items():
+        t2 = s2.get(k)
+        if t2 is None:
+            new_sub[k] = t1
+            continue
+        if k.bound is None:
+            new_sub[k] = cfg.bt_factory.get_any_type()
+        else:
+            new_sub[k] = k.bound
+    for k, t in s2.items():
+        if k not in s1:
+            new_sub[k] = t
+    return new_sub
