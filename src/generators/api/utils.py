@@ -4,6 +4,7 @@ from typing import NamedTuple, List, Set, Dict, Union
 import networkx as nx
 
 from src import utils
+from src.config import cfg
 from src.ir import types as tp, type_utils as tu
 from src.generators.api.nodes import Method
 
@@ -302,9 +303,45 @@ def check_validity_api_parameters(api, type_var_assignments: dict) -> bool:
     return True
 
 
+def is_substitution_ambiguous(type_parameters, other_type_parameters,
+                              s1, s2) -> bool:
+
+    def _get_bound(t, sub):
+        return (
+            cfg.bt_factory.get_any_type()
+            if t.bound is None
+            else tp.substitute_type(t.bound, sub)
+        )
+
+    if len(s1) != len(s2):
+        return False
+    for i, k1 in enumerate(type_parameters):
+        t1 = s1[k1]
+        t2 = s2[other_type_parameters[i]]
+        if t1 != t2:
+            return False
+        t1_bound = _get_bound(k1, s1)
+        t2_bound = _get_bound(other_type_parameters[i], s2)
+        if not t1_bound.is_subtype(t2_bound) and not t2_bound.is_subtype(
+                t1_bound):
+            return True
+    return True
+
+
+def _default_substitution(type_parameters: List[tp.TypeParameter]):
+    sub = {}
+    for k in type_parameters:
+        if k.bound is None:
+            sub[k] = cfg.bt_factory.get_any_type()
+        else:
+            sub[k] = tp.substitute_type(k.bound, sub)
+    return sub
+
+
 def is_typing_seq_ambiguous(method: Method,
                             other_method: Method,
-                            typing_seq: List[tp.Type]) -> bool:
+                            typing_seq: List[tp.Type],
+                            type_args: List[tp.Type]) -> bool:
     """
     Checks whether the given typing sequence can trigger an overload method
     ambiguity.
@@ -313,12 +350,29 @@ def is_typing_seq_ambiguous(method: Method,
         return False
     other_typing_seq = [p.t for p in other_method.parameters]
     curr_typing_seq = [p.t for p in method.parameters]
-    matches = all(t.is_subtype(other_typing_seq[i])
-                  for i, t in enumerate(typing_seq))
-    if not matches:
+    sub = {}
+    for i, t in enumerate(typing_seq):
+        sub_i = tu.unify_types(t, other_typing_seq[i], cfg.bt_factory,
+                               same_type=False)
+        if not sub_i and not t.is_subtype(other_typing_seq[i]):
+            return False
+        sub = tu.merge_substitutions(sub, sub_i)
+    for type_param in other_method.type_parameters:
+        if type_param not in sub:
+            sub[type_param] = (cfg.bt_factory.get_any_type()
+                               if type_param.bound is None
+                               else tp.substitute_type(type_param.bound, sub))
+
+    sub1 = {k: type_args[i] for i, k in enumerate(method.type_parameters)}
+    if not is_substitution_ambiguous(method.type_parameters,
+                                     other_method.type_parameters,
+                                     sub1, sub):
         return False
+    sub1 = _default_substitution(method.type_parameters)
+    sub2 = _default_substitution(other_method.type_parameters)
     for i, t in enumerate(curr_typing_seq):
-        other_t = other_typing_seq[i]
+        t = tp.substitute_type(t, sub1)
+        other_t = tp.substitute_type(other_typing_seq[i], sub2)
         if not t.is_subtype(other_t) and not other_t.is_subtype(t):
             return True
     return False

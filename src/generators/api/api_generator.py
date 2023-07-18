@@ -256,8 +256,11 @@ class APIGenerator(Generator):
                 for typing_seq in typing_seqs:
                     # There is a typing sequence that triggers overload
                     # ambiguity.
+                    type_args = [encoding.type_var_map[t]
+                                 for t in encoding.api.type_parameters]
                     if any(au.is_typing_seq_ambiguous(encoding.api, m,
-                                                      typing_seq[1:-1])
+                                                      typing_seq[1:-1],
+                                                      type_args)
                            for m in overloaded_methods):
                         program_index += 1
                         continue
