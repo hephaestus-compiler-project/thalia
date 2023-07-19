@@ -1,6 +1,8 @@
 import copy
 
-from src.ir import types as tp, java_types as jt
+import networkx as nx
+
+from src.ir import types as tp, java_types as jt, builtins as bt
 from src.generators.api import api_graph as ag
 from src.generators.api.builder import JavaAPIGraphBuilder
 
@@ -527,3 +529,101 @@ def test_get_functional_type():
     assert api_graph.get_functional_type(b.parse_type(
         "java.Producer<java.lang.Integer>")) == jt.FunctionType(0).new([tp.TypeParameter("java.Producer.T1")])
     assert api_graph.get_functional_type(b.parse_type("java.Foo")) is None
+
+
+def test_get_overloaded_methods():
+    g = nx.DiGraph()
+    t1 = tp.SimpleClassifier("A")
+    m1 = ag.Method("m", "A", [], [])
+    m2 = ag.Method("m", "A", [ag.Parameter(bt.Integer, False)], [])
+    m3 = ag.Method("m", "A", [ag.Parameter(bt.String, False)], [])
+
+    g.add_node(t1)
+    g.add_node(m1)
+    g.add_node(m2)
+    g.add_node(m3)
+    g.add_edge(t1, m1)
+    g.add_edge(t1, m2)
+    g.add_edge(t1, m3)
+
+    api_graph = ag.APIGraph(g, nx.DiGraph(), [], jt.JavaBuiltinFactory())
+    assert api_graph.get_overloaded_methods(t1, m1) == {m2, m3}
+    assert api_graph.get_overloaded_methods(t1, m2) == {m1, m3}
+    assert api_graph.get_overloaded_methods(t1, m3) == {m1, m2}
+    assert api_graph.get_overloaded_methods(t1, t1) == set()
+
+    # Do the same using a parameterized type as a reciever
+    g = nx.DiGraph()
+    t1 = tp.TypeConstructor("Foo", [tp.TypeParameter("T")])
+    m1 = ag.Method("m", "A", [], [])
+    m2 = ag.Method("m", "A", [ag.Parameter(bt.Integer, False)], [])
+    m3 = ag.Method("m", "A", [ag.Parameter(bt.String, False)], [])
+
+    g.add_node(t1)
+    g.add_node(m1)
+    g.add_node(m2)
+    g.add_node(m3)
+    g.add_edge(t1, m1)
+    g.add_edge(t1, m2)
+    g.add_edge(t1, m3)
+
+    api_graph = ag.APIGraph(g, nx.DiGraph(), [], jt.JavaBuiltinFactory())
+    rec = t1.new([bt.Integer])
+    assert api_graph.get_overloaded_methods(rec, m1) == {m2, m3}
+    assert api_graph.get_overloaded_methods(rec, m2) == {m1, m3}
+    assert api_graph.get_overloaded_methods(rec, m3) == {m1, m2}
+    assert api_graph.get_overloaded_methods(rec, t1) == set()
+
+def test_get_overloaded_methods_inheritance():
+    g = nx.DiGraph()
+    t1 = tp.SimpleClassifier("A")
+    t2 = tp.SimpleClassifier("B", supertypes=[t1])
+    m1 = ag.Method("m", "A", [], [])
+    m2 = ag.Method("m", "A", [ag.Parameter(bt.String, False)], [])
+    m3 = ag.Method("m", "B", [ag.Parameter(bt.Integer, False)], [])
+    m4 = ag.Method("m", "B", [ag.Parameter(bt.String, False)], [])
+
+    g.add_node(t1)
+    g.add_node(t2)
+    g.add_node(m1)
+    g.add_node(m2)
+    g.add_node(m3)
+    g.add_edge(t1, m1)
+    g.add_edge(t1, m2)
+    g.add_edge(t2, m3)
+    g.add_edge(t2, m4)
+
+    api_graph = ag.APIGraph(g, nx.DiGraph(), [], jt.JavaBuiltinFactory())
+    assert api_graph.get_overloaded_methods(t1, m1) == {m2}
+    assert api_graph.get_overloaded_methods(t1, m2) == {m1}
+    assert api_graph.get_overloaded_methods(t2, m3) == {m1, m4}
+    assert api_graph.get_overloaded_methods(t2, m4) == {m1, m3}
+
+    # Do the same using a parameterized type as a reciever
+    g = nx.DiGraph()
+    t1 = tp.TypeConstructor("A", [tp.TypeParameter("T")])
+    t2 = tp.TypeConstructor("B", [tp.TypeParameter("T")],
+                            supertypes=[t1.new([bt.String])])
+
+    m1 = ag.Method("m", "A", [], [])
+    m2 = ag.Method("m", "A", [ag.Parameter(bt.String, False)], [])
+    m3 = ag.Method("m", "B", [ag.Parameter(bt.Integer, False)], [])
+    m4 = ag.Method("m", "B", [ag.Parameter(bt.String, False)], [])
+
+    g.add_node(t1)
+    g.add_node(t2)
+    g.add_node(m1)
+    g.add_node(m2)
+    g.add_node(m3)
+    g.add_edge(t1, m1)
+    g.add_edge(t1, m2)
+    g.add_edge(t2, m3)
+    g.add_edge(t2, m4)
+
+    api_graph = ag.APIGraph(g, nx.DiGraph(), [], jt.JavaBuiltinFactory())
+    rec1 = t1.new([bt.Integer])
+    rec2 = t2.new([bt.Float])
+    assert api_graph.get_overloaded_methods(rec1, m1) == {m2}
+    assert api_graph.get_overloaded_methods(rec1, m2) == {m1}
+    assert api_graph.get_overloaded_methods(rec2, m3) == {m1, m4}
+    assert api_graph.get_overloaded_methods(rec2, m4) == {m1, m3}

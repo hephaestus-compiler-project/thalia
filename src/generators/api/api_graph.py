@@ -113,15 +113,13 @@ class APIGraph():
             api_name: str
             t: tp.Type
         nodes = self.api_graph.number_of_nodes()
-        edges = self.api_graph.number_of_edges()
+        edges = len(self.api_graph.edges())
         lib_nodes = [n for n in self.api_graph.nodes()
                      if not matcher or matcher.match(n)]
-        methods = [n for n in lib_nodes
-                   if isinstance(n, Method)]
+        methods = [n for n in lib_nodes if isinstance(n, Method)]
         methods_n = len(methods)
         polymorphic_methods = len([m for m in methods if m.type_parameters])
-        fields = len([n for n in lib_nodes
-                     if isinstance(n, Field)])
+        fields = len([n for n in lib_nodes if isinstance(n, Field)])
         constructors = len([n for n in lib_nodes
                            if isinstance(n, Constructor)])
         types = [_Type(n.name, n.name, n) for n in self.subtyping_graph.nodes()]
@@ -556,20 +554,36 @@ class APIGraph():
                                ) -> Set[Method]:
         if not isinstance(method, (Method, Constructor)):
             return set()
-        methods = set()
-        if receiver.is_parameterized():
-            receiver = self.get_type_by_name(receiver.name)
+        if receiver and receiver.is_parameterized():
+            receiver = self.get_type_by_name(
+                receiver.name) or receiver.t_constructor
         if receiver is not None and receiver not in self.api_graph:
-            return methods
+            return set()
 
         if receiver is None:
+            # This is a method with no receiver.
             return {m for m in self.api_graph.nodes()
                     if isinstance(m, Method) and (
                         m.name == method.name and m != method)}
 
-        # TODO: Also, check the inheritance chain.
-        return {m for m in self.api_graph.neighbors(receiver)
-                if m.name == method.name and m != method}
+        methods = set()
+        methods.update({m for m in self.api_graph.neighbors(receiver)
+                       if m.name == method.name and m != method})
+        for supertype in receiver.get_supertypes():
+            if supertype.is_parameterized():
+                supertype = self.get_type_by_name(
+                    supertype.name) or supertype.t_constructor
+            for m in self.api_graph.neighbors(supertype):
+                # Make sure you don't include overriden methods.
+                # To do so, exclude methods that involve the same parameters
+                # types with any method already included in `methods` var.
+                not_overriden = all(
+                    m.parameters != om.parameters
+                    for om in methods
+                ) and m.parameters != method.parameters
+                if m.name == method.name and not_overriden:
+                    methods.add(m)
+        return methods
 
     def get_functional_type(self, etype: tp.Type) -> tp.ParameterizedType:
         if etype.is_parameterized():
