@@ -78,6 +78,9 @@ class GroovyBuiltinFactory(bt.BuiltinFactory):
     def get_number_types(self):
         return super().get_number_types() + self.get_primitive_types()[:-1]
 
+    def get_raw_type(self, name, supertypes):
+        return RawType(name, supertypes)
+
 
 class GroovyBuiltin(Builtin):
     def __init__(self, name, primitive):
@@ -386,6 +389,16 @@ class BooleanType(ObjectType):
         if self.is_primitive():
             return "boolean"
         return super().get_name()
+
+
+class RawType(tp.SimpleClassifier):
+    def __init__(self, name, supertypes=[]):
+        super().__init__(f"Raw{name}", supertypes)
+        self._name = name
+        self.supertypes.append(ObjectType())
+
+    def get_name(self):
+        return self._name
 
 
 class ArrayType(tp.TypeConstructor, ObjectType):
