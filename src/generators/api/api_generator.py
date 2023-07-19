@@ -1,7 +1,7 @@
 from copy import deepcopy, copy
 import functools
 import itertools
-from typing import List, NamedTuple, Union, Iterable
+from typing import List, NamedTuple, Union
 
 from src import utils
 from src.config import cfg
@@ -13,14 +13,6 @@ from src.generators.api import (api_graph as ag, builder, matcher as match,
 from src.generators.api import utils as au
 from src.modules.logging import log
 from src.translators import TRANSLATORS
-
-
-def get_type_variables(t: tp.Type, bt_factory) -> Iterable[tp.TypeParameter]:
-    if t.is_type_var():
-        return [t]
-    if t.is_wildcard() or t.is_parameterized():
-        return t.get_type_variables(bt_factory).keys()
-    return []
 
 
 def get_type_variables_of_callable(
@@ -627,8 +619,8 @@ class APIGenerator(Generator):
         for i, param in enumerate(parameters):
             arg_types = actual_types[i]
             param_types = self.substitute_types(arg_types, type_var_map)
-            self.type_eraser.with_target(param, get_type_variables(
-                param, self.bt_factory))
+            self.type_eraser.with_target(param, tu.get_type_variables_of_type(
+                param))
             for i, param_t in enumerate(list(param_types)):
                 # If encountering a raw type, instantiate the corresponding
                 # type constructor.

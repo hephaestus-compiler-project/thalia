@@ -1643,3 +1643,14 @@ def merge_substitutions(s1, s2):
         if k not in s1:
             new_sub[k] = t
     return new_sub
+
+
+def get_type_variables_of_type(
+    t: tp.Type,
+    bt_factory: bt.BuiltinFactory = cfg.bt_factory
+) -> Iterable[tp.TypeParameter]:
+    if t.is_type_var():
+        return [t]
+    if t.is_wildcard() or t.is_parameterized():
+        return t.get_type_variables(bt_factory).keys()
+    return []

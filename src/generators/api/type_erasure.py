@@ -1,18 +1,9 @@
 from collections import defaultdict
-from typing import Iterable, Dict, Set, List
+from typing import Dict, Set, List
 
 from src.ir import types as tp, type_utils as tu, ast
 from src.ir.builtins import BuiltinFactory
 from src.generators.api import api_graph as ag, utils as au
-
-
-def get_type_variables(t: tp.Type,
-                       bt_factory: BuiltinFactory) -> Iterable[tp.TypeParameter]:
-    if t.is_type_var():
-        return [t]
-    if t.is_wildcard() or t.is_parameterized():
-        return t.get_type_variables(bt_factory).keys()
-    return []
 
 
 def get_arg_api(arg):
@@ -83,12 +74,12 @@ class TypeEraser():
                 markings[type_param].add(self.OUT)
             else:
                 # Check the return type of polymorphic function.
-                type_variables = get_type_variables(ret_type, self.bt_factory)
+                type_variables = tu.get_type_variables_of_type(ret_type)
                 if type_param in type_variables:
                     markings[type_param].add(self.OUT)
 
             for i, param in enumerate(getattr(api, "parameters", [])):
-                type_variables = get_type_variables(param.t, self.bt_factory)
+                type_variables = tu.get_type_variables_of_type(param.t)
                 if type_param in type_variables:
                     markings[type_param].add(i)
         return markings
@@ -124,7 +115,7 @@ class TypeEraser():
                 return True
 
             arg_type = self.get_api_output_type(arg_api)
-            type_variables = get_type_variables(arg_type, self.bt_factory)
+            type_variables = tu.get_type_variables_of_type(arg_type)
             method_type_params = {
                 tpa for tpa in type_parameters
                 if tpa in type_variables
@@ -137,7 +128,7 @@ class TypeEraser():
             if not sub:
                 continue
             for mtpa in method_type_params:
-                if any(mtpa in get_type_variables(p.t, self.bt_factory)
+                if any(mtpa in tu.get_type_variables_of_type(p.t)
                        for p in getattr(arg_api, "parameters", [])):
                     # Type variable of API is in "in" position.
                     can_infer = True
@@ -188,13 +179,13 @@ class TypeEraser():
         # Now, check if the output type of the API contains type variables
         # defined inside API, e.g., fun <T> m(): T
         expr_type = self.get_api_output_type(api)
-        type_vars = get_type_variables(expr_type, self.bt_factory)
+        type_vars = tu.get_type_variables_of_type(expr_type)
         api_type_params = {
             tpa for tpa in type_parameters
             if tpa in type_vars
         }
         if not api_type_params or all(
-                tpa in get_type_variables(p.t, self.bt_factory)
+                tpa in tu.get_type_variables_of_type(p.t)
                 for tpa in api_type_params
                 for p in getattr(api, "parameters", [])):
             var_decl.omit_type()
