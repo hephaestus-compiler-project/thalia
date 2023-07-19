@@ -23,7 +23,10 @@ def get_type_variables(t: tp.Type, bt_factory) -> Iterable[tp.TypeParameter]:
     return []
 
 
-def get_type_variables_of_callable(api_graph: ag.APIGraph, node: ag.APINode):
+def get_type_variables_of_callable(
+        api_graph: ag.APIGraph,
+        node: ag.APINode
+) -> List[tp.TypeParameter]:
     if isinstance(node, ag.Method):
         return node.type_parameters
     elif isinstance(node, ag.Constructor):

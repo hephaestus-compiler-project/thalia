@@ -339,6 +339,29 @@ def _default_substitution(type_parameters: List[tp.TypeParameter],
     return sub
 
 
+def _infer_sub_for_method(method: Method,
+                          arg_types: List[tp.Type]) -> dict:
+    parameter_types = [p.t for p in method.parameters]
+    sub = {}
+    for i, t in enumerate(arg_types):
+        sub_i = tu.unify_types(t, parameter_types[i], cfg.bt_factory,
+                               same_type=False)
+        # The method's parameter type is not combatible with the
+        # provided type. No ambiguity
+        if not sub_i and not t.is_subtype(parameter_types[i]):
+            return None
+        sub = tu.merge_substitutions(sub, sub_i)
+    for type_param in method.type_parameters:
+        # For any type variable not included in the current sub (this is
+        # because the corresponding type parameter appears in the output type
+        # only), instantiate with a type that respects its bound.
+        if type_param not in sub:
+            sub[type_param] = (cfg.bt_factory.get_any_type()
+                               if type_param.bound is None
+                               else tp.substitute_type(type_param.bound, sub))
+    return sub
+
+
 def is_typing_seq_ambiguous(method: Method,
                             other_method: Method,
                             typing_seq: List[tp.Type],
@@ -347,28 +370,23 @@ def is_typing_seq_ambiguous(method: Method,
     Checks whether the given typing sequence can trigger an overload method
     ambiguity.
     """
+    # If type var map is None, then we encounter a polymorphic call with
+    # no explicit type arguments.
     with_erasure = type_var_map is None
     if len(method.parameters) != len(other_method.parameters):
+        # Methods with different number of parameters. No ambiguity here.
         return False
+
     other_typing_seq = [p.t for p in other_method.parameters]
     curr_typing_seq = [p.t for p in method.parameters]
-    sub = {}
-    for i, t in enumerate(typing_seq):
-        sub_i = tu.unify_types(t, other_typing_seq[i], cfg.bt_factory,
-                               same_type=False)
-        if not sub_i and not t.is_subtype(other_typing_seq[i]):
-            return False
-        sub = tu.merge_substitutions(sub, sub_i)
-    for type_param in other_method.type_parameters:
-        if type_param not in sub:
-            sub[type_param] = (cfg.bt_factory.get_any_type()
-                               if type_param.bound is None
-                               else tp.substitute_type(type_param.bound, sub))
-
+    sub = _infer_sub_for_method(other_method, typing_seq)
+    if sub is None:
+        return False
     if not with_erasure and not is_substitution_ambiguous(
             method.type_parameters, other_method.type_parameters,
             type_var_map or {}, sub):
         return False
+
     sub1 = _default_substitution(method.type_parameters, with_erasure)
     sub2 = _default_substitution(other_method.type_parameters, with_erasure)
     for i, t in enumerate(curr_typing_seq):
