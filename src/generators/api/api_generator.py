@@ -23,6 +23,18 @@ def get_type_variables(t: tp.Type, bt_factory) -> Iterable[tp.TypeParameter]:
     return []
 
 
+def get_type_variables_of_callable(api_graph: ag.APIGraph, node: ag.APINode):
+    if isinstance(node, ag.Method):
+        return node.type_parameters
+    elif isinstance(node, ag.Constructor):
+        t = api_graph.get_type_by_name(node.name)
+        if t is None:
+            return []
+        return getattr(t, "type_parameters", [])
+    else:
+        return []
+
+
 class ExprRes(NamedTuple):
     expr: ast.Expr
     type_var_map: dict
@@ -256,11 +268,11 @@ class APIGenerator(Generator):
                 for typing_seq in typing_seqs:
                     # There is a typing sequence that triggers overload
                     # ambiguity.
-                    type_args = [encoding.type_var_map[t]
-                                 for t in encoding.api.type_parameters]
+                    sub = {t: encoding.type_var_map[t]
+                           for t in get_type_variables_of_callable(
+                               self.api_graph, encoding.api)}
                     if any(au.is_typing_seq_ambiguous(encoding.api, m,
-                                                      typing_seq[1:-1],
-                                                      type_args)
+                                                      typing_seq[1:-1], sub)
                            for m in overloaded_methods):
                         program_index += 1
                         continue

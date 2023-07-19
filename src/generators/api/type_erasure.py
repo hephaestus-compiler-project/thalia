@@ -3,7 +3,7 @@ from typing import Iterable, Dict, Set, List
 
 from src.ir import types as tp, type_utils as tu, ast
 from src.ir.builtins import BuiltinFactory
-from src.generators.api import api_graph as ag
+from src.generators.api import api_graph as ag, utils as au
 
 
 def get_type_variables(t: tp.Type,
@@ -201,6 +201,16 @@ class TypeEraser():
 
     def erase_types(self, expr: ast.Expr, api: ag.APINode,
                     args: List[ag.APIPath]):
+        if isinstance(api, (ag.Method, ag.Constructor)):
+            # Checks whether erasing type arguments from polymorphic call
+            # creates ambiguity issues.
+            overloaded_methods = self.api_graph.get_overloaded_methods(
+                self.api_graph.get_input_type(api), api)
+            typing_seq = [p.path[-1] for p in args]
+            if any(au.is_typing_seq_ambiguous(api, m, typing_seq)
+                   for m in overloaded_methods):
+                return
+
         markings = self.compute_markings(api)
         omittable_type_params = set()
         ret_type = self.get_api_output_type(api)
