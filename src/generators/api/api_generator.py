@@ -71,7 +71,6 @@ class APIGenerator(Generator):
 
         self.inject_error_mode = options.get("inject-type-error", False)
         self.type_erasure_mode = options.get("erase-types", False)
-        self.start_index = options.get("start-index", 0)
         self.max_conditional_depth = options.get("max-conditional-depth", 4)
         self.disable_expression_cache = options.get("disable-expression-cache",
                                                     False)
@@ -245,7 +244,6 @@ class APIGenerator(Generator):
         return typing_seqs, True
 
     def compute_programs(self):
-        program_index = 0
         i = 1
         for encoding in self.encodings:
             overloaded_methods = self.api_graph.get_overloaded_methods(
@@ -269,23 +267,13 @@ class APIGenerator(Generator):
                     if any(au.is_typing_seq_ambiguous(encoding.api, m,
                                                       typing_seq[1:-1], sub)
                            for m in overloaded_methods):
-                        program_index += 1
                         continue
 
-                    # Generate a test case from the typing sequence:
-                    # (receiver, parameters, return_type)
-                    if program_index < self.start_index:
-                        program_index += 1
-                        continue
                     yield self.generate_test_case_from_combination(typing_seq,
                                                                    encoding, i,
                                                                    is_incorrect)
-                    program_index += 1
                     i += 1
                 for ret in types[-1]:
-                    if program_index < self.start_index:
-                        program_index += 1
-                        continue
                     # Merge receivers and parameters, and generate a test
                     # case with conditionals
                     program = self.generate_test_case_conditional(encoding,
@@ -296,12 +284,10 @@ class APIGenerator(Generator):
                         continue
                     yield program
                     i += 1
-                    program_index += 1
             except Exception as e:
                 # Handle any exception in order to prevent the termination
                 # of iteration.
                 self.api_graph.remove_types(encoding.type_parameters)
-                program_index += 1
 
     def generate_expr_from_node(self, node: tp.Type,
                                 func_ref: bool,

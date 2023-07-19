@@ -32,13 +32,6 @@ parser.add_argument(
     help="Iterations to run (default: 3)"
 )
 parser.add_argument(
-    "--start-index",
-    type=int,
-    default=0,
-    help=("Enumerate programs starting from the given index (used only with "
-          "API-based program generation")
-)
-parser.add_argument(
     "--api-rules",
     type=str,
     default=None,
@@ -245,7 +238,6 @@ args.options = {
     "Generator": {
         "base": {},
         "api": {
-            "start-index": args.start_index,
             "api-rules": args.api_rules,
             "max-conditional-depth": args.max_conditional_depth,
             "inject-type-error": args.inject_type_error,
