@@ -99,7 +99,7 @@ def test_parameterized_with_chain_inheritance():
         [foo_con.new([tp.TypeParameter("T1")])]
     )
     baz_con = tp.TypeConstructor(
-        "Bar", [tp.TypeParameter("T1")],
+        "Baz", [tp.TypeParameter("T1")],
         [bar_con.new([tp.TypeParameter("T1")])])
 
     baz = baz_con.new([kt.String])

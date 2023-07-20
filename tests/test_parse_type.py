@@ -144,10 +144,17 @@ def test_instance_types():
     enclosing_type = type_con.new([jt.Integer])
     assert b.parse_type("java.Foo<java.lang.Integer>.Bar") == tp.InstanceTypeConstructor(
         "java.Foo.Bar", type_con, "Bar").new([jt.Integer])
+    # It's static type
+    assert b.parse_type("java.Foo.Bar") == tp.SimpleClassifier("java.Foo.Bar")
+
+    # It's inner type
+    b.type_spec["java.Foo.Bar"] = tp.InstanceTypeConstructor(
+        "java.Foo.Bar", type_con, "Bar")
     assert b.parse_type("java.Foo.Bar") == tp.InstanceTypeConstructor(
         "java.Foo.Bar", type_con, "Bar").new([tp.WildCardType()])
 
     b.type_spec["java.Foo"] = classifier
+    del b.type_spec["java.Foo.Bar"]
     assert b.parse_type("java.Foo.Bar<java.lang.Integer>") == tp.TypeConstructor(
         "java.Foo.Bar", [tp.TypeParameter("java.Foo.Bar.T1")]
     ).new([jt.Integer])
