@@ -139,7 +139,7 @@ class GroovyTranslator(BaseTranslator):
             t = t.get_bound_rec()
             return self.get_type_name(t)
         t_constructor = getattr(t, 't_constructor', None)
-        if not t_constructor:
+        if not t_constructor or isinstance(t, gt.RawType):
             return t.get_name()
         if isinstance(t_constructor, gt.ArrayType):
             return "{}[]".format(self.get_type_name(t.type_args[0]))

@@ -179,7 +179,7 @@ class JavaTranslator(BaseTranslator):
             t = t.get_bound_rec()
             return self.get_type_name(t, get_boxed_void, box)
         t_constructor = getattr(t, 't_constructor', None)
-        if not t_constructor:
+        if not t_constructor or isinstance(t, jt.RawType):
             if get_boxed_void and isinstance(t, jt.VoidType):
                 return "Void"
             if box:
