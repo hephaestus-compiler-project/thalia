@@ -87,16 +87,15 @@ class JavaTypeParser(TypeParser):
         enclosing_type = self.parse_reg_type(parent)
         segs = base.split("<", 1)
         if len(segs) == 1:
+            name = enclosing_type.get_name() + "." + base
             if not enclosing_type.is_parameterized():
-                name = enclosing_type.get_name() + "." + base
                 return self.type_spec.get(name, tp.SimpleClassifier(name))
-            name = enclosing_type.name + "." + base
             return tp.InstanceTypeConstructor(
                 name, enclosing_type.t_constructor, base).new(
                     enclosing_type.type_args
                 )
         name, type_args_str = segs[0], segs[1][:-1]
-        name = enclosing_type.name + "." + name
+        name = enclosing_type.get_name() + "." + name
         type_args = utils.top_level_split(type_args_str)
         new_type_args = []
         for type_arg in type_args:
