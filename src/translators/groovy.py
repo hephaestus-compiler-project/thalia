@@ -134,7 +134,7 @@ class GroovyTranslator(BaseTranslator):
         else:
             return "? super " + self.get_type_name(t_arg.bound)
 
-    def get_type_name(self, t):
+    def get_type_name(self, t, for_array: bool = False):
         if t.is_wildcard():
             t = t.get_bound_rec()
             return self.get_type_name(t)
@@ -142,7 +142,8 @@ class GroovyTranslator(BaseTranslator):
         if not t_constructor or isinstance(t, gt.RawType):
             return t.get_name()
         if isinstance(t_constructor, gt.ArrayType):
-            return "{}[]".format(self.get_type_name(t.type_args[0]))
+            return "{}[{}]".format(self.get_type_name(t.type_args[0]),
+                                   "0" if for_array else "")
         if t.is_instance_type():
             return self.instance_type2str(t)
         return "{}<{}>".format(t.name, ", ".join([self.type_arg2str(ta)
@@ -668,7 +669,8 @@ class GroovyTranslator(BaseTranslator):
         if not node.length:
             return "{ident}new {array}[0]".format(
                 ident=self.get_ident(),
-                array=self.get_type_name(node.array_type.type_args[0])
+                array=self.get_type_name(node.array_type.type_args[0],
+                                         for_array=True)
             )
         old_ident = self.ident
         self.ident = 0

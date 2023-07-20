@@ -174,7 +174,8 @@ class JavaTranslator(BaseTranslator):
                                     for ta in t.type_args[len(type_params):])
         return f"{enclosing_str}.{basename}<{extra_type_args}>"
 
-    def get_type_name(self, t, get_boxed_void=False, box=False):
+    def get_type_name(self, t, get_boxed_void=False, box=False,
+                      for_array=False):
         if t.is_wildcard():
             t = t.get_bound_rec()
             return self.get_type_name(t, get_boxed_void, box)
@@ -186,8 +187,9 @@ class JavaTranslator(BaseTranslator):
                 return PRIMITIVES_TO_BOXED.get(t.get_name(), t.get_name())
             return t.get_name()
         if isinstance(t_constructor, jt.ArrayType):
-            return "{}[]".format(self.get_type_name(t.type_args[0], False,
-                                                    box))
+            return "{}[{}]".format(self.get_type_name(t.type_args[0],
+                                                      False, box),
+                                   "0" if for_array else "")
         if t.is_instance_type():
             return self.instance_type2str(t)
 
@@ -861,11 +863,13 @@ class JavaTranslator(BaseTranslator):
     def visit_array_expr(self, node):
         if not node.length:
             new_stmt = "new {etype}".format(
-                etype=self.get_type_name(node.array_type.type_args[0])
+                etype=self.get_type_name(node.array_type.type_args[0],
+                                         for_array=True)
             )
             if isinstance(node.array_type.type_args[0], tp.ParameterizedType):
-                new_stmt = "({etype}[]) new Object".format(
-                    etype=self.get_type_name(node.array_type.type_args[0])
+                new_stmt = "({etype}[]) new Object()".format(
+                    etype=self.get_type_name(node.array_type.type_args[0],
+                                             for_array=True)
                 )
 
             return "{ident}{new}[0]{semicolon}".format(
