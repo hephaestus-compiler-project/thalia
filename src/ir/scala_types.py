@@ -228,6 +228,9 @@ class RawType(tp.SimpleClassifier):
     def get_name(self):
         return self._name
 
+    def get_raw_cls(self):
+        return RawType
+
 
 class ArrayType(tp.TypeConstructor, AnyRefType):
     def __init__(self, name="Array"):

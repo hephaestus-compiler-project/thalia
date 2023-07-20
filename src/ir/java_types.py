@@ -83,6 +83,9 @@ class JavaBuiltinFactory(bt.BuiltinFactory):
     def get_raw_type(self, t_constructor):
         return RawType(t_constructor)
 
+    def get_raw_cls(self):
+        return RawType
+
 
 class JavaBuiltin(Builtin):
     def __init__(self, name, primitive):

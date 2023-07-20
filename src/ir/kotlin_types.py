@@ -80,6 +80,9 @@ class KotlinBuiltinFactory(bt.BuiltinFactory):
     def get_raw_type(self, t_constructor):
         return RawType(t_constructor)
 
+    def get_raw_cls(self):
+        return RawType
+
 
 class KotlinBuiltin(tp.Builtin):
     def __str__(self):

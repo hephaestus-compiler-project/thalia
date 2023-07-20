@@ -78,24 +78,33 @@ class JavaTypeParser(TypeParser):
             return True
         return parent in self.type_spec
 
-    def parse_instance_type(self, str_t: str) -> tp.ParameterizedType:
-        # XXX revisit
-        segs = utils.top_level_split(str_t, delim=".")
-        if len(segs) == 1:
-            return False
-        parent, base = ".".join(segs[:-1]), segs[-1]
-        enclosing_type = self.parse_reg_type(parent)
-        segs = base.split("<", 1)
-        if len(segs) == 1:
+    def _init_instance_type_classifier(self, enclosing_type: tp.Type,
+                                       base: str):
+        is_raw_type = isinstance(enclosing_type, self.bt_factory.get_raw_cls())
+        name = enclosing_type.name + "." + base
+        if is_raw_type:
             name = enclosing_type.get_name() + "." + base
-            if not enclosing_type.is_parameterized():
-                return self.type_spec.get(name, tp.SimpleClassifier(name))
-            return tp.InstanceTypeConstructor(
-                name, enclosing_type.t_constructor, base).new(
-                    enclosing_type.type_args
-                )
-        name, type_args_str = segs[0], segs[1][:-1]
-        name = enclosing_type.get_name() + "." + name
+        if not enclosing_type.is_parameterized() and not is_raw_type:
+            return self.type_spec.get(name, tp.SimpleClassifier(name))
+
+        type_parameters = enclosing_type.t_constructor.type_parameters
+        # If the enclosing type is raw, then we convert it into a
+        # parameterized type by instantiating with wildcard types.
+        # For example, Foo.Bar becomes Foo<?>.Bar
+        type_args = (
+            [tp.WildCardType() for _ in range(len(type_parameters))]
+            if is_raw_type
+            else enclosing_type.type_args
+        )
+        return tp.InstanceTypeConstructor(
+            name, enclosing_type.t_constructor, base).new(type_args)
+
+    def _init_instance_type_parameterized(self, enclosing_type: tp.Type,
+                                          base: str, type_args_str: str):
+        is_raw_type = isinstance(enclosing_type, self.bt_factory.get_raw_cls())
+        name = enclosing_type.name + "." + base
+        if is_raw_type:
+            name = enclosing_type.get_name() + "." + name
         type_args = utils.top_level_split(type_args_str)
         new_type_args = []
         for type_arg in type_args:
@@ -110,13 +119,35 @@ class JavaTypeParser(TypeParser):
             )
             for i in range(len(new_type_args))
         ]
-        if not enclosing_type.is_parameterized():
+        if not enclosing_type.is_parameterized() and not is_raw_type:
             parsed_t = self.type_spec.get(name, tp.TypeConstructor(name,
                                                                    type_vars))
             return parsed_t.new(new_type_args)
+        # If the enclosing type is raw, then we convert it into a
+        # parameterized type by instantiating with wildcard types.
+        type_parameters = enclosing_type.t_constructor.type_parameters
+        type_args = (
+            [tp.WildCardType() for _ in range(len(type_parameters))]
+            if is_raw_type
+            else enclosing_type.type_args
+        )
         return tp.InstanceTypeConstructor(
             name, enclosing_type.t_constructor, base, type_vars).new(
-                enclosing_type.type_args + new_type_args)
+                type_args + new_type_args)
+
+    def parse_instance_type(self, str_t: str) -> tp.ParameterizedType:
+        # XXX revisit
+        segs = utils.top_level_split(str_t, delim=".")
+        if len(segs) == 1:
+            return False
+        parent, base = ".".join(segs[:-1]), segs[-1]
+        enclosing_type = self.parse_reg_type(parent)
+        segs = base.split("<", 1)
+        if len(segs) == 1:
+            return self._init_instance_type_classifier(enclosing_type, base)
+        base, type_args_str = segs[0], segs[1][:-1]
+        return self._init_instance_type_parameterized(enclosing_type, base,
+                                                      type_args_str)
 
     def parse_function_type(self, str_t: str) -> tp.ParameterizedType:
         pass

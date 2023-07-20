@@ -77,6 +77,14 @@ class BuiltinFactory(ABC):
     def get_function_type(self, nr_parameters=0):
         pass
 
+    @abstractmethod
+    def get_raw_cls(self):
+        pass
+
+    @abstractmethod
+    def get_raw_type(self, t_constructor):
+        pass
+
     def get_non_nothing_types(self):
         return [
             self.get_any_type(),
