@@ -573,6 +573,8 @@ class APIGraph():
             if supertype.is_parameterized():
                 supertype = self.get_type_by_name(
                     supertype.name) or supertype.t_constructor
+            if supertype not in self.api_graph:
+                continue
             for m in self.api_graph.neighbors(supertype):
                 # Make sure you don't include overriden methods.
                 # To do so, exclude methods that involve the same parameters
