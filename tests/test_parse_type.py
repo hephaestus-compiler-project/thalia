@@ -117,6 +117,18 @@ def test_wildcards():
         bound=jt.String, variance=tp.Contravariant
     )
 
+def test_raw_types():
+    b = JavaTypeParser("java")
+    a = tp.TypeConstructor("java.Foo", [tp.TypeParameter("T")])
+    assert b.parse_type("java.Foo") == tp.SimpleClassifier("java.Foo")
+
+    type_spec = {
+        "java.Foo": a
+    }
+    b.type_spec = type_spec
+    assert b.parse_type("java.Foo") == jt.RawType(a)
+    assert b.parse_type("java.Foo<java.lang.Integer>") == a.new([jt.Integer])
+
 
 def test_instance_types():
     classifier = tp.SimpleClassifier("java.Foo")
@@ -130,7 +142,8 @@ def test_instance_types():
 
     b.type_spec["java.Foo"] = type_con
     enclosing_type = type_con.new([jt.Integer])
-    assert b.parse_type("java.Foo<java.lang.Integer>.Bar") == tp.InstanceTypeConstructor(
+    t = b.parse_type("java.Foo<java.lang.Integer>.Bar")
+    assert t == tp.InstanceTypeConstructor(
         "java.Foo.Bar", type_con, "Bar"
     ).new([jt.Integer])
 

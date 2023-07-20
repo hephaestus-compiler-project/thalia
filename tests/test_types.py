@@ -606,3 +606,12 @@ def test_match_type_con():
     assert type_param.match_type_con(type_con)
 
 
+def test_raw_types():
+    a = tp.TypeConstructor("A", [tp.TypeParameter("T")])
+    b = tp.TypeConstructor("B", [tp.TypeParameter("X")],
+                           supertypes=[jt.String,
+                                       a.new([tp.TypeParameter("X")])])
+    raw = jt.RawType(b)
+    assert raw.get_name() == "B"
+    assert raw.t_constructor == b
+    assert raw.supertypes == [jt.String, a.new([tp.WildCardType()]), jt.Object]

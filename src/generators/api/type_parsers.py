@@ -79,6 +79,7 @@ class JavaTypeParser(TypeParser):
         return parent in self.type_spec
 
     def parse_instance_type(self, str_t: str) -> tp.ParameterizedType:
+        # XXX revisit
         segs = utils.top_level_split(str_t, delim=".")
         if len(segs) == 1:
             return False
@@ -86,9 +87,10 @@ class JavaTypeParser(TypeParser):
         enclosing_type = self.parse_reg_type(parent)
         segs = base.split("<", 1)
         if len(segs) == 1:
-            name = enclosing_type.name + "." + base
             if not enclosing_type.is_parameterized():
+                name = enclosing_type.get_name() + "." + base
                 return self.type_spec.get(name, tp.SimpleClassifier(name))
+            name = enclosing_type.name + "." + base
             return tp.InstanceTypeConstructor(
                 name, enclosing_type.t_constructor, base).new(
                     enclosing_type.type_args
@@ -184,7 +186,12 @@ class JavaTypeParser(TypeParser):
         segs = str_t.split("<", 1)
         if len(segs) == 1:
             parsed_t = tp.SimpleClassifier(str_t)
-            return self.type_spec.get(str_t, parsed_t)
+            t = self.type_spec.get(str_t, parsed_t)
+            if isinstance(t, tp.TypeConstructor):
+                # The type corresponds to a type constructor, but apparently,
+                # it's used as a raw type.
+                return self.bt_factory.get_raw_type(t)
+            return t
         base, type_args_str = segs[0], segs[1][:-1]
         type_args = utils.top_level_split(type_args_str)
         new_type_args = []
@@ -669,12 +676,9 @@ class ScalaTypeParser(TypeParser):
         if type_con is not None:
             return type_con.new(new_type_args)
 
-        try:
-            parsed_t = self.type_spec.get(base, tp.TypeConstructor(base,
-                                                                   type_vars))
-            return parsed_t.new(new_type_args)
-        except:
-            import pdb; pdb.set_trace()
+        parsed_t = self.type_spec.get(base, tp.TypeConstructor(base,
+                                                               type_vars))
+        return parsed_t.new(new_type_args)
 
     def parse_type(self, str_t: str) -> tp.Type:
         tf = self.bt_factory

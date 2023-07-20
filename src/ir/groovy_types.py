@@ -78,8 +78,8 @@ class GroovyBuiltinFactory(bt.BuiltinFactory):
     def get_number_types(self):
         return super().get_number_types() + self.get_primitive_types()[:-1]
 
-    def get_raw_type(self, name, supertypes):
-        return RawType(name, supertypes)
+    def get_raw_type(self, t_constructor):
+        return RawType(t_constructor)
 
 
 class GroovyBuiltin(Builtin):
@@ -392,9 +392,20 @@ class BooleanType(ObjectType):
 
 
 class RawType(tp.SimpleClassifier):
-    def __init__(self, name, supertypes=[]):
-        super().__init__(f"Raw{name}", supertypes)
-        self._name = name
+    def __init__(self, t_constructor: tp.TypeConstructor):
+        self._name = t_constructor.name
+        self.name = f"Raw{self._name}"
+        self.t_constructor = t_constructor
+        self.supertypes = []
+        for supertype in t_constructor.supertypes:
+            if not supertype.is_parameterized():
+                self.supertypes.append(supertype)
+            else:
+                # Consider B<T> : A<T>
+                # We convert the supertype A<T> to A<?>.
+                sub = {type_param: tp.WildCardType()
+                       for type_param in self.t_constructor.type_parameters}
+                self.supertypes.append(tp.substitute_type(supertype, sub))
         self.supertypes.append(ObjectType())
 
     def get_name(self):

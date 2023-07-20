@@ -72,6 +72,9 @@ class ScalaBuiltinFactory(bt.BuiltinFactory):
         ])
         return types
 
+    def get_raw_type(self, t_constructor):
+        return RawType(t_constructor)
+
 
 class ScalaBuiltin(tp.Builtin):
     def __str__(self):
@@ -203,6 +206,27 @@ class BooleanType(AnyType):
 
     def get_builtin_type(self):
         return bt.Boolean
+
+
+class RawType(tp.SimpleClassifier):
+    def __init__(self, t_constructor: tp.TypeConstructor):
+        self._name = t_constructor.name
+        self.name = f"Raw{self._name}"
+        self.t_constructor = t_constructor
+        self.supertypes = []
+        for supertype in t_constructor.supertypes:
+            if not supertype.is_parameterized():
+                self.supertypes.append(supertype)
+            else:
+                # Consider B<T> : A<T>
+                # We convert the supertype A<T> to A<?>.
+                sub = {type_param: tp.WildCardType()
+                       for type_param in supertype.t_constructor.type_parameters}
+                self.supertypes.append(tp.substitute_type(supertype, sub))
+        self.supertypes.append(AnyType())
+
+    def get_name(self):
+        return self._name
 
 
 class ArrayType(tp.TypeConstructor, AnyRefType):

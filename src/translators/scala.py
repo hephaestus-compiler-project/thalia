@@ -61,6 +61,11 @@ class ScalaTranslator(BaseTranslator):
         if t.is_wildcard():
             t = t.get_bound_rec()
             return self.get_type_name(t)
+        if isinstance(t, kt.RawType):
+            converted_t = t.t_constructor.new(
+                [tp.WildCardType()
+                 for _ in len(t.t_constructor.type_parameters)])
+            return self.get_type_name(converted_t)
         t_constructor = getattr(t, 't_constructor', None)
         if not t_constructor:
             return t.get_name()
