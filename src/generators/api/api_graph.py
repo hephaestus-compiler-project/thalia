@@ -35,6 +35,25 @@ APINode = Union[Field, Method, Constructor, tp.Type, Variable]
 APIPath = List[APINode]
 
 
+def _get_signatures_size(api_graph, nodes):
+    # Get the size of API signagures.
+    signatures = []
+    for n in nodes:
+        if isinstance(n, tp.Type):
+            continue
+        size = 0
+        rec = api_graph.get_input_type(n)
+        if rec is not None:
+            size += 1
+        output_type = api_graph.get_output_type(n)
+        if output_type != api_graph.bt_factory.get_void_type():
+            size += 1
+        if isinstance(n, (Method, Constructor)):
+            size += len(n.parameters)
+        signatures.append(size)
+    return signatures
+
+
 class APIEncoding(NamedTuple):
     api: APINode
     receivers: Set[tp.Type]
@@ -112,39 +131,40 @@ class APIGraph():
             class_: str
             api_name: str
             t: tp.Type
+
+        # Number of nodes
         nodes = self.api_graph.number_of_nodes()
+        # Number of edges
         edges = len(self.api_graph.edges())
         lib_nodes = [n for n in self.api_graph.nodes()
                      if not matcher or matcher.match(n)]
         methods = [n for n in lib_nodes if isinstance(n, Method)]
+        # Number of methods
         methods_n = len(methods)
+        # Number of polymorphic methods
         polymorphic_methods = len([m for m in methods if m.type_parameters])
+        # Number of fields
         fields = len([n for n in lib_nodes if isinstance(n, Field)])
+        # Number of constructors
         constructors = len([n for n in lib_nodes
                            if isinstance(n, Constructor)])
-        types = [_Type(n.name, n.name, n) for n in self.subtyping_graph.nodes()]
+        types = [_Type(n.name, n.name, n)
+                 for n in self.subtyping_graph.nodes()]
         types = [t for t in types if not matcher or matcher.match(t)]
+        # Number of types
         types_n = len(types)
+        # Number of type constructors
         type_constructors = len([n for n in types
                                  if n.t.is_type_constructor()])
         inheritance_sizes = [len(n.t.get_supertypes())
                              for n in types]
-        inheritance_chain_size = statistics.fmean(inheritance_sizes)
-        signatures = []
-        for n in lib_nodes:
-            if isinstance(n, tp.Type):
-                continue
-            size = 0
-            rec = self.get_input_type(n)
-            if rec is not None:
-                size += 1
-            output_type = self.get_output_type(n)
-            if output_type != self.bt_factory.get_void_type():
-                size += 1
-            if isinstance(n, (Method, Constructor)):
-                size += len(n.parameters)
-            signatures.append(size)
-        signature_length = statistics.fmean(signatures)
+        # Average size of inheritance chain
+        inheritance_chain_size = (0 if not inheritance_sizes
+                                  else statistics.fmean(inheritance_sizes))
+        signatures = _get_signatures_size(self, lib_nodes)
+        # Average size of inheritance API signatures
+        signature_length = (0 if not signatures
+                            else statistics.fmean(signatures))
         return APIGraphStatistics(nodes, edges, methods_n, polymorphic_methods,
                                   fields, constructors, types_n,
                                   type_constructors, inheritance_chain_size,
