@@ -75,6 +75,9 @@ class ScalaBuiltinFactory(bt.BuiltinFactory):
     def get_raw_type(self, t_constructor):
         return RawType(t_constructor)
 
+    def get_raw_cls(self):
+        return RawType
+
 
 class ScalaBuiltin(tp.Builtin):
     def __str__(self):
