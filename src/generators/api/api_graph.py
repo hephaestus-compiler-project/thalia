@@ -596,6 +596,8 @@ class APIGraph():
             if supertype not in self.api_graph:
                 continue
             for m in self.api_graph.neighbors(supertype):
+                if not isinstance(m, (Method, Constructor)):
+                    continue
                 # Make sure you don't include overriden methods.
                 # To do so, exclude methods that involve the same parameters
                 # types with any method already included in `methods` var.
