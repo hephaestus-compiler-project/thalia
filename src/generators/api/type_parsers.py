@@ -84,6 +84,10 @@ class JavaTypeParser(TypeParser):
         name = enclosing_type.name + "." + base
         if is_raw_type:
             name = enclosing_type.get_name() + "." + base
+        # Now check the type spec to determine whether we have run into an
+        # a static class. In this case, the enclosing type is not raw.
+        if not isinstance(self.type_spec.get(name), tp.InstanceTypeConstructor):
+            is_raw_type = False
         if not enclosing_type.is_parameterized() and not is_raw_type:
             return self.type_spec.get(name, tp.SimpleClassifier(name))
 
@@ -104,7 +108,12 @@ class JavaTypeParser(TypeParser):
         is_raw_type = isinstance(enclosing_type, self.bt_factory.get_raw_cls())
         name = enclosing_type.name + "." + base
         if is_raw_type:
-            name = enclosing_type.get_name() + "." + name
+            name = enclosing_type.get_name() + "." + base
+        # Now check the type spec to determine whether we have run into an
+        # a static class. In this case, the enclosing type is not raw.
+        if not isinstance(self.type_spec.get(name), tp.InstanceTypeConstructor):
+            is_raw_type = False
+
         type_args = utils.top_level_split(type_args_str)
         new_type_args = []
         for type_arg in type_args:
