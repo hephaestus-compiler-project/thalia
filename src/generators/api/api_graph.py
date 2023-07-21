@@ -97,6 +97,26 @@ class APIGraph():
     DEFAULT_PATH_SEARCH_STRATEGY = "shortest"
     MAX_TYPES = 10
 
+    # A set of blacklisted types. These types cannot be used as an upper bound
+    # of type parameters.
+    BLACKLISTED_TYPES = {
+        "java": set(),
+        "groovy": set(),
+        "scala": set(),
+        "kotlin": {
+            "Array",
+            "kotlin.Array",
+            "BooleanArray",
+            "CharArray",
+            "ByteArray",
+            "ShortArray",
+            "IntArray",
+            "LongArray",
+            "FloatArray",
+            "DoubleArray",
+        }
+    }
+
     def __init__(self, api_graph, subtyping_graph, functional_types,
                  bt_factory, **kwargs):
         self.api_graph: nx.DiGraph = api_graph
@@ -182,8 +202,10 @@ class APIGraph():
             return None if inst is None else inst[0], t
         return t, None
 
-    def get_random_type(self):
+    def get_random_type(self, excluded: Set[str] = None) -> tp.Type:
         types = copy(self.get_reg_types())
+        if excluded:
+            types = [t for t in types if t.name not in excluded]
         actual_t, type_con = self._get_random_type(types)
         while actual_t is None:
             types.remove(type_con)
@@ -701,7 +723,9 @@ class APIGraph():
             bound = None
             if utils.random.bool(cfg.prob.bounded_type_parameters):
                 # Add a bound to the generated type parameter
-                bound = self.get_random_type().box_type()
+                blacklisted = self.BLACKLISTED_TYPES[
+                    self.bt_factory.get_language()]
+                bound = self.get_random_type(excluded=blacklisted).box_type()
                 source = bound
                 kwargs = {}
                 if bound.is_parameterized():

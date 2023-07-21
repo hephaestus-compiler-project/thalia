@@ -166,7 +166,8 @@ class APIGenerator(Generator):
             types,
             types[0]
         )
-        if upper_bound.is_type_constructor():
+        blacklisted = self.api_graph.BLACKLISTED_TYPES[self.language]
+        if upper_bound.is_type_constructor() or upper_bound.name in blacklisted:
             return types
         type_param = tp.TypeParameter(utils.random.caps(blacklist=blacklist),
                                       bound=upper_bound)
