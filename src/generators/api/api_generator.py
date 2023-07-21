@@ -520,8 +520,11 @@ class APIGenerator(Generator):
             self.bt_factory.get_string_type().name: gens.gen_string_constant,
             self.bt_factory.get_boolean_type().name: gens.gen_bool_constant,
             self.bt_factory.get_array_type().name: (
-                lambda x: self.gen_array_expr(x, only_leaves=True,
-                                              subtype=False)
+                lambda x: self.gen_array_expr(
+                    tu.substitute_invariant_wildcard_with(
+                        x, [self.bt_factory.get_any_type()]
+                    ),
+                    only_leaves=True, subtype=False)
             ),
         }
         generator = constant_candidates.get(expr_type.name.capitalize())
