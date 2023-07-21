@@ -79,7 +79,7 @@ class KotlinTranslator(BaseTranslator):
         if isinstance(t, kt.RawType):
             converted_t = t.t_constructor.new(
                 [tp.WildCardType()
-                 for _ in len(t.t_constructor.type_parameters)])
+                 for _ in range(len(t.t_constructor.type_parameters))])
             return self.get_type_name(converted_t)
         t_constructor = getattr(t, 't_constructor', None)
         if not t_constructor:
