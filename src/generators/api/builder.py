@@ -19,7 +19,7 @@ PROTECTED = "protected"
 PUBLIC = "public"
 ROOT_CLASSES = {
     "java": "java.lang.Object",
-    "kotlin": "scala.Kotlin",
+    "kotlin": "kotlin.Any",
     "scala": "scala.Any"
 }
 
