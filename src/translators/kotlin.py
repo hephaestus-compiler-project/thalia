@@ -626,7 +626,7 @@ class KotlinTranslator(BaseTranslator):
             )
         else:
             receiver_expr = ""
-        res = "{}{}{}".format(" " * self.ident, receiver_expr, node.field)
+        res = "{}{}`{}`".format(" " * self.ident, receiver_expr, node.field)
         self._children_res.append(res)
 
     @append_to
@@ -694,7 +694,7 @@ class KotlinTranslator(BaseTranslator):
             args = children_res
         if receiver_expr:
             receiver_expr += "."
-        res = "{ident}{rec}{func}{type_args}({args})".format(
+        res = "{ident}{rec}`{func}`{type_args}({args})".format(
             ident=" " * self.ident,
             rec=receiver_expr,
             func=func,
