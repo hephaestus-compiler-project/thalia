@@ -299,7 +299,7 @@ class APIGenerator(Generator):
             ExprRes(self.generate_function_expr(node, constraints or {},
                                                 depth),
                     {}, [node])
-            if is_func
+            if is_func and utils.random.bool(cfg.prob.function_expr)
             else self._generate_expr_from_node(
                 node, depth, {} if func_ref else (constraints or {}))
         )

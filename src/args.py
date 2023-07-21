@@ -220,6 +220,11 @@ parser.add_argument(
     help="Disable parameterized functions"
 )
 parser.add_argument(
+    "--disable-sam",
+    action="store_true",
+    help="Disable SAM coercions"
+)
+parser.add_argument(
     "--error-filter-patterns",
     default='',
     type=str,
@@ -272,6 +277,8 @@ if args.disable_parameterized_functions:
     cfg.prob.parameterized_functions = 0
 if args.disable_function_references:
     cfg.prob.func_ref = 0
+if args.disable_sam:
+    cfg.prob.sam_coercion = 0
 
 
 def validate_args(args):

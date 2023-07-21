@@ -2290,7 +2290,7 @@ class Generator():
         if (not var_decls and ret_type != self.bt_factory.get_void_type()):
             # The function does not contain any declarations and its return
             # type is not Unit. So, we can create an expression-based function.
-            body = expr if ut.random.bool(cfg.prob.function_expr) else \
+            body = expr if ut.random.bool(cfg.prob.function_body_expr) else \
                 ast.Block([expr])
         else:
             exprs, decls = self._gen_side_effects()

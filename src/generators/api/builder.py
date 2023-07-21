@@ -7,6 +7,7 @@ from typing import List, Dict, Set
 
 import networkx as nx
 
+from src.config import cfg
 from src.ir import BUILTIN_FACTORIES, types as tp, kotlin_types as kt
 from src.ir.builtins import BuiltinFactory
 from src.generators.api.api_graph import (APIGraph, IN, OUT, Method,
@@ -383,6 +384,8 @@ class APIGraphBuilder(ABC):
     def build_functional_interface(self, method_api: dict,
                                    parameters: List[Parameter],
                                    ret_type: tp.Type):
+        if not cfg.prob.sam_coercion:
+            return
         is_abstract = not method_api.get("is_default", False) and not \
             method_api["is_static"]
         if self._is_func_interface and is_abstract:

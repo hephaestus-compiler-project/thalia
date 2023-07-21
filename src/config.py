@@ -54,12 +54,13 @@ class GenLimits:
 # we will generate the specified expression based on the current program
 @dataclass
 class Probabilities:
-    function_expr: float # functions that their body are expressions
+    function_body_expr: float  # functions that their body are expressions
+    function_expr: float  # generate lambda or method ref
     bounded_type_parameters: float
     parameterized_functions: float
-    func_ref_call: float # use function reference call instead of function call
-    func_ref: float # generate func_ref instead of lambda
-    sam_coercion: float # perform sam coercion whenever possible
+    func_ref_call: float  # use function reference call instead of function call
+    func_ref: float  # generate func_ref instead of lambda
+    sam_coercion: float  # perform sam coercion whenever possible
 
 
 # Features that we want to either disable or enable
@@ -89,7 +90,8 @@ class GenConfig(metaclass=Singleton):
             max_depth=6
         )
         self.prob=Probabilities(
-                function_expr=1.0,
+                function_body_expr=1.0,
+                function_expr=0.8,
                 bounded_type_parameters=0.5,
                 parameterized_functions=0.3,
                 func_ref_call=1.0,
@@ -98,7 +100,7 @@ class GenConfig(metaclass=Singleton):
         )
         self.dis=Disabled(
             use_site_variance=False,
-            use_site_contravariance=False
+            use_site_contravariance=False,
         )
         self.bt_factory = None
 
