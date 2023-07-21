@@ -324,7 +324,7 @@ class KotlinTypeParser(TypeParser):
         return bool(re.match(self.FUNC_REGEX, str_t))
 
     def is_native_func_type(self, str_t: str) -> bool:
-        return str_t.startswith("kotlin.Function")
+        return False
 
     def parse_function_type(self, str_t: str) -> tp.ParameterizedType:
         segs = self.FUNC_SEP_REGEX.split(str_t, 1)
