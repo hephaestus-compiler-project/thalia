@@ -114,6 +114,14 @@ class APIGraph():
             "LongArray",
             "FloatArray",
             "DoubleArray",
+            "kotlin.BooleanArray",
+            "kotlin.CharArray",
+            "kotlin.ByteArray",
+            "kotlin.ShortArray",
+            "kotlin.IntArray",
+            "kotlin.LongArray",
+            "kotlin.FloatArray",
+            "kotlin.DoubleArray",
         }
     }
 
@@ -468,8 +476,10 @@ class APIGraph():
 
     def _get_paths(self, source, target):
         if self.path_search_strategy == "shortest":
-            return nx.all_shortest_paths(self.api_graph, source=source,
-                                         target=target)
+            return utils.random.shuffle(
+                list(nx.all_shortest_paths(self.api_graph, source=source,
+                                           target=target))
+            )
         return nx.shortest_simple_paths(self.api_graph, source=source,
                                         target=target)
 
@@ -494,7 +504,7 @@ class APIGraph():
             if source == target:
                 continue
             paths = self._get_paths(source, target)
-            for path in sorted(paths, key=len, reverse=True):
+            for path in paths:
                 node_path = path
                 path = list(zip(path, path[1:]))
                 assignment_graph = au.compute_assignment_graph(self.api_graph,
