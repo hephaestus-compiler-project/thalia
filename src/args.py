@@ -225,6 +225,11 @@ parser.add_argument(
     help="Disable SAM coercions"
 )
 parser.add_argument(
+    "--local-variable-prob",
+    type=float,
+    help="Probability of assigning an expression to a local variable"
+)
+parser.add_argument(
     "--error-filter-patterns",
     default='',
     type=str,
@@ -279,6 +284,7 @@ if args.disable_function_references:
     cfg.prob.func_ref = 0
 if args.disable_sam:
     cfg.prob.sam_coercion = 0
+cfg.prob.local_variable_prob = args.local_variable_prob
 
 
 def validate_args(args):
@@ -331,6 +337,9 @@ def validate_args(args):
                  "--generator 'api'")
     if args.max_conditional_depth <= 0:
         sys.exit("The --max-conditional-depth option should be >= 1")
+
+    if args.local_variable_prob < 0 or args.local_variable_prob > 1:
+        sys.exit("--local-variable-prob should be between 0 and 1")
 
 
 def pre_process_args(args):

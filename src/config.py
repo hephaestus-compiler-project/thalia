@@ -61,6 +61,8 @@ class Probabilities:
     func_ref_call: float  # use function reference call instead of function call
     func_ref: float  # generate func_ref instead of lambda
     sam_coercion: float  # perform sam coercion whenever possible
+    # Probability of assigning every expression to a local variable
+    local_variable_prob: float
 
 
 # Features that we want to either disable or enable
@@ -97,6 +99,7 @@ class GenConfig(metaclass=Singleton):
                 func_ref_call=1.0,
                 func_ref=0.5,
                 sam_coercion=1.0,
+                local_variable_prob=0.5
         )
         self.dis=Disabled(
             use_site_variance=False,

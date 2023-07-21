@@ -303,7 +303,7 @@ class APIGenerator(Generator):
             else self._generate_expr_from_node(
                 node, depth, {} if func_ref else (constraints or {}))
         )
-        if node and utils.random.bool():
+        if node and utils.random.bool(prob=cfg.prob.local_variable_prob):
             var_name = gu.gen_identifier("lower")
             if node.is_type_constructor():
                 node = node.new(node.type_parameters)

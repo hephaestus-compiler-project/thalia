@@ -901,7 +901,7 @@ class Generator():
             not only_leaves and
             expr_type != self.bt_factory.get_void_type() and
             self._vars_in_context[self.namespace] < cfg.limits.max_var_decls and
-            ut.random.bool()
+            ut.random.bool(cfg.prob.local_variable_prob)
         )
         if gen_var:
             self._vars_in_context[self.namespace] += 1
