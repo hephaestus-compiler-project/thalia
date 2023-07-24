@@ -615,12 +615,14 @@ class APIGraph():
         if receiver is None:
             # This is a method with no receiver.
             return {m for m in self.api_graph.nodes()
-                    if isinstance(m, Method) and (
-                        m.name == method.name and m != method)}
+                    if (isinstance(m, (Method, Constructor))
+                        and m.name == method.name
+                        and m != method)}
 
         methods = set()
         methods.update({m for m in self.api_graph.neighbors(receiver)
-                       if m.name == method.name and m != method})
+                       if (isinstance(m, (Method, Constructor))
+                           and m.name == method.name and m != method)})
         for supertype in receiver.get_supertypes():
             if supertype.is_parameterized():
                 supertype = self.get_type_by_name(
