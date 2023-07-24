@@ -208,6 +208,7 @@ class APIGraphBuilder(ABC):
             if not is_constructor:
                 output_type = self.parse_type(ret_type)
                 if output_type is None:
+                    self.graph.remove_node(method_node)
                     # Unable to parse output type
                     continue
             else:
