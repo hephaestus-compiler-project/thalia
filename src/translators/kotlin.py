@@ -654,9 +654,28 @@ class KotlinTranslator(BaseTranslator):
             if children_res
             else segs[0]
         )
-        receiver += "::"
+        map_types = {
+            kt.Long: ".toLong()",
+            kt.Short: ".toShort()",
+            kt.Byte: ".toByte()",
+            kt.Float: ".toFloat()",
+            kt.Double: ".toDouble()",
+        }
         if isinstance(node.receiver, ast.New):
             func_name = node.receiver.class_type.name.rsplit(".", 1)[-1]
+        if isinstance(node.receiver, (ast.IntegerConstant, ast.RealConstant)):
+            if float(node.receiver.literal) < 0:
+                # (-34)::div
+                receiver = f"({receiver})"
+            t = (
+                node.receiver.integer_type
+                if isinstance(node.receiver, ast.IntegerConstant)
+                else node.receiver.real_type
+            )
+            suffix = map_types.get(t, "")
+            receiver += suffix
+
+        receiver += "::"
         res = "{ident}{receiver}{name}".format(
             ident=" " * self.ident,
             receiver=receiver,
