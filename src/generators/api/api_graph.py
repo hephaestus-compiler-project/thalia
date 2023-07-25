@@ -811,8 +811,7 @@ class APIGraph():
                 return None
             type_var_map.update({k: tp.substitute_type(v, type_var_map)
                                  for k, v in func_type_var_map.items()})
-            if parameterized_rec:
-                receiver = tp.substitute_type(receiver, type_var_map)
+            receiver = tp.substitute_type(receiver, type_var_map)
             receivers = {receiver}
             if receiver != self.bt_factory.get_any_type() and \
                     not self.inject_type_error:
