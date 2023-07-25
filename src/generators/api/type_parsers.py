@@ -684,6 +684,9 @@ class ScalaTypeParser(TypeParser):
         if " with " in str_t or " & " in str_t or " def " in str_t:
             # Interesection types
             return None
+        if str_t.endswith(".type"):
+            # this.type
+            return None
         if len(segs) == 1:
             parsed_t = tp.SimpleClassifier(str_t)
             return self.type_spec.get(str_t, parsed_t)
