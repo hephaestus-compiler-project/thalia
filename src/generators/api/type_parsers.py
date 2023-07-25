@@ -410,6 +410,9 @@ class KotlinTypeParser(TypeParser):
                 "." not in str_t.split(":")[0]
              )
         )
+        if "suspend " in str_t:
+            # Suspend types
+            return None
         if is_type_var:
             return self.parse_type_parameter(str_t)
         segs = str_t.replace(", ", ",").split("<", 1)
