@@ -502,7 +502,9 @@ class APIGenerator(Generator):
                       exclude_var=False,
                       gen_bottom=False,
                       sam_coercion=False) -> ast.Expr:
-        if expr_type == self.bt_factory.get_void_type():
+        void_type = type(self.bt_factory.get_void_type())
+        if isinstance(expr_type, void_type) and getattr(expr_type, "primitive",
+                                                        False):
             # For primitive void we generate an empty block
             return ast.Block(body=[])
         assert expr_type is not None
