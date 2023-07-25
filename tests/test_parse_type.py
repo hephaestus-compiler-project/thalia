@@ -332,10 +332,9 @@ def test_kotlin_function_types():
     ])
     assert t == exp_t
 
-    b.parse_type("kotlin.Function1<String, Int>") == kt.FunctionType(1).new([
-        kt.String, kt.Integer
+    assert b.parse_type("((Boolean) -> String)?") == kt.NullableType().new([
+        kt.FunctionType(1).new([kt.Boolean, kt.String])
     ])
-    b.parse_type("kotlin.Function0<Int>") == kt.FunctionType(0).new([kt.Integer])
 
 
 def test_scala_primitives():

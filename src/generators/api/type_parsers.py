@@ -441,18 +441,21 @@ class KotlinTypeParser(TypeParser):
 
     def parse_type(self, str_t: str) -> tp.Type:
         tf = self.bt_factory
-        if self.is_func_type(str_t):
+        if self.is_func_type(str_t) and not str_t.endswith(")?"):
             return self.parse_function_type(str_t)
         if self.is_native_func_type(str_t):
             return self.parse_native_function_type(str_t)
+        if str_t.endswith("?"):
+            # This is a nullable type.
+            str_t = str_t[:-1]
+            if str_t.startswith("(("):
+                str_t = str_t[1:-1]
+            return kt.NullableType().new([self.parse_type(str_t)])
         if str_t.startswith("("):
             str_t = str_t[1:]
         if str_t.endswith(")"):
             str_t = str_t[:-1]
-        if str_t.endswith("?"):
-            # This is a nullable type.
-            return kt.NullableType().new([self.parse_type(str_t[:-1])])
-        elif str_t.startswith("kotlin.Array<"):
+        if str_t.startswith("kotlin.Array<"):
             str_t = str_t.split("kotlin.Array<")[1][:-1]
             return tf.get_array_type().new([self.parse_type(str_t)])
         else:
