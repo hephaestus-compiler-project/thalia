@@ -92,7 +92,7 @@ class KotlinAPIDocConverter(APIDocConverter):
         java_regex = re.compile(
             "https://docs.oracle.com/.*/api/(.*)/[^/]+.html")
         kotlin_regex = re.compile(
-            ".*/(docs/kotlin|stdlib|kotlin-stdlib)/(.+)/-[^/]+/index.html$"
+            ".*/(docs/kotlin|stdlib|kotlin-stdlib|kotlin-stdlib-common)/(.+)/-[^/]+/index.html$"
         )
         for anchor in anchors:
             href = anchor.get("href")
@@ -135,8 +135,11 @@ class KotlinAPIDocConverter(APIDocConverter):
             e.decompose()
         self._replace_anchors_with_package_prefix(element.select("a"))
         text = re.sub(r"\(.+\)", "", element.text).replace(", ", ",")
-        if self.class_name + "<" in text:
-            segs = text.split("> : ")
+        regex = re.compile(
+            r"(object|class|interface) [a-zA-Z0-9.]+\." + self.class_name + "<")
+        segs = regex.split(text, 1)
+        if len(segs) > 2:
+            segs = text.split("> : ", 1)
             if len(segs) == 1:
                 return []
             text = segs[-1].strip()
@@ -164,10 +167,12 @@ class KotlinAPIDocConverter(APIDocConverter):
         for e in rem_elems:
             e.decompose()
         self._replace_anchors_with_package_prefix(element.select("a"))
-        segs = element.text.split(self.class_name + "<", 1)
+        regex = re.compile(
+            r"(object|class|interface) [a-zA-Z0-9.]+\." + self.class_name + "<")
+        segs = regex.split(element.text, 1)
         if len(segs) == 1:
             return []
-        text = "<" + segs[1]
+        text = "<" + segs[2]
         balance = 1
         type_param_str = ""
         i = 1
