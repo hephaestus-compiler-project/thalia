@@ -84,6 +84,12 @@ class KotlinTranslator(BaseTranslator):
         t_constructor = getattr(t, 't_constructor', None)
         if not t_constructor:
             return t.get_name()
+        if isinstance(t_constructor, kt.FunctionTypeWithReceiver):
+            rec = self.get_type_name(t.type_args[0])
+            ret = self.get_type_name(t.type_args[-1])
+            params = ", ".join(self.type_arg2str(ta)
+                               for ta in t.type_args[1:-1])
+            return f"{rec}.({params}) -> {ret}"
         if isinstance(t_constructor, kt.SpecializedArrayType):
             return "{}Array".format(self.get_type_name(
                 t.type_args[0]))

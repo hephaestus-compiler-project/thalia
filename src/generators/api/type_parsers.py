@@ -308,7 +308,7 @@ class KotlinTypeParser(TypeParser):
 
     COMMA_SEP_REGEX = re.compile(r"(?:[^,<(]|\([^)]*\)|<[^>]*>)+")
 
-    FUNC_REGEX = re.compile(r"^\(.*\) -> .*")
+    FUNC_REGEX = re.compile(r"^([a-zA-Z0-9.]+\.)?\(.*\) -> .*")
 
     def __init__(self,
                  class_type_name_map: Dict[str, tp.TypeParameter] = None,
@@ -327,6 +327,12 @@ class KotlinTypeParser(TypeParser):
         return False
 
     def parse_function_type(self, str_t: str) -> tp.ParameterizedType:
+        receiver = None
+        if not str_t.startswith("("):
+            # Parse function types of the form: kotlin.Int.() -> kotlin.String
+            rec_str, str_t = tuple(str_t.split("(", 1))
+            str_t = "(" + str_t
+            receiver = self.parse_type(rec_str[:-1])
         segs = self.FUNC_SEP_REGEX.split(str_t, 1)
         assert len(segs) == 2
         param_strs = re.findall(self.COMMA_SEP_REGEX, segs[0].rstrip()[1:-1])
@@ -335,6 +341,10 @@ class KotlinTypeParser(TypeParser):
             for param_str in param_strs
         ]
         ret_type = self.parse_type(segs[1].lstrip())
+        if receiver is not None:
+            return kt.FunctionTypeWithReceiver(len(param_types)).new(
+                [receiver] + param_types + [ret_type]
+            )
         return self.bt_factory.get_function_type(len(param_types)).new(
             param_types + [ret_type]
         )

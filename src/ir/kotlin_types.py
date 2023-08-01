@@ -264,6 +264,11 @@ class FunctionType(tp.TypeConstructor, AnyType):
         self.supertypes.append(AnyType())
 
 
+class FunctionTypeWithReceiver(FunctionType):
+    def __init__(self, nr_type_parameters: int):
+        super().__init__(nr_type_parameters + 1)
+
+
 ### WARNING: use them only for testing ###
 Any = AnyType()
 Nothing = NothingType()

@@ -337,6 +337,16 @@ def test_kotlin_function_types():
     ])
 
 
+def test_kotlin_types_with_receiver():
+    b = KotlinTypeParser()
+    t = b.parse_type("kotlin.Int.() -> kotlin.String")
+    assert t == kt.FunctionTypeWithReceiver(0).new([kt.Integer, kt.String])
+    t = b.parse_type("T.(kotlin.Int) -> kotlin.String")
+    assert t == kt.FunctionTypeWithReceiver(1).new([tp.TypeParameter("T"),
+                                                    kt.Integer,
+                                                    kt.String])
+
+
 def test_scala_primitives():
     b = ScalaTypeParser()
     assert b.parse_type("scala.Char") == sc.CharType()
