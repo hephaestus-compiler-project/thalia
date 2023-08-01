@@ -286,6 +286,14 @@ class FunctionType(tp.TypeConstructor, AnyType):
             return True, sub
         return False, None
 
+    @classmethod
+    def get_param_types(cls, etype: tp.ParameterizedType):
+        return etype.type_args[:-1]
+
+    @classmethod
+    def get_ret_type(cls, etype: tp.ParameterizedType):
+        return etype.type_args[-1]
+
 
 class FunctionTypeWithReceiver(FunctionType):
     is_native = True
@@ -311,6 +319,15 @@ class FunctionTypeWithReceiver(FunctionType):
         if sub or target_type == api_type:
             return True, sub
         return False, None
+
+    @classmethod
+    def get_param_types(cls, etype: tp.ParameterizedType):
+        return etype.type_args[1:-1]
+
+    @classmethod
+    def get_ret_type(cls, etype: tp.ParameterizedType):
+        return etype.type_args[-1]
+
 
 ### WARNING: use them only for testing ###
 Any = AnyType()

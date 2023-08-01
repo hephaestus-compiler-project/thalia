@@ -419,15 +419,16 @@ class APIGenerator(Generator):
         shadow_name = "lambda_" + str(next(self.int_stream))
         prev_namespace = self.namespace
         self.namespace += (shadow_name,)
+        param_types = type(func_type.t_constructor).get_param_types(func_type)
+        ret_type = type(func_type.t_constructor).get_ret_type(func_type)
 
         params = [
             ast.ParameterDeclaration(name=gu.gen_identifier("lower"),
                                      param_type=param_type)
-            for param_type in func_type.type_args[:-1]
+            for param_type in param_types
         ]
         for param in params:
             self.api_graph.add_variable_node(param.name, param.get_type())
-        ret_type = func_type.type_args[-1]
         for p in params:
             self.context.add_var(self.namespace, p.name, p)
         if self.type_eraser.expected_type:

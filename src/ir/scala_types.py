@@ -283,6 +283,14 @@ class FunctionType(tp.TypeConstructor, AnyRefType):
             return True, sub
         return False, None
 
+    @classmethod
+    def get_param_types(cls, etype: tp.ParameterizedType):
+        return etype.type_args[:-1]
+
+    @classmethod
+    def get_ret_type(cls, etype: tp.ParameterizedType):
+        return etype.type_args[-1]
+
 
 class TupleType(tp.TypeConstructor, AnyRefType):
     def __init__(self, n_type_parameters: int):

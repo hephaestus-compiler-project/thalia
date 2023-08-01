@@ -424,6 +424,14 @@ class FunctionType(tp.TypeConstructor):
             return True, sub
         return False, None
 
+    @classmethod
+    def get_param_types(cls, etype: tp.ParameterizedType):
+        return etype.type_args[:-1]
+
+    @classmethod
+    def get_ret_type(cls, etype: tp.ParameterizedType):
+        return etype.type_args[-1]
+
 
 Object = ObjectType()
 Void = VoidType(primitive=True)
