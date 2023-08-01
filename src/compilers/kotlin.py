@@ -24,7 +24,13 @@ class KotlinCompiler(BaseCompiler):
             extra_options = ["-cp", self.library_path]
         return ['kotlinc', self.input_name, '-include-runtime', '-d',
                 'program.jar',
-                '-Xnullability-annotations=@javax.annotation:ignore'
+                '-Xnullability-annotations=@javax.annotation:ignore',
+                '-opt-in',
+                'kotlin.io.encoding.ExperimentalEncodingApi',
+                '-opt-in',
+                'kotlin.contracts.ExperimentalContracts',
+                '-opt-in',
+                'kotlin.ExperimentalStdlibApi'
                 ] + extra_options
 
     def get_filename(self, match):
