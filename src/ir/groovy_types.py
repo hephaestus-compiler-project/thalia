@@ -1,4 +1,6 @@
 # pylint: disable=abstract-method, useless-super-delegation,too-many-ancestors
+from typing import List
+
 from src.ir.types import Builtin
 
 import src.ir.builtins as bt
@@ -424,6 +426,8 @@ class ArrayType(tp.TypeConstructor, ObjectType):
 
 
 class FunctionType(tp.TypeConstructor, ObjectType):
+    is_native = True
+
     def __init__(self, nr_type_parameters: int):
         name = "Function" + str(nr_type_parameters)
         type_parameters = [
@@ -433,6 +437,25 @@ class FunctionType(tp.TypeConstructor, ObjectType):
         self.nr_type_parameters = nr_type_parameters
         super().__init__(name, type_parameters)
         self.supertypes.append(ObjectType())
+
+    @classmethod
+    def match_function(cls, receiver_type: tp.Type, ret_type: tp.Type,
+                       param_types: List[tp.Type],
+                       target_type: tp.Type,
+                       bt_factory: bt.BuiltinFactory):
+        import src.ir.type_utils as tu
+        api_type = FunctionType(
+            len(param_types)).new(param_types + [ret_type])
+        sub = tu.unify_types(target_type, api_type, bt_factory, same_type=True)
+        if any(v == bt_factory.get_void_type()
+               for v in sub.values()):
+            # We don't want to match something that is needed to be
+            # instantiated with void, e.g.,
+            # Consumer<Int> != Function<Int, void>
+            return False, None
+        if sub or target_type == api_type:
+            return True, sub
+        return False, None
 
 
 Object = ObjectType()

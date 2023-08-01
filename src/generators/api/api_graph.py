@@ -649,8 +649,7 @@ class APIGraph():
             # (Boolean) -> String.
             t_constructor = self.get_type_by_name(
                 etype.name) or etype.t_constructor
-            if t_constructor == self.bt_factory.get_function_type(
-                    len(t_constructor.type_parameters) - 1):
+            if getattr(t_constructor, "is_native", False):
                 return etype
         class_type = etype
         if etype.is_parameterized():
@@ -668,6 +667,28 @@ class APIGraph():
         if func_type is None:
             return None
         return tp.substitute_type(func_type, type_var_map)
+
+    def _get_receiver_and_ret_type_of_func(self, api: Method):
+        view = self.api_graph.out_edges(api)
+        assert len(view) == 1
+        out_type = list(view)[0][1]
+        if out_type.is_type_constructor():
+            constraint = self.api_graph[api][out_type].get("constraint",
+                                                           {})
+            out_type = out_type.new(
+                [constraint.get(tpa, tpa)
+                 for tpa in out_type.type_parameters])
+        if out_type != self.bt_factory.get_void_type():
+            out_type = out_type.box_type()
+
+        view = self.api_graph.in_edges(api)
+        if not view:
+            return None, out_type
+        assert len(view) == 1
+        rec_type = list(view)[0][0]
+        if rec_type.is_type_constructor():
+            rec_type = rec_type.new(rec_type.type_parameters)
+        return rec_type, out_type
 
     def get_function_refs_of(self, etype: tp.Type,
                              single: bool = False) -> List[Tuple[Method, dict]]:
@@ -691,28 +712,11 @@ class APIGraph():
                 )
                 for param in api.parameters
             ]
-            view = self.api_graph.out_edges(api)
-            assert len(view) == 1
-            out_type = list(view)[0][1]
-            if out_type.is_type_constructor():
-                constraint = self.api_graph[api][out_type].get("constraint",
-                                                               {})
-                out_type = out_type.new(
-                    [constraint.get(tpa, tpa)
-                     for tpa in out_type.type_parameters])
-            if out_type != self.bt_factory.get_void_type():
-                out_type = out_type.box_type()
-            api_type = self.bt_factory.get_function_type(
-                len(param_types)).new(param_types + [out_type])
-            sub = tu.unify_types(func_type, api_type, self.bt_factory,
-                                 same_type=True)
-            if any(v == self.bt_factory.get_void_type()
-                   for v in sub.values()):
-                # We don't want to match something that is needed to be
-                # instantiated with void, e.g.,
-                # Consumer<Int> != Function<Int, void>
-                continue
-            if sub or func_type == api_type:
+            rec_type, out_type = self._get_receiver_and_ret_type_of_func(api)
+            match, sub = func_type.t_constructor.match_function(
+                rec_type, out_type, param_types, func_type, self.bt_factory
+            )
+            if match:
                 if single:
                     return [(api, sub)]
                 candidate_functions.append((api, sub))

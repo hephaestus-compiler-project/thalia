@@ -308,7 +308,7 @@ class KotlinTypeParser(TypeParser):
 
     COMMA_SEP_REGEX = re.compile(r"(?:[^,<(]|\([^)]*\)|<[^>]*>)+")
 
-    FUNC_REGEX = re.compile(r"^([a-zA-Z0-9.]+\.)?\(.*\) -> .*")
+    FUNC_REGEX = re.compile(r"^([a-zA-Z0-9.<> ]+\.)?\(.*\) -> .*")
 
     def __init__(self,
                  class_type_name_map: Dict[str, tp.TypeParameter] = None,
@@ -488,6 +488,8 @@ class KotlinTypeParser(TypeParser):
             return kt.FloatArray
         elif str_t == "kotlin.DoubleArray":
             return kt.DoubleArray
+        elif str_t == "kotlin.BooleanArray":
+            return kt.BooleanArray
         elif str_t == "int[]":
             return kt.IntegerArray
         elif str_t.startswith("vararg "):

@@ -345,6 +345,14 @@ def test_kotlin_types_with_receiver():
     assert t == kt.FunctionTypeWithReceiver(1).new([tp.TypeParameter("T"),
                                                     kt.Integer,
                                                     kt.String])
+    t = b.parse_type("kotlin.List<kotlin.Int>.(kotlin.Boolean) -> kotlin.String")
+    assert t == kt.FunctionTypeWithReceiver(1).new([
+        tp.TypeConstructor("kotlin.List", [tp.TypeParameter("kotlin.List.T1")]).new([
+            kt.Integer
+        ]),
+        kt.Boolean,
+        kt.String
+    ])
 
 
 def test_scala_primitives():

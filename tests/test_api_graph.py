@@ -2,9 +2,9 @@ import copy
 
 import networkx as nx
 
-from src.ir import types as tp, java_types as jt, builtins as bt
+from src.ir import types as tp, java_types as jt, builtins as bt, kotlin_types as kt
 from src.generators.api import api_graph as ag
-from src.generators.api.builder import JavaAPIGraphBuilder
+from src.generators.api.builder import JavaAPIGraphBuilder, KotlinAPIGraphBuilder
 
 
 DOCS1 = {
@@ -285,7 +285,7 @@ DOCS5 = {
 
 
         }],
-        "type_parameters": ["T"]
+        "type_parameters": ["T"],
     },
     "java.Foo.List": {
         "name": "java.Foo.List",
@@ -304,10 +304,49 @@ DOCS5 = {
 
         }],
         "parent": "java.Foo",
-        "type_parameters": []
+        "type_parameters": [],
     },
 }
 
+
+DOCS6 = {
+    "kotlin.Foo": {
+        "name": "kotlin.Foo",
+        "inherits": [],
+        "implements": [],
+        "fields": [],
+        "methods": [
+            {
+                "name": "m1",
+                "is_static": False,
+                "is_constructor": False,
+                "parameters": ["kotlin.Int"],
+                "access_mod": "public",
+                "type_parameters": [],
+                "return_type": "kotlin.String"
+            },
+        ],
+        "type_parameters": [],
+        "language": "kotlin"
+    },
+    "kotlin.List": {
+        "name": "kotlin.List",
+        "inherits": [],
+        "implements": [],
+        "fields": [],
+        "methods": [{
+            "name": "m1",
+            "is_static": False,
+            "is_constructor": False,
+            "parameters": ["kotlin.String"],
+            "access_mod": "public",
+            "type_parameters": [],
+            "return_type": "T"
+        }],
+        "type_parameters": ["T"],
+        "language": "kotlin"
+    },
+}
 
 def filter_types(path):
     return [
@@ -518,6 +557,48 @@ def test_get_function_refs_of():
     ]
 
     refs = api_graph.get_function_refs_of(b.parse_type("java.lang.Object"))
+    assert refs == []
+
+
+def test_get_function_refs_of_receiver():
+    b = KotlinAPIGraphBuilder("kotlin")
+    api_graph = b.build(DOCS6)
+
+    refs = api_graph.get_function_refs_of(
+        b.parse_type("kotlin.Int.() -> kotlin.String"))
+    assert refs == []
+
+    refs = api_graph.get_function_refs_of(
+        b.parse_type("kotlin.Foo.() -> kotlin.String")
+    )
+    assert refs == []
+
+
+    refs = api_graph.get_function_refs_of(
+        b.parse_type("kotlin.Foo.(kotlin.Int) -> kotlin.String")
+    )
+    assert refs == [
+        (
+            ag.Method("m1", "kotlin.Foo", [
+                ag.Parameter(b.parse_type("kotlin.Int"), False)], []),
+            {}
+        ),
+    ]
+
+    refs = api_graph.get_function_refs_of(
+        b.parse_type("kotlin.List<kotlin.Int>.(kotlin.String) -> kotlin.Int")
+    )
+    assert refs == [
+        (
+            ag.Method("m1", "kotlin.List", [
+                ag.Parameter(b.parse_type("kotlin.String"), False)], []),
+            {tp.TypeParameter("kotlin.List.T1"): kt.Integer}
+        ),
+    ]
+
+    refs = api_graph.get_function_refs_of(
+        b.parse_type("kotlin.List<kotlin.Int>.(kotlin.String) -> kotlin.Any")
+    )
     assert refs == []
 
 
