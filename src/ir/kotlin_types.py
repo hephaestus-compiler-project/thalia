@@ -306,6 +306,9 @@ class FunctionTypeWithReceiver(FunctionType):
                        param_types: List[tp.Type],
                        target_type: tp.Type,
                        bt_factory: bt.BuiltinFactory):
+        if receiver_type is None:
+            # A receiver is not found. Therefore, there is not match.
+            return False, None
         import src.ir.type_utils as tu
         api_type = FunctionTypeWithReceiver(
             len(param_types)).new([receiver_type] + param_types + [ret_type])
