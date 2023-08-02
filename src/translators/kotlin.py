@@ -680,6 +680,9 @@ class KotlinTranslator(BaseTranslator):
             )
             suffix = map_types.get(t, "")
             receiver += suffix
+        if len(segs) == 1:
+            # Top-level function: ::maxOf
+            receiver = ""
 
         receiver += "::"
         res = "{ident}{receiver}{name}".format(
