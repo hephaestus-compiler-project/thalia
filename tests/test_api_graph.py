@@ -730,6 +730,5 @@ def test_get_overloaded_methods_with_receiver():
 
     api_graph = ag.APIGraph(g, nx.DiGraph(), [], jt.JavaBuiltinFactory())
     rec = t2.new([jt.String])
-    import pdb; pdb.set_trace()
     methods = api_graph.get_overloaded_methods(rec, m1)
     assert methods == {(m2, True)}
