@@ -128,6 +128,7 @@ class KotlinTranslator(BaseTranslator):
             "import kotlin.streams.*",
             "import kotlin.text.*",
             "import kotlin.time.*",
+            "import kotlin.system.*",
         ]
         imports = "\n".join(imports) + "\n"
         self.program = package_str + "\n" + imports + '\n\n'.join(
@@ -680,7 +681,7 @@ class KotlinTranslator(BaseTranslator):
             )
             suffix = map_types.get(t, "")
             receiver += suffix
-        if len(segs) == 1:
+        if not children_res:
             # Top-level function: ::maxOf
             receiver = ""
 
