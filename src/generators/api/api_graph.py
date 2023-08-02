@@ -606,41 +606,58 @@ class APIGraph():
                                ) -> Set[Method]:
         if not isinstance(method, (Method, Constructor)):
             return set()
-        if receiver and receiver.is_parameterized():
-            receiver = self.get_type_by_name(
-                receiver.name) or receiver.t_constructor
-        if receiver is not None and receiver not in self.api_graph:
-            return set()
-
         if receiver is None:
             # This is a method with no receiver.
-            return {m for m in self.api_graph.nodes()
+            return {(m, False) for m in self.api_graph.nodes()
                     if (isinstance(m, (Method, Constructor))
                         and m.name == method.name
                         and m != method)}
 
         methods = set()
-        methods.update({m for m in self.api_graph.neighbors(receiver)
-                       if (isinstance(m, (Method, Constructor))
-                           and m.name == method.name and m != method)})
+        base_t = receiver
+        if receiver.is_parameterized():
+            base_t = self.get_type_by_name(receiver.name) or \
+                receiver.t_constructor
+        if base_t in self.api_graph:
+            methods.update({(m, False)
+                           for m in self.api_graph.neighbors(base_t)
+                           if (isinstance(m, (Method, Constructor))
+                               and m.name == method.name and m != method)})
         for supertype in receiver.get_supertypes():
             if supertype.is_parameterized():
                 supertype = self.get_type_by_name(
                     supertype.name) or supertype.t_constructor
+            rec_types = set()
+            for rec_type in self.api_graph.nodes():
+                if not isinstance(rec_type, tp.Type):
+                    continue
+                if not rec_type.is_parameterized():
+                    continue
+                if rec_type.t_constructor != supertype:
+                    continue
+                supertype_t = supertype.new(supertype.type_parameters)
+                sub = tu.unify_types(rec_type, supertype_t, self.bt_factory)
+                if sub:
+                    rec_types.add((rec_type, True))
             if supertype not in self.api_graph:
                 continue
-            for m in self.api_graph.neighbors(supertype):
-                if not isinstance(m, (Method, Constructor)):
-                    continue
-                # Make sure you don't include overriden methods.
-                # To do so, exclude methods that involve the same parameters
-                # types with any method already included in `methods` var.
-                not_overriden = all(
-                    m.parameters != om.parameters
-                    for om in methods
-                ) and m.parameters != method.parameters
-                if m.name == method.name and not_overriden:
-                    methods.add(m)
+            types = rec_types.union({(supertype, False)})
+            for t, is_extension in types:
+                for m in self.api_graph.neighbors(t):
+                    if m == method:
+                        continue
+                    if not isinstance(m, (Method, Constructor)):
+                        continue
+                    # Make sure you don't include overriden methods.
+                    # To do so, exclude methods that involve the same parameters
+                    # types with any method already included in `methods` var.
+                    not_overriden = all(
+                        m.parameters != om.parameters
+                        for om, _ in methods
+                    ) and m.parameters != method.parameters
+                    if m.name == method.name and (not_overriden
+                                                  or is_extension):
+                        methods.add((m, is_extension))
         return methods
 
     def get_functional_type(self, etype: tp.Type) -> tp.ParameterizedType:

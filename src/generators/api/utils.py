@@ -392,7 +392,7 @@ def is_typing_seq_ambiguous(method: Method,
     for i, t in enumerate(curr_typing_seq):
         t = tp.substitute_type(t, sub1)
         other_t = tp.substitute_type(other_typing_seq[i], sub2)
-        is_subtype = t.is_subtype(other_t)
+        is_subtype = t.is_subtype(other_t) and t != other_t
         if not with_erasure and not is_subtype:
             return True
         if not with_erasure:

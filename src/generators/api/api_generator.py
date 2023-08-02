@@ -239,6 +239,49 @@ class APIGenerator(Generator):
                                                    parameters, return_type,
                                                    pid, is_incorrect)
 
+    def check_ambiguity(self, overloaded_methods, encoding, typing_seq):
+        # There is a typing sequence that triggers overload
+        # ambiguity.
+        type_var_map = {t: encoding.type_var_map[t]
+                        for t in get_type_variables_of_callable(
+                        self.api_graph, encoding.api)}
+        for m, is_extension in overloaded_methods:
+            is_m_ambiguous = au.is_typing_seq_ambiguous(encoding.api, m,
+                                                        typing_seq[1:-1],
+                                                        type_var_map)
+            if is_m_ambiguous and not is_extension:
+                return True
+            if not is_extension:
+                continue
+            # We have an extension method, therefore we check if the
+            # current typing sequences makes the compiler resolve the
+            # overloaded method instead of the method defined in `encoding`.
+            # Example:
+            # Collection<T>.min(T) -> current
+            # Set<T>.min(T)        -> overloaded method
+            # typing_seq: [Set<String>, String]
+            #
+            # The typing seq above makes the compiler call the second method
+            # instead of the first one.
+            other_rec_type = self.api_graph.get_input_type(m)
+            curr_rec_type = self.api_graph.get_input_type(encoding.api)
+            sub = tu.unify_types(typing_seq[0], other_rec_type,
+                                 self.bt_factory, same_type=False)
+            if not sub and not typing_seq[0].is_subtype(other_rec_type):
+                continue
+
+            sub1 = au._default_substitution(encoding.api.type_parameters,
+                                            False)
+            sub2 = au._default_substitution(m.type_parameters, False)
+            curr_rec_type = tp.substitute_type(curr_rec_type, sub1)
+            other_rec_type = tp.substitute_type(other_rec_type, sub2)
+            is_subtype = curr_rec_type.is_subtype(other_rec_type) or bool(
+                tu.unify_types(other_rec_type, curr_rec_type, self.bt_factory)
+            )
+            if not is_subtype:
+                return True
+        return False
+
     def compute_typing_sequences(self, encoding, types):
         if not self.inject_error_mode:
             return itertools.product(*types), False
@@ -252,10 +295,6 @@ class APIGenerator(Generator):
     def compute_programs(self):
         i = 1
         for encoding in self.encodings:
-            overloaded_methods = self.api_graph.get_overloaded_methods(
-                self.api_graph.get_input_type(encoding.api),
-                encoding.api,
-            )
             types = (encoding.receivers, *encoding.parameters,
                      encoding.returns)
             if types in self.visited:
@@ -265,14 +304,12 @@ class APIGenerator(Generator):
                 typing_seqs, is_incorrect = self.compute_typing_sequences(
                     encoding, types)
                 for typing_seq in typing_seqs:
-                    # There is a typing sequence that triggers overload
-                    # ambiguity.
-                    sub = {t: encoding.type_var_map[t]
-                           for t in get_type_variables_of_callable(
-                               self.api_graph, encoding.api)}
-                    if any(au.is_typing_seq_ambiguous(encoding.api, m,
-                                                      typing_seq[1:-1], sub)
-                           for m in overloaded_methods):
+                    overloaded_methods = self.api_graph.get_overloaded_methods(
+                        typing_seq[0],
+                        encoding.api,
+                    )
+                    if self.check_ambiguity(overloaded_methods, encoding,
+                                            typing_seq):
                         continue
 
                     yield self.generate_test_case_from_combination(typing_seq,
@@ -462,7 +499,7 @@ class APIGenerator(Generator):
         type_var_map.update(sub)
         segs = api.name.rsplit(".", 1)
         is_constructor = isinstance(api, ag.Constructor)
-        if len(segs) > 1 and not is_constructor:
+        if len(segs) > 1 and not is_constructor or not api.get_class_name():
             rec = None
         else:
             rec_type = (
