@@ -199,7 +199,7 @@ class TypeEraser():
                 self.api_graph.get_input_type(api), api)
             typing_seq = [p.path[-1] for p in args]
             if any(au.is_typing_seq_ambiguous(api, m, typing_seq)
-                   for m in overloaded_methods):
+                   for m, _ in overloaded_methods):
                 return
 
         markings = self.compute_markings(api)

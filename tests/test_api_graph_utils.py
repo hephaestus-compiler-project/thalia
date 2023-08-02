@@ -407,3 +407,61 @@ def test_is_typing_sequence_ambiguous_parameterized():
     assert not au.is_typing_seq_ambiguous(method1, method2, typing_seq,
                                           {type_param1: t1})
     assert au.is_typing_seq_ambiguous(method1, method2, typing_seq, None)
+
+
+def test_is_typing_sequence_ambiguous_mul_args():
+    t1 = tp.SimpleClassifier("A")
+    t2 = tp.SimpleClassifier("B")
+    t3 = tp.SimpleClassifier("C", [t1, t2])
+
+    method1 = nodes.Method("m", "", [
+        nodes.Parameter(kt.Integer, False),
+        nodes.Parameter(kt.String, False),
+        nodes.Parameter(t1, False)
+    ], [])
+    method2 = nodes.Method("m", "", [
+        nodes.Parameter(kt.Integer, False),
+        nodes.Parameter(kt.String, False),
+        nodes.Parameter(t2, False)
+    ], [])
+    typing_seq = [kt.Integer, kt.String, t3]
+    assert au.is_typing_seq_ambiguous(method1, method2, typing_seq, {})
+
+    method1 = nodes.Method("m", "", [
+        nodes.Parameter(kt.Integer, False),
+        nodes.Parameter(kt.Any, False),
+        nodes.Parameter(t1, False)
+    ], [])
+    method2 = nodes.Method("m", "", [
+        nodes.Parameter(kt.Integer, False),
+        nodes.Parameter(kt.String, False),
+        nodes.Parameter(t1, False)
+    ], [])
+    typing_seq = [kt.Integer, kt.String, t3]
+    assert au.is_typing_seq_ambiguous(method1, method2, typing_seq, {})
+
+    method1 = nodes.Method("m", "", [
+        nodes.Parameter(kt.Integer, False),
+        nodes.Parameter(kt.String, False),
+        nodes.Parameter(t1, False)
+    ], [])
+    method2 = nodes.Method("m", "", [
+        nodes.Parameter(kt.Any, False),
+        nodes.Parameter(kt.Any, False),
+        nodes.Parameter(t1, False)
+    ], [])
+    typing_seq = [kt.Integer, kt.String, t3]
+    assert not au.is_typing_seq_ambiguous(method1, method2, typing_seq, {})
+
+    method1 = nodes.Method("m", "", [
+        nodes.Parameter(kt.Integer, False),
+        nodes.Parameter(kt.String, False),
+        nodes.Parameter(t1, False)
+    ], [])
+    method2 = nodes.Method("m", "", [
+        nodes.Parameter(kt.Any, False),
+        nodes.Parameter(kt.Any, False),
+        nodes.Parameter(t2, False)
+    ], [])
+    typing_seq = [kt.Integer, kt.String, t3]
+    assert au.is_typing_seq_ambiguous(method1, method2, typing_seq, {})

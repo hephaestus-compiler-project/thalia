@@ -389,10 +389,14 @@ def is_typing_seq_ambiguous(method: Method,
 
     sub1 = _default_substitution(method.type_parameters, with_erasure)
     sub2 = _default_substitution(other_method.type_parameters, with_erasure)
+    curr_typing_seq = [tp.substitute_type(t, sub1) for t in curr_typing_seq]
+    other_typing_seq = [tp.substitute_type(t, sub2) for t in other_typing_seq]
+    if curr_typing_seq == other_typing_seq:
+        # Methods with the exactly the same signature. There's ambiguity
+        return True
     for i, t in enumerate(curr_typing_seq):
-        t = tp.substitute_type(t, sub1)
-        other_t = tp.substitute_type(other_typing_seq[i], sub2)
-        is_subtype = t.is_subtype(other_t) and t != other_t
+        other_t = other_typing_seq[i]
+        is_subtype = t.is_subtype(other_t)
         if not with_erasure and not is_subtype:
             return True
         if not with_erasure:
