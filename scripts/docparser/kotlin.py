@@ -42,6 +42,22 @@ def map_type(func):
     return inner_func
 
 
+def find_str_inside_arrows(text):
+    balance = 1
+    str_ = ""
+    i = 1
+    while balance >= 1:
+        c = text[i]
+        if c == "<":
+            balance += 1
+        if c == ">":
+            balance -= 1
+        if balance:
+            str_ += c
+        i += 1
+    return str_
+
+
 class KotlinAPIDocConverter(APIDocConverter):
     EXCLUDED_METHOD_NAME = "<no name provided>"
     PROTECTED = "protected"
@@ -173,18 +189,7 @@ class KotlinAPIDocConverter(APIDocConverter):
         if len(segs) == 1:
             return []
         text = "<" + segs[2]
-        balance = 1
-        type_param_str = ""
-        i = 1
-        while balance >= 1:
-            c = text[i]
-            if c == "<":
-                balance += 1
-            if c == ">":
-                balance -= 1
-            if balance:
-                type_param_str += c
-            i += 1
+        type_param_str = find_str_inside_arrows(text)
         text = type_param_str.replace(", ", ",")
         return top_level_split(text)
 
@@ -258,27 +263,29 @@ class KotlinAPIDocConverter(APIDocConverter):
 
     @map_type
     def extract_method_receiver(self, method_doc, name):
+        segs = method_doc.text.split("fun <", 1)
+        text = method_doc.text
+        if len(segs) > 1:
+            type_params = find_str_inside_arrows("<" + segs[1])
+            text = text.replace(f"<{type_params}> ", "")
         regex = re.compile(
-            r".*fun (<.*> )?(.*)\." + name + r"\(.*\).*")
-        match = re.match(regex, method_doc.text)
+            r".*fun (.*)\." + name + r"\(.*\).*")
+        match = re.match(regex, text)
         if not match:
             return None
-        return match.group(2)
+        return match.group(1)
 
     @map_type
     def extract_method_type_parameters(self, method_doc, is_constructor):
         if is_constructor:
             return []
-        regex = re.compile(
-            r".*fun <(.*)> (.*\.)?[a-zA-Z0-9_]+\(.*\).*")
-        match = re.match(regex, method_doc.text)
-        if not match:
+        segs = method_doc.text.split("fun <", 1)
+        if len(segs) == 1:
             return []
-        type_parameters = match.group(1).replace(", ", ",")
-        if type_parameters:
-            regex = re.compile(r"(?:[^,<]|<[^>]*>)+")
-            type_parameters = re.findall(regex, type_parameters)
-        return type_parameters
+        text = "<" + segs[1]
+        type_parameters_str = find_str_inside_arrows(text)
+        type_parameters_str = type_parameters_str.replace(", ", ",")
+        return top_level_split(type_parameters_str)
 
     @map_type
     def extract_method_return_type(self, method_doc, is_constructor):
@@ -310,6 +317,14 @@ class KotlinAPIDocConverter(APIDocConverter):
         except IndexError:
             # We are probably in a field
             return None
+
+    def extract_method_metadata(self, method_doc):
+        is_suspend = "suspend fun" in method_doc.text
+        is_inline = method_doc.text.startswith("inline")
+        return {
+            "is_suspend": is_suspend,
+            "is_inline": is_inline,
+        }
 
     def extract_field_name(self, field_doc):
         field_doc.find("span", {"class": "top-right-position"}).decompose()
@@ -403,7 +418,8 @@ class KotlinAPIDocConverter(APIDocConverter):
                 "receiver": receiver,
                 "is_static": False,
                 "is_constructor": is_constructor,
-                "access_mod": access_mod
+                "access_mod": access_mod,
+                "other_metadata": self.extract_method_metadata(method_doc),
             }
             method_objs.append(method_obj)
         return method_objs

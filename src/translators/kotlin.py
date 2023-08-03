@@ -130,6 +130,8 @@ class KotlinTranslator(BaseTranslator):
         imports = [
             "import kotlin.collections.*",
             "import kotlin.comparisons.*",
+            "import kotlin.coroutines.*",
+            "import kotlin.coroutines.intrinsics.*",
             "import kotlin.concurrent.*",
             "import kotlin.io.*",
             "import kotlin.io.encoding.*",
