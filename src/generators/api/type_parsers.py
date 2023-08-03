@@ -321,12 +321,16 @@ class KotlinTypeParser(TypeParser):
                          type_spec, mapped_types)
 
     def is_func_type(self, str_t: str) -> bool:
-        return bool(re.match(self.FUNC_REGEX, str_t))
+        return bool(re.match(self.FUNC_REGEX, str_t)) or str_t.startswith(
+            "suspend ")
 
     def is_native_func_type(self, str_t: str) -> bool:
         return False
 
     def parse_function_type(self, str_t: str) -> tp.ParameterizedType:
+        is_suspend = False
+        if str_t.startswith("suspend "):
+            is_suspend, str_t = True, str_t.split("suspend ", 1)[1]
         receiver = None
         if not str_t.startswith("("):
             # Parse function types of the form: kotlin.Int.() -> kotlin.String
@@ -342,12 +346,12 @@ class KotlinTypeParser(TypeParser):
         ]
         ret_type = self.parse_type(segs[1].lstrip())
         if receiver is not None:
-            return kt.FunctionTypeWithReceiver(len(param_types)).new(
+            return kt.FunctionTypeWithReceiver(len(param_types),
+                                               is_suspend).new(
                 [receiver] + param_types + [ret_type]
             )
-        return self.bt_factory.get_function_type(len(param_types)).new(
-            param_types + [ret_type]
-        )
+        return self.bt_factory.get_function_type(
+            len(param_types), is_suspend).new(param_types + [ret_type])
 
     def parse_native_function_type(self, str_t: str) -> tp.ParameterizedType:
         segs = str_t.replace(", ", ",").split("<", 1)
@@ -420,9 +424,6 @@ class KotlinTypeParser(TypeParser):
                 "." not in str_t.split(":")[0]
              )
         )
-        if "suspend " in str_t:
-            # Suspend types
-            return None
         if is_type_var:
             return self.parse_type_parameter(str_t)
         segs = str_t.replace(", ", ",").split("<", 1)

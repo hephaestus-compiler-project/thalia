@@ -75,6 +75,7 @@ class Method(NamedTuple):
     cls: str
     parameters: List[Parameter]
     type_parameters: List[tp.TypeParameter]
+    metadata: dict
 
     def __str__(self):
         type_parameters_str = ""
@@ -92,7 +93,7 @@ class Method(NamedTuple):
 
     def __hash__(self):
         return hash((self.name, self.cls, tuple(self.parameters),
-                     tuple(self.type_parameters)))
+                     tuple(self.type_parameters), str(self.metadata)))
 
     def __eq__(self, other):
         return (
@@ -100,7 +101,8 @@ class Method(NamedTuple):
             self.name == other.name and
             self.cls == other.cls and
             self.parameters == other.parameters and
-            self.type_parameters == other.type_parameters
+            self.type_parameters == other.type_parameters and
+            self.metadata == other.metadata
         )
 
     def get_class_name(self):
@@ -121,6 +123,7 @@ class Method(NamedTuple):
 class Constructor(NamedTuple):
     name: str
     parameters: List[Parameter]
+    metadata: dict
 
     def __str__(self):
         return "{cls!s}.{name!s}({args!s})".format(
@@ -132,13 +135,14 @@ class Constructor(NamedTuple):
     __repr__ = __str__
 
     def __hash__(self):
-        return hash((self.name, tuple(self.parameters)))
+        return hash((self.name, tuple(self.parameters), str(self.metadata)))
 
     def __eq__(self, other):
         return (
             self.__class__ == other.__class__ and
             self.name == other.name and
-            self.parameters == other.parameters
+            self.parameters == other.parameters and
+            self.metadata == other.metadata
         )
 
     def get_class_name(self):

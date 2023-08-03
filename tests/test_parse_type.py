@@ -355,6 +355,27 @@ def test_kotlin_types_with_receiver():
     ])
 
 
+def test_kotlin_suspend_function_types():
+    b = KotlinTypeParser()
+    t = b.parse_type("suspend () -> kotlin.Int")
+    assert t == kt.FunctionType(0, True).new([kt.Integer])
+
+    t = b.parse_type("suspend (kotlin.String) -> kotlin.Int")
+    assert t == kt.FunctionType(1, True).new([kt.String, kt.Integer])
+
+    t = b.parse_type("suspend (kotlin.String, kotlin.Int) -> kotlin.Int")
+    assert t == kt.FunctionType(2, True).new([kt.String, kt.Integer,
+                                              kt.Integer])
+
+    t = b.parse_type("suspend kotlin.String.() -> kotlin.Int")
+    assert t == kt.FunctionTypeWithReceiver(0, True).new([kt.String,
+                                                          kt.Integer])
+
+    t = b.parse_type("suspend kotlin.String.(kotlin.String, kotlin.Int) -> kotlin.Int")
+    assert t == kt.FunctionTypeWithReceiver(2, True).new(
+        [kt.String, kt.String, kt.Integer, kt.Integer])
+
+
 def test_scala_primitives():
     b = ScalaTypeParser()
     assert b.parse_type("scala.Char") == sc.CharType()

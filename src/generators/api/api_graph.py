@@ -745,7 +745,8 @@ class APIGraph():
             ]
             rec_type, out_type = self._get_receiver_and_ret_type_of_func(api)
             match, sub = func_type.t_constructor.match_function(
-                rec_type, out_type, param_types, func_type, self.bt_factory
+                rec_type, out_type, param_types, func_type, self.bt_factory,
+                api.metadata
             )
             if match:
                 if single:

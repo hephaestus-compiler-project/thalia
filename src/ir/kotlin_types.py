@@ -59,8 +59,8 @@ class KotlinBuiltinFactory(bt.BuiltinFactory):
     def get_array_type(self):
         return ArrayType()
 
-    def get_function_type(self, nr_parameters=0):
-        return FunctionType(nr_parameters)
+    def get_function_type(self, nr_parameters=0, is_suspend=False):
+        return FunctionType(nr_parameters, is_suspend)
 
     def get_nothing(self):
         return NothingType()
@@ -256,7 +256,7 @@ class NullableType(tp.TypeConstructor):
 class FunctionType(tp.TypeConstructor, AnyType):
     is_native = True
 
-    def __init__(self, nr_type_parameters: int):
+    def __init__(self, nr_type_parameters: int, is_suspend: bool = False):
         name = "Function" + str(nr_type_parameters)
         # We can have decl-variance in Kotlin
         type_parameters = [
@@ -264,6 +264,7 @@ class FunctionType(tp.TypeConstructor, AnyType):
             for i in range(1, nr_type_parameters + 1)
         ] + [tp.TypeParameter("R", tp.Covariant)]
         self.nr_type_parameters = nr_type_parameters
+        self.is_suspend = is_suspend
         super().__init__(name, type_parameters)
         self.supertypes.append(AnyType())
 
@@ -271,8 +272,12 @@ class FunctionType(tp.TypeConstructor, AnyType):
     def match_function(cls, receiver_type: tp.Type, ret_type: tp.Type,
                        param_types: List[tp.Type],
                        target_type: tp.Type,
-                       bt_factory: bt.BuiltinFactory):
+                       bt_factory: bt.BuiltinFactory,
+                       func_metadata: dict = {}):
         import src.ir.type_utils as tu
+        is_suspend = target_type.t_constructor.is_suspend
+        if func_metadata.get("is_suspend", False) != is_suspend:
+            return False, None
         api_type = FunctionType(
             len(param_types)).new(param_types + [ret_type])
         sub = tu.unify_types(target_type, api_type, bt_factory, same_type=True)
@@ -298,14 +303,18 @@ class FunctionType(tp.TypeConstructor, AnyType):
 class FunctionTypeWithReceiver(FunctionType):
     is_native = True
 
-    def __init__(self, nr_type_parameters: int):
-        super().__init__(nr_type_parameters + 1)
+    def __init__(self, nr_type_parameters: int, is_suspend: bool = False):
+        super().__init__(nr_type_parameters + 1, is_suspend)
 
     @classmethod
     def match_function(cls, receiver_type: tp.Type, ret_type: tp.Type,
                        param_types: List[tp.Type],
                        target_type: tp.Type,
-                       bt_factory: bt.BuiltinFactory):
+                       bt_factory: bt.BuiltinFactory,
+                       func_metadata: dict = {}):
+        is_suspend = target_type.t_constructor.is_suspend
+        if func_metadata.get("is_suspend", False) != is_suspend:
+            return False, None
         if receiver_type is None:
             # A receiver is not found. Therefore, there is not match.
             return False, None

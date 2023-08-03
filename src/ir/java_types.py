@@ -409,7 +409,8 @@ class FunctionType(tp.TypeConstructor):
     def match_function(cls, receiver_type: tp.Type, ret_type: tp.Type,
                        param_types: List[tp.Type],
                        target_type: tp.Type,
-                       bt_factory: bt.BuiltinFactory):
+                       bt_factory: bt.BuiltinFactory,
+                       func_metadata: dict = {}):
         import src.ir.type_utils as tu
         api_type = FunctionType(
             len(param_types)).new(param_types + [ret_type])

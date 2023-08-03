@@ -84,12 +84,22 @@ class KotlinTranslator(BaseTranslator):
         t_constructor = getattr(t, 't_constructor', None)
         if not t_constructor:
             return t.get_name()
-        if isinstance(t_constructor, kt.FunctionTypeWithReceiver):
-            rec = self.get_type_name(t.type_args[0])
+        is_suspend = getattr(t_constructor, "is_suspend", False)
+        if is_suspend:
+            # Dump suspend functional types, e.g., suspend () -> Int
+            is_receiver_func = isinstance(t_constructor,
+                                          kt.FunctionTypeWithReceiver)
             ret = self.get_type_name(t.type_args[-1])
-            params = ", ".join(self.type_arg2str(ta)
-                               for ta in t.type_args[1:-1])
-            return f"{rec}.({params}) -> {ret}"
+            prefix = "suspend " if is_suspend else ""
+            if is_receiver_func:
+                rec = self.get_type_name(t.type_args[0])
+                params = ", ".join(self.type_arg2str(ta)
+                                   for ta in t.type_args[1:-1])
+                return f"{prefix}{rec}.({params}) -> {ret}"
+            else:
+                params = ", ".join(self.type_arg2str(ta)
+                                   for ta in t.type_args[:-1])
+                return f"{prefix}({params}) -> {ret}"
         if isinstance(t_constructor, kt.SpecializedArrayType):
             return "{}Array".format(self.get_type_name(
                 t.type_args[0]))

@@ -325,6 +325,18 @@ DOCS6 = {
                 "type_parameters": [],
                 "return_type": "kotlin.String"
             },
+            {
+                "name": "m2",
+                "is_static": False,
+                "is_constructor": False,
+                "parameters": ["kotlin.Int"],
+                "access_mod": "public",
+                "type_parameters": [],
+                "return_type": "kotlin.String",
+                "other_metadata": {
+                    "is_suspend": True
+                }
+            },
         ],
         "type_parameters": [],
         "language": "kotlin"
@@ -366,8 +378,8 @@ def test1():
 
     assert path == [
         b.parse_type("java.Foo"),
-        ag.Method("makeList", "java.Foo", [], []),
-        ag.Method("toSet", "java.List", [], []),
+        ag.Method("makeList", "java.Foo", [], [], {}),
+        ag.Method("toSet", "java.List", [], [], {}),
     ]
 
 
@@ -383,8 +395,8 @@ def test2():
 
     assert path == [
         b.build_class_node(docs["java.Foo"]),
-        ag.Method("makeList", "java.Foo", [], []),
-        ag.Method("toSet", "java.List", [], []),
+        ag.Method("makeList", "java.Foo", [], [], {}),
+        ag.Method("toSet", "java.List", [], [], {}),
     ]
 
 def test3():
@@ -401,8 +413,8 @@ def test3():
 
     assert path == [
         b.build_class_node(DOCS2["java.Foo"]),
-        ag.Method("makeList", "java.Foo", [], []),
-        ag.Method("toSet", "java.List", [], []),
+        ag.Method("makeList", "java.Foo", [], [], {}),
+        ag.Method("toSet", "java.List", [], [], {}),
     ]
 
     docs = copy.deepcopy(DOCS2)
@@ -423,8 +435,8 @@ def test3():
 
     assert path == [
         b.build_class_node(DOCS2["java.Foo"]),
-        ag.Method("makeList", "java.Foo", [], []),
-        ag.Method("toSet", "java.List", [], []),
+        ag.Method("makeList", "java.Foo", [], [], {}),
+        ag.Method("toSet", "java.List", [], [], {}),
     ]
 
 
@@ -440,8 +452,8 @@ def test4():
         with_constraints={tp.TypeParameter("java.Foo.T1"): jt.String})
     path = filter_types(path)
     assert path == [
-        ag.Method("java.Foo.makeList", "java.Foo", [], []),
-        ag.Constructor("java.Foo.List", [])
+        ag.Method("java.Foo.makeList", "java.Foo", [], [], {}),
+        ag.Constructor("java.Foo.List", [], {})
     ]
     assert assignments == {
         tp.TypeParameter("java.Foo.T1"): jt.String
@@ -463,8 +475,8 @@ def test4():
         with_constraints={tp.TypeParameter("java.Foo.T1"): jt.Integer})
     path = filter_types(path)
     assert path == [
-        ag.Constructor("java.Foo", []),
-        ag.Constructor("java.Foo.List", [])
+        ag.Constructor("java.Foo", [], {}),
+        ag.Constructor("java.Foo.List", [], {})
     ]
     assert assignments == {
         tp.TypeParameter("java.Foo.T1"): jt.Integer
@@ -479,11 +491,11 @@ def test_get_function_refs_of():
         b.parse_type("java.Producer<java.lang.Object>"))
     assert refs == [
         (
-            ag.Method("m1", "java.Foo", [], []),
+            ag.Method("m1", "java.Foo", [], [], {}),
             {}
         ),
         (
-            ag.Method("apply", "java.Producer", [], []),
+            ag.Method("apply", "java.Producer", [], [], {}),
             {
                 tp.TypeParameter("java.Producer.T1"): b.parse_type(
                     "java.lang.Object")
@@ -497,17 +509,18 @@ def test_get_function_refs_of():
     assert refs == [
         (
             ag.Method("m2", "java.Foo", [
-                ag.Parameter(b.parse_type("java.lang.String"), False)], []),
+                ag.Parameter(b.parse_type("java.lang.String"), False)], [], {}),
             {}
         ),
         (
             ag.Method("m4", "java.List", [
-                ag.Parameter(b.parse_type("java.lang.String"), False)], []),
+                ag.Parameter(b.parse_type("java.lang.String"), False)], [], {}),
             {}
         ),
         (
             ag.Method("apply", "java.Function",
-                      [ag.Parameter(tp.TypeParameter("java.Function.T1"), False)], []),
+                      [ag.Parameter(tp.TypeParameter("java.Function.T1"), False)], [],
+                      {}),
             {
                 tp.TypeParameter("java.Function.T1"): b.parse_type("java.lang.String"),
                 tp.TypeParameter("java.Function.T2"): b.parse_type("java.lang.Object"),
@@ -522,13 +535,13 @@ def test_get_function_refs_of():
     assert refs == [
         (
             ag.Method("m3", "java.Foo", [],
-                      [tp.TypeParameter("java.Foo.m3.T1")]),
+                      [tp.TypeParameter("java.Foo.m3.T1")], {}),
             {
                 tp.TypeParameter("java.Foo.m3.T1"): b.parse_type("java.lang.Integer")
             }
         ),
         (
-            ag.Method("apply", "java.Producer", [], []),
+            ag.Method("apply", "java.Producer", [], [], {}),
             {
                 tp.TypeParameter("java.Producer.T1"): b.parse_type(
                     "java.List<java.lang.Integer>")
@@ -542,13 +555,13 @@ def test_get_function_refs_of():
     )
     assert refs == [
         (
-            ag.Constructor("java.Foo", []),
+            ag.Constructor("java.Foo", [], {}),
             {
                 tp.TypeParameter("java.Foo.T1"): b.parse_type("java.lang.Integer")
             }
         ),
         (
-            ag.Method("apply", "java.Producer", [], []),
+            ag.Method("apply", "java.Producer", [], [], {}),
             {
                 tp.TypeParameter("java.Producer.T1"): b.parse_type(
                     "java.Foo<java.lang.Integer>")
@@ -580,7 +593,7 @@ def test_get_function_refs_of_receiver():
     assert refs == [
         (
             ag.Method("m1", "kotlin.Foo", [
-                ag.Parameter(b.parse_type("kotlin.Int"), False)], []),
+                ag.Parameter(b.parse_type("kotlin.Int"), False)], [], {}),
             {}
         ),
     ]
@@ -591,7 +604,7 @@ def test_get_function_refs_of_receiver():
     assert refs == [
         (
             ag.Method("m1", "kotlin.List", [
-                ag.Parameter(b.parse_type("kotlin.String"), False)], []),
+                ag.Parameter(b.parse_type("kotlin.String"), False)], [], {}),
             {tp.TypeParameter("kotlin.List.T1"): kt.Integer}
         ),
     ]
@@ -601,6 +614,42 @@ def test_get_function_refs_of_receiver():
     )
     assert refs == []
 
+
+def test_get_function_refs_of_suspend():
+    b = KotlinAPIGraphBuilder("kotlin")
+    api_graph = b.build(DOCS6)
+
+    refs = api_graph.get_function_refs_of(
+        b.parse_type("suspend (kotlin.String) -> kotlin.String"))
+    assert refs == []
+
+    refs = api_graph.get_function_refs_of(
+        b.parse_type("suspend (kotlin.Int) -> kotlin.String"))
+    assert refs == [
+        (
+            ag.Method("m2", "kotlin.Foo", [
+                ag.Parameter(b.parse_type("kotlin.Int"), False)], [], {
+                    "is_suspend": True
+                }),
+            {}
+        ),
+    ]
+
+    refs = api_graph.get_function_refs_of(
+        b.parse_type("suspend kotlin.Foo.() -> kotlin.String"))
+    assert refs == []
+
+    refs = api_graph.get_function_refs_of(
+        b.parse_type("suspend kotlin.Foo.(kotlin.Int) -> kotlin.String"))
+    assert refs == [
+        (
+            ag.Method("m2", "kotlin.Foo", [
+                ag.Parameter(b.parse_type("kotlin.Int"), False)], [], {
+                    "is_suspend": True
+                }),
+            {}
+        ),
+    ]
 
 def test_get_functional_type():
     b = JavaAPIGraphBuilder("java")
@@ -615,9 +664,9 @@ def test_get_functional_type():
 def test_get_overloaded_methods():
     g = nx.DiGraph()
     t1 = tp.SimpleClassifier("A")
-    m1 = ag.Method("m", "A", [], [])
-    m2 = ag.Method("m", "A", [ag.Parameter(bt.Integer, False)], [])
-    m3 = ag.Method("m", "A", [ag.Parameter(bt.String, False)], [])
+    m1 = ag.Method("m", "A", [], [], {})
+    m2 = ag.Method("m", "A", [ag.Parameter(bt.Integer, False)], [], {})
+    m3 = ag.Method("m", "A", [ag.Parameter(bt.String, False)], [], {})
 
     g.add_node(t1)
     g.add_node(m1)
@@ -636,9 +685,9 @@ def test_get_overloaded_methods():
     # Do the same using a parameterized type as a reciever
     g = nx.DiGraph()
     t1 = tp.TypeConstructor("Foo", [tp.TypeParameter("T")])
-    m1 = ag.Method("m", "A", [], [])
-    m2 = ag.Method("m", "A", [ag.Parameter(bt.Integer, False)], [])
-    m3 = ag.Method("m", "A", [ag.Parameter(bt.String, False)], [])
+    m1 = ag.Method("m", "A", [], [], {})
+    m2 = ag.Method("m", "A", [ag.Parameter(bt.Integer, False)], [], {})
+    m3 = ag.Method("m", "A", [ag.Parameter(bt.String, False)], [], {})
 
     g.add_node(t1)
     g.add_node(m1)
@@ -660,10 +709,10 @@ def test_get_overloaded_methods_inheritance():
     g = nx.DiGraph()
     t1 = tp.SimpleClassifier("A")
     t2 = tp.SimpleClassifier("B", supertypes=[t1])
-    m1 = ag.Method("m", "A", [], [])
-    m2 = ag.Method("m", "A", [ag.Parameter(bt.String, False)], [])
-    m3 = ag.Method("m", "B", [ag.Parameter(bt.Integer, False)], [])
-    m4 = ag.Method("m", "B", [ag.Parameter(bt.String, False)], [])
+    m1 = ag.Method("m", "A", [], [], {})
+    m2 = ag.Method("m", "A", [ag.Parameter(bt.String, False)], [], {})
+    m3 = ag.Method("m", "B", [ag.Parameter(bt.Integer, False)], [], {})
+    m4 = ag.Method("m", "B", [ag.Parameter(bt.String, False)], [], {})
 
     g.add_node(t1)
     g.add_node(t2)
@@ -687,10 +736,10 @@ def test_get_overloaded_methods_inheritance():
     t2 = tp.TypeConstructor("B", [tp.TypeParameter("T")],
                             supertypes=[t1.new([bt.String])])
 
-    m1 = ag.Method("m", "A", [], [])
-    m2 = ag.Method("m", "A", [ag.Parameter(bt.String, False)], [])
-    m3 = ag.Method("m", "B", [ag.Parameter(bt.Integer, False)], [])
-    m4 = ag.Method("m", "B", [ag.Parameter(bt.String, False)], [])
+    m1 = ag.Method("m", "A", [], [], {})
+    m2 = ag.Method("m", "A", [ag.Parameter(bt.String, False)], [], {})
+    m3 = ag.Method("m", "B", [ag.Parameter(bt.Integer, False)], [], {})
+    m4 = ag.Method("m", "B", [ag.Parameter(bt.String, False)], [], {})
 
     g.add_node(t1)
     g.add_node(t2)
@@ -716,8 +765,10 @@ def test_get_overloaded_methods_with_receiver():
     t1 = tp.TypeConstructor("A", [tp.TypeParameter("T1")])
     t2 = tp.TypeConstructor("B", [tp.TypeParameter("T2")],
                             supertypes=[t1.new([tp.TypeParameter("T2")])])
-    m1 = ag.Method("m", "A", [ag.Parameter(tp.TypeParameter("T1"), False)], [])
-    m2 = ag.Method("m", "B", [ag.Parameter(tp.TypeParameter("T2"), False)], [])
+    m1 = ag.Method("m", "A", [ag.Parameter(tp.TypeParameter("T1"), False)], [],
+                   {})
+    m2 = ag.Method("m", "B", [ag.Parameter(tp.TypeParameter("T2"), False)], [],
+                   {})
 
     g.add_node(t1.new(t1.type_parameters))
     g.add_node(t2.new(t2.type_parameters))
