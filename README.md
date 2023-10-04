@@ -236,7 +236,7 @@ the `bugs/java-session/` directory contains two files:
 
 `stats.json` contains the following details about the testing session.
 
-```
+```json
 {
   "Info": {
     "stop_cond": "iterations",
@@ -342,7 +342,7 @@ Then,
 the file shows the typing sequence of every test case.
 For example,
 the first test program invokes the
-[java.lang.module.ModuleDescriptor.Builder.version](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/module/ModuleDescriptor.Builder.html#version(java.lang.module.ModuleDescriptor.Version)
+[java.lang.module.ModuleDescriptor.Builder.version](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/module/ModuleDescriptor.Builder.html#version(java.lang.module.ModuleDescriptor.Version))
 method found in the standard library of Java
 using a parameter of type
 [java.lang.module.ModuleDescriptor.Version](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/module/ModuleDescriptor.Version.html).
