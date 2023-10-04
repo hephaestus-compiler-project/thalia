@@ -62,9 +62,10 @@ parser.add_argument(
     help="Injects a type error in the generated program"
 )
 parser.add_argument(
-    "--disable-expression-cache",
+    "--enable-expression-cache",
     action="store_true",
-    help="Stop caching expressions that yield certain types"
+    default=False,
+    help="Re-use expressions that yield certain types"
 )
 parser.add_argument(
     "--path-search-strategy",
@@ -253,7 +254,7 @@ args.options = {
             "max-conditional-depth": args.max_conditional_depth,
             "inject-type-error": args.inject_type_error,
             "erase-types": args.erase_types,
-            "disable-expression-cache": args.disable_expression_cache,
+            "enable-expression-cache": args.enable_expression_cache,
             "path-search-strategy": args.path_search_strategy,
         }
     },

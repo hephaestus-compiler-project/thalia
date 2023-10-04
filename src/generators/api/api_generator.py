@@ -72,8 +72,8 @@ class APIGenerator(Generator):
         self.inject_error_mode = options.get("inject-type-error", False)
         self.type_erasure_mode = options.get("erase-types", False)
         self.max_conditional_depth = options.get("max-conditional-depth", 4)
-        self.disable_expression_cache = options.get("disable-expression-cache",
-                                                    False)
+        self.enable_expression_cache = options.get("enable-expression-cache",
+                                                   False)
 
         self.translator = TRANSLATORS[language]()
         self.type_eraser: te.TypeEraser = te.TypeEraser(self.api_graph,
@@ -642,7 +642,7 @@ class APIGenerator(Generator):
             # If the generated expression contains a variable, we don't store
             # this expression for later use because it refers to a variable
             # that is no longer valid.
-            if not self.disable_expression_cache:
+            if self.enable_expression_cache:
                 self.visited_exprs[node] = ExprRes(expr, type_var_map, path)
         return ExprRes(expr, type_var_map, path)
 
