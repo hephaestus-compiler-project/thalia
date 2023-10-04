@@ -867,7 +867,7 @@ class JavaTranslator(BaseTranslator):
                                          for_array=True)
             )
             if isinstance(node.array_type.type_args[0], tp.ParameterizedType):
-                new_stmt = "({etype}[]) new Object()".format(
+                new_stmt = "({etype}[]) new Object".format(
                     etype=self.get_type_name(node.array_type.type_args[0],
                                              for_array=True)
                 )
