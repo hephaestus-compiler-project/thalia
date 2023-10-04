@@ -1,56 +1,76 @@
-Hephaestus
-==========
+Thalia
+======
 
-Hephaestus is a testing framework for validating static typing procedures
-in compilers. This is done by a combination of
-program generation and transformation-based compiler testing.
+Thalia is a testing framework for validating static typing procedures
+in compilers via an API-driven program synthesis approach.
+The idea is to synthesize type-intensive but
+small and well-typed programs
+by leveraging and combining
+application programming interfaces (APIs)
+derived from existing software libraries.
 
-Currently, Hephaestus has been used to test the type checkers of
-three popular programming languages: Java, Kotlin, and Groovy.
-
-
-## Program Generation
-
-Hephaestus' program generation comes with three
-important characteristics.
-First, it produces *semantically valid* programs;
-rejecting a well-formed program produced by our
-generator indicates a potential compiler bug
-(test oracle).
-Second,
-the resulting programs rely heavily on
-parametric polymorphism
-(e.g., use of parameterized classes / functions,
-etc.)
-Third,
-to test compilers of different languages
-our generator yields programs at a higher-level of abstraction,
-and then uses translation mechanisms to
-convert the "abstract" programs into the target language.
-Currently, our generator produces programs written in
-three popular programming languages,
-namely, Java, Kotlin, and Groovy.
+Thalia is built on top of
+[Hephaestus](https://github.com/hephaestus-compiler-project/hephaestus).
+Currently, Thalia is able to produce test cases written in four
+popular programming languages: Java, Scala, Kotlin, and Groovy.
 
 
-## Transformation-based Compiler Testing
+## API-driven Program Synthesis
 
-Beyond program generation,
-Hephaestus also supports transformation-based compiler testing
-by introducing two mutations,
-*type erasure mutation* and *type overwriting mutation*.
-Their goal is to exercise compilers' type inference algorithms
-and other type-related operations.
-Given an input program `P`,
-the type erasure mutation removes declared types from variables and parameters,
-or type arguments from parameterized constructor and method calls,
-while preserving the well-formedness of `P`.
-The type overwriting mutation adopts a fault-injecting approach,
-and introduces a type error in `P`
-by replacing a type `t1` with another incompatible type `t2`.
-The type overwriting mutation updates the test oracle,
-as compiling a program obtained from this mutation
-indicates a potential soundness bug in the compiler under test.
+At the high level,
+Thalia's appoach works as follows.
+The input is an API,
+which is modeled as an API graph,
+a structure that captures
+the dependencies and relations among
+API components.
+Then,
+Thalia proceeds with the concept of _API enumeration_,
+which systematically explores all possible invocations
+of the encompassed API components
+through _unique_ typing patterns.
+A typing pattern is
+a sequence of types
+that corresponds to _abstract typed expressions_.
+Conceptually,
+an abstract typed expression represents
+a combination of types
+used to invoke a particular API entity (e.g, method).
+An abstract expression can be
+either well-typed or ill-typed
+with regards to the type signature of
+the corresponding API component.
+Then,
+Thalia yields well-typed or ill-typed programs
+by concretizing each abstract-typed expression
+into a concrete one written
+in a reference intermediate language.
+To do so,
+it examines the API graph to find type inhabitants 
+by enumerating the set of paths
+that reach a specific type node.
 
+As an optional step,
+Thalia employs
+the type erasure process
+whose purpose is to remove the type arguments
+of polymorphic calls,
+while maintaining the type correctness of the
+The final step is to employ
+language-specific translators that
+transform an expression in the intermediate language
+into a source file written in an actual
+language (e.g., Scala).
+Ultimately,
+the generated source files are given
+as input to the compiler under test,
+whose output is checked against
+the given oracle for potential bugs.
+In particular,
+we expect the compiler to accept
+the programs derived from well-typed typing sequences,
+and reject those
+that come from ill-typed ones.
 
 # Requirements
 
@@ -58,25 +78,69 @@ indicates a potential soundness bug in the compiler under test.
 
 # Getting Started
 
+## Install
+
+```
+pip install .
+```
+
+## Run tests
+
+To run `thalia` tests, execute the following command:
+
+```
+python -m pytest
+```
+
+The output of the previous command should be similar to the following:
+
+```
+tests/test_api_graph.py::test1 PASSED                                                   [  0%]
+tests/test_api_graph.py::test2 PASSED                                                   [  0%]
+...
+tests/test_use_analysis.py::test_program6 PASSED                                        [ 99%]
+tests/test_use_analysis.py::test_program7 PASSED                                        [ 99%]
+tests/test_use_analysis.py::test_program8 PASSED                                        [100%]
+
+===================================== 232 passed in 0.46s =====================================
+```
+
 ## Usage
 
 ```
-./hephaestus.py --help
-usage: hephaestus.py [-h] [-s SECONDS] [-i ITERATIONS] [-t TRANSFORMATIONS] [--batch BATCH] [-b BUGS] [-n NAME] [-T [{TypeErasure} [{TypeErasure} ...]]]
-                     [--transformation-schedule TRANSFORMATION_SCHEDULE] [-R REPLAY] [-e] [-k] [-S] [-w WORKERS] [-d] [-r] [-F LOG_FILE] [-L] [-N] [--language {kotlin,groovy,java}]
-                     [--max-type-params MAX_TYPE_PARAMS] [--max-depth MAX_DEPTH] [-P] [--timeout TIMEOUT] [--cast-numbers] [--disable-use-site-variance] [--disable-contravariance-use-site]
-                     [--disable-bounded-type-parameters] [--disable-parameterized-functions]
+usage: thalia [-h] [-g {base,api}] [--api-doc-path API_DOC_PATH] [-s SECONDS] [-i ITERATIONS] [--api-rules API_RULES] [--library-path LIBRARY_PATH]
+              [--max-conditional-depth MAX_CONDITIONAL_DEPTH] [--erase-types] [--inject-type-error] [--disable-expression-cache] [--path-search-strategy {shortest,ksimple}]
+              [-t TRANSFORMATIONS] [--batch BATCH] [-b BUGS] [-n NAME] [-T [{TypeErasure} [{TypeErasure} ...]]] [--transformation-schedule TRANSFORMATION_SCHEDULE] [-R REPLAY] [-e] [-k]
+              [-S] [-w WORKERS] [-d] [-r] [-F LOG_FILE] [-L] [-N] [--language {kotlin,groovy,java,scala}] [--max-type-params MAX_TYPE_PARAMS] [--max-depth MAX_DEPTH] [-P]
+              [--timeout TIMEOUT] [--cast-numbers] [--disable-function-references] [--disable-use-site-variance] [--disable-contravariance-use-site] [--disable-bounded-type-parameters]
+              [--disable-parameterized-functions] [--disable-sam] [--local-variable-prob LOCAL_VARIABLE_PROB] [--error-filter-patterns ERROR_FILTER_PATTERNS]
 
 optional arguments:
   -h, --help            show this help message and exit
+  -g {base,api}, --generator {base,api}
+                        Type of generator
+  --api-doc-path API_DOC_PATH
+                        Path to API docs
   -s SECONDS, --seconds SECONDS
                         Timeout in seconds
   -i ITERATIONS, --iterations ITERATIONS
                         Iterations to run (default: 3)
+  --api-rules API_RULES
+                        File that contains the rules specifying the APIs used for program enumeration (used only with API-based program generation)
+  --library-path LIBRARY_PATH
+                        Path where the compiled library resides. (Used only with API-based program generation)
+  --max-conditional-depth MAX_CONDITIONAL_DEPTH
+                        Maximum depth of conditionals
+  --erase-types         Erases types from the program while preserving its semantics
+  --inject-type-error   Injects a type error in the generated program
+  --disable-expression-cache
+                        Stop caching expressions that yield certain types
+  --path-search-strategy {shortest,ksimple}
+                        Stategy for enumerating paths between two nodes
   -t TRANSFORMATIONS, --transformations TRANSFORMATIONS
-                        Number of transformations in each round (default: 0)
+                        Number of transformations in each round
   --batch BATCH         Number of programs to generate before invoking the compiler
-  -b BUGS, --bugs BUGS  Set bug directory (default: /home/hephaestus/bugs)
+  -b BUGS, --bugs BUGS  Set bug directory (default: bugs)
   -n NAME, --name NAME  Set name of this testing instance (default: random string)
   -T [{TypeErasure} [{TypeErasure} ...]], --transformation-types [{TypeErasure} [{TypeErasure} ...]]
                         Select specific transformations to perform
@@ -93,10 +157,10 @@ optional arguments:
   -d, --debug
   -r, --rerun           Run only the last transformation. If failed, start from the last and go back until the transformation introduces the error
   -F LOG_FILE, --log-file LOG_FILE
-                        Set log file (default: /home/hephaestus/logs)
+                        Set log file (default: logs)
   -L, --log             Keep logs for each transformation (bugs/session/logs)
   -N, --dry-run         Do not compile the programs
-  --language {kotlin,groovy,java}
+  --language {kotlin,groovy,java,scala}
                         Select specific language
   --max-type-params MAX_TYPE_PARAMS
                         Maximum number of type parameters to generate
@@ -106,6 +170,8 @@ optional arguments:
                         Use only correctness-preserving transformations
   --timeout TIMEOUT     Timeout for transformations (in seconds)
   --cast-numbers        Cast numeric constants to their actual type (this option is used to avoid re-occrrence of a specific Groovy bug)
+  --disable-function-references
+                        Disable function references
   --disable-use-site-variance
                         Disable use-site variance
   --disable-contravariance-use-site
@@ -114,38 +180,39 @@ optional arguments:
                         Disable bounded type parameters
   --disable-parameterized-functions
                         Disable parameterized functions
-
-```
-
-## Run Tests
-
-To run `hephaestus` tests you should execute the following commands:
-
-```
-python setup.py test
-```
-
-The output of the previous command should be similar to the following:
-
-```
-tests/test_call_analysis.py::test_program1 PASSED                       [  0%]
-...
-tests/test_use_analysis.py::test_program7 PASSED                        [100%]
-tests/test_use_analysis.py::test_program8 PASSED                        [100%]
-============================ 154 passed in 0.55s =============================
+  --disable-sam         Disable SAM coercions
+  --local-variable-prob LOCAL_VARIABLE_PROB
+                        Probability of assigning an expression to a local variable
+  --error-filter-patterns ERROR_FILTER_PATTERNS
+                        A file containing regular expressions for filtering compiler error messages
 ```
 
 ## Example: Testing the Java compiler
 
-Here, we will test `javac` by employing Hephaestus's program
-generator. Specifically, we will produce 30 test programs in batches of 10
-test programs using two workers with the following command.
-The name of testing session is "mysession".
+We provide an example that demonstrates the `thalia` testing framework.
+The input of `thalia` is an API encoded as a set of JSON files
+that contain all classes and their enclosing
+methods and  fields.
+Example APIs can be found at `example-apis/`.
+In this example,
+we leverage the API of the Java's standard library
+(see `--api-doc-path example-apis/java-stdlib/json-docs`)
+to stress-test `javac`.
+Specifically, we produce 30 test programs in batches of 10.
+The results of our testing procedure are found in
+the `bugs/java-session/` directory
+specified by the `--name java-session` option.
 
 ```
-./hephaestus.py --language java --transformations 0 \
-    --batch 10 --iterations 30 --workers 2 -P \
-    --name mysession
+ thalia --language java --transformations 0  \
+     --batch 10 -i 30 -P \
+	 --max-depth 2 \
+	 --generator api \
+	 ---api-doc-path example-apis/java-stdlib/json-docs \
+	 --api-rules example-apis/java-stdlib/api-rules.json \
+	 --keep-all \
+	 --name java-session
+
 ```
 
 The expected outcome is:
@@ -154,16 +221,17 @@ The expected outcome is:
 stop_cond             iterations (30)
 transformations       0
 transformation_types  TypeErasure
-bugs                  /home/hephaestus/bugs
-name                  mysession
+bugs                  /home/thalia/bugs
+name                  java-session
 language              java
-compiler              javac 18-ea
-===============================================================================================================================================================================================
+compiler              javac 11.0.12
+=============================================================================================
 Test Programs Passed 30 / 30 ✔          Test Programs Failed 0 / 30 ✘
 Total faults: 0
 ```
 
-Two files are generated inside `/home/hephaestus/bugs/mysession`:
+Among other things,
+the `bugs/java-session/` directory contains two files:
 `stats.json` and `faults.json`.
 
 `stats.json` contains the following details about the testing session.
@@ -175,87 +243,124 @@ Two files are generated inside `/home/hephaestus/bugs/mysession`:
     "stop_cond_value": 30,
     "transformations": 0,
     "transformation_types": "TypeErasure",
-    "bugs": "/home/hephaestus/bugs",
-    "name": "mysession",
+    "bugs": "/home/thalia/bugs",
+    "name": "java-session",
     "language": "java",
-    "compiler": "javac 18-ea"
+    "generator": "api",
+    "library_path": null,
+    "erase_types": false,
+    "inject_type_error": false,
+    "compiler": "javac 11.0.12"
   },
   "totals": {
     "passed": 30,
     "failed": 0
-  }
+  },
+  "synthesis_time": 6.266110500000002,
+  "compilation_time": 0.9707086086273193
 }
 ```
 
 In this example, `faults.json` is empty. If there were some bugs detected,
 `faults.json` would look like the following JSON file.
 
-```
+```json
 {
-  "7": {
-    "transformations": [
-      "TypeErasure"
-    ],
-    "error": " 18: [Static type checking] - Incompatible generic argument types. Cannot assign src.easy.Function2<java.lang.Double, java.lang.Float, ?> to: src.easy.Function2<java.lang.Double, java.lang.Float, ? extends java.lang.Object>\n @ line 18, column 5.\n       gurgling\n       ^",
+  "10": {
+    "transformations": [],
+    "error": "5: error: incompatible types: boolean cannot be converted to Q",
     "programs": {
-      "/tmp/tmpyp4u90z5/src/easy/Main.groovy": true
-    }
-  },
-  "11": {
-    "transformations": [
-        "TypeOverwriting"
-    ],
-    "error": "SHOULD NOT BE COMPILED: X <: N expected but Imagine <: (Playing<Function1<Boolean(groovy-builtin), Float(groovy-builtin)>>) found in node global/Reconcile/reflexes/soybeans/cellos",
-    "programs": {
-      "/tmp/tmpmtyy6u6q/src/spanners/Main.groovy": true,
-      "/tmp/tmpmtyy6u6q/src/franker/Main.groovy": false
-    }
-  },
-  "1050": {
-    "transformations": [
-      "TypeErasure"
-    ],
-    "error": ">>> a serious error occurred: BUG! exception in phase 'instruction selection' in source unit '/tmp/tmphj006wfu/src/wack/Main.groovy' unexpected NullPointerException\n>>> stacktrace:\nBUG! exception in phase 'instruction selection' in source unit '/tmp/tmphj006wfu/src/wack/Main.groovy' unexpected NullPointerException\n\tat org.codehaus.groovy.control.CompilationUnit$IPrimaryClassNodeOperation.doPhaseOperation(CompilationUnit.java:905)\n\tat org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:654)\n\tat org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:628)\n\tat org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:609)\n\tat org.codehaus.groovy.tools.FileSystemCompiler.compile(FileSystemCompiler.java:311)\n\tat org.codehaus.groovy.tools.FileSystemCompiler.doCompilation(FileSystemCompiler.java:240)\n\tat org.codehaus.groovy.tools.FileSystemCompiler.commandLineCompile(FileSystemCompiler.java:165)\n\tat org.codehaus.groovy.tools.FileSystemCompiler.commandLineCompileWithErrorHandling(FileSystemCompiler.java:205)\n\tat org.codehaus.groovy.tools.FileSystemCompiler.main(FileSystemCompiler.java:189)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:568)\n\tat org.codehaus.groovy.tools.GroovyStarter.rootLoader(GroovyStarter.java:112)\n\tat org.codehaus.groovy.tools.GroovyStarter.main(GroovyStarter.java:130)\nCaused by: java.lang.NullPointerException: Cannot invoke \"org.codehaus.groovy.ast.stmt.Statement.visit(org.codehaus.groovy.ast.GroovyCodeVisitor)\" because the return value of \"org.codehaus.groovy.ast.MethodNode.getCode()\" is null\n\tat org.codehaus.groovy.transform.stc.StaticTypeCheckingVisitor.isTypeSource(StaticTypeCheckingVisitor.java:4189)\n\tat org.codehaus.groovy.transform.stc.StaticTypeCheckingVisitor.checkForTargetType(StaticTypeCheckingVisitor.java:4160)\n\tat org.codehaus.groovy.transform.stc.StaticTypeCheckingVisitor.visitTernaryExpression(StaticTypeCheckingVisitor.java:4136)\n\tat org.codehaus.groovy.ast.expr.TernaryExpression.visit(TernaryExpression.java:44)\n\tat org.codehaus.groovy.transform.stc.StaticTypeCheckingVisitor.visitMethodCallExpression(StaticTypeCheckingVisitor.java:3303)\n\tat org.codehaus.groovy.transform.sc.StaticCompilationVisitor.visitMethodCallExpression(StaticCompilationVisitor.java:421)\n\tat org.codehaus.groovy.ast.expr.MethodCallExpression.visit(MethodCallExpression.java:77)\n\tat org.codehaus.groovy.ast.CodeVisitorSupport.visitExpressionStatement(CodeVisitorSupport.java:117)\n\tat org.codehaus.groovy.ast.ClassCodeVisitorSupport.visitExpressionStatement(ClassCodeVisitorSupport.java:204)\n\tat org.codehaus.groovy.transform.stc.StaticTypeCheckingVisitor.visitExpressionStatement(StaticTypeCheckingVisitor.java:2188)\n\tat org.codehaus.groovy.ast.stmt.ExpressionStatement.visit(ExpressionStatement.java:41)\n\tat org.codehaus.groovy.ast.CodeVisitorSupport.visitBlockStatement(CodeVisitorSupport.java:86)\n\tat org.codehaus.groovy.ast.ClassCodeVisitorSupport.visitBlockStatement(ClassCodeVisitorSupport.java:168)\n\tat org.codehaus.groovy.transform.stc.StaticTypeCheckingVisitor.visitBlockStatement(StaticTypeCheckingVisitor.java:3895)\n\tat org.codehaus.groovy.ast.stmt.BlockStatement.visit(BlockStatement.java:70)\n\tat org.codehaus.groovy.ast.CodeVisitorSupport.visitBlockStatement(CodeVisitorSupport.java:86)\n\tat org.codehaus.groovy.ast.ClassCodeVisitorSupport.visitBlockStatement(ClassCodeVisitorSupport.java:168)\n\tat org.codehaus.groovy.transform.stc.StaticTypeCheckingVisitor.visitBlockStatement(StaticTypeCheckingVisitor.java:3895)\n\tat org.codehaus.groovy.ast.stmt.BlockStatement.visit(BlockStatement.java:70)\n\tat org.codehaus.groovy.ast.CodeVisitorSupport.visitClosureExpression(CodeVisitorSupport.java:239)\n\tat org.codehaus.groovy.transform.stc.StaticTypeCheckingVisitor.visitClosureExpression(StaticTypeCheckingVisitor.java:2402)\n\tat org.codehaus.groovy.ast.expr.ClosureExpression.visit(ClosureExpression.java:110)\n\tat org.codehaus.groovy.transform.stc.StaticTypeCheckingVisitor.visitCastExpression(StaticTypeCheckingVisitor.java:4074)\n\tat org.codehaus.groovy.ast.expr.CastExpression.visit(CastExpression.java:96)\n\tat org.codehaus.groovy.transform.stc.StaticTypeCheckingVisitor.visitInitialExpression(StaticTypeCheckingVisitor.java:1931)\n\tat org.codehaus.groovy.transform.stc.StaticTypeCheckingVisitor.visitDefaultParameterArguments(StaticTypeCheckingVisitor.java:2616)\n\tat org.codehaus.groovy.transform.stc.StaticTypeCheckingVisitor.visitConstructorOrMethod(StaticTypeCheckingVisitor.java:2588)\n\tat org.codehaus.groovy.ast.ClassCodeVisitorSupport.visitMethod(ClassCodeVisitorSupport.java:110)\n\tat org.codehaus.groovy.transform.stc.StaticTypeCheckingVisitor.startMethodInference(StaticTypeCheckingVisitor.java:2573)\n\tat org.codehaus.groovy.transform.stc.StaticTypeCheckingVisitor.visitMethod(StaticTypeCheckingVisitor.java:2552)\n\tat org.codehaus.groovy.transform.sc.StaticCompilationVisitor.visitConstructorOrMethod(StaticCompilationVisitor.java:236)\n\tat org.codehaus.groovy.transform.sc.StaticCompilationVisitor.visitMethod(StaticCompilationVisitor.java:251)\n\tat org.codehaus.groovy.ast.ClassNode.visitMethods(ClassNode.java:1135)\n\tat org.codehaus.groovy.ast.ClassNode.visitContents(ClassNode.java:1128)\n\tat org.codehaus.groovy.ast.ClassCodeVisitorSupport.visitClass(ClassCodeVisitorSupport.java:52)\n\tat org.codehaus.groovy.transform.stc.StaticTypeCheckingVisitor.visitClass(StaticTypeCheckingVisitor.java:437)\n\tat org.codehaus.groovy.transform.sc.StaticCompilationVisitor.visitClass(StaticCompilationVisitor.java:197)\n\tat org.codehaus.groovy.transform.sc.StaticCompileTransformation.visit(StaticCompileTransformation.java:68)\n\tat org.codehaus.groovy.control.customizers.ASTTransformationCustomizer.call(ASTTransformationCustomizer.groovy:298)\n\tat org.codehaus.groovy.control.CompilationUnit$IPrimaryClassNodeOperation.doPhaseOperation(CompilationUnit.java:900)\n\t... 14 more\n",
-    "programs": {
-      "/tmp/tmphj006wfu/src/yarn/Main.groovy": true
-    }
+      "/tmp/tmp9udxjfh7/src/daiquiri/Main.java": true
+    },
+    "time": 0.01982936600000018
   }
 }
-```
-
-The first error is an unexpected compile-time error detected using the
-`TypeErasure` mutation. The second is a compiler bug where the compiler accepts
-an ill-typed program. Finally, the third one is an internal error of `groovyc`.
-When finding a bug, Hephaestus will store the bug-revealing test case inside
-the directory of the current testing session (e.g., `bugs/mysession`).
 
 ```
-|-- 7
-|   |-- Main.groovy
-|   `-- Main.groovy.bin
-|-- 11
-|   |-- incorrect.groovy
-|   |-- incorrect.groovy.bin
-|   |-- Main.groovy
-|   `-- Main.groovy.bin
-|-- 1050
-|   |-- Main.groovy
-|   `-- Main.groovy.bin
+
+This an example of an unexpected compile-time error.
+When finding a bug, `thalia` stores the bug-revealing test case inside
+the directory of the current testing session (e.g., `bugs/java-session`).
+
+```
+|-- 10
+|   |-- Main.java
+|   `-- Main.java.bin
+|-- logs
+|   `-- api-generator
+|-- generator
 |-- faults.json
 `-- stats.json
 ```
 
+
+Note that the option `--keep-all` allows you to store all the synthesized programs
+into disk. They can be found in the `bugs/java-testing/generator/` directory.
+
+###  Logging
+
+The `-L` option allows use to log the typing sequences
+synthesized by `thalia`.
+This log can be found in the `bugs/java-session/logs/api-generator` file.
+In our previous example,
+the contents of this file look like:
+
+```
+Built API with the following statistics:
+	Number of nodes:13225
+	Number of edges:19736
+	Number of methods:9658
+	Number of polymorphic methods:425
+	Number of fields:1068
+	Number of constructors:1159
+	Number of types:1095
+	Number of type constructors:144
+	Avg inheritance chain size:4.20
+	Avg API signature size:2.43
+
+Generated program 1
+	API: java.lang.module.ModuleDescriptor.Builder.version(Classifier[java.lang.module.ModuleDescriptor.Version])
+	Type variable assignments:
+	receiver: java.lang.module.ModuleDescriptor.Builder
+	parameters java.lang.module.ModuleDescriptor.Version
+	return: java.lang.module.ModuleDescriptor.Builder
+Correctness: True
+Generated program 2
+	API: java.lang.module.ModuleDescriptor.Builder.version(Classifier[java.lang.module.ModuleDescriptor.Version])
+	Type variable assignments:
+	receiver: java.lang.module.ModuleDescriptor.Builder
+	parameters java.lang.module.ModuleDescriptor.Version
+	return: Object
+Correctness: True
+...
+```
+
+The first lines of the `bugs/java-session/logs/api-generator` file dumps
+some statistics regarding the input API and the corresponding
+API graph (e.g., number of methods, nmber of constructors, etc.).
+Then,
+the file shows the typing sequence of every test case.
+For example,
+the first test program invokes the
+[java.lang.module.ModuleDescriptor.Builder.version](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/module/ModuleDescriptor.Builder.html#version(java.lang.module.ModuleDescriptor.Version)
+method found in the standard library of Java
+using a parameter of type
+[java.lang.module.ModuleDescriptor.Version](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/module/ModuleDescriptor.Version.html).
+The result of this method call is assigned to a variable of type
+[java.lang.module.ModuleDescriptor.Builder](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/module/ModuleDescriptor.Builder.html).
+
+
 # Supported Languages
 
 Currently, Hephaestus generates programs written in
-three popular programming languages, namely,
-Java, Kotlin, and Groovy. You should the
+four popular programming languages, namely,
+Java, Scala, Kotlin, and Groovy. Use the
 option `--language` to specify the target language.
 
 To support a new language,
 you need to implement the following:
 
-* A translator that converts a program written in Hephaestus'
+* A translator that converts a program written in the
 IR into a program written in the target language.
 To to so, you have to extend the
 [src.translators.base.BaseTranslator](https://github.com/hephaestus-compiler-project/hephaestus/blob/main/src/translators/base.py)
@@ -269,65 +374,6 @@ class.
 
 * (Optionally) Any built-in types supported by the language, e.g., see
 [Java types](https://github.com/hephaestus-compiler-project/hephaestus/blob/main/src/ir/java_types.py) for guidance.
-
-
-# Supported Language Features
-
-Hephaestus generates programs written in an intermediate representation (IR),
-a simple object-oriented language that supports parametric polymorphism
-and type inference.
-Specifically, the programs generated by Hephaestus involve:
-
-* Standard language features (conditionals, method calls, assignments, constants,
-  binary operations)
-
-* Standard object-oriented features (inheritance, overriding, class fields, object initialization)
-
-* Parametric polymorphism features (parameterized classes,
-  parameterized functions, bounded type parameters, wildcard types,
-  declaration-site variance)
-
-* Functional programming features (higher-order functions, lambdas, method references)
-
-* Type inference features (type argument inference, local variable type inference,
-  return type inference).
-
-
-Arithmetic expressions, loops, exceptions,
-access modifiers (e.g., `public`, `private`)
-are not supported.
-
-
-# API-Based program generation
-
-
-## Collecting API signatures
-
-### Java
-
-Download Java docs from [here](https://www.oracle.com/java/technologies/javase-jdk11-doc-downloads.html).
-
-
-### Kotlin
-
-Build Kotlin docs using [Dokka](https://github.com/Kotlin/dokka) and its
-Gradle plugin.
-
-```bash
-cd extras/kotlin-docs-dokka
-./gradlew dokkaHtml
-```
-
-The resulting documentation can be found in the generated `build/` directory,
-that is `extras/kotlin-docs-dokka/build/dokka/html/kotlin-docs/`.
-
-
-## Converting API docs from an HTML format into a JSON format
-
-```
-./scripts/doc2json.py -i <path-to-html-docs> -o output --language java
-```
-
 
 
 # Related publications
