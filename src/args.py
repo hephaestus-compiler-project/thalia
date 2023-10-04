@@ -48,7 +48,7 @@ parser.add_argument(
 parser.add_argument(
     "--max-conditional-depth",
     type=int,
-    default=1,
+    default=3,
     help="Maximum depth of conditionals"
 )
 parser.add_argument(
@@ -227,6 +227,7 @@ parser.add_argument(
 parser.add_argument(
     "--local-variable-prob",
     type=float,
+    default=0.5,
     help="Probability of assigning an expression to a local variable"
 )
 parser.add_argument(
