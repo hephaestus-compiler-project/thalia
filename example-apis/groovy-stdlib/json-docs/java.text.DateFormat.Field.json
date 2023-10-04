@@ -1,0 +1,178 @@
+{
+  "name": "java.text.DateFormat.Field",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.text.Format.Field"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "ofCalendarField",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getCalendarField",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "readResolve",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.io.InvalidObjectException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Field",
+      "parameters": [
+        "java.lang.String",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "DAY_OF_MONTH",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "DAY_OF_WEEK_IN_MONTH",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ERA",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HOUR_OF_DAY1",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HOUR1",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MINUTE",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SECOND",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "WEEK_OF_MONTH",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "YEAR",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "AM_PM",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "DAY_OF_WEEK",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "DAY_OF_YEAR",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HOUR_OF_DAY0",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HOUR0",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MILLISECOND",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MONTH",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TIME_ZONE",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "WEEK_OF_YEAR",
+      "type": "java.text.DateFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

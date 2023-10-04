@@ -1,0 +1,139 @@
+{
+  "name": "java.time.chrono.Era",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.time.temporal.TemporalAccessor",
+    "java.time.temporal.TemporalAdjuster"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "get",
+      "parameters": [
+        "java.time.temporal.TemporalField"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "getLong",
+      "parameters": [
+        "java.time.temporal.TemporalField"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "isSupported",
+      "parameters": [
+        "java.time.temporal.TemporalField"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "range",
+      "parameters": [
+        "java.time.temporal.TemporalField"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.ValueRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "adjustInto",
+      "parameters": [
+        "java.time.temporal.Temporal"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.Temporal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "getDisplayName",
+      "parameters": [
+        "java.time.format.TextStyle",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "getValue",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "query",
+      "parameters": [
+        "java.time.temporal.TemporalQuery<R>"
+      ],
+      "type_parameters": [
+        "R"
+      ],
+      "return_type": "R",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": true
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

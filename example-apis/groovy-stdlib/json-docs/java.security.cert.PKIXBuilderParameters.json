@@ -1,0 +1,89 @@
+{
+  "name": "java.security.cert.PKIXBuilderParameters",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.security.cert.PKIXParameters"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "setMaxPathLength",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.InvalidParameterException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getMaxPathLength",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "PKIXBuilderParameters",
+      "parameters": [
+        "java.util.Set<java.security.cert.TrustAnchor>",
+        "java.security.cert.CertSelector"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.security.InvalidAlgorithmParameterException",
+        "java.lang.NullPointerException",
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "PKIXBuilderParameters",
+      "parameters": [
+        "java.security.KeyStore",
+        "java.security.cert.CertSelector"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.security.KeyStoreException",
+        "java.security.InvalidAlgorithmParameterException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

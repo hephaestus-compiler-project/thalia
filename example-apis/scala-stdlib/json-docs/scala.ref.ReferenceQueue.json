@@ -1,0 +1,84 @@
+{
+  "name": "scala.ref.ReferenceQueue",
+  "type_parameters": [
+    "+T <: scala.AnyRef"
+  ],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "Wrapper",
+      "parameters": [
+        "java.lang.ref.Reference[_]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Option[scala.ref.Reference[T]]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected"
+    },
+    {
+      "name": "remove",
+      "parameters": [
+        "scala.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Option[scala.ref.Reference[T]]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Predef.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "ReferenceQueue",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "poll",
+      "type": "scala.Option[scala.ref.Reference[T]]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "remove",
+      "type": "scala.Option[scala.ref.Reference[T]]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

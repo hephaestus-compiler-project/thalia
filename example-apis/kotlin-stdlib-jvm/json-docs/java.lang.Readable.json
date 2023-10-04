@@ -1,0 +1,31 @@
+{
+  "name": "java.lang.Readable",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "read",
+      "parameters": [
+        "java.nio.CharBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.NullPointerException",
+        "java.nio.ReadOnlyBufferException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

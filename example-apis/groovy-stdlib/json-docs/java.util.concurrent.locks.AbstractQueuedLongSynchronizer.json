@@ -1,0 +1,427 @@
+{
+  "name": "java.util.concurrent.locks.AbstractQueuedLongSynchronizer",
+  "type_parameters": [],
+  "implements": [
+    "java.io.Serializable"
+  ],
+  "inherits": [
+    "java.util.concurrent.locks.AbstractOwnableSynchronizer"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "acquireInterruptibly",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.InterruptedException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "acquireSharedInterruptibly",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.InterruptedException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getExclusiveQueuedThreads",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Collection<java.lang.Thread>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getQueuedThreads",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Collection<java.lang.Thread>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getSharedQueuedThreads",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Collection<java.lang.Thread>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getWaitingThreads",
+      "parameters": [
+        "java.util.concurrent.locks.AbstractQueuedLongSynchronizer.ConditionObject"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Collection<java.lang.Thread>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalMonitorStateException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasContended",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hasQueuedThreads",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isHeldExclusively",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.lang.UnsupportedOperationException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "owns",
+      "parameters": [
+        "java.util.concurrent.locks.AbstractQueuedLongSynchronizer.ConditionObject"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "releaseShared",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "tryAcquireNanos",
+      "parameters": [
+        "long",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.InterruptedException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "tryAcquireSharedNanos",
+      "parameters": [
+        "long",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.InterruptedException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "tryReleaseShared",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.lang.IllegalMonitorStateException",
+        "java.lang.UnsupportedOperationException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "acquire",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "acquireShared",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "compareAndSetState",
+      "parameters": [
+        "long",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getFirstQueuedThread",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Thread",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getQueueLength",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getState",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getWaitQueueLength",
+      "parameters": [
+        "java.util.concurrent.locks.AbstractQueuedLongSynchronizer.ConditionObject"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalMonitorStateException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasQueuedPredecessors",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hasWaiters",
+      "parameters": [
+        "java.util.concurrent.locks.AbstractQueuedLongSynchronizer.ConditionObject"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalMonitorStateException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isQueued",
+      "parameters": [
+        "java.lang.Thread"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "release",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setState",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "tryAcquire",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.lang.IllegalMonitorStateException",
+        "java.lang.UnsupportedOperationException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "tryAcquireShared",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.lang.IllegalMonitorStateException",
+        "java.lang.UnsupportedOperationException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "tryRelease",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.lang.IllegalMonitorStateException",
+        "java.lang.UnsupportedOperationException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,247 @@
+{
+  "name": "java.time.zone.ZoneRules",
+  "type_parameters": [],
+  "implements": [
+    "java.io.Serializable"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getDaylightSavings",
+      "parameters": [
+        "java.time.Instant"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Duration",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getOffset",
+      "parameters": [
+        "java.time.LocalDateTime"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.ZoneOffset",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getTransition",
+      "parameters": [
+        "java.time.LocalDateTime"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.zone.ZoneOffsetTransition",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getTransitions",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.List<java.time.zone.ZoneOffsetTransition>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isFixedOffset",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "nextTransition",
+      "parameters": [
+        "java.time.Instant"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.zone.ZoneOffsetTransition",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "java.time.ZoneOffset",
+        "java.time.ZoneOffset",
+        "java.util.List<java.time.zone.ZoneOffsetTransition>",
+        "java.util.List<java.time.zone.ZoneOffsetTransition>",
+        "java.util.List<java.time.zone.ZoneOffsetTransitionRule>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.zone.ZoneRules",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getOffset",
+      "parameters": [
+        "java.time.Instant"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.ZoneOffset",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getStandardOffset",
+      "parameters": [
+        "java.time.Instant"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.ZoneOffset",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getTransitionRules",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.List<java.time.zone.ZoneOffsetTransitionRule>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getValidOffsets",
+      "parameters": [
+        "java.time.LocalDateTime"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.List<java.time.ZoneOffset>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isDaylightSavings",
+      "parameters": [
+        "java.time.Instant"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isValidOffset",
+      "parameters": [
+        "java.time.LocalDateTime",
+        "java.time.ZoneOffset"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "java.time.ZoneOffset"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.zone.ZoneRules",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "previousTransition",
+      "parameters": [
+        "java.time.Instant"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.zone.ZoneOffsetTransition",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

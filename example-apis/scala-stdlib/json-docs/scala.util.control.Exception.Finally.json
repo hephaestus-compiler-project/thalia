@@ -1,0 +1,50 @@
+{
+  "name": "scala.util.control.Exception.Finally",
+  "type_parameters": [],
+  "implements": [
+    "scala.util.control.Exception.Described"
+  ],
+  "inherits": [
+    "scala.util.control.Exception.Described"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "and",
+      "parameters": [
+        "=> scala.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.util.control.Exception.Finally",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "invoke",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "name",
+      "type": "java.lang.String",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "protected",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

@@ -1,0 +1,78 @@
+{
+  "name": "scala.reflect.AnyValManifest",
+  "type_parameters": [
+    "T <: scala.AnyVal"
+  ],
+  "implements": [
+    "scala.reflect.Manifest[T]",
+    "scala.Equals"
+  ],
+  "inherits": [
+    "scala.reflect.Manifest[T]",
+    "scala.Equals"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "<:<",
+      "parameters": [
+        "scala.reflect.ClassManifest[_]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "canEqual",
+      "parameters": [
+        "scala.Any"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "scala.Any"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "hashCode",
+      "type": "scala.Int",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toString",
+      "type": "scala.Predef.String",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

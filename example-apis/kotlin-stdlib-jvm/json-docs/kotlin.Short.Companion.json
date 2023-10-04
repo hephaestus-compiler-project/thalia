@@ -1,0 +1,53 @@
+{
+  "name": "kotlin.Short.Companion",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 0,
+  "methods": [],
+  "fields": [
+    {
+      "name": "MAX_VALUE",
+      "type": "kotlin.Short",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "MIN_VALUE",
+      "type": "kotlin.Short",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "SIZE_BITS",
+      "type": "kotlin.Int",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "SIZE_BYTES",
+      "type": "kotlin.Int",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

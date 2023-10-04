@@ -1,0 +1,251 @@
+{
+  "name": "java.time.chrono.JapaneseDate",
+  "type_parameters": [],
+  "implements": [
+    "java.time.chrono.ChronoLocalDate",
+    "java.io.Serializable"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "from",
+      "parameters": [
+        "java.time.temporal.TemporalAccessor"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.JapaneseDate",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getEra",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.JapaneseEra",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isSupported",
+      "parameters": [
+        "java.time.temporal.TemporalField"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "java.time.temporal.TemporalAmount"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.JapaneseDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "now",
+      "parameters": [
+        "java.time.Clock"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.JapaneseDate",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "int",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.JapaneseDate",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "java.time.temporal.TemporalAmount"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.JapaneseDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "java.time.temporal.Temporal",
+        "java.time.temporal.TemporalUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getChronology",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.JapaneseChronology",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "lengthOfMonth",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "now",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.JapaneseDate",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "now",
+      "parameters": [
+        "java.time.ZoneId"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.JapaneseDate",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "java.time.chrono.JapaneseEra",
+        "int",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.JapaneseDate",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "with",
+      "parameters": [
+        "java.time.temporal.TemporalAdjuster"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.JapaneseDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

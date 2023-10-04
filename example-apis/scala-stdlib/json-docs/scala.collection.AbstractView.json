@@ -1,0 +1,19 @@
+{
+  "name": "scala.collection.AbstractView",
+  "type_parameters": [
+    "+A"
+  ],
+  "implements": [
+    "scala.collection.AbstractIterable[A]",
+    "scala.collection.View[A]"
+  ],
+  "inherits": [
+    "scala.collection.AbstractIterable[A]",
+    "scala.collection.View[A]"
+  ],
+  "class_type": 2,
+  "methods": [],
+  "fields": [],
+  "is_class": true,
+  "language": "scala"
+}

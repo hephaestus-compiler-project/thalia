@@ -1,0 +1,68 @@
+{
+  "name": "java.security.AuthProvider",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.security.Provider"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "logout",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException",
+        "Provider.configure(java.lang.String)",
+        "javax.security.auth.login.LoginException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "login",
+      "parameters": [
+        "javax.security.auth.Subject",
+        "javax.security.auth.callback.CallbackHandler"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException",
+        "Provider.configure(java.lang.String)",
+        "javax.security.auth.login.LoginException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setCallbackHandler",
+      "parameters": [
+        "javax.security.auth.callback.CallbackHandler"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException",
+        "Provider.configure(java.lang.String)",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

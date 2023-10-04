@@ -1,0 +1,19 @@
+{
+  "name": "kotlin.coroutines.AbstractCoroutineContextKey",
+  "type_parameters": [
+    "B : kotlin.coroutines.CoroutineContext.Element",
+    "E : B"
+  ],
+  "implements": [
+    "kotlin.coroutines.CoroutineContext.Key<E>"
+  ],
+  "inherits": [
+    "kotlin.coroutines.CoroutineContext.Key<E>"
+  ],
+  "class_type": 2,
+  "methods": [],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

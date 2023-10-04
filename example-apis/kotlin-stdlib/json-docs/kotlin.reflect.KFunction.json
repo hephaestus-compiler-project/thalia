@@ -1,0 +1,194 @@
+{
+  "name": "kotlin.reflect.KFunction",
+  "type_parameters": [
+    "out R"
+  ],
+  "implements": [
+    "kotlin.reflect.KCallable<R>",
+    "kotlin.Function<R>"
+  ],
+  "inherits": [
+    "kotlin.reflect.KCallable<R>",
+    "kotlin.Function<R>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "call",
+      "parameters": [
+        "kotlin.Any?"
+      ],
+      "type_parameters": [],
+      "return_type": "R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "callBy",
+      "parameters": [
+        "kotlin.collections.Map<kotlin.reflect.KParameter, kotlin.Any?>"
+      ],
+      "type_parameters": [],
+      "return_type": "R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [
+    {
+      "name": "annotations",
+      "type": "kotlin.collections.List<kotlin.Annotation>",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "isAbstract",
+      "type": "kotlin.Boolean",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "isExternal",
+      "type": "kotlin.Boolean",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "isFinal",
+      "type": "kotlin.Boolean",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "isInfix",
+      "type": "kotlin.Boolean",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "isInline",
+      "type": "kotlin.Boolean",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "isOpen",
+      "type": "kotlin.Boolean",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "isOperator",
+      "type": "kotlin.Boolean",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "name",
+      "type": "kotlin.String",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "parameters",
+      "type": "kotlin.collections.List<kotlin.reflect.KParameter>",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "returnType",
+      "type": "kotlin.reflect.KType",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "typeParameters",
+      "type": "kotlin.collections.List<kotlin.reflect.KTypeParameter>",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "visibility",
+      "type": "kotlin.reflect.KVisibility?",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "isSuspend",
+      "type": "kotlin.Boolean",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "kotlin.Function",
+  "type_parameters": [
+    "out R"
+  ],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

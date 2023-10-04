@@ -1,0 +1,628 @@
+{
+  "name": "java.time.Instant",
+  "type_parameters": [],
+  "implements": [
+    "java.time.temporal.Temporal",
+    "java.time.temporal.TemporalAdjuster",
+    "java.lang.Comparable<java.time.Instant>",
+    "java.io.Serializable"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "atOffset",
+      "parameters": [
+        "java.time.ZoneOffset"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.OffsetDateTime",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compareTo",
+      "parameters": [
+        "java.time.Instant"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "from",
+      "parameters": [
+        "java.time.temporal.TemporalAccessor"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getEpochSecond",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getNano",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isAfter",
+      "parameters": [
+        "java.time.Instant"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isSupported",
+      "parameters": [
+        "java.time.temporal.TemporalField"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "long",
+        "java.time.temporal.TemporalUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "minusMillis",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "minusSeconds",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "now",
+      "parameters": [
+        "java.time.Clock"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "ofEpochSecond",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parse",
+      "parameters": [
+        "java.lang.CharSequence"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.format.DateTimeParseException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "java.time.temporal.TemporalAmount"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "plusNanos",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "query",
+      "parameters": [
+        "java.time.temporal.TemporalQuery<R>"
+      ],
+      "type_parameters": [
+        "R"
+      ],
+      "return_type": "R",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toEpochMilli",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "truncatedTo",
+      "parameters": [
+        "java.time.temporal.TemporalUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "with",
+      "parameters": [
+        "java.time.temporal.TemporalAdjuster"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "adjustInto",
+      "parameters": [
+        "java.time.temporal.Temporal"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.Temporal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "atZone",
+      "parameters": [
+        "java.time.ZoneId"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.ZonedDateTime",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "java.time.temporal.TemporalField"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getLong",
+      "parameters": [
+        "java.time.temporal.TemporalField"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isBefore",
+      "parameters": [
+        "java.time.Instant"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isSupported",
+      "parameters": [
+        "java.time.temporal.TemporalUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "java.time.temporal.TemporalAmount"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "minusNanos",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "now",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "ofEpochMilli",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "ofEpochSecond",
+      "parameters": [
+        "long",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "long",
+        "java.time.temporal.TemporalUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "plusMillis",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "plusSeconds",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "range",
+      "parameters": [
+        "java.time.temporal.TemporalField"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.ValueRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "java.time.temporal.Temporal",
+        "java.time.temporal.TemporalUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "with",
+      "parameters": [
+        "java.time.temporal.TemporalField",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "MAX",
+      "type": "java.time.Instant",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "EPOCH",
+      "type": "java.time.Instant",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MIN",
+      "type": "java.time.Instant",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

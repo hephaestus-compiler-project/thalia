@@ -1,0 +1,58 @@
+{
+  "name": "scala.util.control.TailCalls.Cont",
+  "type_parameters": [
+    "A",
+    "B"
+  ],
+  "implements": [
+    "scala.util.control.TailCalls.TailRec[B]",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "scala.util.control.TailCalls.TailRec[B]",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "Cont",
+      "parameters": [
+        "scala.util.control.TailCalls.TailRec[A]",
+        "(A) => scala.util.control.TailCalls.TailRec[B]"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "a",
+      "type": "scala.util.control.TailCalls.TailRec[A]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "f",
+      "type": "(A) => scala.util.control.TailCalls.TailRec[B]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "protected",
+  "language": "scala"
+}

@@ -1,0 +1,176 @@
+{
+  "name": "java.util.jar.Attributes.Name",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "Name",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "CONTENT_TYPE",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "EXTENSION_LIST",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "IMPLEMENTATION_TITLE",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "IMPLEMENTATION_VENDOR",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "IMPLEMENTATION_VERSION",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MANIFEST_VERSION",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SEALED",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SPECIFICATION_TITLE",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SPECIFICATION_VERSION",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CLASS_PATH",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "EXTENSION_INSTALLATION",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "EXTENSION_NAME",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "IMPLEMENTATION_URL",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "IMPLEMENTATION_VENDOR_ID",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MAIN_CLASS",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MULTI_RELEASE",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SIGNATURE_VERSION",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SPECIFICATION_VENDOR",
+      "type": "java.util.jar.Attributes.Name",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

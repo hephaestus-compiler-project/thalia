@@ -1,0 +1,31 @@
+{
+  "name": "java.util.concurrent.Flow.Publisher",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "subscribe",
+      "parameters": [
+        "java.util.concurrent.Flow.Subscriber<? super T>"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": true,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

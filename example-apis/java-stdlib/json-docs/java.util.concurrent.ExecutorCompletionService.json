@@ -1,0 +1,84 @@
+{
+  "name": "java.util.concurrent.ExecutorCompletionService",
+  "type_parameters": [
+    "V"
+  ],
+  "implements": [
+    "java.util.concurrent.CompletionService<V>"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "submit",
+      "parameters": [
+        "java.util.concurrent.Callable<V>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.Future<V>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.concurrent.RejectedExecutionException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "submit",
+      "parameters": [
+        "java.lang.Runnable",
+        "V"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.Future<V>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.concurrent.RejectedExecutionException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "ExecutorCompletionService",
+      "parameters": [
+        "java.util.concurrent.Executor",
+        "java.util.concurrent.BlockingQueue<java.util.concurrent.Future<V>>"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "ExecutorCompletionService",
+      "parameters": [
+        "java.util.concurrent.Executor"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

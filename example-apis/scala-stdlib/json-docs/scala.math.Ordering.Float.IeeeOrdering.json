@@ -1,0 +1,233 @@
+{
+  "name": "scala.math.Ordering.Float.IeeeOrdering",
+  "type_parameters": [],
+  "implements": [
+    "scala.math.Ordering[scala.Float]"
+  ],
+  "inherits": [
+    "scala.math.Ordering[scala.Float]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "compare",
+      "parameters": [
+        "scala.Float",
+        "scala.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "equiv",
+      "parameters": [
+        "scala.Float",
+        "scala.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "gt",
+      "parameters": [
+        "scala.Float",
+        "scala.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "gteq",
+      "parameters": [
+        "scala.Float",
+        "scala.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lt",
+      "parameters": [
+        "scala.Float",
+        "scala.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lteq",
+      "parameters": [
+        "scala.Float",
+        "scala.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "max",
+      "parameters": [
+        "U",
+        "U"
+      ],
+      "type_parameters": [
+        "U <: scala.Float"
+      ],
+      "return_type": "U",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "min",
+      "parameters": [
+        "U",
+        "U"
+      ],
+      "type_parameters": [
+        "U <: scala.Float"
+      ],
+      "return_type": "U",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "scala.Float",
+        "scala.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "equiv",
+      "parameters": [
+        "scala.Float",
+        "scala.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "gt",
+      "parameters": [
+        "scala.Float",
+        "scala.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "gteq",
+      "parameters": [
+        "scala.Float",
+        "scala.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lt",
+      "parameters": [
+        "scala.Float",
+        "scala.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lteq",
+      "parameters": [
+        "scala.Float",
+        "scala.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "max",
+      "parameters": [
+        "U",
+        "U"
+      ],
+      "type_parameters": [
+        "U <: scala.Float"
+      ],
+      "return_type": "U",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "min",
+      "parameters": [
+        "U",
+        "U"
+      ],
+      "type_parameters": [
+        "U <: scala.Float"
+      ],
+      "return_type": "U",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

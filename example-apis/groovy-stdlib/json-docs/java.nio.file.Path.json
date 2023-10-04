@@ -1,0 +1,453 @@
+{
+  "name": "java.nio.file.Path",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Comparable<java.nio.file.Path>",
+    "java.lang.Iterable<java.nio.file.Path>",
+    "java.nio.file.Watchable"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "endsWith",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.file.InvalidPathException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getFileSystem",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.FileSystem",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getNameCount",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRoot",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isAbsolute",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "normalize",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "java.net.URI"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.file.FileSystemNotFoundException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "register",
+      "parameters": [
+        "java.nio.file.WatchService",
+        "java.nio.file.WatchEvent.Kind<?>[]",
+        "java.nio.file.WatchEvent.Modifier..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.WatchKey",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.IllegalArgumentException",
+        "java.nio.file.ClosedWatchServiceException",
+        "java.nio.file.NotDirectoryException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkRead"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "resolve",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.file.InvalidPathException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "resolveSibling",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.file.InvalidPathException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "startsWith",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.file.InvalidPathException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "subpath",
+      "parameters": [
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toFile",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "compareTo",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "endsWith",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getFileName",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getName",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getParent",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "iterator",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Iterator<java.nio.file.Path>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.file.InvalidPathException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "register",
+      "parameters": [
+        "java.nio.file.WatchService",
+        "java.nio.file.WatchEvent.Kind<?>..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.WatchKey",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.IllegalArgumentException",
+        "java.nio.file.ClosedWatchServiceException",
+        "java.nio.file.NotDirectoryException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkRead"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "relativize",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "resolve",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "resolveSibling",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "startsWith",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toAbsolutePath",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOError",
+        "java.lang.SecurityException",
+        "checkPropertyAccess"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toRealPath",
+      "parameters": [
+        "java.nio.file.LinkOption..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkRead",
+        "checkPropertyAccess"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toUri",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.URI",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOError",
+        "java.lang.SecurityException",
+        "toAbsolutePath"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

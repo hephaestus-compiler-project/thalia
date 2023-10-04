@@ -1,0 +1,241 @@
+{
+  "name": "java.util.concurrent.ConcurrentMap",
+  "type_parameters": [
+    "K",
+    "V"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.util.Map<K,V>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "computeIfAbsent",
+      "parameters": [
+        "K",
+        "java.util.function.Function<? super K,? extends V>"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "optional",
+        "java.lang.ClassCastException",
+        "optional",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "optional"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "forEach",
+      "parameters": [
+        "java.util.function.BiConsumer<? super K,? super V>"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "merge",
+      "parameters": [
+        "K",
+        "V",
+        "java.util.function.BiFunction<? super V,? super V,? extends V>"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "optional",
+        "java.lang.ClassCastException",
+        "optional",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "optional"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "remove",
+      "parameters": [
+        "java.lang.Object",
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.ClassCastException",
+        "optional",
+        "java.lang.NullPointerException",
+        "optional"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "replace",
+      "parameters": [
+        "K",
+        "V",
+        "V"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.ClassCastException",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "compute",
+      "parameters": [
+        "K",
+        "java.util.function.BiFunction<? super K,? super V,? extends V>"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "optional",
+        "java.lang.ClassCastException",
+        "optional",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "optional"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "computeIfPresent",
+      "parameters": [
+        "K",
+        "java.util.function.BiFunction<? super K,? super V,? extends V>"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "optional",
+        "java.lang.ClassCastException",
+        "optional",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "optional"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "getOrDefault",
+      "parameters": [
+        "java.lang.Object",
+        "V"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "optional",
+        "java.lang.NullPointerException",
+        "optional"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "putIfAbsent",
+      "parameters": [
+        "K",
+        "V"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.ClassCastException",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "replace",
+      "parameters": [
+        "K",
+        "V"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.ClassCastException",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "replaceAll",
+      "parameters": [
+        "java.util.function.BiFunction<? super K,? super V,? extends V>"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.NullPointerException",
+        "optional",
+        "java.lang.ClassCastException",
+        "optional",
+        "java.lang.IllegalArgumentException",
+        "optional"
+      ],
+      "is_default": true
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,122 @@
+{
+  "name": "scala.math.PartialOrdering",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [
+    "scala.math.Equiv[T]"
+  ],
+  "inherits": [
+    "scala.math.Equiv[T]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "lteq",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "tryCompare",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Option[scala.Int]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "equiv",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "gt",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "gteq",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lt",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.math.PartialOrdering[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.math.PartialOrdering[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "reverse",
+      "type": "scala.math.PartialOrdering[T]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

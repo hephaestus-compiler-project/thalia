@@ -1,0 +1,61 @@
+{
+  "name": "kotlin.collections.MutableIterator",
+  "type_parameters": [
+    "out T"
+  ],
+  "implements": [
+    "kotlin.collections.Iterator<T>"
+  ],
+  "inherits": [
+    "kotlin.collections.Iterator<T>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "hasNext",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "next",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "remove",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

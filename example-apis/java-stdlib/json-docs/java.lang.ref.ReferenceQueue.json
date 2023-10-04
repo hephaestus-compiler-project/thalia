@@ -1,0 +1,69 @@
+{
+  "name": "java.lang.ref.ReferenceQueue",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "remove",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.ref.Reference<? extends T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.InterruptedException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "poll",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.ref.Reference<? extends T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "remove",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ref.Reference<? extends T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.InterruptedException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "ReferenceQueue",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

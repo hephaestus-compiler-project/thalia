@@ -1,0 +1,198 @@
+{
+  "name": "java.nio.channels.Selector",
+  "type_parameters": [],
+  "implements": [
+    "java.io.Closeable"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "isOpen",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "open",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.Selector",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "select",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.nio.channels.ClosedSelectorException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "select",
+      "parameters": [
+        "java.util.function.Consumer<java.nio.channels.SelectionKey>"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.nio.channels.ClosedSelectorException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "selectedKeys",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Set<java.nio.channels.SelectionKey>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedSelectorException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "selectNow",
+      "parameters": [
+        "java.util.function.Consumer<java.nio.channels.SelectionKey>"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.nio.channels.ClosedSelectorException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "close",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "keys",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Set<java.nio.channels.SelectionKey>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedSelectorException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "provider",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.spi.SelectorProvider",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "select",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.nio.channels.ClosedSelectorException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "select",
+      "parameters": [
+        "java.util.function.Consumer<java.nio.channels.SelectionKey>",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.nio.channels.ClosedSelectorException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "selectNow",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.nio.channels.ClosedSelectorException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "wakeup",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.Selector",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

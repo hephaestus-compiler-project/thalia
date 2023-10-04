@@ -1,0 +1,125 @@
+{
+  "name": "java.util.spi.LocaleNameProvider",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.util.spi.LocaleServiceProvider"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "getDisplayLanguage",
+      "parameters": [
+        "java.lang.String",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "getAvailableLocales()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDisplayUnicodeExtensionKey",
+      "parameters": [
+        "java.lang.String",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "getAvailableLocales()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDisplayVariant",
+      "parameters": [
+        "java.lang.String",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "getAvailableLocales()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDisplayCountry",
+      "parameters": [
+        "java.lang.String",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "getAvailableLocales()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDisplayScript",
+      "parameters": [
+        "java.lang.String",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "getAvailableLocales()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDisplayUnicodeExtensionType",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "getAvailableLocales()"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

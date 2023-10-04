@@ -1,0 +1,23 @@
+{
+  "name": "java.security.PrivateKey",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.security.Key",
+    "javax.security.auth.Destroyable"
+  ],
+  "class_type": 1,
+  "methods": [],
+  "fields": [
+    {
+      "name": "serialVersionUID",
+      "type": "long",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

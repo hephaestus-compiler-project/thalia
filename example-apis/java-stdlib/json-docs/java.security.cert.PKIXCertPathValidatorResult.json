@@ -1,0 +1,90 @@
+{
+  "name": "java.security.cert.PKIXCertPathValidatorResult",
+  "type_parameters": [],
+  "implements": [
+    "java.security.cert.CertPathValidatorResult"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getPolicyTree",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.security.cert.PolicyNode",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getTrustAnchor",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.security.cert.TrustAnchor",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "clone",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getPublicKey",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.security.PublicKey",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "PKIXCertPathValidatorResult",
+      "parameters": [
+        "java.security.cert.TrustAnchor",
+        "java.security.cert.PolicyNode",
+        "java.security.PublicKey"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

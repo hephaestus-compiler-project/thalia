@@ -1,0 +1,47 @@
+{
+  "name": "java.security.interfaces.DSAKeyPairGenerator",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "initialize",
+      "parameters": [
+        "java.security.interfaces.DSAParams",
+        "java.security.SecureRandom"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.InvalidParameterException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "initialize",
+      "parameters": [
+        "int",
+        "boolean",
+        "java.security.SecureRandom"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.InvalidParameterException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

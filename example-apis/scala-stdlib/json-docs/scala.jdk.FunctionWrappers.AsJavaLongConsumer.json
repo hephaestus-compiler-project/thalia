@@ -1,0 +1,56 @@
+{
+  "name": "scala.jdk.FunctionWrappers.AsJavaLongConsumer",
+  "type_parameters": [],
+  "implements": [
+    "java.util.function.LongConsumer",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "java.util.function.LongConsumer",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "accept",
+      "parameters": [
+        "scala.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "AsJavaLongConsumer",
+      "parameters": [
+        "(scala.Long) => scala.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "sf",
+      "type": "(scala.Long) => scala.Unit",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

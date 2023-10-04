@@ -1,0 +1,15 @@
+{
+  "name": "groovy.util.ObservableMap.PropertyAddedEvent",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "groovy.util.ObservableMap.PropertyEvent"
+  ],
+  "class_type": 0,
+  "methods": [],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

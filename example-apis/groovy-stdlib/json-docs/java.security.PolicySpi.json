@@ -1,0 +1,67 @@
+{
+  "name": "java.security.PolicySpi",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "engineGetPermissions",
+      "parameters": [
+        "java.security.ProtectionDomain"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.PermissionCollection",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "engineRefresh",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "engineGetPermissions",
+      "parameters": [
+        "java.security.CodeSource"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.PermissionCollection",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "engineImplies",
+      "parameters": [
+        "java.security.ProtectionDomain",
+        "java.security.Permission"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

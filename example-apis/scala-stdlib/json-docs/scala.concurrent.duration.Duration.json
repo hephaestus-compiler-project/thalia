@@ -1,0 +1,564 @@
+{
+  "name": "scala.concurrent.duration.Duration",
+  "type_parameters": [],
+  "implements": [
+    "scala.Serializable",
+    "scala.Ordered[scala.concurrent.duration.Duration]"
+  ],
+  "inherits": [
+    "scala.Serializable",
+    "scala.Ordered[scala.concurrent.duration.Duration]"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "*",
+      "parameters": [
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "+",
+      "parameters": [
+        "scala.concurrent.duration.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "-",
+      "parameters": [
+        "scala.concurrent.duration.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "/",
+      "parameters": [
+        "scala.concurrent.duration.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Double",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "/",
+      "parameters": [
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "toUnit",
+      "parameters": [
+        "scala.concurrent.duration.TimeUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Double",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "div",
+      "parameters": [
+        "scala.concurrent.duration.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Double",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "div",
+      "parameters": [
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "gt",
+      "parameters": [
+        "scala.concurrent.duration.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "gteq",
+      "parameters": [
+        "scala.concurrent.duration.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lt",
+      "parameters": [
+        "scala.concurrent.duration.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lteq",
+      "parameters": [
+        "scala.concurrent.duration.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "max",
+      "parameters": [
+        "scala.concurrent.duration.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "min",
+      "parameters": [
+        "scala.concurrent.duration.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "scala.concurrent.duration.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "mul",
+      "parameters": [
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "neg",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "scala.concurrent.duration.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Duration",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.Long",
+        "scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.FiniteDuration",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.Long",
+        "scala.concurrent.duration.TimeUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.FiniteDuration",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.Double",
+        "scala.concurrent.duration.TimeUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Duration",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Duration",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "scala.Long",
+        "scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.FiniteDuration",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "scala.Double",
+        "scala.concurrent.duration.TimeUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Duration",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "scala.Long",
+        "scala.concurrent.duration.TimeUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.FiniteDuration",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromNanos",
+      "parameters": [
+        "scala.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.FiniteDuration",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromNanos",
+      "parameters": [
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Duration",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "unapply",
+      "parameters": [
+        "scala.concurrent.duration.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Option[(scala.Long, scala.concurrent.duration.TimeUnit)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "unapply",
+      "parameters": [
+        "scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Option[(scala.Long, scala.concurrent.duration.TimeUnit)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "isFinite",
+      "type": "scala.Boolean",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "length",
+      "type": "scala.Long",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toCoarsest",
+      "type": "scala.concurrent.duration.Duration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toDays",
+      "type": "scala.Long",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toHours",
+      "type": "scala.Long",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toMicros",
+      "type": "scala.Long",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toMillis",
+      "type": "scala.Long",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toMinutes",
+      "type": "scala.Long",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toNanos",
+      "type": "scala.Long",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toSeconds",
+      "type": "scala.Long",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "unary_-",
+      "type": "scala.concurrent.duration.Duration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "unit",
+      "type": "scala.concurrent.duration.TimeUnit",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "Inf",
+      "type": "scala.concurrent.duration.Duration.Infinite",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "MinusInf",
+      "type": "scala.concurrent.duration.Duration.Infinite",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "Undefined",
+      "type": "scala.concurrent.duration.Duration.Infinite",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "Zero",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "timeUnit",
+      "type": "scala.Predef.Map[scala.Predef.String, scala.concurrent.duration.TimeUnit]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "protected",
+      "is_static": true
+    },
+    {
+      "name": "timeUnitName",
+      "type": "scala.Predef.Map[scala.concurrent.duration.TimeUnit, scala.Predef.String]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "protected",
+      "is_static": true
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

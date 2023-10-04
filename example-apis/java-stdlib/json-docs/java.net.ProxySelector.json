@@ -1,0 +1,91 @@
+{
+  "name": "java.net.ProxySelector",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "getDefault",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.ProxySelector",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "java.net.NetPermission"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "select",
+      "parameters": [
+        "java.net.URI"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.List<java.net.Proxy>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "connectFailed",
+      "parameters": [
+        "java.net.URI",
+        "java.net.SocketAddress",
+        "java.io.IOException"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "java.net.InetSocketAddress"
+      ],
+      "type_parameters": [],
+      "return_type": "java.net.ProxySelector",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setDefault",
+      "parameters": [
+        "java.net.ProxySelector"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "java.net.NetPermission"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

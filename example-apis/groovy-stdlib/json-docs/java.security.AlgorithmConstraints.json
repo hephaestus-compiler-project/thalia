@@ -1,0 +1,65 @@
+{
+  "name": "java.security.AlgorithmConstraints",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "permits",
+      "parameters": [
+        "java.util.Set<java.security.CryptoPrimitive>",
+        "java.lang.String",
+        "java.security.Key",
+        "java.security.AlgorithmParameters"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "permits",
+      "parameters": [
+        "java.util.Set<java.security.CryptoPrimitive>",
+        "java.lang.String",
+        "java.security.AlgorithmParameters"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "permits",
+      "parameters": [
+        "java.util.Set<java.security.CryptoPrimitive>",
+        "java.security.Key"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

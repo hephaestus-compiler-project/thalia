@@ -1,0 +1,38 @@
+{
+  "name": "java.util.jar.Pack200",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "newUnpacker",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.jar.Pack200.Unpacker",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "newPacker",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.jar.Pack200.Packer",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

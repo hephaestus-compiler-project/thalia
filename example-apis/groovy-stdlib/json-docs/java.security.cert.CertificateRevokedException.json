@@ -1,0 +1,90 @@
+{
+  "name": "java.security.cert.CertificateRevokedException",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.security.cert.CertificateException"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getExtensions",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Map<java.lang.String,java.security.cert.Extension>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRevocationDate",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Date",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getAuthorityName",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "javax.security.auth.x500.X500Principal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getInvalidityDate",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Date",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRevocationReason",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.security.cert.CRLReason",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "CertificateRevokedException",
+      "parameters": [
+        "java.util.Date",
+        "java.security.cert.CRLReason",
+        "javax.security.auth.x500.X500Principal",
+        "java.util.Map<java.lang.String,java.security.cert.Extension>"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

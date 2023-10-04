@@ -1,0 +1,80 @@
+{
+  "name": "java.net.CookieHandler",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "getDefault",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.CookieHandler",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "java.net.NetPermission"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setDefault",
+      "parameters": [
+        "java.net.CookieHandler"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "java.net.NetPermission"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "java.net.URI",
+        "java.util.Map<java.lang.String,java.util.List<java.lang.String>>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Map<java.lang.String,java.util.List<java.lang.String>>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "put",
+      "parameters": [
+        "java.net.URI",
+        "java.util.Map<java.lang.String,java.util.List<java.lang.String>>"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

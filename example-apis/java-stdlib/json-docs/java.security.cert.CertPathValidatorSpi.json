@@ -1,0 +1,46 @@
+{
+  "name": "java.security.cert.CertPathValidatorSpi",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "engineValidate",
+      "parameters": [
+        "java.security.cert.CertPath",
+        "java.security.cert.CertPathParameters"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.cert.CertPathValidatorResult",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.cert.CertPathValidatorException",
+        "java.security.InvalidAlgorithmParameterException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineGetRevocationChecker",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.security.cert.CertPathChecker",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

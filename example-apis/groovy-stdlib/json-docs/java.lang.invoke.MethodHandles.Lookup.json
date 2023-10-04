@@ -1,0 +1,530 @@
+{
+  "name": "java.lang.invoke.MethodHandles.Lookup",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "bind",
+      "parameters": [
+        "java.lang.Object",
+        "java.lang.String",
+        "java.lang.invoke.MethodType"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NoSuchMethodException",
+        "java.lang.IllegalAccessException",
+        "java.lang.SecurityException",
+        "refuses access",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "dropLookupMode",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandles.Lookup",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "findConstructor",
+      "parameters": [
+        "java.lang.Class<?>",
+        "java.lang.invoke.MethodType"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NoSuchMethodException",
+        "java.lang.IllegalAccessException",
+        "java.lang.SecurityException",
+        "refuses access",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "findSetter",
+      "parameters": [
+        "java.lang.Class<?>",
+        "java.lang.String",
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NoSuchFieldException",
+        "java.lang.IllegalAccessException",
+        "java.lang.SecurityException",
+        "refuses access",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "findStatic",
+      "parameters": [
+        "java.lang.Class<?>",
+        "java.lang.String",
+        "java.lang.invoke.MethodType"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NoSuchMethodException",
+        "java.lang.IllegalAccessException",
+        "java.lang.SecurityException",
+        "refuses access",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "findStaticSetter",
+      "parameters": [
+        "java.lang.Class<?>",
+        "java.lang.String",
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NoSuchFieldException",
+        "java.lang.IllegalAccessException",
+        "java.lang.SecurityException",
+        "refuses access",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "findVarHandle",
+      "parameters": [
+        "java.lang.Class<?>",
+        "java.lang.String",
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.VarHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NoSuchFieldException",
+        "java.lang.IllegalAccessException",
+        "java.lang.SecurityException",
+        "refuses access",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "hasPrivateAccess",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "lookupClass",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "revealDirect",
+      "parameters": [
+        "java.lang.invoke.MethodHandle"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandleInfo",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "refuses access",
+        "java.lang.IllegalArgumentException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "unreflect",
+      "parameters": [
+        "java.lang.reflect.Method"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalAccessException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "unreflectGetter",
+      "parameters": [
+        "java.lang.reflect.Field"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalAccessException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "unreflectSpecial",
+      "parameters": [
+        "java.lang.reflect.Method",
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalAccessException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "accessClass",
+      "parameters": [
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalAccessException",
+        "java.lang.SecurityException",
+        "refuses access"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "defineClass",
+      "parameters": [
+        "byte[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalAccessException",
+        "java.lang.LinkageError",
+        "java.lang.SecurityException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "findClass",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "refuses access",
+        "java.lang.LinkageError",
+        "java.lang.ClassNotFoundException",
+        "java.lang.IllegalAccessException",
+        "java.lang.SecurityException",
+        "refuses access"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "findGetter",
+      "parameters": [
+        "java.lang.Class<?>",
+        "java.lang.String",
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NoSuchFieldException",
+        "java.lang.IllegalAccessException",
+        "java.lang.SecurityException",
+        "refuses access",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "findSpecial",
+      "parameters": [
+        "java.lang.Class<?>",
+        "java.lang.String",
+        "java.lang.invoke.MethodType",
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NoSuchMethodException",
+        "java.lang.IllegalAccessException",
+        "java.lang.SecurityException",
+        "refuses access",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "findStaticGetter",
+      "parameters": [
+        "java.lang.Class<?>",
+        "java.lang.String",
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NoSuchFieldException",
+        "java.lang.IllegalAccessException",
+        "java.lang.SecurityException",
+        "refuses access",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "findStaticVarHandle",
+      "parameters": [
+        "java.lang.Class<?>",
+        "java.lang.String",
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.VarHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NoSuchFieldException",
+        "java.lang.IllegalAccessException",
+        "java.lang.SecurityException",
+        "refuses access",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "findVirtual",
+      "parameters": [
+        "java.lang.Class<?>",
+        "java.lang.String",
+        "java.lang.invoke.MethodType"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NoSuchMethodException",
+        "java.lang.IllegalAccessException",
+        "java.lang.SecurityException",
+        "refuses access",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "in",
+      "parameters": [
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandles.Lookup",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "lookupModes",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "unreflectConstructor",
+      "parameters": [
+        "java.lang.reflect.Constructor<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalAccessException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "unreflectSetter",
+      "parameters": [
+        "java.lang.reflect.Field"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalAccessException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "unreflectVarHandle",
+      "parameters": [
+        "java.lang.reflect.Field"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.VarHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalAccessException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "PACKAGE",
+      "type": "int",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PROTECTED",
+      "type": "int",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "UNCONDITIONAL",
+      "type": "int",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "MODULE",
+      "type": "int",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PRIVATE",
+      "type": "int",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PUBLIC",
+      "type": "int",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

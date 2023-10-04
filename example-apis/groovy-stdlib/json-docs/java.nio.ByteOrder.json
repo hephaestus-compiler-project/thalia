@@ -1,0 +1,51 @@
+{
+  "name": "java.nio.ByteOrder",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "nativeOrder",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.ByteOrder",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "LITTLE_ENDIAN",
+      "type": "java.nio.ByteOrder",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BIG_ENDIAN",
+      "type": "java.nio.ByteOrder",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

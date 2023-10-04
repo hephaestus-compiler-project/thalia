@@ -1,0 +1,149 @@
+{
+  "name": "java.time.temporal.Temporal",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.time.temporal.TemporalAccessor"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "minus",
+      "parameters": [
+        "long",
+        "java.time.temporal.TemporalUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.Temporal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "long",
+        "java.time.temporal.TemporalUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.Temporal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "java.time.temporal.Temporal",
+        "java.time.temporal.TemporalUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "with",
+      "parameters": [
+        "java.time.temporal.TemporalField",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.Temporal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isSupported",
+      "parameters": [
+        "java.time.temporal.TemporalUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "java.time.temporal.TemporalAmount"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.Temporal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "java.time.temporal.TemporalAmount"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.Temporal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "with",
+      "parameters": [
+        "java.time.temporal.TemporalAdjuster"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.Temporal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": true
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

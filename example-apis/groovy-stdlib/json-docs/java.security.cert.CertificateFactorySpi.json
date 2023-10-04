@@ -1,0 +1,138 @@
+{
+  "name": "java.security.cert.CertificateFactorySpi",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "engineGenerateCertificates",
+      "parameters": [
+        "java.io.InputStream"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Collection<? extends java.security.cert.Certificate>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.cert.CertificateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineGenerateCertPath",
+      "parameters": [
+        "java.io.InputStream",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.cert.CertPath",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.cert.CertificateException",
+        "java.lang.UnsupportedOperationException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineGenerateCRL",
+      "parameters": [
+        "java.io.InputStream"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.cert.CRL",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.cert.CRLException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineGetCertPathEncodings",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Iterator<java.lang.String>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineGenerateCertificate",
+      "parameters": [
+        "java.io.InputStream"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.cert.Certificate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.cert.CertificateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineGenerateCertPath",
+      "parameters": [
+        "java.io.InputStream"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.cert.CertPath",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.cert.CertificateException",
+        "java.lang.UnsupportedOperationException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineGenerateCertPath",
+      "parameters": [
+        "java.util.List<? extends java.security.cert.Certificate>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.cert.CertPath",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.cert.CertificateException",
+        "java.lang.UnsupportedOperationException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineGenerateCRLs",
+      "parameters": [
+        "java.io.InputStream"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Collection<? extends java.security.cert.CRL>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.cert.CRLException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

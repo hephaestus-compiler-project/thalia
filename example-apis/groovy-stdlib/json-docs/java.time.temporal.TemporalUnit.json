@@ -1,0 +1,119 @@
+{
+  "name": "java.time.temporal.TemporalUnit",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "between",
+      "parameters": [
+        "java.time.temporal.Temporal",
+        "java.time.temporal.Temporal"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isDateBased",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isSupportedBy",
+      "parameters": [
+        "java.time.temporal.Temporal"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "addTo",
+      "parameters": [
+        "R",
+        "long"
+      ],
+      "type_parameters": [
+        "R extends java.time.temporal.Temporal"
+      ],
+      "return_type": "R",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDuration",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.Duration",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isDurationEstimated",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isTimeBased",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

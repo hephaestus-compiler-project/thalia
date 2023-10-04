@@ -1,0 +1,184 @@
+{
+  "name": "java.util.concurrent.atomic.AtomicReferenceFieldUpdater",
+  "type_parameters": [
+    "T",
+    "V"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "compareAndSet",
+      "parameters": [
+        "T",
+        "V",
+        "V"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getAndAccumulate",
+      "parameters": [
+        "T",
+        "V",
+        "java.util.function.BinaryOperator<V>"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getAndUpdate",
+      "parameters": [
+        "T",
+        "java.util.function.UnaryOperator<V>"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "newUpdater",
+      "parameters": [
+        "java.lang.Class<U>",
+        "java.lang.Class<W>",
+        "java.lang.String"
+      ],
+      "type_parameters": [
+        "U",
+        "W"
+      ],
+      "return_type": "java.util.concurrent.atomic.AtomicReferenceFieldUpdater<U,W>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.RuntimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "updateAndGet",
+      "parameters": [
+        "T",
+        "java.util.function.UnaryOperator<V>"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "accumulateAndGet",
+      "parameters": [
+        "T",
+        "V",
+        "java.util.function.BinaryOperator<V>"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getAndSet",
+      "parameters": [
+        "T",
+        "V"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "lazySet",
+      "parameters": [
+        "T",
+        "V"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "set",
+      "parameters": [
+        "T",
+        "V"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "weakCompareAndSet",
+      "parameters": [
+        "T",
+        "V",
+        "V"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

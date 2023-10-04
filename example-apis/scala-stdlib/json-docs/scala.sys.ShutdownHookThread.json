@@ -1,0 +1,39 @@
+{
+  "name": "scala.sys.ShutdownHookThread",
+  "type_parameters": [],
+  "implements": [
+    "java.lang.Thread"
+  ],
+  "inherits": [
+    "java.lang.Thread"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "remove",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "=> scala.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.ShutdownHookThread",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

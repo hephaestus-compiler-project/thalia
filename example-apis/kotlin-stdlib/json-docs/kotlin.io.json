@@ -1,0 +1,1403 @@
+{
+  "name": "kotlin.io",
+  "methods": [
+    {
+      "name": "appendBytes",
+      "parameters": [
+        "kotlin.ByteArray"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "appendText",
+      "parameters": [
+        "kotlin.String",
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "buffered",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.BufferedInputStream",
+      "receiver": "java.io.InputStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "buffered",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.BufferedOutputStream",
+      "receiver": "java.io.OutputStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "buffered",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.BufferedReader",
+      "receiver": "java.io.Reader",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "buffered",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.BufferedWriter",
+      "receiver": "java.io.Writer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "bufferedReader",
+      "parameters": [
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.BufferedReader",
+      "receiver": "java.io.InputStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "bufferedReader",
+      "parameters": [
+        "java.nio.charset.Charset",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.BufferedReader",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "bufferedWriter",
+      "parameters": [
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.BufferedWriter",
+      "receiver": "java.io.OutputStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "bufferedWriter",
+      "parameters": [
+        "java.nio.charset.Charset",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.BufferedWriter",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "byteInputStream",
+      "parameters": [
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.ByteArrayInputStream",
+      "receiver": "kotlin.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "copyRecursively",
+      "parameters": [
+        "java.io.File",
+        "kotlin.Boolean",
+        "(java.io.File, java.io.IOException) -> kotlin.io.OnErrorAction"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "copyTo",
+      "parameters": [
+        "java.io.OutputStream",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": "java.io.InputStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "copyTo",
+      "parameters": [
+        "java.io.Writer",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": "java.io.Reader",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "copyTo",
+      "parameters": [
+        "java.io.File",
+        "kotlin.Boolean",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.File",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "deleteRecursively",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "endsWith",
+      "parameters": [
+        "java.io.File"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "endsWith",
+      "parameters": [
+        "kotlin.String"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "forEachBlock",
+      "parameters": [
+        "(buffer: kotlin.ByteArray, bytesRead: kotlin.Int) -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "forEachBlock",
+      "parameters": [
+        "kotlin.Int",
+        "(buffer: kotlin.ByteArray, bytesRead: kotlin.Int) -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "forEachLine",
+      "parameters": [
+        "(kotlin.String) -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.io.Reader",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "forEachLine",
+      "parameters": [
+        "java.nio.charset.Charset",
+        "(line: kotlin.String) -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "inputStream",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.io.FileInputStream",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "inputStream",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.io.ByteArrayInputStream",
+      "receiver": "kotlin.ByteArray",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "inputStream",
+      "parameters": [
+        "kotlin.Int",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.ByteArrayInputStream",
+      "receiver": "kotlin.ByteArray",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "iterator",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.collections.ByteIterator",
+      "receiver": "java.io.BufferedInputStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "lineSequence",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.sequences.Sequence<kotlin.String>",
+      "receiver": "java.io.BufferedReader",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "normalize",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.io.File",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "outputStream",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.io.FileOutputStream",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "print",
+      "parameters": [
+        "kotlin.Any?"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "print",
+      "parameters": [
+        "kotlin.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "print",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "print",
+      "parameters": [
+        "kotlin.Char"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "print",
+      "parameters": [
+        "kotlin.CharArray"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "print",
+      "parameters": [
+        "kotlin.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "print",
+      "parameters": [
+        "kotlin.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "print",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "print",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "print",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "println",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "println",
+      "parameters": [
+        "kotlin.Any?"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "println",
+      "parameters": [
+        "kotlin.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "println",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "println",
+      "parameters": [
+        "kotlin.Char"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "println",
+      "parameters": [
+        "kotlin.CharArray"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "println",
+      "parameters": [
+        "kotlin.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "println",
+      "parameters": [
+        "kotlin.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "println",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "println",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "println",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "printWriter",
+      "parameters": [
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.PrintWriter",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "readBytes",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.ByteArray",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "readBytes",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.ByteArray",
+      "receiver": "java.io.InputStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "readBytes",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.ByteArray",
+      "receiver": "java.net.URL",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "reader",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.io.StringReader",
+      "receiver": "kotlin.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "reader",
+      "parameters": [
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.InputStreamReader",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "reader",
+      "parameters": [
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.InputStreamReader",
+      "receiver": "java.io.InputStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "readLine",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.String?",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "readLines",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.collections.List<kotlin.String>",
+      "receiver": "java.io.Reader",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "readLines",
+      "parameters": [
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.collections.List<kotlin.String>",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "readln",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "readlnOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.String?",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "readText",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.String",
+      "receiver": "java.io.Reader",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "readText",
+      "parameters": [
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.String",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "readText",
+      "parameters": [
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.String",
+      "receiver": "java.net.URL",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "relativeTo",
+      "parameters": [
+        "java.io.File"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.File",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "relativeToOrNull",
+      "parameters": [
+        "java.io.File"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.File?",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "relativeToOrSelf",
+      "parameters": [
+        "java.io.File"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.File",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "resolve",
+      "parameters": [
+        "java.io.File"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.File",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "resolve",
+      "parameters": [
+        "kotlin.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.File",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "resolveSibling",
+      "parameters": [
+        "java.io.File"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.File",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "resolveSibling",
+      "parameters": [
+        "kotlin.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.File",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "startsWith",
+      "parameters": [
+        "java.io.File"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "startsWith",
+      "parameters": [
+        "kotlin.String"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toRelativeString",
+      "parameters": [
+        "java.io.File"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.String",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "use",
+      "parameters": [
+        "(T) -> R"
+      ],
+      "type_parameters": [
+        "T : java.io.Closeable?",
+        "R"
+      ],
+      "return_type": "R",
+      "receiver": "T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "useLines",
+      "parameters": [
+        "(kotlin.sequences.Sequence<kotlin.String>) -> T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": "java.io.Reader",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "useLines",
+      "parameters": [
+        "java.nio.charset.Charset",
+        "(kotlin.sequences.Sequence<kotlin.String>) -> T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "walk",
+      "parameters": [
+        "kotlin.io.FileWalkDirection"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.io.FileTreeWalk",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "walkBottomUp",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.io.FileTreeWalk",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "walkTopDown",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.io.FileTreeWalk",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "writeBytes",
+      "parameters": [
+        "kotlin.ByteArray"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "writer",
+      "parameters": [
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.OutputStreamWriter",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "writer",
+      "parameters": [
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.OutputStreamWriter",
+      "receiver": "java.io.OutputStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "writeText",
+      "parameters": [
+        "kotlin.String",
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [
+    {
+      "name": "DEFAULT_BUFFER_SIZE",
+      "type": "kotlin.Int",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "extension",
+      "type": "kotlin.String",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "java.io.File",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "invariantSeparatorsPath",
+      "type": "kotlin.String",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "java.io.File",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "isRooted",
+      "type": "kotlin.Boolean",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "java.io.File",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "nameWithoutExtension",
+      "type": "kotlin.String",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "java.io.File",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "type_parameters": [],
+  "is_class": false,
+  "language": "kotlin"
+}

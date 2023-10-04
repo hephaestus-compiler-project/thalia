@@ -1,0 +1,76 @@
+{
+  "name": "java.nio.channels.MulticastChannel",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.nio.channels.NetworkChannel"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "join",
+      "parameters": [
+        "java.net.InetAddress",
+        "java.net.NetworkInterface"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.MembershipKey",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "multicast",
+        "java.lang.IllegalStateException",
+        "java.lang.UnsupportedOperationException",
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkMulticast"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "close",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "join",
+      "parameters": [
+        "java.net.InetAddress",
+        "java.net.NetworkInterface",
+        "java.net.InetAddress"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.MembershipKey",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "multicast",
+        "java.lang.IllegalStateException",
+        "java.lang.UnsupportedOperationException",
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkMulticast"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

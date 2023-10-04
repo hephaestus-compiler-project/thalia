@@ -1,0 +1,91 @@
+{
+  "name": "java.lang.invoke.ConstantCallSite",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.invoke.CallSite"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getTarget",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "dynamicInvoker",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setTarget",
+      "parameters": [
+        "java.lang.invoke.MethodHandle"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "ConstantCallSite",
+      "parameters": [
+        "java.lang.invoke.MethodType",
+        "java.lang.invoke.MethodHandle"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "protected",
+      "throws": [
+        "java.lang.invoke.WrongMethodTypeException",
+        "java.lang.NullPointerException",
+        "java.lang.ClassCastException",
+        "java.lang.Throwable"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "ConstantCallSite",
+      "parameters": [
+        "java.lang.invoke.MethodHandle"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,109 @@
+{
+  "name": "java.text.NumberFormat.Field",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.text.Format.Field"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "readResolve",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.io.InvalidObjectException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Field",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "DECIMAL_SEPARATOR",
+      "type": "java.text.NumberFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "EXPONENT_SIGN",
+      "type": "java.text.NumberFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "FRACTION",
+      "type": "java.text.NumberFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "INTEGER",
+      "type": "java.text.NumberFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PERMILLE",
+      "type": "java.text.NumberFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "CURRENCY",
+      "type": "java.text.NumberFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "EXPONENT",
+      "type": "java.text.NumberFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "EXPONENT_SYMBOL",
+      "type": "java.text.NumberFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "GROUPING_SEPARATOR",
+      "type": "java.text.NumberFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PERCENT",
+      "type": "java.text.NumberFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SIGN",
+      "type": "java.text.NumberFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

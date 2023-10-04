@@ -1,0 +1,66 @@
+{
+  "name": "java.security.acl.Group",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.security.Principal"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "isMember",
+      "parameters": [
+        "java.security.Principal"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "removeMember",
+      "parameters": [
+        "java.security.Principal"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "addMember",
+      "parameters": [
+        "java.security.Principal"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "members",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Enumeration<? extends java.security.Principal>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

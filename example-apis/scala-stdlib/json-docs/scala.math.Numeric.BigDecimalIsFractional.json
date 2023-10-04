@@ -1,0 +1,45 @@
+{
+  "name": "scala.math.Numeric.BigDecimalIsFractional",
+  "type_parameters": [],
+  "implements": [
+    "scala.math.Numeric.BigDecimalIsConflicted",
+    "scala.math.Fractional[scala.math.BigDecimal]"
+  ],
+  "inherits": [
+    "scala.math.Numeric.BigDecimalIsConflicted",
+    "scala.math.Fractional[scala.math.BigDecimal]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "div",
+      "parameters": [
+        "scala.math.BigDecimal",
+        "scala.math.BigDecimal"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.math.BigDecimal",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "div",
+      "parameters": [
+        "scala.math.BigDecimal",
+        "scala.math.BigDecimal"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.math.BigDecimal",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

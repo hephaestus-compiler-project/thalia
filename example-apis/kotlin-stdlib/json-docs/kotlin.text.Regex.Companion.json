@@ -1,0 +1,61 @@
+{
+  "name": "kotlin.text.Regex.Companion",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "escape",
+      "parameters": [
+        "kotlin.String"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "escapeReplacement",
+      "parameters": [
+        "kotlin.String"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "fromLiteral",
+      "parameters": [
+        "kotlin.String"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.text.Regex",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

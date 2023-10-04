@@ -1,0 +1,420 @@
+{
+  "name": "scala.jdk.DoubleAccumulator",
+  "type_parameters": [],
+  "implements": [
+    "scala.jdk.Accumulator[scala.Double, scala.jdk.AnyAccumulator, scala.jdk.DoubleAccumulator]",
+    "scala.collection.mutable.SeqOps[scala.Double, scala.jdk.AnyAccumulator, scala.jdk.DoubleAccumulator]",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "scala.jdk.Accumulator[scala.Double, scala.jdk.AnyAccumulator, scala.jdk.DoubleAccumulator]",
+    "scala.collection.mutable.SeqOps[scala.Double, scala.jdk.AnyAccumulator, scala.jdk.DoubleAccumulator]",
+    "scala.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "addOne",
+      "parameters": [
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.DoubleAccumulator.this.type",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Double",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Double",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "clear",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "collect",
+      "parameters": [
+        "scala.PartialFunction[scala.Double, scala.Double]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.DoubleAccumulator",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "count",
+      "parameters": [
+        "(scala.Double) => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "countLong",
+      "parameters": [
+        "(scala.Double) => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Long",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "drain",
+      "parameters": [
+        "scala.jdk.DoubleAccumulator"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "efficientStepper",
+      "parameters": [
+        "scala.collection.StepperShape[scala.Double, S]"
+      ],
+      "type_parameters": [
+        "S <: scala.collection.Stepper[_]"
+      ],
+      "return_type": "S with scala.collection.Stepper.EfficientSplit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "exists",
+      "parameters": [
+        "(scala.Double) => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "filter",
+      "parameters": [
+        "(scala.Double) => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.DoubleAccumulator",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "filterNot",
+      "parameters": [
+        "(scala.Double) => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.DoubleAccumulator",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "flatMap",
+      "parameters": [
+        "(scala.Double) => scala.IterableOnce[scala.Double]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.DoubleAccumulator",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "forall",
+      "parameters": [
+        "(scala.Double) => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "foreach",
+      "parameters": [
+        "(scala.Double) => U"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "map",
+      "parameters": [
+        "(scala.Double) => scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.DoubleAccumulator",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "result",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.jdk.DoubleAccumulator",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "to",
+      "parameters": [
+        "scala.collection.Factory[scala.Double, C1]"
+      ],
+      "type_parameters": [
+        "C1"
+      ],
+      "return_type": "C1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "update",
+      "parameters": [
+        "scala.Int",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "update",
+      "parameters": [
+        "scala.Long",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "DoubleAccumulator",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromSpecific",
+      "parameters": [
+        "scala.IterableOnce[scala.Double]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.DoubleAccumulator",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "toJavaDoubleAccumulator",
+      "parameters": [
+        "scala.jdk.DoubleAccumulator.type"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.collection.SpecificIterableFactory[java.lang.Double, scala.jdk.DoubleAccumulator]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "className",
+      "type": "scala.Predef.String",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "protected",
+      "is_static": false
+    },
+    {
+      "name": "iterableFactory",
+      "type": "scala.collection.SeqFactory[scala.jdk.AnyAccumulator]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "iterator",
+      "type": "scala.Iterator[scala.Double]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "newSpecificBuilder",
+      "type": "scala.jdk.DoubleAccumulator",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "protected",
+      "is_static": false
+    },
+    {
+      "name": "toArray",
+      "type": "scala.Array[scala.Double]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toList",
+      "type": "scala.List[scala.Double]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "adder",
+      "type": "java.util.function.ObjDoubleConsumer[scala.jdk.DoubleAccumulator]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "boxedAdder",
+      "type": "java.util.function.BiConsumer[scala.jdk.DoubleAccumulator, scala.Double]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "empty",
+      "type": "scala.jdk.DoubleAccumulator",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "merger",
+      "type": "java.util.function.BiConsumer[scala.jdk.DoubleAccumulator, scala.jdk.DoubleAccumulator]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "newBuilder",
+      "type": "scala.jdk.DoubleAccumulator",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "supplier",
+      "type": "java.util.function.Supplier[scala.jdk.DoubleAccumulator]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

@@ -1,0 +1,274 @@
+{
+  "name": "scala.util.Success",
+  "type_parameters": [
+    "+T"
+  ],
+  "implements": [
+    "scala.util.Try[T]",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "scala.util.Try[T]",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "collect",
+      "parameters": [
+        "scala.PartialFunction[T, U]"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "scala.util.Try[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "filter",
+      "parameters": [
+        "(T) => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.util.Try[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "flatMap",
+      "parameters": [
+        "(T) => scala.util.Try[U]"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "scala.util.Try[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "flatten",
+      "parameters": [
+        "scala.<:<[T, scala.util.Try[U]]"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "scala.util.Try[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fold",
+      "parameters": [
+        "(scala.Throwable) => U",
+        "(T) => U"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "U",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "foreach",
+      "parameters": [
+        "(T) => U"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "getOrElse",
+      "parameters": [
+        "=> U"
+      ],
+      "type_parameters": [
+        "U >: T"
+      ],
+      "return_type": "U",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "map",
+      "parameters": [
+        "(T) => U"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "scala.util.Try[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "orElse",
+      "parameters": [
+        "=> scala.util.Try[U]"
+      ],
+      "type_parameters": [
+        "U >: T"
+      ],
+      "return_type": "scala.util.Try[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "recover",
+      "parameters": [
+        "scala.PartialFunction[scala.Throwable, U]"
+      ],
+      "type_parameters": [
+        "U >: T"
+      ],
+      "return_type": "scala.util.Try[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "recoverWith",
+      "parameters": [
+        "scala.PartialFunction[scala.Throwable, scala.util.Try[U]]"
+      ],
+      "type_parameters": [
+        "U >: T"
+      ],
+      "return_type": "scala.util.Try[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "transform",
+      "parameters": [
+        "(T) => scala.util.Try[U]",
+        "(scala.Throwable) => scala.util.Try[U]"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "scala.util.Try[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Success",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "failed",
+      "type": "scala.util.Try[scala.Throwable]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "get",
+      "type": "T",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "isFailure",
+      "type": "scala.Boolean",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "isSuccess",
+      "type": "scala.Boolean",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toEither",
+      "type": "scala.util.Either[scala.Throwable, T]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toOption",
+      "type": "scala.Option[T]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "value",
+      "type": "T",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

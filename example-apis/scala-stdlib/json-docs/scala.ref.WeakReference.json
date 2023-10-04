@@ -1,0 +1,83 @@
+{
+  "name": "scala.ref.WeakReference",
+  "type_parameters": [
+    "+T <: scala.AnyRef"
+  ],
+  "implements": [
+    "scala.ref.ReferenceWrapper[T]"
+  ],
+  "inherits": [
+    "scala.ref.ReferenceWrapper[T]"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "WeakReference",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "WeakReference",
+      "parameters": [
+        "T",
+        "scala.ref.ReferenceQueue[T]"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [
+        "T <: scala.AnyRef"
+      ],
+      "return_type": "scala.ref.WeakReference[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "unapply",
+      "parameters": [
+        "scala.ref.WeakReference[T]"
+      ],
+      "type_parameters": [
+        "T <: scala.AnyRef"
+      ],
+      "return_type": "scala.Option[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "underlying",
+      "type": "java.lang.ref.WeakReference[_ <: T]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

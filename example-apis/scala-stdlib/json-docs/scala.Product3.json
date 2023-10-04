@@ -1,0 +1,90 @@
+{
+  "name": "scala.Product3",
+  "type_parameters": [
+    "+T1",
+    "+T2",
+    "+T3"
+  ],
+  "implements": [
+    "scala.Product"
+  ],
+  "inherits": [
+    "scala.Product"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "productElement",
+      "parameters": [
+        "scala.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Any",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "unapply",
+      "parameters": [
+        "scala.Product3[T1, T2, T3]"
+      ],
+      "type_parameters": [
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "return_type": "scala.Option[scala.Product3[T1, T2, T3]]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "_1",
+      "type": "T1",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "_2",
+      "type": "T2",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "_3",
+      "type": "T3",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "productArity",
+      "type": "scala.Int",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

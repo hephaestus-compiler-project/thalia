@@ -1,0 +1,28 @@
+{
+  "name": "java.io.OptionalDataException",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.io.ObjectStreamException"
+  ],
+  "class_type": 0,
+  "methods": [],
+  "fields": [
+    {
+      "name": "length",
+      "type": "int",
+      "is_static": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "eof",
+      "type": "boolean",
+      "is_static": false,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

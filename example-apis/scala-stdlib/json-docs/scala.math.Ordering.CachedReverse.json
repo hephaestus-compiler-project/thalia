@@ -1,0 +1,42 @@
+{
+  "name": "scala.math.Ordering.CachedReverse",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [
+    "scala.math.Ordering[T]"
+  ],
+  "inherits": [
+    "scala.math.Ordering[T]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "isReverseOf",
+      "parameters": [
+        "scala.math.Ordering[_]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "reverse",
+      "type": "scala.math.Ordering[T]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

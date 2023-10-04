@@ -1,0 +1,115 @@
+{
+  "name": "java.nio.channels.MembershipKey",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "channel",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.MulticastChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "group",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.InetAddress",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "networkInterface",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.NetworkInterface",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "unblock",
+      "parameters": [
+        "java.net.InetAddress"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.MembershipKey",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "block",
+      "parameters": [
+        "java.net.InetAddress"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.MembershipKey",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalStateException",
+        "java.lang.UnsupportedOperationException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "drop",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isValid",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "sourceAddress",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.InetAddress",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

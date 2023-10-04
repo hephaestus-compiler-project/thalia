@@ -1,0 +1,92 @@
+{
+  "name": "scala.sys.process.ProcessLogger",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "buffer",
+      "parameters": [
+        "=> T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "err",
+      "parameters": [
+        "=> scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "out",
+      "parameters": [
+        "=> scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "(scala.Predef.String) => scala.Unit",
+        "(scala.Predef.String) => scala.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessLogger",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "(scala.Predef.String) => scala.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessLogger",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "java.io.File"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.FileProcessLogger",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

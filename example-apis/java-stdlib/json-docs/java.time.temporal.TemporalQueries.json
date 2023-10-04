@@ -1,0 +1,93 @@
+{
+  "name": "java.time.temporal.TemporalQueries",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "localDate",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalQuery<java.time.LocalDate>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "offset",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalQuery<java.time.ZoneOffset>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "zone",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalQuery<java.time.ZoneId>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "chronology",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalQuery<java.time.chrono.Chronology>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "localTime",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalQuery<java.time.LocalTime>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "precision",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalQuery<java.time.temporal.TemporalUnit>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "zoneId",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalQuery<java.time.ZoneId>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

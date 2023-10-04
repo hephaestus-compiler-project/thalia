@@ -1,0 +1,15 @@
+{
+  "name": "groovy.util.ScriptException",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Exception"
+  ],
+  "class_type": 0,
+  "methods": [],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

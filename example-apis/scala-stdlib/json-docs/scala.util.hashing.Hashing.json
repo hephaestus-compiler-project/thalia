@@ -1,0 +1,45 @@
+{
+  "name": "scala.util.hashing.Hashing",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "scala.Serializable"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "hash",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromFunction",
+      "parameters": [
+        "(T) => scala.Int"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.util.hashing.Hashing[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

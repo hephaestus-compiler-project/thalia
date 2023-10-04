@@ -1,0 +1,95 @@
+{
+  "name": "kotlin.io.FileTreeWalk",
+  "type_parameters": [],
+  "implements": [
+    "kotlin.sequences.Sequence<java.io.File>"
+  ],
+  "inherits": [
+    "kotlin.sequences.Sequence<java.io.File>"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "iterator",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.collections.Iterator<java.io.File>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxDepth",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.io.FileTreeWalk",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "onEnter",
+      "parameters": [
+        "(java.io.File) -> kotlin.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.io.FileTreeWalk",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "onFail",
+      "parameters": [
+        "(java.io.File, java.io.IOException) -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.io.FileTreeWalk",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "onLeave",
+      "parameters": [
+        "(java.io.File) -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.io.FileTreeWalk",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

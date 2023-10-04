@@ -1,0 +1,57 @@
+{
+  "name": "java.security.Signer",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.security.Identity"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "setKeyPair",
+      "parameters": [
+        "java.security.KeyPair"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.InvalidParameterException",
+        "java.security.KeyException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getPrivateKey",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.security.PrivateKey",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,61 @@
+{
+  "name": "scala.jdk.FunctionWrappers.AsJavaBiFunction",
+  "type_parameters": [
+    "T",
+    "U",
+    "R"
+  ],
+  "implements": [
+    "java.util.function.BiFunction[T, U, R]",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "java.util.function.BiFunction[T, U, R]",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "apply",
+      "parameters": [
+        "T",
+        "U"
+      ],
+      "type_parameters": [],
+      "return_type": "R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "AsJavaBiFunction",
+      "parameters": [
+        "(T, U) => R"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "sf",
+      "type": "(T, U) => R",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

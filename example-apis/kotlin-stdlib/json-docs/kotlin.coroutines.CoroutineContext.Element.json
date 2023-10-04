@@ -1,0 +1,97 @@
+{
+  "name": "kotlin.coroutines.CoroutineContext.Element",
+  "type_parameters": [],
+  "implements": [
+    "kotlin.coroutines.CoroutineContext"
+  ],
+  "inherits": [
+    "kotlin.coroutines.CoroutineContext"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "fold",
+      "parameters": [
+        "R",
+        "(R, CoroutineContext.Element) -> R"
+      ],
+      "type_parameters": [
+        "R"
+      ],
+      "return_type": "R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "kotlin.coroutines.CoroutineContext.Key<E>"
+      ],
+      "type_parameters": [
+        "E : CoroutineContext.Element"
+      ],
+      "return_type": "E?",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minusKey",
+      "parameters": [
+        "kotlin.coroutines.CoroutineContext.Key<*>"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.coroutines.CoroutineContext",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "kotlin.coroutines.CoroutineContext"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.coroutines.CoroutineContext",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [
+    {
+      "name": "key",
+      "type": "kotlin.coroutines.CoroutineContext.Key<*>",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

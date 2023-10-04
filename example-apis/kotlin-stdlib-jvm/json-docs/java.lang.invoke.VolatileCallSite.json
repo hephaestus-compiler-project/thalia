@@ -1,0 +1,73 @@
+{
+  "name": "java.lang.invoke.VolatileCallSite",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.invoke.CallSite"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "setTarget",
+      "parameters": [
+        "java.lang.invoke.MethodHandle"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.invoke.WrongMethodTypeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getTarget",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "VolatileCallSite",
+      "parameters": [
+        "java.lang.invoke.MethodType"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "VolatileCallSite",
+      "parameters": [
+        "java.lang.invoke.MethodHandle"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

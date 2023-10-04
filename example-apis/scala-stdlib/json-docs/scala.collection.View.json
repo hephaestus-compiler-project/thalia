@@ -1,0 +1,117 @@
+{
+  "name": "scala.collection.View",
+  "type_parameters": [
+    "+A"
+  ],
+  "implements": [
+    "scala.collection.Iterable[A]",
+    "scala.collection.IterableOps[A, scala.collection.View, scala.collection.View[A]]",
+    "scala.collection.IterableFactoryDefaults[A, scala.collection.View]",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "scala.collection.Iterable[A]",
+    "scala.collection.IterableOps[A, scala.collection.View, scala.collection.View[A]]",
+    "scala.collection.IterableFactoryDefaults[A, scala.collection.View]",
+    "scala.Serializable"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Predef.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "A*"
+      ],
+      "type_parameters": [
+        "A"
+      ],
+      "return_type": "scala.collection.View[A]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "from",
+      "parameters": [
+        "scala.collection.IterableOnce[E]"
+      ],
+      "type_parameters": [
+        "E"
+      ],
+      "return_type": "scala.collection.View[E]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromIteratorProvider",
+      "parameters": [
+        "() => scala.collection.Iterator[A]"
+      ],
+      "type_parameters": [
+        "A"
+      ],
+      "return_type": "scala.collection.View[A]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "empty",
+      "type": "scala.collection.View[A]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "iterableFactory",
+      "type": "scala.collection.IterableFactory[scala.collection.View]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "stringPrefix",
+      "type": "scala.Predef.String",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "protected",
+      "is_static": false
+    },
+    {
+      "name": "view",
+      "type": "scala.collection.View[A]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "language": "scala"
+}

@@ -1,0 +1,184 @@
+{
+  "name": "java.nio.channels.Channels",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "newChannel",
+      "parameters": [
+        "java.io.OutputStream"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.WritableByteChannel",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "newInputStream",
+      "parameters": [
+        "java.nio.channels.ReadableByteChannel"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.InputStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "newOutputStream",
+      "parameters": [
+        "java.nio.channels.WritableByteChannel"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.OutputStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "newReader",
+      "parameters": [
+        "java.nio.channels.ReadableByteChannel",
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.Reader",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "newWriter",
+      "parameters": [
+        "java.nio.channels.WritableByteChannel",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.Writer",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.charset.UnsupportedCharsetException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "newWriter",
+      "parameters": [
+        "java.nio.channels.WritableByteChannel",
+        "java.nio.charset.CharsetEncoder",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.Writer",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "newChannel",
+      "parameters": [
+        "java.io.InputStream"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.ReadableByteChannel",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "newInputStream",
+      "parameters": [
+        "java.nio.channels.AsynchronousByteChannel"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.InputStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "newOutputStream",
+      "parameters": [
+        "java.nio.channels.AsynchronousByteChannel"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.OutputStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "newReader",
+      "parameters": [
+        "java.nio.channels.ReadableByteChannel",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.Reader",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.charset.UnsupportedCharsetException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "newReader",
+      "parameters": [
+        "java.nio.channels.ReadableByteChannel",
+        "java.nio.charset.CharsetDecoder",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.Reader",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "newWriter",
+      "parameters": [
+        "java.nio.channels.WritableByteChannel",
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.Writer",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

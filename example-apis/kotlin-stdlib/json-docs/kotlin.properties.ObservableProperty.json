@@ -1,0 +1,90 @@
+{
+  "name": "kotlin.properties.ObservableProperty",
+  "type_parameters": [
+    "V"
+  ],
+  "implements": [
+    "kotlin.properties.ReadWriteProperty<kotlin.Any?,V>"
+  ],
+  "inherits": [
+    "kotlin.properties.ReadWriteProperty<kotlin.Any?,V>"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "afterChange",
+      "parameters": [
+        "kotlin.reflect.KProperty<*>",
+        "V",
+        "V"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "beforeChange",
+      "parameters": [
+        "kotlin.reflect.KProperty<*>",
+        "V",
+        "V"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "getValue",
+      "parameters": [
+        "kotlin.Any?",
+        "kotlin.reflect.KProperty<*>"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "setValue",
+      "parameters": [
+        "kotlin.Any?",
+        "kotlin.reflect.KProperty<*>",
+        "V"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

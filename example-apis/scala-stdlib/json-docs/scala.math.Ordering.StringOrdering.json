@@ -1,0 +1,30 @@
+{
+  "name": "scala.math.Ordering.StringOrdering",
+  "type_parameters": [],
+  "implements": [
+    "scala.math.Ordering[scala.Predef.String]"
+  ],
+  "inherits": [
+    "scala.math.Ordering[scala.Predef.String]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "compare",
+      "parameters": [
+        "scala.Predef.String",
+        "scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

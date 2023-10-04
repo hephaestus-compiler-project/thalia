@@ -1,0 +1,62 @@
+{
+  "name": "java.util.concurrent.Exchanger",
+  "type_parameters": [
+    "V"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "exchange",
+      "parameters": [
+        "V",
+        "long",
+        "java.util.concurrent.TimeUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.InterruptedException",
+        "java.util.concurrent.TimeoutException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "exchange",
+      "parameters": [
+        "V"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.InterruptedException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Exchanger",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

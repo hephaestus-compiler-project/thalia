@@ -1,0 +1,31 @@
+{
+  "name": "kotlin.ranges.IntProgression.Companion",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "fromClosedRange",
+      "parameters": [
+        "kotlin.Int",
+        "kotlin.Int",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntProgression",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

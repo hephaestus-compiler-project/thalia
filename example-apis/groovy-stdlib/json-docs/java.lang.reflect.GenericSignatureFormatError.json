@@ -1,0 +1,40 @@
+{
+  "name": "java.lang.reflect.GenericSignatureFormatError",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.ClassFormatError"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "GenericSignatureFormatError",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "GenericSignatureFormatError",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

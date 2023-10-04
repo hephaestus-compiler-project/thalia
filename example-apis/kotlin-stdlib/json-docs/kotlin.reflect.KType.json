@@ -1,0 +1,57 @@
+{
+  "name": "kotlin.reflect.KType",
+  "type_parameters": [],
+  "implements": [
+    "kotlin.reflect.KAnnotatedElement"
+  ],
+  "inherits": [
+    "kotlin.reflect.KAnnotatedElement"
+  ],
+  "class_type": 1,
+  "methods": [],
+  "fields": [
+    {
+      "name": "annotations",
+      "type": "kotlin.collections.List<kotlin.Annotation>",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "arguments",
+      "type": "kotlin.collections.List<kotlin.reflect.KTypeProjection>",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "classifier",
+      "type": "kotlin.reflect.KClassifier?",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "isMarkedNullable",
+      "type": "kotlin.Boolean",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

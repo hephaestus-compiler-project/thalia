@@ -1,0 +1,48 @@
+{
+  "name": "scala.collection.BufferedIterator",
+  "type_parameters": [
+    "+A"
+  ],
+  "implements": [
+    "scala.collection.Iterator[A]"
+  ],
+  "inherits": [
+    "scala.collection.Iterator[A]"
+  ],
+  "class_type": 1,
+  "methods": [],
+  "fields": [
+    {
+      "name": "head",
+      "type": "A",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "buffered",
+      "type": "scala.collection.BufferedIterator.this.type",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "headOption",
+      "type": "scala.Option[A]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "language": "scala"
+}

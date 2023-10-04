@@ -1,0 +1,249 @@
+{
+  "name": "java.security.SignatureSpi",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "engineGetParameter",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.security.InvalidParameterException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineInitSign",
+      "parameters": [
+        "java.security.PrivateKey"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.security.InvalidKeyException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineInitVerify",
+      "parameters": [
+        "java.security.PublicKey"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.security.InvalidKeyException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineSetParameter",
+      "parameters": [
+        "java.security.spec.AlgorithmParameterSpec"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.security.InvalidAlgorithmParameterException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineSign",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.security.SignatureException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineUpdate",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.security.SignatureException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineVerify",
+      "parameters": [
+        "byte[]"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.security.SignatureException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "clone",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.CloneNotSupportedException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineGetParameters",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.security.AlgorithmParameters",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.lang.UnsupportedOperationException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineInitSign",
+      "parameters": [
+        "java.security.PrivateKey",
+        "java.security.SecureRandom"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.security.InvalidKeyException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineSetParameter",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.security.InvalidParameterException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineSign",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "byte[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.security.SignatureException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineUpdate",
+      "parameters": [
+        "byte"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.security.SignatureException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineUpdate",
+      "parameters": [
+        "java.nio.ByteBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "engineVerify",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.security.SignatureException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "appRandom",
+      "type": "java.security.SecureRandom",
+      "is_static": false,
+      "access_mod": "protected"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

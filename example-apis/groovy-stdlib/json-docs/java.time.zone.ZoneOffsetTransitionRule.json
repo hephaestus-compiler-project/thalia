@@ -1,0 +1,190 @@
+{
+  "name": "java.time.zone.ZoneOffsetTransitionRule",
+  "type_parameters": [],
+  "implements": [
+    "java.io.Serializable"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "equals",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getDayOfWeek",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.DayOfWeek",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getMonth",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.Month",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getOffsetBefore",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.ZoneOffset",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getTimeDefinition",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.zone.ZoneOffsetTransitionRule.TimeDefinition",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isMidnightEndOfDay",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "createTransition",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.zone.ZoneOffsetTransition",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getDayOfMonthIndicator",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getLocalTime",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.LocalTime",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getOffsetAfter",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.ZoneOffset",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getStandardOffset",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.ZoneOffset",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "java.time.Month",
+        "int",
+        "java.time.DayOfWeek",
+        "java.time.LocalTime",
+        "boolean",
+        "java.time.zone.ZoneOffsetTransitionRule.TimeDefinition",
+        "java.time.ZoneOffset",
+        "java.time.ZoneOffset",
+        "java.time.ZoneOffset"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.zone.ZoneOffsetTransitionRule",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

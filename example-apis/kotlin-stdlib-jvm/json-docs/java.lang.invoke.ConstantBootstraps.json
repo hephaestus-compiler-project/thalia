@@ -1,0 +1,202 @@
+{
+  "name": "java.lang.invoke.ConstantBootstraps",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "enumConstant",
+      "parameters": [
+        "java.lang.invoke.MethodHandles.Lookup",
+        "java.lang.String",
+        "java.lang.Class<E>"
+      ],
+      "type_parameters": [
+        "E extends java.lang.Enum<E>"
+      ],
+      "return_type": "E",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalAccessError",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getStaticFinal",
+      "parameters": [
+        "java.lang.invoke.MethodHandles.Lookup",
+        "java.lang.String",
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalAccessError",
+        "java.lang.NoSuchFieldError",
+        "java.lang.IncompatibleClassChangeError"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "invoke",
+      "parameters": [
+        "java.lang.invoke.MethodHandles.Lookup",
+        "java.lang.String",
+        "java.lang.Class<?>",
+        "java.lang.invoke.MethodHandle",
+        "java.lang.Object..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.invoke.WrongMethodTypeException",
+        "java.lang.ClassCastException",
+        "java.lang.Throwable"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "primitiveClass",
+      "parameters": [
+        "java.lang.invoke.MethodHandles.Lookup",
+        "java.lang.String",
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "arrayVarHandle",
+      "parameters": [
+        "java.lang.invoke.MethodHandles.Lookup",
+        "java.lang.String",
+        "java.lang.Class<java.lang.invoke.VarHandle>",
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.VarHandle",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalAccessError",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "fieldVarHandle",
+      "parameters": [
+        "java.lang.invoke.MethodHandles.Lookup",
+        "java.lang.String",
+        "java.lang.Class<java.lang.invoke.VarHandle>",
+        "java.lang.Class<?>",
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.VarHandle",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalAccessError",
+        "java.lang.NoSuchFieldError",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getStaticFinal",
+      "parameters": [
+        "java.lang.invoke.MethodHandles.Lookup",
+        "java.lang.String",
+        "java.lang.Class<?>",
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalAccessError",
+        "java.lang.NoSuchFieldError",
+        "java.lang.IncompatibleClassChangeError"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "nullConstant",
+      "parameters": [
+        "java.lang.invoke.MethodHandles.Lookup",
+        "java.lang.String",
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "staticFieldVarHandle",
+      "parameters": [
+        "java.lang.invoke.MethodHandles.Lookup",
+        "java.lang.String",
+        "java.lang.Class<java.lang.invoke.VarHandle>",
+        "java.lang.Class<?>",
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.VarHandle",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalAccessError",
+        "java.lang.NoSuchFieldError",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "ConstantBootstraps",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

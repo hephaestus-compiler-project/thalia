@@ -1,0 +1,119 @@
+{
+  "name": "java.nio.file.attribute.AclEntry",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "flags",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Set<java.nio.file.attribute.AclEntryFlag>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "newBuilder",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.AclEntry.Builder",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "permissions",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Set<java.nio.file.attribute.AclEntryPermission>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "newBuilder",
+      "parameters": [
+        "java.nio.file.attribute.AclEntry"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.AclEntry.Builder",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "principal",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.UserPrincipal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "type",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.AclEntryType",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

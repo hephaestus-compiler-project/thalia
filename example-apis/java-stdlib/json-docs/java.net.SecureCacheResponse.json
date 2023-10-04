@@ -1,0 +1,75 @@
+{
+  "name": "java.net.SecureCacheResponse",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.net.CacheResponse"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "getLocalCertificateChain",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.List<java.security.cert.Certificate>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getPeerPrincipal",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.security.Principal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "javax.net.ssl.SSLPeerUnverifiedException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getCipherSuite",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getLocalPrincipal",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.security.Principal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getServerCertificateChain",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.List<java.security.cert.Certificate>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "javax.net.ssl.SSLPeerUnverifiedException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

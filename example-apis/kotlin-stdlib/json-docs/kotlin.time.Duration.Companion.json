@@ -1,0 +1,326 @@
+{
+  "name": "kotlin.time.Duration.Companion",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "convert",
+      "parameters": [
+        "kotlin.Double",
+        "kotlin.time.DurationUnit",
+        "kotlin.time.DurationUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "parse",
+      "parameters": [
+        "kotlin.String"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.time.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "parseIsoString",
+      "parameters": [
+        "kotlin.String"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.time.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "parseIsoStringOrNull",
+      "parameters": [
+        "kotlin.String"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.time.Duration?",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "parseOrNull",
+      "parameters": [
+        "kotlin.String"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.time.Duration?",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [
+    {
+      "name": "days",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Int",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "days",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Long",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "days",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Double",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "hours",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Int",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "hours",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Long",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "hours",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Double",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "INFINITE",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "microseconds",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Int",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "microseconds",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Long",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "microseconds",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Double",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "milliseconds",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Int",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "milliseconds",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Long",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "milliseconds",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Double",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "minutes",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Int",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "minutes",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Long",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "minutes",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Double",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "nanoseconds",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Int",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "nanoseconds",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Long",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "nanoseconds",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Double",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "seconds",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Int",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "seconds",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Long",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "seconds",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.Double",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "ZERO",
+      "type": "kotlin.time.Duration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

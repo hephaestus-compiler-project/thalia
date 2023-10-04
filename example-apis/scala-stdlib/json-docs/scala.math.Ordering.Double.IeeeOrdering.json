@@ -1,0 +1,233 @@
+{
+  "name": "scala.math.Ordering.Double.IeeeOrdering",
+  "type_parameters": [],
+  "implements": [
+    "scala.math.Ordering[scala.Double]"
+  ],
+  "inherits": [
+    "scala.math.Ordering[scala.Double]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "compare",
+      "parameters": [
+        "scala.Double",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "equiv",
+      "parameters": [
+        "scala.Double",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "gt",
+      "parameters": [
+        "scala.Double",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "gteq",
+      "parameters": [
+        "scala.Double",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lt",
+      "parameters": [
+        "scala.Double",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lteq",
+      "parameters": [
+        "scala.Double",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "max",
+      "parameters": [
+        "U",
+        "U"
+      ],
+      "type_parameters": [
+        "U <: scala.Double"
+      ],
+      "return_type": "U",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "min",
+      "parameters": [
+        "U",
+        "U"
+      ],
+      "type_parameters": [
+        "U <: scala.Double"
+      ],
+      "return_type": "U",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "scala.Double",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "equiv",
+      "parameters": [
+        "scala.Double",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "gt",
+      "parameters": [
+        "scala.Double",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "gteq",
+      "parameters": [
+        "scala.Double",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lt",
+      "parameters": [
+        "scala.Double",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lteq",
+      "parameters": [
+        "scala.Double",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "max",
+      "parameters": [
+        "U",
+        "U"
+      ],
+      "type_parameters": [
+        "U <: scala.Double"
+      ],
+      "return_type": "U",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "min",
+      "parameters": [
+        "U",
+        "U"
+      ],
+      "type_parameters": [
+        "U <: scala.Double"
+      ],
+      "return_type": "U",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

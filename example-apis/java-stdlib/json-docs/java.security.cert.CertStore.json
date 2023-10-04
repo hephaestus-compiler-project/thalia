@@ -1,0 +1,165 @@
+{
+  "name": "java.security.cert.CertStore",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getCertStoreParameters",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.security.cert.CertStoreParameters",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getDefaultType",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getInstance",
+      "parameters": [
+        "java.lang.String",
+        "java.security.cert.CertStoreParameters",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.cert.CertStore",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.security.InvalidAlgorithmParameterException",
+        "java.security.NoSuchAlgorithmException",
+        "java.security.NoSuchProviderException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getProvider",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.security.Provider",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getCertificates",
+      "parameters": [
+        "java.security.cert.CertSelector"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Collection<? extends java.security.cert.Certificate>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.cert.CertStoreException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getCRLs",
+      "parameters": [
+        "java.security.cert.CRLSelector"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Collection<? extends java.security.cert.CRL>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.cert.CertStoreException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getInstance",
+      "parameters": [
+        "java.lang.String",
+        "java.security.cert.CertStoreParameters"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.cert.CertStore",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.InvalidAlgorithmParameterException",
+        "java.security.NoSuchAlgorithmException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getInstance",
+      "parameters": [
+        "java.lang.String",
+        "java.security.cert.CertStoreParameters",
+        "java.security.Provider"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.cert.CertStore",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.security.InvalidAlgorithmParameterException",
+        "java.security.NoSuchAlgorithmException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getType",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "CertStore",
+      "parameters": [
+        "java.security.cert.CertStoreSpi",
+        "java.security.Provider",
+        "java.lang.String",
+        "java.security.cert.CertStoreParameters"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

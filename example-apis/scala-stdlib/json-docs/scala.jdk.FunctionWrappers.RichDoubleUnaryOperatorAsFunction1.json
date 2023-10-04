@@ -1,0 +1,40 @@
+{
+  "name": "scala.jdk.FunctionWrappers.RichDoubleUnaryOperatorAsFunction1",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyVal"
+  ],
+  "inherits": [
+    "scala.AnyVal"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "RichDoubleUnaryOperatorAsFunction1",
+      "parameters": [
+        "java.util.function.DoubleUnaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "asScala",
+      "type": "(scala.Double) => scala.Double",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

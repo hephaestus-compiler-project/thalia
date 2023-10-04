@@ -1,0 +1,30 @@
+{
+  "name": "scala.math.Ordering.UnitOrdering",
+  "type_parameters": [],
+  "implements": [
+    "scala.math.Ordering[scala.Unit]"
+  ],
+  "inherits": [
+    "scala.math.Ordering[scala.Unit]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "compare",
+      "parameters": [
+        "scala.Unit",
+        "scala.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

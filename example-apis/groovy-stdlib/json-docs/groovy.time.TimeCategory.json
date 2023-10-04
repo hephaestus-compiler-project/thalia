@@ -1,0 +1,319 @@
+{
+  "name": "groovy.time.TimeCategory",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getDaylightSavingsOffset",
+      "parameters": [
+        "groovy.time.BaseDuration"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.Duration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getDays",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.Duration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getHours",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.TimeDuration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getMilliseconds",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.TimeDuration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getMinutes",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.TimeDuration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getMonths",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.DatumDependentDuration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getSecond",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.TimeDuration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getTimeZone",
+      "parameters": [
+        "java.util.Date"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.TimeZone",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getWeeks",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.Duration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getYears",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.DatumDependentDuration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "java.util.Date",
+        "java.util.Date"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.TimeDuration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getDay",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.Duration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getDaylightSavingsOffset",
+      "parameters": [
+        "java.util.Date"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.Duration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getHour",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.TimeDuration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getMillisecond",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.TimeDuration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getMinute",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.TimeDuration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getMonth",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.DatumDependentDuration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRelativeDaylightSavingsOffset",
+      "parameters": [
+        "java.util.Date",
+        "java.util.Date"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.Duration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getSeconds",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.TimeDuration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getWeek",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.Duration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getYear",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.DatumDependentDuration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "java.util.Date",
+        "groovy.time.BaseDuration"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Date",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "java.util.Date",
+        "groovy.time.BaseDuration"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Date",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

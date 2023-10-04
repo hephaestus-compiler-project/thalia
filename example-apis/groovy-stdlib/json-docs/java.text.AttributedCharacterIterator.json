@@ -1,0 +1,125 @@
+{
+  "name": "java.text.AttributedCharacterIterator",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.text.CharacterIterator"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "getAttribute",
+      "parameters": [
+        "java.text.AttributedCharacterIterator.Attribute"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRunLimit",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRunLimit",
+      "parameters": [
+        "java.util.Set<? extends java.text.AttributedCharacterIterator.Attribute>"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRunStart",
+      "parameters": [
+        "java.text.AttributedCharacterIterator.Attribute"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getAllAttributeKeys",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Set<java.text.AttributedCharacterIterator.Attribute>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getAttributes",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Map<java.text.AttributedCharacterIterator.Attribute,java.lang.Object>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRunLimit",
+      "parameters": [
+        "java.text.AttributedCharacterIterator.Attribute"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRunStart",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRunStart",
+      "parameters": [
+        "java.util.Set<? extends java.text.AttributedCharacterIterator.Attribute>"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

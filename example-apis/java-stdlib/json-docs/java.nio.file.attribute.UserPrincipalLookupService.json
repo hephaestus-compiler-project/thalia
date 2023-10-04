@@ -1,0 +1,52 @@
+{
+  "name": "java.nio.file.attribute.UserPrincipalLookupService",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "lookupPrincipalByName",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.UserPrincipal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.file.attribute.UserPrincipalNotFoundException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "java.lang.RuntimePermission"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "lookupPrincipalByGroupName",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.GroupPrincipal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.file.attribute.UserPrincipalNotFoundException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "java.lang.RuntimePermission"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

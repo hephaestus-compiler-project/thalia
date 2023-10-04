@@ -1,0 +1,60 @@
+{
+  "name": "scala.jdk.FunctionWrappers.AsJavaBiPredicate",
+  "type_parameters": [
+    "T",
+    "U"
+  ],
+  "implements": [
+    "java.util.function.BiPredicate[T, U]",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "java.util.function.BiPredicate[T, U]",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "test",
+      "parameters": [
+        "T",
+        "U"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "AsJavaBiPredicate",
+      "parameters": [
+        "(T, U) => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "sf",
+      "type": "(T, U) => scala.Boolean",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

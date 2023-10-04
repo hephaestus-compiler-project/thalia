@@ -1,0 +1,23 @@
+{
+  "name": "kotlin.ranges.LongRange.Companion",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 0,
+  "methods": [],
+  "fields": [
+    {
+      "name": "EMPTY",
+      "type": "kotlin.ranges.LongRange",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

@@ -1,0 +1,65 @@
+{
+  "name": "scala.math.Ordering.OptionOrdering",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [
+    "scala.math.Ordering[scala.Option[T]]"
+  ],
+  "inherits": [
+    "scala.math.Ordering[scala.Option[T]]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "compare",
+      "parameters": [
+        "scala.Option[T]",
+        "scala.Option[T]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "scala.Any"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "optionOrdering",
+      "type": "scala.math.Ordering[T]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

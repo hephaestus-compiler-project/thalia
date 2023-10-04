@@ -1,0 +1,56 @@
+{
+  "name": "scala.reflect.ClassManifestDeprecatedApis",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [
+    "scala.reflect.OptManifest[T]"
+  ],
+  "inherits": [
+    "scala.reflect.OptManifest[T]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "arrayClass",
+      "parameters": [
+        "java.lang.Class[_]"
+      ],
+      "type_parameters": [
+        "A"
+      ],
+      "return_type": "java.lang.Class[scala.Array[A]]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected"
+    },
+    {
+      "name": "canEqual",
+      "parameters": [
+        "scala.Any"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "argString",
+      "type": "scala.Predef.String",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "protected",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

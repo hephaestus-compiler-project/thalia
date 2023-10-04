@@ -1,0 +1,417 @@
+{
+  "name": "scala.jdk.Accumulator",
+  "type_parameters": [
+    "A",
+    "+CC[X] <: scala.collection.mutable.Seq[X]",
+    "+C <: scala.collection.mutable.Seq[A]"
+  ],
+  "implements": [
+    "scala.collection.mutable.Seq[A]",
+    "scala.collection.mutable.Builder[A, C]"
+  ],
+  "inherits": [
+    "scala.collection.mutable.Seq[A]",
+    "scala.collection.mutable.Builder[A, C]"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "efficientStepper",
+      "parameters": [
+        "scala.collection.StepperShape[A, S]"
+      ],
+      "type_parameters": [
+        "S <: scala.collection.Stepper[_]"
+      ],
+      "return_type": "S with scala.collection.Stepper.EfficientSplit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected"
+    },
+    {
+      "name": "clear",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "stepper",
+      "parameters": [
+        "scala.collection.StepperShape[A, S]"
+      ],
+      "type_parameters": [
+        "S <: scala.collection.Stepper[_]"
+      ],
+      "return_type": "S with scala.collection.Stepper.EfficientSplit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "A*"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "(scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => C",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "concat",
+      "parameters": [
+        "scala.Iterable[A]*"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "(scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => C",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "empty",
+      "parameters": [
+        "scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "C",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "scala.Int",
+        "scala.Int",
+        "scala.Int",
+        "scala.Int",
+        "scala.Int"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "(=> A) => (scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => scala.jdk.AnyAccumulator[scala.jdk.AnyAccumulator[scala.jdk.AnyAccumulator[scala.jdk.AnyAccumulator[C]]]]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "scala.Int",
+        "scala.Int",
+        "scala.Int",
+        "scala.Int"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "(=> A) => (scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => scala.jdk.AnyAccumulator[scala.jdk.AnyAccumulator[scala.jdk.AnyAccumulator[C]]]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "scala.Int",
+        "scala.Int",
+        "scala.Int"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "(=> A) => (scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => scala.jdk.AnyAccumulator[scala.jdk.AnyAccumulator[C]]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "scala.Int",
+        "scala.Int"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "(=> A) => (scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => scala.jdk.AnyAccumulator[C]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fill",
+      "parameters": [
+        "scala.Int"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "(=> A) => (scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => C",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "from",
+      "parameters": [
+        "scala.IterableOnce[A]"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "(scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => C",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "iterate",
+      "parameters": [
+        "A",
+        "scala.Int"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "((A) => A) => (scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => C",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "newBuilder",
+      "parameters": [
+        "scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "scala.collection.mutable.Builder[A, C]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "range",
+      "parameters": [
+        "A",
+        "A",
+        "A"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "(scala.Integral[A], scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => C",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "range",
+      "parameters": [
+        "A",
+        "A"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "(scala.Integral[A], scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => C",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "tabulate",
+      "parameters": [
+        "scala.Int",
+        "scala.Int",
+        "scala.Int",
+        "scala.Int",
+        "scala.Int"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "((scala.Int, scala.Int, scala.Int, scala.Int, scala.Int) => A) => (scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => scala.jdk.AnyAccumulator[scala.jdk.AnyAccumulator[scala.jdk.AnyAccumulator[scala.jdk.AnyAccumulator[C]]]]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "tabulate",
+      "parameters": [
+        "scala.Int",
+        "scala.Int",
+        "scala.Int",
+        "scala.Int"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "((scala.Int, scala.Int, scala.Int, scala.Int) => A) => (scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => scala.jdk.AnyAccumulator[scala.jdk.AnyAccumulator[scala.jdk.AnyAccumulator[C]]]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "tabulate",
+      "parameters": [
+        "scala.Int",
+        "scala.Int",
+        "scala.Int"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "((scala.Int, scala.Int, scala.Int) => A) => (scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => scala.jdk.AnyAccumulator[scala.jdk.AnyAccumulator[C]]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "tabulate",
+      "parameters": [
+        "scala.Int",
+        "scala.Int"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "((scala.Int, scala.Int) => A) => (scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => scala.jdk.AnyAccumulator[C]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "tabulate",
+      "parameters": [
+        "scala.Int"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "((scala.Int) => A) => (scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => C",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "toFactory",
+      "parameters": [
+        "scala.jdk.Accumulator.type"
+      ],
+      "type_parameters": [
+        "A",
+        "C"
+      ],
+      "return_type": "(scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => scala.collection.Factory[A, C]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "unfold",
+      "parameters": [
+        "S"
+      ],
+      "type_parameters": [
+        "A",
+        "S",
+        "C"
+      ],
+      "return_type": "((S) => scala.Option[(A, S)]) => (scala.jdk.Accumulator.AccumulatorFactoryShape[A, C]) => C",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "knownSize",
+      "type": "scala.Int",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "length",
+      "type": "scala.Int",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "sizeLong",
+      "type": "scala.Long",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

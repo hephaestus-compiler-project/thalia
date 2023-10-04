@@ -1,0 +1,120 @@
+{
+  "name": "groovy.beans.VetoableASTTransformation",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "groovy.beans.BindableASTTransformation"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "createConstrainedStatement",
+      "parameters": [
+        "org.codehaus.groovy.ast.PropertyNode",
+        "org.codehaus.groovy.ast.expr.Expression"
+      ],
+      "type_parameters": [],
+      "return_type": "org.codehaus.groovy.ast.stmt.Statement",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "createSetterMethod",
+      "parameters": [
+        "org.codehaus.groovy.ast.ClassNode",
+        "org.codehaus.groovy.ast.PropertyNode",
+        "java.lang.String",
+        "org.codehaus.groovy.ast.stmt.Statement"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "needsVetoableChangeSupport",
+      "parameters": [
+        "org.codehaus.groovy.ast.ClassNode",
+        "org.codehaus.groovy.control.SourceUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "addVetoableChangeSupport",
+      "parameters": [
+        "org.codehaus.groovy.ast.ClassNode"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "createSetStatement",
+      "parameters": [
+        "org.codehaus.groovy.ast.expr.Expression"
+      ],
+      "type_parameters": [],
+      "return_type": "org.codehaus.groovy.ast.stmt.Statement",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hasVetoableAnnotation",
+      "parameters": [
+        "org.codehaus.groovy.ast.AnnotatedNode"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "visit",
+      "parameters": [
+        "org.codehaus.groovy.ast.ASTNode[]",
+        "org.codehaus.groovy.control.SourceUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "constrainedClassNode",
+      "type": "org.codehaus.groovy.ast.ClassNode",
+      "is_static": true,
+      "access_mod": "protected"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

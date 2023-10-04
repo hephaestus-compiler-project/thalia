@@ -1,0 +1,577 @@
+{
+  "name": "java.util.concurrent.CompletionStage",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "acceptEitherAsync",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<? extends T>",
+        "java.util.function.Consumer<? super T>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "applyToEither",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<? extends T>",
+        "java.util.function.Function<? super T,U>"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<U>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "applyToEitherAsync",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<? extends T>",
+        "java.util.function.Function<? super T,U>",
+        "java.util.concurrent.Executor"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<U>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "handle",
+      "parameters": [
+        "java.util.function.BiFunction<? super T,java.lang.Throwable,? extends U>"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<U>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "handleAsync",
+      "parameters": [
+        "java.util.function.BiFunction<? super T,java.lang.Throwable,? extends U>",
+        "java.util.concurrent.Executor"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<U>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "runAfterBothAsync",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<?>",
+        "java.lang.Runnable"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "runAfterEither",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<?>",
+        "java.lang.Runnable"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "runAfterEitherAsync",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<?>",
+        "java.lang.Runnable",
+        "java.util.concurrent.Executor"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenAcceptAsync",
+      "parameters": [
+        "java.util.function.Consumer<? super T>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenAcceptBoth",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<? extends U>",
+        "java.util.function.BiConsumer<? super T,? super U>"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenAcceptBothAsync",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<? extends U>",
+        "java.util.function.BiConsumer<? super T,? super U>",
+        "java.util.concurrent.Executor"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenApplyAsync",
+      "parameters": [
+        "java.util.function.Function<? super T,? extends U>"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<U>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenCombine",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<? extends U>",
+        "java.util.function.BiFunction<? super T,? super U,? extends V>"
+      ],
+      "type_parameters": [
+        "U",
+        "V"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<V>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenCombineAsync",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<? extends U>",
+        "java.util.function.BiFunction<? super T,? super U,? extends V>",
+        "java.util.concurrent.Executor"
+      ],
+      "type_parameters": [
+        "U",
+        "V"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<V>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenComposeAsync",
+      "parameters": [
+        "java.util.function.Function<? super T,? extends java.util.concurrent.CompletionStage<U>>"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<U>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenRun",
+      "parameters": [
+        "java.lang.Runnable"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenRunAsync",
+      "parameters": [
+        "java.lang.Runnable",
+        "java.util.concurrent.Executor"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "whenComplete",
+      "parameters": [
+        "java.util.function.BiConsumer<? super T,? super java.lang.Throwable>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "whenCompleteAsync",
+      "parameters": [
+        "java.util.function.BiConsumer<? super T,? super java.lang.Throwable>",
+        "java.util.concurrent.Executor"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "acceptEither",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<? extends T>",
+        "java.util.function.Consumer<? super T>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "acceptEitherAsync",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<? extends T>",
+        "java.util.function.Consumer<? super T>",
+        "java.util.concurrent.Executor"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "applyToEitherAsync",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<? extends T>",
+        "java.util.function.Function<? super T,U>"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<U>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "exceptionally",
+      "parameters": [
+        "java.util.function.Function<java.lang.Throwable,? extends T>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "handleAsync",
+      "parameters": [
+        "java.util.function.BiFunction<? super T,java.lang.Throwable,? extends U>"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<U>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "runAfterBoth",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<?>",
+        "java.lang.Runnable"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "runAfterBothAsync",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<?>",
+        "java.lang.Runnable",
+        "java.util.concurrent.Executor"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "runAfterEitherAsync",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<?>",
+        "java.lang.Runnable"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenAccept",
+      "parameters": [
+        "java.util.function.Consumer<? super T>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenAcceptAsync",
+      "parameters": [
+        "java.util.function.Consumer<? super T>",
+        "java.util.concurrent.Executor"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenAcceptBothAsync",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<? extends U>",
+        "java.util.function.BiConsumer<? super T,? super U>"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenApply",
+      "parameters": [
+        "java.util.function.Function<? super T,? extends U>"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<U>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenApplyAsync",
+      "parameters": [
+        "java.util.function.Function<? super T,? extends U>",
+        "java.util.concurrent.Executor"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<U>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenCombineAsync",
+      "parameters": [
+        "java.util.concurrent.CompletionStage<? extends U>",
+        "java.util.function.BiFunction<? super T,? super U,? extends V>"
+      ],
+      "type_parameters": [
+        "U",
+        "V"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<V>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenCompose",
+      "parameters": [
+        "java.util.function.Function<? super T,? extends java.util.concurrent.CompletionStage<U>>"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<U>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenComposeAsync",
+      "parameters": [
+        "java.util.function.Function<? super T,? extends java.util.concurrent.CompletionStage<U>>",
+        "java.util.concurrent.Executor"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.concurrent.CompletionStage<U>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "thenRunAsync",
+      "parameters": [
+        "java.lang.Runnable"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toCompletableFuture",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletableFuture<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "whenCompleteAsync",
+      "parameters": [
+        "java.util.function.BiConsumer<? super T,? super java.lang.Throwable>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.CompletionStage<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

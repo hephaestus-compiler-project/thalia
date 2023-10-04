@@ -1,0 +1,31 @@
+{
+  "name": "java.util.function.ToLongBiFunction",
+  "type_parameters": [
+    "T",
+    "U"
+  ],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "applyAsLong",
+      "parameters": [
+        "T",
+        "U"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": true,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

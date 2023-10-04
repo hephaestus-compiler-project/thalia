@@ -1,0 +1,247 @@
+{
+  "name": "kotlin.time",
+  "methods": [
+    {
+      "name": "toDurationUnit",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.time.DurationUnit",
+      "receiver": "java.util.concurrent.TimeUnit",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toJavaDuration",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.Duration",
+      "receiver": "kotlin.time.Duration",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "toKotlinDuration",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.time.Duration",
+      "receiver": "java.time.Duration",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "toTimeUnit",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.TimeUnit",
+      "receiver": "kotlin.time.DurationUnit",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "measureTime",
+      "parameters": [
+        "() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.time.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "measureTime",
+      "parameters": [
+        "() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.time.Duration",
+      "receiver": "kotlin.time.TimeSource",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "measureTime",
+      "parameters": [
+        "() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.time.Duration",
+      "receiver": "kotlin.time.TimeSource.Monotonic",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "measureTimedValue",
+      "parameters": [
+        "() -> T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.time.TimedValue<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "measureTimedValue",
+      "parameters": [
+        "() -> T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.time.TimedValue<T>",
+      "receiver": "kotlin.time.TimeSource",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "measureTimedValue",
+      "parameters": [
+        "() -> T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.time.TimedValue<T>",
+      "receiver": "kotlin.time.TimeSource.Monotonic",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "times",
+      "parameters": [
+        "kotlin.time.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.time.Duration",
+      "receiver": "kotlin.Double",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "times",
+      "parameters": [
+        "kotlin.time.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.time.Duration",
+      "receiver": "kotlin.Int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "toDuration",
+      "parameters": [
+        "kotlin.time.DurationUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.time.Duration",
+      "receiver": "kotlin.Double",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toDuration",
+      "parameters": [
+        "kotlin.time.DurationUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.time.Duration",
+      "receiver": "kotlin.Int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toDuration",
+      "parameters": [
+        "kotlin.time.DurationUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.time.Duration",
+      "receiver": "kotlin.Long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "type_parameters": [],
+  "is_class": false,
+  "language": "kotlin"
+}

@@ -1,0 +1,77 @@
+{
+  "name": "java.util.function.Function",
+  "type_parameters": [
+    "T",
+    "R"
+  ],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "apply",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "R",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "identity",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.function.Function<T,T>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "andThen",
+      "parameters": [
+        "java.util.function.Function<? super R,? extends V>"
+      ],
+      "type_parameters": [
+        "V"
+      ],
+      "return_type": "java.util.function.Function<T,V>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "compose",
+      "parameters": [
+        "java.util.function.Function<? super V,? extends T>"
+      ],
+      "type_parameters": [
+        "V"
+      ],
+      "return_type": "java.util.function.Function<V,R>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": true
+    }
+  ],
+  "fields": [],
+  "functional_interface": true,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

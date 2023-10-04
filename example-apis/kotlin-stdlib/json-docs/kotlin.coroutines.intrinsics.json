@@ -1,0 +1,130 @@
+{
+  "name": "kotlin.coroutines.intrinsics",
+  "methods": [
+    {
+      "name": "createCoroutineUnintercepted",
+      "parameters": [
+        "kotlin.coroutines.Continuation<T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.coroutines.Continuation<kotlin.Unit>",
+      "receiver": "suspend () -> T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "createCoroutineUnintercepted",
+      "parameters": [
+        "R",
+        "kotlin.coroutines.Continuation<T>"
+      ],
+      "type_parameters": [
+        "R",
+        "T"
+      ],
+      "return_type": "kotlin.coroutines.Continuation<kotlin.Unit>",
+      "receiver": "suspend R.() -> T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "intercepted",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.coroutines.Continuation<T>",
+      "receiver": "kotlin.coroutines.Continuation<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "startCoroutineUninterceptedOrReturn",
+      "parameters": [
+        "kotlin.coroutines.Continuation<T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Any?",
+      "receiver": "suspend () -> T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "startCoroutineUninterceptedOrReturn",
+      "parameters": [
+        "R",
+        "kotlin.coroutines.Continuation<T>"
+      ],
+      "type_parameters": [
+        "R",
+        "T"
+      ],
+      "return_type": "kotlin.Any?",
+      "receiver": "suspend R.() -> T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "suspendCoroutineUninterceptedOrReturn",
+      "parameters": [
+        "(kotlin.coroutines.Continuation<T>) -> kotlin.Any?"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": true,
+        "is_inline": true
+      }
+    }
+  ],
+  "fields": [
+    {
+      "name": "COROUTINE_SUSPENDED",
+      "type": "kotlin.Any",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "type_parameters": [],
+  "is_class": false,
+  "language": "kotlin"
+}

@@ -1,0 +1,114 @@
+{
+  "name": "java.nio.channels.spi.AbstractSelector",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.nio.channels.Selector"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "cancelledKeys",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Set<java.nio.channels.SelectionKey>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "deregister",
+      "parameters": [
+        "java.nio.channels.spi.AbstractSelectionKey"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "implCloseSelector",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "register",
+      "parameters": [
+        "java.nio.channels.spi.AbstractSelectableChannel",
+        "int",
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.SelectionKey",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "begin",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "close",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "end",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "provider",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.spi.SelectorProvider",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

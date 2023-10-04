@@ -1,0 +1,549 @@
+{
+  "name": "java.util.stream.LongStream",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.util.stream.BaseStream<java.lang.Long,java.util.stream.LongStream>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "anyMatch",
+      "parameters": [
+        "java.util.function.LongPredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "average",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalDouble",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "builder",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream.Builder",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "concat",
+      "parameters": [
+        "java.util.stream.LongStream",
+        "java.util.stream.LongStream"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "distinct",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "empty",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "findAny",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalLong",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "flatMap",
+      "parameters": [
+        "java.util.function.LongFunction<? extends java.util.stream.LongStream>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "forEachOrdered",
+      "parameters": [
+        "java.util.function.LongConsumer"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "iterate",
+      "parameters": [
+        "long",
+        "java.util.function.LongPredicate",
+        "java.util.function.LongUnaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "limit",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mapToDouble",
+      "parameters": [
+        "java.util.function.LongToDoubleFunction"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "mapToObj",
+      "parameters": [
+        "java.util.function.LongFunction<? extends U>"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.stream.Stream<U>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "min",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalLong",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "peek",
+      "parameters": [
+        "java.util.function.LongConsumer"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "rangeClosed",
+      "parameters": [
+        "long",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "reduce",
+      "parameters": [
+        "java.util.function.LongBinaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalLong",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "sorted",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "summaryStatistics",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.LongSummaryStatistics",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toArray",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "long[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "allMatch",
+      "parameters": [
+        "java.util.function.LongPredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "asDoubleStream",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "boxed",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.Stream<java.lang.Long>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "collect",
+      "parameters": [
+        "java.util.function.Supplier<R>",
+        "java.util.function.ObjLongConsumer<R>",
+        "java.util.function.BiConsumer<R,R>"
+      ],
+      "type_parameters": [
+        "R"
+      ],
+      "return_type": "R",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "count",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "dropWhile",
+      "parameters": [
+        "java.util.function.LongPredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "filter",
+      "parameters": [
+        "java.util.function.LongPredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "findFirst",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalLong",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "forEach",
+      "parameters": [
+        "java.util.function.LongConsumer"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "generate",
+      "parameters": [
+        "java.util.function.LongSupplier"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "iterate",
+      "parameters": [
+        "long",
+        "java.util.function.LongUnaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "map",
+      "parameters": [
+        "java.util.function.LongUnaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "mapToInt",
+      "parameters": [
+        "java.util.function.LongToIntFunction"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "max",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalLong",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "noneMatch",
+      "parameters": [
+        "java.util.function.LongPredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "long..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "range",
+      "parameters": [
+        "long",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "reduce",
+      "parameters": [
+        "long",
+        "java.util.function.LongBinaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "skip",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "sum",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "takeWhile",
+      "parameters": [
+        "java.util.function.LongPredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

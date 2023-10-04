@@ -1,0 +1,81 @@
+{
+  "name": "scala.concurrent.BlockContext",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "blockOn",
+      "parameters": [
+        "=> T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "(scala.concurrent.CanAwait) => T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "usingBlockContext",
+      "parameters": [
+        "scala.concurrent.BlockContext"
+      ],
+      "type_parameters": [
+        "I",
+        "T"
+      ],
+      "return_type": "((scala.concurrent.BlockContext) => T) => T",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "withBlockContext",
+      "parameters": [
+        "scala.concurrent.BlockContext"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "(=> T) => T",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "current",
+      "type": "scala.concurrent.BlockContext",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "defaultBlockContext",
+      "type": "scala.concurrent.BlockContext",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

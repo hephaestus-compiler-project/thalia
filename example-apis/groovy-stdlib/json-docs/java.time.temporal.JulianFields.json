@@ -1,0 +1,34 @@
+{
+  "name": "java.time.temporal.JulianFields",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [],
+  "fields": [
+    {
+      "name": "MODIFIED_JULIAN_DAY",
+      "type": "java.time.temporal.TemporalField",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "JULIAN_DAY",
+      "type": "java.time.temporal.TemporalField",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "RATA_DIE",
+      "type": "java.time.temporal.TemporalField",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

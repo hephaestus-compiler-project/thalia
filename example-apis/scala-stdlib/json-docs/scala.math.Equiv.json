@@ -1,0 +1,287 @@
+{
+  "name": "scala.math.Equiv",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "scala.Serializable"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "equiv",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Option",
+      "parameters": [
+        "scala.math.Equiv[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.math.Equiv[scala.Option[T]]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple2",
+      "parameters": [
+        "scala.math.Equiv[T1]",
+        "scala.math.Equiv[T2]"
+      ],
+      "type_parameters": [
+        "T1",
+        "T2"
+      ],
+      "return_type": "scala.math.Equiv[(T1, T2)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple3",
+      "parameters": [
+        "scala.math.Equiv[T1]",
+        "scala.math.Equiv[T2]",
+        "scala.math.Equiv[T3]"
+      ],
+      "type_parameters": [
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "return_type": "scala.math.Equiv[(T1, T2, T3)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple4",
+      "parameters": [
+        "scala.math.Equiv[T1]",
+        "scala.math.Equiv[T2]",
+        "scala.math.Equiv[T3]",
+        "scala.math.Equiv[T4]"
+      ],
+      "type_parameters": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "return_type": "scala.math.Equiv[(T1, T2, T3, T4)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple5",
+      "parameters": [
+        "scala.math.Equiv[T1]",
+        "scala.math.Equiv[T2]",
+        "scala.math.Equiv[T3]",
+        "scala.math.Equiv[T4]",
+        "scala.math.Equiv[T5]"
+      ],
+      "type_parameters": [
+        "T1",
+        "T2",
+        "T3",
+        "T4",
+        "T5"
+      ],
+      "return_type": "scala.math.Equiv[(T1, T2, T3, T4, T5)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple6",
+      "parameters": [
+        "scala.math.Equiv[T1]",
+        "scala.math.Equiv[T2]",
+        "scala.math.Equiv[T3]",
+        "scala.math.Equiv[T4]",
+        "scala.math.Equiv[T5]",
+        "scala.math.Equiv[T6]"
+      ],
+      "type_parameters": [
+        "T1",
+        "T2",
+        "T3",
+        "T4",
+        "T5",
+        "T6"
+      ],
+      "return_type": "scala.math.Equiv[(T1, T2, T3, T4, T5, T6)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple7",
+      "parameters": [
+        "scala.math.Equiv[T1]",
+        "scala.math.Equiv[T2]",
+        "scala.math.Equiv[T3]",
+        "scala.math.Equiv[T4]",
+        "scala.math.Equiv[T5]",
+        "scala.math.Equiv[T6]",
+        "scala.math.Equiv[T7]"
+      ],
+      "type_parameters": [
+        "T1",
+        "T2",
+        "T3",
+        "T4",
+        "T5",
+        "T6",
+        "T7"
+      ],
+      "return_type": "scala.math.Equiv[(T1, T2, T3, T4, T5, T6, T7)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple8",
+      "parameters": [
+        "scala.math.Equiv[T1]",
+        "scala.math.Equiv[T2]",
+        "scala.math.Equiv[T3]",
+        "scala.math.Equiv[T4]",
+        "scala.math.Equiv[T5]",
+        "scala.math.Equiv[T6]",
+        "scala.math.Equiv[T7]",
+        "scala.math.Equiv[T8]"
+      ],
+      "type_parameters": [
+        "T1",
+        "T2",
+        "T3",
+        "T4",
+        "T5",
+        "T6",
+        "T7",
+        "T8"
+      ],
+      "return_type": "scala.math.Equiv[(T1, T2, T3, T4, T5, T6, T7, T8)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple9",
+      "parameters": [
+        "scala.math.Equiv[T1]",
+        "scala.math.Equiv[T2]",
+        "scala.math.Equiv[T3]",
+        "scala.math.Equiv[T4]",
+        "scala.math.Equiv[T5]",
+        "scala.math.Equiv[T6]",
+        "scala.math.Equiv[T7]",
+        "scala.math.Equiv[T8]",
+        "scala.math.Equiv[T9]"
+      ],
+      "type_parameters": [
+        "T1",
+        "T2",
+        "T3",
+        "T4",
+        "T5",
+        "T6",
+        "T7",
+        "T8",
+        "T9"
+      ],
+      "return_type": "scala.math.Equiv[(T1, T2, T3, T4, T5, T6, T7, T8, T9)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.math.Equiv[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.math.Equiv[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "by",
+      "parameters": [
+        "(T) => S"
+      ],
+      "type_parameters": [
+        "T",
+        "S"
+      ],
+      "return_type": "(scala.math.Equiv[S]) => scala.math.Equiv[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromComparator",
+      "parameters": [
+        "java.util.Comparator[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.math.Equiv[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromFunction",
+      "parameters": [
+        "(T, T) => scala.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.math.Equiv[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

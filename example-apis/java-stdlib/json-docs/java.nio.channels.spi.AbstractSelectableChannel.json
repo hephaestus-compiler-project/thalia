@@ -1,0 +1,106 @@
+{
+  "name": "java.nio.channels.spi.AbstractSelectableChannel",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.nio.channels.SelectableChannel"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "implCloseChannel",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "implConfigureBlocking",
+      "parameters": [
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "register",
+      "parameters": [
+        "java.nio.channels.Selector",
+        "int",
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.SelectionKey",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedSelectorException",
+        "java.nio.channels.IllegalBlockingModeException",
+        "java.nio.channels.IllegalSelectorException",
+        "java.nio.channels.CancelledKeyException",
+        "java.lang.IllegalArgumentException",
+        "java.nio.channels.ClosedChannelException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "configureBlocking",
+      "parameters": [
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.SelectableChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "implCloseSelectableChannel",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "provider",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.spi.SelectorProvider",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

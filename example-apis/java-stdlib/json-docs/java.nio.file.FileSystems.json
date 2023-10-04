@@ -1,0 +1,106 @@
+{
+  "name": "java.nio.file.FileSystems",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getFileSystem",
+      "parameters": [
+        "java.net.URI"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.FileSystem",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.file.FileSystemNotFoundException",
+        "java.nio.file.ProviderNotFoundException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "newFileSystem",
+      "parameters": [
+        "java.net.URI",
+        "java.util.Map<java.lang.String,?>",
+        "java.lang.ClassLoader"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.FileSystem",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.file.FileSystemAlreadyExistsException",
+        "java.nio.file.ProviderNotFoundException",
+        "java.util.ServiceConfigurationError",
+        "java.io.IOException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDefault",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.FileSystem",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "newFileSystem",
+      "parameters": [
+        "java.net.URI",
+        "java.util.Map<java.lang.String,?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.FileSystem",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.file.FileSystemAlreadyExistsException",
+        "java.nio.file.ProviderNotFoundException",
+        "java.io.IOException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "newFileSystem",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.lang.ClassLoader"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.FileSystem",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.file.ProviderNotFoundException",
+        "java.util.ServiceConfigurationError",
+        "java.io.IOException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

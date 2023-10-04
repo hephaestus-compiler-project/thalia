@@ -1,0 +1,86 @@
+{
+  "name": "kotlin.time.TestTimeSource",
+  "type_parameters": [],
+  "implements": [
+    "kotlin.time.AbstractLongTimeSource"
+  ],
+  "inherits": [
+    "kotlin.time.AbstractLongTimeSource"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "markNow",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.time.ComparableTimeMark",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "plusAssign",
+      "parameters": [
+        "kotlin.time.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "read",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "TestTimeSource",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [
+    {
+      "name": "unit",
+      "type": "kotlin.time.DurationUnit",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "protected",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

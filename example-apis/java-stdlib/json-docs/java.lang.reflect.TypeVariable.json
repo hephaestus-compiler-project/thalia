@@ -1,0 +1,66 @@
+{
+  "name": "java.lang.reflect.TypeVariable",
+  "type_parameters": [
+    "D extends java.lang.reflect.GenericDeclaration"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.lang.reflect.Type",
+    "java.lang.reflect.AnnotatedElement"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "getBounds",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.Type[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.TypeNotPresentException",
+        "java.lang.reflect.MalformedParameterizedTypeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getName",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getAnnotatedBounds",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.AnnotatedType[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getGenericDeclaration",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "D",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

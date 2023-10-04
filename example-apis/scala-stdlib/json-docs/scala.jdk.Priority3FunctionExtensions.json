@@ -1,0 +1,33 @@
+{
+  "name": "scala.jdk.Priority3FunctionExtensions",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "enrichAsJavaBiFunction",
+      "parameters": [
+        "(T, U) => R"
+      ],
+      "type_parameters": [
+        "T",
+        "U",
+        "R"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichFunction2AsBiFunction[T, U, R]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

@@ -1,0 +1,133 @@
+{
+  "name": "kotlin.sequences",
+  "methods": [
+    {
+      "name": "asSequence",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "java.util.Enumeration<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "filterIsInstance",
+      "parameters": [
+        "java.lang.Class<R>"
+      ],
+      "type_parameters": [
+        "R"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<*>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "filterIsInstanceTo",
+      "parameters": [
+        "C",
+        "java.lang.Class<R>"
+      ],
+      "type_parameters": [
+        "C : kotlin.collections.MutableCollection<in R>",
+        "R"
+      ],
+      "return_type": "C",
+      "receiver": "kotlin.sequences.Sequence<*>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sumOf",
+      "parameters": [
+        "(T) -> java.math.BigDecimal"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.math.BigDecimal",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sumOf",
+      "parameters": [
+        "(T) -> java.math.BigInteger"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.math.BigInteger",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toSortedSet",
+      "parameters": [],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "java.util.SortedSet<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toSortedSet",
+      "parameters": [
+        "Comparator<in T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.SortedSet<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "type_parameters": [],
+  "is_class": false,
+  "language": "kotlin"
+}

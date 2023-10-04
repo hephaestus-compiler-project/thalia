@@ -1,0 +1,90 @@
+{
+  "name": "java.nio.channels.AsynchronousByteChannel",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.nio.channels.AsynchronousChannel"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "read",
+      "parameters": [
+        "java.nio.ByteBuffer",
+        "A",
+        "java.nio.channels.CompletionHandler<java.lang.Integer,? super A>"
+      ],
+      "type_parameters": [
+        "A"
+      ],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.channels.ReadPendingException",
+        "java.nio.channels.ShutdownChannelGroupException",
+        "java.nio.channels.group"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.nio.ByteBuffer",
+        "A",
+        "java.nio.channels.CompletionHandler<java.lang.Integer,? super A>"
+      ],
+      "type_parameters": [
+        "A"
+      ],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.WritePendingException",
+        "java.nio.channels.ShutdownChannelGroupException",
+        "java.nio.channels.group"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "java.nio.ByteBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.Future<java.lang.Integer>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.channels.ReadPendingException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.nio.ByteBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.Future<java.lang.Integer>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.WritePendingException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

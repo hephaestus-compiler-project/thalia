@@ -1,0 +1,84 @@
+{
+  "name": "java.text.spi.BreakIteratorProvider",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.util.spi.LocaleServiceProvider"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "getLineInstance",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.text.BreakIterator",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "getAvailableLocales()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getWordInstance",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.text.BreakIterator",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "getAvailableLocales()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getCharacterInstance",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.text.BreakIterator",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "getAvailableLocales()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getSentenceInstance",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.text.BreakIterator",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "getAvailableLocales()"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

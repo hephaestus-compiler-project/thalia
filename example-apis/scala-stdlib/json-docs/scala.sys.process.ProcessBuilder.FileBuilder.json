@@ -1,0 +1,67 @@
+{
+  "name": "scala.sys.process.ProcessBuilder.FileBuilder",
+  "type_parameters": [],
+  "implements": [
+    "scala.sys.process.ProcessBuilder.Sink",
+    "scala.sys.process.ProcessBuilder.Source"
+  ],
+  "inherits": [
+    "scala.sys.process.ProcessBuilder.Sink",
+    "scala.sys.process.ProcessBuilder.Source"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "#<<",
+      "parameters": [
+        "scala.sys.process.ProcessBuilder"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "#<<",
+      "parameters": [
+        "=> scala.sys.process.processInternal.InputStream"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "#<<",
+      "parameters": [
+        "scala.sys.process.processInternal.URL"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "#<<",
+      "parameters": [
+        "scala.sys.process.processInternal.File"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

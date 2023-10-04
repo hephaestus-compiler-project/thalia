@@ -1,0 +1,33 @@
+{
+  "name": "kotlin.contracts.SimpleEffect",
+  "type_parameters": [],
+  "implements": [
+    "kotlin.contracts.Effect"
+  ],
+  "inherits": [
+    "kotlin.contracts.Effect"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "implies",
+      "parameters": [
+        "kotlin.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.contracts.ConditionalEffect",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

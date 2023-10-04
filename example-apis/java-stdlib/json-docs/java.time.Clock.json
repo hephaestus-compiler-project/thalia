@@ -1,0 +1,209 @@
+{
+  "name": "java.time.Clock",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "fixed",
+      "parameters": [
+        "java.time.Instant",
+        "java.time.ZoneId"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Clock",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "millis",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "system",
+      "parameters": [
+        "java.time.ZoneId"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Clock",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "systemUTC",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.Clock",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "tickMillis",
+      "parameters": [
+        "java.time.ZoneId"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Clock",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "tickSeconds",
+      "parameters": [
+        "java.time.ZoneId"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Clock",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getZone",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.ZoneId",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instant",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.Instant",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "offset",
+      "parameters": [
+        "java.time.Clock",
+        "java.time.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Clock",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "systemDefaultZone",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.Clock",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "tick",
+      "parameters": [
+        "java.time.Clock",
+        "java.time.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Clock",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "tickMinutes",
+      "parameters": [
+        "java.time.ZoneId"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Clock",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "withZone",
+      "parameters": [
+        "java.time.ZoneId"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Clock",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

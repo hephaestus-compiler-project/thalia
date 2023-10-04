@@ -1,0 +1,68 @@
+{
+  "name": "groovy.lang.MetaClassRegistry.MetaClassCreationHandle",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "createNormalMetaClass",
+      "parameters": [
+        "java.lang.Class",
+        "groovy.lang.MetaClassRegistry"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.MetaClass",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setDisableCustomMetaClassLookup",
+      "parameters": [
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "java.lang.Class",
+        "groovy.lang.MetaClassRegistry"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.MetaClass",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isDisableCustomMetaClassLookup",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

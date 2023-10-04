@@ -1,0 +1,2900 @@
+{
+  "name": "kotlin.ranges",
+  "methods": [
+    {
+      "name": "coerceAtLeast",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "T",
+      "receiver": "T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtLeast",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Byte",
+      "receiver": "kotlin.Byte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtLeast",
+      "parameters": [
+        "kotlin.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": "kotlin.Double",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtLeast",
+      "parameters": [
+        "kotlin.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Float",
+      "receiver": "kotlin.Float",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtLeast",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.Int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtLeast",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": "kotlin.Long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtLeast",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Short",
+      "receiver": "kotlin.Short",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtLeast",
+      "parameters": [
+        "kotlin.UByte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UByte",
+      "receiver": "kotlin.UByte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtLeast",
+      "parameters": [
+        "kotlin.UInt"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt",
+      "receiver": "kotlin.UInt",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtLeast",
+      "parameters": [
+        "kotlin.ULong"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ULong",
+      "receiver": "kotlin.ULong",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtLeast",
+      "parameters": [
+        "kotlin.UShort"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UShort",
+      "receiver": "kotlin.UShort",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtMost",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "T",
+      "receiver": "T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtMost",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Byte",
+      "receiver": "kotlin.Byte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtMost",
+      "parameters": [
+        "kotlin.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": "kotlin.Double",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtMost",
+      "parameters": [
+        "kotlin.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Float",
+      "receiver": "kotlin.Float",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtMost",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.Int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtMost",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": "kotlin.Long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtMost",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Short",
+      "receiver": "kotlin.Short",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtMost",
+      "parameters": [
+        "kotlin.UByte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UByte",
+      "receiver": "kotlin.UByte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtMost",
+      "parameters": [
+        "kotlin.UInt"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt",
+      "receiver": "kotlin.UInt",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtMost",
+      "parameters": [
+        "kotlin.ULong"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ULong",
+      "receiver": "kotlin.ULong",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceAtMost",
+      "parameters": [
+        "kotlin.UShort"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UShort",
+      "receiver": "kotlin.UShort",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceIn",
+      "parameters": [
+        "kotlin.ranges.ClosedFloatingPointRange<T>"
+      ],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "T",
+      "receiver": "T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceIn",
+      "parameters": [
+        "kotlin.ranges.ClosedRange<T>"
+      ],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "T",
+      "receiver": "T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceIn",
+      "parameters": [
+        "kotlin.ranges.ClosedRange<kotlin.Int>"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.Int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceIn",
+      "parameters": [
+        "kotlin.ranges.ClosedRange<kotlin.Long>"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": "kotlin.Long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceIn",
+      "parameters": [
+        "kotlin.ranges.ClosedRange<kotlin.UInt>"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt",
+      "receiver": "kotlin.UInt",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceIn",
+      "parameters": [
+        "kotlin.ranges.ClosedRange<kotlin.ULong>"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ULong",
+      "receiver": "kotlin.ULong",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceIn",
+      "parameters": [
+        "T?",
+        "T?"
+      ],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "T",
+      "receiver": "T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceIn",
+      "parameters": [
+        "kotlin.Byte",
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Byte",
+      "receiver": "kotlin.Byte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceIn",
+      "parameters": [
+        "kotlin.Double",
+        "kotlin.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": "kotlin.Double",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceIn",
+      "parameters": [
+        "kotlin.Float",
+        "kotlin.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Float",
+      "receiver": "kotlin.Float",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceIn",
+      "parameters": [
+        "kotlin.Int",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.Int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceIn",
+      "parameters": [
+        "kotlin.Long",
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": "kotlin.Long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceIn",
+      "parameters": [
+        "kotlin.Short",
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Short",
+      "receiver": "kotlin.Short",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceIn",
+      "parameters": [
+        "kotlin.UByte",
+        "kotlin.UByte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UByte",
+      "receiver": "kotlin.UByte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceIn",
+      "parameters": [
+        "kotlin.UInt",
+        "kotlin.UInt"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt",
+      "receiver": "kotlin.UInt",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceIn",
+      "parameters": [
+        "kotlin.ULong",
+        "kotlin.ULong"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ULong",
+      "receiver": "kotlin.ULong",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "coerceIn",
+      "parameters": [
+        "kotlin.UShort",
+        "kotlin.UShort"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UShort",
+      "receiver": "kotlin.UShort",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "T?"
+      ],
+      "type_parameters": [
+        "T : kotlin.Any",
+        "R : kotlin.ranges.ClosedRange<T>",
+        "kotlin.collections.Iterable<T>"
+      ],
+      "return_type": "kotlin.Boolean",
+      "receiver": "R",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "T?"
+      ],
+      "type_parameters": [
+        "T : kotlin.Any",
+        "R : kotlin.ranges.OpenEndRange<T>",
+        "kotlin.collections.Iterable<T>"
+      ],
+      "return_type": "kotlin.Boolean",
+      "receiver": "R",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Char?"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.CharRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Int?"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.IntRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Long?"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.LongRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ClosedRange<kotlin.Byte>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ClosedRange<kotlin.Byte>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ClosedRange<kotlin.Byte>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ClosedRange<kotlin.Double>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ClosedRange<kotlin.Float>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ClosedRange<kotlin.Int>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ClosedRange<kotlin.Int>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ClosedRange<kotlin.Int>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ClosedRange<kotlin.Long>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ClosedRange<kotlin.Long>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ClosedRange<kotlin.Long>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ClosedRange<kotlin.Short>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ClosedRange<kotlin.Short>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ClosedRange<kotlin.Short>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.IntRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.IntRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.IntRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.LongRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.LongRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.LongRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.OpenEndRange<kotlin.Byte>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.OpenEndRange<kotlin.Byte>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.OpenEndRange<kotlin.Byte>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.OpenEndRange<kotlin.Double>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.OpenEndRange<kotlin.Int>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.OpenEndRange<kotlin.Int>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.OpenEndRange<kotlin.Int>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.OpenEndRange<kotlin.Long>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.OpenEndRange<kotlin.Long>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.OpenEndRange<kotlin.Long>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.OpenEndRange<kotlin.Short>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.OpenEndRange<kotlin.Short>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.OpenEndRange<kotlin.Short>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.UByte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.UIntRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.ULong"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.UIntRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.UShort"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.UIntRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.UByte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ULongRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.UInt"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ULongRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.UShort"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ULongRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.UInt?"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.UIntRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "kotlin.ULong?"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.ranges.ULongRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntProgression",
+      "receiver": "kotlin.Byte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntProgression",
+      "receiver": "kotlin.Byte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.LongProgression",
+      "receiver": "kotlin.Byte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntProgression",
+      "receiver": "kotlin.Byte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.Char"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.CharProgression",
+      "receiver": "kotlin.Char",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntProgression",
+      "receiver": "kotlin.Int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntProgression",
+      "receiver": "kotlin.Int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.LongProgression",
+      "receiver": "kotlin.Int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntProgression",
+      "receiver": "kotlin.Int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.LongProgression",
+      "receiver": "kotlin.Long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.LongProgression",
+      "receiver": "kotlin.Long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.LongProgression",
+      "receiver": "kotlin.Long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.LongProgression",
+      "receiver": "kotlin.Long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntProgression",
+      "receiver": "kotlin.Short",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntProgression",
+      "receiver": "kotlin.Short",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.LongProgression",
+      "receiver": "kotlin.Short",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntProgression",
+      "receiver": "kotlin.Short",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.UByte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.UIntProgression",
+      "receiver": "kotlin.UByte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.UInt"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.UIntProgression",
+      "receiver": "kotlin.UInt",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.ULong"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.ULongProgression",
+      "receiver": "kotlin.ULong",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "downTo",
+      "parameters": [
+        "kotlin.UShort"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.UIntProgression",
+      "receiver": "kotlin.UShort",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "first",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Char",
+      "receiver": "kotlin.ranges.CharProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "first",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.ranges.IntProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "first",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": "kotlin.ranges.LongProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "first",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt",
+      "receiver": "kotlin.ranges.UIntProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "first",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.ULong",
+      "receiver": "kotlin.ranges.ULongProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "firstOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Char?",
+      "receiver": "kotlin.ranges.CharProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "firstOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Int?",
+      "receiver": "kotlin.ranges.IntProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "firstOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Long?",
+      "receiver": "kotlin.ranges.LongProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "firstOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt?",
+      "receiver": "kotlin.ranges.UIntProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "firstOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.ULong?",
+      "receiver": "kotlin.ranges.ULongProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "last",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Char",
+      "receiver": "kotlin.ranges.CharProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "last",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.ranges.IntProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "last",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": "kotlin.ranges.LongProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "last",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt",
+      "receiver": "kotlin.ranges.UIntProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "last",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.ULong",
+      "receiver": "kotlin.ranges.ULongProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "lastOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Char?",
+      "receiver": "kotlin.ranges.CharProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "lastOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Int?",
+      "receiver": "kotlin.ranges.IntProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "lastOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Long?",
+      "receiver": "kotlin.ranges.LongProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "lastOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt?",
+      "receiver": "kotlin.ranges.UIntProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "lastOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.ULong?",
+      "receiver": "kotlin.ranges.ULongProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "random",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Char",
+      "receiver": "kotlin.ranges.CharRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "random",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.ranges.IntRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "random",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": "kotlin.ranges.LongRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "random",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt",
+      "receiver": "kotlin.ranges.UIntRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "random",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.ULong",
+      "receiver": "kotlin.ranges.ULongRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "random",
+      "parameters": [
+        "kotlin.random.Random"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Char",
+      "receiver": "kotlin.ranges.CharRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "random",
+      "parameters": [
+        "kotlin.random.Random"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.ranges.IntRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "random",
+      "parameters": [
+        "kotlin.random.Random"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": "kotlin.ranges.LongRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "random",
+      "parameters": [
+        "kotlin.random.Random"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt",
+      "receiver": "kotlin.ranges.UIntRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "random",
+      "parameters": [
+        "kotlin.random.Random"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ULong",
+      "receiver": "kotlin.ranges.ULongRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "randomOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Char?",
+      "receiver": "kotlin.ranges.CharRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "randomOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Int?",
+      "receiver": "kotlin.ranges.IntRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "randomOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Long?",
+      "receiver": "kotlin.ranges.LongRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "randomOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt?",
+      "receiver": "kotlin.ranges.UIntRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "randomOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.ULong?",
+      "receiver": "kotlin.ranges.ULongRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "randomOrNull",
+      "parameters": [
+        "kotlin.random.Random"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Char?",
+      "receiver": "kotlin.ranges.CharRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "randomOrNull",
+      "parameters": [
+        "kotlin.random.Random"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int?",
+      "receiver": "kotlin.ranges.IntRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "randomOrNull",
+      "parameters": [
+        "kotlin.random.Random"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Long?",
+      "receiver": "kotlin.ranges.LongRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "randomOrNull",
+      "parameters": [
+        "kotlin.random.Random"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt?",
+      "receiver": "kotlin.ranges.UIntRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "randomOrNull",
+      "parameters": [
+        "kotlin.random.Random"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ULong?",
+      "receiver": "kotlin.ranges.ULongRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "rangeTo",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "kotlin.ranges.ClosedRange<T>",
+      "receiver": "T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "rangeTo",
+      "parameters": [
+        "kotlin.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.ClosedFloatingPointRange<kotlin.Double>",
+      "receiver": "kotlin.Double",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "rangeTo",
+      "parameters": [
+        "kotlin.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.ClosedFloatingPointRange<kotlin.Float>",
+      "receiver": "kotlin.Float",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "rangeUntil",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "kotlin.ranges.OpenEndRange<T>",
+      "receiver": "T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "rangeUntil",
+      "parameters": [
+        "kotlin.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.OpenEndRange<kotlin.Double>",
+      "receiver": "kotlin.Double",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "rangeUntil",
+      "parameters": [
+        "kotlin.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.OpenEndRange<kotlin.Float>",
+      "receiver": "kotlin.Float",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "reversed",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.CharProgression",
+      "receiver": "kotlin.ranges.CharProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "reversed",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntProgression",
+      "receiver": "kotlin.ranges.IntProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "reversed",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.LongProgression",
+      "receiver": "kotlin.ranges.LongProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "reversed",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.UIntProgression",
+      "receiver": "kotlin.ranges.UIntProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "reversed",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.ULongProgression",
+      "receiver": "kotlin.ranges.ULongProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "step",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.CharProgression",
+      "receiver": "kotlin.ranges.CharProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "step",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntProgression",
+      "receiver": "kotlin.ranges.IntProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "step",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.LongProgression",
+      "receiver": "kotlin.ranges.LongProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "step",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.UIntProgression",
+      "receiver": "kotlin.ranges.UIntProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "step",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.ULongProgression",
+      "receiver": "kotlin.ranges.ULongProgression",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntRange",
+      "receiver": "kotlin.Byte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntRange",
+      "receiver": "kotlin.Byte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.LongRange",
+      "receiver": "kotlin.Byte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntRange",
+      "receiver": "kotlin.Byte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.Char"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.CharRange",
+      "receiver": "kotlin.Char",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntRange",
+      "receiver": "kotlin.Int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntRange",
+      "receiver": "kotlin.Int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.LongRange",
+      "receiver": "kotlin.Int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntRange",
+      "receiver": "kotlin.Int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.LongRange",
+      "receiver": "kotlin.Long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.LongRange",
+      "receiver": "kotlin.Long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.LongRange",
+      "receiver": "kotlin.Long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.LongRange",
+      "receiver": "kotlin.Long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntRange",
+      "receiver": "kotlin.Short",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntRange",
+      "receiver": "kotlin.Short",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.LongRange",
+      "receiver": "kotlin.Short",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.IntRange",
+      "receiver": "kotlin.Short",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.UByte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.UIntRange",
+      "receiver": "kotlin.UByte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.UInt"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.UIntRange",
+      "receiver": "kotlin.UInt",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.ULong"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.ULongRange",
+      "receiver": "kotlin.ULong",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "kotlin.UShort"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ranges.UIntRange",
+      "receiver": "kotlin.UShort",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "type_parameters": [],
+  "is_class": false,
+  "language": "kotlin"
+}

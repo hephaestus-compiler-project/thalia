@@ -1,0 +1,44 @@
+{
+  "name": "scala.util.control.Exception.By",
+  "type_parameters": [
+    "T",
+    "R"
+  ],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "by",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "By",
+      "parameters": [
+        "(T) => R"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

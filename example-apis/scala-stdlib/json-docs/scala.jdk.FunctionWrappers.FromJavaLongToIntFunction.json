@@ -1,0 +1,56 @@
+{
+  "name": "scala.jdk.FunctionWrappers.FromJavaLongToIntFunction",
+  "type_parameters": [],
+  "implements": [
+    "(scala.Long) => scala.Int",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "(scala.Long) => scala.Int",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "FromJavaLongToIntFunction",
+      "parameters": [
+        "java.util.function.LongToIntFunction"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "jf",
+      "type": "java.util.function.LongToIntFunction",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

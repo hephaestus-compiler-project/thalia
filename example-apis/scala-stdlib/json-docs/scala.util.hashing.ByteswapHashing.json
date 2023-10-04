@@ -1,0 +1,55 @@
+{
+  "name": "scala.util.hashing.ByteswapHashing",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [
+    "scala.util.hashing.Hashing[T]"
+  ],
+  "inherits": [
+    "scala.util.hashing.Hashing[T]"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "hash",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "ByteswapHashing",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "chain",
+      "parameters": [
+        "scala.util.hashing.Hashing[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.util.hashing.Hashing[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

@@ -1,0 +1,149 @@
+{
+  "name": "groovy.time.DatumDependentDuration",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "groovy.time.BaseDuration"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getFrom",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "groovy.time.BaseDuration.From",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getYears",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "groovy.time.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.DatumDependentDuration",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "groovy.time.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.DatumDependentDuration",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "groovy.time.TimeDuration"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.DatumDependentDuration",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getAgo",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Date",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getMonths",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "groovy.time.DatumDependentDuration"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.DatumDependentDuration",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "groovy.time.DatumDependentDuration"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.DatumDependentDuration",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "groovy.time.TimeDatumDependentDuration"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.time.DatumDependentDuration",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toMilliseconds",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

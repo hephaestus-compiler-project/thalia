@@ -1,0 +1,510 @@
+{
+  "name": "scala.concurrent.duration.DurationConversions",
+  "type_parameters": [],
+  "implements": [
+    "scala.Any"
+  ],
+  "inherits": [
+    "scala.Any"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "durationIn",
+      "parameters": [
+        "scala.concurrent.duration.TimeUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.FiniteDuration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected"
+    },
+    {
+      "name": "day",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "days",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "hour",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "hours",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "micro",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "micros",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "microsecond",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "microseconds",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "milli",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "millis",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "millisecond",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "milliseconds",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "minute",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "minutes",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "nano",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "nanos",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "nanosecond",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "nanoseconds",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "second",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "seconds",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.concurrent.duration.DurationConversions.Classifier[C]) => scala.concurrent.duration.DurationConversions.Classifier.R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "day",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "days",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "hour",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "hours",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "micro",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "micros",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "microsecond",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "microseconds",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "milli",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "millis",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "millisecond",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "milliseconds",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "minute",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "minutes",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "nano",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "nanos",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "nanosecond",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "nanoseconds",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "second",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "seconds",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

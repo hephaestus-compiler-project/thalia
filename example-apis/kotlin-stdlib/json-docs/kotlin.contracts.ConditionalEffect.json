@@ -1,0 +1,16 @@
+{
+  "name": "kotlin.contracts.ConditionalEffect",
+  "type_parameters": [],
+  "implements": [
+    "kotlin.contracts.Effect"
+  ],
+  "inherits": [
+    "kotlin.contracts.Effect"
+  ],
+  "class_type": 1,
+  "methods": [],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

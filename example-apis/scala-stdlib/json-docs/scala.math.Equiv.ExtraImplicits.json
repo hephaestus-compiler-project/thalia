@@ -1,0 +1,47 @@
+{
+  "name": "scala.math.Equiv.ExtraImplicits",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "seqEquiv",
+      "parameters": [
+        "scala.math.Equiv[T]"
+      ],
+      "type_parameters": [
+        "CC[X] <: scala.collection.Seq[X]",
+        "T"
+      ],
+      "return_type": "scala.math.Equiv[CC[T]]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "sortedSetEquiv",
+      "parameters": [
+        "scala.math.Equiv[T]"
+      ],
+      "type_parameters": [
+        "CC[X] <: scala.collection.SortedSet[X]",
+        "T"
+      ],
+      "return_type": "scala.math.Equiv[CC[T]]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

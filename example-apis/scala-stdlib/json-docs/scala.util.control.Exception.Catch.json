@@ -1,0 +1,214 @@
+{
+  "name": "scala.util.control.Exception.Catch",
+  "type_parameters": [
+    "+T"
+  ],
+  "implements": [
+    "scala.util.control.Exception.Described"
+  ],
+  "inherits": [
+    "scala.util.control.Exception.Described"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "andFinally",
+      "parameters": [
+        "=> scala.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.util.control.Exception.Catch[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "=> U"
+      ],
+      "type_parameters": [
+        "U >: T"
+      ],
+      "return_type": "U",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "either",
+      "parameters": [
+        "=> U"
+      ],
+      "type_parameters": [
+        "U >: T"
+      ],
+      "return_type": "scala.util.Either[scala.Throwable, U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "opt",
+      "parameters": [
+        "=> U"
+      ],
+      "type_parameters": [
+        "U >: T"
+      ],
+      "return_type": "scala.Option[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "or",
+      "parameters": [
+        "scala.util.control.Exception.Catch[U]"
+      ],
+      "type_parameters": [
+        "U >: T"
+      ],
+      "return_type": "scala.util.control.Exception.Catch[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "or",
+      "parameters": [
+        "scala.util.control.Exception.Catcher[U]"
+      ],
+      "type_parameters": [
+        "U >: T"
+      ],
+      "return_type": "scala.util.control.Exception.Catch[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "withApply",
+      "parameters": [
+        "(scala.Throwable) => U"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "scala.util.control.Exception.Catch[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "withTry",
+      "parameters": [
+        "=> U"
+      ],
+      "type_parameters": [
+        "U >: T"
+      ],
+      "return_type": "scala.util.Try[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Catch",
+      "parameters": [
+        "scala.util.control.Exception.Catcher[T]",
+        "scala.Option[scala.util.control.Exception.Finally]",
+        "(scala.Throwable) => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "fin",
+      "type": "scala.Option[scala.util.control.Exception.Finally]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "name",
+      "type": "java.lang.String",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "protected",
+      "is_static": false
+    },
+    {
+      "name": "pf",
+      "type": "scala.util.control.Exception.Catcher[T]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "rethrow",
+      "type": "(scala.Throwable) => scala.Boolean",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toEither",
+      "type": "scala.util.control.Exception.Catch[scala.util.Either[scala.Throwable, T]]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toOption",
+      "type": "scala.util.control.Exception.Catch[scala.Option[T]]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toTry",
+      "type": "scala.util.control.Exception.Catch[scala.util.Try[T]]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

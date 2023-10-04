@@ -1,0 +1,49 @@
+{
+  "name": "java.util.Spliterator.OfPrimitive",
+  "type_parameters": [
+    "T extends java.lang.Double",
+    "T_CONS extends java.util.function.DoubleConsumer",
+    "T_SPLITR extends java.util.Spliterator.OfPrimitive<T,T_CONS,T_SPLITR>"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.util.Spliterator<T>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "tryAdvance",
+      "parameters": [
+        "T_CONS"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "forEachRemaining",
+      "parameters": [
+        "T_CONS"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": true
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": "Spliterator",
+  "language": "java"
+}

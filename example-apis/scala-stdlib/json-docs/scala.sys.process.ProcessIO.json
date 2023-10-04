@@ -1,0 +1,133 @@
+{
+  "name": "scala.sys.process.ProcessIO",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "daemonized",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessIO",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "withError",
+      "parameters": [
+        "(scala.sys.process.processInternal.InputStream) => scala.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessIO",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "withInput",
+      "parameters": [
+        "(scala.sys.process.processInternal.OutputStream) => scala.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessIO",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "withOutput",
+      "parameters": [
+        "(scala.sys.process.processInternal.InputStream) => scala.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessIO",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "ProcessIO",
+      "parameters": [
+        "(scala.sys.process.processInternal.OutputStream) => scala.Unit",
+        "(scala.sys.process.processInternal.InputStream) => scala.Unit",
+        "(scala.sys.process.processInternal.InputStream) => scala.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ProcessIO",
+      "parameters": [
+        "(scala.sys.process.processInternal.OutputStream) => scala.Unit",
+        "(scala.sys.process.processInternal.InputStream) => scala.Unit",
+        "(scala.sys.process.processInternal.InputStream) => scala.Unit",
+        "scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "daemonizeThreads",
+      "type": "scala.Boolean",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "processError",
+      "type": "(scala.sys.process.processInternal.InputStream) => scala.Unit",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "processOutput",
+      "type": "(scala.sys.process.processInternal.InputStream) => scala.Unit",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "writeInput",
+      "type": "(scala.sys.process.processInternal.OutputStream) => scala.Unit",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

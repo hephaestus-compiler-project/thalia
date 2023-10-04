@@ -1,0 +1,304 @@
+{
+  "name": "kotlin.concurrent",
+  "methods": [
+    {
+      "name": "fixedRateTimer",
+      "parameters": [
+        "kotlin.String?",
+        "kotlin.Boolean",
+        "java.util.Date",
+        "kotlin.Long",
+        "java.util.TimerTask.() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Timer",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "fixedRateTimer",
+      "parameters": [
+        "kotlin.String?",
+        "kotlin.Boolean",
+        "kotlin.Long",
+        "kotlin.Long",
+        "java.util.TimerTask.() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Timer",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "getOrSet",
+      "parameters": [
+        "() -> T"
+      ],
+      "type_parameters": [
+        "T : kotlin.Any"
+      ],
+      "return_type": "T",
+      "receiver": "java.lang.ThreadLocal<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "() -> T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": "java.util.concurrent.locks.ReentrantReadWriteLock",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "schedule",
+      "parameters": [
+        "java.util.Date",
+        "java.util.TimerTask.() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.TimerTask",
+      "receiver": "java.util.Timer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "schedule",
+      "parameters": [
+        "kotlin.Long",
+        "java.util.TimerTask.() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.TimerTask",
+      "receiver": "java.util.Timer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "schedule",
+      "parameters": [
+        "java.util.Date",
+        "kotlin.Long",
+        "java.util.TimerTask.() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.TimerTask",
+      "receiver": "java.util.Timer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "schedule",
+      "parameters": [
+        "kotlin.Long",
+        "kotlin.Long",
+        "java.util.TimerTask.() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.TimerTask",
+      "receiver": "java.util.Timer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "scheduleAtFixedRate",
+      "parameters": [
+        "java.util.Date",
+        "kotlin.Long",
+        "java.util.TimerTask.() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.TimerTask",
+      "receiver": "java.util.Timer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "scheduleAtFixedRate",
+      "parameters": [
+        "kotlin.Long",
+        "kotlin.Long",
+        "java.util.TimerTask.() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.TimerTask",
+      "receiver": "java.util.Timer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "thread",
+      "parameters": [
+        "kotlin.Boolean",
+        "kotlin.Boolean",
+        "java.lang.ClassLoader?",
+        "kotlin.String?",
+        "kotlin.Int",
+        "() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Thread",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "timer",
+      "parameters": [
+        "kotlin.String?",
+        "kotlin.Boolean",
+        "java.util.Date",
+        "kotlin.Long",
+        "java.util.TimerTask.() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Timer",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "timer",
+      "parameters": [
+        "kotlin.String?",
+        "kotlin.Boolean",
+        "kotlin.Long",
+        "kotlin.Long",
+        "java.util.TimerTask.() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Timer",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "timerTask",
+      "parameters": [
+        "java.util.TimerTask.() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.TimerTask",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "withLock",
+      "parameters": [
+        "() -> T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": "java.util.concurrent.locks.Lock",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "() -> T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": "java.util.concurrent.locks.ReentrantReadWriteLock",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    }
+  ],
+  "fields": [],
+  "type_parameters": [],
+  "is_class": false,
+  "language": "kotlin"
+}

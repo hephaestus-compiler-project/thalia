@@ -1,0 +1,300 @@
+{
+  "name": "java.time.chrono.IsoChronology",
+  "type_parameters": [],
+  "implements": [
+    "java.io.Serializable"
+  ],
+  "inherits": [
+    "java.time.chrono.AbstractChronology"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "date",
+      "parameters": [
+        "java.time.chrono.Era",
+        "int",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.LocalDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "dateEpochDay",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.LocalDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "dateNow",
+      "parameters": [
+        "java.time.Clock"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.LocalDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "dateYearDay",
+      "parameters": [
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.LocalDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "epochSecond",
+      "parameters": [
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "java.time.ZoneOffset"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getId",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "localDateTime",
+      "parameters": [
+        "java.time.temporal.TemporalAccessor"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.LocalDateTime",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "resolveDate",
+      "parameters": [
+        "java.util.Map<java.time.temporal.TemporalField,java.lang.Long>",
+        "java.time.format.ResolverStyle"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.LocalDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "zonedDateTime",
+      "parameters": [
+        "java.time.temporal.TemporalAccessor"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.ZonedDateTime",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "date",
+      "parameters": [
+        "int",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.LocalDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "date",
+      "parameters": [
+        "java.time.temporal.TemporalAccessor"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.LocalDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "dateNow",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.LocalDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "dateNow",
+      "parameters": [
+        "java.time.ZoneId"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.LocalDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "dateYearDay",
+      "parameters": [
+        "java.time.chrono.Era",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.LocalDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getCalendarType",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isLeapYear",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "period",
+      "parameters": [
+        "int",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.Period",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "zonedDateTime",
+      "parameters": [
+        "java.time.Instant",
+        "java.time.ZoneId"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.ZonedDateTime",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "INSTANCE",
+      "type": "java.time.chrono.IsoChronology",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,148 @@
+{
+  "name": "scala.<:<",
+  "type_parameters": [
+    "-From",
+    "+To"
+  ],
+  "implements": [
+    "(scala.<:<.From) => To",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "(scala.<:<.From) => To",
+    "scala.Serializable"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "substituteBoth",
+      "parameters": [
+        "F[To, scala.<:<.From]"
+      ],
+      "type_parameters": [
+        "F[-_, +_]"
+      ],
+      "return_type": "F[scala.<:<.From, To]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "andThen",
+      "parameters": [
+        "scala.<:<[To, C]"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "scala.<:<[scala.<:<.From, C]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "andThen",
+      "parameters": [
+        "(To) => C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(scala.<:<.From) => C",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.<:<.From"
+      ],
+      "type_parameters": [],
+      "return_type": "To",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "compose",
+      "parameters": [
+        "scala.<:<[C, scala.<:<.From]"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "scala.<:<[C, To]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "compose",
+      "parameters": [
+        "(C) => scala.<:<.From"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "(C) => To",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "substituteCo",
+      "parameters": [
+        "F[scala.<:<.From]"
+      ],
+      "type_parameters": [
+        "F[+_]"
+      ],
+      "return_type": "F[To]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "substituteContra",
+      "parameters": [
+        "F[To]"
+      ],
+      "type_parameters": [
+        "F[-_]"
+      ],
+      "return_type": "F[scala.<:<.From]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "antisymm",
+      "parameters": [
+        "scala.<:<[A, B]",
+        "scala.<:<[B, A]"
+      ],
+      "type_parameters": [
+        "A",
+        "B"
+      ],
+      "return_type": "scala.=:=[A, B]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

@@ -1,0 +1,71 @@
+{
+  "name": "java.text.spi.DateFormatProvider",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.util.spi.LocaleServiceProvider"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "getDateTimeInstance",
+      "parameters": [
+        "int",
+        "int",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.text.DateFormat",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "getAvailableLocales()",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDateInstance",
+      "parameters": [
+        "int",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.text.DateFormat",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "getAvailableLocales()",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getTimeInstance",
+      "parameters": [
+        "int",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.text.DateFormat",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "getAvailableLocales()",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,30 @@
+{
+  "name": "scala.math.Ordering.Double.TotalOrdering",
+  "type_parameters": [],
+  "implements": [
+    "scala.math.Ordering[scala.Double]"
+  ],
+  "inherits": [
+    "scala.math.Ordering[scala.Double]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "compare",
+      "parameters": [
+        "scala.Double",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

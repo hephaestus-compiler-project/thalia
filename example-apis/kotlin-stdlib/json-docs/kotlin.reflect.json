@@ -1,0 +1,72 @@
+{
+  "name": "kotlin.reflect",
+  "methods": [
+    {
+      "name": "cast",
+      "parameters": [
+        "kotlin.Any?"
+      ],
+      "type_parameters": [
+        "T : kotlin.Any"
+      ],
+      "return_type": "T",
+      "receiver": "kotlin.reflect.KClass<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "safeCast",
+      "parameters": [
+        "kotlin.Any?"
+      ],
+      "type_parameters": [
+        "T : kotlin.Any"
+      ],
+      "return_type": "T?",
+      "receiver": "kotlin.reflect.KClass<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "typeOf",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.reflect.KType",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    }
+  ],
+  "fields": [
+    {
+      "name": "javaType",
+      "type": "java.lang.reflect.Type",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.reflect.KType",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "type_parameters": [],
+  "is_class": false,
+  "language": "kotlin"
+}

@@ -1,0 +1,56 @@
+{
+  "name": "scala.Tuple1",
+  "type_parameters": [
+    "+T1"
+  ],
+  "implements": [
+    "scala.Product1[T1]",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "scala.Product1[T1]",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Predef.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple1",
+      "parameters": [
+        "T1"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "_1",
+      "type": "T1",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

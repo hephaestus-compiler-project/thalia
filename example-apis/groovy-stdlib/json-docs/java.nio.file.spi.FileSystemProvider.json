@@ -1,0 +1,566 @@
+{
+  "name": "java.nio.file.spi.FileSystemProvider",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "copy",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.nio.file.Path",
+        "java.nio.file.CopyOption..."
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.nio.file.FileAlreadyExistsException",
+        "java.nio.file.DirectoryNotEmptyException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkRead",
+        "checkWrite",
+        "java.nio.file.LinkPermission"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "createLink",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.nio.file.FileAlreadyExistsException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "java.nio.file.LinkPermission",
+        "checkWrite"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "delete",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.file.NoSuchFileException",
+        "java.nio.file.DirectoryNotEmptyException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "SecurityManager.checkDelete(String)"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getFileAttributeView",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.lang.Class<V>",
+        "java.nio.file.LinkOption..."
+      ],
+      "type_parameters": [
+        "V extends java.nio.file.attribute.FileAttributeView"
+      ],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getFileSystem",
+      "parameters": [
+        "java.net.URI"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.FileSystem",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.file.FileSystemNotFoundException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getScheme",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isHidden",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkRead"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "move",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.nio.file.Path",
+        "java.nio.file.CopyOption..."
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.nio.file.FileAlreadyExistsException",
+        "java.nio.file.DirectoryNotEmptyException",
+        "java.nio.file.AtomicMoveNotSupportedException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkWrite"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "newByteChannel",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.util.Set<? extends java.nio.file.OpenOption>",
+        "java.nio.file.attribute.FileAttribute<?>..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.SeekableByteChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.UnsupportedOperationException",
+        "java.nio.file.FileAlreadyExistsException",
+        "CREATE_NEW",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkRead",
+        "checkWrite",
+        "checkDelete"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "newFileChannel",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.util.Set<? extends java.nio.file.OpenOption>",
+        "java.nio.file.attribute.FileAttribute<?>..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.FileChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.UnsupportedOperationException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "SecurityManager.checkRead(String)",
+        "SecurityManager.checkWrite(String)"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "newFileSystem",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.util.Map<java.lang.String,?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.FileSystem",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.IllegalArgumentException",
+        "java.io.IOException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "newOutputStream",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.nio.file.OpenOption..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.OutputStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.UnsupportedOperationException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkWrite",
+        "checkDelete"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "readAttributes",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.lang.String",
+        "java.nio.file.LinkOption..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.IllegalArgumentException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkRead"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setAttribute",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.lang.String",
+        "java.lang.Object",
+        "java.nio.file.LinkOption..."
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ClassCastException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkWrite"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "checkAccess",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.nio.file.AccessMode..."
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.nio.file.NoSuchFileException",
+        "java.nio.file.AccessDeniedException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkRead",
+        "checkWrite",
+        "checkExec"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "createDirectory",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.nio.file.attribute.FileAttribute<?>..."
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.nio.file.FileAlreadyExistsException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkWrite"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "createSymbolicLink",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.nio.file.Path",
+        "java.nio.file.attribute.FileAttribute<?>..."
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.nio.file.FileAlreadyExistsException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "java.nio.file.LinkPermission",
+        "checkWrite"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "deleteIfExists",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.file.DirectoryNotEmptyException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "SecurityManager.checkDelete(String)"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getFileStore",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.FileStore",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkRead",
+        "java.lang.RuntimePermission"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getPath",
+      "parameters": [
+        "java.net.URI"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.file.FileSystemNotFoundException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "installedProviders",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.List<java.nio.file.spi.FileSystemProvider>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.ServiceConfigurationError"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isSameFile",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkRead"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "newAsynchronousFileChannel",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.util.Set<? extends java.nio.file.OpenOption>",
+        "java.util.concurrent.ExecutorService",
+        "java.nio.file.attribute.FileAttribute<?>..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.AsynchronousFileChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.UnsupportedOperationException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "SecurityManager.checkRead(String)",
+        "SecurityManager.checkWrite(String)"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "newDirectoryStream",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.nio.file.DirectoryStream.Filter<? super java.nio.file.Path>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.DirectoryStream<java.nio.file.Path>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.file.NotDirectoryException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkRead"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "newFileSystem",
+      "parameters": [
+        "java.net.URI",
+        "java.util.Map<java.lang.String,?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.FileSystem",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "java.nio.file.FileSystemAlreadyExistsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "newInputStream",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.nio.file.OpenOption..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.InputStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.UnsupportedOperationException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkRead"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "readAttributes",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.lang.Class<A>",
+        "java.nio.file.LinkOption..."
+      ],
+      "type_parameters": [
+        "A extends java.nio.file.attribute.BasicFileAttributes"
+      ],
+      "return_type": "A",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkRead"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "readSymbolicLink",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.nio.file.NotLinkException",
+        "java.io.IOException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

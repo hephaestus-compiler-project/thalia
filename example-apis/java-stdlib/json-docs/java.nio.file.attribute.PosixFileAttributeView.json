@@ -1,0 +1,81 @@
+{
+  "name": "java.nio.file.attribute.PosixFileAttributeView",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.nio.file.attribute.BasicFileAttributeView",
+    "java.nio.file.attribute.FileOwnerAttributeView"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "readAttributes",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.PosixFileAttributes",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "java.lang.RuntimePermission",
+        "checkRead"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setPermissions",
+      "parameters": [
+        "java.util.Set<java.nio.file.attribute.PosixFilePermission>"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "java.lang.RuntimePermission",
+        "checkWrite"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "name",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setGroup",
+      "parameters": [
+        "java.nio.file.attribute.GroupPrincipal"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "java.lang.RuntimePermission",
+        "checkWrite"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

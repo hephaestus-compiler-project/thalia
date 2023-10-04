@@ -1,0 +1,269 @@
+{
+  "name": "java.lang.invoke.MethodHandle",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "asCollector",
+      "parameters": [
+        "java.lang.Class<?>",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "too many parameters",
+        "java.lang.invoke.WrongMethodTypeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "asSpreader",
+      "parameters": [
+        "int",
+        "java.lang.Class<?>",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "too many parameters",
+        "java.lang.invoke.WrongMethodTypeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "asType",
+      "parameters": [
+        "java.lang.invoke.MethodType"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.invoke.WrongMethodTypeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "bindTo",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "invokeExact",
+      "parameters": [
+        "java.lang.Object..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.invoke.WrongMethodTypeException",
+        "java.lang.Throwable"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "invokeWithArguments",
+      "parameters": [
+        "java.util.List<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.ClassCastException",
+        "java.lang.invoke.WrongMethodTypeException",
+        "java.lang.Throwable"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "withVarargs",
+      "parameters": [
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "asCollector",
+      "parameters": [
+        "int",
+        "java.lang.Class<?>",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "too many parameters",
+        "java.lang.invoke.WrongMethodTypeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "asFixedArity",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "asSpreader",
+      "parameters": [
+        "java.lang.Class<?>",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "too many parameters",
+        "java.lang.invoke.WrongMethodTypeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "asVarargsCollector",
+      "parameters": [
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodHandle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "invoke",
+      "parameters": [
+        "java.lang.Object..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.invoke.WrongMethodTypeException",
+        "java.lang.ClassCastException",
+        "java.lang.Throwable"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "invokeWithArguments",
+      "parameters": [
+        "java.lang.Object..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException",
+        "java.lang.invoke.WrongMethodTypeException",
+        "java.lang.Throwable"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isVarargsCollector",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "type",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.MethodType",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

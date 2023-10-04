@@ -1,0 +1,329 @@
+{
+  "name": "scala.sys.process.ProcessBuilder",
+  "type_parameters": [],
+  "implements": [
+    "scala.sys.process.ProcessBuilder.Source",
+    "scala.sys.process.ProcessBuilder.Sink"
+  ],
+  "inherits": [
+    "scala.sys.process.ProcessBuilder.Source",
+    "scala.sys.process.ProcessBuilder.Sink"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "!",
+      "parameters": [
+        "scala.sys.process.ProcessLogger"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "!!",
+      "parameters": [
+        "scala.sys.process.ProcessLogger"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Predef.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "!!<",
+      "parameters": [
+        "scala.sys.process.ProcessLogger"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Predef.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "!<",
+      "parameters": [
+        "scala.sys.process.ProcessLogger"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "###",
+      "parameters": [
+        "scala.sys.process.ProcessBuilder"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "#&&",
+      "parameters": [
+        "scala.sys.process.ProcessBuilder"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "#|",
+      "parameters": [
+        "scala.sys.process.ProcessBuilder"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "#||",
+      "parameters": [
+        "scala.sys.process.ProcessBuilder"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lazyLines",
+      "parameters": [
+        "scala.sys.process.ProcessLogger",
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.LazyList[scala.Predef.String]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lazyLines",
+      "parameters": [
+        "scala.sys.process.ProcessLogger"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.LazyList[scala.Predef.String]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lazyLines",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.LazyList[scala.Predef.String]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lazyLines_!",
+      "parameters": [
+        "scala.sys.process.ProcessLogger",
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.LazyList[scala.Predef.String]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lazyLines_!",
+      "parameters": [
+        "scala.sys.process.ProcessLogger"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.LazyList[scala.Predef.String]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lazyLines_!",
+      "parameters": [
+        "java.lang.Integer"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.LazyList[scala.Predef.String]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "run",
+      "parameters": [
+        "scala.sys.process.ProcessLogger",
+        "scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.Process",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "run",
+      "parameters": [
+        "scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.Process",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "run",
+      "parameters": [
+        "scala.sys.process.ProcessIO"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.Process",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "run",
+      "parameters": [
+        "scala.sys.process.ProcessLogger"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.Process",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "run",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.Process",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "!",
+      "type": "scala.Int",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "!!",
+      "type": "scala.Predef.String",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "!!<",
+      "type": "scala.Predef.String",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "!<",
+      "type": "scala.Int",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "canPipeTo",
+      "type": "scala.Boolean",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "hasExitValue",
+      "type": "scala.Boolean",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "lazyLines",
+      "type": "scala.LazyList[scala.Predef.String]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "lazyLines_!",
+      "type": "scala.LazyList[scala.Predef.String]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

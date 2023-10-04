@@ -1,0 +1,49 @@
+{
+  "name": "java.nio.file.attribute.PosixFileAttributes",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.nio.file.attribute.BasicFileAttributes"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "owner",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.UserPrincipal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "group",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.GroupPrincipal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "permissions",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Set<java.nio.file.attribute.PosixFilePermission>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

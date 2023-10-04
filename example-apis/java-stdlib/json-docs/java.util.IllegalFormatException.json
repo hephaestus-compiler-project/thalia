@@ -1,0 +1,15 @@
+{
+  "name": "java.util.IllegalFormatException",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.IllegalArgumentException"
+  ],
+  "class_type": 0,
+  "methods": [],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

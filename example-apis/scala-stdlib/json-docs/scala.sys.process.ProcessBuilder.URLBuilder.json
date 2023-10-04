@@ -1,0 +1,16 @@
+{
+  "name": "scala.sys.process.ProcessBuilder.URLBuilder",
+  "type_parameters": [],
+  "implements": [
+    "scala.sys.process.ProcessBuilder.Source"
+  ],
+  "inherits": [
+    "scala.sys.process.ProcessBuilder.Source"
+  ],
+  "class_type": 1,
+  "methods": [],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

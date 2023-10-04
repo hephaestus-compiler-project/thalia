@@ -1,0 +1,45 @@
+{
+  "name": "kotlin.time.TimeSource.Monotonic",
+  "type_parameters": [],
+  "implements": [
+    "kotlin.time.TimeSource.WithComparableMarks"
+  ],
+  "inherits": [
+    "kotlin.time.TimeSource.WithComparableMarks"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "markNow",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.time.-time-source.TimeSource.Monotonic.ValueTimeMark",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

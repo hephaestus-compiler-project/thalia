@@ -1,0 +1,356 @@
+{
+  "name": "java.nio.channels.SocketChannel",
+  "type_parameters": [],
+  "implements": [
+    "java.nio.channels.ByteChannel",
+    "java.nio.channels.ScatteringByteChannel",
+    "java.nio.channels.GatheringByteChannel",
+    "java.nio.channels.NetworkChannel"
+  ],
+  "inherits": [
+    "java.nio.channels.spi.AbstractSelectableChannel"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "connect",
+      "parameters": [
+        "java.net.SocketAddress"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.AlreadyConnectedException",
+        "java.nio.channels.ConnectionPendingException",
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.nio.channels.UnresolvedAddressException",
+        "java.nio.channels.UnsupportedAddressTypeException",
+        "java.lang.SecurityException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getLocalAddress",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.SocketAddress",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isConnected",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "open",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.SocketChannel",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "java.nio.ByteBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.NotYetConnectedException",
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "java.nio.ByteBuffer[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.NotYetConnectedException",
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "shutdownInput",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.SocketChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.NotYetConnectedException",
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "socket",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.Socket",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.nio.ByteBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.NotYetConnectedException",
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.nio.ByteBuffer[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.NotYetConnectedException",
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "bind",
+      "parameters": [
+        "java.net.SocketAddress"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.SocketChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ConnectionPendingException",
+        "java.nio.channels.AlreadyBoundException",
+        "java.nio.channels.UnsupportedAddressTypeException",
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkListen"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "finishConnect",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.NoConnectionPendingException",
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getRemoteAddress",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.SocketAddress",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isConnectionPending",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "open",
+      "parameters": [
+        "java.net.SocketAddress"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.SocketChannel",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.nio.channels.UnresolvedAddressException",
+        "java.nio.channels.UnsupportedAddressTypeException",
+        "java.lang.SecurityException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "java.nio.ByteBuffer[]"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.NotYetConnectedException",
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setOption",
+      "parameters": [
+        "java.net.SocketOption<T>",
+        "T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.nio.channels.SocketChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.IllegalArgumentException",
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "shutdownOutput",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.SocketChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.NotYetConnectedException",
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "validOps",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.nio.ByteBuffer[]"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.NotYetConnectedException",
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

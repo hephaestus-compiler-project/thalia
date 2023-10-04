@@ -1,0 +1,71 @@
+{
+  "name": "scala.math.Integral",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [
+    "scala.math.Numeric[T]"
+  ],
+  "inherits": [
+    "scala.math.Numeric[T]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "quot",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "rem",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "mkNumericOps",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.math.Integral.IntegralOps",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.math.Integral[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.math.Integral[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

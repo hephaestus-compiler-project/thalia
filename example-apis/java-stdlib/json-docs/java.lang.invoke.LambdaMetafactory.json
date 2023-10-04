@@ -1,0 +1,75 @@
+{
+  "name": "java.lang.invoke.LambdaMetafactory",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "metafactory",
+      "parameters": [
+        "java.lang.invoke.MethodHandles.Lookup",
+        "java.lang.String",
+        "java.lang.invoke.MethodType",
+        "java.lang.invoke.MethodType",
+        "java.lang.invoke.MethodHandle",
+        "java.lang.invoke.MethodType"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.CallSite",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.invoke.LambdaConversionException",
+        "java.lang.invoke.above"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "altMetafactory",
+      "parameters": [
+        "java.lang.invoke.MethodHandles.Lookup",
+        "java.lang.String",
+        "java.lang.invoke.MethodType",
+        "java.lang.Object..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.CallSite",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.invoke.LambdaConversionException",
+        "java.lang.invoke.above"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "FLAG_MARKERS",
+      "type": "int",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "FLAG_BRIDGES",
+      "type": "int",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "FLAG_SERIALIZABLE",
+      "type": "int",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

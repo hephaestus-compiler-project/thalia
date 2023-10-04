@@ -1,0 +1,30 @@
+{
+  "name": "scala.math.Ordering.ShortOrdering",
+  "type_parameters": [],
+  "implements": [
+    "scala.math.Ordering[scala.Short]"
+  ],
+  "inherits": [
+    "scala.math.Ordering[scala.Short]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "compare",
+      "parameters": [
+        "scala.Short",
+        "scala.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

@@ -1,0 +1,61 @@
+{
+  "name": "java.nio.file.attribute.BasicFileAttributeView",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.nio.file.attribute.FileAttributeView"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "readAttributes",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.BasicFileAttributes",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkRead"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "name",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setTimes",
+      "parameters": [
+        "java.nio.file.attribute.FileTime",
+        "java.nio.file.attribute.FileTime",
+        "java.nio.file.attribute.FileTime"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkWrite"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

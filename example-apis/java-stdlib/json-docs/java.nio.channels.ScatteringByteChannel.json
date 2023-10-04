@@ -1,0 +1,57 @@
+{
+  "name": "java.nio.channels.ScatteringByteChannel",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.nio.channels.ReadableByteChannel"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "read",
+      "parameters": [
+        "java.nio.ByteBuffer[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException",
+        "java.nio.channels.NonReadableChannelException",
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "java.nio.ByteBuffer[]"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.NonReadableChannelException",
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

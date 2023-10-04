@@ -1,0 +1,67 @@
+{
+  "name": "kotlin.properties.Delegates",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "notNull",
+      "parameters": [],
+      "type_parameters": [
+        "T : kotlin.Any"
+      ],
+      "return_type": "kotlin.properties.ReadWriteProperty<kotlin.Any?, T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "observable",
+      "parameters": [
+        "T",
+        "(property: kotlin.reflect.KProperty<*>, oldValue: T, newValue: T) -> kotlin.Unit"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.properties.ReadWriteProperty<kotlin.Any?, T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "vetoable",
+      "parameters": [
+        "T",
+        "(property: kotlin.reflect.KProperty<*>, oldValue: T, newValue: T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.properties.ReadWriteProperty<kotlin.Any?, T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

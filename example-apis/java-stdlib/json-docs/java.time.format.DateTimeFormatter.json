@@ -1,0 +1,533 @@
+{
+  "name": "java.time.format.DateTimeFormatter",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "formatTo",
+      "parameters": [
+        "java.time.temporal.TemporalAccessor",
+        "java.lang.Appendable"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDecimalStyle",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.format.DecimalStyle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getResolverFields",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Set<java.time.temporal.TemporalField>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getZone",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.ZoneId",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "ofLocalizedDate",
+      "parameters": [
+        "java.time.format.FormatStyle"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "ofLocalizedDateTime",
+      "parameters": [
+        "java.time.format.FormatStyle",
+        "java.time.format.FormatStyle"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "ofPattern",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parse",
+      "parameters": [
+        "java.lang.CharSequence"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAccessor",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.format.DateTimeParseException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parse",
+      "parameters": [
+        "java.lang.CharSequence",
+        "java.time.temporal.TemporalQuery<T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.format.DateTimeParseException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parsedExcessDays",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalQuery<java.time.Period>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "parseUnresolved",
+      "parameters": [
+        "java.lang.CharSequence",
+        "java.text.ParsePosition"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAccessor",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toFormat",
+      "parameters": [
+        "java.time.temporal.TemporalQuery<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.text.Format",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "withChronology",
+      "parameters": [
+        "java.time.chrono.Chronology"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.format.DateTimeFormatter",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "withLocale",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.format.DateTimeFormatter",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "withResolverFields",
+      "parameters": [
+        "java.util.Set<java.time.temporal.TemporalField>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.format.DateTimeFormatter",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "withZone",
+      "parameters": [
+        "java.time.ZoneId"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.format.DateTimeFormatter",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "format",
+      "parameters": [
+        "java.time.temporal.TemporalAccessor"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getChronology",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.Chronology",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getLocale",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Locale",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getResolverStyle",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.format.ResolverStyle",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "localizedBy",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.format.DateTimeFormatter",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "ofLocalizedDateTime",
+      "parameters": [
+        "java.time.format.FormatStyle"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "ofLocalizedTime",
+      "parameters": [
+        "java.time.format.FormatStyle"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "ofPattern",
+      "parameters": [
+        "java.lang.String",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parse",
+      "parameters": [
+        "java.lang.CharSequence",
+        "java.text.ParsePosition"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAccessor",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.format.DateTimeParseException",
+        "java.lang.IndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parseBest",
+      "parameters": [
+        "java.lang.CharSequence",
+        "java.time.temporal.TemporalQuery<?>..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAccessor",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.time.format.DateTimeParseException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "parsedLeapSecond",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalQuery<java.lang.Boolean>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toFormat",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.text.Format",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "withDecimalStyle",
+      "parameters": [
+        "java.time.format.DecimalStyle"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.format.DateTimeFormatter",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "withResolverFields",
+      "parameters": [
+        "java.time.temporal.TemporalField..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.format.DateTimeFormatter",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "withResolverStyle",
+      "parameters": [
+        "java.time.format.ResolverStyle"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.format.DateTimeFormatter",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "ISO_DATE",
+      "type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ISO_INSTANT",
+      "type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ISO_LOCAL_DATE_TIME",
+      "type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ISO_OFFSET_DATE",
+      "type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ISO_OFFSET_TIME",
+      "type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ISO_TIME",
+      "type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ISO_ZONED_DATE_TIME",
+      "type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BASIC_ISO_DATE",
+      "type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ISO_DATE_TIME",
+      "type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ISO_LOCAL_DATE",
+      "type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ISO_LOCAL_TIME",
+      "type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ISO_OFFSET_DATE_TIME",
+      "type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ISO_ORDINAL_DATE",
+      "type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ISO_WEEK_DATE",
+      "type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "RFC_1123_DATE_TIME",
+      "type": "java.time.format.DateTimeFormatter",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

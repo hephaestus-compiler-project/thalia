@@ -1,0 +1,54 @@
+{
+  "name": "java.lang.invoke.StringConcatFactory",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "makeConcatWithConstants",
+      "parameters": [
+        "java.lang.invoke.MethodHandles.Lookup",
+        "java.lang.String",
+        "java.lang.invoke.MethodType",
+        "java.lang.String",
+        "java.lang.Object..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.CallSite",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.invoke.StringConcatException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "makeConcat",
+      "parameters": [
+        "java.lang.invoke.MethodHandles.Lookup",
+        "java.lang.String",
+        "java.lang.invoke.MethodType"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.invoke.CallSite",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.invoke.StringConcatException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

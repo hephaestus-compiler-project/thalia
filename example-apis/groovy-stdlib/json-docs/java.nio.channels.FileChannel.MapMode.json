@@ -1,0 +1,46 @@
+{
+  "name": "java.nio.channels.FileChannel.MapMode",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "READ_ONLY",
+      "type": "java.nio.channels.FileChannel.MapMode",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PRIVATE",
+      "type": "java.nio.channels.FileChannel.MapMode",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "READ_WRITE",
+      "type": "java.nio.channels.FileChannel.MapMode",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,45 @@
+{
+  "name": "java.lang.ref.WeakReference",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.lang.ref.Reference<T>"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "WeakReference",
+      "parameters": [
+        "T",
+        "java.lang.ref.ReferenceQueue<? super T>"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "WeakReference",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

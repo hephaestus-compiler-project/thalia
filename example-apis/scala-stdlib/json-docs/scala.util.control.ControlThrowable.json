@@ -1,0 +1,16 @@
+{
+  "name": "scala.util.control.ControlThrowable",
+  "type_parameters": [],
+  "implements": [
+    "scala.Throwable"
+  ],
+  "inherits": [
+    "scala.Throwable"
+  ],
+  "class_type": 2,
+  "methods": [],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

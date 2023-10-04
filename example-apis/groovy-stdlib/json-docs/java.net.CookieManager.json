@@ -1,0 +1,65 @@
+{
+  "name": "java.net.CookieManager",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.net.CookieHandler"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "setCookiePolicy",
+      "parameters": [
+        "java.net.CookiePolicy"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getCookieStore",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.CookieStore",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "CookieManager",
+      "parameters": [
+        "java.net.CookieStore",
+        "java.net.CookiePolicy"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "CookieManager",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

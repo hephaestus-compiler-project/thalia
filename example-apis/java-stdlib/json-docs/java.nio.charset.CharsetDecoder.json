@@ -1,0 +1,309 @@
+{
+  "name": "java.nio.charset.CharsetDecoder",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "charset",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.charset.Charset",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "decode",
+      "parameters": [
+        "java.nio.ByteBuffer",
+        "java.nio.CharBuffer",
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.charset.CoderResult",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException",
+        "reset",
+        "java.nio.charset.CoderMalfunctionError"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "detectedCharset",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.charset.Charset",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException",
+        "java.lang.UnsupportedOperationException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "implFlush",
+      "parameters": [
+        "java.nio.CharBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.charset.CoderResult",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "implOnUnmappableCharacter",
+      "parameters": [
+        "java.nio.charset.CodingErrorAction"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "implReset",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isCharsetDetected",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "maxCharsPerByte",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "float",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "onUnmappableCharacter",
+      "parameters": [
+        "java.nio.charset.CodingErrorAction"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.charset.CharsetDecoder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "replaceWith",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.charset.CharsetDecoder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "unmappableCharacterAction",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.charset.CodingErrorAction",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "averageCharsPerByte",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "float",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "decode",
+      "parameters": [
+        "java.nio.ByteBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.CharBuffer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException",
+        "java.nio.charset.MalformedInputException",
+        "CodingErrorAction.REPORT",
+        "java.nio.charset.UnmappableCharacterException",
+        "CodingErrorAction.REPORT",
+        "java.nio.charset.CharacterCodingException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "decodeLoop",
+      "parameters": [
+        "java.nio.ByteBuffer",
+        "java.nio.CharBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.charset.CoderResult",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "flush",
+      "parameters": [
+        "java.nio.CharBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.charset.CoderResult",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException",
+        "flush",
+        "decode"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "implOnMalformedInput",
+      "parameters": [
+        "java.nio.charset.CodingErrorAction"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "implReplaceWith",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isAutoDetecting",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "malformedInputAction",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.charset.CodingErrorAction",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "onMalformedInput",
+      "parameters": [
+        "java.nio.charset.CodingErrorAction"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.charset.CharsetDecoder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "replacement",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "reset",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.charset.CharsetDecoder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

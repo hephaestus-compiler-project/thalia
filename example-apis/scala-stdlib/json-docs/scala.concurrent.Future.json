@@ -1,0 +1,470 @@
+{
+  "name": "scala.concurrent.Future",
+  "type_parameters": [
+    "+T"
+  ],
+  "implements": [
+    "scala.concurrent.Awaitable[T]"
+  ],
+  "inherits": [
+    "scala.concurrent.Awaitable[T]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "onComplete",
+      "parameters": [
+        "(scala.util.Try[T]) => U"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "(scala.concurrent.ExecutionContext) => scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "transform",
+      "parameters": [
+        "(scala.util.Try[T]) => scala.util.Try[S]"
+      ],
+      "type_parameters": [
+        "S"
+      ],
+      "return_type": "(scala.concurrent.ExecutionContext) => scala.concurrent.Future[S]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "transformWith",
+      "parameters": [
+        "(scala.util.Try[T]) => scala.concurrent.Future[S]"
+      ],
+      "type_parameters": [
+        "S"
+      ],
+      "return_type": "(scala.concurrent.ExecutionContext) => scala.concurrent.Future[S]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "andThen",
+      "parameters": [
+        "scala.PartialFunction[scala.util.Try[T], U]"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "(scala.concurrent.ExecutionContext) => scala.concurrent.Future[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "collect",
+      "parameters": [
+        "scala.PartialFunction[T, S]"
+      ],
+      "type_parameters": [
+        "S"
+      ],
+      "return_type": "(scala.concurrent.ExecutionContext) => scala.concurrent.Future[S]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fallbackTo",
+      "parameters": [
+        "scala.concurrent.Future[U]"
+      ],
+      "type_parameters": [
+        "U >: T"
+      ],
+      "return_type": "scala.concurrent.Future[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "filter",
+      "parameters": [
+        "(T) => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "(scala.concurrent.ExecutionContext) => scala.concurrent.Future[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "flatMap",
+      "parameters": [
+        "(T) => scala.concurrent.Future[S]"
+      ],
+      "type_parameters": [
+        "S"
+      ],
+      "return_type": "(scala.concurrent.ExecutionContext) => scala.concurrent.Future[S]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "flatten",
+      "parameters": [
+        "scala.<:<[T, scala.concurrent.Future[S]]"
+      ],
+      "type_parameters": [
+        "S"
+      ],
+      "return_type": "scala.concurrent.Future[S]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "foreach",
+      "parameters": [
+        "(T) => U"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "(scala.concurrent.ExecutionContext) => scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "map",
+      "parameters": [
+        "(T) => S"
+      ],
+      "type_parameters": [
+        "S"
+      ],
+      "return_type": "(scala.concurrent.ExecutionContext) => scala.concurrent.Future[S]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "mapTo",
+      "parameters": [
+        "scala.reflect.ClassTag[S]"
+      ],
+      "type_parameters": [
+        "S"
+      ],
+      "return_type": "scala.concurrent.Future[S]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "recover",
+      "parameters": [
+        "scala.PartialFunction[scala.Throwable, U]"
+      ],
+      "type_parameters": [
+        "U >: T"
+      ],
+      "return_type": "(scala.concurrent.ExecutionContext) => scala.concurrent.Future[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "recoverWith",
+      "parameters": [
+        "scala.PartialFunction[scala.Throwable, scala.concurrent.Future[U]]"
+      ],
+      "type_parameters": [
+        "U >: T"
+      ],
+      "return_type": "(scala.concurrent.ExecutionContext) => scala.concurrent.Future[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "transform",
+      "parameters": [
+        "(T) => S",
+        "(scala.Throwable) => scala.Throwable"
+      ],
+      "type_parameters": [
+        "S"
+      ],
+      "return_type": "(scala.concurrent.ExecutionContext) => scala.concurrent.Future[S]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "withFilter",
+      "parameters": [
+        "(T) => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "(scala.concurrent.ExecutionContext) => scala.concurrent.Future[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "zip",
+      "parameters": [
+        "scala.concurrent.Future[U]"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "scala.concurrent.Future[(T, U)]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "zipWith",
+      "parameters": [
+        "scala.concurrent.Future[U]"
+      ],
+      "type_parameters": [
+        "U",
+        "R"
+      ],
+      "return_type": "((T, U) => R) => (scala.concurrent.ExecutionContext) => scala.concurrent.Future[R]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "=> T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "(scala.concurrent.ExecutionContext) => scala.concurrent.Future[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "delegate",
+      "parameters": [
+        "=> scala.concurrent.Future[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "(scala.concurrent.ExecutionContext) => scala.concurrent.Future[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "failed",
+      "parameters": [
+        "scala.Throwable"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.concurrent.Future[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "find",
+      "parameters": [
+        "scala.collection.immutable.Iterable[scala.concurrent.Future[T]]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "((T) => scala.Boolean) => (scala.concurrent.ExecutionContext) => scala.concurrent.Future[scala.Option[T]]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "firstCompletedOf",
+      "parameters": [
+        "scala.IterableOnce[scala.concurrent.Future[T]]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "(scala.concurrent.ExecutionContext) => scala.concurrent.Future[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "foldLeft",
+      "parameters": [
+        "scala.collection.immutable.Iterable[scala.concurrent.Future[T]]"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "(R) => ((R, T) => R) => (scala.concurrent.ExecutionContext) => scala.concurrent.Future[R]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromTry",
+      "parameters": [
+        "scala.util.Try[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.concurrent.Future[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "reduceLeft",
+      "parameters": [
+        "scala.collection.immutable.Iterable[scala.concurrent.Future[T]]"
+      ],
+      "type_parameters": [
+        "T",
+        "R >: T"
+      ],
+      "return_type": "((R, T) => R) => (scala.concurrent.ExecutionContext) => scala.concurrent.Future[R]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "sequence",
+      "parameters": [
+        "CC[scala.concurrent.Future[A]]"
+      ],
+      "type_parameters": [
+        "A",
+        "CC[X] <: scala.IterableOnce[X]",
+        "To"
+      ],
+      "return_type": "(scala.collection.BuildFrom[CC[scala.concurrent.Future[A]], A, To], scala.concurrent.ExecutionContext) => scala.concurrent.Future[To]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "successful",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.concurrent.Future[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "traverse",
+      "parameters": [
+        "M[A]"
+      ],
+      "type_parameters": [
+        "A",
+        "B",
+        "M[X] <: scala.IterableOnce[X]"
+      ],
+      "return_type": "((A) => scala.concurrent.Future[B]) => (scala.collection.BuildFrom[M[A], B, M[B]], scala.concurrent.ExecutionContext) => scala.concurrent.Future[M[B]]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "isCompleted",
+      "type": "scala.Boolean",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "value",
+      "type": "scala.Option[scala.util.Try[T]]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "failed",
+      "type": "scala.concurrent.Future[scala.Throwable]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "unit",
+      "type": "scala.concurrent.Future[scala.Unit]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

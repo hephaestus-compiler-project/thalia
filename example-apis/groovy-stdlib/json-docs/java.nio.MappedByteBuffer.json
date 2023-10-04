@@ -1,0 +1,49 @@
+{
+  "name": "java.nio.MappedByteBuffer",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.nio.ByteBuffer"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "isLoaded",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "force",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.MappedByteBuffer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "load",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.MappedByteBuffer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,116 @@
+{
+  "name": "kotlin.coroutines.EmptyCoroutineContext",
+  "type_parameters": [],
+  "implements": [
+    "kotlin.coroutines.CoroutineContext",
+    "java.io.Serializable"
+  ],
+  "inherits": [
+    "kotlin.coroutines.CoroutineContext",
+    "java.io.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "fold",
+      "parameters": [
+        "R",
+        "(R, kotlin.coroutines.CoroutineContext.Element) -> R"
+      ],
+      "type_parameters": [
+        "R"
+      ],
+      "return_type": "R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "kotlin.coroutines.CoroutineContext.Key<E>"
+      ],
+      "type_parameters": [
+        "E : kotlin.coroutines.CoroutineContext.Element"
+      ],
+      "return_type": "E?",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minusKey",
+      "parameters": [
+        "kotlin.coroutines.CoroutineContext.Key<*>"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.coroutines.CoroutineContext",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "kotlin.coroutines.CoroutineContext"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.coroutines.CoroutineContext",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

@@ -1,0 +1,57 @@
+{
+  "name": "java.security.spec.ECPublicKeySpec",
+  "type_parameters": [],
+  "implements": [
+    "java.security.spec.KeySpec"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getW",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.security.spec.ECPoint",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getParams",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.security.spec.ECParameterSpec",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "ECPublicKeySpec",
+      "parameters": [
+        "java.security.spec.ECPoint",
+        "java.security.spec.ECParameterSpec"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

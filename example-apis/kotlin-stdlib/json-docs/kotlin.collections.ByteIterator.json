@@ -1,0 +1,59 @@
+{
+  "name": "kotlin.collections.ByteIterator",
+  "type_parameters": [],
+  "implements": [
+    "kotlin.collections.Iterator<kotlin.Byte>"
+  ],
+  "inherits": [
+    "kotlin.collections.Iterator<kotlin.Byte>"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "forEachRemaining",
+      "parameters": [
+        "java.util.function.Consumer<in kotlin.Byte>"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "hasNext",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "next",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Byte",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "nextByte",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Byte",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

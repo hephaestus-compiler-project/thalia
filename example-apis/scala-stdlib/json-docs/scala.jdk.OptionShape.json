@@ -1,0 +1,105 @@
+{
+  "name": "scala.jdk.OptionShape",
+  "type_parameters": [
+    "A",
+    "O"
+  ],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "fromJava",
+      "parameters": [
+        "java.util.Optional[A]"
+      ],
+      "type_parameters": [],
+      "return_type": "O",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromScala",
+      "parameters": [
+        "scala.Option[A]"
+      ],
+      "type_parameters": [],
+      "return_type": "O",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "doubleOptionShape",
+      "type": "scala.jdk.OptionShape[scala.Double, java.util.OptionalDouble]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "intOptionShape",
+      "type": "scala.jdk.OptionShape[scala.Int, java.util.OptionalInt]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "jDoubleOptionShape",
+      "type": "scala.jdk.OptionShape[java.lang.Double, java.util.OptionalDouble]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "jIntegerOptionShape",
+      "type": "scala.jdk.OptionShape[java.lang.Integer, java.util.OptionalInt]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "jLongOptionShape",
+      "type": "scala.jdk.OptionShape[java.lang.Long, java.util.OptionalLong]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "longOptionShape",
+      "type": "scala.jdk.OptionShape[scala.Long, java.util.OptionalLong]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

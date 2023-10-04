@@ -1,0 +1,107 @@
+{
+  "name": "scala.jdk.Priority2FunctionExtensions",
+  "type_parameters": [],
+  "implements": [
+    "scala.jdk.Priority3FunctionExtensions"
+  ],
+  "inherits": [
+    "scala.jdk.Priority3FunctionExtensions"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "enrichAsJavaBiConsumer",
+      "parameters": [
+        "(T, U) => scala.Unit"
+      ],
+      "type_parameters": [
+        "T",
+        "U"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichFunction2AsBiConsumer[T, U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaBiPredicate",
+      "parameters": [
+        "(T, U) => scala.Boolean"
+      ],
+      "type_parameters": [
+        "T",
+        "U"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichFunction2AsBiPredicate[T, U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaFunction",
+      "parameters": [
+        "(T) => R"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichFunction1AsFunction[T, R]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaToDoubleBiFunction",
+      "parameters": [
+        "(T, U) => scala.Double"
+      ],
+      "type_parameters": [
+        "T",
+        "U"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichFunction2AsToDoubleBiFunction[T, U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaToIntBiFunction",
+      "parameters": [
+        "(T, U) => scala.Int"
+      ],
+      "type_parameters": [
+        "T",
+        "U"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichFunction2AsToIntBiFunction[T, U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaToLongBiFunction",
+      "parameters": [
+        "(T, U) => scala.Long"
+      ],
+      "type_parameters": [
+        "T",
+        "U"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichFunction2AsToLongBiFunction[T, U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

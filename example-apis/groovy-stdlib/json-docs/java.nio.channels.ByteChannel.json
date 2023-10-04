@@ -1,0 +1,16 @@
+{
+  "name": "java.nio.channels.ByteChannel",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.nio.channels.ReadableByteChannel",
+    "java.nio.channels.WritableByteChannel"
+  ],
+  "class_type": 1,
+  "methods": [],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,43 @@
+{
+  "name": "scala.math.Equiv.Float.IeeeEquiv",
+  "type_parameters": [],
+  "implements": [
+    "scala.math.Equiv[scala.Float]"
+  ],
+  "inherits": [
+    "scala.math.Equiv[scala.Float]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "equiv",
+      "parameters": [
+        "scala.Float",
+        "scala.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "equiv",
+      "parameters": [
+        "scala.Float",
+        "scala.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

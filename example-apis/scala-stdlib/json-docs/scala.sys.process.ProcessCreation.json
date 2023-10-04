@@ -1,0 +1,210 @@
+{
+  "name": "scala.sys.process.ProcessCreation",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.Predef.String",
+        "=> scala.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.sys.process.processInternal.URL"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder.URLBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.sys.process.processInternal.File"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder.FileBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.sys.process.processInternal.JProcessBuilder"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.collection.Seq[scala.Predef.String]",
+        "scala.Option[scala.sys.process.processInternal.File]",
+        "(scala.Predef.String, scala.Predef.String)*"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.Predef.String",
+        "scala.Option[scala.sys.process.processInternal.File]",
+        "(scala.Predef.String, scala.Predef.String)*"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.collection.Seq[scala.Predef.String]",
+        "scala.sys.process.processInternal.File",
+        "(scala.Predef.String, scala.Predef.String)*"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.Predef.String",
+        "scala.sys.process.processInternal.File",
+        "(scala.Predef.String, scala.Predef.String)*"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.Predef.String",
+        "scala.collection.Seq[scala.Predef.String]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.collection.Seq[scala.Predef.String]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "applySeq",
+      "parameters": [
+        "scala.collection.Seq[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "((T) => scala.sys.process.ProcessBuilder.Source) => scala.collection.Seq[scala.sys.process.ProcessBuilder.Source]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "cat",
+      "parameters": [
+        "scala.collection.Seq[scala.sys.process.ProcessBuilder.Source]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "cat",
+      "parameters": [
+        "scala.sys.process.ProcessBuilder.Source",
+        "scala.sys.process.ProcessBuilder.Source*"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

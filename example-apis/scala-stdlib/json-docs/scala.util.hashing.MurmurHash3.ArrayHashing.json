@@ -1,0 +1,41 @@
+{
+  "name": "scala.util.hashing.MurmurHash3.ArrayHashing",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [
+    "scala.util.hashing.Hashing[scala.Array[T]]"
+  ],
+  "inherits": [
+    "scala.util.hashing.Hashing[scala.Array[T]]"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "hash",
+      "parameters": [
+        "scala.Array[T]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "ArrayHashing",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

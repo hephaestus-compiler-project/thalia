@@ -1,0 +1,247 @@
+{
+  "name": "java.net.Authenticator",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "getPasswordAuthentication",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.PasswordAuthentication",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRequestingPort",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRequestingProtocol",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRequestingSite",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.InetAddress",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRequestorType",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.Authenticator.RequestorType",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "requestPasswordAuthentication",
+      "parameters": [
+        "java.lang.String",
+        "java.net.InetAddress",
+        "int",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String",
+        "java.net.URL",
+        "java.net.Authenticator.RequestorType"
+      ],
+      "type_parameters": [],
+      "return_type": "java.net.PasswordAuthentication",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "requestPasswordAuthentication",
+      "parameters": [
+        "java.net.InetAddress",
+        "int",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.net.PasswordAuthentication",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setDefault",
+      "parameters": [
+        "java.net.Authenticator"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDefault",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.Authenticator",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getRequestingHost",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRequestingPrompt",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRequestingScheme",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getRequestingURL",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.URL",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "requestPasswordAuthentication",
+      "parameters": [
+        "java.lang.String",
+        "java.net.InetAddress",
+        "int",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.net.PasswordAuthentication",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "requestPasswordAuthentication",
+      "parameters": [
+        "java.net.Authenticator",
+        "java.lang.String",
+        "java.net.InetAddress",
+        "int",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String",
+        "java.net.URL",
+        "java.net.Authenticator.RequestorType"
+      ],
+      "type_parameters": [],
+      "return_type": "java.net.PasswordAuthentication",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "requestPasswordAuthenticationInstance",
+      "parameters": [
+        "java.lang.String",
+        "java.net.InetAddress",
+        "int",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String",
+        "java.net.URL",
+        "java.net.Authenticator.RequestorType"
+      ],
+      "type_parameters": [],
+      "return_type": "java.net.PasswordAuthentication",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

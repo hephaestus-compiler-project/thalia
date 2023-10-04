@@ -1,0 +1,299 @@
+{
+  "name": "scala.util.Either",
+  "type_parameters": [
+    "+A",
+    "+B"
+  ],
+  "implements": [
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "contains",
+      "parameters": [
+        "B1"
+      ],
+      "type_parameters": [
+        "B1 >: B"
+      ],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "exists",
+      "parameters": [
+        "(B) => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "filterOrElse",
+      "parameters": [
+        "(B) => scala.Boolean",
+        "=> A1"
+      ],
+      "type_parameters": [
+        "A1 >: A"
+      ],
+      "return_type": "scala.util.Either[A1, B]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "flatMap",
+      "parameters": [
+        "(B) => scala.util.Either[A1, B1]"
+      ],
+      "type_parameters": [
+        "A1 >: A",
+        "B1"
+      ],
+      "return_type": "scala.util.Either[A1, B1]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "flatten",
+      "parameters": [
+        "scala.<:<[B, scala.util.Either[A1, B1]]"
+      ],
+      "type_parameters": [
+        "A1 >: A",
+        "B1"
+      ],
+      "return_type": "scala.util.Either[A1, B1]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fold",
+      "parameters": [
+        "(A) => C",
+        "(B) => C"
+      ],
+      "type_parameters": [
+        "C"
+      ],
+      "return_type": "C",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "forall",
+      "parameters": [
+        "(B) => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "foreach",
+      "parameters": [
+        "(B) => U"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "getOrElse",
+      "parameters": [
+        "=> B1"
+      ],
+      "type_parameters": [
+        "B1 >: B"
+      ],
+      "return_type": "B1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "joinLeft",
+      "parameters": [
+        "scala.<:<[A1, scala.util.Either[C, B1]]"
+      ],
+      "type_parameters": [
+        "A1 >: A",
+        "B1 >: B",
+        "C"
+      ],
+      "return_type": "scala.util.Either[C, B1]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "joinRight",
+      "parameters": [
+        "scala.<:<[B1, scala.util.Either[A1, C]]"
+      ],
+      "type_parameters": [
+        "A1 >: A",
+        "B1 >: B",
+        "C"
+      ],
+      "return_type": "scala.util.Either[A1, C]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "map",
+      "parameters": [
+        "(B) => B1"
+      ],
+      "type_parameters": [
+        "B1"
+      ],
+      "return_type": "scala.util.Either[A, B1]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "orElse",
+      "parameters": [
+        "=> scala.util.Either[A1, B1]"
+      ],
+      "type_parameters": [
+        "A1 >: A",
+        "B1 >: B"
+      ],
+      "return_type": "scala.util.Either[A1, B1]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "toTry",
+      "parameters": [
+        "scala.<:<[A, scala.Throwable]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.util.Try[B]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "cond",
+      "parameters": [
+        "scala.Boolean",
+        "=> B",
+        "=> A"
+      ],
+      "type_parameters": [
+        "A",
+        "B"
+      ],
+      "return_type": "scala.util.Either[A, B]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "isLeft",
+      "type": "scala.Boolean",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "isRight",
+      "type": "scala.Boolean",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "left",
+      "type": "scala.util.Either.LeftProjection[A, B]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "swap",
+      "type": "scala.util.Either[B, A]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toOption",
+      "type": "scala.Option[B]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toSeq",
+      "type": "scala.collection.immutable.Seq[B]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

@@ -1,0 +1,36 @@
+{
+  "name": "kotlin.collections.Map.Entry",
+  "type_parameters": [
+    "out K",
+    "out V"
+  ],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [],
+  "fields": [
+    {
+      "name": "key",
+      "type": "K",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "value",
+      "type": "V",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

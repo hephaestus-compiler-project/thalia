@@ -1,0 +1,60 @@
+{
+  "name": "java.lang.ref.Cleaner",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "create",
+      "parameters": [
+        "java.util.concurrent.ThreadFactory"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ref.Cleaner",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalThreadStateException",
+        "not a new thread",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "create",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.ref.Cleaner",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "register",
+      "parameters": [
+        "java.lang.Object",
+        "java.lang.Runnable"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ref.Cleaner.Cleanable",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

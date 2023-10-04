@@ -1,0 +1,111 @@
+{
+  "name": "java.nio.file.attribute.AclEntry.Builder",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "setFlags",
+      "parameters": [
+        "java.nio.file.attribute.AclEntryFlag..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.AclEntry.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setPermissions",
+      "parameters": [
+        "java.nio.file.attribute.AclEntryPermission..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.AclEntry.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setPrincipal",
+      "parameters": [
+        "java.nio.file.attribute.UserPrincipal"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.AclEntry.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "build",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.AclEntry",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setFlags",
+      "parameters": [
+        "java.util.Set<java.nio.file.attribute.AclEntryFlag>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.AclEntry.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setPermissions",
+      "parameters": [
+        "java.util.Set<java.nio.file.attribute.AclEntryPermission>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.AclEntry.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ClassCastException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setType",
+      "parameters": [
+        "java.nio.file.attribute.AclEntryType"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.AclEntry.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

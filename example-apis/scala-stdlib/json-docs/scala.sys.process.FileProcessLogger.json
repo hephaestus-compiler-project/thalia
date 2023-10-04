@@ -1,0 +1,91 @@
+{
+  "name": "scala.sys.process.FileProcessLogger",
+  "type_parameters": [],
+  "implements": [
+    "scala.sys.process.ProcessLogger",
+    "java.io.Closeable",
+    "java.io.Flushable"
+  ],
+  "inherits": [
+    "scala.sys.process.ProcessLogger",
+    "java.io.Closeable",
+    "java.io.Flushable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "buffer",
+      "parameters": [
+        "=> T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "close",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "err",
+      "parameters": [
+        "=> scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "flush",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "out",
+      "parameters": [
+        "=> scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "FileProcessLogger",
+      "parameters": [
+        "java.io.File"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

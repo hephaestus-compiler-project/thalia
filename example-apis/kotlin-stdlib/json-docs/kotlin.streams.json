@@ -1,0 +1,141 @@
+{
+  "name": "kotlin.streams",
+  "methods": [
+    {
+      "name": "asSequence",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.sequences.Sequence<kotlin.Double>",
+      "receiver": "java.util.stream.DoubleStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "asSequence",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.sequences.Sequence<kotlin.Int>",
+      "receiver": "java.util.stream.IntStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "asSequence",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.sequences.Sequence<kotlin.Long>",
+      "receiver": "java.util.stream.LongStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "asSequence",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "java.util.stream.Stream<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "asStream",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.stream.Stream<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toList",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.collections.List<kotlin.Double>",
+      "receiver": "java.util.stream.DoubleStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toList",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.collections.List<kotlin.Int>",
+      "receiver": "java.util.stream.IntStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toList",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.collections.List<kotlin.Long>",
+      "receiver": "java.util.stream.LongStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toList",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.collections.List<T>",
+      "receiver": "java.util.stream.Stream<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "type_parameters": [],
+  "is_class": false,
+  "language": "kotlin"
+}

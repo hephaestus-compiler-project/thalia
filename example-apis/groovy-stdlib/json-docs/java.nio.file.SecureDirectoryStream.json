@@ -1,0 +1,156 @@
+{
+  "name": "java.nio.file.SecureDirectoryStream",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.nio.file.DirectoryStream<T>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "deleteFile",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.file.ClosedDirectoryStreamException",
+        "java.nio.file.NoSuchFileException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkDelete"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getFileAttributeView",
+      "parameters": [
+        "T",
+        "java.lang.Class<V>",
+        "java.nio.file.LinkOption..."
+      ],
+      "type_parameters": [
+        "V extends java.nio.file.attribute.FileAttributeView"
+      ],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "newByteChannel",
+      "parameters": [
+        "T",
+        "java.util.Set<? extends java.nio.file.OpenOption>",
+        "java.nio.file.attribute.FileAttribute<?>..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.SeekableByteChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.file.ClosedDirectoryStreamException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.UnsupportedOperationException",
+        "java.nio.file.FileAlreadyExistsException",
+        "CREATE_NEW",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkRead",
+        "checkWrite"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "deleteDirectory",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.file.ClosedDirectoryStreamException",
+        "java.nio.file.NoSuchFileException",
+        "java.nio.file.DirectoryNotEmptyException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkDelete"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getFileAttributeView",
+      "parameters": [
+        "java.lang.Class<V>"
+      ],
+      "type_parameters": [
+        "V extends java.nio.file.attribute.FileAttributeView"
+      ],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "move",
+      "parameters": [
+        "T",
+        "java.nio.file.SecureDirectoryStream<T>",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.file.ClosedDirectoryStreamException",
+        "java.nio.file.FileAlreadyExistsException",
+        "java.nio.file.AtomicMoveNotSupportedException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkWrite"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "newDirectoryStream",
+      "parameters": [
+        "T",
+        "java.nio.file.LinkOption..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.SecureDirectoryStream<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.file.ClosedDirectoryStreamException",
+        "java.nio.file.NotDirectoryException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkRead"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,61 @@
+{
+  "name": "scala.math.Ordering.ExtraImplicits",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "infixOrderingOps",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "(scala.math.Ordering[T]) => scala.math.Ordering.OrderingOps",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "seqOrdering",
+      "parameters": [
+        "scala.math.Ordering[T]"
+      ],
+      "type_parameters": [
+        "CC[X] <: scala.collection.Seq[X]",
+        "T"
+      ],
+      "return_type": "scala.math.Ordering[CC[T]]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "sortedSetOrdering",
+      "parameters": [
+        "scala.math.Ordering[T]"
+      ],
+      "type_parameters": [
+        "CC[X] <: scala.collection.SortedSet[X]",
+        "T"
+      ],
+      "return_type": "scala.math.Ordering[CC[T]]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

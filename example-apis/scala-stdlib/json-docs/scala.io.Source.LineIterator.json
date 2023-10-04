@@ -1,0 +1,72 @@
+{
+  "name": "scala.io.Source.LineIterator",
+  "type_parameters": [],
+  "implements": [
+    "scala.collection.AbstractIterator[scala.Predef.String]",
+    "scala.Iterator[scala.Predef.String]"
+  ],
+  "inherits": [
+    "scala.collection.AbstractIterator[scala.Predef.String]",
+    "scala.Iterator[scala.Predef.String]"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getc",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "isNewline",
+      "parameters": [
+        "scala.Char"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "next",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Predef.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "LineIterator",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "hasNext",
+      "type": "scala.Boolean",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

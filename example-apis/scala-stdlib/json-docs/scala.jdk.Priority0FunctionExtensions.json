@@ -1,0 +1,886 @@
+{
+  "name": "scala.jdk.Priority0FunctionExtensions",
+  "type_parameters": [],
+  "implements": [
+    "scala.jdk.Priority1FunctionExtensions"
+  ],
+  "inherits": [
+    "scala.jdk.Priority1FunctionExtensions"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "enrichAsJavaBooleanSupplier",
+      "parameters": [
+        "() => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichFunction0AsBooleanSupplier",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaDoubleBinaryOperator",
+      "parameters": [
+        "(A0, A1) => scala.Double"
+      ],
+      "type_parameters": [
+        "A0",
+        "A1"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Double], scala.=:=[A1, scala.Double]) => scala.jdk.FunctionWrappers.RichFunction2AsDoubleBinaryOperator",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaDoubleConsumer",
+      "parameters": [
+        "(A0) => scala.Unit"
+      ],
+      "type_parameters": [
+        "A0"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Double]) => scala.jdk.FunctionWrappers.RichFunction1AsDoubleConsumer",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaDoublePredicate",
+      "parameters": [
+        "(A0) => scala.Boolean"
+      ],
+      "type_parameters": [
+        "A0"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Double]) => scala.jdk.FunctionWrappers.RichFunction1AsDoublePredicate",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaDoubleSupplier",
+      "parameters": [
+        "() => scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichFunction0AsDoubleSupplier",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaDoubleToIntFunction",
+      "parameters": [
+        "(A0) => scala.Int"
+      ],
+      "type_parameters": [
+        "A0"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Double]) => scala.jdk.FunctionWrappers.RichFunction1AsDoubleToIntFunction",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaDoubleToLongFunction",
+      "parameters": [
+        "(A0) => scala.Long"
+      ],
+      "type_parameters": [
+        "A0"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Double]) => scala.jdk.FunctionWrappers.RichFunction1AsDoubleToLongFunction",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaDoubleUnaryOperator",
+      "parameters": [
+        "(A0) => scala.Double"
+      ],
+      "type_parameters": [
+        "A0"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Double]) => scala.jdk.FunctionWrappers.RichFunction1AsDoubleUnaryOperator",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaIntBinaryOperator",
+      "parameters": [
+        "(A0, A1) => scala.Int"
+      ],
+      "type_parameters": [
+        "A0",
+        "A1"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Int], scala.=:=[A1, scala.Int]) => scala.jdk.FunctionWrappers.RichFunction2AsIntBinaryOperator",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaIntConsumer",
+      "parameters": [
+        "(A0) => scala.Unit"
+      ],
+      "type_parameters": [
+        "A0"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Int]) => scala.jdk.FunctionWrappers.RichFunction1AsIntConsumer",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaIntPredicate",
+      "parameters": [
+        "(A0) => scala.Boolean"
+      ],
+      "type_parameters": [
+        "A0"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Int]) => scala.jdk.FunctionWrappers.RichFunction1AsIntPredicate",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaIntSupplier",
+      "parameters": [
+        "() => scala.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichFunction0AsIntSupplier",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaIntToDoubleFunction",
+      "parameters": [
+        "(A0) => scala.Double"
+      ],
+      "type_parameters": [
+        "A0"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Int]) => scala.jdk.FunctionWrappers.RichFunction1AsIntToDoubleFunction",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaIntToLongFunction",
+      "parameters": [
+        "(A0) => scala.Long"
+      ],
+      "type_parameters": [
+        "A0"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Int]) => scala.jdk.FunctionWrappers.RichFunction1AsIntToLongFunction",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaIntUnaryOperator",
+      "parameters": [
+        "(A0) => scala.Int"
+      ],
+      "type_parameters": [
+        "A0"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Int]) => scala.jdk.FunctionWrappers.RichFunction1AsIntUnaryOperator",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaLongBinaryOperator",
+      "parameters": [
+        "(A0, A1) => scala.Long"
+      ],
+      "type_parameters": [
+        "A0",
+        "A1"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Long], scala.=:=[A1, scala.Long]) => scala.jdk.FunctionWrappers.RichFunction2AsLongBinaryOperator",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaLongConsumer",
+      "parameters": [
+        "(A0) => scala.Unit"
+      ],
+      "type_parameters": [
+        "A0"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Long]) => scala.jdk.FunctionWrappers.RichFunction1AsLongConsumer",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaLongPredicate",
+      "parameters": [
+        "(A0) => scala.Boolean"
+      ],
+      "type_parameters": [
+        "A0"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Long]) => scala.jdk.FunctionWrappers.RichFunction1AsLongPredicate",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaLongSupplier",
+      "parameters": [
+        "() => scala.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichFunction0AsLongSupplier",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaLongToDoubleFunction",
+      "parameters": [
+        "(A0) => scala.Double"
+      ],
+      "type_parameters": [
+        "A0"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Long]) => scala.jdk.FunctionWrappers.RichFunction1AsLongToDoubleFunction",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaLongToIntFunction",
+      "parameters": [
+        "(A0) => scala.Int"
+      ],
+      "type_parameters": [
+        "A0"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Long]) => scala.jdk.FunctionWrappers.RichFunction1AsLongToIntFunction",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsJavaLongUnaryOperator",
+      "parameters": [
+        "(A0) => scala.Long"
+      ],
+      "type_parameters": [
+        "A0"
+      ],
+      "return_type": "(scala.=:=[A0, scala.Long]) => scala.jdk.FunctionWrappers.RichFunction1AsLongUnaryOperator",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromBiConsumer",
+      "parameters": [
+        "java.util.function.BiConsumer[T, U]"
+      ],
+      "type_parameters": [
+        "T",
+        "U"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichBiConsumerAsFunction2[T, U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromBiFunction",
+      "parameters": [
+        "java.util.function.BiFunction[T, U, R]"
+      ],
+      "type_parameters": [
+        "T",
+        "U",
+        "R"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichBiFunctionAsFunction2[T, U, R]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromBiPredicate",
+      "parameters": [
+        "java.util.function.BiPredicate[T, U]"
+      ],
+      "type_parameters": [
+        "T",
+        "U"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichBiPredicateAsFunction2[T, U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromBinaryOperator",
+      "parameters": [
+        "java.util.function.BinaryOperator[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichBinaryOperatorAsFunction2[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromBooleanSupplier",
+      "parameters": [
+        "java.util.function.BooleanSupplier"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichBooleanSupplierAsFunction0",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromConsumer",
+      "parameters": [
+        "java.util.function.Consumer[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichConsumerAsFunction1[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromDoubleBinaryOperator",
+      "parameters": [
+        "java.util.function.DoubleBinaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichDoubleBinaryOperatorAsFunction2",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromDoubleConsumer",
+      "parameters": [
+        "java.util.function.DoubleConsumer"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichDoubleConsumerAsFunction1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromDoubleFunction",
+      "parameters": [
+        "java.util.function.DoubleFunction[R]"
+      ],
+      "type_parameters": [
+        "R"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichDoubleFunctionAsFunction1[R]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromDoublePredicate",
+      "parameters": [
+        "java.util.function.DoublePredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichDoublePredicateAsFunction1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromDoubleSupplier",
+      "parameters": [
+        "java.util.function.DoubleSupplier"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichDoubleSupplierAsFunction0",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromDoubleToIntFunction",
+      "parameters": [
+        "java.util.function.DoubleToIntFunction"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichDoubleToIntFunctionAsFunction1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromDoubleToLongFunction",
+      "parameters": [
+        "java.util.function.DoubleToLongFunction"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichDoubleToLongFunctionAsFunction1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromDoubleUnaryOperator",
+      "parameters": [
+        "java.util.function.DoubleUnaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichDoubleUnaryOperatorAsFunction1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromFunction",
+      "parameters": [
+        "java.util.function.Function[T, R]"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichFunctionAsFunction1[T, R]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromIntBinaryOperator",
+      "parameters": [
+        "java.util.function.IntBinaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichIntBinaryOperatorAsFunction2",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromIntConsumer",
+      "parameters": [
+        "java.util.function.IntConsumer"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichIntConsumerAsFunction1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromIntFunction",
+      "parameters": [
+        "java.util.function.IntFunction[R]"
+      ],
+      "type_parameters": [
+        "R"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichIntFunctionAsFunction1[R]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromIntPredicate",
+      "parameters": [
+        "java.util.function.IntPredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichIntPredicateAsFunction1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromIntSupplier",
+      "parameters": [
+        "java.util.function.IntSupplier"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichIntSupplierAsFunction0",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromIntToDoubleFunction",
+      "parameters": [
+        "java.util.function.IntToDoubleFunction"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichIntToDoubleFunctionAsFunction1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromIntToLongFunction",
+      "parameters": [
+        "java.util.function.IntToLongFunction"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichIntToLongFunctionAsFunction1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromIntUnaryOperator",
+      "parameters": [
+        "java.util.function.IntUnaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichIntUnaryOperatorAsFunction1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromLongBinaryOperator",
+      "parameters": [
+        "java.util.function.LongBinaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichLongBinaryOperatorAsFunction2",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromLongConsumer",
+      "parameters": [
+        "java.util.function.LongConsumer"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichLongConsumerAsFunction1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromLongFunction",
+      "parameters": [
+        "java.util.function.LongFunction[R]"
+      ],
+      "type_parameters": [
+        "R"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichLongFunctionAsFunction1[R]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromLongPredicate",
+      "parameters": [
+        "java.util.function.LongPredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichLongPredicateAsFunction1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromLongSupplier",
+      "parameters": [
+        "java.util.function.LongSupplier"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichLongSupplierAsFunction0",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromLongToDoubleFunction",
+      "parameters": [
+        "java.util.function.LongToDoubleFunction"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichLongToDoubleFunctionAsFunction1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromLongToIntFunction",
+      "parameters": [
+        "java.util.function.LongToIntFunction"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichLongToIntFunctionAsFunction1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromLongUnaryOperator",
+      "parameters": [
+        "java.util.function.LongUnaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.jdk.FunctionWrappers.RichLongUnaryOperatorAsFunction1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromObjDoubleConsumer",
+      "parameters": [
+        "java.util.function.ObjDoubleConsumer[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichObjDoubleConsumerAsFunction2[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromObjIntConsumer",
+      "parameters": [
+        "java.util.function.ObjIntConsumer[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichObjIntConsumerAsFunction2[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromObjLongConsumer",
+      "parameters": [
+        "java.util.function.ObjLongConsumer[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichObjLongConsumerAsFunction2[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromPredicate",
+      "parameters": [
+        "java.util.function.Predicate[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichPredicateAsFunction1[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromSupplier",
+      "parameters": [
+        "java.util.function.Supplier[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichSupplierAsFunction0[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromToDoubleBiFunction",
+      "parameters": [
+        "java.util.function.ToDoubleBiFunction[T, U]"
+      ],
+      "type_parameters": [
+        "T",
+        "U"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichToDoubleBiFunctionAsFunction2[T, U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromToDoubleFunction",
+      "parameters": [
+        "java.util.function.ToDoubleFunction[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichToDoubleFunctionAsFunction1[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromToIntBiFunction",
+      "parameters": [
+        "java.util.function.ToIntBiFunction[T, U]"
+      ],
+      "type_parameters": [
+        "T",
+        "U"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichToIntBiFunctionAsFunction2[T, U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromToIntFunction",
+      "parameters": [
+        "java.util.function.ToIntFunction[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichToIntFunctionAsFunction1[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromToLongBiFunction",
+      "parameters": [
+        "java.util.function.ToLongBiFunction[T, U]"
+      ],
+      "type_parameters": [
+        "T",
+        "U"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichToLongBiFunctionAsFunction2[T, U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromToLongFunction",
+      "parameters": [
+        "java.util.function.ToLongFunction[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichToLongFunctionAsFunction1[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enrichAsScalaFromUnaryOperator",
+      "parameters": [
+        "java.util.function.UnaryOperator[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.jdk.FunctionWrappers.RichUnaryOperatorAsFunction1[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

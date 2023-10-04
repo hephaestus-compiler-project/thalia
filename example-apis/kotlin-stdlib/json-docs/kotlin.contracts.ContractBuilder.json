@@ -1,0 +1,76 @@
+{
+  "name": "kotlin.contracts.ContractBuilder",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "callsInPlace",
+      "parameters": [
+        "kotlin.Function<R>",
+        "kotlin.contracts.InvocationKind"
+      ],
+      "type_parameters": [
+        "R"
+      ],
+      "return_type": "kotlin.contracts.CallsInPlace",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "returns",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.contracts.Returns",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "returns",
+      "parameters": [
+        "kotlin.Any?"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.contracts.Returns",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "returnsNotNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.contracts.ReturnsNotNull",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

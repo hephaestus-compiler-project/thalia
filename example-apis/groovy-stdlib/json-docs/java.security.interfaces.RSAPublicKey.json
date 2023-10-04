@@ -1,0 +1,35 @@
+{
+  "name": "java.security.interfaces.RSAPublicKey",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.security.PublicKey",
+    "java.security.interfaces.RSAKey"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "getPublicExponent",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.math.BigInteger",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "serialVersionUID",
+      "type": "long",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

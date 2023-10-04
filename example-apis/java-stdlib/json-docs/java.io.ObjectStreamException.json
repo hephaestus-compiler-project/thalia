@@ -1,0 +1,15 @@
+{
+  "name": "java.io.ObjectStreamException",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.io.IOException"
+  ],
+  "class_type": 2,
+  "methods": [],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

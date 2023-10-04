@@ -1,0 +1,155 @@
+{
+  "name": "kotlin.time.TimeSource.Monotonic.ValueTimeMark",
+  "type_parameters": [],
+  "implements": [
+    "kotlin.time.ComparableTimeMark"
+  ],
+  "inherits": [
+    "kotlin.time.ComparableTimeMark"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "compareTo",
+      "parameters": [
+        "kotlin.time.ComparableTimeMark"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "compareTo",
+      "parameters": [
+        "TimeSource.Monotonic.ValueTimeMark"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "elapsedNow",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.time.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "hasNotPassedNow",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "hasPassedNow",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "kotlin.time.ComparableTimeMark"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.time.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "kotlin.time.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "TimeSource.Monotonic.ValueTimeMark",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "TimeSource.Monotonic.ValueTimeMark"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.time.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "kotlin.time.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "TimeSource.Monotonic.ValueTimeMark",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

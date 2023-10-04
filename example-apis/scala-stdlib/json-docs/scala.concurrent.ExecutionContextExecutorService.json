@@ -1,0 +1,18 @@
+{
+  "name": "scala.concurrent.ExecutionContextExecutorService",
+  "type_parameters": [],
+  "implements": [
+    "scala.concurrent.ExecutionContextExecutor",
+    "java.util.concurrent.ExecutorService"
+  ],
+  "inherits": [
+    "scala.concurrent.ExecutionContextExecutor",
+    "java.util.concurrent.ExecutorService"
+  ],
+  "class_type": 1,
+  "methods": [],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "java.nio.file.attribute.GroupPrincipal",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.nio.file.attribute.UserPrincipal"
+  ],
+  "class_type": 1,
+  "methods": [],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

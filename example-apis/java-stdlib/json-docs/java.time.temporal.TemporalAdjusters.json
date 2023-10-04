@@ -1,0 +1,187 @@
+{
+  "name": "java.time.temporal.TemporalAdjusters",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "firstDayOfMonth",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAdjuster",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "firstDayOfNextYear",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAdjuster",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "firstInMonth",
+      "parameters": [
+        "java.time.DayOfWeek"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAdjuster",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "lastDayOfYear",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAdjuster",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "next",
+      "parameters": [
+        "java.time.DayOfWeek"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAdjuster",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "ofDateAdjuster",
+      "parameters": [
+        "java.util.function.UnaryOperator<java.time.LocalDate>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAdjuster",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "previousOrSame",
+      "parameters": [
+        "java.time.DayOfWeek"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAdjuster",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "dayOfWeekInMonth",
+      "parameters": [
+        "int",
+        "java.time.DayOfWeek"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAdjuster",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "firstDayOfNextMonth",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAdjuster",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "firstDayOfYear",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAdjuster",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "lastDayOfMonth",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAdjuster",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "lastInMonth",
+      "parameters": [
+        "java.time.DayOfWeek"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAdjuster",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "nextOrSame",
+      "parameters": [
+        "java.time.DayOfWeek"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAdjuster",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "previous",
+      "parameters": [
+        "java.time.DayOfWeek"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalAdjuster",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

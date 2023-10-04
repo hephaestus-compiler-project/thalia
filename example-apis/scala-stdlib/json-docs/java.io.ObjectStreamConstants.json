@@ -1,0 +1,194 @@
+{
+  "name": "java.io.ObjectStreamConstants",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [],
+  "fields": [
+    {
+      "name": "PROTOCOL_VERSION_1",
+      "type": "int",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SC_BLOCK_DATA",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SC_EXTERNALIZABLE",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SC_WRITE_METHOD",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "STREAM_MAGIC",
+      "type": "short",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SUBCLASS_IMPLEMENTATION_PERMISSION",
+      "type": "java.io.SerializablePermission",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TC_ARRAY",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TC_BLOCKDATA",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TC_CLASS",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TC_ENDBLOCKDATA",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TC_EXCEPTION",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TC_MAX",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TC_OBJECT",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TC_REFERENCE",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TC_STRING",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "baseWireHandle",
+      "type": "int",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "PROTOCOL_VERSION_2",
+      "type": "int",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SC_ENUM",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SC_SERIALIZABLE",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SERIAL_FILTER_PERMISSION",
+      "type": "java.io.SerializablePermission",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "STREAM_VERSION",
+      "type": "short",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SUBSTITUTION_PERMISSION",
+      "type": "java.io.SerializablePermission",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TC_BASE",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TC_BLOCKDATALONG",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TC_CLASSDESC",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TC_ENUM",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TC_LONGSTRING",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TC_NULL",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TC_PROXYCLASSDESC",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TC_RESET",
+      "type": "byte",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "kotlin.contracts",
+  "methods": [
+    {
+      "name": "contract",
+      "parameters": [
+        "kotlin.contracts.ContractBuilder.() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "type_parameters": [],
+  "is_class": false,
+  "language": "kotlin"
+}

@@ -1,0 +1,79 @@
+{
+  "name": "kotlin.sequences.SequenceScope",
+  "type_parameters": [
+    "in T"
+  ],
+  "implements": [],
+  "inherits": [],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "yield",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": true,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "yieldAll",
+      "parameters": [
+        "kotlin.collections.Iterable<T>"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": true,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "yieldAll",
+      "parameters": [
+        "kotlin.collections.Iterator<T>"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": true,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "yieldAll",
+      "parameters": [
+        "kotlin.sequences.Sequence<T>"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": true,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

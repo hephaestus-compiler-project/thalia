@@ -1,0 +1,19 @@
+{
+  "name": "kotlin.reflect",
+  "methods": [],
+  "fields": [
+    {
+      "name": "javaType",
+      "type": "java.lang.reflect.Type",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "kotlin.reflect.KType",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "type_parameters": [],
+  "is_class": false,
+  "language": "kotlin"
+}

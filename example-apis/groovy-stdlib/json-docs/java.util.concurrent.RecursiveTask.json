@@ -1,0 +1,40 @@
+{
+  "name": "java.util.concurrent.RecursiveTask",
+  "type_parameters": [
+    "V"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.util.concurrent.ForkJoinTask<V>"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "exec",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "compute",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "V",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

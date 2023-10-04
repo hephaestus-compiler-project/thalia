@@ -1,0 +1,191 @@
+{
+  "name": "kotlin.io.encoding.Base64.Default",
+  "type_parameters": [],
+  "implements": [
+    "kotlin.io.encoding.Base64"
+  ],
+  "inherits": [
+    "kotlin.io.encoding.Base64"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "decode",
+      "parameters": [
+        "kotlin.ByteArray",
+        "kotlin.Int",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ByteArray",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "decode",
+      "parameters": [
+        "kotlin.CharSequence",
+        "kotlin.Int",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ByteArray",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "decodeIntoByteArray",
+      "parameters": [
+        "kotlin.ByteArray",
+        "kotlin.ByteArray",
+        "kotlin.Int",
+        "kotlin.Int",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "decodeIntoByteArray",
+      "parameters": [
+        "kotlin.CharSequence",
+        "kotlin.ByteArray",
+        "kotlin.Int",
+        "kotlin.Int",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "encode",
+      "parameters": [
+        "kotlin.ByteArray",
+        "kotlin.Int",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "encodeIntoByteArray",
+      "parameters": [
+        "kotlin.ByteArray",
+        "kotlin.ByteArray",
+        "kotlin.Int",
+        "kotlin.Int",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "encodeToAppendable",
+      "parameters": [
+        "kotlin.ByteArray",
+        "A",
+        "kotlin.Int",
+        "kotlin.Int"
+      ],
+      "type_parameters": [
+        "A : kotlin.text.Appendable"
+      ],
+      "return_type": "A",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "encodeToByteArray",
+      "parameters": [
+        "kotlin.ByteArray",
+        "kotlin.Int",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ByteArray",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [
+    {
+      "name": "Mime",
+      "type": "kotlin.io.encoding.Base64",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "UrlSafe",
+      "type": "kotlin.io.encoding.Base64",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

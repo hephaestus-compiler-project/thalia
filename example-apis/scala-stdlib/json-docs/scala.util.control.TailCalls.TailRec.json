@@ -1,0 +1,68 @@
+{
+  "name": "scala.util.control.TailCalls.TailRec",
+  "type_parameters": [
+    "+A"
+  ],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "flatMap",
+      "parameters": [
+        "(A) => scala.util.control.TailCalls.TailRec[B]"
+      ],
+      "type_parameters": [
+        "B"
+      ],
+      "return_type": "scala.util.control.TailCalls.TailRec[B]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "map",
+      "parameters": [
+        "(A) => B"
+      ],
+      "type_parameters": [
+        "B"
+      ],
+      "return_type": "scala.util.control.TailCalls.TailRec[B]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "result",
+      "type": "A",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "resume",
+      "type": "scala.Either[() => scala.util.control.TailCalls.TailRec[A], A]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

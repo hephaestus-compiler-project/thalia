@@ -1,0 +1,3727 @@
+{
+  "name": "kotlin.sequences",
+  "methods": [
+    {
+      "name": "asSequence",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "java.util.Enumeration<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "filterIsInstance",
+      "parameters": [
+        "java.lang.Class<R>"
+      ],
+      "type_parameters": [
+        "R"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<*>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "filterIsInstanceTo",
+      "parameters": [
+        "C",
+        "java.lang.Class<R>"
+      ],
+      "type_parameters": [
+        "C : kotlin.collections.MutableCollection<in R>",
+        "R"
+      ],
+      "return_type": "C",
+      "receiver": "kotlin.sequences.Sequence<*>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sumOf",
+      "parameters": [
+        "(T) -> java.math.BigDecimal"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.math.BigDecimal",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sumOf",
+      "parameters": [
+        "(T) -> java.math.BigInteger"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.math.BigInteger",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toSortedSet",
+      "parameters": [],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "java.util.SortedSet<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toSortedSet",
+      "parameters": [
+        "Comparator<in T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.SortedSet<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "all",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "any",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "any",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "asIterable",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.collections.Iterable<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "asSequence",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.collections.Iterator<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "asSequence",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "associate",
+      "parameters": [
+        "(T) -> kotlin.Pair<K, V>"
+      ],
+      "type_parameters": [
+        "T",
+        "K",
+        "V"
+      ],
+      "return_type": "kotlin.collections.Map<K, V>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "associateBy",
+      "parameters": [
+        "(T) -> K"
+      ],
+      "type_parameters": [
+        "T",
+        "K"
+      ],
+      "return_type": "kotlin.collections.Map<K, T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "associateBy",
+      "parameters": [
+        "(T) -> K",
+        "(T) -> V"
+      ],
+      "type_parameters": [
+        "T",
+        "K",
+        "V"
+      ],
+      "return_type": "kotlin.collections.Map<K, V>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "associateByTo",
+      "parameters": [
+        "M",
+        "(T) -> K"
+      ],
+      "type_parameters": [
+        "T",
+        "K",
+        "M : kotlin.collections.MutableMap<in K,in T>"
+      ],
+      "return_type": "M",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "associateByTo",
+      "parameters": [
+        "M",
+        "(T) -> K",
+        "(T) -> V"
+      ],
+      "type_parameters": [
+        "T",
+        "K",
+        "V",
+        "M : kotlin.collections.MutableMap<in K,in V>"
+      ],
+      "return_type": "M",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "associateTo",
+      "parameters": [
+        "M",
+        "(T) -> kotlin.Pair<K, V>"
+      ],
+      "type_parameters": [
+        "T",
+        "K",
+        "V",
+        "M : kotlin.collections.MutableMap<in K,in V>"
+      ],
+      "return_type": "M",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "associateWith",
+      "parameters": [
+        "(K) -> V"
+      ],
+      "type_parameters": [
+        "K",
+        "V"
+      ],
+      "return_type": "kotlin.collections.Map<K, V>",
+      "receiver": "kotlin.sequences.Sequence<K>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "associateWithTo",
+      "parameters": [
+        "M",
+        "(K) -> V"
+      ],
+      "type_parameters": [
+        "K",
+        "V",
+        "M : kotlin.collections.MutableMap<in K,in V>"
+      ],
+      "return_type": "M",
+      "receiver": "kotlin.sequences.Sequence<K>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "average",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Byte>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "average",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Double>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "average",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Float>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "average",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Int>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "average",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Long>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "average",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Short>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "chunked",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<kotlin.collections.List<T>>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "chunked",
+      "parameters": [
+        "kotlin.Int",
+        "(kotlin.collections.List<T>) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "constrainOnce",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "count",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "count",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "distinct",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "distinctBy",
+      "parameters": [
+        "(T) -> K"
+      ],
+      "type_parameters": [
+        "T",
+        "K"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "drop",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "dropWhile",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "elementAt",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "elementAtOrElse",
+      "parameters": [
+        "kotlin.Int",
+        "(kotlin.Int) -> T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "elementAtOrNull",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "emptySequence",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "filter",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "filterIndexed",
+      "parameters": [
+        "(index: kotlin.Int, T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "filterIndexedTo",
+      "parameters": [
+        "C",
+        "(index: kotlin.Int, T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T",
+        "C : kotlin.collections.MutableCollection<in T>"
+      ],
+      "return_type": "C",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "filterIsInstance",
+      "parameters": [],
+      "type_parameters": [
+        "R"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<*>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "filterIsInstanceTo",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "R",
+        "C : kotlin.collections.MutableCollection<in R>"
+      ],
+      "return_type": "C",
+      "receiver": "kotlin.sequences.Sequence<*>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "filterNot",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "filterNotNull",
+      "parameters": [],
+      "type_parameters": [
+        "T : kotlin.Any"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T?>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "filterNotNullTo",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "C : kotlin.collections.MutableCollection<in T>",
+        "T : kotlin.Any"
+      ],
+      "return_type": "C",
+      "receiver": "kotlin.sequences.Sequence<T?>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "filterNotTo",
+      "parameters": [
+        "C",
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T",
+        "C : kotlin.collections.MutableCollection<in T>"
+      ],
+      "return_type": "C",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "filterTo",
+      "parameters": [
+        "C",
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T",
+        "C : kotlin.collections.MutableCollection<in T>"
+      ],
+      "return_type": "C",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "find",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "findLast",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "first",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "first",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "firstNotNullOf",
+      "parameters": [
+        "(T) -> R?"
+      ],
+      "type_parameters": [
+        "T",
+        "R : kotlin.Any"
+      ],
+      "return_type": "R",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "firstNotNullOfOrNull",
+      "parameters": [
+        "(T) -> R?"
+      ],
+      "type_parameters": [
+        "T",
+        "R : kotlin.Any"
+      ],
+      "return_type": "R?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "firstOrNull",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "firstOrNull",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "flatMap",
+      "parameters": [
+        "(T) -> kotlin.collections.Iterable<R>"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "flatMap",
+      "parameters": [
+        "(T) -> kotlin.sequences.Sequence<R>"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "flatMapIndexed",
+      "parameters": [
+        "(index: kotlin.Int, T) -> kotlin.collections.Iterable<R>"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "flatMapIndexed",
+      "parameters": [
+        "(index: kotlin.Int, T) -> kotlin.sequences.Sequence<R>"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "flatMapIndexedTo",
+      "parameters": [
+        "C",
+        "(index: kotlin.Int, T) -> kotlin.collections.Iterable<R>"
+      ],
+      "type_parameters": [
+        "T",
+        "R",
+        "C : kotlin.collections.MutableCollection<in R>"
+      ],
+      "return_type": "C",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "flatMapIndexedTo",
+      "parameters": [
+        "C",
+        "(index: kotlin.Int, T) -> kotlin.sequences.Sequence<R>"
+      ],
+      "type_parameters": [
+        "T",
+        "R",
+        "C : kotlin.collections.MutableCollection<in R>"
+      ],
+      "return_type": "C",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "flatMapTo",
+      "parameters": [
+        "C",
+        "(T) -> kotlin.collections.Iterable<R>"
+      ],
+      "type_parameters": [
+        "T",
+        "R",
+        "C : kotlin.collections.MutableCollection<in R>"
+      ],
+      "return_type": "C",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "flatMapTo",
+      "parameters": [
+        "C",
+        "(T) -> kotlin.sequences.Sequence<R>"
+      ],
+      "type_parameters": [
+        "T",
+        "R",
+        "C : kotlin.collections.MutableCollection<in R>"
+      ],
+      "return_type": "C",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "flatten",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<kotlin.collections.Iterable<T>>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "flatten",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<kotlin.sequences.Sequence<T>>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "fold",
+      "parameters": [
+        "R",
+        "(acc: R, T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "R",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "foldIndexed",
+      "parameters": [
+        "R",
+        "(index: kotlin.Int, acc: R, T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "R",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "forEach",
+      "parameters": [
+        "(T) -> kotlin.Unit"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "Unit",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "forEachIndexed",
+      "parameters": [
+        "(index: kotlin.Int, T) -> kotlin.Unit"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "Unit",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "generateSequence",
+      "parameters": [
+        "() -> T?"
+      ],
+      "type_parameters": [
+        "T : kotlin.Any"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "generateSequence",
+      "parameters": [
+        "T?",
+        "(T) -> T?"
+      ],
+      "type_parameters": [
+        "T : kotlin.Any"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "generateSequence",
+      "parameters": [
+        "() -> T?",
+        "(T) -> T?"
+      ],
+      "type_parameters": [
+        "T : kotlin.Any"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "groupBy",
+      "parameters": [
+        "(T) -> K"
+      ],
+      "type_parameters": [
+        "T",
+        "K"
+      ],
+      "return_type": "kotlin.collections.Map<K, kotlin.collections.List<T>>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "groupBy",
+      "parameters": [
+        "(T) -> K",
+        "(T) -> V"
+      ],
+      "type_parameters": [
+        "T",
+        "K",
+        "V"
+      ],
+      "return_type": "kotlin.collections.Map<K, kotlin.collections.List<V>>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "groupByTo",
+      "parameters": [
+        "M",
+        "(T) -> K"
+      ],
+      "type_parameters": [
+        "T",
+        "K",
+        "M : kotlin.collections.MutableMap<in K,kotlin.collections.MutableList<T>>"
+      ],
+      "return_type": "M",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "groupByTo",
+      "parameters": [
+        "M",
+        "(T) -> K",
+        "(T) -> V"
+      ],
+      "type_parameters": [
+        "T",
+        "K",
+        "V",
+        "M : kotlin.collections.MutableMap<in K,kotlin.collections.MutableList<V>>"
+      ],
+      "return_type": "M",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "groupingBy",
+      "parameters": [
+        "(T) -> K"
+      ],
+      "type_parameters": [
+        "T",
+        "K"
+      ],
+      "return_type": "kotlin.collections.Grouping<T, K>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "ifEmpty",
+      "parameters": [
+        "() -> kotlin.sequences.Sequence<T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "indexOf",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "indexOfFirst",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "indexOfLast",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "iterator",
+      "parameters": [
+        "suspend kotlin.sequences.SequenceScope<T>.() -> kotlin.Unit"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.collections.Iterator<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "joinTo",
+      "parameters": [
+        "A",
+        "kotlin.CharSequence",
+        "kotlin.CharSequence",
+        "kotlin.CharSequence",
+        "kotlin.Int",
+        "kotlin.CharSequence",
+        "(T) -> kotlin.CharSequence?"
+      ],
+      "type_parameters": [
+        "T",
+        "A : kotlin.text.Appendable"
+      ],
+      "return_type": "A",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "joinToString",
+      "parameters": [
+        "kotlin.CharSequence",
+        "kotlin.CharSequence",
+        "kotlin.CharSequence",
+        "kotlin.Int",
+        "kotlin.CharSequence",
+        "(T) -> kotlin.CharSequence?"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.String",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "last",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "last",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "lastIndexOf",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "lastOrNull",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "lastOrNull",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "map",
+      "parameters": [
+        "(T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "mapIndexed",
+      "parameters": [
+        "(index: kotlin.Int, T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "mapIndexedNotNull",
+      "parameters": [
+        "(index: kotlin.Int, T) -> R?"
+      ],
+      "type_parameters": [
+        "T",
+        "R : kotlin.Any"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "mapIndexedNotNullTo",
+      "parameters": [
+        "C",
+        "(index: kotlin.Int, T) -> R?"
+      ],
+      "type_parameters": [
+        "T",
+        "R : kotlin.Any",
+        "C : kotlin.collections.MutableCollection<in R>"
+      ],
+      "return_type": "C",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "mapIndexedTo",
+      "parameters": [
+        "C",
+        "(index: kotlin.Int, T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R",
+        "C : kotlin.collections.MutableCollection<in R>"
+      ],
+      "return_type": "C",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "mapNotNull",
+      "parameters": [
+        "(T) -> R?"
+      ],
+      "type_parameters": [
+        "T",
+        "R : kotlin.Any"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "mapNotNullTo",
+      "parameters": [
+        "C",
+        "(T) -> R?"
+      ],
+      "type_parameters": [
+        "T",
+        "R : kotlin.Any",
+        "C : kotlin.collections.MutableCollection<in R>"
+      ],
+      "return_type": "C",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "mapTo",
+      "parameters": [
+        "C",
+        "(T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R",
+        "C : kotlin.collections.MutableCollection<in R>"
+      ],
+      "return_type": "C",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "max",
+      "parameters": [],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "T",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "max",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Double>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "max",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Float",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Float>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxBy",
+      "parameters": [
+        "(T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R : kotlin.Comparable<R>"
+      ],
+      "return_type": "T",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxByOrNull",
+      "parameters": [
+        "(T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R : kotlin.Comparable<R>"
+      ],
+      "return_type": "T?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "(T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R : kotlin.Comparable<R>"
+      ],
+      "return_type": "R",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "(T) -> kotlin.Double"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Double",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "(T) -> kotlin.Float"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Float",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "maxOfOrNull",
+      "parameters": [
+        "(T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R : kotlin.Comparable<R>"
+      ],
+      "return_type": "R?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "maxOfOrNull",
+      "parameters": [
+        "(T) -> kotlin.Double"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Double?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "maxOfOrNull",
+      "parameters": [
+        "(T) -> kotlin.Float"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Float?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "maxOfWith",
+      "parameters": [
+        "kotlin.Comparator<in R>",
+        "(T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "R",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "maxOfWithOrNull",
+      "parameters": [
+        "kotlin.Comparator<in R>",
+        "(T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "R?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "maxOrNull",
+      "parameters": [],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "T?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Double?",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Double>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Float?",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Float>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxWith",
+      "parameters": [
+        "kotlin.Comparator<in T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxWithOrNull",
+      "parameters": [
+        "kotlin.Comparator<in T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "min",
+      "parameters": [],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "T",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "min",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Double>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "min",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Float",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Float>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minBy",
+      "parameters": [
+        "(T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R : kotlin.Comparable<R>"
+      ],
+      "return_type": "T",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minByOrNull",
+      "parameters": [
+        "(T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R : kotlin.Comparable<R>"
+      ],
+      "return_type": "T?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "(T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R : kotlin.Comparable<R>"
+      ],
+      "return_type": "R",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "(T) -> kotlin.Double"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Double",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "(T) -> kotlin.Float"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Float",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "minOfOrNull",
+      "parameters": [
+        "(T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R : kotlin.Comparable<R>"
+      ],
+      "return_type": "R?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "minOfOrNull",
+      "parameters": [
+        "(T) -> kotlin.Double"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Double?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "minOfOrNull",
+      "parameters": [
+        "(T) -> kotlin.Float"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Float?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "minOfWith",
+      "parameters": [
+        "kotlin.Comparator<in R>",
+        "(T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "R",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "minOfWithOrNull",
+      "parameters": [
+        "kotlin.Comparator<in R>",
+        "(T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "R?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "minOrNull",
+      "parameters": [],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "T?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Double?",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Double>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOrNull",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Float?",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Float>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "kotlin.Array<out T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "kotlin.collections.Iterable<T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "kotlin.sequences.Sequence<T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minusElement",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "minWith",
+      "parameters": [
+        "kotlin.Comparator<in T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minWithOrNull",
+      "parameters": [
+        "kotlin.Comparator<in T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "none",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "none",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Boolean",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "onEach",
+      "parameters": [
+        "(T) -> kotlin.Unit"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "onEachIndexed",
+      "parameters": [
+        "(index: kotlin.Int, T) -> kotlin.Unit"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "orEmpty",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>?",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "partition",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Pair<kotlin.collections.List<T>, kotlin.collections.List<T>>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "kotlin.Array<out T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "kotlin.collections.Iterable<T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "kotlin.sequences.Sequence<T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "plusElement",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "reduce",
+      "parameters": [
+        "(acc: S, T) -> S"
+      ],
+      "type_parameters": [
+        "S",
+        "T : S"
+      ],
+      "return_type": "S",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "reduceIndexed",
+      "parameters": [
+        "(index: kotlin.Int, acc: S, T) -> S"
+      ],
+      "type_parameters": [
+        "S",
+        "T : S"
+      ],
+      "return_type": "S",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "reduceIndexedOrNull",
+      "parameters": [
+        "(index: kotlin.Int, acc: S, T) -> S"
+      ],
+      "type_parameters": [
+        "S",
+        "T : S"
+      ],
+      "return_type": "S?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "reduceOrNull",
+      "parameters": [
+        "(acc: S, T) -> S"
+      ],
+      "type_parameters": [
+        "S",
+        "T : S"
+      ],
+      "return_type": "S?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "requireNoNulls",
+      "parameters": [],
+      "type_parameters": [
+        "T : kotlin.Any"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T?>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "runningFold",
+      "parameters": [
+        "R",
+        "(acc: R, T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "runningFoldIndexed",
+      "parameters": [
+        "R",
+        "(index: kotlin.Int, acc: R, T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "runningReduce",
+      "parameters": [
+        "(acc: S, T) -> S"
+      ],
+      "type_parameters": [
+        "S",
+        "T : S"
+      ],
+      "return_type": "kotlin.sequences.Sequence<S>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "runningReduceIndexed",
+      "parameters": [
+        "(index: kotlin.Int, acc: S, T) -> S"
+      ],
+      "type_parameters": [
+        "S",
+        "T : S"
+      ],
+      "return_type": "kotlin.sequences.Sequence<S>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "scan",
+      "parameters": [
+        "R",
+        "(acc: R, T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "scanIndexed",
+      "parameters": [
+        "R",
+        "(index: kotlin.Int, acc: R, T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sequence",
+      "parameters": [
+        "suspend kotlin.sequences.SequenceScope<T>.() -> kotlin.Unit"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sequenceOf",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "shuffled",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "shuffled",
+      "parameters": [
+        "kotlin.random.Random"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "single",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "single",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "singleOrNull",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "singleOrNull",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T?",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "sorted",
+      "parameters": [],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sortedBy",
+      "parameters": [
+        "(T) -> R?"
+      ],
+      "type_parameters": [
+        "T",
+        "R : kotlin.Comparable<R>"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "sortedByDescending",
+      "parameters": [
+        "(T) -> R?"
+      ],
+      "type_parameters": [
+        "T",
+        "R : kotlin.Comparable<R>"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "sortedDescending",
+      "parameters": [],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sortedWith",
+      "parameters": [
+        "kotlin.Comparator<in T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sum",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Byte>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sum",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Double>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sum",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Float",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Float>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sum",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Int>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sum",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Long>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sum",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Short>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sum",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt",
+      "receiver": "kotlin.sequences.Sequence<kotlin.UByte>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sum",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt",
+      "receiver": "kotlin.sequences.Sequence<kotlin.UInt>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sum",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.ULong",
+      "receiver": "kotlin.sequences.Sequence<kotlin.ULong>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sum",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt",
+      "receiver": "kotlin.sequences.Sequence<kotlin.UShort>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sumOf",
+      "parameters": [
+        "(T) -> kotlin.Double"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Double",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sumOf",
+      "parameters": [
+        "(T) -> kotlin.Int"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sumOf",
+      "parameters": [
+        "(T) -> kotlin.Long"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Long",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sumOf",
+      "parameters": [
+        "(T) -> kotlin.UInt"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.UInt",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "sumOf",
+      "parameters": [
+        "(T) -> kotlin.ULong"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.ULong",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "take",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "takeWhile",
+      "parameters": [
+        "(T) -> kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toCollection",
+      "parameters": [
+        "C"
+      ],
+      "type_parameters": [
+        "T",
+        "C : kotlin.collections.MutableCollection<in T>"
+      ],
+      "return_type": "C",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toHashSet",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.collections.HashSet<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toList",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.collections.List<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toMutableList",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.collections.MutableList<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toMutableSet",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.collections.MutableSet<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "toSet",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.collections.Set<T>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "unzip",
+      "parameters": [],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "kotlin.Pair<kotlin.collections.List<T>, kotlin.collections.List<R>>",
+      "receiver": "kotlin.sequences.Sequence<kotlin.Pair<T, R>>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "windowed",
+      "parameters": [
+        "kotlin.Int",
+        "kotlin.Int",
+        "kotlin.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<kotlin.collections.List<T>>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "windowed",
+      "parameters": [
+        "kotlin.Int",
+        "kotlin.Int",
+        "kotlin.Boolean",
+        "(kotlin.collections.List<T>) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "withIndex",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<kotlin.collections.IndexedValue<T>>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "zip",
+      "parameters": [
+        "kotlin.sequences.Sequence<R>"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "kotlin.sequences.Sequence<kotlin.Pair<T, R>>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "zip",
+      "parameters": [
+        "kotlin.sequences.Sequence<R>",
+        "(a: T, b: R) -> V"
+      ],
+      "type_parameters": [
+        "T",
+        "R",
+        "V"
+      ],
+      "return_type": "kotlin.sequences.Sequence<V>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "zipWithNext",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.sequences.Sequence<kotlin.Pair<T, T>>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "zipWithNext",
+      "parameters": [
+        "(a: T, b: T) -> R"
+      ],
+      "type_parameters": [
+        "T",
+        "R"
+      ],
+      "return_type": "kotlin.sequences.Sequence<R>",
+      "receiver": "kotlin.sequences.Sequence<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "type_parameters": [],
+  "is_class": false,
+  "language": "kotlin"
+}

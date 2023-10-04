@@ -1,0 +1,120 @@
+{
+  "name": "java.nio.file.attribute.UserDefinedFileAttributeView",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.nio.file.attribute.FileAttributeView"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "list",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.List<java.lang.String>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "java.lang.RuntimePermission",
+        "checkRead"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "java.lang.String",
+        "java.nio.ByteBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "java.lang.RuntimePermission",
+        "checkRead"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.lang.String",
+        "java.nio.ByteBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "java.lang.RuntimePermission",
+        "checkWrite"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "delete",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "java.lang.RuntimePermission",
+        "checkWrite"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "name",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "size",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.ArithmeticException",
+        "Integer.MAX_VALUE",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "java.lang.RuntimePermission",
+        "checkRead"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

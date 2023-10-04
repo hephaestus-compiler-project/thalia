@@ -1,0 +1,17 @@
+{
+  "name": "groovy.lang.GroovyCallable",
+  "type_parameters": [
+    "V"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.util.concurrent.Callable<V>"
+  ],
+  "class_type": 1,
+  "methods": [],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

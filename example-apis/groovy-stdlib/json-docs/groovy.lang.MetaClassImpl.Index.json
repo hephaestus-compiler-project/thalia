@@ -1,0 +1,70 @@
+{
+  "name": "groovy.lang.MetaClassImpl.Index",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "org.codehaus.groovy.util.SingleKeyHashMap"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getNotNull",
+      "parameters": [
+        "org.codehaus.groovy.reflection.CachedClass"
+      ],
+      "type_parameters": [],
+      "return_type": "org.codehaus.groovy.util.SingleKeyHashMap",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "put",
+      "parameters": [
+        "org.codehaus.groovy.reflection.CachedClass",
+        "org.codehaus.groovy.util.SingleKeyHashMap"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "checkEquals",
+      "parameters": [
+        "org.codehaus.groovy.util.ComplexKeyHashMap.Entry",
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getNullable",
+      "parameters": [
+        "org.codehaus.groovy.reflection.CachedClass"
+      ],
+      "type_parameters": [],
+      "return_type": "org.codehaus.groovy.util.SingleKeyHashMap",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

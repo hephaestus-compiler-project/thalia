@@ -1,0 +1,88 @@
+{
+  "name": "java.util.zip.CheckedInputStream",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.io.FilterInputStream"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "read",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "skip",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getChecksum",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.zip.Checksum",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IndexOutOfBoundsException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "CheckedInputStream",
+      "parameters": [
+        "java.io.InputStream",
+        "java.util.zip.Checksum"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

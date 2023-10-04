@@ -1,0 +1,18 @@
+{
+  "name": "scala.annotation.ClassfileAnnotation",
+  "type_parameters": [],
+  "implements": [
+    "scala.annotation.Annotation",
+    "scala.annotation.ConstantAnnotation"
+  ],
+  "inherits": [
+    "scala.annotation.Annotation",
+    "scala.annotation.ConstantAnnotation"
+  ],
+  "class_type": 1,
+  "methods": [],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

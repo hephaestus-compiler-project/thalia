@@ -1,0 +1,46 @@
+{
+  "name": "java.security.cert.CertStoreSpi",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "engineGetCRLs",
+      "parameters": [
+        "java.security.cert.CRLSelector"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Collection<? extends java.security.cert.CRL>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.cert.CertStoreException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineGetCertificates",
+      "parameters": [
+        "java.security.cert.CertSelector"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Collection<? extends java.security.cert.Certificate>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.cert.CertStoreException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

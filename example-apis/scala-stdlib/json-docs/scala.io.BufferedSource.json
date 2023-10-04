@@ -1,0 +1,108 @@
+{
+  "name": "scala.io.BufferedSource",
+  "type_parameters": [],
+  "implements": [
+    "scala.io.Source"
+  ],
+  "inherits": [
+    "scala.io.Source"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "addString",
+      "parameters": [
+        "scala.collection.mutable.StringBuilder",
+        "scala.Predef.String",
+        "scala.Predef.String",
+        "scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": "sb.type",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "bufferedReader",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.io.BufferedReader",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "getLines",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.collection.Iterator[scala.Predef.String]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "reader",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.io.InputStreamReader",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "BufferedSource",
+      "parameters": [
+        "java.io.InputStream"
+      ],
+      "type_parameters": [],
+      "return_type": "(scala.io.Codec)",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "BufferedSource",
+      "parameters": [
+        "java.io.InputStream",
+        "scala.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "(scala.io.Codec)",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "codec",
+      "type": "scala.io.Codec",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "iter",
+      "type": "scala.collection.Iterator[scala.Char]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

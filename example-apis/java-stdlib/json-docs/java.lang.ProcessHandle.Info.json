@@ -1,0 +1,80 @@
+{
+  "name": "java.lang.ProcessHandle.Info",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "command",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Optional<java.lang.String>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "startInstant",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Optional<java.time.Instant>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "user",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Optional<java.lang.String>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "arguments",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Optional<java.lang.String[]>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "commandLine",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Optional<java.lang.String>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "totalCpuDuration",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Optional<java.time.Duration>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

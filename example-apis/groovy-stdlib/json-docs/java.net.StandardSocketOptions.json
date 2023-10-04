@@ -1,0 +1,88 @@
+{
+  "name": "java.net.StandardSocketOptions",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [],
+  "fields": [
+    {
+      "name": "IP_MULTICAST_LOOP",
+      "type": "java.net.SocketOption<java.lang.Boolean>",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "IP_TOS",
+      "type": "java.net.SocketOption<java.lang.Integer>",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SO_KEEPALIVE",
+      "type": "java.net.SocketOption<java.lang.Boolean>",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SO_RCVBUF",
+      "type": "java.net.SocketOption<java.lang.Integer>",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SO_REUSEPORT",
+      "type": "java.net.SocketOption<java.lang.Boolean>",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TCP_NODELAY",
+      "type": "java.net.SocketOption<java.lang.Boolean>",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "IP_MULTICAST_IF",
+      "type": "java.net.SocketOption<java.net.NetworkInterface>",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "IP_MULTICAST_TTL",
+      "type": "java.net.SocketOption<java.lang.Integer>",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SO_BROADCAST",
+      "type": "java.net.SocketOption<java.lang.Boolean>",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SO_LINGER",
+      "type": "java.net.SocketOption<java.lang.Integer>",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SO_REUSEADDR",
+      "type": "java.net.SocketOption<java.lang.Boolean>",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SO_SNDBUF",
+      "type": "java.net.SocketOption<java.lang.Integer>",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

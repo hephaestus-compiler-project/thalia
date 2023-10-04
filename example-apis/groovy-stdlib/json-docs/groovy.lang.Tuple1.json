@@ -1,0 +1,51 @@
+{
+  "name": "groovy.lang.Tuple1",
+  "type_parameters": [
+    "T1"
+  ],
+  "implements": [],
+  "inherits": [
+    "groovy.lang.Tuple"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getFirst",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "T1",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "clone",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "groovy.lang.Tuple1<T1>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getV1",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "T1",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

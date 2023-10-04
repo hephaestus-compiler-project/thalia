@@ -1,0 +1,31 @@
+{
+  "name": "scala.util.ChainingSyntax",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "scalaUtilChainingOps",
+      "parameters": [
+        "A"
+      ],
+      "type_parameters": [
+        "A"
+      ],
+      "return_type": "scala.util.ChainingOps[A]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

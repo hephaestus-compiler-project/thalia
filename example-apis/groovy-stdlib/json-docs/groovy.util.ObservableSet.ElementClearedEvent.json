@@ -1,0 +1,27 @@
+{
+  "name": "groovy.util.ObservableSet.ElementClearedEvent",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "groovy.util.ObservableSet.ElementEvent"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getValues",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.List",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

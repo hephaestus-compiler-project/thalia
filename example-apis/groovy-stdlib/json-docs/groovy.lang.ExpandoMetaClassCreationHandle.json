@@ -1,0 +1,85 @@
+{
+  "name": "groovy.lang.ExpandoMetaClassCreationHandle",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "groovy.lang.MetaClassRegistry.MetaClassCreationHandle"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "disable",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hasModifiedMetaClass",
+      "parameters": [
+        "groovy.lang.ExpandoMetaClass"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "createNormalMetaClass",
+      "parameters": [
+        "java.lang.Class",
+        "groovy.lang.MetaClassRegistry"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.MetaClass",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "enable",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "registerModifiedMetaClass",
+      "parameters": [
+        "groovy.lang.ExpandoMetaClass"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "instance",
+      "type": "groovy.lang.ExpandoMetaClassCreationHandle",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

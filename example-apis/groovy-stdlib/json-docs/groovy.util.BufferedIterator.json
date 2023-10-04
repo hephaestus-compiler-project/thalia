@@ -1,0 +1,29 @@
+{
+  "name": "groovy.util.BufferedIterator",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.util.Iterator<T>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "head",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

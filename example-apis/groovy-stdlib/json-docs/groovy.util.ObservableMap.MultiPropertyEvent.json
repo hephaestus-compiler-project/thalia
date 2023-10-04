@@ -1,0 +1,34 @@
+{
+  "name": "groovy.util.ObservableMap.MultiPropertyEvent",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "groovy.util.ObservableMap.PropertyEvent"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getEvents",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "groovy.util.ObservableMap.PropertyEvent[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "MULTI_PROPERTY",
+      "type": "java.lang.String",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

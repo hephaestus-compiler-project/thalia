@@ -1,0 +1,32 @@
+{
+  "name": "java.lang.reflect.InvocationHandler",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "invoke",
+      "parameters": [
+        "java.lang.Object",
+        "java.lang.reflect.Method",
+        "java.lang.Object[]"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.Throwable",
+        "java.lang.reflect.UndeclaredThrowableException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

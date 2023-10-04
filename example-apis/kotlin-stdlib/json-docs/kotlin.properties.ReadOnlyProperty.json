@@ -1,0 +1,33 @@
+{
+  "name": "kotlin.properties.ReadOnlyProperty",
+  "type_parameters": [
+    "in T",
+    "out V"
+  ],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "getValue",
+      "parameters": [
+        "T",
+        "kotlin.reflect.KProperty<*>"
+      ],
+      "type_parameters": [],
+      "return_type": "V",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

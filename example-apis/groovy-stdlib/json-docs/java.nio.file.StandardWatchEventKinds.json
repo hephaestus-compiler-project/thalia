@@ -1,0 +1,40 @@
+{
+  "name": "java.nio.file.StandardWatchEventKinds",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [],
+  "fields": [
+    {
+      "name": "ENTRY_DELETE",
+      "type": "java.nio.file.WatchEvent.Kind<java.nio.file.Path>",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "OVERFLOW",
+      "type": "java.nio.file.WatchEvent.Kind<java.lang.Object>",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ENTRY_CREATE",
+      "type": "java.nio.file.WatchEvent.Kind<java.nio.file.Path>",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ENTRY_MODIFY",
+      "type": "java.nio.file.WatchEvent.Kind<java.nio.file.Path>",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

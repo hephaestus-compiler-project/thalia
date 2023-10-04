@@ -1,0 +1,41 @@
+{
+  "name": "scala.math.Fractional.FractionalOps",
+  "type_parameters": [],
+  "implements": [
+    "scala.math.Numeric.NumericOps"
+  ],
+  "inherits": [
+    "scala.math.Numeric.NumericOps"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "/",
+      "parameters": [
+        "scala.math.Fractional.T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.math.Fractional.T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "FractionalOps",
+      "parameters": [
+        "scala.math.Fractional.T"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

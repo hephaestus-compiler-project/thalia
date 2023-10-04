@@ -1,0 +1,30 @@
+{
+  "name": "scala.math.Equiv.Double.IeeeEquiv",
+  "type_parameters": [],
+  "implements": [
+    "scala.math.Equiv[scala.Double]"
+  ],
+  "inherits": [
+    "scala.math.Equiv[scala.Double]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "equiv",
+      "parameters": [
+        "scala.Double",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

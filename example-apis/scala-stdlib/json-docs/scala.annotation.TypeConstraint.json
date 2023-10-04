@@ -1,0 +1,16 @@
+{
+  "name": "scala.annotation.TypeConstraint",
+  "type_parameters": [],
+  "implements": [
+    "scala.annotation.Annotation"
+  ],
+  "inherits": [
+    "scala.annotation.Annotation"
+  ],
+  "class_type": 1,
+  "methods": [],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

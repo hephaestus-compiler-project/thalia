@@ -1,0 +1,178 @@
+{
+  "name": "scala.concurrent.Promise",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "tryComplete",
+      "parameters": [
+        "scala.util.Try[T]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "complete",
+      "parameters": [
+        "scala.util.Try[T]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.Promise.this.type",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "completeWith",
+      "parameters": [
+        "scala.concurrent.Future[T]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.Promise.this.type",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "failure",
+      "parameters": [
+        "scala.Throwable"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.Promise.this.type",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "success",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.Promise.this.type",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "tryFailure",
+      "parameters": [
+        "scala.Throwable"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "trySuccess",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.concurrent.Promise[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "failed",
+      "parameters": [
+        "scala.Throwable"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.concurrent.Promise[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromTry",
+      "parameters": [
+        "scala.util.Try[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.concurrent.Promise[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "successful",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.concurrent.Promise[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "future",
+      "type": "scala.concurrent.Future[T]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "isCompleted",
+      "type": "scala.Boolean",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

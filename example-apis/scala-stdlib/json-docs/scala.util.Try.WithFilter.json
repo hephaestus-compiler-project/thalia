@@ -1,0 +1,83 @@
+{
+  "name": "scala.util.Try.WithFilter",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "flatMap",
+      "parameters": [
+        "(scala.util.Try.T) => scala.util.Try[U]"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "scala.util.Try[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "foreach",
+      "parameters": [
+        "(scala.util.Try.T) => U"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "map",
+      "parameters": [
+        "(scala.util.Try.T) => U"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "scala.util.Try[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "withFilter",
+      "parameters": [
+        "(scala.util.Try.T) => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.util.Try.WithFilter",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "WithFilter",
+      "parameters": [
+        "(scala.util.Try.T) => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

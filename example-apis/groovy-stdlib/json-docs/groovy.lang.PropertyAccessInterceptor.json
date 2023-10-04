@@ -1,0 +1,45 @@
+{
+  "name": "groovy.lang.PropertyAccessInterceptor",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "groovy.lang.Interceptor"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "beforeSet",
+      "parameters": [
+        "java.lang.Object",
+        "java.lang.String",
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "beforeGet",
+      "parameters": [
+        "java.lang.Object",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

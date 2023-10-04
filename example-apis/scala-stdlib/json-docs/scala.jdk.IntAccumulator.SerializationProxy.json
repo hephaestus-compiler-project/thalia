@@ -1,0 +1,31 @@
+{
+  "name": "scala.jdk.IntAccumulator.SerializationProxy",
+  "type_parameters": [
+    "A"
+  ],
+  "implements": [
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "scala.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "SerializationProxy",
+      "parameters": [
+        "scala.jdk.IntAccumulator"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

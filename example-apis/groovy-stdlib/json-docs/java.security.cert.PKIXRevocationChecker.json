@@ -1,0 +1,147 @@
+{
+  "name": "java.security.cert.PKIXRevocationChecker",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.security.cert.PKIXCertPathChecker"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "getOcspResponder",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.URI",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getOcspResponses",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Map<java.security.cert.X509Certificate,byte[]>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getSoftFailExceptions",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.List<java.security.cert.CertPathValidatorException>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setOcspResponder",
+      "parameters": [
+        "java.net.URI"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setOcspResponses",
+      "parameters": [
+        "java.util.Map<java.security.cert.X509Certificate,byte[]>"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getOcspExtensions",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.List<java.security.cert.Extension>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getOcspResponderCert",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.security.cert.X509Certificate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getOptions",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Set<java.security.cert.PKIXRevocationChecker.Option>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setOcspExtensions",
+      "parameters": [
+        "java.util.List<java.security.cert.Extension>"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setOcspResponderCert",
+      "parameters": [
+        "java.security.cert.X509Certificate"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setOptions",
+      "parameters": [
+        "java.util.Set<java.security.cert.PKIXRevocationChecker.Option>"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

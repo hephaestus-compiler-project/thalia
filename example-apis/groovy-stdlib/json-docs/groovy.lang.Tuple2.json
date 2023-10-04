@@ -1,0 +1,74 @@
+{
+  "name": "groovy.lang.Tuple2",
+  "type_parameters": [
+    "T1",
+    "T2"
+  ],
+  "implements": [],
+  "inherits": [
+    "groovy.lang.Tuple"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getFirst",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "T1",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getV1",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "T1",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "clone",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "groovy.lang.Tuple2<T1,T2>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getSecond",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "T2",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getV2",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "T2",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,94 @@
+{
+  "name": "java.nio.channels.spi.AsynchronousChannelProvider",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "openAsynchronousChannelGroup",
+      "parameters": [
+        "java.util.concurrent.ExecutorService",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.AsynchronousChannelGroup",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "openAsynchronousSocketChannel",
+      "parameters": [
+        "java.nio.channels.AsynchronousChannelGroup"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.AsynchronousSocketChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.IllegalChannelGroupException",
+        "java.nio.channels.ShutdownChannelGroupException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "openAsynchronousChannelGroup",
+      "parameters": [
+        "int",
+        "java.util.concurrent.ThreadFactory"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.AsynchronousChannelGroup",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "openAsynchronousServerSocketChannel",
+      "parameters": [
+        "java.nio.channels.AsynchronousChannelGroup"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.AsynchronousServerSocketChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.IllegalChannelGroupException",
+        "java.nio.channels.ShutdownChannelGroupException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "provider",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.spi.AsynchronousChannelProvider",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

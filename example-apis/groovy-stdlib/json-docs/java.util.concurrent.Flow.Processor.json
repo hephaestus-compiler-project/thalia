@@ -1,0 +1,19 @@
+{
+  "name": "java.util.concurrent.Flow.Processor",
+  "type_parameters": [
+    "T",
+    "R"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.util.concurrent.Flow.Subscriber<T>",
+    "java.util.concurrent.Flow.Publisher<R>"
+  ],
+  "class_type": 1,
+  "methods": [],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

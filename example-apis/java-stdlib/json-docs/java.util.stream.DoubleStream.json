@@ -1,0 +1,510 @@
+{
+  "name": "java.util.stream.DoubleStream",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.util.stream.BaseStream<java.lang.Double,java.util.stream.DoubleStream>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "anyMatch",
+      "parameters": [
+        "java.util.function.DoublePredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "boxed",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.Stream<java.lang.Double>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "collect",
+      "parameters": [
+        "java.util.function.Supplier<R>",
+        "java.util.function.ObjDoubleConsumer<R>",
+        "java.util.function.BiConsumer<R,R>"
+      ],
+      "type_parameters": [
+        "R"
+      ],
+      "return_type": "R",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "count",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "dropWhile",
+      "parameters": [
+        "java.util.function.DoublePredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "filter",
+      "parameters": [
+        "java.util.function.DoublePredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "findFirst",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalDouble",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "forEach",
+      "parameters": [
+        "java.util.function.DoubleConsumer"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "generate",
+      "parameters": [
+        "java.util.function.DoubleSupplier"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "iterate",
+      "parameters": [
+        "double",
+        "java.util.function.DoubleUnaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "map",
+      "parameters": [
+        "java.util.function.DoubleUnaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "mapToLong",
+      "parameters": [
+        "java.util.function.DoubleToLongFunction"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.LongStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "max",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalDouble",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "noneMatch",
+      "parameters": [
+        "java.util.function.DoublePredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "double..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "reduce",
+      "parameters": [
+        "double",
+        "java.util.function.DoubleBinaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "double",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "skip",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "sum",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "double",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "takeWhile",
+      "parameters": [
+        "java.util.function.DoublePredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "allMatch",
+      "parameters": [
+        "java.util.function.DoublePredicate"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "average",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalDouble",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "builder",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream.Builder",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "concat",
+      "parameters": [
+        "java.util.stream.DoubleStream",
+        "java.util.stream.DoubleStream"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "distinct",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "empty",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "findAny",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalDouble",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "flatMap",
+      "parameters": [
+        "java.util.function.DoubleFunction<? extends java.util.stream.DoubleStream>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "forEachOrdered",
+      "parameters": [
+        "java.util.function.DoubleConsumer"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "iterate",
+      "parameters": [
+        "double",
+        "java.util.function.DoublePredicate",
+        "java.util.function.DoubleUnaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "limit",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mapToInt",
+      "parameters": [
+        "java.util.function.DoubleToIntFunction"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.IntStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "mapToObj",
+      "parameters": [
+        "java.util.function.DoubleFunction<? extends U>"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "java.util.stream.Stream<U>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "min",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalDouble",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "double"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "peek",
+      "parameters": [
+        "java.util.function.DoubleConsumer"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "reduce",
+      "parameters": [
+        "java.util.function.DoubleBinaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.OptionalDouble",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "sorted",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.stream.DoubleStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "summaryStatistics",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.DoubleSummaryStatistics",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toArray",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "double[]",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

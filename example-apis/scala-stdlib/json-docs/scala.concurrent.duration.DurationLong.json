@@ -1,0 +1,43 @@
+{
+  "name": "scala.concurrent.duration.DurationLong",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyVal",
+    "scala.concurrent.duration.DurationConversions"
+  ],
+  "inherits": [
+    "scala.AnyVal",
+    "scala.concurrent.duration.DurationConversions"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "durationIn",
+      "parameters": [
+        "scala.concurrent.duration.TimeUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.FiniteDuration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected"
+    },
+    {
+      "name": "DurationLong",
+      "parameters": [
+        "scala.Long"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

@@ -1,0 +1,415 @@
+{
+  "name": "java.util.Formatter",
+  "type_parameters": [],
+  "implements": [
+    "java.io.Closeable",
+    "java.io.Flushable"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "flush",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.FormatterClosedException",
+        "close()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "format",
+      "parameters": [
+        "java.util.Locale",
+        "java.lang.String",
+        "java.lang.Object..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Formatter",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.IllegalFormatException",
+        "Details",
+        "java.util.FormatterClosedException",
+        "close()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "locale",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Locale",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.FormatterClosedException",
+        "close()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.FormatterClosedException",
+        "close()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "close",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "format",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Object..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Formatter",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.IllegalFormatException",
+        "Details",
+        "java.util.FormatterClosedException",
+        "close()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "ioException",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.io.IOException",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "out",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Appendable",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.FormatterClosedException",
+        "close()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Formatter",
+      "parameters": [
+        "java.io.File"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "checkWrite(file.getPath())",
+        "java.io.FileNotFoundException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Formatter",
+      "parameters": [
+        "java.io.File",
+        "java.lang.String",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.io.FileNotFoundException",
+        "java.lang.SecurityException",
+        "checkWrite(file.getPath())",
+        "java.io.UnsupportedEncodingException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Formatter",
+      "parameters": [
+        "java.io.OutputStream"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "Formatter",
+      "parameters": [
+        "java.io.OutputStream",
+        "java.lang.String",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.io.UnsupportedEncodingException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Formatter",
+      "parameters": [
+        "java.io.PrintStream"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "Formatter",
+      "parameters": [
+        "java.lang.Appendable",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "Formatter",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.io.FileNotFoundException",
+        "java.lang.SecurityException",
+        "checkWrite(fileName)",
+        "java.io.UnsupportedEncodingException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Formatter",
+      "parameters": [
+        "java.lang.String",
+        "java.nio.charset.Charset",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkWrite(fileName)",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Formatter",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "Formatter",
+      "parameters": [
+        "java.io.File",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.io.FileNotFoundException",
+        "java.lang.SecurityException",
+        "checkWrite(file.getPath())",
+        "java.io.UnsupportedEncodingException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Formatter",
+      "parameters": [
+        "java.io.File",
+        "java.nio.charset.Charset",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkWrite(file.getPath())",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Formatter",
+      "parameters": [
+        "java.io.OutputStream",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.io.UnsupportedEncodingException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Formatter",
+      "parameters": [
+        "java.io.OutputStream",
+        "java.nio.charset.Charset",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Formatter",
+      "parameters": [
+        "java.lang.Appendable"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "Formatter",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "checkWrite(fileName)",
+        "java.io.FileNotFoundException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Formatter",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.io.FileNotFoundException",
+        "java.lang.SecurityException",
+        "checkWrite(fileName)",
+        "java.io.UnsupportedEncodingException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Formatter",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

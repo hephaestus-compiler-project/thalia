@@ -1,0 +1,57 @@
+{
+  "name": "scala.jdk.FunctionWrappers.FromJavaDoubleBinaryOperator",
+  "type_parameters": [],
+  "implements": [
+    "(scala.Double, scala.Double) => scala.Double",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "(scala.Double, scala.Double) => scala.Double",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.Double",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Double",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "FromJavaDoubleBinaryOperator",
+      "parameters": [
+        "java.util.function.DoubleBinaryOperator"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "jf",
+      "type": "java.util.function.DoubleBinaryOperator",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

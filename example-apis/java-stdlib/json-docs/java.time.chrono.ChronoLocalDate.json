@@ -1,0 +1,420 @@
+{
+  "name": "java.time.chrono.ChronoLocalDate",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.time.temporal.Temporal",
+    "java.time.temporal.TemporalAdjuster",
+    "java.lang.Comparable<java.time.chrono.ChronoLocalDate>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "atTime",
+      "parameters": [
+        "java.time.LocalTime"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.ChronoLocalDateTime<?>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "from",
+      "parameters": [
+        "java.time.temporal.TemporalAccessor"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.ChronoLocalDate",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getEra",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.Era",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "isAfter",
+      "parameters": [
+        "java.time.chrono.ChronoLocalDate"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "isEqual",
+      "parameters": [
+        "java.time.chrono.ChronoLocalDate"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "isSupported",
+      "parameters": [
+        "java.time.temporal.TemporalField"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "lengthOfMonth",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "long",
+        "java.time.temporal.TemporalUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.ChronoLocalDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "long",
+        "java.time.temporal.TemporalUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.ChronoLocalDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "query",
+      "parameters": [
+        "java.time.temporal.TemporalQuery<R>"
+      ],
+      "type_parameters": [
+        "R"
+      ],
+      "return_type": "R",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "toEpochDay",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "java.time.chrono.ChronoLocalDate"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.ChronoPeriod",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "with",
+      "parameters": [
+        "java.time.temporal.TemporalAdjuster"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.ChronoLocalDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "adjustInto",
+      "parameters": [
+        "java.time.temporal.Temporal"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.Temporal",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "compareTo",
+      "parameters": [
+        "java.time.chrono.ChronoLocalDate"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "format",
+      "parameters": [
+        "java.time.format.DateTimeFormatter"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "getChronology",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.Chronology",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "isBefore",
+      "parameters": [
+        "java.time.chrono.ChronoLocalDate"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "isLeapYear",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "isSupported",
+      "parameters": [
+        "java.time.temporal.TemporalUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "lengthOfYear",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": true
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "java.time.temporal.TemporalAmount"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.ChronoLocalDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "java.time.temporal.TemporalAmount"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.ChronoLocalDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": true
+    },
+    {
+      "name": "timeLineOrder",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Comparator<java.time.chrono.ChronoLocalDate>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "until",
+      "parameters": [
+        "java.time.temporal.Temporal",
+        "java.time.temporal.TemporalUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "with",
+      "parameters": [
+        "java.time.temporal.TemporalField",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.ChronoLocalDate",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException",
+        "java.lang.ArithmeticException"
+      ],
+      "is_default": true
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

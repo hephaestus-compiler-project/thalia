@@ -1,0 +1,143 @@
+{
+  "name": "java.time.zone.ZoneRulesProvider",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "getRules",
+      "parameters": [
+        "java.lang.String",
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.zone.ZoneRules",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.zone.ZoneRulesException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "provideRefresh",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.time.zone.ZoneRulesException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "provideVersions",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.NavigableMap<java.lang.String,java.time.zone.ZoneRules>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.time.zone.ZoneRulesException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "refresh",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.zone.ZoneRulesException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getAvailableZoneIds",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Set<java.lang.String>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getVersions",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.NavigableMap<java.lang.String,java.time.zone.ZoneRules>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.zone.ZoneRulesException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "provideRules",
+      "parameters": [
+        "java.lang.String",
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.zone.ZoneRules",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.time.zone.ZoneRulesException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "provideZoneIds",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Set<java.lang.String>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.time.zone.ZoneRulesException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "registerProvider",
+      "parameters": [
+        "java.time.zone.ZoneRulesProvider"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.zone.ZoneRulesException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

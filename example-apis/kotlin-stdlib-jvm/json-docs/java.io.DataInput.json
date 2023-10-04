@@ -1,0 +1,234 @@
+{
+  "name": "java.io.DataInput",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "readByte",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "byte",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.EOFException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "readDouble",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "double",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.EOFException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "readFully",
+      "parameters": [
+        "byte[]"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.io.EOFException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "readInt",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.EOFException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "readLong",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.EOFException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "readUnsignedByte",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.EOFException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "readUTF",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.EOFException",
+        "java.io.IOException",
+        "java.io.UTFDataFormatException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "readBoolean",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.EOFException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "readChar",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "char",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.EOFException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "readFloat",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "float",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.EOFException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "readFully",
+      "parameters": [
+        "byte[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IndexOutOfBoundsException",
+        "java.io.EOFException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "readLine",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "readShort",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "short",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.EOFException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "readUnsignedShort",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.EOFException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "skipBytes",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,460 @@
+{
+  "name": "scala.math.Ordering",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [
+    "java.util.Comparator[T]",
+    "scala.math.PartialOrdering[T]",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "java.util.Comparator[T]",
+    "scala.math.PartialOrdering[T]",
+    "scala.Serializable"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "compare",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "equiv",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "gt",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "gteq",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "isReverseOf",
+      "parameters": [
+        "scala.math.Ordering[_]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lt",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "lteq",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "max",
+      "parameters": [
+        "U",
+        "U"
+      ],
+      "type_parameters": [
+        "U <: T"
+      ],
+      "return_type": "U",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "min",
+      "parameters": [
+        "U",
+        "U"
+      ],
+      "type_parameters": [
+        "U <: T"
+      ],
+      "return_type": "U",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "mkOrderingOps",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.math.Ordering.OrderingOps",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "on",
+      "parameters": [
+        "(U) => T"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "scala.math.Ordering[U]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "orElse",
+      "parameters": [
+        "scala.math.Ordering[T]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.math.Ordering[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "orElseBy",
+      "parameters": [
+        "(T) => S"
+      ],
+      "type_parameters": [
+        "S"
+      ],
+      "return_type": "(scala.math.Ordering[S]) => scala.math.Ordering[T]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "tryCompare",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Some[scala.Int]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Option",
+      "parameters": [
+        "scala.math.Ordering[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.math.Ordering[scala.Option[T]]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple2",
+      "parameters": [
+        "scala.math.Ordering[T1]",
+        "scala.math.Ordering[T2]"
+      ],
+      "type_parameters": [
+        "T1",
+        "T2"
+      ],
+      "return_type": "scala.math.Ordering[(T1, T2)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple3",
+      "parameters": [
+        "scala.math.Ordering[T1]",
+        "scala.math.Ordering[T2]",
+        "scala.math.Ordering[T3]"
+      ],
+      "type_parameters": [
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "return_type": "scala.math.Ordering[(T1, T2, T3)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple4",
+      "parameters": [
+        "scala.math.Ordering[T1]",
+        "scala.math.Ordering[T2]",
+        "scala.math.Ordering[T3]",
+        "scala.math.Ordering[T4]"
+      ],
+      "type_parameters": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "return_type": "scala.math.Ordering[(T1, T2, T3, T4)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple5",
+      "parameters": [
+        "scala.math.Ordering[T1]",
+        "scala.math.Ordering[T2]",
+        "scala.math.Ordering[T3]",
+        "scala.math.Ordering[T4]",
+        "scala.math.Ordering[T5]"
+      ],
+      "type_parameters": [
+        "T1",
+        "T2",
+        "T3",
+        "T4",
+        "T5"
+      ],
+      "return_type": "scala.math.Ordering[(T1, T2, T3, T4, T5)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple6",
+      "parameters": [
+        "scala.math.Ordering[T1]",
+        "scala.math.Ordering[T2]",
+        "scala.math.Ordering[T3]",
+        "scala.math.Ordering[T4]",
+        "scala.math.Ordering[T5]",
+        "scala.math.Ordering[T6]"
+      ],
+      "type_parameters": [
+        "T1",
+        "T2",
+        "T3",
+        "T4",
+        "T5",
+        "T6"
+      ],
+      "return_type": "scala.math.Ordering[(T1, T2, T3, T4, T5, T6)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple7",
+      "parameters": [
+        "scala.math.Ordering[T1]",
+        "scala.math.Ordering[T2]",
+        "scala.math.Ordering[T3]",
+        "scala.math.Ordering[T4]",
+        "scala.math.Ordering[T5]",
+        "scala.math.Ordering[T6]",
+        "scala.math.Ordering[T7]"
+      ],
+      "type_parameters": [
+        "T1",
+        "T2",
+        "T3",
+        "T4",
+        "T5",
+        "T6",
+        "T7"
+      ],
+      "return_type": "scala.math.Ordering[(T1, T2, T3, T4, T5, T6, T7)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple8",
+      "parameters": [
+        "scala.math.Ordering[T1]",
+        "scala.math.Ordering[T2]",
+        "scala.math.Ordering[T3]",
+        "scala.math.Ordering[T4]",
+        "scala.math.Ordering[T5]",
+        "scala.math.Ordering[T6]",
+        "scala.math.Ordering[T7]",
+        "scala.math.Ordering[T8]"
+      ],
+      "type_parameters": [
+        "T1",
+        "T2",
+        "T3",
+        "T4",
+        "T5",
+        "T6",
+        "T7",
+        "T8"
+      ],
+      "return_type": "scala.math.Ordering[(T1, T2, T3, T4, T5, T6, T7, T8)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "Tuple9",
+      "parameters": [
+        "scala.math.Ordering[T1]",
+        "scala.math.Ordering[T2]",
+        "scala.math.Ordering[T3]",
+        "scala.math.Ordering[T4]",
+        "scala.math.Ordering[T5]",
+        "scala.math.Ordering[T6]",
+        "scala.math.Ordering[T7]",
+        "scala.math.Ordering[T8]",
+        "scala.math.Ordering[T9]"
+      ],
+      "type_parameters": [
+        "T1",
+        "T2",
+        "T3",
+        "T4",
+        "T5",
+        "T6",
+        "T7",
+        "T8",
+        "T9"
+      ],
+      "return_type": "scala.math.Ordering[(T1, T2, T3, T4, T5, T6, T7, T8, T9)]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "scala.math.Ordering[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.math.Ordering[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "by",
+      "parameters": [
+        "(T) => S"
+      ],
+      "type_parameters": [
+        "T",
+        "S"
+      ],
+      "return_type": "(scala.math.Ordering[S]) => scala.math.Ordering[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromLessThan",
+      "parameters": [
+        "(T, T) => scala.Boolean"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.math.Ordering[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "reverse",
+      "type": "scala.math.Ordering[T]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

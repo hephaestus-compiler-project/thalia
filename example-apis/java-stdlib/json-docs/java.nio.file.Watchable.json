@@ -1,0 +1,55 @@
+{
+  "name": "java.nio.file.Watchable",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "register",
+      "parameters": [
+        "java.nio.file.WatchService",
+        "java.nio.file.WatchEvent.Kind<?>[]",
+        "java.nio.file.WatchEvent.Modifier..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.WatchKey",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.IllegalArgumentException",
+        "java.nio.file.ClosedWatchServiceException",
+        "java.io.IOException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "register",
+      "parameters": [
+        "java.nio.file.WatchService",
+        "java.nio.file.WatchEvent.Kind<?>..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.WatchKey",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.lang.IllegalArgumentException",
+        "java.nio.file.ClosedWatchServiceException",
+        "java.io.IOException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,101 @@
+{
+  "name": "kotlin.random",
+  "methods": [
+    {
+      "name": "asJavaRandom",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Random",
+      "receiver": "kotlin.random.Random",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "asKotlinRandom",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.random.Random",
+      "receiver": "java.util.Random",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "nextInt",
+      "parameters": [
+        "kotlin.ranges.IntRange"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": "kotlin.random.Random",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "nextLong",
+      "parameters": [
+        "kotlin.ranges.LongRange"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": "kotlin.random.Random",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "kotlin.random.Random",
+      "parameters": [
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.random.Random",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "kotlin.random.Random",
+      "parameters": [
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.random.Random",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "type_parameters": [],
+  "is_class": false,
+  "language": "kotlin"
+}

@@ -1,0 +1,402 @@
+{
+  "name": "java.lang.reflect.Array",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getBoolean",
+      "parameters": [
+        "java.lang.Object",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getChar",
+      "parameters": [
+        "java.lang.Object",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "char",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getFloat",
+      "parameters": [
+        "java.lang.Object",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "float",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getLength",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getShort",
+      "parameters": [
+        "java.lang.Object",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "short",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "newInstance",
+      "parameters": [
+        "java.lang.Class<?>",
+        "int..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "Void.TYPE",
+        "java.lang.NegativeArraySizeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setBoolean",
+      "parameters": [
+        "java.lang.Object",
+        "int",
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setChar",
+      "parameters": [
+        "java.lang.Object",
+        "int",
+        "char"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setFloat",
+      "parameters": [
+        "java.lang.Object",
+        "int",
+        "float"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setLong",
+      "parameters": [
+        "java.lang.Object",
+        "int",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "java.lang.Object",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getByte",
+      "parameters": [
+        "java.lang.Object",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "byte",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getDouble",
+      "parameters": [
+        "java.lang.Object",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "double",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getInt",
+      "parameters": [
+        "java.lang.Object",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getLong",
+      "parameters": [
+        "java.lang.Object",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "newInstance",
+      "parameters": [
+        "java.lang.Class<?>",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "Void.TYPE",
+        "java.lang.NegativeArraySizeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "set",
+      "parameters": [
+        "java.lang.Object",
+        "int",
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setByte",
+      "parameters": [
+        "java.lang.Object",
+        "int",
+        "byte"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setDouble",
+      "parameters": [
+        "java.lang.Object",
+        "int",
+        "double"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setInt",
+      "parameters": [
+        "java.lang.Object",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setShort",
+      "parameters": [
+        "java.lang.Object",
+        "int",
+        "short"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.ArrayIndexOutOfBoundsException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

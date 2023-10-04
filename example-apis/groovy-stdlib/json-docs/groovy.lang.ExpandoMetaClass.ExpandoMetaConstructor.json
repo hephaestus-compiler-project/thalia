@@ -1,0 +1,29 @@
+{
+  "name": "groovy.lang.ExpandoMetaClass.ExpandoMetaConstructor",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "groovy.lang.GroovyObjectSupport"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "leftShift",
+      "parameters": [
+        "groovy.lang.Closure"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": "groovy.lang.ExpandoMetaClass",
+  "access_mod": "protected",
+  "language": "java"
+}

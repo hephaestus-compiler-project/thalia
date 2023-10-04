@@ -1,0 +1,34 @@
+{
+  "name": "groovy.lang.Tuple0",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "groovy.lang.Tuple"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "clone",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "groovy.lang.Tuple0",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "INSTANCE",
+      "type": "groovy.lang.Tuple0",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

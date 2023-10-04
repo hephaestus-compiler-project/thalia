@@ -1,0 +1,367 @@
+{
+  "name": "java.lang.module.ModuleDescriptor.Builder",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "exports",
+      "parameters": [
+        "java.lang.module.ModuleDescriptor.Exports"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException",
+        "package"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "exports",
+      "parameters": [
+        "java.lang.String",
+        "java.util.Set<java.lang.String>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "exports",
+      "parameters": [
+        "java.util.Set<java.lang.module.ModuleDescriptor.Exports.Modifier>",
+        "java.lang.String",
+        "java.util.Set<java.lang.String>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "opens",
+      "parameters": [
+        "java.lang.module.ModuleDescriptor.Opens"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "opens",
+      "parameters": [
+        "java.lang.String",
+        "java.util.Set<java.lang.String>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "opens",
+      "parameters": [
+        "java.util.Set<java.lang.module.ModuleDescriptor.Opens.Modifier>",
+        "java.lang.String",
+        "java.util.Set<java.lang.String>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "provides",
+      "parameters": [
+        "java.lang.module.ModuleDescriptor.Provides"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "requires",
+      "parameters": [
+        "java.lang.module.ModuleDescriptor.Requires"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "requires",
+      "parameters": [
+        "java.util.Set<java.lang.module.ModuleDescriptor.Requires.Modifier>",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "uses",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "version",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "build",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "exports",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "exports",
+      "parameters": [
+        "java.util.Set<java.lang.module.ModuleDescriptor.Exports.Modifier>",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "mainClass",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "opens",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "opens",
+      "parameters": [
+        "java.util.Set<java.lang.module.ModuleDescriptor.Opens.Modifier>",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "packages",
+      "parameters": [
+        "java.util.Set<java.lang.String>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "provides",
+      "parameters": [
+        "java.lang.String",
+        "java.util.List<java.lang.String>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "requires",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "requires",
+      "parameters": [
+        "java.util.Set<java.lang.module.ModuleDescriptor.Requires.Modifier>",
+        "java.lang.String",
+        "java.lang.module.ModuleDescriptor.Version"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.IllegalStateException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "version",
+      "parameters": [
+        "java.lang.module.ModuleDescriptor.Version"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleDescriptor.Builder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

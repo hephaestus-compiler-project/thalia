@@ -1,0 +1,53 @@
+{
+  "name": "scala.concurrent.duration.LongMult",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyVal"
+  ],
+  "inherits": [
+    "scala.AnyVal"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "*",
+      "parameters": [
+        "scala.concurrent.duration.FiniteDuration"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.FiniteDuration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "*",
+      "parameters": [
+        "scala.concurrent.duration.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Duration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "LongMult",
+      "parameters": [
+        "scala.Long"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

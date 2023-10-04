@@ -1,0 +1,340 @@
+{
+  "name": "groovy.util.ProxyGenerator",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getEmptyMethods",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instantiateAggregate",
+      "parameters": [
+        "java.util.List<java.lang.Class>"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.GroovyObject",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instantiateAggregate",
+      "parameters": [
+        "java.util.Map",
+        "java.util.List<java.lang.Class>",
+        "java.lang.Class"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.GroovyObject",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instantiateAggregateFromBaseClass",
+      "parameters": [
+        "groovy.lang.Closure",
+        "java.lang.Class"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.GroovyObject",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instantiateAggregateFromBaseClass",
+      "parameters": [
+        "java.lang.Class",
+        "java.lang.Object[]"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.GroovyObject",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instantiateAggregateFromBaseClass",
+      "parameters": [
+        "java.util.Map",
+        "java.lang.Class",
+        "java.lang.Object[]"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.GroovyObject",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instantiateAggregateFromInterface",
+      "parameters": [
+        "java.util.Map",
+        "java.lang.Class"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.GroovyObject",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instantiateDelegate",
+      "parameters": [
+        "java.util.List<java.lang.Class>",
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.GroovyObject",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instantiateDelegateWithBaseClass",
+      "parameters": [
+        "java.util.Map",
+        "java.util.List<java.lang.Class>",
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.GroovyObject",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instantiateDelegateWithBaseClass",
+      "parameters": [
+        "java.util.Map",
+        "java.util.List<java.lang.Class>",
+        "java.lang.Object",
+        "java.lang.Class",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.GroovyObject",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setEmptyMethods",
+      "parameters": [
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getDebug",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getOverride",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.ClassLoader",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instantiateAggregate",
+      "parameters": [
+        "java.util.Map",
+        "java.util.List<java.lang.Class>"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.GroovyObject",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instantiateAggregate",
+      "parameters": [
+        "java.util.Map",
+        "java.util.List<java.lang.Class>",
+        "java.lang.Class",
+        "java.lang.Object[]"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.GroovyObject",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instantiateAggregateFromBaseClass",
+      "parameters": [
+        "java.lang.Class"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.GroovyObject",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instantiateAggregateFromBaseClass",
+      "parameters": [
+        "java.util.Map",
+        "java.lang.Class"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.GroovyObject",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instantiateAggregateFromInterface",
+      "parameters": [
+        "java.lang.Class"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.GroovyObject",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instantiateDelegate",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.GroovyObject",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instantiateDelegate",
+      "parameters": [
+        "java.util.Map",
+        "java.util.List<java.lang.Class>",
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.GroovyObject",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "instantiateDelegateWithBaseClass",
+      "parameters": [
+        "java.util.Map",
+        "java.util.List<java.lang.Class>",
+        "java.lang.Object",
+        "java.lang.Class"
+      ],
+      "type_parameters": [],
+      "return_type": "groovy.lang.GroovyObject",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setDebug",
+      "parameters": [
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setOverride",
+      "parameters": [
+        "java.lang.ClassLoader"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "INSTANCE",
+      "type": "groovy.util.ProxyGenerator",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

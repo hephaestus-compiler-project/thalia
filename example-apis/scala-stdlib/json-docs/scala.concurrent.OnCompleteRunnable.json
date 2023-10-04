@@ -1,0 +1,16 @@
+{
+  "name": "scala.concurrent.OnCompleteRunnable",
+  "type_parameters": [],
+  "implements": [
+    "scala.concurrent.Batchable"
+  ],
+  "inherits": [
+    "scala.concurrent.Batchable"
+  ],
+  "class_type": 1,
+  "methods": [],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

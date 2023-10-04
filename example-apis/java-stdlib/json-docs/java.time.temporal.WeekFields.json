@@ -1,0 +1,178 @@
+{
+  "name": "java.time.temporal.WeekFields",
+  "type_parameters": [],
+  "implements": [
+    "java.io.Serializable"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "equals",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getMinimalDaysInFirstWeek",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "java.time.DayOfWeek",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.WeekFields",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "weekOfMonth",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalField",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "weekOfYear",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalField",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "dayOfWeek",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalField",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getFirstDayOfWeek",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.DayOfWeek",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.WeekFields",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "weekBasedYear",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalField",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "weekOfWeekBasedYear",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.TemporalField",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "SUNDAY_START",
+      "type": "java.time.temporal.WeekFields",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "ISO",
+      "type": "java.time.temporal.WeekFields",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "WEEK_BASED_YEARS",
+      "type": "java.time.temporal.TemporalUnit",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

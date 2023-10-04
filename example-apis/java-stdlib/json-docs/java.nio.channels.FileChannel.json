@@ -1,0 +1,442 @@
+{
+  "name": "java.nio.channels.FileChannel",
+  "type_parameters": [],
+  "implements": [
+    "java.nio.channels.SeekableByteChannel",
+    "java.nio.channels.GatheringByteChannel",
+    "java.nio.channels.ScatteringByteChannel"
+  ],
+  "inherits": [
+    "java.nio.channels.spi.AbstractInterruptibleChannel"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "lock",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.FileLock",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.FileLockInterruptionException",
+        "java.nio.channels.OverlappingFileLockException",
+        "java.nio.channels.NonWritableChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "map",
+      "parameters": [
+        "java.nio.channels.FileChannel.MapMode",
+        "long",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.MappedByteBuffer",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.NonReadableChannelException",
+        "READ_ONLY",
+        "java.nio.channels.NonWritableChannelException",
+        "READ_WRITE",
+        "PRIVATE",
+        "java.lang.IllegalArgumentException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "open",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.util.Set<? extends java.nio.file.OpenOption>",
+        "java.nio.file.attribute.FileAttribute<?>..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.FileChannel",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.UnsupportedOperationException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "SecurityManager.checkRead(String)",
+        "SecurityManager.checkWrite(String)"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "position",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.FileChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.lang.IllegalArgumentException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "java.nio.ByteBuffer[]"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "java.nio.ByteBuffer",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.channels.NonReadableChannelException",
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "transferFrom",
+      "parameters": [
+        "java.nio.channels.ReadableByteChannel",
+        "long",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.channels.NonReadableChannelException",
+        "java.nio.channels.NonWritableChannelException",
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "truncate",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.FileChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.NonWritableChannelException",
+        "java.nio.channels.ClosedChannelException",
+        "java.lang.IllegalArgumentException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "tryLock",
+      "parameters": [
+        "long",
+        "long",
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.FileLock",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.OverlappingFileLockException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.nio.ByteBuffer[]"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.nio.ByteBuffer",
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.channels.NonWritableChannelException",
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "force",
+      "parameters": [
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "lock",
+      "parameters": [
+        "long",
+        "long",
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.FileLock",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.FileLockInterruptionException",
+        "java.nio.channels.OverlappingFileLockException",
+        "java.nio.channels.NonReadableChannelException",
+        "java.nio.channels.NonWritableChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "open",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.nio.file.OpenOption..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.FileChannel",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.UnsupportedOperationException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "SecurityManager.checkRead(String)",
+        "SecurityManager.checkWrite(String)"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "position",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "java.nio.ByteBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "java.nio.ByteBuffer[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "size",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "transferTo",
+      "parameters": [
+        "long",
+        "long",
+        "java.nio.channels.WritableByteChannel"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.channels.NonReadableChannelException",
+        "java.nio.channels.NonWritableChannelException",
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "tryLock",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.FileLock",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.OverlappingFileLockException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.nio.ByteBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.nio.ByteBuffer[]",
+        "int",
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

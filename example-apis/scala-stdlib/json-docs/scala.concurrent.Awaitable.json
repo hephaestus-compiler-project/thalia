@@ -1,0 +1,43 @@
+{
+  "name": "scala.concurrent.Awaitable",
+  "type_parameters": [
+    "+T"
+  ],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "ready",
+      "parameters": [
+        "scala.concurrent.duration.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "(scala.concurrent.CanAwait) => scala.concurrent.Awaitable.this.type",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "result",
+      "parameters": [
+        "scala.concurrent.duration.Duration"
+      ],
+      "type_parameters": [],
+      "return_type": "(scala.concurrent.CanAwait) => T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

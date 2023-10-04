@@ -1,0 +1,321 @@
+{
+  "name": "java.lang.ProcessBuilder",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "command",
+      "parameters": [
+        "java.lang.String..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ProcessBuilder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "directory",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.io.File",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "environment",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Map<java.lang.String,java.lang.String>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "checkPermission"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "redirectError",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.ProcessBuilder.Redirect",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "redirectError",
+      "parameters": [
+        "java.lang.ProcessBuilder.Redirect"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ProcessBuilder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "READ"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "redirectErrorStream",
+      "parameters": [
+        "boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ProcessBuilder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "redirectInput",
+      "parameters": [
+        "java.io.File"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ProcessBuilder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "redirectOutput",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.ProcessBuilder.Redirect",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "redirectOutput",
+      "parameters": [
+        "java.lang.ProcessBuilder.Redirect"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ProcessBuilder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "READ"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "startPipeline",
+      "parameters": [
+        "java.util.List<java.lang.ProcessBuilder>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.List<java.lang.Process>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "ProcessBuilder.Redirect.PIPE",
+        "java.lang.NullPointerException",
+        "java.lang.IndexOutOfBoundsException",
+        "java.lang.SecurityException",
+        "checkExec",
+        "redirected from a file",
+        "checkRead",
+        "redirected to a file",
+        "checkWrite",
+        "java.lang.UnsupportedOperationException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "command",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.List<java.lang.String>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "command",
+      "parameters": [
+        "java.util.List<java.lang.String>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ProcessBuilder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "directory",
+      "parameters": [
+        "java.io.File"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ProcessBuilder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "inheritIO",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.ProcessBuilder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "redirectError",
+      "parameters": [
+        "java.io.File"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ProcessBuilder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "redirectErrorStream",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "redirectInput",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.ProcessBuilder.Redirect",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "redirectInput",
+      "parameters": [
+        "java.lang.ProcessBuilder.Redirect"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ProcessBuilder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "WRITE",
+        "APPEND"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "redirectOutput",
+      "parameters": [
+        "java.io.File"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.ProcessBuilder",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "start",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Process",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IndexOutOfBoundsException",
+        "java.lang.SecurityException",
+        "checkExec",
+        "redirected from a file",
+        "checkRead",
+        "redirected to a file",
+        "checkWrite",
+        "java.lang.UnsupportedOperationException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "ProcessBuilder",
+      "parameters": [
+        "java.util.List<java.lang.String>"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "ProcessBuilder",
+      "parameters": [
+        "java.lang.String..."
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

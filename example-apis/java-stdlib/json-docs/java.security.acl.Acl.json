@@ -1,0 +1,124 @@
+{
+  "name": "java.security.acl.Acl",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.security.acl.Owner"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "checkPermission",
+      "parameters": [
+        "java.security.Principal",
+        "java.security.acl.Permission"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getName",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "removeEntry",
+      "parameters": [
+        "java.security.Principal",
+        "java.security.acl.AclEntry"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.acl.NotOwnerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "addEntry",
+      "parameters": [
+        "java.security.Principal",
+        "java.security.acl.AclEntry"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.acl.NotOwnerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "entries",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Enumeration<java.security.acl.AclEntry>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getPermissions",
+      "parameters": [
+        "java.security.Principal"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Enumeration<java.security.acl.Permission>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "setName",
+      "parameters": [
+        "java.security.Principal",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.acl.NotOwnerException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

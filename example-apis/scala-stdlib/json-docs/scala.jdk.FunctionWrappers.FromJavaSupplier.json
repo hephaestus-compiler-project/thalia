@@ -1,0 +1,56 @@
+{
+  "name": "scala.jdk.FunctionWrappers.FromJavaSupplier",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [
+    "() => T",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "() => T",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "apply",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "FromJavaSupplier",
+      "parameters": [
+        "java.util.function.Supplier[T]"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "jf",
+      "type": "java.util.function.Supplier[T]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

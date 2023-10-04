@@ -1,0 +1,86 @@
+{
+  "name": "scala.sys.process.ProcessBuilder.Source",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "#>",
+      "parameters": [
+        "scala.sys.process.ProcessBuilder"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "#>",
+      "parameters": [
+        "=> scala.sys.process.processInternal.OutputStream"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "#>",
+      "parameters": [
+        "scala.sys.process.processInternal.File"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "#>>",
+      "parameters": [
+        "scala.sys.process.processInternal.File"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "toSource",
+      "type": "scala.sys.process.ProcessBuilder",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "protected",
+      "is_static": false
+    },
+    {
+      "name": "cat",
+      "type": "scala.sys.process.ProcessBuilder",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

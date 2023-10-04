@@ -1,0 +1,59 @@
+{
+  "name": "scala.jdk.FunctionWrappers.FromJavaObjDoubleConsumer",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [
+    "(T, scala.Double) => scala.Unit",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "(T, scala.Double) => scala.Unit",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "apply",
+      "parameters": [
+        "T",
+        "scala.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "FromJavaObjDoubleConsumer",
+      "parameters": [
+        "java.util.function.ObjDoubleConsumer[T]"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "jf",
+      "type": "java.util.function.ObjDoubleConsumer[T]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

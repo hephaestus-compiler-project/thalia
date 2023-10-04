@@ -1,0 +1,87 @@
+{
+  "name": "java.security.spec.MGF1ParameterSpec",
+  "type_parameters": [],
+  "implements": [
+    "java.security.spec.AlgorithmParameterSpec"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getDigestAlgorithm",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "MGF1ParameterSpec",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "SHA224",
+      "type": "java.security.spec.MGF1ParameterSpec",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SHA384",
+      "type": "java.security.spec.MGF1ParameterSpec",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SHA512_224",
+      "type": "java.security.spec.MGF1ParameterSpec",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SHA1",
+      "type": "java.security.spec.MGF1ParameterSpec",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SHA256",
+      "type": "java.security.spec.MGF1ParameterSpec",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SHA512",
+      "type": "java.security.spec.MGF1ParameterSpec",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SHA512_256",
+      "type": "java.security.spec.MGF1ParameterSpec",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

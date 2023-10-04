@@ -1,0 +1,114 @@
+{
+  "name": "java.security.SecureClassLoader",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.ClassLoader"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "defineClass",
+      "parameters": [
+        "java.lang.String",
+        "java.nio.ByteBuffer",
+        "java.security.CodeSource"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.lang.ClassFormatError",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "defineClass",
+      "parameters": [
+        "java.lang.String",
+        "byte[]",
+        "int",
+        "int",
+        "java.security.CodeSource"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.lang.ClassFormatError",
+        "java.lang.IndexOutOfBoundsException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getPermissions",
+      "parameters": [
+        "java.security.CodeSource"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.PermissionCollection",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "SecureClassLoader",
+      "parameters": [
+        "java.lang.ClassLoader"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "protected",
+      "throws": [
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "SecureClassLoader",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "protected",
+      "throws": [
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "SecureClassLoader",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.ClassLoader"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "protected",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.SecurityException",
+        "SecurityManager.checkCreateClassLoader()"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

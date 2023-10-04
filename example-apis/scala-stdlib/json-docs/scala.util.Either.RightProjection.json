@@ -1,0 +1,160 @@
+{
+  "name": "scala.util.Either.RightProjection",
+  "type_parameters": [
+    "+A",
+    "+B"
+  ],
+  "implements": [
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "exists",
+      "parameters": [
+        "(B) => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "filterToOption",
+      "parameters": [
+        "(B) => scala.Boolean"
+      ],
+      "type_parameters": [
+        "A1"
+      ],
+      "return_type": "scala.Option[scala.util.Either[A1, B]]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "flatMap",
+      "parameters": [
+        "(B) => scala.util.Either[A1, B1]"
+      ],
+      "type_parameters": [
+        "A1 >: A",
+        "B1"
+      ],
+      "return_type": "scala.util.Either[A1, B1]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "forall",
+      "parameters": [
+        "(B) => scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "foreach",
+      "parameters": [
+        "(B) => U"
+      ],
+      "type_parameters": [
+        "U"
+      ],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "getOrElse",
+      "parameters": [
+        "=> B1"
+      ],
+      "type_parameters": [
+        "B1 >: B"
+      ],
+      "return_type": "B1",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "map",
+      "parameters": [
+        "(B) => B1"
+      ],
+      "type_parameters": [
+        "B1"
+      ],
+      "return_type": "scala.util.Either[A, B1]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "RightProjection",
+      "parameters": [
+        "scala.util.Either[A, B]"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "e",
+      "type": "scala.util.Either[A, B]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toOption",
+      "type": "scala.Option[B]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "toSeq",
+      "type": "scala.Seq[B]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

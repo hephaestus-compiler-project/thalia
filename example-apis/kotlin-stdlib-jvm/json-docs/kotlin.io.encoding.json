@@ -1,0 +1,41 @@
+{
+  "name": "kotlin.io.encoding",
+  "methods": [
+    {
+      "name": "decodingWith",
+      "parameters": [
+        "kotlin.io.encoding.Base64"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.InputStream",
+      "receiver": "java.io.InputStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "encodingWith",
+      "parameters": [
+        "kotlin.io.encoding.Base64"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.OutputStream",
+      "receiver": "java.io.OutputStream",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "type_parameters": [],
+  "is_class": false,
+  "language": "kotlin"
+}

@@ -1,0 +1,45 @@
+{
+  "name": "scala.math.LowPriorityOrderingImplicits",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "comparatorToOrdering",
+      "parameters": [
+        "java.util.Comparator[A]"
+      ],
+      "type_parameters": [
+        "A"
+      ],
+      "return_type": "scala.math.Ordering[A]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "ordered",
+      "parameters": [
+        "scala.math.LowPriorityOrderingImplicits.AsComparable[A]"
+      ],
+      "type_parameters": [
+        "A"
+      ],
+      "return_type": "scala.math.Ordering[A]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

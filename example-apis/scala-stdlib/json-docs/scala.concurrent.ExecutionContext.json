@@ -1,0 +1,102 @@
+{
+  "name": "scala.concurrent.ExecutionContext",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "execute",
+      "parameters": [
+        "java.lang.Runnable"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "reportFailure",
+      "parameters": [
+        "scala.Throwable"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromExecutor",
+      "parameters": [
+        "java.util.concurrent.Executor"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.ExecutionContextExecutor",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromExecutor",
+      "parameters": [
+        "java.util.concurrent.Executor",
+        "(scala.Throwable) => scala.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.ExecutionContextExecutor",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromExecutorService",
+      "parameters": [
+        "java.util.concurrent.ExecutorService"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.ExecutionContextExecutorService",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fromExecutorService",
+      "parameters": [
+        "java.util.concurrent.ExecutorService",
+        "(scala.Throwable) => scala.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.ExecutionContextExecutorService",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "defaultReporter",
+      "type": "(scala.Throwable) => scala.Unit",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

@@ -1,0 +1,57 @@
+{
+  "name": "java.security.spec.NamedParameterSpec",
+  "type_parameters": [],
+  "implements": [
+    "java.security.spec.AlgorithmParameterSpec"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getName",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "NamedParameterSpec",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "X448",
+      "type": "java.security.spec.NamedParameterSpec",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "X25519",
+      "type": "java.security.spec.NamedParameterSpec",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

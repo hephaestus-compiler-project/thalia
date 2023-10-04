@@ -1,0 +1,1532 @@
+{
+  "name": "kotlin.comparisons",
+  "methods": [
+    {
+      "name": "maxOf",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Byte",
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Byte",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Double",
+        "kotlin.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Float",
+        "kotlin.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Float",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Int",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Long",
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Short",
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Short",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Byte",
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Byte",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Double",
+        "kotlin.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Float",
+        "kotlin.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Float",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Int",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Long",
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Short",
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Short",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "T",
+        "T",
+        "T"
+      ],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Byte",
+        "kotlin.Byte",
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Byte",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Double",
+        "kotlin.Double",
+        "kotlin.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Float",
+        "kotlin.Float",
+        "kotlin.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Float",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Int",
+        "kotlin.Int",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Long",
+        "kotlin.Long",
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.Short",
+        "kotlin.Short",
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Short",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Byte",
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Byte",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Double",
+        "kotlin.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Float",
+        "kotlin.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Float",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Int",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Long",
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Short",
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Short",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "T",
+        "T"
+      ],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Byte",
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Byte",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Double",
+        "kotlin.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Float",
+        "kotlin.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Float",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Int",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Long",
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Short",
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Short",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "T",
+        "T",
+        "T"
+      ],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Byte",
+        "kotlin.Byte",
+        "kotlin.Byte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Byte",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Double",
+        "kotlin.Double",
+        "kotlin.Double"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Double",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Float",
+        "kotlin.Float",
+        "kotlin.Float"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Float",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Int",
+        "kotlin.Int",
+        "kotlin.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Long",
+        "kotlin.Long",
+        "kotlin.Long"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.Short",
+        "kotlin.Short",
+        "kotlin.Short"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Short",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "compareBy",
+      "parameters": [
+        "(T) -> kotlin.Comparable<*>?"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Comparator<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "compareBy",
+      "parameters": [
+        "(T) -> kotlin.Comparable<*>?"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Comparator<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "compareBy",
+      "parameters": [
+        "kotlin.Comparator<in K>",
+        "(T) -> K"
+      ],
+      "type_parameters": [
+        "T",
+        "K"
+      ],
+      "return_type": "kotlin.Comparator<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "compareByDescending",
+      "parameters": [
+        "(T) -> kotlin.Comparable<*>?"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Comparator<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "compareByDescending",
+      "parameters": [
+        "kotlin.Comparator<in K>",
+        "(T) -> K"
+      ],
+      "type_parameters": [
+        "T",
+        "K"
+      ],
+      "return_type": "kotlin.Comparator<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "compareValues",
+      "parameters": [
+        "T?",
+        "T?"
+      ],
+      "type_parameters": [
+        "T : kotlin.Comparable<*>"
+      ],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "compareValuesBy",
+      "parameters": [
+        "T",
+        "T",
+        "(T) -> kotlin.Comparable<*>?"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "compareValuesBy",
+      "parameters": [
+        "T",
+        "T",
+        "(T) -> kotlin.Comparable<*>?"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "compareValuesBy",
+      "parameters": [
+        "T",
+        "T",
+        "kotlin.Comparator<in K>",
+        "(T) -> K"
+      ],
+      "type_parameters": [
+        "T",
+        "K"
+      ],
+      "return_type": "kotlin.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.UByte",
+        "kotlin.UByte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UByte",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.UInt",
+        "kotlin.UInt"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.ULong",
+        "kotlin.ULong"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ULong",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.UShort",
+        "kotlin.UShort"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UShort",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "T",
+        "T",
+        "kotlin.Comparator<in T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.UByte",
+        "kotlin.UByte",
+        "kotlin.UByte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UByte",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.UInt",
+        "kotlin.UInt",
+        "kotlin.UInt"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.ULong",
+        "kotlin.ULong",
+        "kotlin.ULong"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ULong",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "kotlin.UShort",
+        "kotlin.UShort",
+        "kotlin.UShort"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UShort",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "maxOf",
+      "parameters": [
+        "T",
+        "T",
+        "T",
+        "kotlin.Comparator<in T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.UByte",
+        "kotlin.UByte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UByte",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.UInt",
+        "kotlin.UInt"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.ULong",
+        "kotlin.ULong"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ULong",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.UShort",
+        "kotlin.UShort"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UShort",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "T",
+        "T",
+        "kotlin.Comparator<in T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.UByte",
+        "kotlin.UByte",
+        "kotlin.UByte"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UByte",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.UInt",
+        "kotlin.UInt",
+        "kotlin.UInt"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UInt",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.ULong",
+        "kotlin.ULong",
+        "kotlin.ULong"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.ULong",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "kotlin.UShort",
+        "kotlin.UShort",
+        "kotlin.UShort"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.UShort",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "minOf",
+      "parameters": [
+        "T",
+        "T",
+        "T",
+        "kotlin.Comparator<in T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "naturalOrder",
+      "parameters": [],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "kotlin.Comparator<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "nullsFirst",
+      "parameters": [],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "kotlin.Comparator<T?>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "nullsFirst",
+      "parameters": [
+        "kotlin.Comparator<in T>"
+      ],
+      "type_parameters": [
+        "T : kotlin.Any"
+      ],
+      "return_type": "kotlin.Comparator<T?>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "nullsLast",
+      "parameters": [],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "kotlin.Comparator<T?>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "nullsLast",
+      "parameters": [
+        "kotlin.Comparator<in T>"
+      ],
+      "type_parameters": [
+        "T : kotlin.Any"
+      ],
+      "return_type": "kotlin.Comparator<T?>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "reversed",
+      "parameters": [],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Comparator<T>",
+      "receiver": "kotlin.Comparator<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "reverseOrder",
+      "parameters": [],
+      "type_parameters": [
+        "T : kotlin.Comparable<T>"
+      ],
+      "return_type": "kotlin.Comparator<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "then",
+      "parameters": [
+        "kotlin.Comparator<in T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Comparator<T>",
+      "receiver": "kotlin.Comparator<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "thenBy",
+      "parameters": [
+        "(T) -> kotlin.Comparable<*>?"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Comparator<T>",
+      "receiver": "kotlin.Comparator<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "thenBy",
+      "parameters": [
+        "kotlin.Comparator<in K>",
+        "(T) -> K"
+      ],
+      "type_parameters": [
+        "T",
+        "K"
+      ],
+      "return_type": "kotlin.Comparator<T>",
+      "receiver": "kotlin.Comparator<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "thenByDescending",
+      "parameters": [
+        "(T) -> kotlin.Comparable<*>?"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Comparator<T>",
+      "receiver": "kotlin.Comparator<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "thenByDescending",
+      "parameters": [
+        "kotlin.Comparator<in K>",
+        "(T) -> K"
+      ],
+      "type_parameters": [
+        "T",
+        "K"
+      ],
+      "return_type": "kotlin.Comparator<T>",
+      "receiver": "kotlin.Comparator<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "thenComparator",
+      "parameters": [
+        "(a: T, b: T) -> kotlin.Int"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Comparator<T>",
+      "receiver": "kotlin.Comparator<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "thenDescending",
+      "parameters": [
+        "kotlin.Comparator<in T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.Comparator<T>",
+      "receiver": "kotlin.Comparator<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "type_parameters": [],
+  "is_class": false,
+  "language": "kotlin"
+}

@@ -1,0 +1,219 @@
+{
+  "name": "java.util.concurrent.ExecutorService",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.util.concurrent.Executor"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "invokeAll",
+      "parameters": [
+        "java.util.Collection<? extends java.util.concurrent.Callable<T>>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.List<java.util.concurrent.Future<T>>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.InterruptedException",
+        "java.lang.NullPointerException",
+        "java.util.concurrent.RejectedExecutionException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "invokeAny",
+      "parameters": [
+        "java.util.Collection<? extends java.util.concurrent.Callable<T>>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.InterruptedException",
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "java.util.concurrent.ExecutionException",
+        "java.util.concurrent.RejectedExecutionException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isShutdown",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "shutdown",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "java.lang.RuntimePermission"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "submit",
+      "parameters": [
+        "java.lang.Runnable"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.Future<?>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.concurrent.RejectedExecutionException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "submit",
+      "parameters": [
+        "java.util.concurrent.Callable<T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.concurrent.Future<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.concurrent.RejectedExecutionException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "awaitTermination",
+      "parameters": [
+        "long",
+        "java.util.concurrent.TimeUnit"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.InterruptedException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "invokeAll",
+      "parameters": [
+        "java.util.Collection<? extends java.util.concurrent.Callable<T>>",
+        "long",
+        "java.util.concurrent.TimeUnit"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.List<java.util.concurrent.Future<T>>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.InterruptedException",
+        "java.lang.NullPointerException",
+        "java.util.concurrent.RejectedExecutionException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "invokeAny",
+      "parameters": [
+        "java.util.Collection<? extends java.util.concurrent.Callable<T>>",
+        "long",
+        "java.util.concurrent.TimeUnit"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.InterruptedException",
+        "java.lang.NullPointerException",
+        "java.util.concurrent.TimeoutException",
+        "java.util.concurrent.ExecutionException",
+        "java.util.concurrent.RejectedExecutionException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isTerminated",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "shutdownNow",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.List<java.lang.Runnable>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException",
+        "java.lang.RuntimePermission"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "submit",
+      "parameters": [
+        "java.lang.Runnable",
+        "T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.util.concurrent.Future<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.concurrent.RejectedExecutionException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,111 @@
+{
+  "name": "scala.sys.BooleanProp",
+  "type_parameters": [],
+  "implements": [
+    "scala.sys.Prop[scala.Boolean]"
+  ],
+  "inherits": [
+    "scala.sys.Prop[scala.Boolean]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "disable",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "enable",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "toggle",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "booleanPropAsBoolean",
+      "parameters": [
+        "scala.sys.BooleanProp"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "constant",
+      "parameters": [
+        "scala.Predef.String",
+        "scala.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.BooleanProp",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "keyExists",
+      "parameters": [
+        "scala.Predef.String"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.sys.BooleanProp",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "valueIsTrue",
+      "parameters": [
+        "scala.Predef.String"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.sys.BooleanProp",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "value",
+      "type": "scala.Boolean",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

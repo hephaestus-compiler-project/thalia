@@ -1,0 +1,169 @@
+{
+  "name": "java.security.KeyFactory",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "generatePublic",
+      "parameters": [
+        "java.security.spec.KeySpec"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.PublicKey",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.spec.InvalidKeySpecException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getInstance",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.KeyFactory",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.NoSuchAlgorithmException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getInstance",
+      "parameters": [
+        "java.lang.String",
+        "java.security.Provider"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.KeyFactory",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.security.NoSuchAlgorithmException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getProvider",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.security.Provider",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "generatePrivate",
+      "parameters": [
+        "java.security.spec.KeySpec"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.PrivateKey",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.spec.InvalidKeySpecException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getAlgorithm",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getInstance",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.KeyFactory",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.security.NoSuchAlgorithmException",
+        "java.security.NoSuchProviderException",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getKeySpec",
+      "parameters": [
+        "java.security.Key",
+        "java.lang.Class<T>"
+      ],
+      "type_parameters": [
+        "T extends java.security.spec.KeySpec"
+      ],
+      "return_type": "T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.spec.InvalidKeySpecException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "translateKey",
+      "parameters": [
+        "java.security.Key"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.Key",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.security.InvalidKeyException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "KeyFactory",
+      "parameters": [
+        "java.security.KeyFactorySpi",
+        "java.security.Provider",
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

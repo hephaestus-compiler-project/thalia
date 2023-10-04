@@ -1,0 +1,203 @@
+{
+  "name": "kotlin.coroutines",
+  "methods": [
+    {
+      "name": "Continuation",
+      "parameters": [
+        "kotlin.coroutines.CoroutineContext",
+        "(kotlin.Result<T>) -> kotlin.Unit"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.coroutines.Continuation<T>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "createCoroutine",
+      "parameters": [
+        "kotlin.coroutines.Continuation<T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "kotlin.coroutines.Continuation<kotlin.Unit>",
+      "receiver": "suspend () -> T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "createCoroutine",
+      "parameters": [
+        "R",
+        "kotlin.coroutines.Continuation<T>"
+      ],
+      "type_parameters": [
+        "R",
+        "T"
+      ],
+      "return_type": "kotlin.coroutines.Continuation<kotlin.Unit>",
+      "receiver": "suspend R.() -> T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "getPolymorphicElement",
+      "parameters": [
+        "kotlin.coroutines.CoroutineContext.Key<E>"
+      ],
+      "type_parameters": [
+        "E : kotlin.coroutines.CoroutineContext.Element"
+      ],
+      "return_type": "E?",
+      "receiver": "kotlin.coroutines.CoroutineContext.Element",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "minusPolymorphicKey",
+      "parameters": [
+        "kotlin.coroutines.CoroutineContext.Key<*>"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.coroutines.CoroutineContext",
+      "receiver": "kotlin.coroutines.CoroutineContext.Element",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "resume",
+      "parameters": [
+        "T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "Unit",
+      "receiver": "kotlin.coroutines.Continuation<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "resumeWithException",
+      "parameters": [
+        "kotlin.Throwable"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "Unit",
+      "receiver": "kotlin.coroutines.Continuation<T>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "startCoroutine",
+      "parameters": [
+        "kotlin.coroutines.Continuation<T>"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "Unit",
+      "receiver": "suspend () -> T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "startCoroutine",
+      "parameters": [
+        "R",
+        "kotlin.coroutines.Continuation<T>"
+      ],
+      "type_parameters": [
+        "R",
+        "T"
+      ],
+      "return_type": "Unit",
+      "receiver": "suspend R.() -> T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "suspendCoroutine",
+      "parameters": [
+        "(kotlin.coroutines.Continuation<T>) -> kotlin.Unit"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": true,
+        "is_inline": true
+      }
+    }
+  ],
+  "fields": [
+    {
+      "name": "coroutineContext",
+      "type": "kotlin.coroutines.CoroutineContext",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "type_parameters": [],
+  "is_class": false,
+  "language": "kotlin"
+}

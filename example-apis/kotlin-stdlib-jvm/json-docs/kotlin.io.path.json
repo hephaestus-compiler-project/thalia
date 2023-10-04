@@ -1,0 +1,1352 @@
+{
+  "name": "kotlin.io.path",
+  "methods": [
+    {
+      "name": "absolute",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "absolutePathString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.String",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "appendBytes",
+      "parameters": [
+        "kotlin.ByteArray"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "appendLines",
+      "parameters": [
+        "kotlin.collections.Iterable<kotlin.CharSequence>",
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "appendLines",
+      "parameters": [
+        "kotlin.sequences.Sequence<kotlin.CharSequence>",
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "appendText",
+      "parameters": [
+        "kotlin.CharSequence",
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "bufferedReader",
+      "parameters": [
+        "java.nio.charset.Charset",
+        "kotlin.Int",
+        "java.nio.file.OpenOption"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.BufferedReader",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "bufferedWriter",
+      "parameters": [
+        "java.nio.charset.Charset",
+        "kotlin.Int",
+        "java.nio.file.OpenOption"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.BufferedWriter",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "copyTo",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.nio.file.CopyOption"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "copyTo",
+      "parameters": [
+        "java.nio.file.Path",
+        "kotlin.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "copyToRecursively",
+      "parameters": [
+        "java.nio.file.Path",
+        "(source: java.nio.file.Path, target: java.nio.file.Path, Exception) -> kotlin.io.path.OnErrorResult",
+        "kotlin.Boolean",
+        "kotlin.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "copyToRecursively",
+      "parameters": [
+        "java.nio.file.Path",
+        "(source: java.nio.file.Path, target: java.nio.file.Path, Exception) -> kotlin.io.path.OnErrorResult",
+        "kotlin.Boolean",
+        "kotlin.io.path.CopyActionContext.(source: java.nio.file.Path, target: java.nio.file.Path) -> kotlin.io.path.CopyActionResult"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "createDirectories",
+      "parameters": [
+        "java.nio.file.attribute.FileAttribute<*>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "createDirectory",
+      "parameters": [
+        "java.nio.file.attribute.FileAttribute<*>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "createFile",
+      "parameters": [
+        "java.nio.file.attribute.FileAttribute<*>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "createLinkPointingTo",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "createSymbolicLinkPointingTo",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.nio.file.attribute.FileAttribute<*>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "createTempDirectory",
+      "parameters": [
+        "kotlin.String?",
+        "java.nio.file.attribute.FileAttribute<*>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "createTempDirectory",
+      "parameters": [
+        "java.nio.file.Path?",
+        "kotlin.String?",
+        "java.nio.file.attribute.FileAttribute<*>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "createTempFile",
+      "parameters": [
+        "kotlin.String?",
+        "kotlin.String?",
+        "java.nio.file.attribute.FileAttribute<*>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "createTempFile",
+      "parameters": [
+        "java.nio.file.Path?",
+        "kotlin.String?",
+        "kotlin.String?",
+        "java.nio.file.attribute.FileAttribute<*>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "deleteExisting",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "deleteIfExists",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "deleteRecursively",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "div",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "div",
+      "parameters": [
+        "kotlin.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "exists",
+      "parameters": [
+        "java.nio.file.LinkOption"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "fileAttributesView",
+      "parameters": [
+        "java.nio.file.LinkOption"
+      ],
+      "type_parameters": [
+        "V : java.nio.file.attribute.FileAttributeView"
+      ],
+      "return_type": "V",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "fileAttributesViewOrNull",
+      "parameters": [
+        "java.nio.file.LinkOption"
+      ],
+      "type_parameters": [
+        "V : java.nio.file.attribute.FileAttributeView"
+      ],
+      "return_type": "V?",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "fileSize",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Long",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "fileStore",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.FileStore",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "fileVisitor",
+      "parameters": [
+        "kotlin.io.path.FileVisitorBuilder.() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.FileVisitor<java.nio.file.Path>",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "forEachDirectoryEntry",
+      "parameters": [
+        "kotlin.String",
+        "(java.nio.file.Path) -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "forEachLine",
+      "parameters": [
+        "java.nio.charset.Charset",
+        "(line: kotlin.String) -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "getAttribute",
+      "parameters": [
+        "kotlin.String",
+        "java.nio.file.LinkOption"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Any?",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "getLastModifiedTime",
+      "parameters": [
+        "java.nio.file.LinkOption"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.FileTime",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "getOwner",
+      "parameters": [
+        "java.nio.file.LinkOption"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.attribute.UserPrincipal?",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "getPosixFilePermissions",
+      "parameters": [
+        "java.nio.file.LinkOption"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.collections.Set<java.nio.file.attribute.PosixFilePermission>",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "inputStream",
+      "parameters": [
+        "java.nio.file.OpenOption"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.InputStream",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "isDirectory",
+      "parameters": [
+        "java.nio.file.LinkOption"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "isExecutable",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "isHidden",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "isReadable",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "isRegularFile",
+      "parameters": [
+        "java.nio.file.LinkOption"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "isSameFileAs",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "isSymbolicLink",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "isWritable",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "listDirectoryEntries",
+      "parameters": [
+        "kotlin.String"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.collections.List<java.nio.file.Path>",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "moveTo",
+      "parameters": [
+        "java.nio.file.Path",
+        "java.nio.file.CopyOption"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "moveTo",
+      "parameters": [
+        "java.nio.file.Path",
+        "kotlin.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "notExists",
+      "parameters": [
+        "java.nio.file.LinkOption"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.Boolean",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "outputStream",
+      "parameters": [
+        "java.nio.file.OpenOption"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.OutputStream",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "Path",
+      "parameters": [
+        "kotlin.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "Path",
+      "parameters": [
+        "kotlin.String",
+        "kotlin.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "readAttributes",
+      "parameters": [
+        "java.nio.file.LinkOption"
+      ],
+      "type_parameters": [
+        "A : java.nio.file.attribute.BasicFileAttributes"
+      ],
+      "return_type": "A",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "readAttributes",
+      "parameters": [
+        "kotlin.String",
+        "java.nio.file.LinkOption"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.collections.Map<kotlin.String, kotlin.Any?>",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "readBytes",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.ByteArray",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "reader",
+      "parameters": [
+        "java.nio.charset.Charset",
+        "java.nio.file.OpenOption"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.InputStreamReader",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "readLines",
+      "parameters": [
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.collections.List<kotlin.String>",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "readSymbolicLink",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "readText",
+      "parameters": [
+        "java.nio.charset.Charset"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.String",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "relativeTo",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "relativeToOrNull",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path?",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "relativeToOrSelf",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "setAttribute",
+      "parameters": [
+        "kotlin.String",
+        "kotlin.Any?",
+        "java.nio.file.LinkOption"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "setLastModifiedTime",
+      "parameters": [
+        "java.nio.file.attribute.FileTime"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "setOwner",
+      "parameters": [
+        "java.nio.file.attribute.UserPrincipal"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "setPosixFilePermissions",
+      "parameters": [
+        "kotlin.collections.Set<java.nio.file.attribute.PosixFilePermission>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "toPath",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.net.URI",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "useDirectoryEntries",
+      "parameters": [
+        "kotlin.String",
+        "(kotlin.sequences.Sequence<java.nio.file.Path>) -> T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "useLines",
+      "parameters": [
+        "java.nio.charset.Charset",
+        "(kotlin.sequences.Sequence<kotlin.String>) -> T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "T",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "visitFileTree",
+      "parameters": [
+        "java.nio.file.FileVisitor<java.nio.file.Path>",
+        "kotlin.Int",
+        "kotlin.Boolean"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "visitFileTree",
+      "parameters": [
+        "kotlin.Int",
+        "kotlin.Boolean",
+        "kotlin.io.path.FileVisitorBuilder.() -> kotlin.Unit"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "walk",
+      "parameters": [
+        "kotlin.io.path.PathWalkOption"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.sequences.Sequence<java.nio.file.Path>",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "writeBytes",
+      "parameters": [
+        "kotlin.ByteArray",
+        "java.nio.file.OpenOption"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "writeLines",
+      "parameters": [
+        "kotlin.collections.Iterable<kotlin.CharSequence>",
+        "java.nio.charset.Charset",
+        "java.nio.file.OpenOption"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "writeLines",
+      "parameters": [
+        "kotlin.sequences.Sequence<kotlin.CharSequence>",
+        "java.nio.charset.Charset",
+        "java.nio.file.OpenOption"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.Path",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "writer",
+      "parameters": [
+        "java.nio.charset.Charset",
+        "java.nio.file.OpenOption"
+      ],
+      "type_parameters": [],
+      "return_type": "java.io.OutputStreamWriter",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": true
+      }
+    },
+    {
+      "name": "writeText",
+      "parameters": [
+        "kotlin.CharSequence",
+        "java.nio.charset.Charset",
+        "java.nio.file.OpenOption"
+      ],
+      "type_parameters": [],
+      "return_type": "Unit",
+      "receiver": "java.nio.file.Path",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [
+    {
+      "name": "extension",
+      "type": "kotlin.String",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "java.nio.file.Path",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "invariantSeparatorsPathString",
+      "type": "kotlin.String",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "java.nio.file.Path",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "name",
+      "type": "kotlin.String",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "java.nio.file.Path",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "nameWithoutExtension",
+      "type": "kotlin.String",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "java.nio.file.Path",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "pathString",
+      "type": "kotlin.String",
+      "is_final": true,
+      "is_override": false,
+      "receiver": "java.nio.file.Path",
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "type_parameters": [],
+  "is_class": false,
+  "language": "kotlin"
+}

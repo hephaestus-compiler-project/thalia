@@ -1,0 +1,95 @@
+{
+  "name": "java.nio.file.SimpleFileVisitor",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [
+    "java.nio.file.FileVisitor<T>"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "preVisitDirectory",
+      "parameters": [
+        "T",
+        "java.nio.file.attribute.BasicFileAttributes"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.FileVisitResult",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "visitFileFailed",
+      "parameters": [
+        "T",
+        "java.io.IOException"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.FileVisitResult",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "postVisitDirectory",
+      "parameters": [
+        "T",
+        "java.io.IOException"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.FileVisitResult",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "visitFile",
+      "parameters": [
+        "T",
+        "java.nio.file.attribute.BasicFileAttributes"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.file.FileVisitResult",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "SimpleFileVisitor",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

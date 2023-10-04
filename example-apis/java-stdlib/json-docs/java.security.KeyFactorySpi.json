@@ -1,0 +1,79 @@
+{
+  "name": "java.security.KeyFactorySpi",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "engineGeneratePublic",
+      "parameters": [
+        "java.security.spec.KeySpec"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.PublicKey",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.security.spec.InvalidKeySpecException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineTranslateKey",
+      "parameters": [
+        "java.security.Key"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.Key",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.security.InvalidKeyException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineGeneratePrivate",
+      "parameters": [
+        "java.security.spec.KeySpec"
+      ],
+      "type_parameters": [],
+      "return_type": "java.security.PrivateKey",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.security.spec.InvalidKeySpecException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "engineGetKeySpec",
+      "parameters": [
+        "java.security.Key",
+        "java.lang.Class<T>"
+      ],
+      "type_parameters": [
+        "T extends java.security.spec.KeySpec"
+      ],
+      "return_type": "T",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.security.spec.InvalidKeySpecException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

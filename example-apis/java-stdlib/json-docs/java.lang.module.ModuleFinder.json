@@ -1,0 +1,83 @@
+{
+  "name": "java.lang.module.ModuleFinder",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "find",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Optional<java.lang.module.ModuleReference>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.module.FindException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "java.nio.file.Path..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleFinder",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "compose",
+      "parameters": [
+        "java.lang.module.ModuleFinder..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleFinder",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "findAll",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Set<java.lang.module.ModuleReference>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.module.FindException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "ofSystem",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.module.ModuleFinder",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,117 @@
+{
+  "name": "java.lang.reflect.Proxy",
+  "type_parameters": [],
+  "implements": [
+    "java.io.Serializable"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getProxyClass",
+      "parameters": [
+        "java.lang.ClassLoader",
+        "java.lang.Class<?>..."
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<?>",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "\n          restrictions",
+        "java.lang.SecurityException",
+        "s.checkPermission",
+        "s.checkPackageAccess()",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "newProxyInstance",
+      "parameters": [
+        "java.lang.ClassLoader",
+        "java.lang.Class<?>[]",
+        "java.lang.reflect.InvocationHandler"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "\n          restrictions",
+        "java.lang.SecurityException",
+        "s.checkPermission",
+        "s.checkPackageAccess()",
+        "java.lang.runtime package",
+        "s.checkPermission",
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getInvocationHandler",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.reflect.InvocationHandler",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.lang.SecurityException",
+        "s.checkPackageAccess()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "isProxyClass",
+      "parameters": [
+        "java.lang.Class<?>"
+      ],
+      "type_parameters": [],
+      "return_type": "boolean",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Proxy",
+      "parameters": [
+        "java.lang.reflect.InvocationHandler"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "protected",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "h",
+      "type": "java.lang.reflect.InvocationHandler",
+      "is_static": false,
+      "access_mod": "protected"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

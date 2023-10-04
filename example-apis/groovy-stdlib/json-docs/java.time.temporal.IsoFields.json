@@ -1,0 +1,52 @@
+{
+  "name": "java.time.temporal.IsoFields",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [],
+  "fields": [
+    {
+      "name": "QUARTER_OF_YEAR",
+      "type": "java.time.temporal.TemporalField",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "WEEK_BASED_YEAR",
+      "type": "java.time.temporal.TemporalField",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "WEEK_OF_WEEK_BASED_YEAR",
+      "type": "java.time.temporal.TemporalField",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "DAY_OF_QUARTER",
+      "type": "java.time.temporal.TemporalField",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "QUARTER_YEARS",
+      "type": "java.time.temporal.TemporalUnit",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "WEEK_BASED_YEARS",
+      "type": "java.time.temporal.TemporalUnit",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

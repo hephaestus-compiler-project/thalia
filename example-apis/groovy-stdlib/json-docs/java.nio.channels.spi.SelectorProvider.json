@@ -1,0 +1,123 @@
+{
+  "name": "java.nio.channels.spi.SelectorProvider",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "openDatagramChannel",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.DatagramChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "openPipe",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.Pipe",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "openServerSocketChannel",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.ServerSocketChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "provider",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.spi.SelectorProvider",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "inheritedChannel",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.Channel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "java.lang.RuntimePermission"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "openDatagramChannel",
+      "parameters": [
+        "java.net.ProtocolFamily"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.DatagramChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.UnsupportedOperationException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "openSelector",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.spi.AbstractSelector",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "openSocketChannel",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.SocketChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

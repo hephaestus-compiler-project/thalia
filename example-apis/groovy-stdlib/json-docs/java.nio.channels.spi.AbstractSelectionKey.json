@@ -1,0 +1,27 @@
+{
+  "name": "java.nio.channels.spi.AbstractSelectionKey",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.nio.channels.SelectionKey"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "cancel",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

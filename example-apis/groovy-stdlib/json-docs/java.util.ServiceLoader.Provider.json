@@ -1,0 +1,42 @@
+{
+  "name": "java.util.ServiceLoader.Provider",
+  "type_parameters": [
+    "S"
+  ],
+  "implements": [],
+  "inherits": [
+    "java.util.function.Supplier<S>"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "type",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Class<? extends S>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "get",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "S",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.util.ServiceConfigurationError"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

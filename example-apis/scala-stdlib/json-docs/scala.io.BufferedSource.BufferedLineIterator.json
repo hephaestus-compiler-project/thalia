@@ -1,0 +1,60 @@
+{
+  "name": "scala.io.BufferedSource.BufferedLineIterator",
+  "type_parameters": [],
+  "implements": [
+    "scala.collection.AbstractIterator[scala.Predef.String]",
+    "scala.collection.Iterator[scala.Predef.String]"
+  ],
+  "inherits": [
+    "scala.collection.AbstractIterator[scala.Predef.String]",
+    "scala.collection.Iterator[scala.Predef.String]"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "next",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Predef.String",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "BufferedLineIterator",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "hasNext",
+      "type": "scala.Boolean",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "nextLine",
+      "type": "scala.Predef.String",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

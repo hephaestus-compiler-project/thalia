@@ -1,0 +1,31 @@
+{
+  "name": "groovy.util.ObjectGraphBuilder.ReflectionClassNameResolver",
+  "type_parameters": [],
+  "implements": [
+    "groovy.util.ObjectGraphBuilder.ClassNameResolver"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "resolveClassname",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": "groovy.util.ObjectGraphBuilder",
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,115 @@
+{
+  "name": "java.nio.channels.SeekableByteChannel",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.nio.channels.ByteChannel"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "position",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.SeekableByteChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.lang.IllegalArgumentException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "size",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.nio.ByteBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "position",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "long",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "java.nio.ByteBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.nio.channels.AsynchronousCloseException",
+        "java.nio.channels.ClosedByInterruptException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "truncate",
+      "parameters": [
+        "long"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.SeekableByteChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.NonWritableChannelException",
+        "java.nio.channels.ClosedChannelException",
+        "java.lang.IllegalArgumentException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

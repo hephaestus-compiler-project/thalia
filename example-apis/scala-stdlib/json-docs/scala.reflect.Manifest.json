@@ -1,0 +1,356 @@
+{
+  "name": "scala.reflect.Manifest",
+  "type_parameters": [
+    "T"
+  ],
+  "implements": [
+    "scala.reflect.ClassManifest[T]",
+    "scala.Equals"
+  ],
+  "inherits": [
+    "scala.reflect.ClassManifest[T]",
+    "scala.Equals"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "canEqual",
+      "parameters": [
+        "scala.Any"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "equals",
+      "parameters": [
+        "scala.Any"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "hashCode",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "abstractType",
+      "parameters": [
+        "scala.reflect.Manifest[_]",
+        "scala.Predef.String",
+        "scala.Predef.Class[_]",
+        "scala.reflect.Manifest[_]*"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.reflect.Manifest[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "arrayType",
+      "parameters": [
+        "scala.reflect.Manifest[_]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.reflect.Manifest[scala.Array[T]]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "classType",
+      "parameters": [
+        "scala.reflect.Manifest[_]",
+        "scala.Predef.Class[_]",
+        "scala.reflect.Manifest[_]*"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.reflect.Manifest[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "classType",
+      "parameters": [
+        "scala.Predef.Class[T]",
+        "scala.reflect.Manifest[_]",
+        "scala.reflect.Manifest[_]*"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.reflect.Manifest[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "classType",
+      "parameters": [
+        "scala.Predef.Class[_]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.reflect.Manifest[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "intersectionType",
+      "parameters": [
+        "scala.reflect.Manifest[_]*"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.reflect.Manifest[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "singleType",
+      "parameters": [
+        "scala.AnyRef"
+      ],
+      "type_parameters": [
+        "T <: scala.AnyRef"
+      ],
+      "return_type": "scala.reflect.Manifest[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "wildcardType",
+      "parameters": [
+        "scala.reflect.Manifest[_]",
+        "scala.reflect.Manifest[_]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "scala.reflect.Manifest[T]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "arrayManifest",
+      "type": "scala.reflect.Manifest[scala.Array[T]]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "typeArguments",
+      "type": "scala.List[scala.reflect.Manifest[_]]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "Any",
+      "type": "scala.reflect.Manifest[scala.Any]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "AnyRef",
+      "type": "scala.reflect.Manifest[scala.AnyRef]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "AnyVal",
+      "type": "scala.reflect.Manifest[scala.AnyVal]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "Boolean",
+      "type": "scala.reflect.ManifestFactory.BooleanManifest",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "Byte",
+      "type": "scala.reflect.ManifestFactory.ByteManifest",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "Char",
+      "type": "scala.reflect.ManifestFactory.CharManifest",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "Double",
+      "type": "scala.reflect.ManifestFactory.DoubleManifest",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "Float",
+      "type": "scala.reflect.ManifestFactory.FloatManifest",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "Int",
+      "type": "scala.reflect.ManifestFactory.IntManifest",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "Long",
+      "type": "scala.reflect.ManifestFactory.LongManifest",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "Nothing",
+      "type": "scala.reflect.Manifest[scala.Nothing]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "Null",
+      "type": "scala.reflect.Manifest[scala.Null]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "Object",
+      "type": "scala.reflect.Manifest[scala.AnyRef]",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "Short",
+      "type": "scala.reflect.ManifestFactory.ShortManifest",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "Unit",
+      "type": "scala.reflect.ManifestFactory.UnitManifest",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    },
+    {
+      "name": "valueManifests",
+      "type": "scala.List[scala.reflect.AnyValManifest[_]]",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

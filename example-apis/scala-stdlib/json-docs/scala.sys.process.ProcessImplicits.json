@@ -1,0 +1,91 @@
+{
+  "name": "scala.sys.process.ProcessImplicits",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "builderToProcess",
+      "parameters": [
+        "scala.sys.process.processInternal.JProcessBuilder"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "buildersToProcess",
+      "parameters": [
+        "scala.collection.Seq[T]"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "((T) => scala.sys.process.ProcessBuilder.Source) => scala.collection.Seq[scala.sys.process.ProcessBuilder.Source]",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "fileToProcess",
+      "parameters": [
+        "scala.sys.process.processInternal.File"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder.FileBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "stringSeqToProcess",
+      "parameters": [
+        "scala.collection.Seq[scala.Predef.String]"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "stringToProcess",
+      "parameters": [
+        "scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "urlToProcess",
+      "parameters": [
+        "scala.sys.process.processInternal.URL"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.sys.process.ProcessBuilder.URLBuilder",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

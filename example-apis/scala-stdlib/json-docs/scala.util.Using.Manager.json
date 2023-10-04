@@ -1,0 +1,59 @@
+{
+  "name": "scala.util.Using.Manager",
+  "type_parameters": [],
+  "implements": [
+    "scala.AnyRef"
+  ],
+  "inherits": [
+    "scala.AnyRef"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "acquire",
+      "parameters": [
+        "R"
+      ],
+      "type_parameters": [
+        "R"
+      ],
+      "return_type": "(scala.util.Using.Releasable[R]) => scala.Unit",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "R"
+      ],
+      "type_parameters": [
+        "R"
+      ],
+      "return_type": "(scala.util.Using.Releasable[R]) => R",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "apply",
+      "parameters": [
+        "(scala.util.Using.Manager) => A"
+      ],
+      "type_parameters": [
+        "A"
+      ],
+      "return_type": "scala.util.Try[A]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "groovy.security.GroovyCodeSourcePermission",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.security.BasicPermission"
+  ],
+  "class_type": 0,
+  "methods": [],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

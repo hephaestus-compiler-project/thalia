@@ -1,0 +1,72 @@
+{
+  "name": "kotlin.reflect.KTypeProjection.Companion",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "contravariant",
+      "parameters": [
+        "kotlin.reflect.KType"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.reflect.KTypeProjection",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "covariant",
+      "parameters": [
+        "kotlin.reflect.KType"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.reflect.KTypeProjection",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    },
+    {
+      "name": "invariant",
+      "parameters": [
+        "kotlin.reflect.KType"
+      ],
+      "type_parameters": [],
+      "return_type": "kotlin.reflect.KTypeProjection",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [
+    {
+      "name": "STAR",
+      "type": "kotlin.reflect.KTypeProjection",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

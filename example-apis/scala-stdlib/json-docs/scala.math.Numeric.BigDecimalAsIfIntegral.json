@@ -1,0 +1,45 @@
+{
+  "name": "scala.math.Numeric.BigDecimalAsIfIntegral",
+  "type_parameters": [],
+  "implements": [
+    "scala.math.Numeric.BigDecimalIsConflicted",
+    "scala.math.Integral[scala.math.BigDecimal]"
+  ],
+  "inherits": [
+    "scala.math.Numeric.BigDecimalIsConflicted",
+    "scala.math.Integral[scala.math.BigDecimal]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "quot",
+      "parameters": [
+        "scala.math.BigDecimal",
+        "scala.math.BigDecimal"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.math.BigDecimal",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "rem",
+      "parameters": [
+        "scala.math.BigDecimal",
+        "scala.math.BigDecimal"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.math.BigDecimal",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

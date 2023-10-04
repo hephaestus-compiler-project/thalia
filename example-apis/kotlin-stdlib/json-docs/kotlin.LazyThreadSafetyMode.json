@@ -1,0 +1,37 @@
+{
+  "name": "kotlin.LazyThreadSafetyMode",
+  "type_parameters": [],
+  "implements": [
+    "kotlin.Enum<kotlin.LazyThreadSafetyMode>"
+  ],
+  "inherits": [
+    "kotlin.Enum<kotlin.LazyThreadSafetyMode>"
+  ],
+  "class_type": 1,
+  "methods": [],
+  "fields": [
+    {
+      "name": "name",
+      "type": "kotlin.String",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "ordinal",
+      "type": "kotlin.Int",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

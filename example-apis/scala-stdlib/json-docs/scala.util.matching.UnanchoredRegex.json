@@ -1,0 +1,40 @@
+{
+  "name": "scala.util.matching.UnanchoredRegex",
+  "type_parameters": [],
+  "implements": [
+    "scala.util.matching.Regex"
+  ],
+  "inherits": [
+    "scala.util.matching.Regex"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "runMatcher",
+      "parameters": [
+        "java.util.regex.Matcher"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected"
+    }
+  ],
+  "fields": [
+    {
+      "name": "unanchored",
+      "type": "scala.util.matching.UnanchoredRegex",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

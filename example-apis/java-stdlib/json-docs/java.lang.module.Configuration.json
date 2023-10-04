@@ -1,0 +1,153 @@
+{
+  "name": "java.lang.module.Configuration",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "findModule",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.Optional<java.lang.module.ResolvedModule>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "parents",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.List<java.lang.module.Configuration>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "resolve",
+      "parameters": [
+        "java.lang.module.ModuleFinder",
+        "java.util.List<java.lang.module.Configuration>",
+        "java.lang.module.ModuleFinder",
+        "java.util.Collection<java.lang.String>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.Configuration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.module.FindException",
+        "java.lang.module.ResolutionException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "resolveAndBind",
+      "parameters": [
+        "java.lang.module.ModuleFinder",
+        "java.util.List<java.lang.module.Configuration>",
+        "java.lang.module.ModuleFinder",
+        "java.util.Collection<java.lang.String>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.Configuration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.module.FindException",
+        "java.lang.module.ResolutionException",
+        "java.lang.IllegalArgumentException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "empty",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.module.Configuration",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "modules",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.util.Set<java.lang.module.ResolvedModule>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "resolve",
+      "parameters": [
+        "java.lang.module.ModuleFinder",
+        "java.lang.module.ModuleFinder",
+        "java.util.Collection<java.lang.String>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.Configuration",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.module.FindException",
+        "java.lang.module.ResolutionException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "resolveAndBind",
+      "parameters": [
+        "java.lang.module.ModuleFinder",
+        "java.lang.module.ModuleFinder",
+        "java.util.Collection<java.lang.String>"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.module.Configuration",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.module.FindException",
+        "java.lang.module.ResolutionException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "toString",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,377 @@
+{
+  "name": "java.nio.channels.AsynchronousSocketChannel",
+  "type_parameters": [],
+  "implements": [
+    "java.nio.channels.AsynchronousByteChannel",
+    "java.nio.channels.NetworkChannel"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "connect",
+      "parameters": [
+        "java.net.SocketAddress"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.Future<java.lang.Void>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.UnresolvedAddressException",
+        "java.nio.channels.UnsupportedAddressTypeException",
+        "java.nio.channels.AlreadyConnectedException",
+        "java.nio.channels.ConnectionPendingException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getLocalAddress",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.SocketAddress",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "open",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.AsynchronousSocketChannel",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "provider",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.spi.AsynchronousChannelProvider",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "java.nio.ByteBuffer[]",
+        "int",
+        "int",
+        "long",
+        "java.util.concurrent.TimeUnit",
+        "A",
+        "java.nio.channels.CompletionHandler<java.lang.Long,? super A>"
+      ],
+      "type_parameters": [
+        "A"
+      ],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException",
+        "java.lang.IllegalArgumentException",
+        "java.nio.channels.ReadPendingException",
+        "java.nio.channels.NotYetConnectedException",
+        "java.nio.channels.ShutdownChannelGroupException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "java.nio.ByteBuffer",
+        "A",
+        "java.nio.channels.CompletionHandler<java.lang.Integer,? super A>"
+      ],
+      "type_parameters": [
+        "A"
+      ],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.channels.ReadPendingException",
+        "java.nio.channels.NotYetConnectedException",
+        "java.nio.channels.ShutdownChannelGroupException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "shutdownInput",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.AsynchronousSocketChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.NotYetConnectedException",
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.nio.ByteBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.Future<java.lang.Integer>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.WritePendingException",
+        "java.nio.channels.NotYetConnectedException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.nio.ByteBuffer",
+        "long",
+        "java.util.concurrent.TimeUnit",
+        "A",
+        "java.nio.channels.CompletionHandler<java.lang.Integer,? super A>"
+      ],
+      "type_parameters": [
+        "A"
+      ],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.WritePendingException",
+        "java.nio.channels.NotYetConnectedException",
+        "java.nio.channels.ShutdownChannelGroupException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "bind",
+      "parameters": [
+        "java.net.SocketAddress"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.AsynchronousSocketChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ConnectionPendingException",
+        "java.nio.channels.AlreadyBoundException",
+        "java.nio.channels.UnsupportedAddressTypeException",
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException",
+        "java.lang.SecurityException",
+        "checkListen"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "connect",
+      "parameters": [
+        "java.net.SocketAddress",
+        "A",
+        "java.nio.channels.CompletionHandler<java.lang.Void,? super A>"
+      ],
+      "type_parameters": [
+        "A"
+      ],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.UnresolvedAddressException",
+        "java.nio.channels.UnsupportedAddressTypeException",
+        "java.nio.channels.AlreadyConnectedException",
+        "java.nio.channels.ConnectionPendingException",
+        "java.nio.channels.ShutdownChannelGroupException",
+        "java.lang.SecurityException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getRemoteAddress",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.net.SocketAddress",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "open",
+      "parameters": [
+        "java.nio.channels.AsynchronousChannelGroup"
+      ],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.AsynchronousSocketChannel",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.ShutdownChannelGroupException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "java.nio.ByteBuffer"
+      ],
+      "type_parameters": [],
+      "return_type": "java.util.concurrent.Future<java.lang.Integer>",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.channels.ReadPendingException",
+        "java.nio.channels.NotYetConnectedException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "read",
+      "parameters": [
+        "java.nio.ByteBuffer",
+        "long",
+        "java.util.concurrent.TimeUnit",
+        "A",
+        "java.nio.channels.CompletionHandler<java.lang.Integer,? super A>"
+      ],
+      "type_parameters": [
+        "A"
+      ],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.channels.ReadPendingException",
+        "java.nio.channels.NotYetConnectedException",
+        "java.nio.channels.ShutdownChannelGroupException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "setOption",
+      "parameters": [
+        "java.net.SocketOption<T>",
+        "T"
+      ],
+      "type_parameters": [
+        "T"
+      ],
+      "return_type": "java.nio.channels.AsynchronousSocketChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException",
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "shutdownOutput",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.nio.channels.AsynchronousSocketChannel",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.NotYetConnectedException",
+        "java.nio.channels.ClosedChannelException",
+        "java.io.IOException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.nio.ByteBuffer[]",
+        "int",
+        "int",
+        "long",
+        "java.util.concurrent.TimeUnit",
+        "A",
+        "java.nio.channels.CompletionHandler<java.lang.Long,? super A>"
+      ],
+      "type_parameters": [
+        "A"
+      ],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IndexOutOfBoundsException",
+        "java.nio.channels.WritePendingException",
+        "java.nio.channels.NotYetConnectedException",
+        "java.nio.channels.ShutdownChannelGroupException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "write",
+      "parameters": [
+        "java.nio.ByteBuffer",
+        "A",
+        "java.nio.channels.CompletionHandler<java.lang.Integer,? super A>"
+      ],
+      "type_parameters": [
+        "A"
+      ],
+      "return_type": "void",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.nio.channels.WritePendingException",
+        "java.nio.channels.NotYetConnectedException",
+        "java.nio.channels.ShutdownChannelGroupException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

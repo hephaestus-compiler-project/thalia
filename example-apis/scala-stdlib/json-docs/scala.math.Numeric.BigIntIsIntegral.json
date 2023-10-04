@@ -1,0 +1,166 @@
+{
+  "name": "scala.math.Numeric.BigIntIsIntegral",
+  "type_parameters": [],
+  "implements": [
+    "scala.math.Integral[scala.math.BigInt]"
+  ],
+  "inherits": [
+    "scala.math.Integral[scala.math.BigInt]"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "fromInt",
+      "parameters": [
+        "scala.Int"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.math.BigInt",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        "scala.math.BigInt",
+        "scala.math.BigInt"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.math.BigInt",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "negate",
+      "parameters": [
+        "scala.math.BigInt"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.math.BigInt",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "parseString",
+      "parameters": [
+        "scala.Predef.String"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Option[scala.math.BigInt]",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        "scala.math.BigInt",
+        "scala.math.BigInt"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.math.BigInt",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "quot",
+      "parameters": [
+        "scala.math.BigInt",
+        "scala.math.BigInt"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.math.BigInt",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "rem",
+      "parameters": [
+        "scala.math.BigInt",
+        "scala.math.BigInt"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.math.BigInt",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "times",
+      "parameters": [
+        "scala.math.BigInt",
+        "scala.math.BigInt"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.math.BigInt",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "toDouble",
+      "parameters": [
+        "scala.math.BigInt"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Double",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "toFloat",
+      "parameters": [
+        "scala.math.BigInt"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Float",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "toInt",
+      "parameters": [
+        "scala.math.BigInt"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "toLong",
+      "parameters": [
+        "scala.math.BigInt"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Long",
+      "receiver": null,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

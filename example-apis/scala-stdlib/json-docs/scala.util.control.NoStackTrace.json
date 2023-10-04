@@ -1,0 +1,38 @@
+{
+  "name": "scala.util.control.NoStackTrace",
+  "type_parameters": [],
+  "implements": [
+    "scala.Throwable"
+  ],
+  "inherits": [
+    "scala.Throwable"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "fillInStackTrace",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Throwable",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "noSuppression",
+      "type": "scala.Boolean",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}

@@ -1,0 +1,84 @@
+{
+  "name": "java.text.spi.NumberFormatProvider",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.util.spi.LocaleServiceProvider"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "getIntegerInstance",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.text.NumberFormat",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "getAvailableLocales()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getPercentInstance",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.text.NumberFormat",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "getAvailableLocales()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getCurrencyInstance",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.text.NumberFormat",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "getAvailableLocales()"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getNumberInstance",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.text.NumberFormat",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException",
+        "java.lang.IllegalArgumentException",
+        "getAvailableLocales()"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

@@ -1,0 +1,126 @@
+{
+  "name": "java.time.chrono.JapaneseEra",
+  "type_parameters": [],
+  "implements": [
+    "java.time.chrono.Era",
+    "java.io.Serializable"
+  ],
+  "inherits": [
+    "java.lang.Object"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "getValue",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "range",
+      "parameters": [
+        "java.time.temporal.TemporalField"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.temporal.ValueRange",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException",
+        "java.time.temporal.UnsupportedTemporalTypeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "values",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.JapaneseEra[]",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "getDisplayName",
+      "parameters": [
+        "java.time.format.TextStyle",
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "java.lang.String",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "of",
+      "parameters": [
+        "int"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.JapaneseEra",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.time.DateTimeException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "valueOf",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": "java.time.chrono.JapaneseEra",
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.IllegalArgumentException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "MEIJI",
+      "type": "java.time.chrono.JapaneseEra",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "TAISHO",
+      "type": "java.time.chrono.JapaneseEra",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "HEISEI",
+      "type": "java.time.chrono.JapaneseEra",
+      "is_static": true,
+      "access_mod": "public"
+    },
+    {
+      "name": "SHOWA",
+      "type": "java.time.chrono.JapaneseEra",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

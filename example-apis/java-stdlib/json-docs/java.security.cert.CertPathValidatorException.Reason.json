@@ -1,0 +1,15 @@
+{
+  "name": "java.security.cert.CertPathValidatorException.Reason",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.io.Serializable"
+  ],
+  "class_type": 1,
+  "methods": [],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

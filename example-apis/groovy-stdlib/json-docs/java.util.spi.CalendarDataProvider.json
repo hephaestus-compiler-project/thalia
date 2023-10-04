@@ -1,0 +1,46 @@
+{
+  "name": "java.util.spi.CalendarDataProvider",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.util.spi.LocaleServiceProvider"
+  ],
+  "class_type": 2,
+  "methods": [
+    {
+      "name": "getMinimalDaysInFirstWeek",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "getFirstDayOfWeek",
+      "parameters": [
+        "java.util.Locale"
+      ],
+      "type_parameters": [],
+      "return_type": "int",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [
+        "java.lang.NullPointerException"
+      ],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

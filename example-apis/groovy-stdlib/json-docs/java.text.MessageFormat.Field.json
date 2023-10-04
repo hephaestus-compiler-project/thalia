@@ -1,0 +1,49 @@
+{
+  "name": "java.text.MessageFormat.Field",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.text.Format.Field"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "readResolve",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.lang.Object",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "protected",
+      "throws": [
+        "java.io.InvalidObjectException"
+      ],
+      "is_default": false
+    },
+    {
+      "name": "Field",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "ARGUMENT",
+      "type": "java.text.MessageFormat.Field",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

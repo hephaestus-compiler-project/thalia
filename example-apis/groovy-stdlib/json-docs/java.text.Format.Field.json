@@ -1,0 +1,29 @@
+{
+  "name": "java.text.Format.Field",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.text.AttributedCharacterIterator.Attribute"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "Field",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "protected",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

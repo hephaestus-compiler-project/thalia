@@ -1,0 +1,35 @@
+{
+  "name": "java.security.interfaces.ECPrivateKey",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.security.PrivateKey",
+    "java.security.interfaces.ECKey"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "getS",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "java.math.BigInteger",
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [
+    {
+      "name": "serialVersionUID",
+      "type": "long",
+      "is_static": true,
+      "access_mod": "public"
+    }
+  ],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

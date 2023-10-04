@@ -1,0 +1,31 @@
+{
+  "name": "kotlin.time.TimeSource.WithComparableMarks",
+  "type_parameters": [],
+  "implements": [
+    "kotlin.time.TimeSource"
+  ],
+  "inherits": [
+    "kotlin.time.TimeSource"
+  ],
+  "class_type": 1,
+  "methods": [
+    {
+      "name": "markNow",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "kotlin.time.ComparableTimeMark",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "is_suspend": false,
+        "is_inline": false
+      }
+    }
+  ],
+  "fields": [],
+  "is_class": true,
+  "parent": null,
+  "language": "kotlin"
+}

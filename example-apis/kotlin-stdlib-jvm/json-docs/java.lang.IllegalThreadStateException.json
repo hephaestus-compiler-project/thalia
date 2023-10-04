@@ -1,0 +1,40 @@
+{
+  "name": "java.lang.IllegalThreadStateException",
+  "type_parameters": [],
+  "implements": [],
+  "inherits": [
+    "java.lang.IllegalArgumentException"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "IllegalThreadStateException",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    },
+    {
+      "name": "IllegalThreadStateException",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": null,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "throws": [],
+      "is_default": false
+    }
+  ],
+  "fields": [],
+  "functional_interface": false,
+  "parent": null,
+  "access_mod": "public",
+  "language": "java"
+}

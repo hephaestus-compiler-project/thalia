@@ -1,0 +1,120 @@
+{
+  "name": "scala.concurrent.duration.Deadline",
+  "type_parameters": [],
+  "implements": [
+    "scala.Ordered[scala.concurrent.duration.Deadline]",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "inherits": [
+    "scala.Ordered[scala.concurrent.duration.Deadline]",
+    "scala.Product",
+    "scala.Serializable"
+  ],
+  "class_type": 0,
+  "methods": [
+    {
+      "name": "+",
+      "parameters": [
+        "scala.concurrent.duration.FiniteDuration"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Deadline",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "-",
+      "parameters": [
+        "scala.concurrent.duration.Deadline"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.FiniteDuration",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "-",
+      "parameters": [
+        "scala.concurrent.duration.FiniteDuration"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.concurrent.duration.Deadline",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        "scala.concurrent.duration.Deadline"
+      ],
+      "type_parameters": [],
+      "return_type": "scala.Int",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "hasTimeLeft",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    },
+    {
+      "name": "isOverdue",
+      "parameters": [],
+      "type_parameters": [],
+      "return_type": "scala.Boolean",
+      "receiver": null,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public"
+    }
+  ],
+  "fields": [
+    {
+      "name": "time",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": true,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "timeLeft",
+      "type": "scala.concurrent.duration.FiniteDuration",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": false
+    },
+    {
+      "name": "now",
+      "type": "scala.concurrent.duration.Deadline",
+      "is_final": false,
+      "is_override": false,
+      "receiver": null,
+      "type_parameters": [],
+      "access_mod": "public",
+      "is_static": true
+    }
+  ],
+  "is_class": true,
+  "access_mod": "public",
+  "language": "scala"
+}
