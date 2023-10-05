@@ -299,9 +299,10 @@ into disk. They can be found in the `bugs/java-testing/generator/` directory.
 
 ###  Logging
 
-The `-L` option allows use to log the typing sequences
+The `-L` option allows you to log all the typing sequences
 synthesized by `thalia`.
-This log can be found in the `bugs/java-session/logs/api-generator` file.
+The resulting logs can be found
+at the `bugs/java-session/logs/api-generator` file.
 In our previous example,
 the contents of this file look like:
 
@@ -337,9 +338,9 @@ Correctness: True
 
 The first lines of the `bugs/java-session/logs/api-generator` file dumps
 some statistics regarding the input API and the corresponding
-API graph (e.g., number of methods, nmber of constructors, etc.).
+API graph (e.g., number of methods, number of constructors, etc.).
 Then,
-the file shows the typing sequence of every test case.
+the file shows the typing sequence which every test case comes from.
 For example,
 the first test program invokes the
 [java.lang.module.ModuleDescriptor.Builder.version](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/module/ModuleDescriptor.Builder.html#version(java.lang.module.ModuleDescriptor.Version))
