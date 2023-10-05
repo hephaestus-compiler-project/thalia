@@ -82,7 +82,7 @@ class APIGenerator(Generator):
         self.error_injected = None
         self.test_case_type_params: List[tp.TypeParameter] = []
 
-    def log_api_graph_statistics(self, matcher):
+    def log_api_graph_statistics(self, matcher=None):
         if self.logger is None:
             return
         statistics = self.api_graph.statistics(matcher)
