@@ -186,7 +186,7 @@ class RandomUtils():
 
     def sample(self, choices, k=None):
         k = k or self.integer(0, len(choices))
-        return self.r.sample(choices, k)
+        return self.r.sample(list(choices), k)
 
     def shuffle(self, lst):
         self.r.shuffle(lst)
