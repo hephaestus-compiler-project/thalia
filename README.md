@@ -295,7 +295,7 @@ the directory of the current testing session (e.g., `bugs/java-session`).
 
 
 Note that the option `--keep-all` allows you to store all the synthesized programs
-into disk. They can be found in the `bugs/java-testing/generator/` directory.
+into disk. They can be found in the `bugs/java-session/generator/` directory.
 
 ###  Logging
 
