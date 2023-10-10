@@ -353,7 +353,7 @@ The result of this method call is assigned to a variable of type
 
 # Supported Languages
 
-Currently, Hephaestus generates programs written in
+Currently, `thalia` generates programs written in
 four popular programming languages, namely,
 Java, Scala, Kotlin, and Groovy. Use the
 option `--language` to specify the target language.
