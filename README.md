@@ -208,7 +208,7 @@ specified by the `--name java-session` option.
      --batch 10 -i 30 -P \
 	 --max-depth 2 \
 	 --generator api \
-	 ---api-doc-path example-apis/java-stdlib/json-docs \
+	 --api-doc-path example-apis/java-stdlib/json-docs \
 	 --api-rules example-apis/java-stdlib/api-rules.json \
 	 --keep-all \
 	 --name java-session
