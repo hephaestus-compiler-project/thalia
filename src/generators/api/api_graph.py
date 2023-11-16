@@ -601,48 +601,73 @@ class APIGraph():
 
         return possibles_types
 
-    def _get_overloaded_method_from_inheritance(
+    def _get_overloaded_method_from_extension(
         self, receiver: tp.Type, method: Union[Method, Constructor],
         overloaded_methods: Set[Tuple[Method, bool]]
     ) -> Set[Tuple[Method, bool]]:
         methods = set()
-        for supertype in receiver.get_supertypes():
+        for supertype in {st for st in receiver.get_supertypes()
+                          if st != receiver}:
             if supertype.is_parameterized():
                 supertype = self.get_type_by_name(
                     supertype.name) or supertype.t_constructor
             rec_types = set()
             # At this point we examine all type nodes in the graph that match
-            # with the supertype
+            # with the supertype. We do that to identify the receivers of
+            # potential extension methods.
             for rec_type in self.api_graph.nodes():
-                if not isinstance(rec_type, tp.Type) or \
-                        not rec_type.is_parameterized():
-                    continue
-                if rec_type.t_constructor != supertype:
+                if not isinstance(rec_type,
+                                  tp.Type) or not rec_type.is_parameterized():
                     continue
                 supertype_t = supertype.new(supertype.type_parameters)
-                sub = tu.unify_types(rec_type, supertype_t, self.bt_factory)
+                sub = tu.unify_types(rec_type, supertype_t, self.bt_factory,
+                                     same_type=False)
                 if sub:
-                    rec_types.add((rec_type, True))
-            if supertype not in self.api_graph:
-                continue
-            types = rec_types.union({(supertype, False)})
-            for t, is_extension in types:
+                    rec_types.add(rec_type)
+            for t in rec_types:
+                sub = t.get_type_variable_assignments()
                 for m in self.api_graph.neighbors(t):
-                    if m == method:
-                        continue
-                    if not isinstance(m, (Method, Constructor)):
-                        continue
                     # Make sure you don't include overriden methods.
                     # To do so, exclude methods that involve the same
                     # parameters types with any method already included in
                     # `methods` var.
                     not_overriden = all(
-                        m.parameters != om.parameters
+                        not au.is_overriden(m, om, sub)
                         for om, _ in overloaded_methods
-                    ) and m.parameters != method.parameters
-                    if m.name == method.name and (not_overriden
-                                                  or is_extension):
-                        methods.add((m, is_extension))
+                    ) and not au.is_overriden(m, method, sub)
+                    if method.name == m.name and not_overriden:
+                        methods.add((m, True))
+        return methods
+
+    def _get_overloaded_method_from_inheritance(
+        self, receiver: tp.Type, method: Union[Method, Constructor],
+        overloaded_methods: Set[Tuple[Method, bool]]
+    ) -> Set[Tuple[Method, bool]]:
+        methods = set()
+        for supertype in {st for st in receiver.get_supertypes()
+                          if st != receiver}:
+            # Get the substitution of the supertype and its type constructor
+            # (if present).
+            sub = {}
+            if supertype.is_parameterized():
+                sub = supertype.get_type_variable_assignments()
+                supertype = self.get_type_by_name(
+                    supertype.name) or supertype.t_constructor
+            if supertype not in self.api_graph:
+                continue
+            for m in self.api_graph.neighbors(supertype):
+                if not isinstance(m, (Method, Constructor)) or m == method:
+                    continue
+                # Make sure you don't include overriden methods.
+                # To do so, exclude methods that involve the same
+                # parameters types with any method already included in
+                # `methods` var.
+                not_overriden = all(
+                    not au.is_overriden(m, om, sub)
+                    for om, _ in overloaded_methods
+                ) and not au.is_overriden(m, method, sub)
+                if method.name == m.name and not_overriden:
+                    methods.add((m, False))
         return methods
 
     def get_overloaded_methods(self, receiver: tp.Type,
@@ -666,11 +691,20 @@ class APIGraph():
             base_t = self.get_type_by_name(receiver.name) or \
                 receiver.t_constructor
         if base_t in self.api_graph:
+            matched_supertype = [st for st in receiver.get_supertypes()
+                                 if st.name == method.cls]
+            sub = {}
+            if matched_supertype and matched_supertype[0].is_parameterized():
+                sub = matched_supertype[0].get_type_variable_assignments()
             methods.update({(m, False)
                            for m in self.api_graph.neighbors(base_t)
                            if (isinstance(m, (Method, Constructor))
-                               and m.name == method.name and m != method)})
+                               and m.name == method.name  # Same name
+                               and not au.is_overriden(method, m, sub))
+                            })
         methods.update(self._get_overloaded_method_from_inheritance(
+            receiver, method, methods))
+        methods.update(self._get_overloaded_method_from_extension(
             receiver, method, methods))
         return methods
 

@@ -292,6 +292,11 @@ def test_is_typing_sequence_ambiguous_simple_classifier():
     t2 = tp.SimpleClassifier("B")
     t3 = tp.SimpleClassifier("C", [t1])
 
+    method1 = nodes.Method("m", "", [], [], {})
+    method2 = nodes.Method("m", "", [], [], {})
+    typing_seq = (0,)
+    assert not au.is_typing_seq_ambiguous(method1, method2, typing_seq, {})
+
     method1 = nodes.Method("m", "", [nodes.Parameter(t1, False)], [], {})
     method2 = nodes.Method("m", "", [nodes.Parameter(t2, False)], [], {})
     typing_seq = [t1]

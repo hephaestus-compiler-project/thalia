@@ -370,6 +370,10 @@ def is_typing_seq_ambiguous(method: Method,
     Checks whether the given typing sequence can trigger an overload method
     ambiguity.
     """
+    if not method.parameters:
+        # The callee method takes no parameters.
+        return False
+
     # If type var map is None, then we encounter a polymorphic call with
     # no explicit type arguments.
     with_erasure = type_var_map is None
@@ -405,3 +409,16 @@ def is_typing_seq_ambiguous(method: Method,
                                                    same_type=False):
             return True
     return False
+
+
+def is_overriden(parent_m: Method, child_m: Method, sub: dict) -> bool:
+    if parent_m == child_m:
+        return True
+    parent_parameters = [tp.substitute_type(p.t, sub)
+                         for p in parent_m.parameters]
+    child_parameters = [tp.substitute_type(p.t, sub)
+                        for p in child_m.parameters]
+    return (
+        parent_m.name == child_m.name and
+        parent_parameters == child_parameters
+    )
