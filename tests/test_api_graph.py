@@ -759,27 +759,69 @@ def test_get_overloaded_methods_inheritance():
     assert api_graph.get_overloaded_methods(rec2, m3) == {(m1, False), (m4, False)}
     assert api_graph.get_overloaded_methods(rec2, m4) == {(m1, False), (m3, False)}
 
+    # class A<T> {fun foo(x: T)//m1}
+    # class B : A<Int> { fun foo(x: Int) }
+    # get_overloaded_methods(B, m1) == {}
+    g = nx.DiGraph()
+    t1 = tp.TypeConstructor("A", [tp.TypeParameter("T")])
+    t2 = tp.SimpleClassifier("B", supertypes=[t1.new([bt.Integer])])
+    m1 = ag.Method("m", "A", [ag.Parameter(tp.TypeParameter("T"), False)], [], {})
+    m2 = ag.Method("m", "B", [ag.Parameter(bt.Integer, False)], [], {})
+    g.add_node(t1)
+    g.add_node(t2)
+    g.add_node(m1)
+    g.add_node(m2)
+    g.add_edge(t1, m1)
+    g.add_edge(t2, m2)
+    api_graph = ag.APIGraph(g, nx.DiGraph(), [], jt.JavaBuiltinFactory())
+    rec = t2
+    assert api_graph.get_overloaded_methods(rec, m1) == set()
+    assert api_graph.get_overloaded_methods(rec, m2) == set()
 
 def test_get_overloaded_methods_with_receiver():
+    # class A<T> { fun m(x: T)//m1 }
+    # class B<T> : A<T> { fun m(x: Int)//m2 }
+    # get_overloaded_methods(B<String>, m1) == {m2}
     g = nx.DiGraph()
     t1 = tp.TypeConstructor("A", [tp.TypeParameter("T1")])
     t2 = tp.TypeConstructor("B", [tp.TypeParameter("T2")],
                             supertypes=[t1.new([tp.TypeParameter("T2")])])
     m1 = ag.Method("m", "A", [ag.Parameter(tp.TypeParameter("T1"), False)], [],
                    {})
-    m2 = ag.Method("m", "B", [ag.Parameter(tp.TypeParameter("T2"), False)], [],
+    m2 = ag.Method("m", "B", [ag.Parameter(kt.Integer, False)], [],
                    {})
 
-    g.add_node(t1.new(t1.type_parameters))
-    g.add_node(t2.new(t2.type_parameters))
+    g.add_node(t2.new([kt.String]))
     g.add_node(m1)
     g.add_node(m2)
     g.add_node(t1)
     g.add_node(t2)
-    g.add_edge(t1.new(t1.type_parameters), m1)
-    g.add_edge(t2.new(t2.type_parameters), m2)
+    g.add_edge(t1, m1)
+    g.add_edge(t2.new([kt.String]), m2)
 
-    api_graph = ag.APIGraph(g, nx.DiGraph(), [], jt.JavaBuiltinFactory())
-    rec = t2.new([jt.String])
+    api_graph = ag.APIGraph(g, nx.DiGraph(), [], kt.KotlinBuiltinFactory())
+    rec = t2.new([kt.String])
     methods = api_graph.get_overloaded_methods(rec, m1)
     assert methods == {(m2, True)}
+
+    # class A<T> { fun m(x: T) }
+    # A<Int>.m(x: Int)
+    g = nx.DiGraph()
+    t1 = tp.TypeConstructor("A", [tp.TypeParameter("T1")])
+    m1 = ag.Method("m", "A", [ag.Parameter(tp.TypeParameter("T1"), False)], [],
+                   {})
+    m2 = ag.Method("m", "A", [ag.Parameter(kt.Integer, False)], [],
+                   {})
+    g.add_node(t1)
+    g.add_node(t1.new([kt.Integer]))
+    g.add_node(m1)
+    g.add_node(m2)
+    g.add_edge(t1, m1)
+    g.add_edge(t1.new([kt.Integer]), m2)
+
+    api_graph = ag.APIGraph(g, nx.DiGraph(), [], kt.KotlinBuiltinFactory())
+    rec = t1.new([kt.Integer])
+    methods = api_graph.get_overloaded_methods(rec, m1)
+    assert methods == set()
+    methods = api_graph.get_overloaded_methods(rec, m2)
+    assert methods == set()
