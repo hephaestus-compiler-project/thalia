@@ -370,6 +370,10 @@ def is_typing_seq_ambiguous(method: Method,
     Checks whether the given typing sequence can trigger an overload method
     ambiguity.
     """
+    if not method.parameters:
+        # The callee method takes no parameters.
+        return False
+
     # If type var map is None, then we encounter a polymorphic call with
     # no explicit type arguments.
     with_erasure = type_var_map is None
