@@ -619,7 +619,10 @@ class APIGraph():
                 if not isinstance(rec_type,
                                   tp.Type) or not rec_type.is_parameterized():
                     continue
-                supertype_t = supertype.new(supertype.type_parameters)
+                if supertype.is_type_constructor():
+                    supertype_t = supertype.new(supertype.type_parameters)
+                else:
+                    supertype_t = supertype
                 sub = tu.unify_types(rec_type, supertype_t, self.bt_factory,
                                      same_type=False)
                 if sub:
@@ -676,7 +679,7 @@ class APIGraph():
         if not isinstance(method, (Method, Constructor)):
             # This is not a callable.
             return set()
-        if receiver is None:
+        if receiver is None or receiver == self.EMPTY:
             # This is a callable with no receiver.
             return {(m, False) for m in self.api_graph.nodes()
                     if (isinstance(m, (Method, Constructor))
