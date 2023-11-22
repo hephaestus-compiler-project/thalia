@@ -7,7 +7,7 @@
   "inherits": [
     "java.lang.Object"
   ],
-  "class_type": 0,
+  "class_type": 2,
   "methods": [
     {
       "name": "estimateSize",
