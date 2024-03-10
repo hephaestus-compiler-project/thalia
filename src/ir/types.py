@@ -533,8 +533,11 @@ class TypeConstructor(AbstractType):
         return matched_supertype is not None
 
     def new(self, type_args: List[Type]):
-        type_map = {tp: type_args[i]
+        try:
+            type_map = {tp: type_args[i]
                     for i, tp in enumerate(self.type_parameters)}
+        except:
+            return None
         old_supertypes = self.supertypes
         type_con = perform_type_substitution(self, type_map, lambda t: False)
         etype = ParameterizedType(type_con, type_args)

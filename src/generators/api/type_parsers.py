@@ -5,7 +5,7 @@ import re
 
 
 from src import utils
-from src.ir import (BUILTIN_FACTORIES, types as tp, kotlin_types as kt,
+from src.ir import (BUILTIN_FACTORIES, types as tp, kotlin_types as kt, swift_types as swift,
                     scala_types as sc)
 from src.ir.builtins import BuiltinFactory
 
@@ -56,6 +56,392 @@ class TypeParser(ABC):
     @abstractmethod
     def is_variable_argument(self, str_t: str) -> bool:
         pass
+
+class SwiftTypeParser(TypeParser):
+    FUNC_SEP_REGEX = re.compile(r" -> (?!(?:[^(]*\([^)]*\))*[^()]*\))")
+    COMMA_SEP_REGEX = re.compile(r"(?:[^, <(]|\([^)]*\)|<[^>]*>)+")
+    #FUNC_REGEX = re.compile(r"^\(.*\) -> .*")
+    FUNC_REGEX = re.compile(r"^\(.*\)(?: throws| rethrows)? -> .*") #would produce a false positive for a tuple with a closure
+    protocols = set()
+    def __init__(self, target_language: str,
+                 class_type_name_map: Dict[str, tp.TypeParameter] = None,
+                 func_type_name_map: Dict[str, tp.TypeParameter] = None,
+                 classes_type_parameters: dict = None,
+                 type_spec: Dict[str, tp.Type] = None,
+                 mapped_types: Dict[str, tuple] = None):
+        super().__init__(target_language, class_type_name_map,
+                         func_type_name_map, classes_type_parameters,
+                         type_spec, mapped_types)
+    def is_func_type(self, str_t: str) -> bool:
+        return bool(re.match(self.FUNC_REGEX, str_t)) 
+    def is_instance_type(self, str_t: str) -> bool:
+        segs = utils.top_level_split(str_t, delim=".")
+        
+        if len(segs) == 1:
+            return False
+        parent = ".".join(segs[:-1])
+        if parent.endswith(">"):
+            return True
+        return parent in self.type_spec
+    def split_ignoring_brackets(self,s,c):
+        parts = []
+        curr = []
+        bracket_level = 0
+        diamond_level = 0
+        for char in s:
+            if char == '(':
+                bracket_level += 1
+            elif char == ')':
+                bracket_level -= 1
+            elif char == '<':
+                diamond_level += 1
+            elif char == '>':
+                diamond_level -= 1
+            if char == c and bracket_level == 0 and diamond_level == 0: #TODO check if this is correct
+                parts.append(''.join(curr).strip())
+                curr = []
+            else:
+                curr.append(char)
+
+        parts.append(''.join(curr).strip())  
+        return parts
+
+    def _init_instance_type_classifier(self, enclosing_type: tp.Type,
+                                       base: str):
+        is_raw_type = isinstance(enclosing_type, self.bt_factory.get_raw_cls())
+        name = enclosing_type.name + "." + base
+        if is_raw_type:
+            name = enclosing_type.get_name() + "." + base
+        # Now check the type spec to determine whether we have run into an
+        # a static class. In this case, the enclosing type is not raw.
+        if not isinstance(self.type_spec.get(name), tp.InstanceTypeConstructor):
+            is_raw_type = False
+        if not enclosing_type.is_parameterized() and not is_raw_type:
+            return self.type_spec.get(name, tp.SimpleClassifier(name))
+
+        type_parameters = enclosing_type.t_constructor.type_parameters
+        # If the enclosing type is raw, then we convert it into a
+        # parameterized type by instantiating with wildcard types.
+        # For example, Foo.Bar becomes Foo<?>.Bar
+        type_args = (
+            [tp.WildCardType() for _ in range(len(type_parameters))]
+            if is_raw_type
+            else enclosing_type.type_args
+        )
+        return tp.InstanceTypeConstructor(
+            name, enclosing_type.t_constructor, base).new(type_args)
+
+    def _init_instance_type_parameterized(self, enclosing_type: tp.Type,
+                                          base: str, type_args_str: str):
+        is_raw_type = isinstance(enclosing_type, self.bt_factory.get_raw_cls())
+        name = enclosing_type.name + "." + base
+        if is_raw_type:
+            name = enclosing_type.get_name() + "." + base
+        # Now check the type spec to determine whether we have run into an
+        # a static class. In this case, the enclosing type is not raw.
+        if not isinstance(self.type_spec.get(name), tp.InstanceTypeConstructor):
+            is_raw_type = False
+
+        type_args = utils.top_level_split(type_args_str)
+        new_type_args = []
+        for type_arg in type_args:
+            new_type_args.append(self.parse_type(type_arg))
+        type_var_map = self.classes_type_parameters.get(name) or {}
+        values = list(type_var_map.values())
+        type_vars = [
+            (
+                values[i]
+                if i < len(values)
+                else tp.TypeParameter(name + ".T" + str(i + 1))
+            )
+            for i in range(len(new_type_args))
+        ]
+        if not enclosing_type.is_parameterized() and not is_raw_type:
+            parsed_t = self.type_spec.get(name, tp.TypeConstructor(name,
+                                                                   type_vars))
+            return parsed_t.new(new_type_args)
+        # If the enclosing type is raw, then we convert it into a
+        # parameterized type by instantiating with wildcard types.
+        type_parameters = enclosing_type.t_constructor.type_parameters
+        type_args = (
+            [tp.WildCardType() for _ in range(len(type_parameters))]
+            if is_raw_type
+            else enclosing_type.type_args
+        )
+        return tp.InstanceTypeConstructor(
+            name, enclosing_type.t_constructor, base, type_vars).new(
+                type_args + new_type_args)
+
+    def parse_instance_type(self, str_t: str) -> tp.ParameterizedType:
+        # XXX revisit
+        segs = utils.top_level_split(str_t, delim=".")
+        if len(segs) == 1:
+            return False
+        parent, base = ".".join(segs[:-1]), segs[-1]
+        enclosing_type = self.parse_reg_type(parent)
+        segs = base.split("<", 1)
+        if len(segs) == 1:
+            return self._init_instance_type_classifier(enclosing_type, base)
+        base, type_args_str = segs[0], segs[1][:-1]
+        return self._init_instance_type_parameterized(enclosing_type, base,
+                                                      type_args_str)
+    
+    def parse_tuple_type(self, str_t: str) -> tp.ParameterizedType:
+        
+        str_t = str_t[1:-1]
+        segs = str_t.split(', ')
+        
+       
+        param_types = [
+            self.parse_type(param_str.strip().split(": ", 1)[-1])
+            for param_str in segs
+        ]
+        
+        return self.bt_factory.get_tuple_type(
+            len(param_types)).new(param_types)
+
+    def parse_function_type(self, str_t: str) -> tp.ParameterizedType:
+        
+        
+        segs = self.FUNC_SEP_REGEX.split(str_t, 1)
+        
+        assert len(segs) == 2
+        #drop 'throws' if it's there, also drop the name of the argument
+        if segs[0][-7:] == ' throws':
+            segs[0] = segs[0][:-7]
+        
+        #segs[0] = segs[0].split(': ')[-1] TODO no splitting on ': ' for now
+        segs[0] = segs[0][1:-1]
+        param_strs = self.split_ignoring_brackets(segs[0],',')
+        
+       
+        param_types = [
+            self.parse_type(param_str)
+            for param_str in param_strs
+        ]
+        ret_type = self.parse_type(segs[1].lstrip())
+       
+        return self.bt_factory.get_function_type(
+            len(param_types)).new(param_types + [ret_type])
+
+    def parse_wildcard(self, str_t) -> tp.WildCardType:
+        pass
+
+    def parse_type_parameter(self, str_t: str, protocols,
+                             keep: bool = False) -> tp.TypeParameter:
+        if len(protocols) > 0:
+            self.protocols = copy(protocols)
+        segs = str_t.split(" extends ", 1) 
+        old_class_type_map = copy(self.class_type_name_map)
+        if keep:
+            # We handle the following case:
+            # class Foo<T> {
+            #  <T extends C<T>> void test()
+            # }
+            # In the above case, the type variable T in C<T> refers to
+            # the newly introduced function type parameter.
+            self.class_type_name_map = {k: v
+                                        for k, v in old_class_type_map.items()
+                                        if segs[0] != k}
+        
+        type_var_map = copy(self.class_type_name_map)
+        type_var_map.update(self.func_type_name_map)
+        if keep:
+            # It might be the case where the names of function's and class's
+            # type parameters conflict. In this case, we should not replace
+            # the name of a function's type parameter with the name
+            # of the corresponding class type parameter.
+            type_var_map = {}
+
+        if len(segs) == 1:
+            return type_var_map.get(str_t, tp.TypeParameter(str_t))
+        if " & " in segs[1]:
+            # TODO We currently don't support intersection types
+            return None
+        bound = self.parse_type(segs[1])
+        if bound and type_var_map.get(segs[0],False):
+            parsed_t = tp.TypeParameter(type_var_map.get(segs[0]), bound=bound) #TODO bound 
+        else: 
+            parsed_t = type_var_map.get(segs[0],
+                                    tp.TypeParameter(segs[0], bound=bound))
+        self.class_type_name_map = old_class_type_map
+        return parsed_t
+
+    def parse_reg_type(self, str_t: str) -> tp.Type:
+        
+        if str_t == '()':
+            str_t = 'Swift.Void'
+        if str_t.startswith("inout "):
+            return swift.ReferenceType().new([self.parse_type(str_t[6:])])
+        builtins = ["Swift.Character","Swift.Int","Swift.Long","Swift.Float","Swift.Double","Swift.Bool","Swift.String","Swift.Any","Swift.Array","Swift.Void"]
+        if str_t in builtins:
+            return self._parse_type(str_t)
+            
+        if str_t.startswith("Self."):
+            return self.parse_type(str_t.split("Self.")[1]) #XXX
+        
+        segs = str_t.split(".")
+        is_type_var = (
+            len(segs) == 1 or
+            (
+                " extends " in str_t and
+                "." not in str_t.split(" extends ")[0]
+             )
+        )
+        #check if parameter is a field of a type argument like Element.foo for Array<Element>
+        check = [True for key in self.classes_type_parameters for k, v in self.classes_type_parameters[key].items() if str_t.split('.')[0] in k]
+        if len(segs)!=1 and any(check):
+            return None
+
+   
+        
+        if is_type_var:
+            return self.parse_type_parameter(str_t,self.protocols)
+        if self.is_instance_type(str_t):
+            return self.parse_instance_type(str_t)
+        segs = str_t.split("<", 1)
+        if len(segs) == 1:
+            parsed_t = tp.SimpleClassifier(str_t)
+            t = self.type_spec.get(str_t, parsed_t)
+            if isinstance(t, tp.TypeConstructor):
+                # The type corresponds to a type constructor, but apparently,
+                # it's used as a raw type.
+                return self.bt_factory.get_raw_type(t)
+            return t
+        base, type_args_str = segs[0], segs[1][:-1]
+        
+        type_args = utils.top_level_split(type_args_str)
+        new_type_args = []
+        for type_arg in type_args:
+            new_type_args.append(self.parse_type(type_arg))
+        type_var_map = self.classes_type_parameters.get(base) or {}
+        values = list(type_var_map.values())
+        type_vars = [
+            (
+                values[i]
+                if i < len(values)
+                else tp.TypeParameter(base + ".T" + str(i + 1))
+            )
+            for i in range(len(new_type_args))
+        ]
+        parsed_t = self.type_spec.get(base, tp.TypeConstructor(base,
+                                                               type_vars))
+        return parsed_t.new(new_type_args)
+
+    def parse_named_arguments(self, str_t: str,protocols) -> (str, tp.Type):
+        arg_name = None
+        if len(protocols) > 0:
+            self.protocols = copy(protocols)
+        protocols = self.protocols
+        if ': ' in str_t:
+            splitted = self.split_ignoring_brackets(str_t,':') #TODO SPLIT  
+            arg_name = splitted[0] if len(splitted) > 1 else None
+            str_t = splitted[-1]
+        return arg_name, self.parse_type(str_t)
+    def parse_type(self, str_t: str, protocols=set()) -> tp.Type:
+        
+        black_list = ['Float16','Float80']
+        if any(t in str_t for t in black_list):
+            return None
+
+        if str_t == '()' or str_t=='':
+            str_t = 'Swift.Void'
+        tf = self.bt_factory
+        
+        
+        if len(protocols) > 0:
+            self.protocols = copy(protocols)
+        #here str_t might be a Dict (for interfaces) or string, if it's a Dict, we need to 'unwrap' it to get the name string
+        protocols = self.protocols
+        
+
+        if isinstance(str_t, str) and 'Self.'in str_t:
+            str_t = str_t.replace('Self.','')
+        if isinstance(str_t, str) and str_t in self.protocols:
+            print ('str_t in protocols = ', str_t)
+            str_t = 'any ' + str_t
+        if isinstance(str_t, dict):
+            #XXX revisit, appending 'any' to the start of swift protocols
+            
+            str_t = 'any ' + str_t['name']
+        if isinstance(str_t, str) and '...' in str_t: #TODO varargs
+            return None
+        
+        
+        if self.is_func_type(str_t) and not str_t.endswith(")?"): #causes a problem with tuples
+            return self.parse_function_type(str_t)
+        if str_t[0] == '(' and str_t[-1] == ')':
+            return self.parse_tuple_type(str_t)
+        
+        
+        if str_t.startswith("[") and str_t.endswith("]"):
+            if ' : ' in str_t:
+                print ('str_t = ', str_t)
+                tp1 = str_t.split(' : ')[0][1:]
+                tp2 = str_t.split(' : ')[1][:-1]
+                tp1 = tp1 
+                t = 'Swift.Dictionary<'+tp1+','+tp2+'>'
+                return None
+                return self.parse_type(t)
+            str_t = str_t[1:-1]
+            return tf.get_array_type().new([self.parse_type(str_t)])
+        
+        
+        
+        else:
+            return self._parse_type(str_t)
+
+    @map_type
+    #TODO
+    def _parse_type(self, str_t: str) -> tp.Type:
+        tf = self.bt_factory
+        
+        if str_t.endswith("?"):
+            # This is a nullable type.
+            str_t = str_t[:-1]
+            if str_t.startswith("(("):
+                str_t = str_t[1:-1]
+            return swift.NullableType().new([self.parse_type(str_t)])
+        if str_t in ["Swift.Character"]:
+            return tf.get_char_type()
+        elif str_t in ['Swift.Int','Int']:
+            return tf.get_integer_type()
+        elif str_t in ["Swift.Long"]:
+            return tf.get_long_type()
+        elif str_t in ["Swift.Float","Float"]:
+            return tf.get_float_type()
+        elif str_t in ["Swift.Double"]:
+            return tf.get_double_type()
+        elif str_t in ["Swift.Bool","Bool"]:
+            return tf.get_boolean_type()
+        elif str_t == "Swift.String":
+            return tf.get_string_type()
+        elif str_t == "Swift.Any":
+            return tf.get_any_type()
+        elif str_t in ["Swift.Array","Array"]:
+            return tf.get_array_type()
+        elif str_t in ["Swift.Void","Void","void"]:
+            return tf.get_void_type()
+        else:
+            return self.parse_reg_type(str_t)
+
+    def is_variable_argument(self, str_t: str) -> bool:
+        return str_t.endswith("...")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class JavaTypeParser(TypeParser):

@@ -7,7 +7,7 @@ from src import utils
 from src.config import cfg
 from src.ir import types as tp, type_utils as tu
 from src.generators.api.nodes import Method
-
+from src.ir import swift_types as swift
 
 class UpperBoundConstraint(NamedTuple):
     bound: tp.Type
@@ -196,7 +196,11 @@ def _instantiate_type_variable_with_constraints(
         return eqs[0]
 
     if len(new_bounds) == 1:
-        return new_bounds[0]
+        reg_types = api_graph.get_reg_types()
+        candidates = [t for t in reg_types if t.is_subtype(new_bounds[0]) and not t.name.startswith('any ')]
+        if candidates:
+            return tu.select_random_type(candidates, uniform=True)
+        return new_bounds[0] #TODO swift, returns bound
     return None
 
 

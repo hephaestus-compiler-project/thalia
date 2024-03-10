@@ -50,6 +50,7 @@ class APIGenerator(Generator):
         "kotlin": builder.KotlinAPIGraphBuilder,
         "groovy": builder.JavaAPIGraphBuilder,
         "scala": builder.ScalaAPIGraphBuilder,
+        "swift": builder.SwiftAPIGraphBuilder,
     }
 
     def __init__(self, api_docs, options={}, language=None, logger=None):
@@ -121,7 +122,7 @@ class APIGenerator(Generator):
         type_parameters.extend(self.test_case_type_params)
         main_func = ast.FunctionDeclaration(
             self.TEST_CASE_NAME,
-            params=[],
+            params=[] if self.language != 'swift' else [ast.ParameterDeclaration(str(t.name).lower(),t) for t in type_parameters], #TODO add parameters
             type_parameters=type_parameters,
             ret_type=self.bt_factory.get_void_type(),
             body=ast.Block(body),
@@ -170,7 +171,7 @@ class APIGenerator(Generator):
         is_blacklisted = (
             upper_bound.name in blacklisted
             or (upper_bound.name == "Nullable"
-                and upper_bound.type_args[0].name in blacklisted)
+                and upper_bound.type_args[0].name in blacklisted) or (upper_bound.name == "Reference" and upper_bound.type_args[0].name in blacklisted) 
         )
         if upper_bound.is_type_constructor() or is_blacklisted:
             return types
@@ -335,7 +336,7 @@ class APIGenerator(Generator):
     def generate_expr_from_node(self, node: tp.Type,
                                 func_ref: bool,
                                 constraints: dict = None,
-                                depth: int = 1) -> ExprRes:
+                                depth: int = 1,is_mutating=False) -> ExprRes:
         is_func = func_ref and self.api_graph.get_functional_type(
             node) is not None
         res = (
@@ -346,7 +347,8 @@ class APIGenerator(Generator):
             else self._generate_expr_from_node(
                 node, depth, {} if func_ref else (constraints or {}))
         )
-        if node and utils.random.bool(prob=cfg.prob.local_variable_prob):
+        # Generate a local variable for the expression, required for mutaing methods and inout parameters in Swift
+        if node and (utils.random.bool(prob=cfg.prob.local_variable_prob) or is_mutating or str(node).startswith('Reference')): 
             var_name = gu.gen_identifier("lower")
             if node.is_type_constructor():
                 node = node.new(node.type_parameters)
@@ -367,11 +369,11 @@ class APIGenerator(Generator):
     def generate_expr_from_nodes(self, nodes: List[tp.Type],
                                  constraints: dict,
                                  func_ref: bool = False,
-                                 depth: int = 1) -> ExprRes:
+                                 depth: int = 1,is_mutating=False) -> ExprRes:
         if len(nodes) == 1:
             return self.generate_expr_from_node(
                 nodes[0], func_ref=func_ref, constraints=constraints,
-                depth=depth)
+                depth=depth,is_mutating=is_mutating)
         cond = self.generate_expr(self.bt_factory.get_boolean_type())
         cond_type = functools.reduce(
             lambda acc, x: acc if x.is_subtype(acc) else x,
@@ -398,19 +400,38 @@ class APIGenerator(Generator):
     def generate_from_type_combination(self, api, receiver, parameters,
                                        return_type, type_map) -> ast.Expr:
         type_var_map = copy(type_map)
+        is_mutating = False
+        if isinstance(api, ag.Method):
+            is_mutating = api.metadata.get('is_mutating',False)
+
         receiver, _, _ = self.generate_expr_from_nodes(
-            receiver, type_var_map, func_ref=False)
+            receiver, type_var_map, func_ref=False, is_mutating=is_mutating)
         exp_parameters = [p.t for p in getattr(api, "parameters", [])]
         args = self._generate_args(exp_parameters, parameters,
                                    depth=1, type_var_map=type_var_map)
         var_type = return_type
         self.type_eraser.with_target(return_type)
         if isinstance(api, ag.Method):
-            call_args = [ast.CallArgument(arg.expr) for arg in args]
+            parameter_list = api.parameters
+            
+            names = []
+            """
+            extract names of the parameters, named parameters are default in Swift
+            """
+            if parameter_list:
+                names = [param.name if isinstance(param,ag.NamedParameter) else None for param in parameter_list]
+
+            
+            if self.language == 'swift' and len(args)==len(names):
+                call_args = [ast.CallArgument(args[i].expr,names[i],inout=str(parameter_list[i].t).startswith('Reference'))
+                         for i in range(len(args))]
+            else:
+                call_args = [ast.CallArgument(args[i].expr,inout=str(parameter_list[i].t).startswith('Reference')) for i in range(len(args))]
+            
             type_args = self.substitute_types(api.type_parameters,
                                               type_var_map)
             expr = ast.FunctionCall(api.name, args=call_args,
-                                    receiver=receiver, type_args=type_args)
+                                    receiver=receiver, type_args=type_args,names=names,throws=api.metadata.get('throws',False))
             if api.type_parameters and self.type_erasure_mode:
                 self.type_eraser.erase_types(expr, api, args)
         elif isinstance(api, ag.Constructor):
@@ -423,8 +444,16 @@ class APIGenerator(Generator):
             con_type = self.api_graph.get_type_by_name(
                 cls_name) or self.parse_builtin_type(cls_name)
             con_type = _instantiate_type_con(con_type)
-            call_args = [arg.expr for arg in args]
-            expr = ast.New(con_type, call_args, receiver=receiver)
+            parameter_list = api.parameters
+            """
+            extract names of the parameters, named parameters are default in Swift
+            """
+            names = []
+            if parameter_list:
+                names = [param.name if isinstance(param,ag.NamedParameter) else None for param in parameter_list]
+            
+            call_args = [arg.expr for arg in args] 
+            expr = ast.New(con_type, call_args, receiver=receiver,names=names) 
             if con_type.is_parameterized() and self.type_erasure_mode:
                 self.type_eraser.erase_types(expr, api, args)
         else:
@@ -536,7 +565,8 @@ class APIGenerator(Generator):
             self.api_graph.get_functional_type(expr_type), type_var_map)
         return ast.FunctionReference(api_name, receiver=rec,
                                      signature=expr_type,
-                                     function_type=func_type)
+                                     function_type=func_type,named_parameters = None if len(api.parameters)==0 else [e.name if isinstance(e, ag.NamedParameter) else '' for e in api.parameters]
+)
 
     def generate_expr(self,
                       expr_type: tp.Type = None,
@@ -647,7 +677,7 @@ class APIGenerator(Generator):
         return ExprRes(expr, type_var_map, path)
 
     def _generate_args(self, parameters, actual_types, depth,
-                       type_var_map):
+                       type_var_map,is_mutating=False):
         if not parameters:
             return []
         args = []
@@ -665,7 +695,7 @@ class APIGenerator(Generator):
                         rec_bound_handler=self.api_graph.get_instantiations_of_recursive_bound)
             expr = self.generate_expr_from_nodes(param_types, {},
                                                  func_ref=True,
-                                                 depth=depth)
+                                                 depth=depth,is_mutating=is_mutating)
             self.type_eraser.reset_target_type()
             args.append(expr)
         return args
@@ -688,15 +718,42 @@ class APIGenerator(Generator):
                                                            depth, type_var_map)
             self.type_eraser.reset_target_type()
         if isinstance(elem, ag.Method):
+            is_mutating = elem.metadata.get('is_mutating',False)
             parameters = [param.t for param in elem.parameters]
+            parameter_list = elem.parameters
+            """ 
+            extract names of the parameters, named parameters are default in Swift
+            """
+            names = []
+            if parameter_list:
+                names = [param.name if isinstance(param,ag.NamedParameter) else None for param in parameter_list]
+
             args = self._generate_args(parameters,
                                        [[p] for p in parameters],
-                                       depth + 1, type_var_map)
-            call_args = [ast.CallArgument(arg.expr)
-                         for arg in args]
+                                       depth + 1, type_var_map,is_mutating=is_mutating)
+            if is_mutating:
+                var_name = gu.gen_identifier("lower")
+                last_elem = receiver_path[-1]
+                if isinstance(last_elem,tp.Type):
+                    var_type = tp.substitute_type(last_elem, type_var_map)
+                    if var_type.is_type_constructor():
+                        var_type = var_type.new([type_var_map[t] for t in var_type.type_parameters])
+                else:
+                    var_type = tp.substitute_type(self.api_graph.get_output_type(last_elem), type_var_map)
+                mut_var = ast.VariableDeclaration(var_name,receiver,var_type=var_type) 
+                receiver = ast.Variable(var_name)
+                self._add_node_to_parent(self.namespace, mut_var)
+            if names and self.language == 'swift' and len(args)==len(names):
+                
+               
+                call_args = [ast.CallArgument(args[i].expr,names[i],inout=str(parameter_list[i].t).startswith('Reference')) #NAMED ARGUMENTS TODO
+                         for i in range(len(args))]
+            else :
+                
+                call_args = [ast.CallArgument(args[i].expr,inout=str(parameter_list[i].t).startswith('Reference')) for i in range(len(args))]
             type_args = [type_var_map[tpa] for tpa in elem.type_parameters]
             expr = ast.FunctionCall(elem.name, args=call_args,
-                                    receiver=receiver, type_args=type_args)
+                                    receiver=receiver, type_args=type_args,names=names,throws=elem.metadata.get('throws',False))
             if elem.type_parameters and self.type_erasure_mode:
                 self.type_eraser.erase_types(expr, elem, args)
         elif isinstance(elem, ag.Field):
@@ -710,7 +767,20 @@ class APIGenerator(Generator):
             args = self._generate_args(parameters, [[p] for p in parameters],
                                        depth + 1, type_var_map)
             call_args = [arg.expr for arg in args]
-            expr = ast.New(con_type, call_args, receiver=receiver)
+            parameter_list = elem.parameters
+            """
+            extract names of the parameters, named parameters are default in Swift
+            """
+            names = []
+            if parameter_list:
+                names = [param.name if isinstance(param,ag.NamedParameter) else None for param in parameter_list]
+            
+
+            if names and self.language == 'swift':
+                expr = ast.New(con_type, call_args, receiver=receiver, names=names)
+            else:
+                expr = ast.New(con_type, call_args, receiver=receiver)
+            
             if con_type.is_parameterized() and self.type_erasure_mode:
                 self.type_eraser.erase_types(expr, elem, args)
         elif isinstance(elem, ag.Variable):

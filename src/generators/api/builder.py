@@ -11,16 +11,17 @@ from src.config import cfg
 from src.ir import BUILTIN_FACTORIES, types as tp, kotlin_types as kt
 from src.ir.builtins import BuiltinFactory
 from src.generators.api.api_graph import (APIGraph, IN, OUT, Method,
-                                          Constructor, Field, Parameter)
+                                          Constructor, Field, Parameter, NamedParameter)
 from src.generators.api.type_parsers import (TypeParser, KotlinTypeParser,
-                                             JavaTypeParser, ScalaTypeParser)
+                                             JavaTypeParser, ScalaTypeParser,SwiftTypeParser)
 
 PROTECTED = "protected"
 PUBLIC = "public"
 ROOT_CLASSES = {
     "java": "java.lang.Object",
     "kotlin": "kotlin.Any",
-    "scala": "scala.Any"
+    "scala": "scala.Any",
+    "swift": "swift.Any"
 }
 
 
@@ -29,7 +30,7 @@ class APIGraphBuilder(ABC):
         self.target_language: str = target_language
         self.bt_factory: BuiltinFactory = BUILTIN_FACTORIES[target_language]
         self.api_language: str = None
-
+        self.generic_whitelist = set()
         self.graph: nx.DiGraph = None
         self.subtyping_graph: nx.DiGraph = None
 
@@ -76,11 +77,13 @@ class APIGraphBuilder(ABC):
         for api_doc in docs.values():
             name = api_doc["name"]
             self.api_language = api_doc.get("language", self.api_language)
-            super_types = {
-                self.parse_type(st, build_class_node=True)
-                for st in api_doc.get("implements", []) + api_doc.get(
-                    "inherits", [])
-            }
+            super_types = set()
+            #exclude conditional inheritance
+            for st in api_doc.get("implements", []) + api_doc.get("inherits", []):
+                if isinstance(st,dict) and st.get("conditional",False):
+                    continue
+                super_types.add(self.parse_type(st, build_class_node=True))
+            
             dep_graph.add_node(name)
             parent = api_doc.get("parent")
             if parent:
@@ -325,6 +328,9 @@ class APIGraphBuilder(ABC):
         return target_node, kwargs
 
     def get_receiver_name(self, method_api: dict) -> str:
+        if self.api_language == "swift" and method_api.get("receiver",False): 
+            return method_api.get("receiver")
+    
         if self.class_name:
             return self.class_name
         return method_api.get("receiver")
@@ -344,7 +350,7 @@ class APIGraphBuilder(ABC):
         self._current_func_type_var_map = OrderedDict()
         self.rename_type_parameters(
             method_fqn, method_api["type_parameters"],
-            self._current_func_type_var_map
+            self._current_func_type_var_map,method_api=method_api
         )
         type_parameters = list(self._current_func_type_var_map.values())
         return type_parameters
@@ -364,9 +370,9 @@ class APIGraphBuilder(ABC):
             # Unable to parse type parameters
             return None
         parameters = [
-            Parameter(self.parse_type(p),
-                      self.get_type_parser().is_variable_argument(p))
-            for p in method_api["parameters"]
+        Parameter(self.parse_type(p),
+                    self.get_type_parser().is_variable_argument(p))
+        for p in method_api["parameters"]
         ]
         if any(p.t is None for p in parameters):
             # Unable to parse parameter types
@@ -422,10 +428,14 @@ class APIGraphBuilder(ABC):
     def build_class_node(self, class_api: dict) -> tp.Type:
         self.parent_cls = self.class_nodes.get(class_api.get("parent"))
         self.build_tentative_type(class_api)
-        super_types = {
-            self.parse_type(st, build_class_node=True)
-            for st in class_api["implements"] + class_api["inherits"]
-        }
+        api_doc = class_api
+        super_types = set()
+        for st in api_doc.get("implements", []) + api_doc.get("inherits", []):
+                if isinstance(st,dict) and st.get("conditional",False):
+                    continue
+                super_types.add(self.parse_type(st, build_class_node=True))
+
+
 
         if not super_types:
             super_types.add(self.parse_type(ROOT_CLASSES[self.api_language]))
@@ -457,10 +467,16 @@ class APIGraphBuilder(ABC):
         return class_node
 
     def build_subtyping_relations(self, class_api: dict):
-        super_types = {
-            self.parse_type(st, build_class_node=True)
-            for st in class_api["implements"] + class_api["inherits"]
-        }
+        api_doc = class_api
+        super_types = set()
+        for st in api_doc.get("implements", []) + api_doc.get("inherits", []):
+                if isinstance(st,dict) and st.get("conditional",False):
+                    continue
+                super_types.add(self.parse_type(st, build_class_node=True))
+        for st in class_api["implements"] + class_api["inherits"]:
+            st = self.parse_type(st)
+            self.generic_whitelist.add(st)
+        self.bt_factory.generic_whitelist = self.generic_whitelist
         if not super_types:
             super_types.add(self.bt_factory.get_any_type())
         for st in super_types:
@@ -474,6 +490,231 @@ class APIGraphBuilder(ABC):
             class_node = self.class_nodes[self.class_name]
             if class_node != source:
                 self.subtyping_graph.add_edge(source, class_node, **kwargs)
+
+
+class SwiftAPIGraphBuilder(APIGraphBuilder):
+    # named parameters TODO
+    def __init__(self, target_language, **kwargs):
+        super().__init__(target_language, **kwargs)
+        self.api_language = "swift"
+        self.protocols = set()
+    def parse_type(self, str_t: str, **kwargs) -> tp.Type:
+        return self.get_type_parser().parse_type(str_t,protocols=self.protocols)
+    def process_class(self, class_api: dict):
+        all_protocols = class_api.get("all_protocols",[])
+        for p in all_protocols:
+            self.protocols.add(str(p))
+        super().process_class(class_api)
+
+    def get_type_parser(self):
+        return SwiftTypeParser(
+            self.target_language,
+            self.type_var_mappings,
+            self._current_func_type_var_map,
+            self._class_type_var_map,
+            self.parsed_types
+        )
+    def parse_named_arguments(self, param: str):
+        return self.get_type_parser().parse_named_arguments(param,protocols=self.protocols)
+    def build_subtyping_relations(self, class_api: dict):
+        api_doc = class_api
+        super_types = set()
+        for st in api_doc.get("implements", []) + api_doc.get("inherits", []):
+                if isinstance(st,dict) and st.get("conditional",False):
+                    continue
+                super_types.add(self.parse_type(st, build_class_node=True))
+        for st in class_api["implements"] + class_api["inherits"]:
+            st = self.parse_type(st)
+            self.generic_whitelist.add(st)
+        self.bt_factory.generic_whitelist = self.generic_whitelist
+        if not super_types:
+            super_types.add(self.bt_factory.get_any_type())
+        for st in super_types:
+            kwargs = {}
+            source = st
+            if st.is_parameterized():
+                source = st.t_constructor
+                kwargs["constraint"] = st.get_type_variable_assignments()
+            self.subtyping_graph.add_node(source)
+            # Do not connect a node with itself.
+            class_node = self.class_nodes[self.class_name]
+            if class_node != source:
+                self.subtyping_graph.add_edge(source, class_node, **kwargs)
+    
+    def process_methods(self, methods: List[dict]):
+        for method_api in methods:
+            if method_api["access_mod"] == PROTECTED:
+                continue
+            receiver_name = self.get_receiver_name(method_api)
+            try:
+                method_node = self.build_method_node(method_api, receiver_name)
+                if method_node is None:
+                    continue
+            except NotImplementedError:
+                self._current_func_type_var_map = {}
+                continue
+            receiver = self.get_api_incoming_node(method_api)
+            receiver_ = None
+            if method_api.get("receiver",False):
+                receiver_ = self.parse_type(self.get_receiver_name(method_api))
+            is_constructor = method_api["is_constructor"]
+            is_static = method_api["is_static"]
+            output_type = None
+            ret_type = method_api["return_type"]
+            if not is_constructor:
+                output_type = self.parse_type(ret_type)
+                if output_type is None:
+                    self.graph.remove_node(method_node)
+                    # Unable to parse output type
+                    continue
+            else:
+                output_type = self.class_nodes[self.class_name]
+            non_letter_pattern = r'[^a-zA-Z]'
+        # Finding all non-letter characters
+            binary_op = re.findall(non_letter_pattern, method_api["name"])
+            binary_op = ''.join(binary_op)
+            if binary_op and is_static:
+                is_static = False #hacking binary operators TODO
+            if not (is_constructor or is_static or receiver is None):
+                self.graph.add_edge(receiver, method_node, label=IN)
+            
+            elif not (receiver_ is None or is_constructor): 
+                self.graph.add_edge(receiver_, method_node, label=IN)
+           
+            if (is_static or is_constructor) and self.parent_cls:
+                # Handle the members of non-static inner classes
+                self.graph.add_edge(self.parent_cls, method_node, label=IN)
+            out_node, kwargs = self.get_api_outgoing_node(output_type)
+            self.graph.add_edge(method_node, out_node, label=OUT, **kwargs)
+            self._current_func_type_var_map = {}
+            self.build_functional_interface(
+                method_api, getattr(method_node, "parameters", []),
+                output_type)
+    
+    def process_fields(self, fields: List[dict]):
+        for field_api in fields:
+            if field_api.get("conditional", False): 
+                print('skipping',field_api.get("name"),'because of conditional fields')
+                continue 
+            if field_api.get("type_parameters", []):
+                # TODO support parameterized fields
+                print('skipping',field_api.get("name"),'because of type parameters')
+                continue
+            if field_api.get("other_metadata",None):
+                if field_api.get("other_metadata").get("available_when",None):
+                    print('skipping',field_api.get("name"),'because of available when, cond fields')
+                    continue 
+            receiver_name = self.get_receiver_name(field_api)
+            receiver = self.get_api_incoming_node(field_api)
+            prefix = receiver_name + "." if receiver_name else ""
+            if field_api["access_mod"] == PROTECTED:
+                continue
+            field_type = self.parse_type(field_api["type"])
+            if field_type is None:
+                # Field type is unsupported
+                print('skipping',field_api.get("name"),'because of field type is unsupported')
+                continue
+            
+            if field_api["is_static"]:
+                continue 
+               
+            else:
+                field_node = Field(field_api["name"], receiver_name)
+
+            self.graph.add_node(field_node)
+            if receiver and not field_api["is_static"]:
+                # XXX: Maybe we also need to consider static fields called
+                # by a receiver.
+                self.graph.add_node(receiver)
+                self.graph.add_edge(receiver, field_node, label=IN)
+            if field_api["is_static"] and self.parent_cls:
+                # Handle fields of non-static inner classes.
+                self.graph.add_edge(self.parent_cls, field_node, label=IN)
+            out_node, kwargs = self.get_api_outgoing_node(field_type)
+            self.graph.add_edge(field_node, out_node, label=OUT, **kwargs)
+
+    def build_method_node(self, method_api: dict,
+                          receiver_name: str) -> Method:
+        method_fqn = (
+            receiver_name + "." + method_api["name"]
+            if receiver_name
+            else method_api["name"]
+        )
+        is_constructor = method_api["is_constructor"]
+        is_static = method_api["is_static"]
+        type_parameters = self.build_method_type_parameters(method_api,
+                                                            method_fqn)
+        if is_constructor and (type_parameters or method_api["throws"]) or method_api["name"]=='init?' :
+            print('skipping',method_api.get("name"),'because of constructor type parameters or throws or init?')
+            # TODO support constructor type parameters and nullable constuctors
+            return None
+        throws = method_api["throws"]
+        
+        if any(t is None for t in type_parameters):
+            # Unable to parse type parameters
+            print('skipping',method_api.get("name"),'because couldnt parse type parameters')
+            return None
+        other_metadata = method_api.get("other_metadata", {})
+        if throws:
+            other_metadata["throws"] = True
+        
+        if other_metadata.get("type_equality",None):
+            print('skipping',method_api.get("name"),'because of type equality')
+            return None #TODO equal types check
+        if other_metadata.get("unsupported",None):
+            print('skipping',method_api.get("name"),'because of unsupported')
+            return None #TODO unsupported e.g. exact type matching or conformation of a field/type parameter or unavailable type
+        
+        parameters = []  
+        for p in method_api["parameters"]:
+            
+            name,t = self.parse_named_arguments(p)
+            is_varibale_arg = self.get_type_parser().is_variable_argument(p)
+            if name:
+                parameter = NamedParameter(t,is_varibale_arg,name)
+            else:
+                parameter = Parameter(t,is_varibale_arg)
+            parameters.append(parameter)
+        if any(p.t is None for p in parameters):
+            # Unable to parse parameter types
+            return None
+
+        if is_constructor:
+            method_node = Constructor(receiver_name, parameters,
+                                      other_metadata)
+            
+            
+        elif is_static:
+            method_node = Method(method_fqn, receiver_name,
+                                 parameters, type_parameters, other_metadata)
+        else:
+            method_node = Method(method_api["name"], receiver_name, parameters,
+                                 type_parameters, other_metadata)
+        self.graph.add_node(method_node)
+        return method_node
+    def build_topological_sort(self, docs: dict) -> List[str]:
+        dep_graph = nx.DiGraph()
+        for api_doc in docs.values():
+            name = api_doc["name"]
+            self.api_language = api_doc.get("language", self.api_language)
+            super_types = set()
+            for st in api_doc.get("implements", []):
+                if st.get("conditional",None):
+                    continue
+                super_types.add(self.parse_type(st, build_class_node=True)) 
+            for st in api_doc.get("inherits", []):
+                super_types.add(self.parse_type(st, build_class_node=True))
+            dep_graph.add_node(name)
+            parent = api_doc.get("parent")
+            if parent:
+                dep_graph.add_node(parent)
+                dep_graph.add_edge(parent, name)
+            for st in super_types:
+                if st == self.bt_factory.get_any_type():
+                    continue
+                dep_graph.add_node(st.name)
+                dep_graph.add_edge(st.name, name)
+        return list(nx.topological_sort(dep_graph))
 
 
 class JavaAPIGraphBuilder(APIGraphBuilder):

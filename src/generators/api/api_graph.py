@@ -3,7 +3,7 @@ from copy import copy
 import itertools
 import statistics
 from typing import NamedTuple, List, Union, Set, Dict, Tuple
-
+import re
 import networkx as nx
 
 from src import utils
@@ -12,7 +12,7 @@ from src.ir import types as tp, type_utils as tu
 from src.generators.api import utils as au
 from src.generators.api.matcher import Matcher
 from src.generators.api.nodes import (Field, Method, Constructor, Variable,
-                                      Parameter)
+                                      Parameter, NamedParameter)
 
 
 IN = 0
@@ -122,7 +122,10 @@ class APIGraph():
             "kotlin.LongArray",
             "kotlin.FloatArray",
             "kotlin.DoubleArray",
-        }
+        },
+        "swift": {"Swift.Array",
+                  "Array",
+                  }
     }
 
     def __init__(self, api_graph, subtyping_graph, functional_types,
@@ -148,7 +151,7 @@ class APIGraph():
             if (
                 not (t.is_parameterized() and t.has_type_variables()) and
                 not (t.name == self.bt_factory.get_void_type().name and
-                     getattr(t, "primive", False))
+                     getattr(t, "primive", False)) #TODO TYPO??? primitive
             )
         ]
         self.type_constructors = [t for t in self.types
@@ -199,7 +202,21 @@ class APIGraph():
                                   signature_length)
 
     def get_reg_types(self):
-        return self.types
+        #for Swift also return the built-ins
+        types = self.types
+        language = self.bt_factory.get_language()
+        builtins = []
+        if language == "swift":
+            integer_type = self.bt_factory.get_integer_type()
+            float_type = self.bt_factory.get_float_type()
+            double_type = self.bt_factory.get_double_type()
+            boolean_type = self.bt_factory.get_boolean_type()
+            character_type = self.bt_factory.get_char_type()
+            string_type = self.bt_factory.get_string_type()
+            builtins = [integer_type, float_type, double_type, boolean_type,
+                        character_type, string_type]
+    
+        return types + builtins
 
     def _get_random_type(self, types):
         t = tu.select_random_type(types)
@@ -428,7 +445,7 @@ class APIGraph():
             msg = msg.format(sel=target_selection)
             return Exception(msg)
         origin = target
-        targets = []
+        targets = [origin]
         if target.is_parameterized():
             is_primitive = (
                 origin.t_constructor == self.bt_factory.get_array_type() and
@@ -606,6 +623,8 @@ class APIGraph():
         overloaded_methods: Set[Tuple[Method, bool]]
     ) -> Set[Tuple[Method, bool]]:
         methods = set()
+        if type(receiver) == int:
+            return methods #TODO dirty solution
         for supertype in receiver.get_supertypes():
             if supertype.is_parameterized():
                 supertype = self.get_type_by_name(
@@ -660,7 +679,7 @@ class APIGraph():
 
         methods = set()
         base_t = receiver
-        if receiver.is_parameterized():
+        if type(receiver) != int and receiver.is_parameterized(): #TODO int is parameterized???
             # Get the type constructor in order to retrieve the definitions
             # of the corresponding class
             base_t = self.get_type_by_name(receiver.name) or \
@@ -675,7 +694,7 @@ class APIGraph():
         return methods
 
     def get_functional_type(self, etype: tp.Type) -> tp.ParameterizedType:
-        if etype.is_parameterized():
+        if etype.is_parameterized(): #TODO tuple is parameterized???
             # Check if this the given type is a native function type, e.g.,
             # (Boolean) -> String.
             t_constructor = self.get_type_by_name(
@@ -735,6 +754,16 @@ class APIGraph():
         for api in api_components:
             if not isinstance(api, (Method, Constructor)):
                 continue
+            non_letter_pattern = r'[^a-zA-Z]'
+            # Finding all non-letter characters
+            binary_op = bool(re.search(non_letter_pattern, api.name.split('.')[-1]))
+            """
+            exclude mutating methods, binary functions and subscripts from ref for Swift
+            """
+            language = self.bt_factory.get_language()
+            if language == 'swift' and (api.metadata.get("is_mutating",None) or 'subscript' in api.name or binary_op):
+                continue
+
             param_types = [
                 (
                     self.bt_factory.get_array_type().new([param.t.box_type()])
@@ -743,7 +772,7 @@ class APIGraph():
                 )
                 for param in api.parameters
             ]
-            rec_type, out_type = self._get_receiver_and_ret_type_of_func(api)
+            rec_type, out_type = self._get_receiver_and_ret_type_of_func(api)            
             match, sub = func_type.t_constructor.match_function(
                 rec_type, out_type, param_types, func_type, self.bt_factory,
                 api.metadata
@@ -773,6 +802,21 @@ class APIGraph():
                 # Add a bound to the generated type parameter
                 blacklisted = self.BLACKLISTED_TYPES[
                     self.bt_factory.get_language()]
+                if self.bt_factory.get_language() == "swift":
+                    whitelist = self.bt_factory.generic_whitelist
+                    all_types = copy(self.get_reg_types())   
+                                   
+                    for t in all_types:
+                        if t not in whitelist:
+                            if t.name.startswith('any '):
+                                continue
+                            blacklisted.add(t.name)
+
+                    alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+                    for a in alphabet:
+                        if a not in blacklisted:
+                            blacklisted.add(a)
+                blacklisted = set(blacklisted)
                 bound = self.get_random_type(excluded=blacklisted).box_type()
                 source = bound
                 kwargs = {}

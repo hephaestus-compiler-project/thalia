@@ -1,0 +1,2393 @@
+{
+  "frozen": true,
+  "data_type": "struct",
+  "name": "Swift.Float",
+  "type_parameters": [],
+  "methods": [
+    {
+      "name": "random",
+      "type_parameters": [],
+      "parameters": [
+        "in: Swift.Range<Swift.Float>"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": true,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": true,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "random",
+      "type_parameters": [
+        "T extends any Swift.RandomNumberGenerator"
+      ],
+      "parameters": [
+        "in: Swift.Range<Swift.Float>",
+        "using: inout T"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": true,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": true,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "random",
+      "type_parameters": [],
+      "parameters": [
+        "in: Swift.ClosedRange<Swift.Float>"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": true,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": true,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "random",
+      "type_parameters": [
+        "T extends any Swift.RandomNumberGenerator"
+      ],
+      "parameters": [
+        "in: Swift.ClosedRange<Swift.Float>",
+        "using: inout T"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": true,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": true,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "addingProduct",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "addProduct",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": true,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "squareRoot",
+      "type_parameters": [],
+      "parameters": [],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "formSquareRoot",
+      "type_parameters": [],
+      "parameters": [],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": true,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "remainder",
+      "type_parameters": [],
+      "parameters": [
+        "dividingBy: Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "formRemainder",
+      "type_parameters": [],
+      "parameters": [
+        "dividingBy: Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": true,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "truncatingRemainder",
+      "type_parameters": [],
+      "parameters": [
+        "dividingBy: Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "formTruncatingRemainder",
+      "type_parameters": [],
+      "parameters": [
+        "dividingBy: Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": true,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "negate",
+      "type_parameters": [],
+      "parameters": [],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": true,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "rounded",
+      "type_parameters": [],
+      "parameters": [],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "rounded",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.FloatingPointRoundingRule"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "round",
+      "type_parameters": [],
+      "parameters": [],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": true,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "round",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.FloatingPointRoundingRule"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": true,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "isEqual",
+      "type_parameters": [],
+      "parameters": [
+        "to: Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "isLess",
+      "type_parameters": [],
+      "parameters": [
+        "than: Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "isLessThanOrEqualTo",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "isTotallyOrdered",
+      "type_parameters": [],
+      "parameters": [
+        "belowOrEqualTo: Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "maximum",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "maximumMagnitude",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "minimum",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "minimumMagnitude",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "encode",
+      "type_parameters": [],
+      "parameters": [
+        "to: any Swift.Encoder"
+      ],
+      "throws": true,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "...",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.ClosedRange<Swift.Float>",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "hash",
+      "type_parameters": [],
+      "parameters": [
+        "into: inout Swift.Hasher"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "advanced",
+      "type_parameters": [],
+      "parameters": [
+        "by: Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "distance",
+      "type_parameters": [],
+      "parameters": [
+        "to: Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "write",
+      "type_parameters": [
+        "Target extends any Swift.TextOutputStream"
+      ],
+      "parameters": [
+        "to: inout Target"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "*",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "*=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "+",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "+=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "-",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "-",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "-=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "/",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "/=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "!=",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "==",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "==",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "+",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "+=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "-=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "...",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.PartialRangeThrough<Swift.Float>",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "...",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.PartialRangeFrom<Swift.Float>",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "..<",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.PartialRangeUpTo<Swift.Float>",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "..<",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Range<Swift.Float>",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": ">",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": ">",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "<",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "<",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "<=",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "<=",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": ">=",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": ">=",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float",
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "-",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "entityIdentifier",
+      "type_parameters": [],
+      "parameters": [
+        "for: Swift.String"
+      ],
+      "throws": false,
+      "return_type": "Swift.Float?",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [
+        "Source extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "Source"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Int"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init?",
+      "type_parameters": [
+        "S extends any Swift.StringProtocol"
+      ],
+      "parameters": [
+        "S"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [
+        "Source extends any Swift.BinaryFloatingPoint"
+      ],
+      "parameters": [
+        "Source"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [
+        "Source extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "Source"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": true,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": true,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Double"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float80"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "signOf: Swift.Float",
+        "magnitudeOf: Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "sign: Swift.FloatingPointSign",
+        "exponent: Swift.Int",
+        "significand: Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "truncating: Foundation.NSNumber"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init?",
+      "type_parameters": [
+        "Source extends any Swift.BinaryFloatingPoint"
+      ],
+      "parameters": [
+        "exactly: Source"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init?",
+      "type_parameters": [],
+      "parameters": [
+        "exactly: Swift.Double"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init?",
+      "type_parameters": [],
+      "parameters": [
+        "exactly: Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init?",
+      "type_parameters": [],
+      "parameters": [
+        "exactly: Swift.Float80"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init?",
+      "type_parameters": [],
+      "parameters": [
+        "exactly: Foundation.NSNumber"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init?",
+      "type_parameters": [
+        "Source extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "exactly: Source"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": true,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": true,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "bitPattern: Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "sign: Swift.FloatingPointSign",
+        "exponentBitPattern: Swift.UInt",
+        "significandBitPattern: Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "nan: Swift.UInt32",
+        "signaling: Swift.Bool"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "from: any Swift.Decoder"
+      ],
+      "throws": true,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "integerLiteral: Swift.Int64"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "floatLiteral: Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [
+        "A extends any ExpressibleByBuiltinIntegerLiter>"
+      ],
+      "parameters": [
+        "integerLiteral: Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": true,
+      "is_static": true,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "A",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": true,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "Foundation.NSNumber"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init?",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Substring"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "CoreFoundation.CGFloat"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float16"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init?",
+      "type_parameters": [],
+      "parameters": [
+        "exactly: Swift.Float16"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    }
+  ],
+  "fields": [
+    {
+      "name": "magnitude",
+      "type": "Swift.Float",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "sign",
+      "type": "Swift.FloatingPointSign",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "ulp",
+      "type": "Swift.Float",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "significand",
+      "type": "Swift.Float",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "exponent",
+      "type": "Swift.Int",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "nextUp",
+      "type": "Swift.Float",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "nextDown",
+      "type": "Swift.Float",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "binade",
+      "type": "Swift.Float",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "pi",
+      "type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "infinity",
+      "type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "greatestFiniteMagnitude",
+      "type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "nan",
+      "type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "signalingNaN",
+      "type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "ulpOfOne",
+      "type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "leastNormalMagnitude",
+      "type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "leastNonzeroMagnitude",
+      "type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "zero",
+      "type": "Swift.Float",
+      "conditional": true,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": true
+      }
+    },
+    {
+      "name": "bitPattern",
+      "type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "significandBitPattern",
+      "type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "significandWidth",
+      "type": "Swift.Int",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "exponentBitPattern",
+      "type": "Swift.UInt",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "significandBitCount",
+      "type": "Swift.Int",
+      "conditional": false,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "exponentBitCount",
+      "type": "Swift.Int",
+      "conditional": false,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "radix",
+      "type": "Swift.Int",
+      "conditional": false,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isZero",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isFinite",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isInfinite",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isNaN",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isSignalingNaN",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isNormal",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isSubnormal",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isCanonical",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "floatingPointClass",
+      "type": "Swift.FloatingPointClassification",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "description",
+      "type": "Swift.String",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "debugDescription",
+      "type": "Swift.String",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    
+    {
+      "name": "hashValue",
+      "type": "Swift.Int",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "mlMultiArrayDataType",
+      "type": "CoreML.MLMultiArrayDataType",
+      "conditional": false,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "multiArrayDataType",
+      "type": "MLMultiArrayDataType",
+      "conditional": false,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "ulpOfOne",
+      "type": "Swift.Float",
+      "conditional": false,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "entityIdentifierString",
+      "type": "Swift.String",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    }
+
+    
+  ],
+  "implements": [
+    {
+      "name": "Swift.AdditiveArithmetic",
+      "conditional": false
+    },
+    {
+      "name": "Accelerate.BNNSScalar",
+      "conditional": false
+    },
+    {
+      "name": "Swift.BinaryFloatingPoint",
+      "conditional": false
+    },
+    {
+      "name": "Swift.CVarArg",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Comparable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.CustomDebugStringConvertible",
+      "conditional": false
+    },
+    {
+      "name": "Swift.CustomReflectable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.CustomStringConvertible",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Decodable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Encodable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Equatable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.ExpressibleByFloatLiteral",
+      "conditional": false
+    },
+    {
+      "name": "Swift.ExpressibleByIntegerLiteral",
+      "conditional": false
+    },
+    {
+      "name": "Swift.FloatingPoint",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Hashable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.LosslessStringConvertible",
+      "conditional": false
+    },
+    {
+      "name": "CoreML.MLShapedArrayScalar",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Numeric",
+      "conditional": false
+    },
+    {
+      "name": "Swift.SIMDScalar",
+      "conditional": false
+    },
+    {
+      "name": "Swift.SignedNumeric",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Strideable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.TextOutputStreamable",
+      "conditional": false
+    },
+    {
+      "name": "Accelerate.vDSP_DiscreteFourierTransformable",
+      "conditional": false
+    },
+    {
+      "name": "Accelerate.vDSP_FloatingPointBiquadFilterable",
+      "conditional": false
+    },
+    {
+      "name": "Accelerate.vDSP_FloatingPointConvertable",
+      "conditional": false
+    },
+    {
+      "name": "Accelerate.vDSP_FloatingPointDiscreteFourierTransformable",
+      "conditional": false
+    },
+    {
+      "name": "Accelerate.vDSP_FloatingPointGeneratable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Sendable",
+      "conditional": true
+    }
+  ],
+  "typealiases": [
+    {
+      "name": "Magnitude",
+      "conditional": false
+    },
+    {
+      "name": "Exponent",
+      "conditional": false
+    },
+    {
+      "name": "RawSignificand",
+      "conditional": false
+    },
+    {
+      "name": "SIMDMaskScalar",
+      "conditional": false
+    }
+  ],
+  "inherits": [],
+  "language": "swift",
+  "all_protocols": []
+}

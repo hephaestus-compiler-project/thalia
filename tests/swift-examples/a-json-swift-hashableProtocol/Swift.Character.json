@@ -1,0 +1,714 @@
+{
+  "frozen": true,
+  "data_type": "struct",
+  "name": "Swift.Character",
+  "type_parameters": [],
+  "methods": [
+    {
+      "name": "write",
+      "type_parameters": [
+        "Target extends any Swift.TextOutputStream"
+      ],
+      "parameters": [
+        "to: inout Target"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "==",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Character",
+        "Swift.Character"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "!=",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Character",
+        "Swift.Character"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "uppercased",
+      "type_parameters": [],
+      "parameters": [],
+      "throws": false,
+      "return_type": "Swift.String",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "lowercased",
+      "type_parameters": [],
+      "parameters": [],
+      "throws": false,
+      "return_type": "Swift.String",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "...",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Character",
+        "Swift.Character"
+      ],
+      "throws": false,
+      "return_type": "Swift.ClosedRange<Swift.Character>",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "...",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Character"
+      ],
+      "throws": false,
+      "return_type": "Swift.PartialRangeThrough<Swift.Character>",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "...",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Character"
+      ],
+      "throws": false,
+      "return_type": "Swift.PartialRangeFrom<Swift.Character>",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "hash",
+      "type_parameters": [],
+      "parameters": [
+        "into: inout Swift.Hasher"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "..<",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Character"
+      ],
+      "throws": false,
+      "return_type": "Swift.PartialRangeUpTo<Swift.Character>",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "..<",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Character",
+        "Swift.Character"
+      ],
+      "throws": false,
+      "return_type": "Swift.Range<Swift.Character>",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": ">",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Character",
+        "Swift.Character"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "<",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Character",
+        "Swift.Character"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "<=",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Character",
+        "Swift.Character"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": ">=",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Character",
+        "Swift.Character"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.String"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Unicode.Scalar"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "extendedGraphemeClusterLiteral: Swift.Character"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "unicodeScalarLiteral: Self.ExtendedGraphemeClusterLiteralType"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": true,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": true,
+        "type_equality": false,
+        "unsupported": true
+      }
+    }
+  ],
+  "fields": [
+    {
+      "name": "unicodeScalars",
+      "type": "Swift.Character.UnicodeScalarView",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isASCII",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "asciiValue",
+      "type": "Swift.UInt8?",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isLetter",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isPunctuation",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isNewline",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isWhitespace",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isSymbol",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isMathSymbol",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isCurrencySymbol",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isCased",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isUppercase",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isLowercase",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isNumber",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isWholeNumber",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "wholeNumberValue",
+      "type": "Swift.Int?",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isHexDigit",
+      "type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "hexDigitValue",
+      "type": "Swift.Int?",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "description",
+      "type": "Swift.String",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "debugDescription",
+      "type": "Swift.String",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "customMirror",
+      "type": "Swift.Mirror",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "utf16",
+      "type": "Swift.Character.UTF16View",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "utf8",
+      "type": "Swift.Character.UTF8View",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "regex",
+      "type": "Regex<Character.Output>",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "hashValue",
+      "type": "Int",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    }
+  ],
+  "implements": [
+    {
+      "name": "Swift.Comparable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.CustomDebugStringConvertible",
+      "conditional": false
+    },
+    {
+      "name": "Swift.CustomReflectable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.CustomStringConvertible",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Equatable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.ExpressibleByExtendedGraphemeClusterLiteral",
+      "conditional": false
+    },
+    {
+      "name": "Swift.ExpressibleByUnicodeScalarLiteral",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Hashable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.LosslessStringConvertible",
+      "conditional": false
+    },
+    
+    {
+      "name": "Swift.TextOutputStreamable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Sendable",
+      "conditional": true
+    }
+  ],
+  "typealiases": [
+    {
+      "name": "UnicodeScalarView",
+      "conditional": false
+    },
+    {
+      "name": "Output",
+      "conditional": false
+    },
+    {
+      "name": "UTF16View",
+      "conditional": false
+    },
+    {
+      "name": "UTF8View",
+      "conditional": false
+    }
+  ],
+  "inherits": [],
+  "language": "swift",
+  "all_protocols": []
+}

@@ -75,7 +75,7 @@ class Method(NamedTuple):
     cls: str
     parameters: List[Parameter]
     type_parameters: List[tp.TypeParameter]
-    metadata: dict
+    metadata: dict #swift: cannot reference mutating methods
 
     def __str__(self):
         type_parameters_str = ""
@@ -120,9 +120,25 @@ class Method(NamedTuple):
         return self.get_name()
 
 
+class NamedParameter(NamedTuple):
+    t: tp.Type
+    variable: bool
+    name: str
+    
+    def __str__(self):
+        return "{t!s}{suffix!s}".format(
+            t=str(self.t),
+            suffix="*" if self.variable else ""
+        )
+
+    __repr__ = __str__
+
+    def __hash__(self):
+        return hash((self.t, self.variable))
+    
 class Constructor(NamedTuple):
     name: str
-    parameters: List[Parameter]
+    parameters: List[NamedParameter] 
     metadata: dict
 
     def __str__(self):

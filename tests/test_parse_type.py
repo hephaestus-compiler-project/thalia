@@ -1,7 +1,7 @@
 from src.ir import (types as tp, java_types as jt, kotlin_types as kt,
                     scala_types as sc)
 from src.generators.api.type_parsers import (JavaTypeParser, KotlinTypeParser,
-                                             ScalaTypeParser)
+                                             ScalaTypeParser,SwiftTypeParser)
 
 
 def test_primitives():
@@ -628,3 +628,15 @@ def test_scala_tuple_types():
          sc.String,
          sc.FunctionType(1).new([sc.Integer, sc.Integer])
      ])
+
+def test_swift_types():
+    b = SwiftTypeParser("swift")
+    assert b.parse_type("Swift.Array<Element>") == tp.TypeConstructor("Swift.Array",
+                           [tp.TypeParameter("Swift.Array.T1")]).new([tp.TypeParameter("Element")])
+    
+    
+    
+    assert b.parse_type("Swift.SomeClass<C extends Swift.Collection>") == tp.TypeConstructor("Swift.SomeClass",[tp.TypeParameter("Swift.SomeClass.T1")]).new([tp.TypeParameter("C",bound=tp.SimpleClassifier("Swift.Collection"))])
+    
+   
+    

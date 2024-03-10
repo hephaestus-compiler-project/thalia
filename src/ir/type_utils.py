@@ -2,6 +2,7 @@ from collections import OrderedDict
 from typing import TypeVar, List, Tuple, Dict, Callable, Set, Iterable
 
 import networkx as nx
+from src.ir import swift_types as swift
 
 from src.config import cfg
 import src.ir.types as tp
@@ -667,6 +668,10 @@ def _find_candidate_types_for_bound(
                 a_types.append(t)
     else:
         a_types = [bound]
+        language = rec_bound_handler.__self__.bt_factory.get_language()
+        if language == 'swift':
+            candidates = [t for t in types if t.is_subtype(bound) and not t.name.startswith('any ')]
+            a_types = candidates
     for i, t in enumerate(a_types):
         if t.is_parameterized():
             a_types[i] = t.to_variance_free()
@@ -793,6 +798,11 @@ def _compute_type_variable_assignments(
                             t_bound = type_var_map[t_param.bound]
                         except KeyError:
                             t_bound = t_param.bound
+                            language = rec_bound_handler.__self__.bt_factory.get_language()
+                            if language == 'swift':
+                                bound = t_bound
+                                candidates = [t for t in types if t.is_subtype(bound) and not t.is_type_constructor()] 
+                                a_types = candidates
 
                         if t_bound.is_wildcard() and t_bound.is_contravariant():
                             # Here we have the following case:

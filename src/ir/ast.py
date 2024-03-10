@@ -305,10 +305,10 @@ class CallArgument(Node):
     A call argument can also be named (i.e., param_name = expr).
     In this case the field 'name' is not None.
     """
-
-    def __init__(self, expr: Expr, name: str = None):
+    def __init__(self, expr: Expr, name: str = None, inout=False):
         self.expr = expr
         self.name = name
+        self.inout = inout # For Swift
 
     def children(self):
         return [self.expr]
@@ -1150,6 +1150,10 @@ class EqualityExpr(BinaryOp):
         "scala": [
             Operator('=='),
             Operator('=', is_not=True)
+        ],
+        "swift": [
+            Operator('=='),
+            Operator('=', is_not=True)
         ]
     }
 
@@ -1181,6 +1185,12 @@ class ComparisonExpr(BinaryOp):
             Operator('<=')
         ],
         "scala": [
+            Operator('>'),
+            Operator('>='),
+            Operator('<'),
+            Operator('<=')
+        ],
+        "swift": [
             Operator('>'),
             Operator('>='),
             Operator('<'),
@@ -1221,6 +1231,12 @@ class ArithExpr(BinaryOp):
             Operator('/'),
             Operator('*')
         ],
+        "swift": [
+            Operator('+'),
+            Operator('-'),
+            Operator('/'),
+            Operator('*')
+        ],
     }
 
 
@@ -1244,10 +1260,11 @@ class Is(BinaryOp):
 
 class New(Expr):
     def __init__(self, class_type: types.Type, args: List[Expr],
-                 receiver: Expr = None):
+                 receiver: Expr = None, names: List[str] = []):
         self.class_type = class_type
         self.args = args
         self.receiver = receiver
+        self.names = names
 
     def has_variable(self):
         return any(e.has_variable() for e in self.args)
@@ -1320,7 +1337,7 @@ class FunctionCall(Expr):
     def __init__(self, func: str, args: List[CallArgument],
                  receiver: Expr = None,
                  type_args: List[types.Type] = [],
-                 is_ref_call: bool = False):
+                 is_ref_call: bool = False, names: List[str] = [],throws=False):
         self.func = func
         self.args = args
         self.receiver = receiver
@@ -1328,6 +1345,8 @@ class FunctionCall(Expr):
         self.is_ref_call = is_ref_call
         self._can_infer_type_args = False
         self.type_parameters = []
+        self.names = names
+        self.throws = throws
 
     def has_variable(self):
         args = [e.expr for e in self.args]
@@ -1399,11 +1418,12 @@ class FunctionReference(Expr):
     NEW_REF = "__init__"
 
     def __init__(self, func: str, receiver: Expr, signature: types.Type,
-                 function_type: types.ParameterizedType):
+                 function_type: types.ParameterizedType, named_parameters=[]):
         self.func = func
         self.receiver = receiver
         self.signature = signature
         self.function_type = function_type
+        self.named_parameters = named_parameters #for Swift, parameters are named by default
 
     def has_variable(self):
         return self.receiver and self.receiver.has_variable()

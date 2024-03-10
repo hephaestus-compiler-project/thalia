@@ -1,0 +1,2494 @@
+{
+  "frozen": true,
+  "data_type": "struct",
+  "name": "Swift.UInt32",
+  "type_parameters": [],
+  "methods": [
+    {
+      "name": "&=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&<<=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&>>=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "*=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "+=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "-=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "/=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "==",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "<",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "|=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "%=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "^=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "addingReportingOverflow",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "dividedReportingOverflow",
+      "type_parameters": [],
+      "parameters": [
+        "by: Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "dividingFullWidth",
+      "type_parameters": [],
+      "parameters": [
+        "(high: Swift.UInt32, low: Swift.UInt32.Swift.UInt32)"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "multipliedFullWidth",
+      "type_parameters": [],
+      "parameters": [
+        "by: Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "multipliedReportingOverflow",
+      "type_parameters": [],
+      "parameters": [
+        "by: Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "remainderReportingOverflow",
+      "type_parameters": [],
+      "parameters": [
+        "dividingBy: Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "signum",
+      "type_parameters": [],
+      "parameters": [],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "subtractingReportingOverflow",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "+",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "+=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "-=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "hash",
+      "type_parameters": [],
+      "parameters": [
+        "into: inout Swift.Hasher"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "!=",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "==",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "...",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.PartialRangeThrough<Swift.UInt32>",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "...",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.PartialRangeFrom<Swift.UInt32>",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "...",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.ClosedRange<Swift.UInt32>",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "..<",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.PartialRangeUpTo<Swift.UInt32>",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "..<",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Range<Swift.UInt32>",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": true
+      }
+    },
+    {
+      "name": "<",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": ">",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": ">",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": ">",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": ">=",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "<=",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "<=",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": ">=",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "<=",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": ">=",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&*",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&*=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&+",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&+=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&-",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&-=",
+      "type_parameters": [],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&<<",
+      "type_parameters": [
+        "Other extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "Swift.UInt32",
+        "Other"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&>>",
+      "type_parameters": [
+        "Other extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "Swift.UInt32",
+        "Other"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&<<",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&<<",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&>>",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&>>",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&>>=",
+      "type_parameters": [
+        "Other extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Other"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&<<=",
+      "type_parameters": [
+        "Other extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Other"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": ">>",
+      "type_parameters": [
+        "Other extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "Swift.UInt32",
+        "Other"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "<<",
+      "type_parameters": [
+        "Other extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "Swift.UInt32",
+        "Other"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "~",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "random",
+      "type_parameters": [],
+      "parameters": [
+        "in: Swift.ClosedRange<Swift.UInt32>"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "random",
+      "type_parameters": [],
+      "parameters": [
+        "in: Swift.Range<Swift.UInt32>"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "random",
+      "type_parameters": [
+        "T extends any Swift.RandomNumberGenerator"
+      ],
+      "parameters": [
+        "in: Swift.ClosedRange<Swift.UInt32>",
+        "using: inout T"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "random",
+      "type_parameters": [
+        "T extends any Swift.RandomNumberGenerator"
+      ],
+      "parameters": [
+        "in: Swift.Range<Swift.UInt32>",
+        "using: inout T"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "!=",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "!=",
+      "type_parameters": [
+        "Other extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "Swift.UInt32",
+        "Other"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "&",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "*",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "+",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "-",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "/",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "==",
+      "type_parameters": [
+        "Other extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "Swift.UInt32",
+        "Other"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "|",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "^",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "|",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "%",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "<",
+      "type_parameters": [
+        "Other extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "Swift.UInt32",
+        "Other"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "^",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.UInt32",
+        "Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": ">",
+      "type_parameters": [
+        "Other extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "Swift.UInt32",
+        "Other"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": ">=",
+      "type_parameters": [
+        "Other extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "Swift.UInt32",
+        "Other"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "<=",
+      "type_parameters": [
+        "Other extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "Swift.UInt32",
+        "Other"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": ">>",
+      "type_parameters": [
+        "RHS extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "Swift.UInt32",
+        "RHS"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "<<",
+      "type_parameters": [
+        "RHS extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "Swift.UInt32",
+        "RHS"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": ">>=",
+      "type_parameters": [
+        "Other extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Other"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "<<=",
+      "type_parameters": [
+        "Other extends any Swift.BinaryInteger"
+      ],
+      "parameters": [
+        "inout Swift.UInt32",
+        "Other"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": true,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "advanced",
+      "type_parameters": [],
+      "parameters": [
+        "by: Swift.Int"
+      ],
+      "throws": false,
+      "return_type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "distance",
+      "type_parameters": [],
+      "parameters": [
+        "to: Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Int",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "formatted",
+      "type_parameters": [],
+      "parameters": [],
+      "throws": false,
+      "return_type": "Swift.String",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "formatted",
+      "type_parameters": [
+        "S extends any Foundation.FormatStyle"
+      ],
+      "parameters": [
+        "S"
+      ],
+      "throws": false,
+      "return_type": "S.FormatOutput",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": true,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "formatted",
+      "type_parameters": [
+        "S extends any Foundation.FormatStyle"
+      ],
+      "parameters": [
+        "S"
+      ],
+      "throws": false,
+      "return_type": "S.FormatOutput",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "isMultiple",
+      "type_parameters": [],
+      "parameters": [
+        "of: Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "Swift.Bool",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "quotientAndRemainder",
+      "type_parameters": [],
+      "parameters": [
+        "dividingBy: Swift.UInt32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "encode",
+      "type_parameters": [],
+      "parameters": [
+        "to: any Swift.Encoder"
+      ],
+      "throws": true,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": false,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float16"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Float80"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Unicode.Scalar"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "CoreFoundation.CGFloat"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "Foundation.NSNumber"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "Swift.Double"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "bitPattern: Swift.Int32"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init?",
+      "type_parameters": [],
+      "parameters": [
+        "exactly: Foundation.NSNumber"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init?",
+      "type_parameters": [],
+      "parameters": [
+        "exactly: Swift.Float80"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init?",
+      "type_parameters": [],
+      "parameters": [
+        "exactly: Swift.Double"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init?",
+      "type_parameters": [],
+      "parameters": [
+        "exactly: Swift.Float16"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init?",
+      "type_parameters": [],
+      "parameters": [
+        "exactly: Swift.Float"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    },
+    {
+      "name": "init",
+      "type_parameters": [],
+      "parameters": [
+        "truncating: Foundation.NSNumber"
+      ],
+      "throws": false,
+      "return_type": "void",
+      "conditional": false,
+      "is_static": false,
+      "is_constructor": true,
+      "access_mod": "public",
+      "receiver": "",
+      "other_metadata": {
+        "is_mutating": false,
+        "available_when": false,
+        "type_equality": false,
+        "unsupported": false
+      }
+    }
+  ],
+  "fields": [
+    {
+      "name": "byteSwapped",
+      "type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "leadingZeroBitCount",
+      "type": "Swift.Int",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "nonzeroBitCount",
+      "type": "Swift.Int",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "trailingZeroBitCount",
+      "type": "Swift.Int",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "words",
+      "type": "Swift.UInt32.Words",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "bitWidth",
+      "type": "Swift.Int",
+      "conditional": false,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+   
+    {
+      "name": "magnitude",
+      "type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "isSigned",
+      "type": "Bool",
+      "conditional": false,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "max",
+      "type": "Swift.UInt32",
+      "conditional": true,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "min",
+      "type": "Swift.UInt32",
+      "conditional": true,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "zero",
+      "type": "Swift.UInt32",
+      "conditional": true,
+      "is_static": true,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "hashValue",
+      "type": "Int",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "bigEndian",
+      "type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "bitWidth",
+      "type": "Int",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "littleEndian",
+      "type": "Swift.UInt32",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    },
+    {
+      "name": "description",
+      "type": "Swift.String",
+      "conditional": false,
+      "is_static": false,
+      "access_mod": "public",
+      "other_metadata": {
+        "available_when": false
+      }
+    }
+  ],
+  "implements": [
+    {
+      "name": "Swift.AdditiveArithmetic",
+      "conditional": false
+    },
+    {
+      "name": "Accelerate.BNNSScalar",
+      "conditional": false
+    },
+    {
+      "name": "Swift.BinaryInteger",
+      "conditional": false
+    },
+    {
+      "name": "Swift.CVarArg",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Comparable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.CustomReflectable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.CustomStringConvertible",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Decodable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Encodable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Equatable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.ExpressibleByIntegerLiteral",
+      "conditional": false
+    },
+    {
+      "name": "Swift.FixedWidthInteger",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Hashable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.LosslessStringConvertible",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Numeric",
+      "conditional": false
+    },
+    {
+      "name": "Swift.SIMDScalar",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Strideable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.UnsignedInteger",
+      "conditional": false
+    },
+    {
+      "name": "Accelerate.vDSP_IntegerConvertable",
+      "conditional": false
+    },
+    {
+      "name": "Swift.Sendable",
+      "conditional": true
+    }
+  ],
+  "typealiases": [
+    {
+      "name": "IntegerLiteralType",
+      "conditional": false
+    },
+    {
+      "name": "Magnitude",
+      "conditional": false
+    },
+    {
+      "name": "Stride",
+      "conditional": false
+    }
+  ],
+  "inherits": [],
+  "language": "swift",
+  "all_protocols": []
+}
