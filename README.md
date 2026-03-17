@@ -1,6 +1,11 @@
 Thalia
 ======
 
+> **Note:** This repository ([thalia](https://github.com/hephaestus-compiler-project/thalia)) is
+> a fork of [hephaestus](https://github.com/hephaestus-compiler-project/hephaestus).
+> In the near future, we plan to integrate all these repositories into a single unified repo
+> under [hephaestus](https://github.com/hephaestus-compiler-project/hephaestus).
+
 Thalia is a testing framework for validating static typing procedures
 in compilers via an API-driven program synthesis approach.
 The idea is to synthesize type-intensive but
